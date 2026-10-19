@@ -321,6 +321,7 @@
     let selo = '';
     if (it.tipo === 'gratis') selo = '<span class="card-selo gratis">Grátis</span>';
     else if (id === 'mentoria') selo = '<span class="card-selo pago">Mentoria</span>';
+    else if (it.bloqueado) selo = `<span class="card-selo trancado">${CADEADO}${it.breve ? 'Em breve' : 'Exclusivo'}</span>`;
 
     const linha = [];
     if (comCombina && it.peso) linha.push(`<span class="combina">${combina(it)}%</span>`);
@@ -332,7 +333,7 @@
     const play = it.video && !texto ? `<span class="card-play">${PLAY}</span>` : '';
     const tituloCard = it.tipo === 'aluno' ? `“${esc(it.titulo)}”` : esc(it.titulo);
 
-    return `<button class="card card-${formato}${texto ? ' capa-texto' : ''}${it.contem ? ' contem' : ''}" type="button"
+    return `<button class="card card-${formato}${texto ? ' capa-texto' : ''}${it.contem ? ' contem' : ''}${it.bloqueado ? ' bloqueado' : ''}" type="button"
         data-abrir="${id}" style="--i:${i};${texto ? `--cor:${it.cor}` : ''}" aria-label="${esc(it.titulo)}">
       ${midia}${texto ? '' : selo}${play}
       <span class="card-texto">
@@ -348,7 +349,7 @@
   function montarFileiras() {
     $('#fileiras').innerHTML = C.fileiras.map(f => {
       let itens = f.itens;
-      let sub = '';
+      let sub = f.sub || '';
       if (f.dinamica) {
         itens = Object.keys(C.itens)
           .filter(k => C.itens[k].peso && C.itens[k].tipo !== 'exclusivo')
@@ -433,7 +434,7 @@
     const it = C.itens[id];
     const texto = it.capa === 'texto';
     const midia = texto
-      ? `<div class="ficha-midia capa-texto" style="--cor:${it.cor}"><span>${esc(it.titulo)}</span></div>`
+      ? `<div class="ficha-midia capa-texto" style="--cor:${it.cor}"><span>${esc(it.bloqueado ? it.trilha : it.titulo)}</span></div>`
       : `<div class="ficha-midia"><img src="${it.imgLarga || it.img}" alt="${it.tipo === 'aluno' ? esc(it.nome) : ''}">
           ${it.video ? `<button class="ficha-play" type="button" data-video="${it.video}" data-item="${id}" ${it.tipo === 'aluno' ? 'data-vertical="1"' : ''} aria-label="Assistir">${PLAY}</button>` : ''}</div>`;
 
@@ -442,12 +443,15 @@
     if (it.tipo === 'aluno') meta.push(`<span>${esc(it.nome)}</span>`, `<span>${esc(it.arroba)}</span>`);
     if (it.tipo === 'etapa') meta.push(`<span>${esc(it.duracao)}</span>`, '<span>Parte da Mentoria</span>');
     if (it.tipo === 'gratis') meta.push('<span>Grátis</span>');
+    if (it.bloqueado) meta.push(`<span>${esc(it.trilha)}</span>`, `<span class="trancado-meta">${esc(it.breve || 'Exclusivo da mentoria')}</span>`);
     (it.meta || []).forEach(t => meta.push(`<span>${esc(t)}</span>`));
 
     let acoes = '';
     if (it.tipo === 'aluno') {
       acoes = botaoCta({ rotulo: 'Ver depoimento', acao: 'video', video: it.video, vertical: true }, id, 'botao-claro')
             + botaoCta({ rotulo: 'Quero esse caminho também', acao: 'ficha', alvo: 'mentoria' }, id, 'botao-cinza');
+    } else if (it.bloqueado) {
+      acoes = botaoCta({ rotulo: 'Quero entrar na mentoria', acao: 'ficha', alvo: 'mentoria' }, id, 'botao-cheio');
     } else if (it.tipo === 'etapa') {
       acoes = botaoCta({ rotulo: 'Ver a mentoria completa', acao: 'ficha', alvo: 'mentoria' }, id, 'botao-cheio');
     } else {
@@ -467,8 +471,11 @@
         <p class="preco-garantia"><b>Garantia de 7 dias.</b> Participou da primeira semana e sentiu que não é pra você? O valor volta inteiro.</p>
       </div>`;
     }
-    if (it.episodios) {
-      const eps = C.fileiras.find(f => f.id === it.episodios).itens;
+    if (it.bloqueado) {
+      extra += `<p class="ficha-trava">${CADEADO}<span>Esse conteúdo abre quando você entra na mentoria. Ele fica na área de membros, junto com o resto do ${esc(it.trilha)}.</span></p>`;
+    }
+    if (it.etapas) {
+      const eps = it.etapas;
       extra += `<h3>Como funciona, etapa por etapa</h3><ol class="episodios">${eps.map(e => {
         const ep = C.itens[e];
         return `<li class="episodio"><img src="${ep.img}" alt="" loading="lazy"><div><strong>${esc(ep.titulo)}</strong><span>${esc(ep.duracao)}</span></div><p>${esc(ep.sinopse)}</p></li>`;

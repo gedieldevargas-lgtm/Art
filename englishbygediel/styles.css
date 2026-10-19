@@ -429,6 +429,13 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 }
 .card-selo.gratis { background: var(--gold); color: #1a1408; }
 .card-selo.pago { background: var(--accent); color: #fff; }
+.card-selo.trancado { white-space: nowrap; display: inline-flex; align-items: center; gap: 5px; background: rgba(11,11,13,.82); color: var(--gold); }
+.card-selo.trancado .card-cadeado { width: 13px; height: 13px; opacity: 1; }
+.card.bloqueado img { filter: grayscale(.4) brightness(.62); }
+.card.bloqueado .card-linha { color: var(--muted); }
+.trancado-meta { color: var(--gold); }
+.ficha-trava { display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start; margin-top: 24px; padding: 16px 18px; border-radius: var(--raio); background: var(--surface-2); }
+.ficha-trava .card-cadeado { width: 20px; height: 20px; color: var(--gold); opacity: 1; }
 .card-play {
   position: absolute; top: 8px; right: 8px; z-index: 2;
   width: 34px; height: 34px; border-radius: 50%;

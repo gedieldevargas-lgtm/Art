@@ -53,12 +53,13 @@ window.EBG = {
         'Prática diária no WhatsApp',
         'Missões semanais pra usar o inglês na vida',
         'Encontro ao vivo com o Gediel a cada 15 dias',
-        'Comunidade de quem está no mesmo caminho'
+        'Comunidade de quem está no mesmo caminho',
+        'Acesso às trilhas English On Mission, Culture English e Intercâmbio e Viagens'
       ],
       preco: { separado: 'R$ 1.100 no 1º mês, se comprado separado', parcelas: '6x de R$ 297', nota: 'Assinatura de 6 meses no cartão. Consulte boleto parcelado.' },
       cta: { rotulo: 'Quero minha vaga', acao: 'checkout' },
       cta2: { rotulo: 'Tirar uma dúvida', acao: 'whatsapp', texto: 'Oi Gediel! Vim pelo catálogo e quero entender a mentoria.' },
-      episodios: 'serie',
+      etapas: ['diagnostico', 'aovivo', 'pratica', 'missoes', 'conversacao', 'encontro', 'comunidade'],
       peso: { fala: 10, trabalho: 10, viagem: 10, fe: 9, zero: 10 }
     },
 
@@ -99,6 +100,46 @@ window.EBG = {
       img: 'img/aluno-bruno.webp', video: 'OaEF46zSVYs',
       sinopse: 'Depois de alguns meses me desafiei a fazer um intercâmbio internacional com ele, e percebi que nada mais me travava. Eu conseguia muito mais do que só me virar.',
       peso: { fala: 8, trabalho: 5, viagem: 9, fe: 4, zero: 5 } },
+
+
+    // Área de membros (Cakto). bloqueado: aparece no catálogo, mas só abre pra quem entra na mentoria.
+    // Quando chegar a capa original do Cakto, troque capa: 'texto' por img: 'img/arquivo.webp'.
+    diagtestes: { titulo: 'Diagnósticos e Testes', trilha: 'Programa Inteligente', bloqueado: true, capa: 'texto', cor: '#1d1d24',
+      sinopse: 'O ponto de partida: teste de nível e diagnóstico de múltiplas inteligências, pra saber como você aprende antes da primeira aula.' },
+    cronograma: { titulo: 'Cronograma', trilha: 'Programa Inteligente', bloqueado: true, capa: 'texto', cor: '#1d1d24',
+      sinopse: 'Seu plano de estudo semana a semana, montado a partir do diagnóstico.' },
+    salas: { titulo: 'Salas de Interação', trilha: 'Programa Inteligente', bloqueado: true, img: 'img/aula-grupo.webp',
+      sinopse: 'Conversa ao vivo em turma, por nível, com correção na hora.' },
+    aulas: { titulo: 'Aulas', trilha: 'Programa Inteligente', bloqueado: true, img: 'img/aula-tela.webp',
+      sinopse: 'As aulas da plataforma, pra estudar no seu ritmo e rever quantas vezes quiser.' },
+
+    grupoeom: { titulo: 'Grupo do WhatsApp', trilha: 'English On Mission', bloqueado: true, capa: 'texto', cor: '#15281f',
+      sinopse: 'O grupo do English On Mission, pra praticar e caminhar junto durante a semana.' },
+    devocionais: { titulo: 'Devocionais EOM', trilha: 'English On Mission', bloqueado: true, capa: 'texto', cor: '#15281f',
+      sinopse: 'Devocionais em inglês: um versículo e um ponto da língua de cada vez.' },
+    cristao: { titulo: 'Curso de Inglês Cristão', trilha: 'English On Mission', bloqueado: true, capa: 'texto', cor: '#15281f',
+      sinopse: 'Inglês estudando as cartas da Bíblia, do verb to be às cartas de João.',
+      peso: { fala: 4, trabalho: 2, viagem: 2, fe: 10, zero: 5 } },
+    biblia: { titulo: 'Inglês com a Bíblia', trilha: 'English On Mission', bloqueado: true, capa: 'texto', cor: '#15281f', meta: ['Extra'],
+      sinopse: 'Conteúdo extra pra ler e entender a Palavra em inglês.' },
+
+    seriesingles: { titulo: 'Inglês com Séries', trilha: 'Culture English', bloqueado: true, capa: 'texto', cor: '#1b1c30',
+      sinopse: 'Aprender com o que você já gosta de assistir, entendendo como as pessoas falam de verdade.',
+      peso: { fala: 7, trabalho: 4, viagem: 6, fe: 3, zero: 4 } },
+    filmes: { titulo: 'Inglês com Filmes', trilha: 'Culture English', bloqueado: true, capa: 'texto', cor: '#1b1c30',
+      sinopse: 'Cenas de filme como aula: expressões, sotaques e o inglês que não está no livro.' },
+    musica: { titulo: 'Inglês com Música', trilha: 'Culture English', bloqueado: true, capa: 'texto', cor: '#1b1c30',
+      sinopse: 'Letra, pronúncia e ritmo: o ouvido treina enquanto você canta.' },
+
+    inglesviagem: { titulo: 'Inglês para Viagens', trilha: 'Intercâmbio e Viagens', bloqueado: true, capa: 'texto', cor: '#2a2117',
+      sinopse: 'Aeroporto, hotel, restaurante e imprevisto: as situações que toda viagem traz.',
+      peso: { fala: 5, trabalho: 3, viagem: 10, fe: 3, zero: 5 } },
+    toronto: { titulo: 'Toronto 2027', trilha: 'Intercâmbio e Viagens', bloqueado: true, breve: 'Lista de espera', capa: 'texto', cor: '#2a2117',
+      sinopse: 'O próximo intercâmbio. Quem está na mentoria entra primeiro na lista de espera.' },
+    vlogny: { titulo: 'Vlogs New York 2025', trilha: 'Intercâmbio e Viagens', bloqueado: true, img: 'img/gediel-liberty.webp',
+      sinopse: 'Os bastidores da viagem a Nova York, com o inglês de rua acontecendo ao vivo.' },
+    vlogeuropa: { titulo: 'Vlogs Londres, Paris e Bruxelas', trilha: 'Intercâmbio e Viagens', bloqueado: true, capa: 'texto', cor: '#2a2117', meta: ['2024'],
+      sinopse: 'Três cidades, três sotaques e o caderno de viagem de 2024.' },
 
     // Bônus gratuitos
     teste: { titulo: 'Qual é o seu nível?', tipo: 'gratis', capa: 'texto', cor: '#c8322b',
@@ -152,10 +193,16 @@ window.EBG = {
 
   fileiras: [
     { id: 'pra-voce', titulo: 'Escolhido pra você', dinamica: true, formato: 'poster' },
-    { id: 'serie', titulo: 'A mentoria por dentro', formato: 'largo',
-      itens: ['diagnostico', 'aovivo', 'pratica', 'missoes', 'conversacao', 'encontro', 'comunidade'] },
+    { id: 'programa', titulo: 'Programa Inteligente', sub: 'Só na mentoria', formato: 'poster',
+      itens: ['diagtestes', 'cronograma', 'salas', 'aulas'] },
     { id: 'alunos', titulo: 'Quem já passou por aqui', formato: 'poster',
       itens: ['levi', 'laura', 'luiz', 'alycia', 'bruno'] },
+    { id: 'eom', titulo: 'English On Mission', sub: 'Só na mentoria', formato: 'poster',
+      itens: ['grupoeom', 'devocionais', 'cristao', 'biblia'] },
+    { id: 'culture', titulo: 'Culture English', sub: 'Só na mentoria', formato: 'poster',
+      itens: ['seriesingles', 'filmes', 'musica'] },
+    { id: 'intercambio', titulo: 'Intercâmbio e Viagens', sub: 'Só na mentoria', formato: 'poster',
+      itens: ['inglesviagem', 'toronto', 'vlogny', 'vlogeuropa'] },
     { id: 'gratis', titulo: 'Bônus gratuitos', formato: 'largo',
       itens: ['teste', 'liveterca', 'eom', 'instagram', 'esposa'] },
     { id: 'mais', titulo: 'Também do Gediel', formato: 'largo',
