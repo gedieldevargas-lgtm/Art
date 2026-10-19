@@ -3,11 +3,12 @@
 
 window.EBG = {
   perfis: [
-    { id: 'fala',     nome: 'Destravar a fala',   cor: '#c8322b', letra: 'F' },
-    { id: 'trabalho', nome: 'Inglês no trabalho', cor: '#2f4f9e', letra: 'T' },
-    { id: 'viagem',   nome: 'Viajar sem travar',  cor: '#c4973a', letra: 'V' },
-    { id: 'fe',       nome: 'Fé e missões',       cor: '#2f7a55', letra: 'M' },
-    { id: 'zero',     nome: 'Começar do zero',    cor: '#ddd9cf', letra: 'Z', tinta: '#101014' }
+    // img: capa do perfil (quadrada, sem texto). O título é escrito por cima pelo site.
+    { id: 'fala',     nome: 'Destravar a fala',   img: 'img/aula-grupo.webp' },
+    { id: 'trabalho', nome: 'Inglês no trabalho', img: 'img/gediel-reading.webp' },
+    { id: 'viagem',   nome: 'Viajar sem travar',  img: 'img/gediel-liberty-tall.webp' },
+    { id: 'fe',       nome: 'Fé e missões',       img: 'img/logo-eom.webp' },
+    { id: 'zero',     nome: 'Começar do zero',    img: 'img/gediel-brooklyn.webp' }
   ],
 
   // Abertura em formato stories. {nome} vira o primeiro nome da pessoa.

@@ -10,13 +10,6 @@
 
   document.documentElement.classList.add('js');
 
-  const ICONES = {
-    fala: '<path d="M4 3h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H10l-6 4.5V17a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/>',
-    trabalho: '<path d="M9 2.5h6a2 2 0 0 1 2 2V7h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3V4.5a2 2 0 0 1 2-2zM9 7h6V4.5H9z"/>',
-    viagem: '<path d="M21.5 16v-2l-8.5-5.2V3.5a1.5 1.5 0 0 0-3 0v5.3L1.5 14v2l8.5-2.6V19l-2.2 1.6V22l3.7-1 3.7 1v-1.4L13 19v-5.6z"/>',
-    fe: '<path d="M10 1.5h4v6h6v4h-6V22.5h-4V11.5H4v-4h6z"/>',
-    zero: '<path d="M11 22v-6.2C6.4 15.3 3.5 12 3.5 7V5.5H5c3.3 0 5.9 1.5 7 4 1.3-3 4.2-5 8-5h1.5V6c0 5.1-3.1 8.6-7.5 9.6V22z"/>'
-  };
   const PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg>';
   const CHECK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12.5l5 5 10-11"/></svg>';
   const MAIS = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4h2v7h7v2h-7v7h-2v-7H4v-2h7z"/></svg>';
@@ -93,12 +86,9 @@
   const perfilDe = id => C.perfis.find(p => p.id === id) || C.perfis[0];
   const primeiroNome = () => ((estado.lead && estado.lead.nome) || '').trim().split(/\s+/)[0] || '';
   const combina = item => Math.round(60 + ((item.peso && item.peso[estado.perfil]) || 7) * 3.8);
-  const icone = id => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONES[id]}</svg>`;
 
   function pintarPerfil(el, p) {
-    el.style.setProperty('--cor', p.cor);
-    if (p.tinta) el.style.setProperty('--tinta', p.tinta); else el.style.removeProperty('--tinta');
-    el.innerHTML = icone(p.id);
+    el.innerHTML = `<img src="${p.img}" alt="">`;
   }
 
   function linkWhats(texto) {
@@ -139,7 +129,7 @@
   function montarPerfis() {
     $('#perfis').innerHTML = C.perfis.map(p => `
       <li><button class="perfil" type="button" data-perfil="${p.id}">
-        <span class="perfil-quadro" style="--cor:${p.cor};${p.tinta ? `--tinta:${p.tinta}` : ''}">${icone(p.id)}</span>
+        <span class="perfil-quadro"><img src="${p.img}" alt="" decoding="async"></span>
         <span class="perfil-nome">${esc(p.nome)}</span>
       </button></li>`).join('');
   }
