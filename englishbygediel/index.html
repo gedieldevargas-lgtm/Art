@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>englishbygediel</title>
+<meta name="description" content="Mentoria Inglês Inteligente, aulas, bônus gratuitos e tudo do ecossistema do Gediel, num só lugar.">
+<meta name="theme-color" content="#0b0b0d">
+<meta property="og:title" content="englishbygediel">
+<meta property="og:description" content="Escolha o seu caminho no inglês: mentoria, aulas e bônus gratuitos.">
+<meta property="og:image" content="img/gediel-liberty.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/gediel-brooklyn.webp">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-tela="entrada">
+
+<!-- 1 · ENTRADA -->
+<section class="tela entrada" id="entrada" aria-label="Entrada">
+  <div class="parede" aria-hidden="true"></div>
+
+  <div class="abertura" id="abertura" aria-hidden="true">
+    <span class="marca-grande">englishbygediel</span>
+  </div>
+
+  <div class="entrada-corpo">
+    <a class="marca" href="#" aria-label="englishbygediel">english<b>by</b>gediel</a>
+
+    <div class="passo passo-perfil ativo" id="passoPerfil">
+      <h1 class="entrada-titulo">Quem está aprendendo hoje?</h1>
+      <p class="entrada-texto" id="boasVindas">Escolha o que mais combina com você. O catálogo se organiza a partir daqui.</p>
+      <ul class="perfis" id="perfis" role="list"></ul>
+    </div>
+
+    <form class="passo passo-dados" id="passoDados" novalidate>
+      <button type="button" class="voltar" id="voltarPerfil" aria-label="Trocar perfil">
+        <span class="perfil-mini" id="perfilEscolhido"></span>
+        <span>Trocar</span>
+      </button>
+      <h2 class="entrada-titulo">Prazer! Como te chamo?</h2>
+      <label class="campo">
+        <span>Seu nome</span>
+        <input name="nome" autocomplete="given-name" required maxlength="80" placeholder="Como gosta de ser chamado">
+      </label>
+      <label class="campo">
+        <span>WhatsApp</span>
+        <input name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" required placeholder="(55) 99999-9999">
+      </label>
+      <label class="campo">
+        <span>E-mail <small>opcional</small></span>
+        <input name="email" type="email" inputmode="email" autocomplete="email" maxlength="200" placeholder="voce@email.com">
+      </label>
+      <p class="erro" id="erroDados" role="alert"></p>
+      <button class="botao botao-cheio" type="submit" id="enviarDados">Começar</button>
+      <p class="nota">Seus dados ficam só com o Gediel. Nada de spam.</p>
+    </form>
+  </div>
+</section>
+
+<!-- 2 · HISTÓRIA (stories) -->
+<section class="tela historia" id="historia" aria-label="Apresentação" aria-roledescription="stories">
+  <div class="barras" id="barras"></div>
+  <button class="pular" id="pular">Pular</button>
+  <div class="slides" id="slides"></div>
+  <button class="toque toque-voltar" id="toqueVoltar" aria-label="Anterior"></button>
+  <button class="toque toque-avancar" id="toqueAvancar" aria-label="Próximo"></button>
+</section>
+
+<!-- 3 · CATÁLOGO -->
+<main class="tela catalogo" id="catalogo" aria-label="Catálogo">
+  <header class="topo" id="topo">
+    <a class="marca" href="#inicio">english<b>by</b>gediel</a>
+    <nav class="atalhos" aria-label="Seções">
+      <a href="#fileira-serie">A mentoria</a>
+      <a href="#fileira-alunos">Alunos</a>
+      <a href="#fileira-gratis">Grátis</a>
+    </nav>
+    <button class="avatar" id="avatar" aria-label="Trocar perfil"></button>
+  </header>
+
+  <section class="vitrine" id="inicio">
+    <div class="vitrine-fotos" aria-hidden="true">
+      <img src="img/gediel-brooklyn.webp" alt="" class="ativa" width="642" height="900" fetchpriority="high">
+      <img src="img/gediel-liberty-tall.webp" alt="" width="675" height="900" loading="lazy">
+      <img src="img/gediel-london.webp" alt="" width="640" height="853" loading="lazy">
+    </div>
+    <div class="vitrine-texto">
+      <p class="vitrine-selo"><span class="ponto"></span> Inscrições abertas</p>
+      <h1 class="vitrine-titulo">Mentoria <em>Inglês Inteligente</em></h1>
+      <p class="vitrine-meta" id="vitrineMeta"></p>
+      <p class="vitrine-sinopse" id="vitrineSinopse"></p>
+      <div class="vitrine-acoes">
+        <button class="botao botao-claro" data-video="eXfovCYxdZw" data-item="mentoria">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg>
+          Ver apresentação
+        </button>
+        <button class="botao botao-cinza" data-abrir="mentoria">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-6h2zm0-8h-2V7h2z"/></svg>
+          Mais informações
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div class="fileiras" id="fileiras"></div>
+
+  <section class="proximo" id="proximo" aria-labelledby="proximoTitulo">
+    <img src="img/gediel-liberty.webp" alt="Gediel em frente à Estátua da Liberdade" width="900" height="675" loading="lazy">
+    <div class="proximo-texto">
+      <p class="proximo-contagem"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19"/><circle class="anel" cx="22" cy="22" r="19"/></svg> A seguir</p>
+      <h2 id="proximoTitulo">Próximo episódio: você falando inglês.</h2>
+      <p>O primeiro passo é escolher a turma do seu nível. Daqui pra frente, quem conduz o caminho somos nós dois.</p>
+      <div class="vitrine-acoes">
+        <button class="botao botao-cheio" data-abrir="mentoria">Quero entrar na mentoria</button>
+        <button class="botao botao-cinza" data-whats="Oi Gediel! Vim pelo catálogo e quero conversar sobre o meu caso.">Conversar com o Gediel</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="perguntas" aria-labelledby="perguntasTitulo">
+    <h2 id="perguntasTitulo">Perguntas de quem está chegando</h2>
+    <div id="listaPerguntas"></div>
+  </section>
+
+  <footer class="rodape">
+    <p class="rodape-marca">english<b>by</b>gediel</p>
+    <ul class="rodape-links" role="list">
+      <li><a href="https://instagram.com/englishbygediel" target="_blank" rel="noopener">@englishbygediel</a></li>
+      <li><a href="https://instagram.com/englishonmission" target="_blank" rel="noopener">@englishonmission</a></li>
+      <li><a href="https://instagram.com/inglesinteligente" target="_blank" rel="noopener">@inglesinteligente</a></li>
+      <li><a href="#" data-whats="Oi Gediel! Vim pelo catálogo.">WhatsApp</a></li>
+    </ul>
+    <p class="rodape-nota">© 2026 Mentor Gediel · Inglês Inteligente</p>
+  </footer>
+</main>
+
+<!-- Ficha do título (estilo "mais informações") -->
+<div class="ficha-fundo" id="fichaFundo" hidden></div>
+<div class="ficha" id="ficha" role="dialog" aria-modal="true" aria-labelledby="fichaTitulo" hidden>
+  <button class="fechar" id="fecharFicha" aria-label="Fechar">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <div class="ficha-alca" aria-hidden="true"></div>
+  <div class="ficha-conteudo" id="fichaConteudo"></div>
+</div>
+
+<!-- Vídeo -->
+<div class="video" id="video" role="dialog" aria-modal="true" aria-label="Vídeo" hidden>
+  <button class="fechar" id="fecharVideo" aria-label="Fechar vídeo">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <div class="video-quadro" id="videoQuadro"></div>
+</div>
+
+<p class="aviso" id="aviso" role="status" aria-live="polite"></p>
+
+<noscript><p class="semjs">Ative o JavaScript para ver o catálogo, ou fale com o Gediel no Instagram <a href="https://instagram.com/englishbygediel">@englishbygediel</a>.</p></noscript>
+
+<script src="config.js"></script>
+<script src="content.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
