@@ -4,7 +4,7 @@ Landing em formato de catálogo, estilo streaming: a pessoa escolhe um perfil, d
 
 ## A jornada
 
-1. **Entrada.** "Quem está aprendendo hoje?" com 5 perfis (fala, trabalho, viagem, fé, do zero). Depois nome, WhatsApp e e-mail (opcional). O lead vai para a Supabase.
+1. **Entrada.** Nome, WhatsApp e e-mail (opcional). Depois "{Nome}, qual é o foco de hoje?" com 5 perfis (fala, trabalho, viagem, fé, do zero). O lead vai para a Supabase quando a pessoa escolhe o foco.
 2. **Abertura.** 4 stories (toque para avançar, segure para pausar, "Pular" no canto). O último usa o nome e o perfil da pessoa.
 3. **Catálogo.** A vitrine da Mentoria e as fileiras: *Escolhido pra você* (ordenada pelo perfil), *A mentoria por dentro* (as 7 etapas), *Quem já passou por aqui* (depoimentos em vídeo), *Bônus gratuitos* e *Também do Gediel*.
 4. **Ficha.** Cada card abre uma ficha com o botão certo: checkout da Hotmart, WhatsApp com mensagem pronta, Instagram ou o teste de nível.
@@ -18,6 +18,7 @@ Quem volta ao link pula o cadastro: escolhe o perfil e cai direto no catálogo.
 | `config.js` | Chaves da Supabase, WhatsApp, link da Hotmart, vídeo de apresentação e Instagrams. **Comece por aqui.** |
 | `content.js` | Todo o texto: perfis, stories, cards, preço, perguntas e o teste de nível. |
 | `index.html` · `styles.css` · `app.js` | A página. Sem framework, carrega rápido no 4G. |
+| `fonts/` | Coloque aqui a Advercase licenciada como `advercase.woff2` (ou `.otf`). Sem ela, a pergunta usa a Instrument Serif. |
 | `img/` | Fotos reais (landing antiga e Central), já em WebP. |
 | `supabase/schema.sql` | As tabelas `leads` e `events` e a visão `painel_leads`. |
 

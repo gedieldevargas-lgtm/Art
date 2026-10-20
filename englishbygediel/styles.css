@@ -1,3 +1,11 @@
+/* Advercase (Indieground) é paga: coloque o arquivo licenciado em fonts/advercase.woff2.
+   Sem o arquivo, a pergunta usa a Instrument Serif. */
+@font-face {
+  font-family: 'Advercase';
+  src: url('fonts/advercase.woff2') format('woff2'), url('fonts/advercase.otf') format('opentype');
+  font-display: swap;
+}
+
 :root {
   --bg: #0b0b0d;
   --surface: #16161a;
@@ -11,6 +19,7 @@
   --gold: #e0b86a;
 
   --serif: 'Instrument Serif', 'Times New Roman', serif;
+  --destaque: 'Advercase', 'Instrument Serif', 'Times New Roman', serif;
   --sans: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   --step-small: 0.875rem;
@@ -148,6 +157,14 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
   letter-spacing: -0.02em;
   text-align: center;
 }
+.pergunta-foco {
+  font: 400 clamp(2.5rem, 1.2rem + 6.4vw, 5.25rem)/0.98 var(--destaque);
+  letter-spacing: -0.01em;
+  text-align: center;
+  text-wrap: balance;
+  margin-bottom: 8px;
+}
+.passo-perfil.ativo .pergunta-foco { animation: entra .8s var(--sai) both; }
 .entrada-texto { color: var(--muted); text-align: center; margin: 14px auto 0; max-width: 36ch; }
 
 .perfis {

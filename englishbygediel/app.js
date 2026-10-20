@@ -84,7 +84,7 @@
   const uuid = () => (crypto.randomUUID ? crypto.randomUUID()
     : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 3 | 8)).toString(16); }));
   const perfilDe = id => C.perfis.find(p => p.id === id) || C.perfis[0];
-  const primeiroNome = () => ((estado.lead && estado.lead.nome) || '').trim().split(/\s+/)[0] || '';
+  const primeiroNome = () => ((estado.lead || estado.dados || {}).nome || '').trim().split(/\s+/)[0] || '';
   const combina = item => Math.round(60 + ((item.peso && item.peso[estado.perfil]) || 7) * 3.8);
 
   function pintarPerfil(el, p) {
@@ -148,9 +148,19 @@
       abrirCatalogo();
       return;
     }
-    pintarPerfil($('#perfilEscolhido'), perfilDe(id));
-    mostrarPasso('passoDados');
-    setTimeout(() => $('#passoDados [name=nome]').focus({ preventScroll: true }), 350);
+    if (!estado.dados) { mostrarPasso('passoDados'); return; }
+    // o lead nasce aqui: já com nome, contato e o foco escolhido
+    const lead = { ...estado.dados, objetivo: id };
+    estado.lead = lead;
+    guarda.gravar('ebg:lead', { id: lead.id, nome: lead.nome, objetivo: lead.objetivo });
+    enfileirar('leads', lead);
+    abrirHistoria();
+  }
+
+  function perguntarFoco() {
+    const nome = primeiroNome();
+    $('#tituloFoco').textContent = nome ? `${nome}, qual é o foco de hoje?` : 'Qual é o foco de hoje?';
+    mostrarPasso('passoPerfil');
   }
 
   function mascaraTelefone(v) {
@@ -189,19 +199,15 @@
     }
     erro.textContent = '';
 
-    const lead = {
+    estado.dados = {
       id: uuid(),
       nome: nome.slice(0, 120),
       whatsapp: (tel.length <= 11 ? '55' + tel : tel),
       email: email || null,
-      objetivo: estado.perfil,
       origem: origem(),
       dispositivo: navigator.userAgent.slice(0, 300)
     };
-    estado.lead = lead;
-    guarda.gravar('ebg:lead', { id: lead.id, nome: lead.nome, objetivo: lead.objetivo });
-    enfileirar('leads', lead);
-    abrirHistoria();
+    perguntarFoco();
   }
 
   /* =========================================================
@@ -660,14 +666,11 @@
   });
 
   $('#avatar').addEventListener('click', () => {
-    $('#boasVindas').textContent = `${primeiroNome() ? primeiroNome() + ', q' : 'Q'}ual é o foco de hoje? O catálogo se reorganiza na hora.`;
-    $('.entrada-titulo').textContent = 'Quem está aprendendo hoje?';
-    mostrarPasso('passoPerfil');
+    perguntarFoco();
     irPara('entrada');
   });
 
   $('#passoDados').addEventListener('submit', enviarDados);
-  $('#voltarPerfil').addEventListener('click', () => mostrarPasso('passoPerfil'));
   $('#passoDados [name=whatsapp]').addEventListener('input', e => {
     const el = e.target, fim = el.selectionStart === el.value.length;
     el.value = mascaraTelefone(el.value);
@@ -690,9 +693,8 @@
     setTimeout(() => abertura.classList.add('feita'), 1900);
   }
 
-  if (estado.lead) {
-    $('#boasVindas').textContent = `Que bom te ver de novo, ${primeiroNome()}. Qual é o foco de hoje?`;
-  }
+  // quem volta pula o cadastro e cai direto na pergunta
+  if (estado.lead) perguntarFoco();
 
   // atalho pra testar direto o catálogo: ?catalogo
   if (new URLSearchParams(location.search).has('catalogo')) {

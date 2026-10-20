@@ -28,18 +28,8 @@
   <div class="entrada-corpo">
     <a class="marca" href="#" aria-label="englishbygediel">english<b>by</b>gediel</a>
 
-    <div class="passo passo-perfil ativo" id="passoPerfil">
-      <h1 class="entrada-titulo">Quem está aprendendo hoje?</h1>
-      <p class="entrada-texto" id="boasVindas">Escolha o que mais combina com você. O catálogo se organiza a partir daqui.</p>
-      <ul class="perfis" id="perfis" role="list"></ul>
-    </div>
-
-    <form class="passo passo-dados" id="passoDados" novalidate>
-      <button type="button" class="voltar" id="voltarPerfil" aria-label="Trocar perfil">
-        <span class="perfil-mini" id="perfilEscolhido"></span>
-        <span>Trocar</span>
-      </button>
-      <h2 class="entrada-titulo">Prazer! Como te chamo?</h2>
+    <form class="passo passo-dados ativo" id="passoDados" novalidate>
+      <h1 class="entrada-titulo">Prazer! Como te chamo?</h1>
       <label class="campo">
         <span>Seu nome</span>
         <input name="nome" autocomplete="given-name" required maxlength="80" placeholder="Como gosta de ser chamado">
@@ -53,9 +43,14 @@
         <input name="email" type="email" inputmode="email" autocomplete="email" maxlength="200" placeholder="voce@email.com">
       </label>
       <p class="erro" id="erroDados" role="alert"></p>
-      <button class="botao botao-cheio" type="submit" id="enviarDados">Começar</button>
+      <button class="botao botao-cheio" type="submit" id="enviarDados">Continuar</button>
       <p class="nota">Seus dados ficam só com o Gediel. Nada de spam.</p>
     </form>
+
+    <div class="passo passo-perfil" id="passoPerfil">
+      <h1 class="pergunta-foco" id="tituloFoco">Qual é o foco de hoje?</h1>
+      <ul class="perfis" id="perfis" role="list"></ul>
+    </div>
   </div>
 </section>
 
