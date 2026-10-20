@@ -223,7 +223,10 @@ window.EBG = {
     { id: 'programa', titulo: 'Programa Inteligente', sub: 'Só na mentoria', etiqueta: 'Ideal pra você', destaque: true, formato: 'poster',
       itens: ['diagtestes', 'cronograma', 'salas', 'aulas'] },
     { id: 'alunos', titulo: 'Resultados de alunos', formato: 'poster',
-      itens: ['levi', 'laura', 'luiz', 'alycia', 'bruno'] },
+      itens: ['levi', 'laura', 'luiz', 'alycia', 'bruno'],
+      // botões embaixo da fileira (href = chave de config.instagram)
+      acoes: [{ rotulo: 'Mais depoimentos no Instagram', href: 'depoimentos' },
+              { rotulo: 'Veja as aulas por dentro', href: 'bastidores' }] },
     // depoimentos do EOM ficam misturados com os cards da trilha
     { id: 'eom', titulo: 'English On Mission', sub: 'Inglês com a Bíblia', formato: 'poster',
       itens: ['grupoeom', 'eomgabriel', 'devocionais', 'eomalycia', 'cristao', 'eomguilherme', 'biblia'] },

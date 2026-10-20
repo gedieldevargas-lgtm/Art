@@ -196,7 +196,7 @@ window.EBG_EN = {
   fileiras: [
     { titulo: 'Picked for you' },
     { titulo: 'Smart Program', sub: 'Mentorship only', etiqueta: 'Ideal for you' },
-    { titulo: 'Student results' },
+    { titulo: 'Student results', acoes: [{ rotulo: 'More testimonials on Instagram' }, { rotulo: 'See the classes from inside' }] },
     { sub: 'English with the Bible' },
     {},
     { titulo: 'Exchange & Travel' },

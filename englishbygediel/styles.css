@@ -781,6 +781,17 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 
 .fileira h2 { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
 .fileira-sub { white-space: nowrap; }
+.fileira-acoes { display: flex; flex-wrap: wrap; gap: 8px; padding: 2px var(--margem) 6px; }
+.pilula {
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 40px; padding: 0 14px; border-radius: 999px;
+  background: rgba(255,255,255,.1); color: var(--ink);
+  font-size: var(--step-small); font-weight: 500;
+  transition: background-color .2s, transform .15s;
+}
+.pilula:hover { background: rgba(255,255,255,.18); }
+.pilula:active { transform: scale(.96); }
+.pilula svg { width: 16px; height: 16px; }
 /* fileira mais importante (Programa Inteligente): etiqueta no título e cards com borda azul pulsando */
 .etiqueta {
   display: inline-block;

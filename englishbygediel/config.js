@@ -32,6 +32,7 @@ window.EBG_CONFIG = {
     ingi: 'https://instagram.com/metodoinglesinteligente',
     escola: 'https://instagram.com/escolainfly',
     viagens: 'https://instagram.com/inflyviagens',
-    depoimentos: 'https://www.instagram.com/stories/highlights/17976442123983837/'
+    depoimentos: 'https://www.instagram.com/stories/highlights/17976442123983837/',
+    bastidores: 'https://www.instagram.com/stories/highlights/18047529878029312/'
   }
 };
