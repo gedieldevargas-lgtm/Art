@@ -117,7 +117,7 @@ window.EBG = {
 
     // Área de membros (Cakto). bloqueado: aparece no catálogo, mas só abre pra quem entra na mentoria.
     // Quando chegar a capa original do Cakto, troque capa: 'texto' por img: 'img/arquivo.webp'.
-    diagtestes: { titulo: 'Diagnósticos e Testes', trilha: 'Programa Inteligente', bloqueado: true, img: 'img/gediel-reading.webp',
+    diagtestes: { titulo: 'Diagnósticos e Testes', trilha: 'Programa Inteligente', bloqueado: true, img: 'img/card-diagnostico.webp',
       sinopse: 'O ponto de partida: teste de nível e diagnóstico de múltiplas inteligências, pra saber como você aprende antes da primeira aula.' },
     cronograma: { titulo: 'Cronograma', trilha: 'Programa Inteligente', bloqueado: true, img: 'img/card-cronograma.webp',
       sinopse: 'Seu plano de estudo semana a semana, montado a partir do diagnóstico.' },
