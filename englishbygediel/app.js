@@ -406,7 +406,7 @@
       let sub = f.sub || '';
       if (f.dinamica) {
         itens = Object.keys(C.itens)
-          .filter(k => C.itens[k].peso && C.itens[k].tipo !== 'exclusivo')
+          .filter(k => C.itens[k].peso && C.itens[k].tipo !== 'exclusivo' && !C.itens[k].indisponivel)
           .sort((a, b) => (a === 'mentoria' ? -1 : b === 'mentoria' ? 1 : 0) || C.itens[b].peso[estado.perfil] - C.itens[a].peso[estado.perfil])
           .slice(0, 8);
         sub = perfilDe(estado.perfil).nome;
