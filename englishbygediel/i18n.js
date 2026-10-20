@@ -1,0 +1,222 @@
+// Idiomas da página. UI = textos fixos da interface. EBG_EN = só os textos do catálogo
+// que mudam em inglês (o resto, como imagens, links e pesos, vem de content.js).
+
+window.EBG_UI = {
+  pt: {
+    idiomaOutro: 'English', idiomaAria: 'Ver a página em inglês',
+    titulo: 'Prazer! Como te chamo?', nome: 'Seu nome', nomePh: 'Como gosta de ser chamado',
+    whats: 'WhatsApp', email: 'E-mail', opcional: 'opcional', emailPh: 'voce@email.com',
+    continuar: 'Continuar', nota: 'Seus dados ficam só com o Gediel. Nada de spam.',
+    foco: 'Qual é o foco de hoje?', focoNome: '{nome}, qual é o foco de hoje?',
+    erroNome: 'Me diz seu nome pra eu te chamar direitinho.',
+    erroWhats: 'Confere o WhatsApp com DDD, por favor.',
+    erroEmail: 'Esse e-mail parece incompleto. Pode deixar em branco, se preferir.',
+    pular: 'Pular', anterior: 'Anterior', proximo: 'Próximo', voce: 'Você',
+    navMentoria: 'A mentoria', navAlunos: 'Alunos', navGratis: 'Grátis',
+    perfilAria: 'Perfil: {nome}. Trocar', trocarPerfil: 'Trocar perfil',
+    inscricoes: 'Inscrições abertas', vitrine1: 'Mentoria', vitrine2: 'Inglês Inteligente',
+    verApresentacao: 'Ver apresentação', maisInfo: 'Mais informações',
+    aSeguir: 'A seguir', proximoTitulo: 'Próximo episódio: você falando inglês.',
+    proximoTexto: 'O primeiro passo é escolher a turma do seu nível. Daqui pra frente, quem conduz o caminho somos nós dois.',
+    entrarMentoria: 'Quero entrar na mentoria', conversar: 'Conversar com o Gediel',
+    whatsConversar: 'Oi Gediel! Vim pelo catálogo e quero conversar sobre o meu caso.',
+    whatsRodape: 'Oi Gediel! Vim pelo catálogo.',
+    perguntasTitulo: 'Perguntas de quem está chegando',
+    pctVoce: '% pra você', gratis: 'Grátis', seloMentoria: 'Mentoria', emBreve: 'Em breve', exclusivo: 'Exclusivo',
+    resultadoAluno: 'Resultado de aluno', voltar: 'Voltar', avancar: 'Avançar', fechar: 'Fechar', assistir: 'Assistir',
+    parteMentoria: 'Parte da Mentoria', exclusivoMentoria: 'Exclusivo da mentoria',
+    verDepoimento: 'Ver depoimento', mesmoCaminho: 'Quero esse caminho também', verMentoria: 'Ver a mentoria completa',
+    incluido: 'O que está incluído', garantia: 'Garantia de 7 dias.',
+    garantiaTexto: 'Participou da primeira semana e sentiu que não é pra você? O valor volta inteiro.',
+    trava: 'Esse conteúdo abre quando você entra na mentoria. Ele fica na área de membros, junto com o resto do {trilha}.',
+    etapas: 'Como funciona, etapa por etapa', alunos: 'Resultados de alunos',
+    perguntaDe: 'Pergunta {n} de {t}', pontoPartida: 'Seu ponto de partida',
+    mentoriaNivel: 'Ver a mentoria pro meu nível', mandarResultado: 'Mandar meu resultado pro Gediel',
+    whatsResultado: 'Oi Gediel! Fiz o teste do catálogo e deu {nivel}. Por onde eu começo?',
+    souNome: '(Sou {nome}.)', video: 'Vídeo'
+  },
+  en: {
+    idiomaOutro: 'Português', idiomaAria: 'Ver a página em português',
+    titulo: 'Nice to meet you! What should I call you?', nome: 'Your name', nomePh: 'What you like to be called',
+    whats: 'WhatsApp', email: 'Email', opcional: 'optional', emailPh: 'you@email.com',
+    continuar: 'Continue', nota: 'Your details stay with Gediel. No spam.',
+    foco: "What's your focus today?", focoNome: "{nome}, what's your focus today?",
+    erroNome: 'Tell me your name so I can call you properly.',
+    erroWhats: 'Please check your WhatsApp number, with area code.',
+    erroEmail: 'That email looks incomplete. You can leave it blank if you prefer.',
+    pular: 'Skip', anterior: 'Previous', proximo: 'Next', voce: 'You',
+    navMentoria: 'Mentorship', navAlunos: 'Students', navGratis: 'Free',
+    perfilAria: 'Profile: {nome}. Change', trocarPerfil: 'Change profile',
+    inscricoes: 'Enrollment open', vitrine1: 'Inglês Inteligente', vitrine2: 'Mentorship',
+    verApresentacao: 'Watch the intro', maisInfo: 'More info',
+    aSeguir: 'Up next', proximoTitulo: 'Next episode: you speaking English.',
+    proximoTexto: 'The first step is picking the group at your level. From there, we walk the path together.',
+    entrarMentoria: 'Join the mentorship', conversar: 'Talk to Gediel',
+    whatsConversar: "Hi Gediel! I found you through the catalog and I'd like to talk about my case.",
+    whatsRodape: 'Hi Gediel! I found you through the catalog.',
+    perguntasTitulo: 'Questions from people just arriving',
+    pctVoce: '% match', gratis: 'Free', seloMentoria: 'Mentorship', emBreve: 'Coming soon', exclusivo: 'Exclusive',
+    resultadoAluno: 'Student result', voltar: 'Back', avancar: 'Forward', fechar: 'Close', assistir: 'Watch',
+    parteMentoria: 'Part of the mentorship', exclusivoMentoria: 'Mentorship only',
+    verDepoimento: 'Watch the testimonial', mesmoCaminho: 'I want this path too', verMentoria: 'See the full mentorship',
+    incluido: "What's included", garantia: '7-day guarantee.',
+    garantiaTexto: "Joined the first week and felt it's not for you? You get your money back in full.",
+    trava: 'This opens when you join the mentorship. It lives in the members area, together with the rest of {trilha}.',
+    etapas: 'How it works, step by step', alunos: 'Student results',
+    perguntaDe: 'Question {n} of {t}', pontoPartida: 'Your starting point',
+    mentoriaNivel: 'See the mentorship for my level', mandarResultado: 'Send my result to Gediel',
+    whatsResultado: 'Hi Gediel! I took the catalog test and got {nivel}. Where should I start?',
+    souNome: "(I'm {nome}.)", video: 'Video'
+  }
+};
+
+window.EBG_EN = {
+  perfis: [
+    { nome: 'Unlock your speaking' }, { nome: 'English for work' }, { nome: 'Travel with confidence' },
+    { nome: 'Christian English' }, { nome: 'Start from zero' }
+  ],
+  historia: [
+    { titulo: "You're not bad at English. You were taught badly.",
+      texto: 'Apps, school, online courses. Years of effort, and you still freeze when it counts. The problem was never you. It was the method.' },
+    { titulo: "Hi, I'm Gediel.",
+      texto: 'Eleven years in the classroom, more than 500 students, and an exchange in England that showed me classroom English and street English are relatives, not twins.' },
+    { titulo: 'Everyone learns in their own way.',
+      texto: 'The Smart Method starts by finding out how you learn. Then it brings together live conversation, recorded lessons at your pace and close guidance.' },
+    { titulo: '{nome}, I picked a path for you.', botao: 'Open my catalog' }
+  ],
+  perfilTexto: {
+    fala: 'You understand, but you freeze when it is time to speak. The mentorship was built for that: talk every week, make mistakes out loud and get corrected on the spot.',
+    trabalho: 'Meetings, clients, promotions. In the mentorship you talk live with people at your level, so you join the meeting instead of staying quiet.',
+    viagem: 'Airport, hotel, restaurant. Street English, not test English, practiced live before your next trip.',
+    fe: 'Pray, serve and talk in English. The mentorship takes care of conversation, and English On Mission comes as a bonus to study the Word in English.',
+    zero: 'Starting from zero is a starting point, not a problem. The assessment shows the way, and the A1 group moves at your pace.'
+  },
+  itens: {
+    mentoria: {
+      titulo: 'Inglês Inteligente Mentorship',
+      meta: ['6 months', 'A1 → B2', 'Live', '7-day guarantee'],
+      sinopse: "It's not another course of static videos. It's guided daily practice, live classes by level and real guidance, for people who freeze when they speak.",
+      inclui: [
+        'Live classes by level, A1/A2 and B1/B2 groups',
+        'Platform with 80+ video lessons and 100 exercises',
+        'Multiple Intelligences assessment at the start',
+        'Daily practice on WhatsApp',
+        'Weekly missions to use English in real life',
+        'Live meeting with Gediel every 15 days',
+        'A community walking the same path',
+        'Access to the English On Mission, Culture English and Exchange & Travel tracks'
+      ],
+      preco: { separado: 'R$ 1,100 in the 1st month if bought separately', parcelas: '6x R$ 297', nota: '6-month subscription by card. Ask about installment bank slips.' },
+      cta: { rotulo: 'Save my spot' },
+      cta2: { rotulo: 'Ask a question', texto: "Hi Gediel! I found you through the catalog and I'd like to understand the mentorship." }
+    },
+    diagnostico: { titulo: 'Multiple Intelligences assessment', duracao: 'Week 1',
+      sinopse: 'Before any class, we find out how you learn best. The method adapts to you, not the other way around.' },
+    aovivo: { titulo: 'Live class every week, by level', duracao: 'Every week',
+      sinopse: 'A1/A2 and B1/B2 groups with their own schedules. You practice with people at your stage, without embarrassment.' },
+    pratica: { titulo: 'Guided daily practice', duracao: 'Every day',
+      sinopse: 'Audio, short videos and conversation prompts on WhatsApp. No more static videos waiting for you to remember them.' },
+    missoes: { titulo: 'Weekly real-life missions', duracao: 'Every week',
+      sinopse: 'Each week, a real mission to use English in your life, not just on a screen.' },
+    conversacao: { titulo: 'Conversation with an assistant teacher', duracao: 'Every week',
+      sinopse: 'Conversation sessions focused on your level, to really unlock your speaking.' },
+    encontro: { titulo: 'Live meeting with Gediel', duracao: 'Every 15 days',
+      sinopse: "Direct access: ask questions, go deeper and feel you're not alone in this." },
+    comunidade: { titulo: "A community that won't let you quit", duracao: 'Always',
+      sinopse: 'No one finishes alone what they start in a group.' },
+
+    levi: { titulo: "I'm no longer embarrassed to speak English",
+      sinopse: "I didn't believe I could speak anything well. In the very first class I introduced myself and even opened a presentation about my life, with ease." },
+    laura: { titulo: 'Today I travel the world with confidence',
+      sinopse: 'I love traveling alone, but I felt stuck, rusty with school English. On every international trip now, I notice the difference practicing with the method made.' },
+    luiz: { titulo: 'Everything I do today is in English',
+      sinopse: 'I knew English from games, shows and music, but I learned to really talk with Gediel. Today I work, run meetings and use my tools in English.' },
+    alycia: { titulo: 'Praying in English changed everything',
+      sinopse: "I wasn't even fluent, and Gediel got me praying in English for the first time. I feel I got off the ground really fast." },
+    bruno: { titulo: 'Now I truly speak English',
+      sinopse: 'After a few months I challenged myself to do an international exchange with him, and I realized nothing held me back anymore. I could do much more than just get by.' },
+
+    diagtestes: { titulo: 'Assessments and Tests', trilha: 'Smart Program',
+      sinopse: 'The starting point: level test and multiple intelligences assessment, so you know how you learn before the first class.' },
+    cronograma: { titulo: 'Study Plan', trilha: 'Smart Program', sinopse: 'Your week-by-week study plan, built from your assessment.' },
+    salas: { titulo: 'Conversation Rooms', trilha: 'Smart Program', sinopse: 'Live group conversation, by level, with on-the-spot correction.' },
+    aulas: { titulo: 'Lessons', trilha: 'Smart Program', sinopse: 'The platform lessons, to study at your pace and rewatch as many times as you want.' },
+
+    grupoeom: { titulo: 'WhatsApp Group', sinopse: 'The English On Mission group, to practice and walk together during the week.' },
+    devocionais: { titulo: 'EOM Devotionals', sinopse: 'Devotionals in English: one verse and one language point at a time.' },
+    cristao: { titulo: 'Christian English Course', sinopse: 'English through the letters of the Bible, from the verb to be to the letters of John.' },
+    biblia: { titulo: 'English with the Bible', sinopse: 'Extra content to read and understand the Word in English.' },
+
+    seriesingles: { titulo: 'English with TV Shows', sinopse: 'Learn from what you already love to watch, understanding how people really talk.' },
+    filmes: { titulo: 'English with Movies', sinopse: "Movie scenes as lessons: expressions, accents and the English that isn't in the book." },
+    musica: { titulo: 'English with Music', sinopse: 'Lyrics, pronunciation and rhythm: your ear trains while you sing.' },
+
+    inglesviagem: { titulo: 'English for Travel', trilha: 'Exchange & Travel', sinopse: 'Airport, hotel, restaurant and the unexpected: the situations every trip brings.' },
+    toronto: { titulo: 'Toronto 2027', trilha: 'Exchange & Travel', breve: 'Waiting list',
+      sinopse: 'The next exchange. Mentorship students get on the waiting list first.' },
+    vlogny: { titulo: 'New York Vlogs 2025', trilha: 'Exchange & Travel', sinopse: 'Behind the scenes of the New York trip, with street English happening live.' },
+    vlogeuropa: { titulo: 'London, Paris & Brussels Vlogs', trilha: 'Exchange & Travel', sinopse: 'Three cities, three accents and the 2024 travel journal.' },
+
+    teste: { titulo: "What's your level?", meta: ['5 questions', '1 minute'],
+      sinopse: 'Five quick questions to find your starting point. Starting in the right place saves time and motivation.',
+      cta: { rotulo: 'Take the test now' } },
+    liveterca: { titulo: 'Free Tuesday live class', meta: ['Every Tuesday', 'Live'],
+      sinopse: 'An open live class with Gediel, for anyone who wants to feel what learning the Smart Method way is like.',
+      cta: { rotulo: 'Remind me about the live', texto: "Hi Gediel! I'd like the link for the free Tuesday live class." } },
+    eom: { meta: ['Saturday, 9 a.m.', 'Live on YouTube'],
+      sinopse: 'English through the letters of the Bible: each class pairs a verse with a grammar point. From the verb to be to the letters of John.',
+      cta: { rotulo: 'Follow English On Mission' } },
+    instagram: { titulo: 'Real English, every day', meta: ['@englishbygediel', 'Daily'],
+      sinopse: 'School phrases versus natural phrases, the mistakes every Brazilian makes and street English, in short videos.',
+      cta: { rotulo: 'Follow on Instagram' } },
+    esposa: { titulo: 'Encouraging my wife', meta: ['Series', 'Gediel & Mayandra'],
+      sinopse: 'Mayandra tries first, her own way, with no help. Then comes the natural version. Mistakes are part of it: whoever tries, learns.',
+      cta: { rotulo: 'Watch the series' } },
+
+    ingi: { meta: ['@inglesinteligente', 'Method'],
+      sinopse: 'The method behind it all: multiple intelligences applied to English. One person learns by listening, another by doing, another needs to see it written.',
+      cta: { rotulo: 'Discover the method' } },
+    escola: { titulo: 'Infly School', meta: ['In person', 'Tupanciretã'],
+      sinopse: "The ecosystem's in-person English school, for people in the region who want a real classroom.",
+      cta: { rotulo: 'See the school' } },
+    viagens: { titulo: 'Infly Travel', meta: ['Exchange', 'Trips'],
+      sinopse: 'Trips and exchanges to put English to use. That is how students like Bruno found out nothing held them back anymore.',
+      cta: { rotulo: 'See the trips' } },
+    particular: { titulo: 'Private lessons', meta: ['Students only'],
+      sinopse: 'One-on-one attention with Gediel, available only inside the mentorship, for current subscribers.',
+      cta: { rotulo: "I'm a student, I want to book", texto: "Hi Gediel! I'm already in the program and I'd like to book private lessons." } }
+  },
+  fileiras: [
+    { titulo: 'Picked for you' },
+    { titulo: 'Smart Program', sub: 'Mentorship only' },
+    { titulo: 'Student results' },
+    { sub: 'Mentorship only' },
+    { sub: 'Mentorship only' },
+    { titulo: 'Exchange & Travel', sub: 'Mentorship only' },
+    { titulo: 'Free bonuses' },
+    { titulo: 'Also by Gediel' }
+  ],
+  perguntas: [
+    ['Do I need to know English to join?', 'No. The mentorship takes everyone from zero to advanced. The assessment at the start puts you on the right track from day one.'],
+    ['What if I miss a live class?', 'Every class is recorded on the platform. Watch whenever you want, as many times as you need.'],
+    ['How much time do I need per week?', '3 to 4 hours, counting live classes and daily practice. It fits a busy schedule.'],
+    ['Is the guarantee real?', "Yes. Seven full days. If you feel it's not for you, you get your money back in full, no red tape."],
+    ['Is there a commitment?', "It's a 6-month subscription, 6x R$ 297 by card. No sign-up fee."],
+    ['Does it work for people over 50?', "It does. Students aged 40, 50 and 60 have learned here for the first time, at their own pace."]
+  ],
+  teste: {
+    perguntas: [
+      ['Can you introduce yourself in English without freezing?', ['Never tried', 'I can do the basics', 'Yes, with difficulty', 'Yes, with confidence']],
+      ['How do you do when someone speaks to you in English?', ["I don't understand anything", 'I catch single words', 'I understand, but slowly', 'I understand and answer well']],
+      ['Can you write a simple email in English?', ["I can't", 'With a lot of help', 'Yes, with difficulty', 'Yes, no problem']],
+      ['How long have you studied English?', ['Never seriously', 'Less than 1 year', '1 to 5 years', 'More than 5 years']],
+      ['Could you take part in a meeting in English?', ['Never', "I'd stay quiet", 'A little', 'Normally']]
+    ],
+    resultados: [
+      { nivel: 'Beginner', frase: 'What courage to take the first step.', texto: "You're at the start, with no bad habits and no blocks from an old method. The A1 group is your place." },
+      { nivel: 'Elementary', frase: 'You know more than you think.', texto: "The foundation is there. What's missing is structure and real practice, every week." },
+      { nivel: 'Intermediate', frase: "You're closer than you think.", texto: "You understand, but you freeze. That's called a speaking block, and it's solved by talking with on-the-spot correction." },
+      { nivel: 'Advanced', frase: 'Now it is time to master it.', texto: 'Your path is high-level conversation, meetings and presentations, with close guidance.' }
+    ]
+  }
+};

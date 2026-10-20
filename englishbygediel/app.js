@@ -2,7 +2,10 @@
   'use strict';
 
   const CFG = window.EBG_CONFIG;
-  const C = window.EBG;
+  const PT = window.EBG;
+  const UI = window.EBG_UI;
+  let C = PT;
+  let idioma = 'pt';
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const reduz = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -21,6 +24,37 @@
     ler(k, padrao = null) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : padrao; } catch (e) { return padrao; } },
     gravar(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* modo privado: segue sem salvar */ } }
   };
+
+  /* ---------------- idioma ---------------- */
+  // arrays de objetos (perfis, stories, fileiras) mesclam item a item; listas de texto trocam inteiras
+  function mesclar(base, extra) {
+    if (extra === undefined) return base;
+    if (Array.isArray(extra)) {
+      if (Array.isArray(base) && extra.every(x => x && typeof x === 'object' && !Array.isArray(x))) return base.map((b, i) => mesclar(b, extra[i]));
+      return extra;
+    }
+    if (extra && typeof extra === 'object' && base && typeof base === 'object') {
+      const out = { ...base };
+      Object.keys(extra).forEach(k => { out[k] = mesclar(base[k], extra[k]); });
+      return out;
+    }
+    return extra;
+  }
+  const CONTEUDO = { pt: PT, en: mesclar(PT, window.EBG_EN) };
+  const t = (k, vars = {}) => (UI[idioma][k] || UI.pt[k] || k).replace(/\{(\w+)\}/g, (_, v) => vars[v] ?? '');
+
+  function aplicarTextos() {
+    document.documentElement.lang = idioma === 'en' ? 'en' : 'pt-BR';
+    $$('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+    $$('[data-i18n-ph]').forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
+    $$('[data-i18n-aria]').forEach(el => { el.setAttribute('aria-label', t(el.dataset.i18nAria)); });
+  }
+
+  function definirIdioma(novo) {
+    idioma = novo === 'en' ? 'en' : 'pt';
+    C = CONTEUDO[idioma];
+    aplicarTextos();
+  }
 
   const estado = {
     lead: guarda.ler('ebg:lead'),
@@ -93,8 +127,8 @@
 
   function linkWhats(texto) {
     const nome = primeiroNome();
-    const t = nome ? `${texto} (Sou ${nome}.)` : texto;
-    return `https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent(t)}`;
+    const msg = nome ? `${texto} ${t('souNome', { nome })}` : texto;
+    return `https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent(msg)}`;
   }
 
   function abrirFora(url) {
@@ -159,7 +193,7 @@
 
   function perguntarFoco() {
     const nome = primeiroNome();
-    $('#tituloFoco').textContent = nome ? `${nome}, qual é o foco de hoje?` : 'Qual é o foco de hoje?';
+    $('#tituloFoco').textContent = nome ? t('focoNome', { nome }) : t('foco');
     mostrarPasso('passoPerfil');
   }
 
@@ -188,9 +222,9 @@
     $$('input', f).forEach(i => i.removeAttribute('aria-invalid'));
 
     let problema = null;
-    if (nome.length < 2) problema = [f.nome, 'Me diz seu nome pra eu te chamar direitinho.'];
-    else if (tel.length < 10 || tel.length > 13) problema = [f.whatsapp, 'Confere o WhatsApp com DDD, por favor.'];
-    else if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) problema = [f.email, 'Esse e-mail parece incompleto. Pode deixar em branco, se preferir.'];
+    if (nome.length < 2) problema = [f.nome, t('erroNome')];
+    else if (tel.length < 10 || tel.length > 13) problema = [f.whatsapp, t('erroWhats')];
+    else if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) problema = [f.email, t('erroEmail')];
     if (problema) {
       problema[0].setAttribute('aria-invalid', 'true');
       problema[0].focus();
@@ -219,7 +253,7 @@
     const slides = C.historia;
     $('#barras').innerHTML = slides.map(() => '<span class="barra"><i></i></span>').join('');
     $('#slides').innerHTML = slides.map((s, i) => {
-      const titulo = esc(s.titulo.replace('{nome}', primeiroNome() || 'Você'));
+      const titulo = esc(s.titulo.replace('{nome}', primeiroNome() || t('voce')));
       const texto = esc(s.texto || C.perfilTexto[estado.perfil]);
       return `<article class="slide ${s.img ? 'tem-foto' : 'campo-cor'}" aria-hidden="true">
         ${s.img ? `<img src="${s.img}" alt="" ${i ? 'loading="lazy"' : ''} decoding="async">` : ''}
@@ -307,14 +341,14 @@
     irPara('catalogo');
     const p = perfilDe(estado.perfil);
     pintarPerfil($('#avatar'), p);
-    $('#avatar').setAttribute('aria-label', `Perfil: ${p.nome}. Trocar`);
+    $('#avatar').setAttribute('aria-label', t('perfilAria', { nome: p.nome }));
     const m = C.itens.mentoria;
-    $('#vitrineMeta').innerHTML = `<span class="combina">${combina(m)}% pra você</span>` + m.meta.map(t => `<span>${esc(t)}</span>`).join('');
+    $('#vitrineMeta').innerHTML = `<span class="combina">${combina(m)}${t('pctVoce')}</span>` + m.meta.map(t => `<span>${esc(t)}</span>`).join('');
     $('#vitrineSinopse').textContent = C.perfilTexto[estado.perfil] || m.sinopse;
     montarFileiras();
+    montarPerguntas();
     if (!catalogoMontado) {
       catalogoMontado = true;
-      montarPerguntas();
       observar();
       girarVitrine();
     }
@@ -325,9 +359,10 @@
     const it = C.itens[id];
     const texto = it.capa === 'texto';
     let selo = '';
-    if (it.tipo === 'gratis') selo = '<span class="card-selo gratis">Grátis</span>';
-    else if (id === 'mentoria') selo = '<span class="card-selo pago">Mentoria</span>';
-    else if (it.bloqueado) selo = `<span class="card-selo trancado">${CADEADO}${it.breve ? 'Em breve' : 'Exclusivo'}</span>`;
+    if (it.tipo === 'gratis') selo = `<span class="card-selo gratis">${t('gratis')}</span>`;
+    else if (id === 'mentoria') selo = `<span class="card-selo pago">${t('seloMentoria')}</span>`;
+    else if (it.tipo === 'aluno') selo = `<span class="card-selo aluno">${t('resultadoAluno')}</span>`;
+    else if (it.bloqueado) selo = `<span class="card-selo trancado">${CADEADO}${it.breve ? t('emBreve') : t('exclusivo')}</span>`;
 
     const linha = [];
     if (comCombina && it.peso) linha.push(`<span class="combina">${combina(it)}%</span>`);
@@ -341,9 +376,9 @@
 
     return `<button class="card card-${formato}${texto ? ' capa-texto' : ''}${it.contem ? ' contem' : ''}${it.bloqueado ? ' bloqueado' : ''}" type="button"
         data-abrir="${id}" style="--i:${i};${texto ? `--cor:${it.cor}` : ''}" aria-label="${esc(it.titulo)}">
-      ${midia}${texto ? '' : selo}${play}
+      ${midia}${texto || it.tipo === 'aluno' ? '' : selo}${play}
       <span class="card-texto">
-        ${texto ? (it.tipo === 'exclusivo' ? CADEADO : selo) : ''}
+        ${texto ? (it.tipo === 'exclusivo' ? CADEADO : selo) : (it.tipo === 'aluno' ? selo : '')}
         <span>
           <span class="card-titulo">${tituloCard}</span>
           <span class="card-linha">${linha.join('')}</span>
@@ -366,9 +401,9 @@
       return `<section class="fileira" id="fileira-${f.id}" aria-labelledby="t-${f.id}">
         <div class="fileira-cabeca"><h2 id="t-${f.id}">${esc(f.titulo)}</h2>${sub ? `<span class="fileira-sub">${esc(sub)}</span>` : ''}</div>
         <div class="trilho-wrap">
-          <button class="seta seta-esq" type="button" aria-label="Voltar" data-seta="-1">${SETA('esq')}</button>
+          <button class="seta seta-esq" type="button" aria-label="${t('voltar')}" data-seta="-1">${SETA('esq')}</button>
           <div class="trilho" role="list">${itens.map((id, i) => cardHTML(id, f.formato, i, f.dinamica)).join('')}</div>
-          <button class="seta seta-dir" type="button" aria-label="Avançar" data-seta="1">${SETA('dir')}</button>
+          <button class="seta seta-dir" type="button" aria-label="${t('avancar')}" data-seta="1">${SETA('dir')}</button>
         </div>
       </section>`;
     }).join('');
@@ -378,10 +413,10 @@
   function montarPerguntas() {
     $('#listaPerguntas').innerHTML = C.perguntas.map(([q, r]) => `
       <details class="pergunta"><summary>${esc(q)}${MAIS}</summary><p>${esc(r)}</p></details>`).join('');
-    $('#listaPerguntas').addEventListener('toggle', e => {
-      if (e.target.open) $$('.pergunta[open]').forEach(d => { if (d !== e.target) d.open = false; });
-    }, true);
   }
+  $('#listaPerguntas').addEventListener('toggle', e => {
+    if (e.target.open) $$('.pergunta[open]').forEach(d => { if (d !== e.target) d.open = false; });
+  }, true);
 
   let observador;
   function observar() {
@@ -442,24 +477,25 @@
     const midia = texto
       ? `<div class="ficha-midia capa-texto" style="--cor:${it.cor}"><span>${esc(it.bloqueado ? it.trilha : it.titulo)}</span></div>`
       : `<div class="ficha-midia"><img src="${it.imgLarga || it.img}" alt="${it.tipo === 'aluno' ? esc(it.nome) : ''}">
-          ${it.video ? `<button class="ficha-play" type="button" data-video="${it.video}" data-item="${id}" ${it.tipo === 'aluno' ? 'data-vertical="1"' : ''} aria-label="Assistir">${PLAY}</button>` : ''}</div>`;
+          ${it.video ? `<button class="ficha-play" type="button" data-video="${it.video}" data-item="${id}" ${it.tipo === 'aluno' ? 'data-vertical="1"' : ''} aria-label="${t('assistir')}">${PLAY}</button>` : ''}</div>`;
 
     const meta = [];
-    if (it.peso) meta.push(`<span class="combina">${combina(it)}% pra você</span>`);
+    if (it.tipo === 'aluno') meta.push(`<span class="resultado-aluno">${t('resultadoAluno')}</span>`);
+    if (it.peso) meta.push(`<span class="combina">${combina(it)}${t('pctVoce')}</span>`);
     if (it.tipo === 'aluno') meta.push(`<span>${esc(it.nome)}</span>`, `<span>${esc(it.arroba)}</span>`);
-    if (it.tipo === 'etapa') meta.push(`<span>${esc(it.duracao)}</span>`, '<span>Parte da Mentoria</span>');
-    if (it.tipo === 'gratis') meta.push('<span>Grátis</span>');
-    if (it.bloqueado) meta.push(`<span>${esc(it.trilha)}</span>`, `<span class="trancado-meta">${esc(it.breve || 'Exclusivo da mentoria')}</span>`);
+    if (it.tipo === 'etapa') meta.push(`<span>${esc(it.duracao)}</span>`, `<span>${t('parteMentoria')}</span>`);
+    if (it.tipo === 'gratis') meta.push(`<span>${t('gratis')}</span>`);
+    if (it.bloqueado) meta.push(`<span>${esc(it.trilha)}</span>`, `<span class="trancado-meta">${esc(it.breve || t('exclusivoMentoria'))}</span>`);
     (it.meta || []).forEach(t => meta.push(`<span>${esc(t)}</span>`));
 
     let acoes = '';
     if (it.tipo === 'aluno') {
-      acoes = botaoCta({ rotulo: 'Ver depoimento', acao: 'video', video: it.video, vertical: true }, id, 'botao-claro')
-            + botaoCta({ rotulo: 'Quero esse caminho também', acao: 'ficha', alvo: 'mentoria' }, id, 'botao-cinza');
+      acoes = botaoCta({ rotulo: t('verDepoimento'), acao: 'video', video: it.video, vertical: true }, id, 'botao-claro')
+            + botaoCta({ rotulo: t('mesmoCaminho'), acao: 'ficha', alvo: 'mentoria' }, id, 'botao-cinza');
     } else if (it.bloqueado) {
-      acoes = botaoCta({ rotulo: 'Quero entrar na mentoria', acao: 'ficha', alvo: 'mentoria' }, id, 'botao-cheio');
+      acoes = botaoCta({ rotulo: t('entrarMentoria'), acao: 'ficha', alvo: 'mentoria' }, id, 'botao-cheio');
     } else if (it.tipo === 'etapa') {
-      acoes = botaoCta({ rotulo: 'Ver a mentoria completa', acao: 'ficha', alvo: 'mentoria' }, id, 'botao-cheio');
+      acoes = botaoCta({ rotulo: t('verMentoria'), acao: 'ficha', alvo: 'mentoria' }, id, 'botao-cheio');
     } else {
       if (it.cta) acoes += botaoCta(it.cta, id, (it.cta.acao === 'checkout' || it.cta.acao === 'teste') ? 'botao-cheio' : 'botao-claro');
       if (it.cta2) acoes += botaoCta(it.cta2, id, 'botao-cinza');
@@ -467,26 +503,26 @@
 
     let extra = '';
     if (it.inclui) {
-      extra += `<h3>O que está incluído</h3><ul class="inclui" role="list">${it.inclui.map(t => `<li>${CHECK}<span>${esc(t)}</span></li>`).join('')}</ul>`;
+      extra += `<h3>${t('incluido')}</h3><ul class="inclui" role="list">${it.inclui.map(t => `<li>${CHECK}<span>${esc(t)}</span></li>`).join('')}</ul>`;
     }
     if (it.preco) {
       extra += `<div class="preco">
         <p class="preco-de">${esc(it.preco.separado)}</p>
         <p class="preco-por">${esc(it.preco.parcelas)}</p>
         <p class="preco-nota">${esc(it.preco.nota)}</p>
-        <p class="preco-garantia"><b>Garantia de 7 dias.</b> Participou da primeira semana e sentiu que não é pra você? O valor volta inteiro.</p>
+        <p class="preco-garantia"><b>${t('garantia')}</b> ${t('garantiaTexto')}</p>
       </div>`;
     }
     if (it.bloqueado) {
-      extra += `<p class="ficha-trava">${CADEADO}<span>Esse conteúdo abre quando você entra na mentoria. Ele fica na área de membros, junto com o resto do ${esc(it.trilha)}.</span></p>`;
+      extra += `<p class="ficha-trava">${CADEADO}<span>${esc(t('trava', { trilha: it.trilha }))}</span></p>`;
     }
     if (it.etapas) {
       const eps = it.etapas;
-      extra += `<h3>Como funciona, etapa por etapa</h3><ol class="episodios">${eps.map(e => {
+      extra += `<h3>${t('etapas')}</h3><ol class="episodios">${eps.map(e => {
         const ep = C.itens[e];
         return `<li class="episodio"><img src="${ep.img}" alt="" loading="lazy"><div><strong>${esc(ep.titulo)}</strong><span>${esc(ep.duracao)}</span></div><p>${esc(ep.sinopse)}</p></li>`;
       }).join('')}</ol>`;
-      extra += `<h3>Quem já passou por aqui</h3><div class="alunos-mini">${['levi', 'laura', 'luiz', 'alycia', 'bruno'].map(a => {
+      extra += `<h3>${t('alunos')}</h3><div class="alunos-mini">${['levi', 'laura', 'luiz', 'alycia', 'bruno'].map(a => {
         const al = C.itens[a];
         return `<button type="button" data-video="${al.video}" data-item="${a}" data-vertical="1"><img src="${al.img}" alt="${esc(al.nome)}" loading="lazy"><span>${esc(al.nome)}</span></button>`;
       }).join('')}</div>`;
@@ -554,7 +590,7 @@
       if (k === T.perguntas.length) return resultado();
       const [q, ops] = T.perguntas[k];
       const html = `<div class="teste">
-        <div class="teste-progresso" aria-label="Pergunta ${k + 1} de ${T.perguntas.length}">${T.perguntas.map((_, j) => `<i class="${j < k ? 'feito' : ''}"></i>`).join('')}</div>
+        <div class="teste-progresso" aria-label="${t('perguntaDe', { n: k + 1, t: T.perguntas.length })}">${T.perguntas.map((_, j) => `<i class="${j < k ? 'feito' : ''}"></i>`).join('')}</div>
         <div class="ficha-corpo" style="padding:0">
           <h2 id="fichaTitulo">${esc(q)}</h2>
           <div class="opcoes">${ops.map((o, j) => `<button class="opcao" type="button" data-resposta="${j}">${esc(o)}</button>`).join('')}</div>
@@ -567,13 +603,13 @@
       const r = T.resultados.find(x => media < x.ate) || T.resultados[T.resultados.length - 1];
       registrar('teste_nivel', 'teste', { nivel: r.nivel, media: +media.toFixed(2), respostas });
       const html = `<div class="teste"><div class="ficha-corpo" style="padding:0">
-        <p class="ficha-meta">Seu ponto de partida</p>
+        <p class="ficha-meta">${t('pontoPartida')}</p>
         <p class="resultado-nivel">${esc(r.nivel)}</p>
         <h2 id="fichaTitulo" style="margin-top:18px">${esc(r.frase)}</h2>
         <p class="ficha-sinopse">${esc(r.texto)}</p>
         <div class="ficha-acoes">
-          ${botaoCta({ rotulo: 'Ver a mentoria pro meu nível', acao: 'ficha', alvo: 'mentoria' }, 'teste', 'botao-cheio')}
-          ${botaoCta({ rotulo: 'Mandar meu resultado pro Gediel', acao: 'whatsapp', texto: `Oi Gediel! Fiz o teste do catálogo e deu ${r.nivel}. Por onde eu começo?` }, 'teste', 'botao-cinza')}
+          ${botaoCta({ rotulo: t('mentoriaNivel'), acao: 'ficha', alvo: 'mentoria' }, 'teste', 'botao-cheio')}
+          ${botaoCta({ rotulo: t('mandarResultado'), acao: 'whatsapp', texto: t('whatsResultado', { nivel: r.nivel }) }, 'teste', 'botao-cinza')}
         </div></div></div>`;
       abrirFicha('teste', html);
     };
@@ -585,7 +621,7 @@
     const quadro = $('#videoQuadro');
     quadro.classList.toggle('vertical', Boolean(vertical));
     quadro.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(idVideo)}?autoplay=1&rel=0&playsinline=1&modestbranding=1"
-      title="Vídeo" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+      title="${t('video')}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
     $('#video').hidden = false;
     $('#fecharVideo').focus({ preventScroll: true });
     registrar('video', item || idVideo);
@@ -628,29 +664,31 @@
   }
 
   document.addEventListener('click', e => {
-    const t = e.target;
-    const perfil = t.closest('[data-perfil]');
+    const alvo = e.target;
+    const perfil = alvo.closest('[data-perfil]');
     if (perfil) return escolherPerfil(perfil.dataset.perfil);
 
-    const video = t.closest('[data-video]');
+    const video = alvo.closest('[data-video]');
     if (video) return abrirVideo(video.dataset.video, video.dataset.item, video.dataset.vertical);
 
-    const cta = t.closest('[data-acao-cta]');
+    const cta = alvo.closest('[data-acao-cta]');
     if (cta) return executar(JSON.parse(cta.dataset.acaoCta), cta.dataset.cta);
 
-    const abrir = t.closest('[data-abrir]');
+    const abrir = alvo.closest('[data-abrir]');
     if (abrir) return abrirFicha(abrir.dataset.abrir);
 
-    const whats = t.closest('[data-whats]');
-    if (whats) { e.preventDefault(); registrar('clicou', 'whatsapp', { de: 'pagina' }); return abrirFora(linkWhats(whats.dataset.whats)); }
+    const whats = alvo.closest('[data-whats]');
+    if (whats) { e.preventDefault(); registrar('clicou', 'whatsapp', { de: 'pagina' }); return abrirFora(linkWhats(t(whats.dataset.whats))); }
 
-    const seta = t.closest('[data-seta]');
+    if (alvo.closest('[data-idioma]')) return trocarIdioma();
+
+    const seta = alvo.closest('[data-seta]');
     if (seta) {
       const trilho = seta.parentElement.querySelector('.trilho');
       return trilho.scrollBy({ left: +seta.dataset.seta * trilho.clientWidth * 0.82, behavior: reduz ? 'auto' : 'smooth' });
     }
 
-    const acao = t.closest('[data-acao]');
+    const acao = alvo.closest('[data-acao]');
     if (acao && acao.dataset.acao === 'fimHistoria') return fimHistoria(false);
   });
 
@@ -665,6 +703,26 @@
     if (fichaAberta) fecharFicha();
   });
 
+  function trocarIdioma() {
+    definirIdioma(idioma === 'pt' ? 'en' : 'pt');
+    guarda.gravar('ebg:idioma', idioma);
+    montarPerfis();
+    $('#erroDados').textContent = '';
+    const tela = document.body.dataset.tela;
+    if (tela === 'entrada') {
+      if ($('#passoPerfil').classList.contains('ativo')) perguntarFoco();
+    } else if (tela === 'historia') {
+      const i = historia.i;
+      abrirHistoria();
+      mostrarSlide(i);
+    } else {
+      if (fichaAberta) fecharFicha();
+      const y = scrollY;
+      abrirCatalogo();
+      scrollTo(0, y);
+    }
+  }
+
   $('#avatar').addEventListener('click', () => {
     perguntarFoco();
     irPara('entrada');
@@ -678,6 +736,8 @@
   });
 
   /* ---------------- início ---------------- */
+  const pedido = new URLSearchParams(location.search).get('lang');
+  definirIdioma(pedido || guarda.ler('ebg:idioma') || 'pt');
   montarParede();
   montarPerfis();
   ligarHistoria();

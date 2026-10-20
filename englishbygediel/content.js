@@ -142,7 +142,7 @@ window.EBG = {
       sinopse: 'Três cidades, três sotaques e o caderno de viagem de 2024.' },
 
     // Bônus gratuitos
-    teste: { titulo: 'Qual é o seu nível?', tipo: 'gratis', capa: 'texto', cor: '#c8322b',
+    teste: { titulo: 'Qual é o seu nível?', tipo: 'gratis', capa: 'texto', cor: '#2f56d6',
       meta: ['5 perguntas', '1 minuto'],
       sinopse: 'Cinco perguntas rápidas pra descobrir seu ponto de partida. Começar pelo ponto certo poupa tempo e motivação.',
       cta: { rotulo: 'Fazer o teste agora', acao: 'teste' },
@@ -162,7 +162,7 @@ window.EBG = {
       sinopse: 'Frase de escola contra frase natural, os erros que todo brasileiro comete e o inglês de rua, em vídeos curtos.',
       cta: { rotulo: 'Seguir no Instagram', acao: 'link', href: 'ebg' },
       peso: { fala: 7, trabalho: 6, viagem: 7, fe: 5, zero: 7 } },
-    esposa: { titulo: 'Encorajando minha esposa', tipo: 'gratis', capa: 'texto', cor: '#2f4f9e',
+    esposa: { titulo: 'Encorajando minha esposa', tipo: 'gratis', capa: 'texto', cor: '#1f6b4a',
       meta: ['Série', 'Gediel e Mayandra'],
       sinopse: 'A Mayandra tenta primeiro, do jeito dela, sem ajuda. Depois vem a versão natural. Errar faz parte: quem tenta, aprende.',
       cta: { rotulo: 'Assistir a série', acao: 'link', href: 'ebg' },
@@ -195,7 +195,7 @@ window.EBG = {
     { id: 'pra-voce', titulo: 'Escolhido pra você', dinamica: true, formato: 'poster' },
     { id: 'programa', titulo: 'Programa Inteligente', sub: 'Só na mentoria', formato: 'poster',
       itens: ['diagtestes', 'cronograma', 'salas', 'aulas'] },
-    { id: 'alunos', titulo: 'Quem já passou por aqui', formato: 'poster',
+    { id: 'alunos', titulo: 'Resultados de alunos', formato: 'poster',
       itens: ['levi', 'laura', 'luiz', 'alycia', 'bruno'] },
     { id: 'eom', titulo: 'English On Mission', sub: 'Só na mentoria', formato: 'poster',
       itens: ['grupoeom', 'devocionais', 'cristao', 'biblia'] },

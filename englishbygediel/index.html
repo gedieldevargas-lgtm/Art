@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="img/gediel-brooklyn.webp">
+<link rel="preload" as="image" href="img/vitrine-cafe.webp">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body data-tela="entrada">
@@ -26,25 +26,28 @@
   </div>
 
   <div class="entrada-corpo">
-    <a class="marca" href="#" aria-label="englishbygediel">english<b>by</b>gediel</a>
+    <div class="entrada-topo">
+      <a class="marca" href="#" aria-label="englishbygediel">english<b>by</b>gediel</a>
+      <button class="idioma" type="button" data-idioma data-i18n="idiomaOutro" data-i18n-aria="idiomaAria">English</button>
+    </div>
 
     <form class="passo passo-dados ativo" id="passoDados" novalidate>
-      <h1 class="entrada-titulo">Prazer! Como te chamo?</h1>
+      <h1 class="entrada-titulo" data-i18n="titulo">Prazer! Como te chamo?</h1>
       <label class="campo">
-        <span>Seu nome</span>
-        <input name="nome" autocomplete="given-name" required maxlength="80" placeholder="Como gosta de ser chamado">
+        <span data-i18n="nome">Seu nome</span>
+        <input name="nome" autocomplete="given-name" required maxlength="80" placeholder="Como gosta de ser chamado" data-i18n-ph="nomePh">
       </label>
       <label class="campo">
-        <span>WhatsApp</span>
+        <span data-i18n="whats">WhatsApp</span>
         <input name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" required placeholder="(55) 99999-9999">
       </label>
       <label class="campo">
-        <span>E-mail <small>opcional</small></span>
-        <input name="email" type="email" inputmode="email" autocomplete="email" maxlength="200" placeholder="voce@email.com">
+        <span><span data-i18n="email">E-mail</span> <small data-i18n="opcional">opcional</small></span>
+        <input name="email" type="email" inputmode="email" autocomplete="email" maxlength="200" placeholder="voce@email.com" data-i18n-ph="emailPh">
       </label>
       <p class="erro" id="erroDados" role="alert"></p>
-      <button class="botao botao-cheio" type="submit" id="enviarDados">Continuar</button>
-      <p class="nota">Seus dados ficam só com o Gediel. Nada de spam.</p>
+      <button class="botao botao-cheio" type="submit" id="enviarDados" data-i18n="continuar">Continuar</button>
+      <p class="nota" data-i18n="nota">Seus dados ficam só com o Gediel. Nada de spam.</p>
     </form>
 
     <div class="passo passo-perfil" id="passoPerfil">
@@ -57,10 +60,10 @@
 <!-- 2 · HISTÓRIA (stories) -->
 <section class="tela historia" id="historia" aria-label="Apresentação" aria-roledescription="stories">
   <div class="barras" id="barras"></div>
-  <button class="pular" id="pular">Pular</button>
+  <button class="pular" id="pular" data-i18n="pular">Pular</button>
   <div class="slides" id="slides"></div>
-  <button class="toque toque-voltar" id="toqueVoltar" aria-label="Anterior"></button>
-  <button class="toque toque-avancar" id="toqueAvancar" aria-label="Próximo"></button>
+  <button class="toque toque-voltar" id="toqueVoltar" aria-label="Anterior" data-i18n-aria="anterior"></button>
+  <button class="toque toque-avancar" id="toqueAvancar" aria-label="Próximo" data-i18n-aria="proximo"></button>
 </section>
 
 <!-- 3 · CATÁLOGO -->
@@ -68,32 +71,37 @@
   <header class="topo" id="topo">
     <a class="marca" href="#inicio">english<b>by</b>gediel</a>
     <nav class="atalhos" aria-label="Seções">
-      <a href="#fileira-programa">A mentoria</a>
-      <a href="#fileira-alunos">Alunos</a>
-      <a href="#fileira-gratis">Grátis</a>
+      <a href="#fileira-programa" data-i18n="navMentoria">A mentoria</a>
+      <a href="#fileira-alunos" data-i18n="navAlunos">Alunos</a>
+      <a href="#fileira-gratis" data-i18n="navGratis">Grátis</a>
     </nav>
+    <button class="idioma" type="button" data-idioma data-i18n="idiomaOutro" data-i18n-aria="idiomaAria">English</button>
     <button class="avatar" id="avatar" aria-label="Trocar perfil"></button>
   </header>
 
   <section class="vitrine" id="inicio">
     <div class="vitrine-fotos" aria-hidden="true">
-      <img src="img/gediel-brooklyn.webp" alt="" class="ativa" width="642" height="900" fetchpriority="high">
-      <img src="img/gediel-liberty-tall.webp" alt="" width="675" height="900" loading="lazy">
-      <img src="img/gediel-london.webp" alt="" width="640" height="853" loading="lazy">
+      <img src="img/vitrine-cafe.webp" alt="" class="ativa" width="817" height="1100" fetchpriority="high">
+      <img src="img/vitrine-ny.webp" alt="" width="825" height="1100" loading="lazy">
+      <img src="img/vitrine-terno.webp" alt="" width="880" height="1100" loading="lazy">
+      <img src="img/vitrine-londres.webp" alt="" width="825" height="1100" loading="lazy">
+      <img src="img/vitrine-brooklyn.webp" alt="" width="733" height="1100" loading="lazy">
+      <img src="img/vitrine-joinha.webp" alt="" width="1100" height="733" loading="lazy">
+      <img src="img/vitrine-liberdade.webp" alt="" width="825" height="1100" loading="lazy">
     </div>
     <div class="vitrine-texto">
-      <p class="vitrine-selo"><span class="ponto"></span> Inscrições abertas</p>
-      <h1 class="vitrine-titulo">Mentoria <em>Inglês Inteligente</em></h1>
+      <p class="vitrine-selo"><span class="ponto"></span> <span data-i18n="inscricoes">Inscrições abertas</span></p>
+      <h1 class="vitrine-titulo"><span data-i18n="vitrine1">Mentoria</span> <em data-i18n="vitrine2">Inglês Inteligente</em></h1>
       <p class="vitrine-meta" id="vitrineMeta"></p>
       <p class="vitrine-sinopse" id="vitrineSinopse"></p>
       <div class="vitrine-acoes">
         <button class="botao botao-claro" data-video="eXfovCYxdZw" data-item="mentoria">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg>
-          Ver apresentação
+          <span data-i18n="verApresentacao">Ver apresentação</span>
         </button>
         <button class="botao botao-cinza" data-abrir="mentoria">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-6h2zm0-8h-2V7h2z"/></svg>
-          Mais informações
+          <span data-i18n="maisInfo">Mais informações</span>
         </button>
       </div>
     </div>
@@ -104,18 +112,18 @@
   <section class="proximo" id="proximo" aria-labelledby="proximoTitulo">
     <img src="img/gediel-liberty.webp" alt="Gediel em frente à Estátua da Liberdade" width="900" height="675" loading="lazy">
     <div class="proximo-texto">
-      <p class="proximo-contagem"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19"/><circle class="anel" cx="22" cy="22" r="19"/></svg> A seguir</p>
-      <h2 id="proximoTitulo">Próximo episódio: você falando inglês.</h2>
-      <p>O primeiro passo é escolher a turma do seu nível. Daqui pra frente, quem conduz o caminho somos nós dois.</p>
+      <p class="proximo-contagem"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19"/><circle class="anel" cx="22" cy="22" r="19"/></svg> <span data-i18n="aSeguir">A seguir</span></p>
+      <h2 id="proximoTitulo" data-i18n="proximoTitulo">Próximo episódio: você falando inglês.</h2>
+      <p data-i18n="proximoTexto">O primeiro passo é escolher a turma do seu nível. Daqui pra frente, quem conduz o caminho somos nós dois.</p>
       <div class="vitrine-acoes">
-        <button class="botao botao-cheio" data-abrir="mentoria">Quero entrar na mentoria</button>
-        <button class="botao botao-cinza" data-whats="Oi Gediel! Vim pelo catálogo e quero conversar sobre o meu caso.">Conversar com o Gediel</button>
+        <button class="botao botao-cheio" data-abrir="mentoria" data-i18n="entrarMentoria">Quero entrar na mentoria</button>
+        <button class="botao botao-cinza" data-whats="whatsConversar" data-i18n="conversar">Conversar com o Gediel</button>
       </div>
     </div>
   </section>
 
   <section class="perguntas" aria-labelledby="perguntasTitulo">
-    <h2 id="perguntasTitulo">Perguntas de quem está chegando</h2>
+    <h2 id="perguntasTitulo" data-i18n="perguntasTitulo">Perguntas de quem está chegando</h2>
     <div id="listaPerguntas"></div>
   </section>
 
@@ -125,7 +133,7 @@
       <li><a href="https://instagram.com/englishbygediel" target="_blank" rel="noopener">@englishbygediel</a></li>
       <li><a href="https://instagram.com/englishonmission" target="_blank" rel="noopener">@englishonmission</a></li>
       <li><a href="https://instagram.com/inglesinteligente" target="_blank" rel="noopener">@inglesinteligente</a></li>
-      <li><a href="#" data-whats="Oi Gediel! Vim pelo catálogo.">WhatsApp</a></li>
+      <li><a href="#" data-whats="whatsRodape">WhatsApp</a></li>
     </ul>
     <p class="rodape-nota">© 2026 Mentor Gediel · Inglês Inteligente</p>
   </footer>
@@ -134,7 +142,7 @@
 <!-- Ficha do título (estilo "mais informações") -->
 <div class="ficha-fundo" id="fichaFundo" hidden></div>
 <div class="ficha" id="ficha" role="dialog" aria-modal="true" aria-labelledby="fichaTitulo" hidden>
-  <button class="fechar" id="fecharFicha" aria-label="Fechar">
+  <button class="fechar" id="fecharFicha" aria-label="Fechar" data-i18n-aria="fechar">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
   </button>
   <div class="ficha-alca" aria-hidden="true"></div>
@@ -155,6 +163,7 @@
 
 <script src="config.js"></script>
 <script src="content.js"></script>
+<script src="i18n.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
