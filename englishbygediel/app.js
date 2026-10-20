@@ -382,7 +382,7 @@
     const aspas = it.tipo === 'aluno' && it.citacao !== false;
     const tituloCard = aspas ? `“${esc(it.titulo)}”` : esc(it.titulo);
 
-    return `<button class="card card-${formato}${texto ? ' capa-texto' : ''}${it.contem ? ' contem' : ''}${it.bloqueado || it.indisponivel ? ' bloqueado' : ''}${it.tom ? ` tom-${it.tom}` : ''}${disponivel(it, id) ? ' neon' : ''}" type="button"
+    return `<button class="card card-${formato}${texto ? ' capa-texto' : ''}${it.contem ? ' contem' : ''}${it.bloqueado || it.indisponivel ? ' bloqueado' : ''}${disponivel(it, id) ? ' neon' : ''}" type="button"
         data-abrir="${id}" style="--i:${i};${texto ? `--cor:${it.cor}` : ''}" aria-label="${esc(it.titulo)}">
       ${midia}${texto || it.tipo === 'aluno' ? '' : selo}${play}
       <span class="card-texto">
@@ -568,7 +568,7 @@
     const texto = it.capa === 'texto';
     const midia = texto
       ? `<div class="ficha-midia capa-texto" style="--cor:${it.cor}"><span>${esc(it.bloqueado ? it.trilha : it.titulo)}</span></div>`
-      : `<div class="ficha-midia${it.tom ? ` tom-${it.tom}` : ''}"><img src="${it.imgLarga || it.img}" alt="${it.tipo === 'aluno' ? esc(it.nome) : ''}">
+      : `<div class="ficha-midia"><img src="${it.imgLarga || it.img}" alt="${it.tipo === 'aluno' ? esc(it.nome) : ''}">
           ${it.video ? `<button class="ficha-play" type="button" data-video="${it.video}" data-item="${id}" ${it.tipo === 'aluno' ? 'data-vertical="1"' : ''} aria-label="${t('assistir')}">${PLAY}</button>` : ''}</div>`;
 
     const meta = [];

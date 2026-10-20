@@ -115,16 +115,15 @@ window.EBG = {
       sinopse: 'O Guilherme conta, em vídeo, como foi a experiência dele no English On Mission.',
       peso: { fala: 5, trabalho: 3, viagem: 3, fe: 9, zero: 5 } },
 
-    // tom: 'azul' = filtro azul-escuro de destaque (usado no Programa Inteligente).
     // Área de membros (Cakto). bloqueado: aparece no catálogo, mas só abre pra quem entra na mentoria.
     // Quando chegar a capa original do Cakto, troque capa: 'texto' por img: 'img/arquivo.webp'.
-    diagtestes: { titulo: 'Diagnósticos e Testes', trilha: 'Programa Inteligente', tom: 'azul', bloqueado: true, img: 'img/card-diagnostico.webp',
+    diagtestes: { titulo: 'Diagnósticos e Testes', trilha: 'Programa Inteligente', bloqueado: true, img: 'img/card-diagnostico.webp',
       sinopse: 'O ponto de partida: teste de nível e diagnóstico de múltiplas inteligências, pra saber como você aprende antes da primeira aula.' },
-    cronograma: { titulo: 'Cronograma', trilha: 'Programa Inteligente', tom: 'azul', bloqueado: true, img: 'img/card-cronograma.webp',
+    cronograma: { titulo: 'Cronograma', trilha: 'Programa Inteligente', bloqueado: true, img: 'img/card-cronograma.webp',
       sinopse: 'Seu plano de estudo semana a semana, montado a partir do diagnóstico.' },
-    salas: { titulo: 'Salas de Interação', trilha: 'Programa Inteligente', tom: 'azul', bloqueado: true, img: 'img/card-salas.webp',
+    salas: { titulo: 'Salas de Interação', trilha: 'Programa Inteligente', bloqueado: true, img: 'img/card-salas.webp',
       sinopse: 'Conversa ao vivo em turma, por nível, com correção na hora.' },
-    aulas: { titulo: 'Aulas', trilha: 'Programa Inteligente', tom: 'azul', bloqueado: true, img: 'img/card-aulas.webp',
+    aulas: { titulo: 'Aulas', trilha: 'Programa Inteligente', bloqueado: true, img: 'img/card-aulas.webp',
       sinopse: 'As aulas da plataforma, pra estudar no seu ritmo e rever quantas vezes quiser.' },
 
     grupoeom: { titulo: 'Grupo do WhatsApp', trilha: 'English On Mission', tipo: 'gratis', img: 'img/logo-eom.webp', contem: true,
