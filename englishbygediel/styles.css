@@ -812,18 +812,18 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 @media (max-width: 759px) {
   .trilho { gap: 6px; padding-block: 10px 12px; }
   .fileira { padding: 12px 0 8px; }
-  .card-poster { width: max(104px, 29vw); }
-  .card-largo { width: max(200px, 58vw); }
-  .card-texto { padding: 8px; gap: 2px; }
-  .card-poster .card-titulo { font-size: 1rem; line-height: 1.05; }
-  .card-largo .card-titulo { font-size: 1.125rem; }
+  .card-poster { width: max(88px, 24vw); }
+  .card-largo { width: max(164px, 46vw); }
+  .card-texto { padding: 6px; gap: 2px; }
+  .card-poster .card-titulo { font-size: 0.875rem; line-height: 1.05; }
+  .card-largo .card-titulo { font-size: 1rem; }
   .card.capa-texto .card-texto { padding: 9px; }
-  .card.capa-texto .card-titulo { font-size: 1.3rem; }
-  .card-linha { font-size: 0.6875rem; gap: 6px; }
-  .card-selo { top: 6px; left: 6px; padding: 2px 6px; font-size: 0.6875rem; }
-  .card-selo.aluno { padding: 3px 6px; letter-spacing: .02em; }
+  .card.capa-texto .card-titulo { font-size: 1.05rem; }
+  .card-linha { font-size: 0.625rem; gap: 5px; }
+  .card-selo { top: 5px; left: 5px; padding: 2px 5px; font-size: 0.625rem; }
+  .card-selo.aluno { padding: 2px 5px; letter-spacing: .02em; }
   .card-selo.trancado .card-cadeado { width: 11px; height: 11px; }
-  .card-play, .card-whats { top: 6px; right: 6px; width: 26px; height: 26px; }
-  .card-play svg { width: 12px; height: 12px; }
-  .card-whats svg { width: 15px; height: 15px; }
+  .card-play, .card-whats { top: 5px; right: 5px; width: 22px; height: 22px; }
+  .card-play svg { width: 10px; height: 10px; }
+  .card-whats svg { width: 13px; height: 13px; }
 }
