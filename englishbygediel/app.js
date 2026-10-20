@@ -411,8 +411,8 @@
           .slice(0, 8);
         sub = perfilDe(estado.perfil).nome;
       }
-      return `<section class="fileira" id="fileira-${f.id}" aria-labelledby="t-${f.id}">
-        <div class="fileira-cabeca"><h2 id="t-${f.id}">${esc(f.titulo)}</h2>${sub ? `<span class="fileira-sub">${esc(sub)}</span>` : ''}</div>
+      return `<section class="fileira${f.destaque ? ' fileira-destaque' : ''}" id="fileira-${f.id}" aria-labelledby="t-${f.id}">
+        <div class="fileira-cabeca"><h2 id="t-${f.id}">${esc(f.titulo)}${f.etiqueta ? ` <span class="etiqueta">${esc(f.etiqueta)}</span>` : ''}</h2>${sub ? `<span class="fileira-sub">${esc(sub)}</span>` : ''}</div>
         <div class="trilho-wrap">
           <button class="seta seta-esq" type="button" aria-label="${t('voltar')}" data-seta="-1">${SETA('esq')}</button>
           <div class="trilho" role="list">${itens.map((id, i) => cardHTML(id, f.formato, i, f.dinamica)).join('')}</div>

@@ -773,10 +773,29 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 
 @media (prefers-reduced-motion: reduce) {
   .card.neon::before { opacity: .8; }
+  .fileira-destaque .card::before { opacity: .8; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
   .parede { animation: none; }
   .js .revela > * { opacity: 1; transform: none; }
 }
+
+.fileira h2 { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.fileira-sub { white-space: nowrap; }
+/* fileira mais importante (Programa Inteligente): etiqueta no título e cards com borda azul pulsando */
+.etiqueta {
+  display: inline-block;
+  padding: 3px 8px; border-radius: 4px;
+  background: var(--accent); color: #fff;
+  font: 700 0.75rem/1.2 var(--sans); letter-spacing: .06em; text-transform: uppercase;
+  animation: etiqueta 2.4s ease-in-out infinite;
+}
+@keyframes etiqueta { 50% { box-shadow: 0 0 16px rgba(110,150,255,.95); background: #3d66f0; } } /* taste-skill-ignore: destaque pedido pelo cliente */
+.fileira-destaque .card::before {
+  content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none; border-radius: inherit;
+  box-shadow: inset 0 0 0 2px var(--azul-claro), inset 0 0 22px rgba(110,150,255,.5); /* taste-skill-ignore: destaque pedido pelo cliente */
+  opacity: .2; animation: neon 2.4s ease-in-out infinite;
+}
+.fileira-destaque .card.bloqueado img { filter: grayscale(.15) brightness(.82); }
 
 /* celular: cards menores pra ver mais opções de uma vez (cerca de 3,5 por fileira) */
 @media (max-width: 759px) {

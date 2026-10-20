@@ -200,7 +200,7 @@ window.EBG_EN = {
   },
   fileiras: [
     { titulo: 'Picked for you' },
-    { titulo: 'Smart Program', sub: 'Mentorship only' },
+    { titulo: 'Smart Program', sub: 'Mentorship only', etiqueta: 'Ideal for you' },
     { titulo: 'Student results' },
     { sub: 'English with the Bible' },
     {},

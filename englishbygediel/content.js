@@ -224,7 +224,8 @@ window.EBG = {
 
   fileiras: [
     { id: 'pra-voce', titulo: 'Escolhido pra você', dinamica: true, formato: 'poster' },
-    { id: 'programa', titulo: 'Programa Inteligente', sub: 'Só na mentoria', formato: 'poster',
+    // destaque: a fileira inteira pulsa e o título ganha a etiqueta
+    { id: 'programa', titulo: 'Programa Inteligente', sub: 'Só na mentoria', etiqueta: 'Ideal pra você', destaque: true, formato: 'poster',
       itens: ['diagtestes', 'cronograma', 'salas', 'aulas'] },
     { id: 'alunos', titulo: 'Resultados de alunos', formato: 'poster',
       itens: ['levi', 'laura', 'luiz', 'alycia', 'bruno'] },
