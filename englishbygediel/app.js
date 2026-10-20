@@ -120,9 +120,9 @@
      1 · ENTRADA
      ========================================================= */
   function montarParede() {
-    const fotos = ['aluno-levi', 'aula-grupo', 'aluno-laura', 'gediel-brooklyn', 'aula-trio', 'aluno-luiz',
-      'aula-turma', 'aluno-alycia', 'gediel-liberty-tall', 'aula-tela', 'aluno-bruno', 'gediel-london'];
-    const html = Array.from({ length: 36 }, (_, i) => `<img src="img/${fotos[(i * 5) % fotos.length]}.webp" alt="" loading="${i < 18 ? 'eager' : 'lazy'}" decoding="async">`).join('');
+    const fotos = ['parede-londres', 'parede-gediel-cafe', 'parede-ny', 'parede-escola', 'parede-brooklyn'];
+    // 6 colunas e 5 fotos: nenhuma foto encosta nela mesma, nem do lado nem embaixo
+    const html = Array.from({ length: 36 }, (_, i) => `<img src="img/${fotos[i % fotos.length]}.webp" alt="" loading="${i < 18 ? 'eager' : 'lazy'}" decoding="async">`).join('');
     $('.parede').innerHTML = html;
   }
 

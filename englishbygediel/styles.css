@@ -108,14 +108,14 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
   grid-template-columns: repeat(6, 1fr);
   gap: 10px;
   transform: rotate(-10deg);
-  opacity: .32;
+  opacity: .6;
   animation: parede 60s linear infinite alternate;
 }
 .parede img { width: 100%; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 4px; }
 @keyframes parede { to { transform: rotate(-10deg) translateY(-18%); } }
 .entrada::after {
   content: ""; position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 50% 45%, rgba(11,11,13,.72), rgba(11,11,13,.96) 70%); /* taste-skill-ignore: scrim over photo */
+  background: radial-gradient(ellipse at 50% 45%, rgba(11,11,13,.6), rgba(11,11,13,.9) 75%); /* taste-skill-ignore: scrim over photo */
   pointer-events: none;
 }
 
