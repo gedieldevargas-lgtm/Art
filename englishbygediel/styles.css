@@ -794,8 +794,9 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 .pilula:active { transform: scale(.96); }
 .pilula svg { width: 16px; height: 16px; }
 /* vitrine: botão principal da vaga em linha inteira, prova logo embaixo */
-.botao-vaga { flex: 1 1 100%; min-height: 54px; font-size: 1.0625rem; }
-.vaga-preco { font-weight: 500; opacity: .85; }
+.botao-vaga { flex: 1 1 100%; min-height: 54px; font-size: 1rem; gap: 8px; white-space: nowrap; }
+.vaga-preco { font-weight: 700; }
+.vaga-de { font-weight: 400; font-size: .875em; opacity: .7; }
 .vitrine-prova { margin-top: 12px; font-size: var(--step-small); color: #d8d2c8; }
 
 /* O que você procura? */

@@ -33,7 +33,7 @@ window.EBG_UI = {
     perguntaDe: 'Pergunta {n} de {t}', pontoPartida: 'Seu ponto de partida',
     mentoriaNivel: 'Ver a mentoria pro meu nível', mandarResultado: 'Mandar meu resultado pro Gediel',
     whatsResultado: 'Oi Gediel! Fiz o teste do catálogo e deu {nivel}. Por onde eu começo?',
-    souNome: '(Sou {nome}.)', video: 'Vídeo', verInstagram: 'Conferir no Instagram', disponivel: 'Disponível', redes: 'Outros canais', whatsPrisma: 'Oi Gediel! Quero fazer o teste Prisma de múltiplas inteligências.', procuraTitulo: 'O que você procura?', vaga: 'Quero minha vaga', vagaPreco: '6x R$ 297', prova: '+500 alunos · 11 anos ensinando · Garantia de 7 dias', apresentacao: 'Apresentação', detalhes: 'Detalhes', barraNome: 'Mentoria Inglês Inteligente', barraInfo: '6x R$ 297 · 7 dias de garantia'
+    souNome: '(Sou {nome}.)', video: 'Vídeo', verInstagram: 'Conferir no Instagram', disponivel: 'Disponível', redes: 'Outros canais', whatsPrisma: 'Oi Gediel! Quero fazer o teste Prisma de múltiplas inteligências.', procuraTitulo: 'O que você procura?', vaga: 'Quero minha vaga', vagaDe: '6x R$ 500', vagaPreco: '6x R$ 297', prova: '+700 alunos · 11 anos ensinando · Garantia de 7 dias', apresentacao: 'Apresentação', detalhes: 'Detalhes', barraNome: 'Mentoria Inglês Inteligente', barraInfo: 'de 6x R$ 500 por 6x R$ 297'
   },
   en: {
     idiomaOutro: 'Português', idiomaAria: 'Ver a página em português',
@@ -66,7 +66,7 @@ window.EBG_UI = {
     perguntaDe: 'Question {n} of {t}', pontoPartida: 'Your starting point',
     mentoriaNivel: 'See the mentorship for my level', mandarResultado: 'Send my result to Gediel',
     whatsResultado: 'Hi Gediel! I took the catalog test and got {nivel}. Where should I start?',
-    souNome: "(I'm {nome}.)", video: 'Video', verInstagram: 'See on Instagram', disponivel: 'Available', redes: 'Other channels', whatsPrisma: "Hi Gediel! I'd like to take the Prisma multiple intelligences test.", procuraTitulo: 'What are you looking for?', vaga: 'Save my spot', vagaPreco: '6x R$ 297', prova: '500+ students · 11 years teaching · 7-day guarantee', apresentacao: 'Intro', detalhes: 'Details', barraNome: 'Inglês Inteligente Mentorship', barraInfo: '6x R$ 297 · 7-day guarantee'
+    souNome: "(I'm {nome}.)", video: 'Video', verInstagram: 'See on Instagram', disponivel: 'Available', redes: 'Other channels', whatsPrisma: "Hi Gediel! I'd like to take the Prisma multiple intelligences test.", procuraTitulo: 'What are you looking for?', vaga: 'Save my spot', vagaDe: '6x R$ 500', vagaPreco: '6x R$ 297', prova: '700+ students · 11 years teaching · 7-day guarantee', apresentacao: 'Intro', detalhes: 'Details', barraNome: 'Inglês Inteligente Mentorship', barraInfo: 'was 6x R$ 500, now 6x R$ 297'
   }
 };
 
@@ -77,7 +77,7 @@ window.EBG_EN = {
   ],
   historia: [
     { titulo: "You're not bad at English. You were taught badly.",
-      texto: "I'm Gediel. Eleven years in the classroom and more than 500 students showed me the problem was never you. It was the method." },
+      texto: "I'm Gediel. Eleven years in the classroom and more than 700 students showed me the problem was never you. It was the method." },
     { titulo: 'Everyone learns in their own way.',
       texto: 'The Smart Method starts by finding out how you learn. Then it brings together a live class, a plan for each day and close guidance.' },
     { titulo: '{nome}, I picked a path for you.', botao: 'Open my catalog' }
@@ -113,7 +113,7 @@ window.EBG_EN = {
         'Access to the English On Mission, Culture English and Exchange & Travel tracks',
         'Optional private, couple or group lesson packages, booked from inside'
       ],
-      preco: { separado: 'R$ 1,100 in the 1st month if bought separately', parcelas: '6x R$ 297', nota: '6-month subscription by card. Ask about installment bank slips.' },
+      preco: { separado: 'Was 6x R$ 500', parcelas: 'now 6x R$ 297', nota: '6-month subscription by card. Ask about installment bank slips.' },
       cta: { rotulo: 'Save my spot' },
       cta2: { rotulo: 'Ask a question', texto: "Hi Gediel! I found you through the catalog and I'd like to understand the mentorship." }
     },

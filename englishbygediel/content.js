@@ -15,7 +15,7 @@ window.EBG = {
   historia: [
     { img: 'img/gediel-brooklyn.webp',
       titulo: 'Você não é ruim em inglês. Foi mal ensinado.',
-      texto: 'Eu sou o Gediel. Onze anos de sala de aula e mais de 500 alunos me mostraram: o problema nunca foi você, foi o método.' },
+      texto: 'Eu sou o Gediel. Onze anos de sala de aula e mais de 700 alunos me mostraram: o problema nunca foi você, foi o método.' },
     { img: 'img/aula-grupo.webp',
       titulo: 'Cada pessoa aprende de um jeito.',
       texto: 'O Método Inteligente começa descobrindo como você aprende. Depois junta aula ao vivo, um cronograma pra cada dia e acompanhamento de perto.' },
@@ -79,7 +79,7 @@ window.EBG = {
         'Acesso às trilhas English On Mission, Culture English e Intercâmbio e Viagens',
         'Opção de pacotes de aula individuais, em casal ou com amigos, contratados por dentro'
       ],
-      preco: { separado: 'R$ 1.100 no 1º mês, se comprado separado', parcelas: '6x de R$ 297', nota: 'Assinatura de 6 meses no cartão. Consulte boleto parcelado.' },
+      preco: { separado: 'De 6x de R$ 500', parcelas: 'por 6x de R$ 297', nota: 'Assinatura de 6 meses no cartão. Consulte boleto parcelado.' },
       cta: { rotulo: 'Quero minha vaga', acao: 'checkout' },
       cta2: { rotulo: 'Tirar uma dúvida', acao: 'whatsapp', texto: 'Oi Gediel! Vim pelo catálogo e quero entender a mentoria.' },
       etapas: ['diagnostico', 'aovivo', 'pratica', 'certificado', 'pacotes'],
