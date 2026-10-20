@@ -152,6 +152,15 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
   display: flex; flex-direction: column;
 }
 .entrada-topo { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: auto; padding-top: env(safe-area-inset-top); }
+.topo-direita { display: flex; align-items: center; gap: 10px; }
+.redes { display: flex; align-items: center; gap: 2px; }
+.redes a {
+  width: 32px; height: 32px; display: grid; place-items: center;
+  border-radius: 50%; color: var(--muted);
+  transition: color .2s, background-color .2s;
+}
+.redes a:hover, .redes a:focus-visible { color: var(--ink); background: rgba(255,255,255,.08); }
+.redes svg { width: 17px; height: 17px; }
 .idioma {
   min-height: 36px; padding: 0 14px;
   border-radius: 999px;
@@ -331,7 +340,7 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
   position: fixed; top: 0; left: 0; right: 0; z-index: 20;
   display: grid;
   grid-template-columns: 1fr auto auto;
-  grid-template-areas: "marca idioma avatar" "atalhos atalhos atalhos";
+  grid-template-areas: "marca idioma avatar" "atalhos atalhos redes";
   align-items: center;
   gap: 6px 16px;
   padding: calc(12px + env(safe-area-inset-top)) var(--margem) 10px;
@@ -340,6 +349,7 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 }
 .topo.solido { background: var(--bg); }
 .topo .idioma { grid-area: idioma; }
+.topo .redes { grid-area: redes; justify-self: end; }
 .topo .marca { grid-area: marca; font-size: 1.25rem; }
 .atalhos { grid-area: atalhos; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
 .atalhos::-webkit-scrollbar { display: none; }
@@ -487,6 +497,18 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 .ficha-midia.tom-azul::before { z-index: 0; }
 .card.tom-azul .card-selo.trancado { background: var(--accent); color: #fff; }
 .card.tom-azul .card-linha { color: var(--azul-claro); }
+/* disponível agora: borda neon que pulsa devagar (anima só opacidade, leve no celular) */
+.card.neon { --neon: #46f0a4; }
+.card.neon::before {
+  content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 2px var(--neon), inset 0 0 22px rgba(70,240,164,.45); /* taste-skill-ignore: neon pedido pelo cliente */
+  opacity: .2;
+  animation: neon 2.4s ease-in-out infinite;
+}
+@keyframes neon { 50% { opacity: 1; } }
+.card.neon .card-selo.gratis { animation: neon-selo 2.4s ease-in-out infinite; }
+@keyframes neon-selo { 50% { box-shadow: 0 0 14px rgba(70,240,164,.9); } } /* taste-skill-ignore: neon pedido pelo cliente */
 .trancado-meta { color: var(--azul-claro); }
 .ficha-trava { display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start; margin-top: 24px; padding: 16px 18px; border-radius: var(--raio); background: var(--surface-2); }
 .ficha-trava .card-cadeado { width: 20px; height: 20px; color: var(--azul-claro); opacity: 1; }
@@ -713,7 +735,7 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
    ========================================================= */
 @media (min-width: 760px) {
   :root { --topo-h: 72px; }
-  .topo { grid-template-columns: auto 1fr auto auto; grid-template-areas: "marca atalhos idioma avatar"; gap: 20px 28px; padding-block: 16px; }
+  .topo { grid-template-columns: auto 1fr auto auto auto; grid-template-areas: "marca atalhos redes idioma avatar"; gap: 20px 28px; padding-block: 16px; }
   .atalhos a { background: none; padding: 0 6px; color: var(--muted); }
   .atalhos a:hover { background: none; color: var(--ink); }
   .vitrine { min-height: min(88vh, 820px); align-items: center; padding-bottom: 96px; }
@@ -752,6 +774,7 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .card.neon::before { opacity: .8; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
   .parede { animation: none; }
   .js .revela > * { opacity: 1; transform: none; }

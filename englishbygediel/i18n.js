@@ -33,7 +33,7 @@ window.EBG_UI = {
     perguntaDe: 'Pergunta {n} de {t}', pontoPartida: 'Seu ponto de partida',
     mentoriaNivel: 'Ver a mentoria pro meu nível', mandarResultado: 'Mandar meu resultado pro Gediel',
     whatsResultado: 'Oi Gediel! Fiz o teste do catálogo e deu {nivel}. Por onde eu começo?',
-    souNome: '(Sou {nome}.)', video: 'Vídeo', verInstagram: 'Conferir no Instagram'
+    souNome: '(Sou {nome}.)', video: 'Vídeo', verInstagram: 'Conferir no Instagram', disponivel: 'Disponível', redes: 'Outros canais'
   },
   en: {
     idiomaOutro: 'Português', idiomaAria: 'Ver a página em português',
@@ -66,7 +66,7 @@ window.EBG_UI = {
     perguntaDe: 'Question {n} of {t}', pontoPartida: 'Your starting point',
     mentoriaNivel: 'See the mentorship for my level', mandarResultado: 'Send my result to Gediel',
     whatsResultado: 'Hi Gediel! I took the catalog test and got {nivel}. Where should I start?',
-    souNome: "(I'm {nome}.)", video: 'Video', verInstagram: 'See on Instagram'
+    souNome: "(I'm {nome}.)", video: 'Video', verInstagram: 'See on Instagram', disponivel: 'Available', redes: 'Other channels'
   }
 };
 
@@ -145,7 +145,12 @@ window.EBG_EN = {
     salas: { titulo: 'Conversation Rooms', trilha: 'Smart Program', sinopse: 'Live group conversation, by level, with on-the-spot correction.' },
     aulas: { titulo: 'Lessons', trilha: 'Smart Program', sinopse: 'The platform lessons, to study at your pace and rewatch as many times as you want.' },
 
-    grupoeom: { titulo: 'WhatsApp Group', sinopse: 'The English On Mission group, to practice and walk together during the week.' },
+    grupoeom: { titulo: 'WhatsApp Group', meta: ['Free', 'WhatsApp'],
+      sinopse: 'The free English On Mission group, to practice and walk together during the week.',
+      cta: { rotulo: 'Join the group', texto: "Hi Gediel! I'd like to join the free English On Mission group." } },
+    grupoculture: { titulo: 'WhatsApp Group', meta: ['Free', 'WhatsApp'],
+      sinopse: 'The free Culture English group: TV show, movie and music tips to practice real English.',
+      cta: { rotulo: 'Join the group', texto: "Hi Gediel! I'd like to join the free Culture English group." } },
     devocionais: { titulo: 'EOM Devotionals', sinopse: 'Devotionals in English: one verse and one language point at a time.' },
     cristao: { titulo: 'Christian English Course', sinopse: 'English through the letters of the Bible, from the verb to be to the letters of John.' },
     biblia: { titulo: 'English with the Bible', sinopse: 'Extra content to read and understand the Word in English.' },
@@ -155,10 +160,14 @@ window.EBG_EN = {
     musica: { titulo: 'English with Music', sinopse: 'Lyrics, pronunciation and rhythm: your ear trains while you sing.' },
 
     inglesviagem: { titulo: 'English for Travel', trilha: 'Exchange & Travel', sinopse: 'Airport, hotel, restaurant and the unexpected: the situations every trip brings.' },
-    toronto: { titulo: 'Toronto 2027', trilha: 'Exchange & Travel', breve: 'Waiting list',
-      sinopse: 'The next exchange. Mentorship students get on the waiting list first.' },
-    vlogny: { titulo: 'New York Vlogs 2025', trilha: 'Exchange & Travel', sinopse: 'Behind the scenes of the New York trip, with street English happening live.' },
-    vlogeuropa: { titulo: 'London, Paris & Brussels Vlogs', trilha: 'Exchange & Travel', sinopse: 'Three cities, three accents and the 2024 travel journal.' },
+    toronto: { titulo: 'Toronto 2027', trilha: 'Exchange & Travel', selo: 'Enrollment open', meta: ['Exchange', '2027'],
+      sinopse: "Infly's next exchange. Enrollment is open: save your spot through the form.",
+      cta: { rotulo: 'I want to enroll' } },
+    vlogny: { titulo: 'New York Vlogs 2025', trilha: 'Exchange & Travel', breve: 'Coming soon', meta: ['Coming soon'],
+      sinopse: 'Behind the scenes of the New York trip, with street English happening live. Coming soon on YouTube.' },
+    vlogeuropa: { titulo: 'London, Paris & Brussels Vlogs', trilha: 'Exchange & Travel', meta: ['2024', 'YouTube'],
+      sinopse: "Three cities, three accents and the 2024 travel journal. The vlogs are open on Infly's YouTube.",
+      cta: { rotulo: 'Watch on YouTube' } },
 
     teste: { titulo: "What's your level?", meta: ['5 questions', '1 minute'],
       sinopse: 'Five quick questions to find your starting point. Starting in the right place saves time and motivation.',
@@ -169,9 +178,6 @@ window.EBG_EN = {
     eom: { meta: ['Saturday, 9 a.m.', 'Live on YouTube'],
       sinopse: 'English through the letters of the Bible: each class pairs a verse with a grammar point. From the verb to be to the letters of John.',
       cta: { rotulo: 'Follow English On Mission' } },
-    instagram: { titulo: 'Real English, every day', meta: ['@englishbygediel', 'Daily'],
-      sinopse: 'School phrases versus natural phrases, the mistakes every Brazilian makes and street English, in short videos.',
-      cta: { rotulo: 'Follow on Instagram' } },
     esposa: { titulo: 'Encouraging my wife', breve: 'Coming soon', meta: ['Series', 'Gediel & Mayandra', 'Unavailable'],
       sinopse: 'Mayandra tries first, her own way, with no help. Then comes the natural version. Mistakes are part of it: whoever tries, learns.',
       cta: { rotulo: 'Let me know when it launches', texto: "Hi Gediel! I'd like to know when the Encouraging my wife series launches." } },
@@ -181,10 +187,10 @@ window.EBG_EN = {
       cta: { rotulo: 'Discover the method' } },
     escola: { titulo: 'Infly School', meta: ['In person', 'Tupanciretã'],
       sinopse: "The ecosystem's in-person English school, for people in the region who want a real classroom.",
-      cta: { rotulo: 'See the school' } },
+      cta: { rotulo: 'See on Instagram' } },
     viagens: { titulo: 'Infly Travel', meta: ['Exchange', 'Trips'],
       sinopse: 'Trips and exchanges to put English to use. That is how students like Bruno found out nothing held them back anymore.',
-      cta: { rotulo: 'See the trips' } },
+      cta: { rotulo: 'See on Instagram' } },
     particular: { titulo: 'Private lessons', meta: ['Students only'],
       sinopse: 'One-on-one attention with Gediel, available only inside the mentorship, for current subscribers.',
       cta: { rotulo: "I'm a student, I want to book", texto: "Hi Gediel! I'm already in the program and I'd like to book private lessons." } }
@@ -193,11 +199,11 @@ window.EBG_EN = {
     { titulo: 'Picked for you' },
     { titulo: 'Smart Program', sub: 'Mentorship only' },
     { titulo: 'Student results' },
-    { sub: 'Mentorship only' },
-    { sub: 'Mentorship only' },
-    { titulo: 'Exchange & Travel', sub: 'Mentorship only' },
+    {},
+    {},
+    { titulo: 'Exchange & Travel' },
     { titulo: 'Free bonuses' },
-    { titulo: 'Also by Gediel' }
+    { titulo: 'Extras' }
   ],
   perguntas: [
     ['Do I need to know English to join?', 'No. The mentorship takes everyone from zero to advanced. The assessment at the start puts you on the right track from day one.'],

@@ -11,6 +11,17 @@ window.EBG_CONFIG = {
   checkoutMentoria: 'https://pay.hotmart.com/Y101022807Y',
   videoApresentacao: 'eXfovCYxdZw',
 
+  // links abertos ao público
+  toronto: 'https://forms.gle/V2dDVBXotN1XUmS1A',
+  vlogs: 'https://www.youtube.com/@oficialinfly/videos',
+
+  // ícones pequenos no topo da página. Confirme o TikTok.
+  redes: {
+    youtube: 'https://www.youtube.com/@teachergediel',
+    tiktok: 'https://www.tiktok.com/@englishbygediel',
+    metodo: 'https://instagram.com/inglesinteligente'
+  },
+
   instagram: {
     ebg: 'https://instagram.com/englishbygediel',
     eom: 'https://instagram.com/englishonmission',

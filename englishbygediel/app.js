@@ -119,6 +119,8 @@
     : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 3 | 8)).toString(16); }));
   const perfilDe = id => C.perfis.find(p => p.id === id) || C.perfis[0];
   const primeiroNome = () => ((estado.lead || estado.dados || {}).nome || '').trim().split(/\s+/)[0] || '';
+  // disponível agora (gratuito, aberto ou a própria mentoria): ganha o brilho neon
+  const disponivel = (it, id) => id === 'mentoria' || Boolean(it.aberto) || (it.tipo === 'gratis' && !it.breve);
   const combina = item => Math.round(60 + ((item.peso && item.peso[estado.perfil]) || 7) * 3.8);
 
   function pintarPerfil(el, p) {
@@ -367,6 +369,7 @@
     else if (id === 'mentoria') selo = `<span class="card-selo pago">${t('seloMentoria')}</span>`;
     else if (it.tipo === 'aluno') selo = `<span class="card-selo aluno">${t('resultadoAluno')}</span>`;
     else if (it.bloqueado) selo = `<span class="card-selo trancado">${CADEADO}${it.breve ? t('emBreve') : t('exclusivo')}</span>`;
+    else if (it.aberto) selo = `<span class="card-selo gratis">${esc(it.selo || t('disponivel'))}</span>`;
 
     const linha = [];
     if (comCombina && it.peso) linha.push(`<span class="combina">${combina(it)}%</span>`);
@@ -379,7 +382,7 @@
     const aspas = it.tipo === 'aluno' && it.citacao !== false;
     const tituloCard = aspas ? `“${esc(it.titulo)}”` : esc(it.titulo);
 
-    return `<button class="card card-${formato}${texto ? ' capa-texto' : ''}${it.contem ? ' contem' : ''}${it.bloqueado || it.indisponivel ? ' bloqueado' : ''}${it.tom ? ` tom-${it.tom}` : ''}" type="button"
+    return `<button class="card card-${formato}${texto ? ' capa-texto' : ''}${it.contem ? ' contem' : ''}${it.bloqueado || it.indisponivel ? ' bloqueado' : ''}${it.tom ? ` tom-${it.tom}` : ''}${disponivel(it, id) ? ' neon' : ''}" type="button"
         data-abrir="${id}" style="--i:${i};${texto ? `--cor:${it.cor}` : ''}" aria-label="${esc(it.titulo)}">
       ${midia}${texto || it.tipo === 'aluno' ? '' : selo}${play}
       <span class="card-texto">
@@ -574,7 +577,8 @@
     if (it.tipo === 'aluno') meta.push(`<span>${esc(it.nome)}</span>`, `<span>${esc(it.arroba)}</span>`);
     if (it.tipo === 'etapa') meta.push(`<span>${esc(it.duracao)}</span>`, `<span>${t('parteMentoria')}</span>`);
     if (it.breve && !it.bloqueado) meta.push(`<span class="trancado-meta">${esc(it.breve)}</span>`);
-    else if (it.tipo === 'gratis') meta.push(`<span>${t('gratis')}</span>`);
+    else if (it.tipo === 'gratis') meta.push(`<span class="combina">${t('gratis')}</span>`);
+    else if (it.aberto) meta.push(`<span class="combina">${esc(it.selo || t('disponivel'))}</span>`);
     if (it.bloqueado) meta.push(`<span>${esc(it.trilha)}</span>`, `<span class="trancado-meta">${esc(it.breve || t('exclusivoMentoria'))}</span>`);
     (it.meta || []).forEach(t => meta.push(`<span>${esc(t)}</span>`));
 
@@ -739,7 +743,7 @@
         break;
       case 'link':
         registrar('clicou', id, { acao: 'link' });
-        abrirFora(CFG.instagram[cta.href] || cta.href);
+        abrirFora(CFG.instagram[cta.href] || CFG[cta.href] || cta.href);
         break;
       case 'teste':
         registrar('clicou', id, { acao: 'teste' });
@@ -826,7 +830,21 @@
     if (fim) el.setSelectionRange(el.value.length, el.value.length);
   });
 
+  /* ---------------- redes no topo ---------------- */
+  const REDES = {
+    youtube: '<path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3z"/>',
+    tiktok: '<path d="M16.6 3c.4 2.2 1.8 3.7 4 3.9v3.2c-1.5 0-2.9-.5-4-1.2v6.3c0 3.6-2.8 5.8-5.8 5.8A5.8 5.8 0 0 1 5 15.2c0-3.4 2.9-6 6.4-5.7v3.3c-1.6-.4-3.1.8-3.1 2.4 0 1.4 1.1 2.5 2.5 2.5s2.6-1 2.6-2.6V3z"/>',
+    metodo: '<path d="M12 2c.6 4.8 2.2 6.6 7 7.4-4.8.8-6.4 2.6-7 7.4-.6-4.8-2.2-6.6-7-7.4 4.8-.8 6.4-2.6 7-7.4zm6 12c.3 2.2 1 3 3 3.3-2 .4-2.7 1.1-3 3.3-.3-2.2-1-2.9-3-3.3 2-.3 2.7-1.1 3-3.3z"/>'
+  };
+  const NOMES_REDES = { youtube: 'YouTube', tiktok: 'TikTok', metodo: 'Inglês Inteligente' };
+  function montarRedes() {
+    const html = Object.keys(REDES).filter(k => CFG.redes && CFG.redes[k]).map(k =>
+      `<a href="${CFG.redes[k]}" target="_blank" rel="noopener" aria-label="${NOMES_REDES[k]}" title="${NOMES_REDES[k]}"><svg viewBox="0 0 24 24" aria-hidden="true">${REDES[k]}</svg></a>`).join('');
+    $$('.redes').forEach(el => { el.innerHTML = html; });
+  }
+
   /* ---------------- início ---------------- */
+  montarRedes();
   const pedido = new URLSearchParams(location.search).get('lang');
   definirIdioma(pedido || guarda.ler('ebg:idioma') || 'pt');
   montarParede();
