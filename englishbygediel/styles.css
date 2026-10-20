@@ -444,6 +444,10 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
   isolation: isolate;
 }
 .card:active { transform: scale(.96); }
+/* fileira que anda sozinha: sem encaixe, senão o navegador puxa de volta a cada passo */
+.trilho.anda { scroll-snap-type: none; }
+.trilho.focado .card { animation: none; opacity: .45; transition: opacity .3s ease, transform .3s var(--sai); }
+.trilho.focado .card.em-foco { animation: none; opacity: 1; transform: scale(1.06); outline: 2px solid var(--azul-claro); outline-offset: 2px; z-index: 2; }
 .card-poster { width: clamp(132px, 36vw, 200px); aspect-ratio: 2 / 3; }
 .card-largo { width: clamp(248px, 72vw, 340px); aspect-ratio: 16 / 10; }
 .card img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--sai); }

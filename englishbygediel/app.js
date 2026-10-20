@@ -362,7 +362,8 @@
     const it = C.itens[id];
     const texto = it.capa === 'texto';
     let selo = '';
-    if (it.tipo === 'gratis') selo = `<span class="card-selo gratis">${t('gratis')}</span>`;
+    if (it.breve && !it.bloqueado) selo = `<span class="card-selo trancado">${t('emBreve')}</span>`;
+    else if (it.tipo === 'gratis') selo = `<span class="card-selo gratis">${t('gratis')}</span>`;
     else if (id === 'mentoria') selo = `<span class="card-selo pago">${t('seloMentoria')}</span>`;
     else if (it.tipo === 'aluno') selo = `<span class="card-selo aluno">${t('resultadoAluno')}</span>`;
     else if (it.bloqueado) selo = `<span class="card-selo trancado">${CADEADO}${it.breve ? t('emBreve') : t('exclusivo')}</span>`;
@@ -378,7 +379,7 @@
     const aspas = it.tipo === 'aluno' && it.citacao !== false;
     const tituloCard = aspas ? `“${esc(it.titulo)}”` : esc(it.titulo);
 
-    return `<button class="card card-${formato}${texto ? ' capa-texto' : ''}${it.contem ? ' contem' : ''}${it.bloqueado ? ' bloqueado' : ''}" type="button"
+    return `<button class="card card-${formato}${texto ? ' capa-texto' : ''}${it.contem ? ' contem' : ''}${it.bloqueado || it.indisponivel ? ' bloqueado' : ''}" type="button"
         data-abrir="${id}" style="--i:${i};${texto ? `--cor:${it.cor}` : ''}" aria-label="${esc(it.titulo)}">
       ${midia}${texto || it.tipo === 'aluno' ? '' : selo}${play}
       <span class="card-texto">
@@ -412,7 +413,66 @@
       </section>`;
     }).join('');
     $$('.trilho').forEach(t => observador && observador.observe(t));
+    $$('.trilho').forEach(ligarTrilho);
   }
+
+  /* ---------------- fileiras que andam sozinhas ----------------
+     Cada fileira visível desliza devagar e vai e volta. Encostou o dedo (ou o mouse) num card:
+     a fileira para, o card ganha destaque e os outros apagam. Solta: volta a andar depois de um tempo. */
+  const VELOCIDADE = 16;   // px por segundo
+  const RETOMA = 2600;     // ms parado depois que a pessoa solta
+  const trilhos = new Set();
+
+  function ligarTrilho(tr) {
+    if (reduz || tr.dataset.anda) return;
+    tr.dataset.anda = '1';
+    const st = { dir: 1, pos: 0, ate: performance.now() + 1500, visivel: false, preso: false };
+    tr._anda = st;
+    tr.classList.add('anda');
+    trilhos.add(tr);
+    const parar = (card) => {
+      st.preso = true;
+      tr.classList.toggle('focado', Boolean(card));
+      $$('.card.em-foco', tr).forEach(c => { if (c !== card) c.classList.remove('em-foco'); });
+      if (card) card.classList.add('em-foco');
+    };
+    const soltar = () => { st.preso = false; st.ate = performance.now() + RETOMA; };
+    tr.addEventListener('pointerdown', e => parar(e.target.closest('.card')));
+    tr.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') parar(null); });
+    tr.addEventListener('pointerover', e => { if (e.pointerType === 'mouse') parar(e.target.closest('.card')); });
+    tr.addEventListener('pointerup', soltar);
+    tr.addEventListener('pointercancel', soltar);
+    tr.addEventListener('pointerleave', () => { soltar(); tr.classList.remove('focado'); $$('.card.em-foco', tr).forEach(c => c.classList.remove('em-foco')); });
+    tr.addEventListener('wheel', () => { st.ate = performance.now() + RETOMA; }, { passive: true });
+    tr.addEventListener('focusin', e => parar(e.target.closest('.card')));
+    tr.addEventListener('focusout', () => { soltar(); tr.classList.remove('focado'); });
+    visTrilhos.observe(tr);
+  }
+
+  const visTrilhos = new IntersectionObserver(es => es.forEach(e => { if (e.target._anda) e.target._anda.visivel = e.isIntersecting; }));
+
+  let ultimoQuadro = 0;
+  function andar(agora) {
+    const dt = Math.min(0.05, (agora - (ultimoQuadro || agora)) / 1000);
+    ultimoQuadro = agora;
+    const livre = document.body.dataset.tela === 'catalogo' && !fichaAberta && !document.hidden;
+    trilhos.forEach(tr => {
+      if (!tr.isConnected) return trilhos.delete(tr);
+      const st = tr._anda;
+      if (!livre || !st.visivel || st.preso) return;
+      if (agora < st.ate) { st.pos = tr.scrollLeft; return; }   // a pessoa mexeu: parte de onde ela deixou
+      const max = tr.scrollWidth - tr.clientWidth;
+      if (max <= 2) return;
+      // depois que a fileira foi tocada, o destaque some quando ela volta a andar
+      if (tr.classList.contains('focado')) { tr.classList.remove('focado'); $$('.card.em-foco', tr).forEach(c => c.classList.remove('em-foco')); }
+      st.pos += st.dir * VELOCIDADE * dt;
+      if (st.pos >= max) { st.pos = max; st.dir = -1; st.ate = agora + 1800; }
+      if (st.pos <= 0) { st.pos = 0; st.dir = 1; st.ate = agora + 1800; }
+      tr.scrollLeft = st.pos;
+    });
+    requestAnimationFrame(andar);
+  }
+  if (!reduz) requestAnimationFrame(andar);
 
   function montarPerguntas() {
     $('#listaPerguntas').innerHTML = C.perguntas.map(([q, r]) => `
@@ -513,7 +573,8 @@
     if (it.peso) meta.push(`<span class="combina">${combina(it)}${t('pctVoce')}</span>`);
     if (it.tipo === 'aluno') meta.push(`<span>${esc(it.nome)}</span>`, `<span>${esc(it.arroba)}</span>`);
     if (it.tipo === 'etapa') meta.push(`<span>${esc(it.duracao)}</span>`, `<span>${t('parteMentoria')}</span>`);
-    if (it.tipo === 'gratis') meta.push(`<span>${t('gratis')}</span>`);
+    if (it.breve && !it.bloqueado) meta.push(`<span class="trancado-meta">${esc(it.breve)}</span>`);
+    else if (it.tipo === 'gratis') meta.push(`<span>${t('gratis')}</span>`);
     if (it.bloqueado) meta.push(`<span>${esc(it.trilha)}</span>`, `<span class="trancado-meta">${esc(it.breve || t('exclusivoMentoria'))}</span>`);
     (it.meta || []).forEach(t => meta.push(`<span>${esc(t)}</span>`));
 
