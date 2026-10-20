@@ -37,29 +37,6 @@
       <ul class="perfis" id="perfis" role="list"></ul>
     </div>
 
-    <form class="passo passo-dados" id="passoDados" novalidate>
-      <h1 class="entrada-titulo" data-i18n="titulo">Prazer! Como te chamo?</h1>
-      <p class="ola-origem" hidden></p>
-      <label class="campo">
-        <span data-i18n="nome">Seu nome</span>
-        <input name="nome" autocomplete="given-name" required maxlength="80" placeholder="Como gosta de ser chamado" data-i18n-ph="nomePh">
-      </label>
-      <label class="campo">
-        <span data-i18n="whats">WhatsApp</span>
-        <input name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" required placeholder="(55) 99999-9999">
-      </label>
-      <label class="campo">
-        <span><span data-i18n="insta">Instagram</span> <small data-i18n="opcional">opcional</small></span>
-        <input name="instagram" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="40" placeholder="@seuperfil" data-i18n-ph="instaPh">
-      </label>
-      <label class="campo">
-        <span><span data-i18n="email">E-mail</span> <small data-i18n="opcional">opcional</small></span>
-        <input name="email" type="email" inputmode="email" autocomplete="email" maxlength="200" placeholder="voce@email.com" data-i18n-ph="emailPh">
-      </label>
-      <p class="erro" id="erroDados" role="alert"></p>
-      <button class="botao botao-cheio" type="submit" id="enviarDados" data-i18n="continuar">Continuar</button>
-      <p class="nota" data-i18n="nota">Seus dados ficam só com o Gediel. Nada de spam.</p>
-    </form>
   </div>
 </section>
 
@@ -105,6 +82,10 @@
         <button class="botao botao-claro" data-video="eXfovCYxdZw" data-item="mentoria">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg>
           <span data-i18n="apresentacao">Apresentação</span>
+        </button>
+        <button class="botao botao-cinza botao-whats" type="button" data-whats="whatsMentoria">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>
+          <span data-i18n="duvida">Dúvidas</span>
         </button>
         <button class="botao botao-cinza" data-abrir="mentoria">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-6h2zm0-8h-2V7h2z"/></svg>
@@ -155,6 +136,7 @@
 <!-- Barra fixa da mentoria no celular (aparece ao rolar o catálogo) -->
 <div class="barra-vaga" id="barraVaga" hidden>
   <p><strong data-i18n="barraNome">Mentoria Inglês Inteligente</strong><span data-i18n="barraInfo">de 6x R$ 500 por 6x R$ 297</span></p>
+  <button class="botao botao-cinza barra-whats" type="button" data-whats="whatsMentoria" aria-label="Tirar dúvida no WhatsApp" data-i18n-aria="duvidaAria"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg></button>
   <button class="botao botao-cheio" type="button" data-cta="mentoria" data-acao-cta='{"acao":"checkout"}' data-i18n="vaga">Quero minha vaga</button>
 </div>
 
@@ -167,6 +149,33 @@
   <div class="ficha-alca" aria-hidden="true"></div>
   <div class="ficha-conteudo" id="fichaConteudo"></div>
 </div>
+
+<!-- Cadastro: aparece na ficha quando a pessoa pede um bônus grátis -->
+<template id="tplCadastro">
+  <form class="cadastro" id="passoDados" novalidate>
+    <h2 class="cadastro-titulo" id="cadastroTitulo"></h2>
+    <p class="cadastro-sub" id="cadastroSub"></p>
+    <label class="campo">
+      <span data-i18n="nome">Seu nome</span>
+      <input name="nome" autocomplete="given-name" required maxlength="80" placeholder="Como gosta de ser chamado" data-i18n-ph="nomePh">
+    </label>
+    <label class="campo">
+      <span data-i18n="whats">WhatsApp</span>
+      <input name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" required placeholder="(55) 99999-9999">
+    </label>
+    <label class="campo">
+      <span><span data-i18n="insta">Instagram</span> <small data-i18n="opcional">opcional</small></span>
+      <input name="instagram" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="40" placeholder="@seuperfil" data-i18n-ph="instaPh">
+    </label>
+    <label class="campo">
+      <span><span data-i18n="email">E-mail</span> <small data-i18n="opcional">opcional</small></span>
+      <input name="email" type="email" inputmode="email" autocomplete="email" maxlength="200" placeholder="voce@email.com" data-i18n-ph="emailPh">
+    </label>
+    <p class="erro" id="erroDados" role="alert"></p>
+    <button class="botao botao-cheio" type="submit" id="enviarDados" data-i18n="continuar">Continuar</button>
+    <p class="nota" data-i18n="nota">Seus dados ficam só com o Gediel. Nada de spam.</p>
+  </form>
+</template>
 
 <!-- Vídeo -->
 <div class="video" id="video" role="dialog" aria-modal="true" aria-label="Vídeo" hidden>

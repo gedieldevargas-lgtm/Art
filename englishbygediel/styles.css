@@ -237,8 +237,10 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 .perfis li:nth-child(4) { animation-delay: .21s; }
 .perfis li:nth-child(5) { animation-delay: .28s; }
 
-.passo-dados { gap: 14px; }
-.passo-dados .entrada-titulo { margin-bottom: 10px; }
+/* cadastro: abre na ficha quando a pessoa pede um bônus grátis */
+.cadastro { display: flex; flex-direction: column; gap: 14px; padding-top: 36px; }
+.cadastro-titulo { font: 400 clamp(2rem, 1.6rem + 2vw, 3rem)/1 var(--serif); letter-spacing: -0.02em; }
+.cadastro-sub { color: var(--azul-claro); margin-bottom: 6px; }
 .voltar {
   align-self: center;
   display: inline-flex; align-items: center; gap: 10px;
@@ -267,7 +269,7 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 .campo input::placeholder { color: #77736c; }
 .campo input:focus { outline: none; background: var(--surface-3); box-shadow: inset 0 -2px 0 var(--accent); } /* taste-skill-ignore: form field focus / dialog */
 .campo input[aria-invalid="true"] { box-shadow: inset 0 -2px 0 var(--aviso); } /* taste-skill-ignore: form field focus / dialog */
-.passo-dados .botao { margin-top: 8px; min-height: 54px; font-size: 1.0625rem; }
+.cadastro .botao { margin-top: 8px; min-height: 54px; font-size: 1.0625rem; }
 .erro { color: var(--aviso); font-size: var(--step-small); min-height: 1.2em; }
 .erro:empty { min-height: 0; }
 .nota { color: var(--muted); font-size: var(--step-small); text-align: center; }
@@ -656,6 +658,15 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 .preco-nota { color: var(--muted); font-size: var(--step-small); margin-top: 8px; }
 .preco-garantia { margin-top: 14px; font-size: var(--step-small); }
 .preco-garantia b { color: var(--verde); font-weight: 600; }
+.preco-agora { color: var(--verde); font-weight: 600; font-size: var(--step-small); margin-bottom: 12px; }
+.nao-e { margin-top: 14px; color: var(--muted); font-size: var(--step-small); }
+.nao-e b { color: var(--ink); font-weight: 600; }
+.objecoes { margin: 12px 0 0; display: grid; gap: 14px; }
+.objecoes dt { font: 400 1.375rem/1.15 var(--serif); }
+.objecoes dd { margin: 4px 0 0; color: var(--muted); }
+.depois { margin: 12px 0 0; padding: 0; list-style: none; counter-reset: passo; display: grid; gap: 10px; }
+.depois li { counter-increment: passo; display: grid; grid-template-columns: 30px 1fr; gap: 10px; align-items: baseline; }
+.depois li::before { content: counter(passo); font: 400 1.5rem/1 var(--serif); color: var(--azul-claro); }
 .episodios { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 4px; counter-reset: ep; }
 .episodio {
   display: grid; grid-template-columns: 22px 112px 1fr; gap: 12px; align-items: center;
@@ -828,6 +839,9 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 .barra-vaga strong { font-size: 0.875rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .barra-vaga span { font-size: 0.75rem; color: var(--muted); }
 .barra-vaga .botao { flex: none; min-height: 44px; padding: 0 16px; font-size: 0.9375rem; }
+.barra-vaga p { flex: 1; }
+.barra-vaga .barra-whats { width: 44px; padding: 0; }
+.botao-whats svg, .barra-whats svg { fill: var(--verde); }
 @media (min-width: 760px) { .barra-vaga { display: none !important; } }
 
 /* boas-vindas de quem veio de um perfil específico */

@@ -65,7 +65,7 @@ window.EBG = {
   itens: {
     mentoria: {
       titulo: 'Mentoria Inglês Inteligente',
-      tipo: 'pago', selo: 'Inscrições abertas',
+      tipo: 'pago', selo: 'Comece esta semana',
       img: 'img/gediel-brooklyn.webp', imgLarga: 'img/gediel-liberty.webp',
       video: 'eXfovCYxdZw',
       meta: ['6 meses', 'A1 → B2', 'Ao vivo', 'Garantia de 7 dias'],
@@ -78,6 +78,24 @@ window.EBG = {
         'Certificado de conclusão',
         'Acesso às trilhas English On Mission, Culture English e Intercâmbio e Viagens',
         'Opção de pacotes de aula individuais, em casal ou com amigos, contratados por dentro'
+      ],
+      paraQuem: [
+        'Você entende inglês, mas trava na hora de falar',
+        'Já começou curso ou aplicativo e parou no meio',
+        'Precisa do inglês no trabalho, em viagens ou no ministério',
+        'Quer aprender com gente de verdade, ao vivo, e não só com vídeo gravado'
+      ],
+      naoE: ['Não é pra quem procura fórmula mágica sem praticar', 'nem pra quem quer só um certificado na parede'],
+      objecoes: [
+        ['Não tenho tempo.', 'O cronograma diário foi feito pra caber na rotina: você segue no seu ritmo. E se perder a aula ao vivo, ela fica gravada.'],
+        ['Já tentei e travei.', 'Por isso o centro é a conversa ao vivo no seu nível, com correção na hora. Quem trava precisa falar, não assistir mais vídeo.'],
+        ['Meu nível é muito baixo.', 'A mentoria recebe do zero. O diagnóstico no começo te coloca na turma certa desde o primeiro dia.'],
+        ['E se não for pra mim?', 'São 7 dias de garantia. Participou, sentiu que não é pra você, o valor volta inteiro.']
+      ],
+      depois: [
+        'Você recebe o acesso à plataforma no seu e-mail',
+        'Faz o diagnóstico e descobre como você aprende melhor',
+        'Entra na turma ao vivo do seu nível e já participa da aula desta semana'
       ],
       preco: { separado: 'De 6x de R$ 500', parcelas: 'por 6x de R$ 297', nota: 'Assinatura de 6 meses no cartão. Consulte boleto parcelado.' },
       cta: { rotulo: 'Quero minha vaga', acao: 'checkout' },

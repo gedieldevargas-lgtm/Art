@@ -16,7 +16,7 @@ window.EBG_UI = {
     pular: 'Pular', anterior: 'Anterior', proximo: 'Próximo', voce: 'Você',
     navMentoria: 'A mentoria', navAlunos: 'Alunos', navGratis: 'Grátis',
     perfilAria: 'Perfil: {nome}. Trocar', trocarPerfil: 'Trocar perfil',
-    inscricoes: 'Inscrições abertas', vitrine1: 'Mentoria', vitrine2: 'Inglês Inteligente',
+    inscricoes: 'Comece esta semana', vitrine1: 'Mentoria', vitrine2: 'Inglês Inteligente',
     verApresentacao: 'Ver apresentação', maisInfo: 'Mais informações',
     aSeguir: 'A seguir', proximoTitulo: 'Próximo episódio: você falando inglês.',
     proximoTexto: 'O primeiro passo é escolher a turma do seu nível. Daqui pra frente, quem conduz o caminho somos nós dois.',
@@ -35,7 +35,13 @@ window.EBG_UI = {
     perguntaDe: 'Pergunta {n} de {t}', pontoPartida: 'Seu ponto de partida',
     mentoriaNivel: 'Ver a mentoria pro meu nível', mandarResultado: 'Mandar meu resultado pro Gediel',
     whatsResultado: 'Oi Gediel! Fiz o teste do catálogo e deu {nivel}. Por onde eu começo?',
-    souNome: '(Sou {nome}.)', video: 'Vídeo', verInstagram: 'Conferir no Instagram', disponivel: 'Disponível', redes: 'Outros canais', whatsPrisma: 'Oi Gediel! Quero fazer o teste Prisma de múltiplas inteligências.', procuraTitulo: 'O que você procura?', vaga: 'Quero minha vaga', vagaDe: '6x R$ 500', vagaPreco: '6x R$ 297', prova: '+700 alunos · 11 anos ensinando · Garantia de 7 dias', apresentacao: 'Apresentação', detalhes: 'Detalhes', barraNome: 'Mentoria Inglês Inteligente', barraInfo: 'de 6x R$ 500 por 6x R$ 297'
+    souNome: '(Sou {nome}.)', souNomeFoco: '(Sou {nome}. Meu foco: {foco}.)',
+    duvida: 'Dúvidas', duvidaAria: 'Tirar dúvida no WhatsApp',
+    whatsMentoria: 'Oi Gediel! Vim pelo catálogo e quero tirar uma dúvida sobre a mentoria.',
+    cadastroTitulo: 'Falta pouco! Como te chamo?', cadastroSub: 'Deixe seu contato e libere agora: “{item}”',
+    paraQuem: 'É pra você se…', naoE: 'Sendo honesto:', objecoes: 'O que costuma segurar quem está pensando',
+    depois: 'O que acontece depois que você entra',
+    comeceSemana: 'Entre hoje e já participe da aula ao vivo desta semana.', video: 'Vídeo', verInstagram: 'Conferir no Instagram', disponivel: 'Disponível', redes: 'Outros canais', whatsPrisma: 'Oi Gediel! Quero fazer o teste Prisma de múltiplas inteligências.', procuraTitulo: 'O que você procura?', vaga: 'Quero minha vaga', vagaDe: '6x R$ 500', vagaPreco: '6x R$ 297', prova: '+700 alunos · 11 anos ensinando · Garantia de 7 dias', apresentacao: 'Apresentação', detalhes: 'Detalhes', barraNome: 'Mentoria Inglês Inteligente', barraInfo: 'de 6x R$ 500 por 6x R$ 297'
   },
   en: {
     idiomaOutro: 'Português', idiomaAria: 'Ver a página em português',
@@ -51,7 +57,7 @@ window.EBG_UI = {
     pular: 'Skip', anterior: 'Previous', proximo: 'Next', voce: 'You',
     navMentoria: 'Mentorship', navAlunos: 'Students', navGratis: 'Free',
     perfilAria: 'Profile: {nome}. Change', trocarPerfil: 'Change profile',
-    inscricoes: 'Enrollment open', vitrine1: 'Inglês Inteligente', vitrine2: 'Mentorship',
+    inscricoes: 'Start this week', vitrine1: 'Inglês Inteligente', vitrine2: 'Mentorship',
     verApresentacao: 'Watch the intro', maisInfo: 'More info',
     aSeguir: 'Up next', proximoTitulo: 'Next episode: you speaking English.',
     proximoTexto: 'The first step is picking the group at your level. From there, we walk the path together.',
@@ -70,7 +76,13 @@ window.EBG_UI = {
     perguntaDe: 'Question {n} of {t}', pontoPartida: 'Your starting point',
     mentoriaNivel: 'See the mentorship for my level', mandarResultado: 'Send my result to Gediel',
     whatsResultado: 'Hi Gediel! I took the catalog test and got {nivel}. Where should I start?',
-    souNome: "(I'm {nome}.)", video: 'Video', verInstagram: 'See on Instagram', disponivel: 'Available', redes: 'Other channels', whatsPrisma: "Hi Gediel! I'd like to take the Prisma multiple intelligences test.", procuraTitulo: 'What are you looking for?', vaga: 'Save my spot', vagaDe: '6x R$ 500', vagaPreco: '6x R$ 297', prova: '700+ students · 11 years teaching · 7-day guarantee', apresentacao: 'Intro', detalhes: 'Details', barraNome: 'Inglês Inteligente Mentorship', barraInfo: 'was 6x R$ 500, now 6x R$ 297'
+    souNome: "(I'm {nome}.)", souNomeFoco: "(I'm {nome}. My focus: {foco}.)",
+    duvida: 'Questions', duvidaAria: 'Ask a question on WhatsApp',
+    whatsMentoria: "Hi Gediel! I found you through the catalog and I have a question about the mentorship.",
+    cadastroTitulo: 'Almost there! What should I call you?', cadastroSub: 'Leave your contact and get it now: “{item}”',
+    paraQuem: "It's for you if…", naoE: 'To be honest:', objecoes: 'What usually holds people back',
+    depois: 'What happens after you join',
+    comeceSemana: "Join today and you're in this week's live class.", video: 'Video', verInstagram: 'See on Instagram', disponivel: 'Available', redes: 'Other channels', whatsPrisma: "Hi Gediel! I'd like to take the Prisma multiple intelligences test.", procuraTitulo: 'What are you looking for?', vaga: 'Save my spot', vagaDe: '6x R$ 500', vagaPreco: '6x R$ 297', prova: '700+ students · 11 years teaching · 7-day guarantee', apresentacao: 'Intro', detalhes: 'Details', barraNome: 'Inglês Inteligente Mentorship', barraInfo: 'was 6x R$ 500, now 6x R$ 297'
   }
 };
 
@@ -106,7 +118,26 @@ window.EBG_EN = {
   itens: {
     mentoria: {
       titulo: 'Inglês Inteligente Mentorship',
+      selo: 'Start this week',
       meta: ['6 months', 'A1 → B2', 'Live', '7-day guarantee'],
+      paraQuem: [
+        'You understand English but freeze when you speak',
+        'You started a course or an app and quit halfway',
+        'You need English at work, when traveling or in ministry',
+        'You want to learn with real people, live, not just recorded videos'
+      ],
+      naoE: ["It's not for anyone looking for a magic formula without practice", 'nor for anyone who just wants a certificate on the wall'],
+      objecoes: [
+        ["I don't have time.", 'The daily plan was made to fit your routine: you go at your own pace. And if you miss the live class, it stays recorded.'],
+        ['I tried before and froze.', "That's why the core is live conversation at your level, with on-the-spot correction. People who freeze need to speak, not watch more videos."],
+        ['My level is too low.', 'The mentorship takes you from zero. The assessment at the start puts you in the right group from day one.'],
+        ["What if it's not for me?", "You get a 7-day guarantee. Join, and if you feel it's not for you, you get your money back in full."]
+      ],
+      depois: [
+        'You get platform access in your email',
+        'You take the assessment and find out how you learn best',
+        "You join the live group for your level and you're in this week's class"
+      ],
       sinopse: "It's not another course of static videos. It's a daily task plan, a live class with Gediel every week at your level and real guidance, for people who freeze when they speak.",
       inclui: [
         'A live class with Gediel every week, at your level (A1/A2 and B1/B2)',

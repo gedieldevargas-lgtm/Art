@@ -45,11 +45,11 @@
   const CONTEUDO = { pt: PT, en: mesclar(PT, window.EBG_EN) };
   const t = (k, vars = {}) => (UI[idioma][k] || UI.pt[k] || k).replace(/\{(\w+)\}/g, (_, v) => vars[v] ?? '');
 
-  function aplicarTextos() {
+  function aplicarTextos(raiz = document) {
     document.documentElement.lang = idioma === 'en' ? 'en' : 'pt-BR';
-    $$('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
-    $$('[data-i18n-ph]').forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
-    $$('[data-i18n-aria]').forEach(el => { el.setAttribute('aria-label', t(el.dataset.i18nAria)); });
+    $$('[data-i18n]', raiz).forEach(el => { el.textContent = t(el.dataset.i18n); });
+    $$('[data-i18n-ph]', raiz).forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
+    $$('[data-i18n-aria]', raiz).forEach(el => { el.setAttribute('aria-label', t(el.dataset.i18nAria)); });
   }
 
   function definirIdioma(novo) {
@@ -71,7 +71,9 @@
 
   const estado = {
     lead: guarda.ler('ebg:lead'),
-    perfil: (guarda.ler('ebg:lead') || {}).objetivo || null
+    perfil: (guarda.ler('ebg:lead') || {}).objetivo || guarda.ler('ebg:perfil') || null,
+    antes: [],        // o que a pessoa fez antes de deixar os dados; vai junto quando o lead nasce
+    pendente: null    // o bônus que ela pediu e que abre logo depois do cadastro
   };
 
   /* ---------------- Supabase (fila que sobrevive a queda de rede) ---------------- */
@@ -120,7 +122,7 @@
   }
 
   function registrar(tipo, item = null, detalhe = null) {
-    if (!estado.lead) return;
+    if (!estado.lead) { if (estado.antes.length < 60) estado.antes.push({ tipo, item, detalhe }); return; }
     enfileirar('events', { lead_id: estado.lead.id, tipo, item, detalhe });
   }
 
@@ -140,7 +142,8 @@
 
   function linkWhats(texto) {
     const nome = primeiroNome();
-    const msg = nome ? `${texto} ${t('souNome', { nome })}` : texto;
+    const foco = estado.perfil ? perfilDe(estado.perfil).nome : '';
+    const msg = nome ? `${texto} ${t(foco ? 'souNomeFoco' : 'souNome', { nome, foco })}` : texto;
     return `https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent(msg)}`;
   }
 
@@ -191,21 +194,35 @@
 
   function escolherPerfil(id) {
     estado.perfil = id;
+    registrar('perfil', id);
     if (estado.lead) {
-      // quem já entrou só troca de perfil e volta pro catálogo
+      // quem já deixou os dados só troca de perfil
       estado.lead.objetivo = id;
       guarda.gravar('ebg:lead', estado.lead);
-      registrar('perfil', id);
-      abrirCatalogo();
-      return;
-    }
-    // primeiro o foco, depois os dados
-    pedirDados();
+    } else guarda.gravar('ebg:perfil', id);
+    // um toque e já está no catálogo: os dados só são pedidos quando a pessoa quer um bônus
+    abrirCatalogo();
+    seguirDestino();
   }
 
-  function pedirDados() {
-    mostrarPasso('passoDados');
-    if (!matchMedia('(pointer: coarse)').matches) $('#passoDados [name=nome]').focus();
+  // bônus grátis pedem nome e contato antes. Compra e conversa no WhatsApp nunca são travadas.
+  function pedeCadastro(cta, id) {
+    if (estado.lead) return false;
+    const it = C.itens[id] || {};
+    return cta.acao === 'teste' || cta.acao === 'prisma' || (cta.acao === 'whatsapp' && it.grupo);
+  }
+
+  function pedirDados(cta, id) {
+    estado.pendente = { cta, id };
+    const tpl = $('#tplCadastro').content.cloneNode(true);
+    const titulo = (C.itens[id] || {}).titulo || '';
+    abrirFicha('cadastro', '<div class="ficha-corpo"></div>');
+    const corpo = $('#fichaConteudo .ficha-corpo');
+    corpo.appendChild(tpl);
+    aplicarTextos(corpo);
+    $('#cadastroTitulo').textContent = t('cadastroTitulo');
+    $('#cadastroSub').textContent = t('cadastroSub', { item: titulo });
+    if (!matchMedia('(pointer: coarse)').matches) $('#passoDados [name=nome]').focus({ preventScroll: true });
   }
 
   // o lead nasce aqui: já com o foco escolhido, nome e contato
@@ -214,8 +231,11 @@
     estado.lead = lead;
     guarda.gravar('ebg:lead', { id: lead.id, nome: lead.nome, objetivo: lead.objetivo });
     enfileirar('leads', lead);
-    if (IR) { abrirCatalogo(); seguirDestino(); }   // veio por um link direto: pula os stories
-    else abrirHistoria();
+    estado.antes.splice(0).forEach(e => enfileirar('events', { lead_id: lead.id, ...e }));
+    const p = estado.pendente;
+    estado.pendente = null;
+    if (p) { executar(p.cta, p.id); if (fichaAberta === 'cadastro') fecharFicha(); }
+    descarregar();
   }
 
   // foco que já dá pra saber sem perguntar: o do perfil de origem ou o que mais combina com o destino
@@ -274,12 +294,12 @@
 
   function enviarDados(ev) {
     ev.preventDefault();
-    const f = ev.currentTarget;
+    const f = ev.target;
     const nome = f.nome.value.trim();
     const tel = f.whatsapp.value.replace(/\D/g, '');
     const insta = f.instagram.value.trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i, '').replace(/^@+/, '').replace(/[/?].*$/, '');
     const email = f.email.value.trim();
-    const erro = $('#erroDados');
+    const erro = $('#erroDados', f);
     $$('input', f).forEach(i => i.removeAttribute('aria-invalid'));
 
     let problema = null;
@@ -403,7 +423,7 @@
   let catalogoMontado = false;
 
   function abrirCatalogo() {
-    irPara('catalogo');
+    if (document.body.dataset.tela !== 'catalogo') irPara('catalogo');
     const p = perfilDe(estado.perfil);
     pintarPerfil($('#avatar'), p);
     $('#avatar').setAttribute('aria-label', t('perfilAria', { nome: p.nome }));
@@ -656,7 +676,7 @@
 
   function botaoCta(cta, id, classe) {
     return `<button class="botao ${classe}" type="button" data-cta="${id}" data-acao-cta='${esc(JSON.stringify(cta))}'>
-      ${cta.acao === 'video' ? PLAY : ''}${esc(cta.rotulo)}</button>`;
+      ${cta.acao === 'video' ? PLAY : cta.acao === 'whatsapp' ? WHATS : ''}${esc(cta.rotulo)}</button>`;
   }
 
   function fichaHTML(id) {
@@ -693,16 +713,14 @@
     }
 
     let extra = '';
+    if (it.paraQuem) {
+      extra += `<h3>${t('paraQuem')}</h3><ul class="inclui" role="list">${it.paraQuem.map(x => `<li>${CHECK}<span>${esc(x)}</span></li>`).join('')}</ul>`;
+    }
+    if (it.naoE) {
+      extra += `<p class="nao-e"><b>${t('naoE')}</b> ${it.naoE.map(esc).join('. ')}.</p>`;
+    }
     if (it.inclui) {
       extra += `<h3>${t('incluido')}</h3><ul class="inclui" role="list">${it.inclui.map(t => `<li>${CHECK}<span>${esc(t)}</span></li>`).join('')}</ul>`;
-    }
-    if (it.preco) {
-      extra += `<div class="preco">
-        <p class="preco-de">${esc(it.preco.separado)}</p>
-        <p class="preco-por">${esc(it.preco.parcelas)}</p>
-        <p class="preco-nota">${esc(it.preco.nota)}</p>
-        <p class="preco-garantia"><b>${t('garantia')}</b> ${t('garantiaTexto')}</p>
-      </div>`;
     }
     if (it.bloqueado) {
       extra += `<p class="ficha-trava">${CADEADO}<span>${esc(t('trava', { trilha: it.trilha }))}</span></p>`;
@@ -717,6 +735,23 @@
         const al = C.itens[a];
         return `<button type="button" data-video="${al.video}" data-item="${a}" data-vertical="1"><img src="${al.img}" alt="${esc(al.nome)}" loading="lazy"><span>${esc(al.nome)}</span></button>`;
       }).join('')}</div>`;
+    }
+    if (it.objecoes) {
+      extra += `<h3>${t('objecoes')}</h3><dl class="objecoes">${it.objecoes.map(([q, r]) => `<dt>${esc(q)}</dt><dd>${esc(r)}</dd>`).join('')}</dl>`;
+    }
+    if (it.depois) {
+      extra += `<h3>${t('depois')}</h3><ol class="depois">${it.depois.map(x => `<li>${esc(x)}</li>`).join('')}</ol>`;
+    }
+    if (it.preco) {
+      // fecha a ficha como uma página de venda: preço, garantia e os mesmos botões do topo
+      extra += `<div class="preco">
+        <p class="preco-agora">${t('comeceSemana')}</p>
+        <p class="preco-de">${esc(it.preco.separado)}</p>
+        <p class="preco-por">${esc(it.preco.parcelas)}</p>
+        <p class="preco-nota">${esc(it.preco.nota)}</p>
+        <p class="preco-garantia"><b>${t('garantia')}</b> ${t('garantiaTexto')}</p>
+      </div>
+      <div class="ficha-acoes">${acoes}</div>`;
     }
 
     return `${midia}<div class="ficha-corpo">
@@ -826,6 +861,7 @@
 
   /* ---------------- ações ---------------- */
   function executar(cta, id) {
+    if (pedeCadastro(cta, id)) return pedirDados(cta, id);
     switch (cta.acao) {
       case 'checkout': {
         registrar('clicou', id, { acao: 'checkout' });
@@ -914,7 +950,6 @@
     guarda.gravar('ebg:idioma', idioma);
     mostrarOla();
     montarPerfis();
-    $('#erroDados').textContent = '';
     const tela = document.body.dataset.tela;
     if (tela === 'entrada') {
       if ($('#passoPerfil').classList.contains('ativo')) perguntarFoco();
@@ -935,8 +970,9 @@
     irPara('entrada');
   });
 
-  $('#passoDados').addEventListener('submit', enviarDados);
-  $('#passoDados [name=whatsapp]').addEventListener('input', e => {
+  document.addEventListener('submit', e => { if (e.target.id === 'passoDados') enviarDados(e); });
+  document.addEventListener('input', e => {
+    if (e.target.name !== 'whatsapp' || !e.target.closest('#passoDados')) return;
     const el = e.target, fim = el.selectionStart === el.value.length;
     el.value = mascaraTelefone(el.value);
     if (fim) el.setSelectionRange(el.value.length, el.value.length);
@@ -976,18 +1012,13 @@
 
   mostrarOla();
 
-  // quem volta pula o cadastro: com origem/destino conhecidos vai direto ao catálogo, senão cai na pergunta
-  if (estado.lead) {
-    const pre = perfilPreDefinido();
-    if (pre || IR) {
-      estado.perfil = pre || estado.perfil || 'fala';
-      abrirCatalogo();
-      seguirDestino();
-    } else perguntarFoco();
-  } else {
-    // quem chega por um perfil de origem já tem o foco: vai direto pros dados
-    const pre = perfilPreDefinido();
-    if (pre) { estado.perfil = pre; mostrarPasso('passoDados'); }
+  // quem já escolheu o foco, chega por um perfil de origem ou por um link direto vai direto ao catálogo
+  const pre = perfilPreDefinido();
+  if (pre || IR || estado.perfil) {
+    estado.perfil = pre || estado.perfil || 'fala';
+    abrirCatalogo();
+    seguirDestino();
+    if (origemCfg().ola) setTimeout(() => aviso(origemCfg().ola), 900);
   }
 
   // atalho pra testar direto o catálogo: ?catalogo

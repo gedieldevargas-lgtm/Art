@@ -4,12 +4,14 @@ Landing em formato de catálogo, estilo streaming: a pessoa escolhe um perfil, d
 
 ## A jornada
 
-1. **Entrada.** Primeiro "Qual é o foco de hoje?" com 5 perfis (fala, trabalho, viagem, fé, do zero). Depois nome, WhatsApp, Instagram e e-mail (os dois últimos opcionais). O lead vai para a Supabase já com o foco escolhido. Quem chega por um link de perfil com foco definido (`?de=eom`, `?de=viagens`) pula a pergunta e vai direto aos dados.
-2. **Abertura.** 3 stories (toque para avançar, segure para pausar, "Pular" no canto). O último usa o nome e o perfil da pessoa.
+1. **Entrada.** "Qual é o foco de hoje?" com 5 perfis (fala, trabalho, viagem, fé, do zero). Um toque e a pessoa já está no catálogo. Quem chega por um link de perfil com foco definido (`?de=eom`, `?de=viagens`), por um link direto (`&ir=`) ou já escolheu antes pula a pergunta.
+2. **Cadastro na hora do bônus.** Nome, WhatsApp, Instagram e e-mail (os dois últimos opcionais) são pedidos só quando a pessoa quer um bônus grátis: teste de nível, teste Prisma ou grupos do WhatsApp. Depois do cadastro o bônus abre na hora. Compra e "Tirar dúvida" no WhatsApp nunca são travados. O lead vai para a Supabase com o foco e com tudo o que a pessoa já tinha aberto antes.
 3. **Catálogo.** A vitrine da Mentoria (com o botão da vaga), a barra "O que você procura?" e as fileiras: *Escolhido pra você* (ordenada pelo perfil), *Programa Inteligente*, *Quem já passou por aqui* (depoimentos em vídeo), *English On Mission*, *Culture English*, *Intercâmbio e Viagens*, *Bônus gratuitos* e *Também do Gediel*. As trilhas da área de membros aparecem trancadas: só abrem para quem entra na mentoria.
 4. **Ficha.** Cada card abre uma ficha com o botão certo: checkout da Hotmart, WhatsApp com mensagem pronta, Instagram ou o teste de nível.
 
-Quem volta ao link pula o cadastro: vê "{Nome}, qual é o foco de hoje?", escolhe e cai direto no catálogo.
+A ficha da Mentoria funciona como uma página de venda curta: para quem é, o que está incluído, etapas, depoimentos, objeções, o que acontece depois de entrar, preço com garantia e os botões de vaga e WhatsApp de novo no fim.
+
+Quem volta ao link cai direto no catálogo. A foto do perfil no topo troca o foco. Os stories de abertura estão desligados (o código continua em `app.js`, em `abrirHistoria`).
 
 ## Links da bio (um por perfil)
 
