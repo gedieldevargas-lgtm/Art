@@ -15,13 +15,13 @@
   --muted: #b5afa5;
   /* paleta da marca: só azul e verde */
   /* azul militar e verde militar */
-  --accent: #3d5671;
-  --accent-press: #2f4459;
+  --accent: #15244a;
+  --accent-press: #0e1a38;
   --accent-ink: #ffffff;
-  --azul-claro: #a3b6cb;
-  --verde: #94a35a;
-  --verde-escuro: #556b2f;
-  --verde-ink: #12160a;
+  --azul-claro: #9fb2d6;
+  --verde: #6e9440;
+  --verde-escuro: #2d4a1c;
+  --verde-ink: #ffffff;
   --aviso: #f5c26b;
 
   --serif: 'Instrument Serif', 'Times New Roman', serif;
@@ -94,16 +94,16 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 /* destaque metalizado: azul militar escovado com um reflexo que passa de tempos em tempos */
 .botao-cheio, .chip-procura:first-child, .etiqueta {
   position: relative; overflow: hidden; isolation: isolate;
-  background: linear-gradient(180deg, #7890ab 0%, #4a6482 38%, #34495f 52%, #2b3d51 70%, #4d6787 100%); /* taste-skill-ignore: metalizado pedido pelo cliente */
+  background: linear-gradient(180deg, #4a5f8f 0%, #1f3263 36%, #142449 52%, #0d1a38 72%, #24396b 100%); /* taste-skill-ignore: metalizado pedido pelo cliente */
   box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -1px 0 rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.35); /* taste-skill-ignore: metalizado pedido pelo cliente */
   text-shadow: 0 1px 1px rgba(0,0,0,.4); /* taste-skill-ignore: gravado no metal */
 }
 .botao-cheio:hover, .chip-procura:first-child:hover {
-  background: linear-gradient(180deg, #869dba 0%, #55708f 38%, #3b5169 52%, #30445a 70%, #57728f 100%); /* taste-skill-ignore: metalizado pedido pelo cliente */
+  background: linear-gradient(180deg, #566c9e 0%, #263b70 36%, #182a54 52%, #112042 72%, #2b4278 100%); /* taste-skill-ignore: metalizado pedido pelo cliente */
 }
 .botao-cheio::after, .chip-procura:first-child::after, .etiqueta::after {
   content: ""; position: absolute; inset: -20% auto -20% -60%; width: 45%; z-index: -1;
-  background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.55) 50%, rgba(255,255,255,0) 100%); /* taste-skill-ignore: reflexo do metal */
+  background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.4) 50%, rgba(255,255,255,0) 100%); /* taste-skill-ignore: reflexo do metal */
   transform: skewX(-20deg);
   animation: reflexo 4.5s ease-in-out infinite;
   pointer-events: none;
@@ -501,7 +501,7 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
   font-size: 0.8125rem; font-weight: 600;
   background: var(--bg); color: var(--ink);
 }
-.card-selo.gratis { background: var(--verde); color: var(--verde-ink); }
+.card-selo.gratis { background: var(--verde-escuro); color: var(--verde-ink); }
 .card-selo.pago { background: var(--accent); color: #fff; }
 .card-selo.aluno { position: static; align-self: flex-start; margin-bottom: 4px; background: var(--accent); color: #fff; text-transform: uppercase; letter-spacing: .04em; line-height: 1.25; padding: 4px 8px; }
 .resultado-aluno { color: var(--azul-claro); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
@@ -510,17 +510,17 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 .card.bloqueado img { filter: grayscale(.4) brightness(.62); }
 .card.bloqueado .card-linha { color: var(--muted); }
 /* disponível agora: borda neon que pulsa devagar (anima só opacidade, leve no celular) */
-.card.neon { --neon: #b4c46e; }
+.card.neon { --neon: #6e9440; }
 .card.neon::before {
   content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none;
   border-radius: inherit;
-  box-shadow: inset 0 0 0 2px var(--neon), inset 0 0 22px rgba(180,196,110,.45); /* taste-skill-ignore: neon pedido pelo cliente */
+  box-shadow: inset 0 0 0 2px var(--neon), inset 0 0 22px rgba(110,148,64,.5); /* taste-skill-ignore: neon pedido pelo cliente */
   opacity: .2;
   animation: neon 2.4s ease-in-out infinite;
 }
 @keyframes neon { 50% { opacity: 1; } }
 .card.neon .card-selo.gratis { animation: neon-selo 2.4s ease-in-out infinite; }
-@keyframes neon-selo { 50% { box-shadow: 0 0 14px rgba(180,196,110,.9); } } /* taste-skill-ignore: neon pedido pelo cliente */
+@keyframes neon-selo { 50% { box-shadow: 0 0 14px rgba(110,148,64,.95); } } /* taste-skill-ignore: neon pedido pelo cliente */
 .trancado-meta { color: var(--azul-claro); }
 .ficha-trava { display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start; margin-top: 24px; padding: 16px 18px; border-radius: var(--raio); background: var(--surface-2); }
 .ficha-trava .card-cadeado { width: 20px; height: 20px; color: var(--azul-claro); opacity: 1; }
@@ -877,10 +877,10 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
   font: 700 0.75rem/1.2 var(--sans); letter-spacing: .06em; text-transform: uppercase;
   animation: etiqueta 2.4s ease-in-out infinite;
 }
-@keyframes etiqueta { 50% { box-shadow: 0 0 16px rgba(163,182,203,.95); } } /* taste-skill-ignore: destaque pedido pelo cliente */
+@keyframes etiqueta { 50% { box-shadow: 0 0 16px rgba(80,110,180,.95); } } /* taste-skill-ignore: destaque pedido pelo cliente */
 .fileira-destaque .card::before {
   content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none; border-radius: inherit;
-  box-shadow: inset 0 0 0 2px var(--azul-claro), inset 0 0 22px rgba(163,182,203,.5); /* taste-skill-ignore: destaque pedido pelo cliente */
+  box-shadow: inset 0 0 0 2px var(--azul-claro), inset 0 0 22px rgba(80,110,180,.55); /* taste-skill-ignore: destaque pedido pelo cliente */
   opacity: .55;
 }
 .fileira-destaque .card.bloqueado img { filter: grayscale(.15) brightness(.82); }
