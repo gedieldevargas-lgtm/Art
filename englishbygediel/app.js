@@ -349,8 +349,6 @@
     }).join('');
     irPara('historia');
     mostrarSlide(0);
-    const primeiro = $('.vitrine-fotos video');
-    if (primeiro && !reduz && primeiro.preload === 'none') { primeiro.preload = 'auto'; primeiro.load(); }
   }
 
   function mostrarSlide(i) {
@@ -436,9 +434,7 @@
     if (!catalogoMontado) {
       catalogoMontado = true;
       observar();
-      girarVitrine();
     }
-    tocarVitrine();
     descarregar();
   }
 
@@ -631,42 +627,6 @@
     }, { passive: true });
   }
 
-  // Vitrine: os vídeos tocam um depois do outro, sem som. Só o da vez baixa e toca;
-  // o próximo começa a baixar enquanto o atual passa. Fora da tela ou com a aba escondida, pausa.
-  let tocarVitrine = () => {};
-  function girarVitrine() {
-    const videos = $$('.vitrine-fotos video');
-    if (reduz || !videos.length) return; // movimento reduzido: fica só a capa do primeiro
-    let i = 0, visivel = true;
-    const carregar = v => { if (v.preload === 'none') { v.preload = 'auto'; v.load(); } };
-    tocarVitrine = () => {
-      const v = videos[i];
-      if (document.hidden || document.body.dataset.tela !== 'catalogo' || !visivel) return v.pause();
-      carregar(v);
-      v.play().catch(() => {});
-      carregar(videos[(i + 1) % videos.length]);
-    };
-    const proximo = () => {
-      videos[i].classList.remove('ativa');
-      videos[i].pause();
-      i = (i + 1) % videos.length;
-      videos[i].currentTime = 0;
-      videos[i].classList.add('ativa');
-      tocarVitrine();
-    };
-    let falhas = 0; // se o navegador não toca nenhum, para na capa em vez de girar sem fim
-    videos.forEach(v => {
-      v.addEventListener('ended', proximo);
-      v.addEventListener('playing', () => { falhas = 0; });
-      // com <source>, a falha chega no último formato que o navegador tentou
-      v.querySelector('source:last-of-type').addEventListener('error', () => {
-        if (++falhas < videos.length) return proximo();
-        videos.forEach((x, k) => x.classList.toggle('ativa', k === 0)); // nenhum tocou: fica a capa do primeiro
-      });
-    });
-    new IntersectionObserver(es => { visivel = es[0].isIntersecting; tocarVitrine(); }).observe($('.vitrine'));
-    document.addEventListener('visibilitychange', () => tocarVitrine());
-  }
 
   /* =========================================================
      Ficha
