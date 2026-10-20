@@ -478,6 +478,15 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 .card-selo.trancado .card-cadeado { width: 13px; height: 13px; opacity: 1; }
 .card.bloqueado img { filter: grayscale(.4) brightness(.62); }
 .card.bloqueado .card-linha { color: var(--muted); }
+/* Programa Inteligente: foto em azul-escuro, sem o apagado dos outros trancados, pra ganhar destaque */
+.card.tom-azul img, .ficha-midia.tom-azul img { filter: grayscale(1) contrast(1.12) brightness(.8); }
+.card.tom-azul::before, .ficha-midia.tom-azul::before {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: #1b3fa8; mix-blend-mode: color;
+}
+.ficha-midia.tom-azul::before { z-index: 0; }
+.card.tom-azul .card-selo.trancado { background: var(--accent); color: #fff; }
+.card.tom-azul .card-linha { color: var(--azul-claro); }
 .trancado-meta { color: var(--azul-claro); }
 .ficha-trava { display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start; margin-top: 24px; padding: 16px 18px; border-radius: var(--raio); background: var(--surface-2); }
 .ficha-trava .card-cadeado { width: 20px; height: 20px; color: var(--azul-claro); opacity: 1; }
