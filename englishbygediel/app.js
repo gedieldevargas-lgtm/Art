@@ -366,13 +366,14 @@
 
     const linha = [];
     if (comCombina && it.peso) linha.push(`<span class="combina">${combina(it)}%</span>`);
-    if (it.tipo === 'aluno') linha.push(esc(it.nome));
+    if (it.tipo === 'aluno') linha.push(esc(it.linha || it.nome));
     else if (it.tipo === 'etapa') linha.push(esc(it.duracao));
     else if (it.meta) linha.push(esc(it.meta[0]));
 
     const midia = texto ? '' : `<img src="${it.img}" alt="" loading="lazy" decoding="async">`;
     const play = it.video && !texto ? `<span class="card-play">${PLAY}</span>` : '';
-    const tituloCard = it.tipo === 'aluno' ? `“${esc(it.titulo)}”` : esc(it.titulo);
+    const aspas = it.tipo === 'aluno' && it.citacao !== false;
+    const tituloCard = aspas ? `“${esc(it.titulo)}”` : esc(it.titulo);
 
     return `<button class="card card-${formato}${texto ? ' capa-texto' : ''}${it.contem ? ' contem' : ''}${it.bloqueado ? ' bloqueado' : ''}" type="button"
         data-abrir="${id}" style="--i:${i};${texto ? `--cor:${it.cor}` : ''}" aria-label="${esc(it.titulo)}">
@@ -491,6 +492,7 @@
     let acoes = '';
     if (it.tipo === 'aluno') {
       acoes = botaoCta({ rotulo: t('verDepoimento'), acao: 'video', video: it.video, vertical: true }, id, 'botao-claro')
+            + (it.arroba ? botaoCta({ rotulo: t('verInstagram'), acao: 'link', href: `https://instagram.com/${it.arroba.replace(/^@/, '')}` }, id, 'botao-cinza') : '')
             + botaoCta({ rotulo: t('mesmoCaminho'), acao: 'ficha', alvo: 'mentoria' }, id, 'botao-cinza');
     } else if (it.bloqueado) {
       acoes = botaoCta({ rotulo: t('entrarMentoria'), acao: 'ficha', alvo: 'mentoria' }, id, 'botao-cheio');
@@ -522,16 +524,16 @@
         const ep = C.itens[e];
         return `<li class="episodio"><img src="${ep.img}" alt="" loading="lazy"><div><strong>${esc(ep.titulo)}</strong><span>${esc(ep.duracao)}</span></div><p>${esc(ep.sinopse)}</p></li>`;
       }).join('')}</ol>`;
-      extra += `<h3>${t('alunos')}</h3><div class="alunos-mini">${['levi', 'laura', 'luiz', 'alycia', 'bruno'].map(a => {
+      extra += `<h3>${t('alunos')}</h3><div class="alunos-mini">${Object.keys(C.itens).filter(k => C.itens[k].tipo === 'aluno').map(a => {
         const al = C.itens[a];
         return `<button type="button" data-video="${al.video}" data-item="${a}" data-vertical="1"><img src="${al.img}" alt="${esc(al.nome)}" loading="lazy"><span>${esc(al.nome)}</span></button>`;
       }).join('')}</div>`;
     }
 
     return `${midia}<div class="ficha-corpo">
-      <h2 id="fichaTitulo">${it.tipo === 'aluno' ? `“${esc(it.titulo)}”` : esc(it.titulo)}</h2>
+      <h2 id="fichaTitulo">${it.tipo === 'aluno' && it.citacao !== false ? `“${esc(it.titulo)}”` : esc(it.titulo)}</h2>
       <p class="ficha-meta">${meta.join('')}</p>
-      <p class="ficha-sinopse">${it.tipo === 'aluno' ? `“${esc(it.sinopse)}”` : esc(it.sinopse)}</p>
+      <p class="ficha-sinopse">${it.tipo === 'aluno' && it.citacao !== false ? `“${esc(it.sinopse)}”` : esc(it.sinopse)}</p>
       <div class="ficha-acoes">${acoes}</div>
       ${extra}
     </div>`;

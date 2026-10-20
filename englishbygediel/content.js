@@ -101,6 +101,19 @@ window.EBG = {
       sinopse: 'Depois de alguns meses me desafiei a fazer um intercâmbio internacional com ele, e percebi que nada mais me travava. Eu conseguia muito mais do que só me virar.',
       peso: { fala: 8, trabalho: 5, viagem: 9, fe: 4, zero: 5 } },
 
+    // Depoimentos do English On Mission (citacao: false = título sem aspas; linha: o que aparece no card embaixo do título)
+    eomgabriel: { titulo: 'Gabriel', linha: 'English On Mission', citacao: false, tipo: 'aluno', nome: 'Gabriel Braga', arroba: '@gabriel_braga_oficial',
+      img: 'img/aluno-eom-gabriel.webp', video: 'Zos-hQ7jvYo',
+      sinopse: 'O Gabriel conta, em vídeo, como foi a experiência dele no English On Mission.',
+      peso: { fala: 5, trabalho: 3, viagem: 3, fe: 10, zero: 5 } },
+    eomalycia: { titulo: 'Alycia', linha: 'English On Mission', citacao: false, tipo: 'aluno', nome: 'Alycia Marafiga', arroba: '@alyciamarafiga',
+      img: 'img/aluno-eom-alycia.webp', video: 'NMBt8t9GY8w',
+      sinopse: 'A Alycia conta, em vídeo, como foi a experiência dela no English On Mission.',
+      peso: { fala: 5, trabalho: 3, viagem: 3, fe: 9, zero: 5 } },
+    eomguilherme: { titulo: 'Guilherme', linha: 'English On Mission', citacao: false, tipo: 'aluno', nome: 'Guilherme', arroba: '@guirahts.oficial',
+      img: 'img/aluno-eom-guilherme.webp', video: 'RDrb0sCn-mc',
+      sinopse: 'O Guilherme conta, em vídeo, como foi a experiência dele no English On Mission.',
+      peso: { fala: 5, trabalho: 3, viagem: 3, fe: 9, zero: 5 } },
 
     // Área de membros (Cakto). bloqueado: aparece no catálogo, mas só abre pra quem entra na mentoria.
     // Quando chegar a capa original do Cakto, troque capa: 'texto' por img: 'img/arquivo.webp'.
@@ -196,9 +209,9 @@ window.EBG = {
     { id: 'programa', titulo: 'Programa Inteligente', sub: 'Só na mentoria', formato: 'poster',
       itens: ['diagtestes', 'cronograma', 'salas', 'aulas'] },
     { id: 'alunos', titulo: 'Resultados de alunos', formato: 'poster',
-      itens: ['levi', 'laura', 'luiz', 'alycia', 'bruno'] },
+      itens: ['levi', 'laura', 'luiz', 'alycia', 'bruno', 'eomgabriel', 'eomalycia', 'eomguilherme'] },
     { id: 'eom', titulo: 'English On Mission', sub: 'Só na mentoria', formato: 'poster',
-      itens: ['grupoeom', 'devocionais', 'cristao', 'biblia'] },
+      itens: ['eomgabriel', 'eomalycia', 'eomguilherme', 'grupoeom', 'devocionais', 'cristao', 'biblia'] },
     { id: 'culture', titulo: 'Culture English', sub: 'Só na mentoria', formato: 'poster',
       itens: ['seriesingles', 'filmes', 'musica'] },
     { id: 'intercambio', titulo: 'Intercâmbio e Viagens', sub: 'Só na mentoria', formato: 'poster',

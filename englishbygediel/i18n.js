@@ -33,7 +33,7 @@ window.EBG_UI = {
     perguntaDe: 'Pergunta {n} de {t}', pontoPartida: 'Seu ponto de partida',
     mentoriaNivel: 'Ver a mentoria pro meu nível', mandarResultado: 'Mandar meu resultado pro Gediel',
     whatsResultado: 'Oi Gediel! Fiz o teste do catálogo e deu {nivel}. Por onde eu começo?',
-    souNome: '(Sou {nome}.)', video: 'Vídeo'
+    souNome: '(Sou {nome}.)', video: 'Vídeo', verInstagram: 'Conferir no Instagram'
   },
   en: {
     idiomaOutro: 'Português', idiomaAria: 'Ver a página em português',
@@ -66,7 +66,7 @@ window.EBG_UI = {
     perguntaDe: 'Question {n} of {t}', pontoPartida: 'Your starting point',
     mentoriaNivel: 'See the mentorship for my level', mandarResultado: 'Send my result to Gediel',
     whatsResultado: 'Hi Gediel! I took the catalog test and got {nivel}. Where should I start?',
-    souNome: "(I'm {nome}.)", video: 'Video'
+    souNome: "(I'm {nome}.)", video: 'Video', verInstagram: 'See on Instagram'
   }
 };
 
@@ -135,6 +135,9 @@ window.EBG_EN = {
       sinopse: "I wasn't even fluent, and Gediel got me praying in English for the first time. I feel I got off the ground really fast." },
     bruno: { titulo: 'Now I truly speak English',
       sinopse: 'After a few months I challenged myself to do an international exchange with him, and I realized nothing held me back anymore. I could do much more than just get by.' },
+    eomgabriel: { sinopse: 'Gabriel shares, on video, what his experience at English On Mission was like.' },
+    eomalycia: { sinopse: 'Alycia shares, on video, what her experience at English On Mission was like.' },
+    eomguilherme: { sinopse: 'Guilherme shares, on video, what his experience at English On Mission was like.' },
 
     diagtestes: { titulo: 'Assessments and Tests', trilha: 'Smart Program',
       sinopse: 'The starting point: level test and multiple intelligences assessment, so you know how you learn before the first class.' },
