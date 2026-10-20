@@ -14,12 +14,14 @@
   --ink: #f3efe8;
   --muted: #b5afa5;
   /* paleta da marca: só azul e verde */
-  --accent: #2f56d6;
-  --accent-press: #2443ad;
+  /* azul militar e verde militar */
+  --accent: #3d5671;
+  --accent-press: #2f4459;
   --accent-ink: #ffffff;
-  --azul-claro: #8fb0ff;
-  --verde: #3fbf86;
-  --verde-ink: #06180f;
+  --azul-claro: #a3b6cb;
+  --verde: #94a35a;
+  --verde-escuro: #556b2f;
+  --verde-ink: #12160a;
   --aviso: #f5c26b;
 
   --serif: 'Instrument Serif', 'Times New Roman', serif;
@@ -89,6 +91,25 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 .botao:active { transform: scale(.96); }
 .botao-cheio { background: var(--accent); color: var(--accent-ink); }
 .botao-cheio:hover { background: var(--accent-press); }
+/* destaque metalizado: azul militar escovado com um reflexo que passa de tempos em tempos */
+.botao-cheio, .chip-procura:first-child, .etiqueta {
+  position: relative; overflow: hidden; isolation: isolate;
+  background: linear-gradient(180deg, #7890ab 0%, #4a6482 38%, #34495f 52%, #2b3d51 70%, #4d6787 100%); /* taste-skill-ignore: metalizado pedido pelo cliente */
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -1px 0 rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.35); /* taste-skill-ignore: metalizado pedido pelo cliente */
+  text-shadow: 0 1px 1px rgba(0,0,0,.4);
+}
+.botao-cheio:hover, .chip-procura:first-child:hover {
+  background: linear-gradient(180deg, #869dba 0%, #55708f 38%, #3b5169 52%, #30445a 70%, #57728f 100%); /* taste-skill-ignore: metalizado pedido pelo cliente */
+}
+.botao-cheio::after, .chip-procura:first-child::after, .etiqueta::after {
+  content: ""; position: absolute; inset: -20% auto -20% -60%; width: 45%; z-index: -1;
+  background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.55) 50%, rgba(255,255,255,0) 100%); /* taste-skill-ignore: reflexo do metal */
+  transform: skewX(-20deg);
+  animation: reflexo 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes reflexo { 0%, 62% { left: -60%; } 100% { left: 130%; } }
+@media (prefers-reduced-motion: reduce) { .botao-cheio::after, .chip-procura:first-child::after, .etiqueta::after { animation: none; display: none; } }
 .botao-claro { background: var(--ink); color: var(--bg); }
 .botao-claro:hover { background: #fff; }
 .botao-cinza { background: rgba(110, 110, 120, .42); color: var(--ink); }
@@ -489,17 +510,17 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 .card.bloqueado img { filter: grayscale(.4) brightness(.62); }
 .card.bloqueado .card-linha { color: var(--muted); }
 /* disponível agora: borda neon que pulsa devagar (anima só opacidade, leve no celular) */
-.card.neon { --neon: #46f0a4; }
+.card.neon { --neon: #b4c46e; }
 .card.neon::before {
   content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none;
   border-radius: inherit;
-  box-shadow: inset 0 0 0 2px var(--neon), inset 0 0 22px rgba(70,240,164,.45); /* taste-skill-ignore: neon pedido pelo cliente */
+  box-shadow: inset 0 0 0 2px var(--neon), inset 0 0 22px rgba(180,196,110,.45); /* taste-skill-ignore: neon pedido pelo cliente */
   opacity: .2;
   animation: neon 2.4s ease-in-out infinite;
 }
 @keyframes neon { 50% { opacity: 1; } }
 .card.neon .card-selo.gratis { animation: neon-selo 2.4s ease-in-out infinite; }
-@keyframes neon-selo { 50% { box-shadow: 0 0 14px rgba(70,240,164,.9); } } /* taste-skill-ignore: neon pedido pelo cliente */
+@keyframes neon-selo { 50% { box-shadow: 0 0 14px rgba(180,196,110,.9); } } /* taste-skill-ignore: neon pedido pelo cliente */
 .trancado-meta { color: var(--azul-claro); }
 .ficha-trava { display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start; margin-top: 24px; padding: 16px 18px; border-radius: var(--raio); background: var(--surface-2); }
 .ficha-trava .card-cadeado { width: 20px; height: 20px; color: var(--azul-claro); opacity: 1; }
@@ -513,7 +534,7 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
   position: absolute; top: 8px; right: 8px; z-index: 4;
   width: 30px; height: 30px; border-radius: 50%;
   display: grid; place-items: center;
-  background: #25d366; color: #fff;
+  background: var(--verde-escuro); color: #fff;
 }
 .card-whats svg { width: 18px; height: 18px; }
 .card-play svg { width: 16px; height: 16px; margin-left: 2px; }
@@ -823,9 +844,8 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
   font-size: var(--step-small); font-weight: 600;
   transition: background-color .2s, transform .15s;
 }
-.chip-procura:first-child { background: var(--accent); color: #fff; }
+.chip-procura:first-child { color: #fff; }
 .chip-procura:hover { background: var(--surface-3); }
-.chip-procura:first-child:hover { background: var(--accent-press); }
 .chip-procura:active { transform: scale(.95); }
 
 /* barra fixa da mentoria (celular) */
@@ -853,14 +873,14 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 .etiqueta {
   display: inline-block;
   padding: 3px 8px; border-radius: 4px;
-  background: var(--accent); color: #fff;
+  color: #fff;
   font: 700 0.75rem/1.2 var(--sans); letter-spacing: .06em; text-transform: uppercase;
   animation: etiqueta 2.4s ease-in-out infinite;
 }
-@keyframes etiqueta { 50% { box-shadow: 0 0 16px rgba(110,150,255,.95); background: #3d66f0; } } /* taste-skill-ignore: destaque pedido pelo cliente */
+@keyframes etiqueta { 50% { box-shadow: 0 0 16px rgba(163,182,203,.95); } } /* taste-skill-ignore: destaque pedido pelo cliente */
 .fileira-destaque .card::before {
   content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none; border-radius: inherit;
-  box-shadow: inset 0 0 0 2px var(--azul-claro), inset 0 0 22px rgba(110,150,255,.5); /* taste-skill-ignore: destaque pedido pelo cliente */
+  box-shadow: inset 0 0 0 2px var(--azul-claro), inset 0 0 22px rgba(163,182,203,.5); /* taste-skill-ignore: destaque pedido pelo cliente */
   opacity: .55;
 }
 .fileira-destaque .card.bloqueado img { filter: grayscale(.15) brightness(.82); }
