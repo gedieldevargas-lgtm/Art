@@ -221,7 +221,7 @@ window.EBG = {
     { id: 'alunos', titulo: 'Resultados de alunos', formato: 'poster',
       itens: ['levi', 'laura', 'luiz', 'alycia', 'bruno'] },
     // depoimentos do EOM ficam misturados com os cards da trilha
-    { id: 'eom', titulo: 'English On Mission', formato: 'poster',
+    { id: 'eom', titulo: 'English On Mission', sub: 'Inglês com a Bíblia', formato: 'poster',
       itens: ['grupoeom', 'eomgabriel', 'devocionais', 'eomalycia', 'cristao', 'eomguilherme', 'biblia'] },
     { id: 'culture', titulo: 'Culture English', formato: 'poster',
       itens: ['grupoculture', 'seriesingles', 'filmes', 'musica'] },

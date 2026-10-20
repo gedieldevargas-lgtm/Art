@@ -199,7 +199,7 @@ window.EBG_EN = {
     { titulo: 'Picked for you' },
     { titulo: 'Smart Program', sub: 'Mentorship only' },
     { titulo: 'Student results' },
-    {},
+    { sub: 'English with the Bible' },
     {},
     { titulo: 'Exchange & Travel' },
     { titulo: 'Free bonuses' },
