@@ -8,11 +8,15 @@ create table if not exists public.leads (
   created_at  timestamptz not null default now(),
   nome        text not null check (char_length(nome) between 1 and 120),
   whatsapp    text not null check (char_length(whatsapp) between 8 and 25),
+  instagram   text check (instagram is null or char_length(instagram) <= 60),
   email       text check (email is null or char_length(email) <= 200),
   objetivo    text not null check (objetivo in ('fala','trabalho','viagem','fe','zero')),
   origem      text check (char_length(origem) <= 300),   -- utm_source / utm_campaign / referrer
   dispositivo text check (char_length(dispositivo) <= 300)
 );
+
+-- Se a tabela já existia antes do campo Instagram, isto acrescenta a coluna.
+alter table public.leads add column if not exists instagram text check (instagram is null or char_length(instagram) <= 60);
 
 create table if not exists public.events (
   id         bigint generated always as identity primary key,
@@ -40,12 +44,14 @@ create policy "site insere events" on public.events
 
 -- Painel pronto pra consultar no Table Editor / SQL:
 -- o que cada pessoa fez, em uma linha.
-create or replace view public.painel_leads
+drop view if exists public.painel_leads;
+create view public.painel_leads
 with (security_invoker = true) as
 select
   l.created_at,
   l.nome,
   l.whatsapp,
+  l.instagram,
   l.email,
   l.objetivo,
   (select e.detalhe->>'nivel' from public.events e

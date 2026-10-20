@@ -199,9 +199,18 @@
       abrirCatalogo();
       return;
     }
-    if (!estado.dados) { mostrarPasso('passoDados'); return; }
-    // o lead nasce aqui: já com nome, contato e o foco escolhido
-    const lead = { ...estado.dados, objetivo: id };
+    // primeiro o foco, depois os dados
+    pedirDados();
+  }
+
+  function pedirDados() {
+    mostrarPasso('passoDados');
+    if (!matchMedia('(pointer: coarse)').matches) $('#passoDados [name=nome]').focus();
+  }
+
+  // o lead nasce aqui: já com o foco escolhido, nome e contato
+  function criarLead() {
+    const lead = { ...estado.dados, objetivo: estado.perfil || 'fala' };
     estado.lead = lead;
     guarda.gravar('ebg:lead', { id: lead.id, nome: lead.nome, objetivo: lead.objetivo });
     enfileirar('leads', lead);
@@ -238,10 +247,8 @@
   }
 
   function mostrarOla() {
-    const el = $('#olaOrigem');
     const ola = origemCfg().ola;
-    el.hidden = !ola;
-    el.textContent = ola || '';
+    $$('.ola-origem').forEach(el => { el.hidden = !ola; el.textContent = ola || ''; });
   }
 
   function perguntarFoco() {
@@ -270,6 +277,7 @@
     const f = ev.currentTarget;
     const nome = f.nome.value.trim();
     const tel = f.whatsapp.value.replace(/\D/g, '');
+    const insta = f.instagram.value.trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i, '').replace(/^@+/, '').replace(/[/?].*$/, '');
     const email = f.email.value.trim();
     const erro = $('#erroDados');
     $$('input', f).forEach(i => i.removeAttribute('aria-invalid'));
@@ -277,6 +285,7 @@
     let problema = null;
     if (nome.length < 2) problema = [f.nome, t('erroNome')];
     else if (tel.length < 10 || tel.length > 13) problema = [f.whatsapp, t('erroWhats')];
+    else if (insta && !/^[A-Za-z0-9._]{1,30}$/.test(insta)) problema = [f.instagram, t('erroInsta')];
     else if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) problema = [f.email, t('erroEmail')];
     if (problema) {
       problema[0].setAttribute('aria-invalid', 'true');
@@ -290,13 +299,12 @@
       id: uuid(),
       nome: nome.slice(0, 120),
       whatsapp: (tel.length <= 11 ? '55' + tel : tel),
+      instagram: insta ? insta.toLowerCase() : null,
       email: email || null,
       origem: origem(),
       dispositivo: navigator.userAgent.slice(0, 300)
     };
-    const pre = perfilPreDefinido();
-    if (pre) escolherPerfil(pre);
-    else perguntarFoco();
+    criarLead();
   }
 
   /* =========================================================
@@ -976,6 +984,10 @@
       abrirCatalogo();
       seguirDestino();
     } else perguntarFoco();
+  } else {
+    // quem chega por um perfil de origem já tem o foco: vai direto pros dados
+    const pre = perfilPreDefinido();
+    if (pre) { estado.perfil = pre; mostrarPasso('passoDados'); }
   }
 
   // atalho pra testar direto o catálogo: ?catalogo

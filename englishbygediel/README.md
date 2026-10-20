@@ -4,7 +4,7 @@ Landing em formato de catálogo, estilo streaming: a pessoa escolhe um perfil, d
 
 ## A jornada
 
-1. **Entrada.** Nome, WhatsApp e e-mail (opcional). Depois "{Nome}, qual é o foco de hoje?" com 5 perfis (fala, trabalho, viagem, fé, do zero). O lead vai para a Supabase quando a pessoa escolhe o foco.
+1. **Entrada.** Primeiro "Qual é o foco de hoje?" com 5 perfis (fala, trabalho, viagem, fé, do zero). Depois nome, WhatsApp, Instagram e e-mail (os dois últimos opcionais). O lead vai para a Supabase já com o foco escolhido. Quem chega por um link de perfil com foco definido (`?de=eom`, `?de=viagens`) pula a pergunta e vai direto aos dados.
 2. **Abertura.** 3 stories (toque para avançar, segure para pausar, "Pular" no canto). O último usa o nome e o perfil da pessoa.
 3. **Catálogo.** A vitrine da Mentoria (com o botão da vaga), a barra "O que você procura?" e as fileiras: *Escolhido pra você* (ordenada pelo perfil), *Programa Inteligente*, *Quem já passou por aqui* (depoimentos em vídeo), *English On Mission*, *Culture English*, *Intercâmbio e Viagens*, *Bônus gratuitos* e *Também do Gediel*. As trilhas da área de membros aparecem trancadas: só abrem para quem entra na mentoria.
 4. **Ficha.** Cada card abre uma ficha com o botão certo: checkout da Hotmart, WhatsApp com mensagem pronta, Instagram ou o teste de nível.
@@ -43,7 +43,7 @@ O `de` e o `ir` ficam salvos no lead (coluna `origem`), então dá pra ver na Su
 1. Crie um projeto em supabase.com.
 2. **SQL Editor → New query**: cole o conteúdo de `supabase/schema.sql` e clique em **Run**.
 3. **Project Settings → API**: copie a *Project URL* e a chave *anon public* para `config.js`.
-4. Pronto. Para ver os contatos, abra **Table Editor → painel_leads**: nome, WhatsApp, perfil, nível do teste, o que a pessoa abriu e se clicou na mentoria.
+4. Pronto. Para ver os contatos, abra **Table Editor → painel_leads**: nome, WhatsApp, Instagram, perfil, nível do teste, o que a pessoa abriu e se clicou na mentoria.
 
 O site só consegue **inserir**. Ninguém de fora lê, edita ou apaga os dados. Sem internet, os registros ficam guardados no aparelho da pessoa e sobem na próxima visita.
 

@@ -31,9 +31,15 @@
       <div class="topo-direita"><nav class="redes" data-i18n-aria="redes" aria-label="Outros canais"></nav><button class="idioma" type="button" data-idioma data-i18n="idiomaOutro" data-i18n-aria="idiomaAria">English</button></div>
     </div>
 
-    <form class="passo passo-dados ativo" id="passoDados" novalidate>
+    <div class="passo passo-perfil ativo" id="passoPerfil">
+      <h1 class="pergunta-foco" id="tituloFoco">Qual é o foco de hoje?</h1>
+      <p class="ola-origem" hidden></p>
+      <ul class="perfis" id="perfis" role="list"></ul>
+    </div>
+
+    <form class="passo passo-dados" id="passoDados" novalidate>
       <h1 class="entrada-titulo" data-i18n="titulo">Prazer! Como te chamo?</h1>
-      <p class="ola-origem" id="olaOrigem" hidden></p>
+      <p class="ola-origem" hidden></p>
       <label class="campo">
         <span data-i18n="nome">Seu nome</span>
         <input name="nome" autocomplete="given-name" required maxlength="80" placeholder="Como gosta de ser chamado" data-i18n-ph="nomePh">
@@ -43,6 +49,10 @@
         <input name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" required placeholder="(55) 99999-9999">
       </label>
       <label class="campo">
+        <span><span data-i18n="insta">Instagram</span> <small data-i18n="opcional">opcional</small></span>
+        <input name="instagram" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="40" placeholder="@seuperfil" data-i18n-ph="instaPh">
+      </label>
+      <label class="campo">
         <span><span data-i18n="email">E-mail</span> <small data-i18n="opcional">opcional</small></span>
         <input name="email" type="email" inputmode="email" autocomplete="email" maxlength="200" placeholder="voce@email.com" data-i18n-ph="emailPh">
       </label>
@@ -50,11 +60,6 @@
       <button class="botao botao-cheio" type="submit" id="enviarDados" data-i18n="continuar">Continuar</button>
       <p class="nota" data-i18n="nota">Seus dados ficam só com o Gediel. Nada de spam.</p>
     </form>
-
-    <div class="passo passo-perfil" id="passoPerfil">
-      <h1 class="pergunta-foco" id="tituloFoco">Qual é o foco de hoje?</h1>
-      <ul class="perfis" id="perfis" role="list"></ul>
-    </div>
   </div>
 </section>
 
