@@ -96,7 +96,7 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
   position: relative; overflow: hidden; isolation: isolate;
   background: linear-gradient(180deg, #7890ab 0%, #4a6482 38%, #34495f 52%, #2b3d51 70%, #4d6787 100%); /* taste-skill-ignore: metalizado pedido pelo cliente */
   box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -1px 0 rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.35); /* taste-skill-ignore: metalizado pedido pelo cliente */
-  text-shadow: 0 1px 1px rgba(0,0,0,.4);
+  text-shadow: 0 1px 1px rgba(0,0,0,.4); /* taste-skill-ignore: gravado no metal */
 }
 .botao-cheio:hover, .chip-procura:first-child:hover {
   background: linear-gradient(180deg, #869dba 0%, #55708f 38%, #3b5169 52%, #30445a 70%, #57728f 100%); /* taste-skill-ignore: metalizado pedido pelo cliente */
