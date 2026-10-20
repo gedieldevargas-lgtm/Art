@@ -128,7 +128,7 @@ window.EBG = {
 
     grupoeom: { titulo: 'Grupo do WhatsApp', trilha: 'English On Mission', bloqueado: true, img: 'img/logo-eom.webp',
       sinopse: 'O grupo do English On Mission, pra praticar e caminhar junto durante a semana.' },
-    devocionais: { titulo: 'Devocionais EOM', trilha: 'English On Mission', bloqueado: true, capa: 'texto', cor: '#15281f',
+    devocionais: { titulo: 'Devocionais EOM', trilha: 'English On Mission', bloqueado: true, img: 'img/card-devocionais.webp',
       sinopse: 'Devocionais em inglês: um versículo e um ponto da língua de cada vez.' },
     cristao: { titulo: 'Curso de Inglês Cristão', trilha: 'English On Mission', bloqueado: true, capa: 'texto', cor: '#15281f',
       sinopse: 'Inglês estudando as cartas da Bíblia, do verb to be às cartas de João.',
