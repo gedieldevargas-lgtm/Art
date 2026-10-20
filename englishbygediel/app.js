@@ -58,6 +58,17 @@
     aplicarTextos();
   }
 
+  /* ---------------- de onde veio e pra onde quer ir ----------------
+     ?de=eom|metodo|escola|viagens|ebg  -> o perfil do Instagram de onde a pessoa veio (link da bio)
+     ?ir=toronto|prisma|teste|mentoria|eom|grupos|...  -> abre direto o que ela veio buscar, sem stories */
+  const PARAMS = new URLSearchParams(location.search);
+  const DE = (PARAMS.get('de') || '').toLowerCase();
+  const IR = (PARAMS.get('ir') || '').toLowerCase();
+  const ATALHOS_IR = { bussola: 'teste', nivel: 'teste', vlogs: 'vlogeuropa', londres: 'vlogeuropa', grupos: '#gratis', gratis: '#gratis',
+    eom: '#eom', biblia: '#eom', intercambio: '#intercambio', viagem: '#intercambio', alunos: '#alunos', programa: '#programa', culture: '#culture', extras: '#mais' };
+  let irFeito = false;
+  const origemCfg = () => ((C.origens || {})[DE]) || {};
+
   const estado = {
     lead: guarda.ler('ebg:lead'),
     perfil: (guarda.ler('ebg:lead') || {}).objetivo || null
@@ -121,8 +132,6 @@
     : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 3 | 8)).toString(16); }));
   const perfilDe = id => C.perfis.find(p => p.id === id) || C.perfis[0];
   const primeiroNome = () => ((estado.lead || estado.dados || {}).nome || '').trim().split(/\s+/)[0] || '';
-  // disponível agora (gratuito, aberto ou a própria mentoria): ganha o brilho neon
-  const disponivel = (it, id) => id === 'mentoria' || Boolean(it.aberto) || (it.tipo === 'gratis' && !it.breve);
   const combina = item => Math.round(60 + ((item.peso && item.peso[estado.perfil]) || 7) * 3.8);
 
   function pintarPerfil(el, p) {
@@ -155,6 +164,7 @@
   function irPara(tela) {
     document.body.dataset.tela = tela;
     window.scrollTo(0, 0);
+    atualizarBarra();
   }
 
   /* =========================================================
@@ -195,7 +205,43 @@
     estado.lead = lead;
     guarda.gravar('ebg:lead', { id: lead.id, nome: lead.nome, objetivo: lead.objetivo });
     enfileirar('leads', lead);
-    abrirHistoria();
+    if (IR) { abrirCatalogo(); seguirDestino(); }   // veio por um link direto: pula os stories
+    else abrirHistoria();
+  }
+
+  // foco que já dá pra saber sem perguntar: o do perfil de origem ou o que mais combina com o destino
+  function perfilPreDefinido() {
+    if (origemCfg().perfil) return origemCfg().perfil;
+    if (!IR) return null;
+    const alvo = ATALHOS_IR[IR] || IR;
+    const it = C.itens[alvo];
+    if (it && it.peso) return Object.keys(it.peso).sort((a, b) => it.peso[b] - it.peso[a])[0];
+    if (alvo === '#eom') return 'fe';
+    if (alvo === '#intercambio') return 'viagem';
+    return 'fala';
+  }
+
+  // abre o que a pessoa veio buscar (uma vez por visita)
+  function seguirDestino() {
+    if (!IR || irFeito) return;
+    irFeito = true;
+    const alvo = ATALHOS_IR[IR] || IR;
+    setTimeout(() => {
+      if (alvo.startsWith('#')) rolarAte(alvo.slice(1));
+      else if (C.itens[alvo]) abrirFicha(alvo);
+    }, 450);
+  }
+
+  function rolarAte(fileira) {
+    const el = $('#fileira-' + fileira);
+    if (el) el.scrollIntoView({ behavior: reduz ? 'auto' : 'smooth', block: 'start' });
+  }
+
+  function mostrarOla() {
+    const el = $('#olaOrigem');
+    const ola = origemCfg().ola;
+    el.hidden = !ola;
+    el.textContent = ola || '';
   }
 
   function perguntarFoco() {
@@ -213,8 +259,8 @@
   }
 
   function origem() {
-    const q = new URLSearchParams(location.search);
-    const partes = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].map(k => q.get(k) && `${k.slice(4)}=${q.get(k)}`).filter(Boolean);
+    const q = PARAMS;
+    const partes = ['de', 'ir', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].map(k => q.get(k) && `${k.replace('utm_', '')}=${q.get(k)}`).filter(Boolean);
     if (document.referrer && !document.referrer.startsWith(location.origin)) partes.push(`ref=${document.referrer}`);
     return partes.join(' · ').slice(0, 300) || null;
   }
@@ -248,7 +294,9 @@
       origem: origem(),
       dispositivo: navigator.userAgent.slice(0, 300)
     };
-    perguntarFoco();
+    const pre = perfilPreDefinido();
+    if (pre) escolherPerfil(pre);
+    else perguntarFoco();
   }
 
   /* =========================================================
@@ -354,6 +402,7 @@
     const m = C.itens.mentoria;
     $('#vitrineMeta').innerHTML = `<span class="combina">${combina(m)}${t('pctVoce')}</span>` + m.meta.map(t => `<span>${esc(t)}</span>`).join('');
     $('#vitrineSinopse').textContent = C.perfilTexto[estado.perfil] || m.sinopse;
+    montarProcura();
     montarFileiras();
     montarPerguntas();
     if (!catalogoMontado) {
@@ -388,7 +437,7 @@
     const aspas = it.tipo === 'aluno' && it.citacao !== false;
     const tituloCard = aspas ? `“${esc(it.titulo)}”` : esc(it.titulo);
 
-    return `<button class="card card-${formato}${texto ? ' capa-texto' : ''}${it.contem ? ' contem' : ''}${it.bloqueado || it.indisponivel ? ' bloqueado' : ''}${disponivel(it, id) ? ' neon' : ''}" type="button"
+    return `<button class="card card-${formato}${texto ? ' capa-texto' : ''}${it.contem ? ' contem' : ''}${it.bloqueado || it.indisponivel ? ' bloqueado' : ''}${id === 'mentoria' || it.pulsa ? ' neon' : ''}" type="button"
         data-abrir="${id}" style="--i:${i};${texto ? `--cor:${it.cor}` : ''}" aria-label="${esc(it.titulo)}">
       ${midia}${texto || it.tipo === 'aluno' ? '' : selo}${play}
       <span class="card-texto">
@@ -402,7 +451,7 @@
   }
 
   function montarFileiras() {
-    $('#fileiras').innerHTML = C.fileiras.map(f => {
+    $('#fileiras').innerHTML = ordenarFileiras(C.fileiras).map(f => {
       let itens = f.itens;
       let sub = f.sub || '';
       if (f.dinamica) {
@@ -484,6 +533,24 @@
   }
   if (!reduz) requestAnimationFrame(andar);
 
+  function montarProcura() {
+    const ordem = [...(origemCfg().procura || []), ...((C.procuraPorPerfil || {})[estado.perfil] || [])];
+    const lista = [...C.procura].sort((a, b) => {
+      const ia = ordem.indexOf(a.id), ib = ordem.indexOf(b.id);
+      return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
+    });
+    $('#procuraChips').innerHTML = lista.map(x => `<button class="chip-procura" type="button" data-procura="${x.id}">${esc(x.rotulo)}</button>`).join('');
+  }
+
+  // fileira que mais combina com o foco sobe pra logo depois do Programa Inteligente
+  function ordenarFileiras(fileiras) {
+    const sobe = (C.ordemPorPerfil || {})[estado.perfil];
+    const lista = fileiras.filter(f => f.id !== sobe);
+    const alvo = fileiras.find(f => f.id === sobe);
+    if (alvo) lista.splice(lista.findIndex(f => f.id === 'programa') + 1, 0, alvo);
+    return lista;
+  }
+
   function montarPerguntas() {
     $('#listaPerguntas').innerHTML = C.perguntas.map(([q, r]) => `
       <details class="pergunta"><summary>${esc(q)}${MAIS}</summary><p>${esc(r)}</p></details>`).join('');
@@ -493,6 +560,7 @@
   }, true);
 
   let observador;
+  let atualizarBarra = () => {};
   function observar() {
     if (!('IntersectionObserver' in window)) return;
     observador = new IntersectionObserver(entradas => {
@@ -512,6 +580,19 @@
     new IntersectionObserver((es, o) => es.forEach(e => {
       if (e.isIntersecting) { prox.querySelector('.proximo-texto').classList.add('visivel'); o.disconnect(); }
     }), { threshold: 0.2 }).observe(prox);
+
+    // barra da mentoria: aparece quando a vitrine e o "próximo episódio" saem da tela
+    const vis = { vitrine: true, proximo: false, rodape: false };
+    const obsBarra = new IntersectionObserver(es => {
+      es.forEach(e => { vis[e.target.dataset.barra] = e.isIntersecting; });
+      atualizarBarra();
+    });
+    [['.vitrine', 'vitrine'], ['.proximo', 'proximo'], ['.rodape', 'rodape']].forEach(([sel, nome]) => {
+      const el = $(sel); el.dataset.barra = nome; obsBarra.observe(el);
+    });
+    atualizarBarra = () => {
+      $('#barraVaga').hidden = document.body.dataset.tela !== 'catalogo' || Boolean(fichaAberta) || vis.vitrine || vis.proximo || vis.rodape;
+    };
 
     const topo = $('#topo');
     let ultimoY = 0;
@@ -650,6 +731,7 @@
     document.body.style.overflow = 'hidden';
     $('#fecharFicha').focus({ preventScroll: true });
     if (!html) registrar('abriu', id);
+    atualizarBarra();
   }
 
   function fecharFicha(doHistorico) {
@@ -661,6 +743,7 @@
     document.body.style.overflow = '';
     if (!doHistorico && history.state && history.state.ficha) history.back();
     if (focoAntes) focoAntes.focus({ preventScroll: true });
+    setTimeout(atualizarBarra, 300);
   }
 
   function arrastarFicha() {
@@ -789,6 +872,14 @@
 
     if (alvo.closest('[data-idioma]')) return trocarIdioma();
 
+    const chip = alvo.closest('[data-procura]');
+    if (chip) {
+      const x = C.procura.find(p => p.id === chip.dataset.procura);
+      registrar('clicou', 'procura:' + x.id);
+      if (x.abrir) return abrirFicha(x.abrir);
+      return rolarAte(x.rolar);
+    }
+
     const seta = alvo.closest('[data-seta]');
     if (seta) {
       const trilho = seta.parentElement.querySelector('.trilho');
@@ -813,6 +904,7 @@
   function trocarIdioma() {
     definirIdioma(idioma === 'pt' ? 'en' : 'pt');
     guarda.gravar('ebg:idioma', idioma);
+    mostrarOla();
     montarPerfis();
     $('#erroDados').textContent = '';
     const tela = document.body.dataset.tela;
@@ -874,8 +966,17 @@
     setTimeout(() => abertura.classList.add('feita'), 1900);
   }
 
-  // quem volta pula o cadastro e cai direto na pergunta
-  if (estado.lead) perguntarFoco();
+  mostrarOla();
+
+  // quem volta pula o cadastro: com origem/destino conhecidos vai direto ao catálogo, senão cai na pergunta
+  if (estado.lead) {
+    const pre = perfilPreDefinido();
+    if (pre || IR) {
+      estado.perfil = pre || estado.perfil || 'fala';
+      abrirCatalogo();
+      seguirDestino();
+    } else perguntarFoco();
+  }
 
   // atalho pra testar direto o catálogo: ?catalogo
   if (new URLSearchParams(location.search).has('catalogo')) {

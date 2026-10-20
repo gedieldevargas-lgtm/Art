@@ -13,20 +13,44 @@ window.EBG = {
 
   // Abertura em formato stories. {nome} vira o primeiro nome da pessoa.
   historia: [
-    { img: null,
-      titulo: 'Você não é ruim em inglês. Foi mal ensinado.',
-      texto: 'App, escola, curso online. Anos de esforço e a fala ainda trava na hora H. O problema nunca foi você, foi o método.' },
     { img: 'img/gediel-brooklyn.webp',
-      titulo: 'Prazer, eu sou o Gediel.',
-      texto: 'Onze anos de sala de aula, mais de 500 alunos e um intercâmbio na Inglaterra que me mostrou: inglês de aula e inglês de rua são parentes, não gêmeos.' },
+      titulo: 'Você não é ruim em inglês. Foi mal ensinado.',
+      texto: 'Eu sou o Gediel. Onze anos de sala de aula e mais de 500 alunos me mostraram: o problema nunca foi você, foi o método.' },
     { img: 'img/aula-grupo.webp',
       titulo: 'Cada pessoa aprende de um jeito.',
-      texto: 'O Método Inteligente começa descobrindo como você aprende. Depois junta conversa ao vivo, aulas gravadas no seu ritmo e acompanhamento de perto.' },
+      texto: 'O Método Inteligente começa descobrindo como você aprende. Depois junta aula ao vivo, um cronograma pra cada dia e acompanhamento de perto.' },
     { img: 'img/gediel-liberty-tall.webp',
       titulo: '{nome}, separei um caminho pra você.',
       texto: null, // vem do perfil: perfilTexto
       botao: 'Abrir meu catálogo' }
   ],
+
+  // De onde a pessoa veio (?de= no link da bio de cada perfil).
+  // perfil: já escolhe o foco e pula a pergunta. procura: atalhos que aparecem primeiro. ola: frase de boas-vindas.
+  origens: {
+    ebg:     { ola: '' },
+    eom:     { perfil: 'fe', procura: ['eom', 'grupos', 'mentoria'], ola: 'Que bom te ver por aqui, família English On Mission.' },
+    metodo:  { procura: ['prisma', 'teste', 'mentoria'], ola: 'Veio do Método Inglês Inteligente? Comece descobrindo como você aprende.' },
+    escola:  { procura: ['escola', 'teste', 'mentoria'], ola: 'Aluno ou amigo da Escola Infly? Aqui está tudo do ecossistema.' },
+    viagens: { perfil: 'viagem', procura: ['toronto', 'vlogs', 'mentoria'], ola: 'Veio da Infly Viagens? As inscrições pra Toronto 2027 estão abertas.' }
+  },
+
+  // Barra "O que você procura?" logo abaixo da vitrine. abrir = ficha do item; rolar = leva até a fileira.
+  procura: [
+    { id: 'mentoria',   rotulo: 'Mentoria',              abrir: 'mentoria' },
+    { id: 'teste',      rotulo: 'Teste de nível grátis', abrir: 'teste' },
+    { id: 'prisma',     rotulo: 'Como você aprende',     abrir: 'prisma' },
+    { id: 'toronto',    rotulo: 'Intercâmbio Toronto',   abrir: 'toronto' },
+    { id: 'eom',        rotulo: 'Inglês com a Bíblia',   rolar: 'eom' },
+    { id: 'grupos',     rotulo: 'Grupos grátis',         rolar: 'gratis' },
+    { id: 'particular', rotulo: 'Aulas particulares',    abrir: 'particular' },
+    { id: 'vlogs',      rotulo: 'Vlogs de viagem',       abrir: 'vlogeuropa' },
+    { id: 'escola',     rotulo: 'Escola Infly',          abrir: 'escola' }
+  ],
+  // atalhos que sobem conforme o foco escolhido
+  procuraPorPerfil: { fala: ['mentoria', 'teste'], trabalho: ['mentoria', 'particular'], viagem: ['toronto', 'vlogs'], fe: ['eom', 'grupos'], zero: ['teste', 'prisma'] },
+  // fileira que sobe pra logo depois do Programa Inteligente, conforme o foco
+  ordemPorPerfil: { fala: 'alunos', trabalho: 'alunos', viagem: 'intercambio', fe: 'eom', zero: 'gratis' },
 
   perfilTexto: {
     fala: 'Você entende, mas trava na hora de falar. A mentoria foi feita pra isso: conversar toda semana, errar em voz alta e ser corrigido na hora.',
@@ -150,7 +174,7 @@ window.EBG = {
     inglesviagem: { titulo: 'Inglês para Viagens', trilha: 'Intercâmbio e Viagens', bloqueado: true, img: 'img/card-viagem-ingles.webp',
       sinopse: 'Aeroporto, hotel, restaurante e imprevisto: as situações que toda viagem traz.',
       peso: { fala: 5, trabalho: 3, viagem: 10, fe: 3, zero: 5 } },
-    toronto: { titulo: 'Toronto 2027', trilha: 'Intercâmbio e Viagens', aberto: true, selo: 'Inscrições abertas', img: 'img/card-toronto.webp',
+    toronto: { titulo: 'Toronto 2027', trilha: 'Intercâmbio e Viagens', aberto: true, pulsa: true, selo: 'Inscrições abertas', img: 'img/card-toronto.webp',
       meta: ['Intercâmbio', '2027'],
       sinopse: 'O próximo intercâmbio da Infly. As inscrições já estão abertas: garanta seu lugar no formulário.',
       cta: { rotulo: 'Quero me inscrever', acao: 'link', href: 'toronto' },

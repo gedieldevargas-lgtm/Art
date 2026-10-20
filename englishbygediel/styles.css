@@ -294,8 +294,9 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 .pular {
   position: absolute; z-index: 5;
   top: calc(26px + env(safe-area-inset-top)); right: var(--margem);
-  min-height: 44px; padding: 0 4px;
-  color: rgba(255,255,255,.85); font-size: var(--step-small); font-weight: 500;
+  min-height: 44px;
+  padding: 0 16px; border-radius: 999px; background: rgba(0,0,0,.45);
+  color: #fff; font-size: var(--step-small); font-weight: 600;
 }
 .slides { position: absolute; inset: 0; }
 .slide {
@@ -792,6 +793,45 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 .pilula:hover { background: rgba(255,255,255,.18); }
 .pilula:active { transform: scale(.96); }
 .pilula svg { width: 16px; height: 16px; }
+/* vitrine: botão principal da vaga em linha inteira, prova logo embaixo */
+.botao-vaga { flex: 1 1 100%; min-height: 54px; font-size: 1.0625rem; }
+.vaga-preco { font-weight: 500; opacity: .85; }
+.vitrine-prova { margin-top: 12px; font-size: var(--step-small); color: #d8d2c8; }
+
+/* O que você procura? */
+.procura { position: relative; z-index: 2; padding: 6px 0 4px; }
+.procura-titulo { padding: 0 var(--margem); font: 600 clamp(1.125rem, 1rem + 0.6vw, 1.5rem)/1.2 var(--sans); letter-spacing: -0.02em; }
+.procura-chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 12px var(--margem) 8px; }
+.procura-chips::-webkit-scrollbar { display: none; }
+.chip-procura {
+  flex: none; min-height: 44px; padding: 0 16px; border-radius: 999px;
+  background: var(--surface-2); color: var(--ink);
+  font-size: var(--step-small); font-weight: 600;
+  transition: background-color .2s, transform .15s;
+}
+.chip-procura:first-child { background: var(--accent); color: #fff; }
+.chip-procura:hover { background: var(--surface-3); }
+.chip-procura:first-child:hover { background: var(--accent-press); }
+.chip-procura:active { transform: scale(.95); }
+
+/* barra fixa da mentoria (celular) */
+.barra-vaga {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  background: var(--surface);
+  box-shadow: 0 -10px 30px rgba(0,0,0,.5); /* taste-skill-ignore: barra fixa flutuante */
+  animation: sobe .35s var(--sai) both;
+}
+.barra-vaga p { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+.barra-vaga strong { font-size: 0.875rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.barra-vaga span { font-size: 0.75rem; color: var(--muted); }
+.barra-vaga .botao { flex: none; min-height: 44px; padding: 0 16px; font-size: 0.9375rem; }
+@media (min-width: 760px) { .barra-vaga { display: none !important; } }
+
+/* boas-vindas de quem veio de um perfil específico */
+.ola-origem { margin: -2px auto 6px; max-width: 34ch; text-align: center; color: var(--azul-claro); font-size: var(--step-small); }
+
 /* fileira mais importante (Programa Inteligente): etiqueta no título e cards com borda azul pulsando */
 .etiqueta {
   display: inline-block;
@@ -804,7 +844,7 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 .fileira-destaque .card::before {
   content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none; border-radius: inherit;
   box-shadow: inset 0 0 0 2px var(--azul-claro), inset 0 0 22px rgba(110,150,255,.5); /* taste-skill-ignore: destaque pedido pelo cliente */
-  opacity: .2; animation: neon 2.4s ease-in-out infinite;
+  opacity: .55;
 }
 .fileira-destaque .card.bloqueado img { filter: grayscale(.15) brightness(.82); }
 

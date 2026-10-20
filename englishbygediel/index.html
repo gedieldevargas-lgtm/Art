@@ -33,6 +33,7 @@
 
     <form class="passo passo-dados ativo" id="passoDados" novalidate>
       <h1 class="entrada-titulo" data-i18n="titulo">Prazer! Como te chamo?</h1>
+      <p class="ola-origem" id="olaOrigem" hidden></p>
       <label class="campo">
         <span data-i18n="nome">Seu nome</span>
         <input name="nome" autocomplete="given-name" required maxlength="80" placeholder="Como gosta de ser chamado" data-i18n-ph="nomePh">
@@ -93,17 +94,26 @@
       <p class="vitrine-meta" id="vitrineMeta"></p>
       <p class="vitrine-sinopse" id="vitrineSinopse"></p>
       <div class="vitrine-acoes">
+        <button class="botao botao-cheio botao-vaga" type="button" data-cta="mentoria" data-acao-cta='{"acao":"checkout"}'>
+          <span data-i18n="vaga">Quero minha vaga</span> <span class="vaga-preco" data-i18n="vagaPreco">6x R$ 297</span>
+        </button>
         <button class="botao botao-claro" data-video="eXfovCYxdZw" data-item="mentoria">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg>
-          <span data-i18n="verApresentacao">Ver apresentação</span>
+          <span data-i18n="apresentacao">Apresentação</span>
         </button>
         <button class="botao botao-cinza" data-abrir="mentoria">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-6h2zm0-8h-2V7h2z"/></svg>
-          <span data-i18n="maisInfo">Mais informações</span>
+          <span data-i18n="detalhes">Detalhes</span>
         </button>
       </div>
+      <p class="vitrine-prova" data-i18n="prova">+500 alunos · 11 anos ensinando · Garantia de 7 dias</p>
     </div>
   </section>
+
+  <nav class="procura" aria-labelledby="procuraTitulo">
+    <h2 class="procura-titulo" id="procuraTitulo" data-i18n="procuraTitulo">O que você procura?</h2>
+    <div class="procura-chips" id="procuraChips"></div>
+  </nav>
 
   <div class="fileiras" id="fileiras"></div>
 
@@ -136,6 +146,12 @@
     <p class="rodape-nota">© 2026 Mentor Gediel · Inglês Inteligente</p>
   </footer>
 </main>
+
+<!-- Barra fixa da mentoria no celular (aparece ao rolar o catálogo) -->
+<div class="barra-vaga" id="barraVaga" hidden>
+  <p><strong data-i18n="barraNome">Mentoria Inglês Inteligente</strong><span data-i18n="barraInfo">6x R$ 297 · 7 dias de garantia</span></p>
+  <button class="botao botao-cheio" type="button" data-cta="mentoria" data-acao-cta='{"acao":"checkout"}' data-i18n="vaga">Quero minha vaga</button>
+</div>
 
 <!-- Ficha do título (estilo "mais informações") -->
 <div class="ficha-fundo" id="fichaFundo" hidden></div>

@@ -33,7 +33,7 @@ window.EBG_UI = {
     perguntaDe: 'Pergunta {n} de {t}', pontoPartida: 'Seu ponto de partida',
     mentoriaNivel: 'Ver a mentoria pro meu nível', mandarResultado: 'Mandar meu resultado pro Gediel',
     whatsResultado: 'Oi Gediel! Fiz o teste do catálogo e deu {nivel}. Por onde eu começo?',
-    souNome: '(Sou {nome}.)', video: 'Vídeo', verInstagram: 'Conferir no Instagram', disponivel: 'Disponível', redes: 'Outros canais', whatsPrisma: 'Oi Gediel! Quero fazer o teste Prisma de múltiplas inteligências.'
+    souNome: '(Sou {nome}.)', video: 'Vídeo', verInstagram: 'Conferir no Instagram', disponivel: 'Disponível', redes: 'Outros canais', whatsPrisma: 'Oi Gediel! Quero fazer o teste Prisma de múltiplas inteligências.', procuraTitulo: 'O que você procura?', vaga: 'Quero minha vaga', vagaPreco: '6x R$ 297', prova: '+500 alunos · 11 anos ensinando · Garantia de 7 dias', apresentacao: 'Apresentação', detalhes: 'Detalhes', barraNome: 'Mentoria Inglês Inteligente', barraInfo: '6x R$ 297 · 7 dias de garantia'
   },
   en: {
     idiomaOutro: 'Português', idiomaAria: 'Ver a página em português',
@@ -66,7 +66,7 @@ window.EBG_UI = {
     perguntaDe: 'Question {n} of {t}', pontoPartida: 'Your starting point',
     mentoriaNivel: 'See the mentorship for my level', mandarResultado: 'Send my result to Gediel',
     whatsResultado: 'Hi Gediel! I took the catalog test and got {nivel}. Where should I start?',
-    souNome: "(I'm {nome}.)", video: 'Video', verInstagram: 'See on Instagram', disponivel: 'Available', redes: 'Other channels', whatsPrisma: "Hi Gediel! I'd like to take the Prisma multiple intelligences test."
+    souNome: "(I'm {nome}.)", video: 'Video', verInstagram: 'See on Instagram', disponivel: 'Available', redes: 'Other channels', whatsPrisma: "Hi Gediel! I'd like to take the Prisma multiple intelligences test.", procuraTitulo: 'What are you looking for?', vaga: 'Save my spot', vagaPreco: '6x R$ 297', prova: '500+ students · 11 years teaching · 7-day guarantee', apresentacao: 'Intro', detalhes: 'Details', barraNome: 'Inglês Inteligente Mentorship', barraInfo: '6x R$ 297 · 7-day guarantee'
   }
 };
 
@@ -77,12 +77,20 @@ window.EBG_EN = {
   ],
   historia: [
     { titulo: "You're not bad at English. You were taught badly.",
-      texto: 'Apps, school, online courses. Years of effort, and you still freeze when it counts. The problem was never you. It was the method.' },
-    { titulo: "Hi, I'm Gediel.",
-      texto: 'Eleven years in the classroom, more than 500 students, and an exchange in England that showed me classroom English and street English are relatives, not twins.' },
+      texto: "I'm Gediel. Eleven years in the classroom and more than 500 students showed me the problem was never you. It was the method." },
     { titulo: 'Everyone learns in their own way.',
-      texto: 'The Smart Method starts by finding out how you learn. Then it brings together live conversation, recorded lessons at your pace and close guidance.' },
+      texto: 'The Smart Method starts by finding out how you learn. Then it brings together a live class, a plan for each day and close guidance.' },
     { titulo: '{nome}, I picked a path for you.', botao: 'Open my catalog' }
+  ],
+  origens: {
+    eom: { ola: 'Great to see you here, English On Mission family.' },
+    metodo: { ola: 'Coming from the Smart English Method? Start by finding out how you learn.' },
+    escola: { ola: 'A student or friend of Infly School? Everything in the ecosystem is here.' },
+    viagens: { ola: 'Coming from Infly Travel? Enrollment for Toronto 2027 is open.' }
+  },
+  procura: [
+    { rotulo: 'Mentorship' }, { rotulo: 'Free level test' }, { rotulo: 'How you learn' }, { rotulo: 'Toronto exchange' },
+    { rotulo: 'English with the Bible' }, { rotulo: 'Free groups' }, { rotulo: 'Private lessons' }, { rotulo: 'Travel vlogs' }, { rotulo: 'Infly School' }
   ],
   perfilTexto: {
     fala: 'You understand, but you freeze when it is time to speak. The mentorship was built for that: talk every week, make mistakes out loud and get corrected on the spot.',
