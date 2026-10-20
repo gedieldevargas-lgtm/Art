@@ -17,6 +17,7 @@
   const CHECK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12.5l5 5 10-11"/></svg>';
   const MAIS = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4h2v7h7v2h-7v7h-2v-7H4v-2h7z"/></svg>';
   const CADEADO = '<svg class="card-cadeado" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3h1.5a1.5 1.5 0 0 1 1.5 1.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 20.5v-9A1.5 1.5 0 0 1 5.5 10zm2 0h6V7a3 3 0 0 0-6 0z"/></svg>';
+  const WHATS = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>';
   const SETA = d => `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${d === 'esq' ? 'M15.5 4l-8 8 8 8 1.5-1.5L10.5 12 17 5.5z' : 'M8.5 4l8 8-8 8L7 18.5 13.5 12 7 5.5z'}"/></svg>`;
 
   /* ---------------- armazenamento local ---------------- */
@@ -134,8 +135,11 @@
   }
 
   function abrirFora(url) {
-    const w = window.open(url, '_blank', 'noopener');
-    if (!w) location.href = url;
+    // sem 'noopener' na lista de recursos: com ele o navegador sempre devolve null,
+    // e a página achava que o pop-up tinha sido bloqueado e saía da landing.
+    const w = window.open(url, '_blank');
+    if (w) w.opener = null;
+    else location.href = url; // pop-up bloqueado de verdade: abre na mesma aba
   }
 
   let avisoTempo;
@@ -378,7 +382,8 @@
     else if (it.meta) linha.push(esc(it.meta[0]));
 
     const midia = texto ? '' : `<img src="${it.img}" alt="" loading="lazy" decoding="async">`;
-    const play = it.video && !texto ? `<span class="card-play">${PLAY}</span>` : '';
+    const play = it.video && !texto ? `<span class="card-play">${PLAY}</span>`
+      : it.grupo === 'whatsapp' ? `<span class="card-whats" title="Grupo do WhatsApp">${WHATS}</span>` : '';
     const aspas = it.tipo === 'aluno' && it.citacao !== false;
     const tituloCard = aspas ? `“${esc(it.titulo)}”` : esc(it.titulo);
 
@@ -747,7 +752,12 @@
         break;
       case 'teste':
         registrar('clicou', id, { acao: 'teste' });
-        abrirTeste();
+        if (CFG.bussola) abrirFora(CFG.bussola);
+        else abrirTeste();
+        break;
+      case 'prisma':
+        registrar('clicou', id, { acao: 'prisma' });
+        abrirFora(CFG.prisma || linkWhats(t('whatsPrisma')));
         break;
       case 'video':
         abrirVideo(cta.video, id, cta.vertical);

@@ -33,7 +33,7 @@ window.EBG_UI = {
     perguntaDe: 'Pergunta {n} de {t}', pontoPartida: 'Seu ponto de partida',
     mentoriaNivel: 'Ver a mentoria pro meu nível', mandarResultado: 'Mandar meu resultado pro Gediel',
     whatsResultado: 'Oi Gediel! Fiz o teste do catálogo e deu {nivel}. Por onde eu começo?',
-    souNome: '(Sou {nome}.)', video: 'Vídeo', verInstagram: 'Conferir no Instagram', disponivel: 'Disponível', redes: 'Outros canais'
+    souNome: '(Sou {nome}.)', video: 'Vídeo', verInstagram: 'Conferir no Instagram', disponivel: 'Disponível', redes: 'Outros canais', whatsPrisma: 'Oi Gediel! Quero fazer o teste Prisma de múltiplas inteligências.'
   },
   en: {
     idiomaOutro: 'Português', idiomaAria: 'Ver a página em português',
@@ -66,7 +66,7 @@ window.EBG_UI = {
     perguntaDe: 'Question {n} of {t}', pontoPartida: 'Your starting point',
     mentoriaNivel: 'See the mentorship for my level', mandarResultado: 'Send my result to Gediel',
     whatsResultado: 'Hi Gediel! I took the catalog test and got {nivel}. Where should I start?',
-    souNome: "(I'm {nome}.)", video: 'Video', verInstagram: 'See on Instagram', disponivel: 'Available', redes: 'Other channels'
+    souNome: "(I'm {nome}.)", video: 'Video', verInstagram: 'See on Instagram', disponivel: 'Available', redes: 'Other channels', whatsPrisma: "Hi Gediel! I'd like to take the Prisma multiple intelligences test."
   }
 };
 
@@ -169,9 +169,12 @@ window.EBG_EN = {
       sinopse: "Three cities, three accents and the 2024 travel journal. The vlogs are open on Infly's YouTube.",
       cta: { rotulo: 'Watch on YouTube' } },
 
-    teste: { titulo: "What's your level?", meta: ['5 questions', '1 minute'],
-      sinopse: 'Five quick questions to find your starting point. Starting in the right place saves time and motivation.',
-      cta: { rotulo: 'Take the test now' } },
+    teste: { titulo: "What's your level?", meta: ['Bússola test', 'A1 → C2'],
+      sinopse: "Bússola is the Smart Method level test: the questions adapt to your answers and show where you stand on the European framework, from A1 to C2. Starting in the right place saves time and motivation.",
+      cta: { rotulo: 'Take the Bússola test' } },
+    prisma: { titulo: 'How do you learn?', meta: ['Prisma test', 'Multiple intelligences'],
+      sinopse: 'Prisma shows which of your intelligences show up most when you learn. It is the foundation of the Smart Method: the path adapts to you, not the other way around.',
+      cta: { rotulo: 'Take the Prisma test' } },
     liveterca: { titulo: 'Culture English Lives', meta: ['Live', 'Free'],
       sinopse: 'Open Culture English live classes with Gediel: real English from TV shows, movies and music, live.',
       cta: { rotulo: 'Remind me about the lives', texto: "Hi Gediel! I'd like the link for the Culture English live classes." } },

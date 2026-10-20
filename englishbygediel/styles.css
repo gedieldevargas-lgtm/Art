@@ -509,6 +509,13 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
   display: grid; place-items: center;
   background: rgba(0,0,0,.55);
 }
+.card-whats {
+  position: absolute; top: 8px; right: 8px; z-index: 4;
+  width: 30px; height: 30px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: #25d366; color: #fff;
+}
+.card-whats svg { width: 18px; height: 18px; }
 .card-play svg { width: 16px; height: 16px; margin-left: 2px; }
 .card.capa-texto { background: var(--cor); }
 .card.capa-texto::after { display: none; }

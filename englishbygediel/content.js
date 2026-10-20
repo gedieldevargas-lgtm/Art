@@ -126,7 +126,7 @@ window.EBG = {
     aulas: { titulo: 'Aulas', trilha: 'Programa Inteligente', bloqueado: true, img: 'img/card-aulas.webp',
       sinopse: 'As aulas da plataforma, pra estudar no seu ritmo e rever quantas vezes quiser.' },
 
-    grupoeom: { titulo: 'Grupo do WhatsApp', trilha: 'English On Mission', tipo: 'gratis', img: 'img/logo-eom.webp', contem: true,
+    grupoeom: { titulo: 'Grupo do WhatsApp', grupo: 'whatsapp', trilha: 'English On Mission', tipo: 'gratis', img: 'img/logo-eom.webp', contem: true,
       meta: ['Gratuito', 'WhatsApp'],
       sinopse: 'O grupo gratuito do English On Mission, pra praticar e caminhar junto durante a semana.',
       cta: { rotulo: 'Entrar no grupo', acao: 'whatsapp', texto: 'Oi Gediel! Quero entrar no grupo gratuito do English On Mission.' },
@@ -139,7 +139,7 @@ window.EBG = {
     biblia: { titulo: 'Inglês com a Bíblia', trilha: 'English On Mission', bloqueado: true, capa: 'texto', cor: '#15281f', meta: ['Extra'],
       sinopse: 'Conteúdo extra pra ler e entender a Palavra em inglês.' },
 
-    grupoculture: { titulo: 'Grupo do WhatsApp', trilha: 'Culture English', tipo: 'gratis', capa: 'texto', cor: '#1b2a6b',
+    grupoculture: { titulo: 'Grupo do WhatsApp', grupo: 'whatsapp', trilha: 'Culture English', tipo: 'gratis', capa: 'texto', cor: '#1b2a6b',
       meta: ['Gratuito', 'WhatsApp'],
       sinopse: 'O grupo gratuito do Culture English: dicas de séries, filmes e músicas pra praticar o inglês de verdade.',
       cta: { rotulo: 'Entrar no grupo', acao: 'whatsapp', texto: 'Oi Gediel! Quero entrar no grupo gratuito do Culture English.' },
@@ -170,11 +170,19 @@ window.EBG = {
       peso: { fala: 4, trabalho: 2, viagem: 9, fe: 2, zero: 3 } },
 
     // Bônus gratuitos
+    // Bússola: teste de nível adaptativo (CEFR). Com o link em config.js, o botão abre o Bússola;
+    // sem link, roda o teste rápido de 5 perguntas desta página.
     teste: { titulo: 'Qual é o seu nível?', tipo: 'gratis', img: 'img/card-teste.webp',
-      meta: ['5 perguntas', '1 minuto'],
-      sinopse: 'Cinco perguntas rápidas pra descobrir seu ponto de partida. Começar pelo ponto certo poupa tempo e motivação.',
-      cta: { rotulo: 'Fazer o teste agora', acao: 'teste' },
+      meta: ['Teste Bússola', 'A1 → C2'],
+      sinopse: 'O Bússola é o teste de nível do Método Inteligente: as perguntas se ajustam às suas respostas e mostram onde você está no quadro europeu, do A1 ao C2. Começar pelo ponto certo poupa tempo e motivação.',
+      cta: { rotulo: 'Fazer o teste Bússola', acao: 'teste' },
       peso: { fala: 8, trabalho: 7, viagem: 7, fe: 7, zero: 10 } },
+    // Prisma: teste de múltiplas inteligências
+    prisma: { titulo: 'Como você aprende?', tipo: 'gratis', img: 'img/card-diagnostico.webp',
+      meta: ['Teste Prisma', 'Múltiplas inteligências'],
+      sinopse: 'O Prisma mostra quais das suas inteligências mais aparecem quando você aprende. É a base do Método Inteligente: o caminho se adapta a você, não o contrário.',
+      cta: { rotulo: 'Fazer o teste Prisma', acao: 'prisma' },
+      peso: { fala: 7, trabalho: 7, viagem: 6, fe: 6, zero: 9 } },
     liveterca: { titulo: 'Culture English Lives', tipo: 'gratis', img: 'img/card-culture-lives.webp',
       meta: ['Ao vivo', 'Gratuito'],
       sinopse: 'Lives abertas do Culture English com o Gediel: inglês de verdade a partir de séries, filmes e música, ao vivo.',
@@ -228,7 +236,7 @@ window.EBG = {
     { id: 'intercambio', titulo: 'Intercâmbio e Viagens', formato: 'poster',
       itens: ['toronto', 'vlogeuropa', 'inglesviagem', 'vlogny'] },
     { id: 'gratis', titulo: 'Bônus gratuitos', formato: 'largo',
-      itens: ['teste', 'liveterca', 'grupoculture', 'eom', 'grupoeom', 'esposa'] },
+      itens: ['teste', 'prisma', 'liveterca', 'grupoculture', 'eom', 'grupoeom', 'esposa'] },
     { id: 'mais', titulo: 'Extras', formato: 'largo',
       itens: ['escola', 'viagens', 'vlogeuropa', 'ingi', 'particular'] }
   ],
