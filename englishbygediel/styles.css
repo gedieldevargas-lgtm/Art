@@ -756,8 +756,9 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
       linear-gradient(to right, var(--bg) 34%, rgba(11,11,13,.6) 52%, rgba(11,11,13,0) 72%), /* taste-skill-ignore: scrim over photo */
       linear-gradient(to top, var(--bg) 2%, rgba(11,11,13,0) 30%); /* taste-skill-ignore: scrim over photo */
   }
-  .vitrine-acoes .botao { flex: 0 0 auto; }
-  .fileiras { margin-top: -64px; }
+  .vitrine-acoes .botao { flex: 0 0 auto; min-height: 48px; padding: 0 20px; font-size: 0.9375rem; }
+  .vitrine-acoes .botao svg { width: 18px; height: 18px; }
+  .fileiras { margin-top: 8px; }
   .proximo { grid-template-columns: 1.1fr 1fr; align-items: center; margin: 56px var(--margem) 0; border-radius: var(--raio); overflow: hidden; }
   .proximo > img { height: 100%; aspect-ratio: auto; min-height: 420px; }
   .proximo-texto { padding: 48px; }
@@ -807,6 +808,10 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 /* vitrine: botão principal da vaga em linha inteira, prova logo embaixo */
 .botao-vaga { flex: 1 1 100%; min-height: 54px; font-size: 1rem; gap: 8px; white-space: nowrap; }
 .vaga-preco { font-weight: 700; }
+/* no computador: a vaga sozinha na primeira linha, os três botões menores embaixo */
+@media (min-width: 760px) {
+  .vitrine-acoes .botao-vaga { flex: 0 0 100%; max-width: 520px; min-height: 56px; font-size: 1.0625rem; }
+}
 .vaga-de { font-weight: 400; font-size: .875em; opacity: .7; }
 .vitrine-prova { margin-top: 12px; font-size: var(--step-small); color: #d8d2c8; }
 
