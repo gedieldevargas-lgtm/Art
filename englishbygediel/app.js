@@ -72,6 +72,7 @@
   const estado = {
     lead: guarda.ler('ebg:lead'),
     perfil: (guarda.ler('ebg:lead') || {}).objetivo || guarda.ler('ebg:perfil') || null,
+    modo: guarda.ler('ebg:modo'),   // o card escolhido na entrada (vários modos podem dar no mesmo perfil)
     antes: [],        // o que a pessoa fez antes de deixar os dados; vai junto quando o lead nasce
     pendente: null    // o bônus que ela pediu e que abre logo depois do cadastro
   };
@@ -136,8 +137,8 @@
   const primeiroNome = () => ((estado.lead || estado.dados || {}).nome || '').trim().split(/\s+/)[0] || '';
   const combina = item => Math.round(60 + ((item.peso && item.peso[estado.perfil]) || 7) * 3.8);
 
-  function pintarPerfil(el, p) {
-    el.innerHTML = `<img src="${p.img}" alt="">`;
+  function pintarPerfil(el) {
+    el.innerHTML = `<img src="${modoDe(estado.modo).img}" alt="">`;
   }
 
   function linkWhats(texto) {
@@ -173,19 +174,111 @@
   /* =========================================================
      1 · ENTRADA
      ========================================================= */
-  function montarParede() {
-    const fotos = ['parede-londres', 'parede-gediel-cafe', 'parede-ny', 'parede-escola', 'parede-brooklyn'];
-    // 6 colunas e 5 fotos: nenhuma foto encosta nela mesma, nem do lado nem embaixo
-    const html = Array.from({ length: 36 }, (_, i) => `<img src="img/${fotos[i % fotos.length]}.webp" alt="" loading="${i < 18 ? 'eager' : 'lazy'}" decoding="async">`).join('');
-    $('.parede').innerHTML = html;
+  // Os modos giram em volta do Gediel como uma auréola: atrás da cabeça ficam menores e apagados,
+  // na frente do corpo ficam maiores e nítidos. Tocar escolhe; arrastar gira.
+  const anel = { giro: 0, alvo: null, arrasto: null, ultimo: 0, cards: [] };
+  let modoEscolhido = null;
+
+  function montarModos() {
+    const nomes = C.modos.map(m => esc(m.nome)).join(' <i></i> ') + ' <i></i>';
+    $('#faixaModos').innerHTML = nomes;
+    $('#faixaModos2').innerHTML = nomes;
+    $$('#cena .modo').forEach(c => c.remove());
+    $('#cena').insertAdjacentHTML('beforeend', C.modos.map(m => `
+      <button class="modo${m.verde ? ' verde' : ''}" type="button" aria-pressed="${modoEscolhido === m.id}" data-modo="${m.id}"${m.recorte ? ` style="--h:${m.recorte}%"` : ''}>
+        <span class="modo-fundo">${m.recorte ? '' : `<img src="${m.img}" alt="" decoding="async">`}</span>
+        ${m.recorte ? `<span class="modo-recorte"><img src="${m.img}" alt="" decoding="async"></span>` : ''}
+        <span class="modo-chave" aria-hidden="true"></span>
+        <span class="modo-nome">${esc(m.nome)}</span>
+      </button>`).join(''));
+    anel.cards = $$('#cena .modo');
+    posicionarAnel();
   }
 
-  function montarPerfis() {
-    $('#perfis').innerHTML = C.perfis.map(p => `
-      <li><button class="perfil" type="button" data-perfil="${p.id}">
-        <span class="perfil-quadro"><img src="${p.img}" alt="" decoding="async"></span>
-        <span class="perfil-nome">${esc(p.nome)}</span>
-      </button></li>`).join('');
+  function posicionarAnel() {
+    const cena = $('#cena'), cards = anel.cards;
+    if (!cards.length) return;
+    const W = cena.clientWidth, H = cena.clientHeight;
+    const cw = cards[0].offsetWidth, ch = cards[0].offsetHeight;
+    const estreito = W < 600;
+    const rx = Math.min(W * 0.36, 400);              // largura da auréola
+    const ry = H * (estreito ? 0.2 : 0.13);          // atrás fica mais alto, na frente mais baixo
+    const cy = H * (estreito ? 0.46 : 0.36);         // em volta da cabeça e dos ombros
+    const passo = Math.PI * 2 / cards.length;
+    cards.forEach((c, i) => {
+      const a = anel.giro + i * passo;
+      const frente = Math.cos(a);                    // 1 = na frente dele, -1 = atrás da cabeça
+      const s = estreito ? 0.7 + (frente + 1) * 0.16 : 0.72 + (frente + 1) * 0.2;
+      c.style.transform = `translate(${W / 2 + Math.sin(a) * rx - cw / 2}px, ${cy + frente * ry - ch / 2}px) scale(${s})`;
+      c.style.zIndex = frente > 0 ? 60 + Math.round(frente * 30) : 20 + Math.round((frente + 1) * 20);
+      c.style.opacity = (0.45 + (frente + 1) * 0.275).toFixed(2);
+      c.style.filter = frente < -0.2 ? `blur(${((-frente - 0.2) * 2).toFixed(2)}px)` : '';
+    });
+  }
+
+  function girarAnel(agora) {
+    const dt = Math.min(64, agora - (anel.ultimo || agora)) / 1000;
+    anel.ultimo = agora;
+    if (document.body.dataset.tela === 'entrada' && !document.hidden) {
+      if (anel.alvo !== null) {
+        const d = anel.alvo - anel.giro;
+        anel.giro = Math.abs(d) < 0.001 ? anel.alvo : anel.giro + d * Math.min(1, dt * 6);
+      } else if (!anel.arrasto && !reduz) anel.giro += 0.18 * dt;
+      posicionarAnel();
+    }
+    requestAnimationFrame(girarAnel);
+  }
+
+  function ligarAnel() {
+    const cena = $('#cena');
+    cena.addEventListener('pointerdown', e => { anel.arrasto = { x: e.clientX, g: anel.giro, moveu: false }; });
+    addEventListener('pointermove', e => {
+      const a = anel.arrasto;
+      if (!a) return;
+      const dx = e.clientX - a.x;
+      if (Math.abs(dx) > 6) { a.moveu = true; anel.alvo = null; }
+      if (a.moveu) anel.giro = a.g + dx / 180;
+    });
+    addEventListener('pointerup', () => { setTimeout(() => { anel.arrasto = null; }, 0); });
+    cena.addEventListener('click', e => {
+      const b = e.target.closest('.modo');
+      if (!b || (anel.arrasto && anel.arrasto.moveu)) return;
+      escolherModo(modoEscolhido === b.dataset.modo ? null : b.dataset.modo);
+    });
+    $('#botaoLigar').addEventListener('click', () => { if (modoEscolhido) ligarModo(modoEscolhido); });
+    addEventListener('resize', posicionarAnel);
+    requestAnimationFrame(girarAnel);
+  }
+
+  function escolherModo(id) {
+    modoEscolhido = id;
+    anel.cards.forEach(c => c.setAttribute('aria-pressed', String(c.dataset.modo === id)));
+    $('#ligar').classList.toggle('mostra', !!id);
+    if (!id) { anel.alvo = null; return; }
+    // traz o card escolhido pra frente, pelo caminho mais curto
+    const passo = Math.PI * 2 / anel.cards.length;
+    let a = -C.modos.findIndex(m => m.id === id) * passo;
+    a += Math.round((anel.giro - a) / (Math.PI * 2)) * Math.PI * 2;
+    anel.alvo = a;
+    $('#botaoLigar').textContent = t('ligarModo', { modo: modoDe(id).nome });
+  }
+
+  const modoDe = id => C.modos.find(m => m.id === id) || C.modos.find(m => m.perfil === estado.perfil) || C.modos[0];
+
+  // a chave vira ON, o nome aparece grande e o catálogo abre já montado pro modo
+  function ligarModo(id) {
+    const m = modoDe(id), tela = $('#ligando');
+    $('#ligandoNome').textContent = t('modoLigado', { modo: m.nome });
+    tela.classList.remove('sai');
+    tela.hidden = false;
+    setTimeout(() => {
+      estado.modo = m.id;
+      guarda.gravar('ebg:modo', m.id);
+      escolherPerfil(m.perfil);
+      if (m.ir) abrirDestino(m.ir);
+      tela.classList.add('sai');
+      setTimeout(() => { tela.hidden = true; }, 450);
+    }, reduz ? 200 : 1150);
   }
 
   function mostrarPasso(id) {
@@ -255,6 +348,10 @@
     if (!IR || irFeito) return;
     irFeito = true;
     const alvo = ATALHOS_IR[IR] || IR;
+    abrirDestino(alvo);
+  }
+
+  function abrirDestino(alvo) {
     setTimeout(() => {
       if (alvo.startsWith('#')) rolarAte(alvo.slice(1));
       else if (C.itens[alvo]) abrirFicha(alvo);
@@ -273,7 +370,8 @@
 
   function perguntarFoco() {
     const nome = primeiroNome();
-    $('#tituloFoco').textContent = nome ? t('focoNome', { nome }) : t('foco');
+    $('#tituloFoco').innerHTML = nome ? t('focoNome', { nome: esc(nome) }) : t('foco');
+    escolherModo(null);
     mostrarPasso('passoPerfil');
   }
 
@@ -422,9 +520,8 @@
 
   function abrirCatalogo() {
     if (document.body.dataset.tela !== 'catalogo') irPara('catalogo');
-    const p = perfilDe(estado.perfil);
-    pintarPerfil($('#avatar'), p);
-    $('#avatar').setAttribute('aria-label', t('perfilAria', { nome: p.nome }));
+    pintarPerfil($('#avatar'));
+    $('#avatar').setAttribute('aria-label', t('perfilAria', { nome: modoDe(estado.modo).nome }));
     const m = C.itens.mentoria;
     $('#vitrineMeta').innerHTML = `<span class="combina">${combina(m)}${t('pctVoce')}</span>` + m.meta.map(t => `<span>${esc(t)}</span>`).join('');
     $('#vitrineSinopse').textContent = C.perfilTexto[estado.perfil] || m.sinopse;
@@ -909,7 +1006,7 @@
     definirIdioma(idioma === 'pt' ? 'en' : 'pt');
     guarda.gravar('ebg:idioma', idioma);
     mostrarOla();
-    montarPerfis();
+    montarModos();
     const tela = document.body.dataset.tela;
     if (tela === 'entrada') {
       if ($('#passoPerfil').classList.contains('ativo')) perguntarFoco();
@@ -955,8 +1052,9 @@
   montarRedes();
   const pedido = new URLSearchParams(location.search).get('lang');
   definirIdioma(pedido || guarda.ler('ebg:idioma') || 'pt');
-  montarParede();
-  montarPerfis();
+  montarModos();
+  ligarAnel();
+  $('#tituloFoco').innerHTML = t('foco');
   ligarHistoria();
   arrastarFicha();
   descarregar();

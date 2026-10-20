@@ -8,7 +8,8 @@ window.EBG_UI = {
     whats: 'WhatsApp', email: 'E-mail', opcional: 'opcional', emailPh: 'voce@email.com',
     insta: 'Instagram', instaPh: '@seuperfil',
     continuar: 'Continuar', nota: 'Seus dados ficam só com o Gediel. Nada de spam.',
-    foco: 'Qual é o foco de hoje?', focoNome: '{nome}, qual é o foco de hoje?',
+    foco: 'Qual modo você quer <em>ligar</em> hoje?', focoNome: '{nome}, qual modo você quer <em>ligar</em> hoje?',
+    modosRotulo: 'Escolha o seu caminho', modosDica: 'Toque num card ou arraste pra girar.', ligarModo: 'Ligar {modo}', modoLigado: '{modo} ligado',
     erroNome: 'Me diz seu nome pra eu te chamar direitinho.',
     erroWhats: 'Confere o WhatsApp com DDD, por favor.',
     erroEmail: 'Esse e-mail parece incompleto. Pode deixar em branco, se preferir.',
@@ -49,7 +50,8 @@ window.EBG_UI = {
     whats: 'WhatsApp', email: 'Email', opcional: 'optional', emailPh: 'you@email.com',
     insta: 'Instagram', instaPh: '@yourprofile',
     continuar: 'Continue', nota: 'Your details stay with Gediel. No spam.',
-    foco: "What's your focus today?", focoNome: "{nome}, what's your focus today?",
+    foco: 'Which mode do you want to <em>switch on</em> today?', focoNome: '{nome}, which mode do you want to <em>switch on</em> today?',
+    modosRotulo: 'Choose your path', modosDica: 'Tap a card or drag to spin.', ligarModo: 'Switch on {modo}', modoLigado: '{modo} on',
     erroNome: 'Tell me your name so I can call you properly.',
     erroWhats: 'Please check your WhatsApp number, with area code.',
     erroEmail: 'That email looks incomplete. You can leave it blank if you prefer.',
@@ -87,6 +89,8 @@ window.EBG_UI = {
 };
 
 window.EBG_EN = {
+  modos: [{ nome: 'Speaking Mode' }, { nome: 'Career Mode' }, { nome: 'Travel Mode' }, { nome: 'Faith Mode' },
+    { nome: 'Start Mode' }, { nome: 'Culture Mode' }, { nome: 'Level Mode' }, { nome: 'Exchange Mode' }],
   perfis: [
     { nome: 'Unlock your speaking' }, { nome: 'English for work' }, { nome: 'Travel with confidence' },
     { nome: 'Christian English' }, { nome: 'Start from zero' }

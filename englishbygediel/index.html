@@ -11,15 +11,16 @@
 <meta property="og:image" content="img/gediel-liberty.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Geist:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="img/vitrine-gediel.webp">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body data-tela="entrada">
 
-<!-- 1 · ENTRADA -->
+<!-- 1 · ENTRADA: Gediel no centro, os modos girando em volta como uma auréola -->
 <section class="tela entrada" id="entrada" aria-label="Entrada">
-  <div class="parede" aria-hidden="true"></div>
+  <div class="faixa faixa-1" aria-hidden="true"><div><span id="faixaModos"></span><span id="faixaModos2"></span></div></div>
+  <div class="faixa faixa-2" aria-hidden="true"><div><span>Inglês Inteligente <i></i> All modes <i></i> Inglês Inteligente <i></i> All modes <i></i></span><span>Inglês Inteligente <i></i> All modes <i></i> Inglês Inteligente <i></i> All modes <i></i></span></div></div>
 
   <div class="abertura" id="abertura" aria-hidden="true">
     <span class="marca-grande">englishbygediel</span>
@@ -32,13 +33,23 @@
     </div>
 
     <div class="passo passo-perfil ativo" id="passoPerfil">
-      <h1 class="pergunta-foco" id="tituloFoco">Qual é o foco de hoje?</h1>
+      <p class="modos-rotulo" data-i18n="modosRotulo">Escolha o seu caminho</p>
+      <h1 class="pergunta-foco" id="tituloFoco">Qual modo você quer <em>ligar</em> hoje?</h1>
       <p class="ola-origem" hidden></p>
-      <ul class="perfis" id="perfis" role="list"></ul>
+      <p class="modos-dica" data-i18n="modosDica">Toque num card ou arraste pra girar.</p>
     </div>
-
   </div>
+
+  <div class="cena" id="cena">
+    <span class="aura" aria-hidden="true"></span>
+    <img class="gediel-centro" src="img/modo-fala.webp" alt="Gediel de braços abertos" width="707" height="800" decoding="async">
+  </div>
+
+  <div class="ligar" id="ligar"><button type="button" id="botaoLigar">Ligar modo</button></div>
 </section>
+
+<!-- transição: o modo escolhido "liga" antes do catálogo abrir -->
+<div class="ligando" id="ligando" hidden aria-live="polite"><span class="ligando-chave" aria-hidden="true"></span><strong id="ligandoNome"></strong></div>
 
 <!-- 2 · HISTÓRIA (stories) -->
 <section class="tela historia" id="historia" aria-label="Apresentação" aria-roledescription="stories">

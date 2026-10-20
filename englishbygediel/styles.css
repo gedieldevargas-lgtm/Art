@@ -26,6 +26,8 @@
 
   --serif: 'Instrument Serif', 'Times New Roman', serif;
   --destaque: 'Advercase', 'Instrument Serif', 'Times New Roman', serif;
+  /* botões e nomes dos modos: Advercase quando o arquivo licenciado estiver em fonts/; até lá, Archivo Black */
+  --destaque-bloco: 'Advercase', 'Archivo Black', 'Arial Black', sans-serif;
   --sans: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   --step-small: 0.875rem;
@@ -122,26 +124,11 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 .entrada {
   position: relative;
   min-height: 100svh;
-  align-items: stretch;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   overflow: hidden;
-  background: var(--bg);
-}
-.parede {
-  position: absolute; inset: -20% -30%;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 10px;
-  transform: rotate(-10deg);
-  opacity: .6;
-  animation: parede 60s linear infinite alternate;
-}
-.parede img { width: 100%; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 4px; }
-@keyframes parede { to { transform: rotate(-10deg) translateY(-18%); } }
-.entrada::after {
-  content: ""; position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 50% 45%, rgba(11,11,13,.6), rgba(11,11,13,.9) 75%); /* taste-skill-ignore: scrim over photo */
-  pointer-events: none;
+  padding-bottom: calc(110px + env(safe-area-inset-bottom));
+  background: radial-gradient(60% 45% at 50% 62%, rgba(21,36,74,.7), transparent 72%), var(--bg); /* taste-skill-ignore: visual da tela de modos pedido pelo cliente */
 }
 
 .abertura {
@@ -167,9 +154,9 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 @keyframes some { to { opacity: 0; visibility: hidden; } }
 
 .entrada-corpo {
-  position: relative; z-index: 2;
-  width: min(100%, 640px);
-  padding: 20px var(--margem) calc(32px + env(safe-area-inset-bottom));
+  position: relative; z-index: 3;
+  width: min(100%, 1280px);
+  padding: 20px var(--margem) 0;
   display: flex; flex-direction: column;
 }
 .entrada-topo { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: auto; padding-top: env(safe-area-inset-top); }
@@ -192,13 +179,6 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 .idioma:hover { background: rgba(255,255,255,.2); }
 .idioma:active { transform: scale(.95); }
 .passo { display: none; flex-direction: column; margin: auto 0; padding: 40px 0; position: relative; isolation: isolate; }
-/* sombra atrás das opções: separa o conteúdo do mural de fotos */
-.passo::before {
-  content: ""; position: absolute; z-index: -1;
-  inset: -12% -18%;
-  background: radial-gradient(closest-side, rgba(11,11,13,.94) 55%, rgba(11,11,13,.7) 78%, rgba(11,11,13,0)); /* taste-skill-ignore: scrim over photo */
-  pointer-events: none;
-}
 .passo.ativo { display: flex; animation: entra .55s var(--sai) both; }
 @keyframes entra { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
 
@@ -215,48 +195,90 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
   margin-bottom: 8px;
 }
 .passo-perfil.ativo .pergunta-foco { animation: entra .8s var(--sai) both; }
+.pergunta-foco em { color: var(--azul-claro); }
+
+/* modos: faixas inclinadas ao fundo, Gediel no centro e o anel de cards girando em volta */
+.passo-perfil { padding: 28px 0 0; margin: 0; }
+.entrada .entrada-topo { margin-bottom: 0; }
+.modos-rotulo { text-align: center; font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.modos-dica { text-align: center; color: var(--muted); font-size: var(--step-small); margin-top: 6px; }
+.faixa { position: absolute; left: -10%; width: 120%; overflow: hidden; pointer-events: none; z-index: 0; }
+.faixa div { display: flex; width: max-content; animation: corre 40s linear infinite; }
+.faixa span { display: inline-flex; align-items: center; gap: 26px; padding-right: 26px; white-space: nowrap; font: 600 clamp(2.25rem, 1.5rem + 3.4vw, 4.25rem)/1 var(--sans); letter-spacing: -.035em; }
+.faixa i { flex: none; position: relative; width: 1.5em; height: .9em; border-radius: 99px; background: var(--verde); }
+.faixa i::before { content: "ON"; position: absolute; left: .22em; top: 0; font: 700 .3em/3em var(--sans); color: #fff; letter-spacing: .02em; }
+.faixa i::after { content: ""; position: absolute; right: .07em; top: .07em; width: .76em; height: .76em; border-radius: 50%; background: #fff; }
+.faixa-1 { top: 330px; transform: rotate(-6deg); color: rgba(243,239,232,.9); }
+.faixa-2 { top: 410px; transform: rotate(4deg); color: rgba(243,239,232,.18); filter: blur(4px); }
+.faixa-2 div { animation-direction: reverse; animation-duration: 55s; }
+.faixa-2 i { opacity: .5; }
+@keyframes corre { to { transform: translateX(-50%); } }
+
+.cena { position: relative; z-index: 2; width: 100%; height: var(--cena-h); touch-action: pan-y; user-select: none; -webkit-user-select: none; --cena-h: 600px; --card-w: 100px; }
+.gediel-centro { position: absolute; left: 50%; bottom: 0; height: 74%; width: auto; max-width: none; transform: translateX(-50%); z-index: 50; pointer-events: none;
+  -webkit-mask-image: linear-gradient(to top, transparent 0, #000 16%); mask-image: linear-gradient(to top, transparent 0, #000 16%); } /* taste-skill-ignore: visual da tela de modos pedido pelo cliente */
+.aura { position: absolute; left: 50%; top: 40%; width: 92%; max-width: 900px; aspect-ratio: 3 / 1; transform: translate(-50%, -50%); border-radius: 50%; z-index: 1;
+  box-shadow: 0 0 0 1px rgba(143,176,214,.18); pointer-events: none; } /* taste-skill-ignore: linha da auréola */
+
+.modo { position: absolute; left: 0; top: 0; width: var(--card-w); aspect-ratio: 3 / 4; border-radius: 16px; will-change: transform; text-align: left; }
+.modo-fundo { position: absolute; inset: 0; border-radius: inherit; overflow: hidden;
+  background: radial-gradient(70% 45% at 50% 38%, rgba(159,178,214,.28), transparent 70%), linear-gradient(180deg, var(--accent) 0%, var(--accent-press) 100%); /* taste-skill-ignore: visual da tela de modos pedido pelo cliente */
+  box-shadow: inset 0 0 0 1px rgba(243,239,232,.12), 0 14px 30px rgba(0,0,0,.45); } /* taste-skill-ignore: card flutuando no anel */
+.modo.verde .modo-fundo { background: radial-gradient(70% 45% at 50% 38%, rgba(127,168,74,.26), transparent 70%), linear-gradient(180deg, var(--verde-escuro) 0%, #16260d 100%); } /* taste-skill-ignore: visual da tela de modos pedido pelo cliente */
+.modo-fundo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.modo-fundo::after { content: ""; position: absolute; inset: 45% 0 0; background: linear-gradient(to top, rgba(8,9,12,.85), rgba(8,9,12,0)); } /* taste-skill-ignore: visual da tela de modos pedido pelo cliente */
+/* recorte: a cabeça sai pela borda de cima, o resto fica dentro da moldura */
+.modo-recorte { position: absolute; inset: 0; pointer-events: none; clip-path: inset(-60% 0 0 0 round 0 0 16px 16px); }
+.modo-recorte img { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); height: var(--h, 92%); width: auto; max-width: none; }
+.modo-nome { position: absolute; left: 50%; bottom: -12px; transform: translateX(-50%); white-space: nowrap; padding: 6px 10px; border-radius: 99px;
+  background: rgba(243,239,232,.16); -webkit-backdrop-filter: blur(16px) saturate(1.6); backdrop-filter: blur(16px) saturate(1.6); /* taste-skill-ignore: visual da tela de modos pedido pelo cliente */
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.24); /* taste-skill-ignore: vidro fosco */
+  font: 400 .6875rem/1 var(--destaque-bloco); text-transform: uppercase; letter-spacing: .01em; color: #fff; transition: background-color .3s, color .3s; }
+.modo-chave { position: absolute; top: 6px; right: 6px; width: 40px; height: 20px; border-radius: 99px; background: rgba(120,120,128,.5); transition: background-color .3s; }
+.modo-chave::before { content: "OFF"; position: absolute; right: 5px; top: 0; font: 700 .5rem/20px var(--sans); color: rgba(255,255,255,.8); }
+.modo-chave::after { content: ""; position: absolute; left: 2px; top: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: transform .3s var(--sai); }
+.modo[aria-pressed="true"] .modo-chave { background: var(--verde); }
+.modo[aria-pressed="true"] .modo-chave::before { content: "ON"; right: auto; left: 6px; color: #fff; }
+.modo[aria-pressed="true"] .modo-chave::after { transform: translateX(20px); }
+.modo[aria-pressed="true"] .modo-nome { background: rgba(243,239,232,.95); color: var(--accent); }
+.modo[aria-pressed="true"] .modo-fundo { box-shadow: inset 0 0 0 1.5px var(--verde), 0 14px 30px rgba(0,0,0,.45); } /* taste-skill-ignore: card flutuando no anel */
+.modo:focus-visible { outline: 2px solid var(--azul-claro); outline-offset: 4px; }
+
+.ligar { position: fixed; z-index: 20; left: 0; right: 0; bottom: 0; display: flex; justify-content: center;
+  padding: 24px max(16px, env(safe-area-inset-right, 0px)) calc(16px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  background: linear-gradient(to top, var(--bg) 60%, rgba(11,11,13,0)); transform: translateY(110%); transition: transform .4s var(--sai); } /* taste-skill-ignore: visual da tela de modos pedido pelo cliente */
+.ligar.mostra { transform: none; }
+body:not([data-tela="entrada"]) .ligar { display: none; }
+.ligar button { width: 100%; max-width: 560px; min-height: 68px; padding: 0 20px; border-radius: 12px; background: var(--accent); color: #fff;
+  font: 400 clamp(1.25rem, 1rem + 1.2vw, 1.75rem)/1 var(--destaque-bloco); text-transform: uppercase; letter-spacing: .01em; transition: background-color .2s, transform .15s; }
+.ligar button:hover { background: var(--accent-press); }
+.ligar button:active { transform: scale(.98); }
+
+/* a transição de ligar: a chave vira ON e o nome do modo aparece grande */
+.ligando { position: fixed; inset: 0; z-index: 40; display: grid; place-content: center; justify-items: center; gap: 22px; background: var(--bg); animation: liga-entra .35s ease both; }
+.ligando.sai { animation: liga-sai .45s ease forwards; }
+.ligando strong { font: 400 clamp(2.5rem, 1.6rem + 5vw, 5.5rem)/1 var(--destaque-bloco); text-transform: uppercase; text-align: center; padding: 0 16px; animation: entra .5s var(--sai) .15s both; }
+.ligando-chave { position: relative; width: 120px; height: 64px; border-radius: 99px; background: rgba(120,120,128,.5); animation: liga-fundo .4s ease .3s forwards; }
+.ligando-chave::after { content: ""; position: absolute; left: 5px; top: 5px; width: 54px; height: 54px; border-radius: 50%; background: #fff; animation: liga-bola .4s var(--sai) .3s forwards; }
+@keyframes liga-fundo { to { background: var(--verde); } }
+@keyframes liga-bola { to { transform: translateX(56px); } }
+@keyframes liga-entra { from { opacity: 0; } }
+@keyframes liga-sai { to { opacity: 0; visibility: hidden; } }
+
+@media (min-width: 900px) {
+  .cena { --cena-h: 760px; --card-w: 190px; }
+  .gediel-centro { height: 98%; }
+  .modo-nome { font-size: 1rem; padding: 10px 16px; bottom: -16px; }
+  .modo-chave { top: 10px; right: 10px; width: 48px; height: 24px; }
+  .modo-chave::before { font-size: .5625rem; line-height: 24px; }
+  .modo-chave::after { width: 20px; height: 20px; }
+  .modo[aria-pressed="true"] .modo-chave::after { transform: translateX(24px); }
+  .faixa-1 { top: 360px; }
+  .faixa-2 { top: 450px; }
+}
+@media (prefers-reduced-motion: reduce) { .faixa div { animation: none; } .ligando, .ligando * { animation-duration: .01s !important; animation-delay: 0s !important; } }
 .entrada-texto { color: var(--muted); text-align: center; margin: 14px auto 0; max-width: 36ch; }
 
-.perfis {
-  list-style: none; margin: 36px 0 0; padding: 0;
-  display: flex; flex-wrap: wrap; justify-content: center;
-  gap: 22px 18px;
-}
-.perfis li { width: clamp(96px, 27vw, 150px); }
-.perfil {
-  width: 100%;
-  display: flex; flex-direction: column; align-items: center; gap: 10px;
-  color: var(--muted);
-  transition: color .2s;
-}
-.perfil-quadro {
-  box-shadow: 0 14px 32px rgba(0,0,0,.65); /* taste-skill-ignore: tile lifted off the photo wall */
-  width: 100%; aspect-ratio: 1;
-  border-radius: var(--raio);
-  display: grid; place-items: center;
-  position: relative;
-  overflow: hidden;
-  background: var(--surface-2);
-  outline: 2px solid transparent; outline-offset: 3px;
-  transition: transform .25s var(--sai), outline-color .2s;
-}
-.perfil-quadro img {
-  width: 100%; height: 100%; object-fit: cover; object-position: center 25%;
-  filter: brightness(.82);
-  transition: filter .35s ease, transform .6s var(--sai);
-}
-.perfil:hover .perfil-quadro img, .perfil:focus-visible .perfil-quadro img { filter: brightness(1.05); transform: scale(1.06); }
-.perfil-nome { font: 400 1.1875rem/1.1 var(--serif); letter-spacing: -0.01em; text-align: center; color: var(--muted); transition: color .2s; }
-.perfil:hover .perfil-nome, .perfil:focus-visible .perfil-nome { color: var(--ink); }
-.perfil:hover, .perfil:focus-visible { color: var(--ink); }
-.perfil:hover .perfil-quadro, .perfil:focus-visible .perfil-quadro { outline-color: var(--azul-claro); }
-.perfil:focus-visible { outline: none; }
-.perfil:active .perfil-quadro { transform: scale(.94); }
-.perfis li { animation: entra .5s var(--sai) both; }
-.perfis li:nth-child(2) { animation-delay: .07s; }
-.perfis li:nth-child(3) { animation-delay: .14s; }
-.perfis li:nth-child(4) { animation-delay: .21s; }
-.perfis li:nth-child(5) { animation-delay: .28s; }
 
 /* cadastro: abre na ficha quando a pessoa pede um bônus grátis */
 .cadastro { display: flex; flex-direction: column; gap: 14px; padding-top: 36px; }

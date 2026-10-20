@@ -2,6 +2,19 @@
 // peso: quanto cada item combina com cada perfil (0 a 10). Vira a % "pra você" e a ordem da fileira "Escolhido pra você".
 
 window.EBG = {
+  // Entrada: os modos que giram em volta do Gediel. perfil = o foco que o catálogo usa;
+  // ir = pra onde o catálogo leva logo depois (#fileira ou id de item). recorte = foto sem fundo saindo da moldura (h = altura).
+  modos: [
+    { id: 'fala',        nome: 'Modo Fala',        perfil: 'fala',     img: 'img/modo-meet.webp' },
+    { id: 'carreira',    nome: 'Modo Carreira',    perfil: 'trabalho', img: 'img/modo-trabalho.webp', recorte: 122, verde: true },
+    { id: 'viagem',      nome: 'Modo Viagem',      perfil: 'viagem',   img: 'img/modo-viagem.webp',   recorte: 86 },
+    { id: 'fe',          nome: 'Modo Fé',          perfil: 'fe',       img: 'img/modo-fe.webp',       recorte: 104, verde: true },
+    { id: 'zero',        nome: 'Modo Zero',        perfil: 'zero',     img: 'img/modo-zero.webp',     recorte: 112 },
+    { id: 'cultura',     nome: 'Modo Cultura',     perfil: 'fala',     img: 'img/modo-cultura.webp',  verde: true, ir: '#culture' },
+    { id: 'nivel',       nome: 'Modo Nível',       perfil: 'zero',     img: 'img/modo-nivel.webp',    ir: 'teste' },
+    { id: 'intercambio', nome: 'Modo Intercâmbio', perfil: 'viagem',   img: 'img/modo-toronto.webp',  verde: true, ir: '#intercambio' }
+  ],
+
   perfis: [
     // img: capa do perfil (quadrada, sem texto, já com o tratamento preto e branco quente).
     { id: 'fala',     nome: 'Destravar a fala',   img: 'img/perfil-fala.webp' },
