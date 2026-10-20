@@ -182,7 +182,7 @@ window.EBG_EN = {
       sinopse: 'Mayandra tries first, her own way, with no help. Then comes the natural version. Mistakes are part of it: whoever tries, learns.',
       cta: { rotulo: 'Let me know when it launches', texto: "Hi Gediel! I'd like to know when the Encouraging my wife series launches." } },
 
-    ingi: { meta: ['@inglesinteligente', 'Method'],
+    ingi: { meta: ['@metodoinglesinteligente', 'Method'],
       sinopse: 'The method behind it all: multiple intelligences applied to English. One person learns by listening, another by doing, another needs to see it written.',
       cta: { rotulo: 'Discover the method' } },
     escola: { titulo: 'Infly School', meta: ['In person', 'Tupanciretã'],

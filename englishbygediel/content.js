@@ -194,7 +194,7 @@ window.EBG = {
 
     // Extras
     ingi: { titulo: 'Inglês Inteligente', tipo: 'gratis', img: 'img/logo-ingi.webp', contem: true,
-      meta: ['@inglesinteligente', 'Método'],
+      meta: ['@metodoinglesinteligente', 'Método'],
       sinopse: 'O método por trás de tudo: as múltiplas inteligências aplicadas ao inglês. Uma pessoa aprende ouvindo, outra fazendo, outra precisa ver escrito.',
       cta: { rotulo: 'Conhecer o método', acao: 'link', href: 'ingi' },
       peso: { fala: 6, trabalho: 6, viagem: 5, fe: 5, zero: 7 } },

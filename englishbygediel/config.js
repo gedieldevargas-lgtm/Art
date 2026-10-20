@@ -19,13 +19,13 @@ window.EBG_CONFIG = {
   redes: {
     youtube: 'https://www.youtube.com/@teachergediel',
     tiktok: 'https://www.tiktok.com/@englishbygediel',
-    metodo: 'https://instagram.com/inglesinteligente'
+    metodo: 'https://instagram.com/metodoinglesinteligente'
   },
 
   instagram: {
     ebg: 'https://instagram.com/englishbygediel',
     eom: 'https://instagram.com/englishonmission',
-    ingi: 'https://instagram.com/inglesinteligente',
+    ingi: 'https://instagram.com/metodoinglesinteligente',
     escola: 'https://instagram.com/escolainfly',
     viagens: 'https://instagram.com/inflyviagens',
     depoimentos: 'https://www.instagram.com/stories/highlights/17976442123983837/'
