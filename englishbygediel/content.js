@@ -121,7 +121,7 @@ window.EBG = {
       sinopse: 'O ponto de partida: teste de nível e diagnóstico de múltiplas inteligências, pra saber como você aprende antes da primeira aula.' },
     cronograma: { titulo: 'Cronograma', trilha: 'Programa Inteligente', bloqueado: true, img: 'img/card-cronograma.webp',
       sinopse: 'Seu plano de estudo semana a semana, montado a partir do diagnóstico.' },
-    salas: { titulo: 'Salas de Interação', trilha: 'Programa Inteligente', bloqueado: true, img: 'img/aula-grupo.webp',
+    salas: { titulo: 'Salas de Interação', trilha: 'Programa Inteligente', bloqueado: true, img: 'img/card-salas.webp',
       sinopse: 'Conversa ao vivo em turma, por nível, com correção na hora.' },
     aulas: { titulo: 'Aulas', trilha: 'Programa Inteligente', bloqueado: true, img: 'img/aula-tela.webp',
       sinopse: 'As aulas da plataforma, pra estudar no seu ritmo e rever quantas vezes quiser.' },
