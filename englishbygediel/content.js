@@ -123,7 +123,7 @@ window.EBG = {
       sinopse: 'Seu plano de estudo semana a semana, montado a partir do diagnóstico.' },
     salas: { titulo: 'Salas de Interação', trilha: 'Programa Inteligente', bloqueado: true, img: 'img/card-salas.webp',
       sinopse: 'Conversa ao vivo em turma, por nível, com correção na hora.' },
-    aulas: { titulo: 'Aulas', trilha: 'Programa Inteligente', bloqueado: true, img: 'img/aula-tela.webp',
+    aulas: { titulo: 'Aulas', trilha: 'Programa Inteligente', bloqueado: true, img: 'img/card-aulas.webp',
       sinopse: 'As aulas da plataforma, pra estudar no seu ritmo e rever quantas vezes quiser.' },
 
     grupoeom: { titulo: 'Grupo do WhatsApp', trilha: 'English On Mission', bloqueado: true, img: 'img/logo-eom.webp',
