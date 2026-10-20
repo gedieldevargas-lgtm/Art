@@ -3,12 +3,12 @@
 
 window.EBG = {
   perfis: [
-    // img: capa do perfil (quadrada, sem texto). O título é escrito por cima pelo site.
-    { id: 'fala',     nome: 'Destravar a fala',   img: 'img/aula-grupo.webp' },
-    { id: 'trabalho', nome: 'Inglês no trabalho', img: 'img/gediel-reading.webp' },
-    { id: 'viagem',   nome: 'Viajar sem travar',  img: 'img/gediel-liberty-tall.webp' },
-    { id: 'fe',       nome: 'Fé e missões',       img: 'img/logo-eom.webp' },
-    { id: 'zero',     nome: 'Começar do zero',    img: 'img/gediel-brooklyn.webp' }
+    // img: capa do perfil (quadrada, sem texto, já com o tratamento preto e branco quente).
+    { id: 'fala',     nome: 'Destravar a fala',   img: 'img/perfil-fala.webp' },
+    { id: 'trabalho', nome: 'Inglês no trabalho', img: 'img/perfil-trabalho.webp' },
+    { id: 'viagem',   nome: 'Viajar sem travar',  img: 'img/perfil-viagem.webp' },
+    { id: 'fe',       nome: 'Inglês cristão',     img: 'img/perfil-cristao.webp' },
+    { id: 'zero',     nome: 'Começar do zero',    img: 'img/perfil-zero.webp' }
   ],
 
   // Abertura em formato stories. {nome} vira o primeiro nome da pessoa.

@@ -191,10 +191,10 @@ body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height
 }
 .perfil-quadro img {
   width: 100%; height: 100%; object-fit: cover; object-position: center 25%;
-  filter: grayscale(.55) brightness(.78);
+  filter: brightness(.82);
   transition: filter .35s ease, transform .6s var(--sai);
 }
-.perfil:hover .perfil-quadro img, .perfil:focus-visible .perfil-quadro img { filter: none; transform: scale(1.06); }
+.perfil:hover .perfil-quadro img, .perfil:focus-visible .perfil-quadro img { filter: brightness(1.05); transform: scale(1.06); }
 .perfil-nome { font: 400 1.1875rem/1.1 var(--serif); letter-spacing: -0.01em; text-align: center; color: var(--muted); transition: color .2s; }
 .perfil:hover .perfil-nome, .perfil:focus-visible .perfil-nome { color: var(--ink); }
 .perfil:hover, .perfil:focus-visible { color: var(--ink); }
