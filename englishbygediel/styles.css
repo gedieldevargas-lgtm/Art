@@ -68,7 +68,8 @@ svg { fill: currentColor; }
 body[data-tela="entrada"] .entrada,
 body[data-tela="historia"] .historia { display: flex; }
 body[data-tela="catalogo"] .catalogo { display: block; }
-body[data-tela="entrada"], body[data-tela="historia"] { overflow: hidden; height: 100svh; }
+body[data-tela="historia"] { overflow: hidden; height: 100svh; }
+body[data-tela="entrada"] { overflow-x: hidden; }
 
 /* ---------- marca ---------- */
 .marca {
@@ -271,7 +272,8 @@ body:not([data-tela="entrada"]) .ligar { display: none; }
 @keyframes liga-sai { to { opacity: 0; visibility: hidden; } }
 
 @media (min-width: 900px) {
-  .cena { --cena-h: 760px; --card-w: 190px; }
+  /* a roda cabe na altura da janela: em notebook fica menor, em monitor grande chega a 760px */
+  .cena { --cena-h: clamp(500px, calc(100svh - 230px), 760px); --card-w: clamp(140px, calc((100svh - 230px) * .25), 190px); }
   .gediel-centro { height: 98%; }
   .modo-nome { font-size: 1rem; padding: 10px 16px; bottom: -16px; }
   .modo-chave { top: 10px; right: 10px; width: 48px; height: 24px; }
