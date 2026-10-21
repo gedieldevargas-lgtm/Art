@@ -5,6 +5,8 @@ window.EBG = {
   // Entrada: os modos que giram em volta do Gediel. perfil = o foco que o catálogo usa;
   // ir = pra onde o catálogo leva logo depois (#fileira ou id de item). recorte = foto sem fundo saindo da moldura (h = altura).
   modos: [
+    // o Prisma é a porta do método: vem primeiro e ganha a marca "Comece aqui"
+    { id: 'prisma',      nome: 'Modo Prisma',      perfil: 'fala',     img: 'img/modo-prisma.webp',   ir: 'prisma', marca: 'Comece aqui' },
     { id: 'fala',        nome: 'Modo Fala',        perfil: 'fala',     img: 'img/modo-meet.webp' },
     { id: 'carreira',    nome: 'Modo Carreira',    perfil: 'trabalho', img: 'img/modo-trabalho.webp', recorte: 122, verde: true },
     { id: 'viagem',      nome: 'Modo Viagem',      perfil: 'viagem',   img: 'img/modo-viagem.webp',   recorte: 86 },
@@ -167,8 +169,13 @@ window.EBG = {
 
     // Área de membros (Cakto). bloqueado: aparece no catálogo, mas só abre pra quem entra na mentoria.
     // Quando chegar a capa original do Cakto, troque capa: 'texto' por img: 'img/arquivo.webp'.
-    diagtestes: { titulo: 'Diagnósticos e Testes', trilha: 'Programa Inteligente', bloqueado: true, img: 'img/card-diagnostico.webp',
-      sinopse: 'O ponto de partida: teste de nível e diagnóstico de múltiplas inteligências, pra saber como você aprende antes da primeira aula.' },
+    // liberado: é a porta do Programa Inteligente, com os dois testes grátis
+    diagtestes: { titulo: 'Diagnósticos e Testes', trilha: 'Programa Inteligente', tipo: 'gratis', pulsa: true, img: 'img/card-diagnostico.webp',
+      meta: ['Teste Prisma', 'Teste Bússola', 'Liberado'],
+      sinopse: 'O ponto de partida do Método Inteligente, liberado pra você fazer agora. Primeiro o Prisma, que mostra como você aprende pelas múltiplas inteligências. Depois a Bússola, que mostra o seu nível de inglês, do A1 ao C2.',
+      cta: { rotulo: 'Fazer o teste Prisma', acao: 'prisma' },
+      cta2: { rotulo: 'Fazer o teste Bússola (nível)', acao: 'teste' },
+      peso: { fala: 9, trabalho: 9, viagem: 8, fe: 8, zero: 10 } },
     cronograma: { titulo: 'Cronograma', trilha: 'Programa Inteligente', bloqueado: true, img: 'img/card-cronograma.webp',
       sinopse: 'Seu plano de estudo semana a semana, montado a partir do diagnóstico.' },
     salas: { titulo: 'Salas de Interação', trilha: 'Programa Inteligente', bloqueado: true, img: 'img/card-salas.webp',
@@ -228,9 +235,9 @@ window.EBG = {
       cta: { rotulo: 'Fazer o teste Bússola', acao: 'teste' },
       peso: { fala: 8, trabalho: 7, viagem: 7, fe: 7, zero: 10 } },
     // Prisma: teste de múltiplas inteligências
-    prisma: { titulo: 'Como você aprende?', tipo: 'gratis', img: 'img/card-diagnostico.webp',
-      meta: ['Teste Prisma', 'Múltiplas inteligências'],
-      sinopse: 'O Prisma mostra quais das suas inteligências mais aparecem quando você aprende. É a base do Método Inteligente: o caminho se adapta a você, não o contrário.',
+    prisma: { titulo: 'Teste Prisma: como você aprende?', tipo: 'gratis', pulsa: true, img: 'img/card-diagnostico.webp',
+      meta: ['Múltiplas inteligências', 'Base do Método Inteligente'],
+      sinopse: 'Tudo no Método Inteligente começa aqui. O Prisma mostra quais das suas inteligências mais aparecem quando você aprende, e a partir disso o caminho se adapta a você, não o contrário. É o primeiro passo de quem entra na mentoria, e você pode fazer agora, de graça.',
       cta: { rotulo: 'Fazer o teste Prisma', acao: 'prisma' },
       peso: { fala: 7, trabalho: 7, viagem: 6, fe: 6, zero: 9 } },
     liveterca: { titulo: 'Culture English Lives', tipo: 'gratis', img: 'img/card-culture-lives.webp',

@@ -185,10 +185,11 @@
     $('#faixaModos2').innerHTML = nomes;
     $$('#cena .modo').forEach(c => c.remove());
     $('#cena').insertAdjacentHTML('beforeend', C.modos.map(m => `
-      <button class="modo${m.verde ? ' verde' : ''}" type="button" aria-pressed="${modoEscolhido === m.id}" data-modo="${m.id}"${m.recorte ? ` style="--h:${m.recorte}%"` : ''}>
+      <button class="modo${m.verde ? ' verde' : ''}${m.marca ? ' principal' : ''}" type="button" aria-pressed="${modoEscolhido === m.id}" data-modo="${m.id}"${m.recorte ? ` style="--h:${m.recorte}%"` : ''}>
         <span class="modo-fundo">${m.recorte ? '' : `<img src="${m.img}" alt="" decoding="async">`}</span>
         ${m.recorte ? `<span class="modo-recorte"><img src="${m.img}" alt="" decoding="async"></span>` : ''}
         <span class="modo-chave" aria-hidden="true"></span>
+        ${m.marca ? `<span class="modo-marca">${esc(m.marca)}</span>` : ''}
         <span class="modo-nome">${esc(m.nome)}</span>
       </button>`).join(''));
     anel.cards = $$('#cena .modo');

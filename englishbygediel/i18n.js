@@ -89,7 +89,7 @@ window.EBG_UI = {
 };
 
 window.EBG_EN = {
-  modos: [{ nome: 'Speaking Mode' }, { nome: 'Career Mode' }, { nome: 'Travel Mode' }, { nome: 'Faith Mode' },
+  modos: [{ nome: 'Prisma Mode', marca: 'Start here' }, { nome: 'Speaking Mode' }, { nome: 'Career Mode' }, { nome: 'Travel Mode' }, { nome: 'Faith Mode' },
     { nome: 'Start Mode' }, { nome: 'Culture Mode' }, { nome: 'Level Mode' }, { nome: 'Exchange Mode' }],
   perfis: [
     { nome: 'Unlock your speaking' }, { nome: 'English for work' }, { nome: 'Travel with confidence' },
@@ -181,8 +181,9 @@ window.EBG_EN = {
     eomalycia: { sinopse: 'Alycia shares, on video, what her experience at English On Mission was like.' },
     eomguilherme: { sinopse: 'Guilherme shares, on video, what his experience at English On Mission was like.' },
 
-    diagtestes: { titulo: 'Assessments and Tests', trilha: 'Smart Program',
-      sinopse: 'The starting point: level test and multiple intelligences assessment, so you know how you learn before the first class.' },
+    diagtestes: { titulo: 'Assessments and Tests', trilha: 'Smart Program', meta: ['Prisma test', 'Bússola test', 'Unlocked'],
+      sinopse: 'The starting point of the Smart Method, unlocked for you to take now. First Prisma, which shows how you learn through multiple intelligences. Then Bússola, which shows your English level, from A1 to C2.',
+      cta: { rotulo: 'Take the Prisma test' }, cta2: { rotulo: 'Take the Bússola level test' } },
     cronograma: { titulo: 'Study Plan', trilha: 'Smart Program', sinopse: 'Your week-by-week study plan, built from your assessment.' },
     salas: { titulo: 'Conversation Rooms', trilha: 'Smart Program', sinopse: 'Live group conversation, by level, with on-the-spot correction.' },
     aulas: { titulo: 'Lessons', trilha: 'Smart Program', sinopse: 'The platform lessons, to study at your pace and rewatch as many times as you want.' },
@@ -214,7 +215,8 @@ window.EBG_EN = {
     teste: { titulo: "What's your level?", meta: ['Bússola test', 'A1 → C2'],
       sinopse: "Bússola is the Smart Method level test: the questions adapt to your answers and show where you stand on the European framework, from A1 to C2. Starting in the right place saves time and motivation.",
       cta: { rotulo: 'Take the Bússola test' } },
-    prisma: { titulo: 'How do you learn?', meta: ['Prisma test', 'Multiple intelligences'],
+    prisma: { titulo: 'Prisma test: how do you learn?', meta: ['Multiple intelligences', 'The base of the Smart Method'],
+      sinopse: 'Everything in the Smart Method starts here. Prisma shows which of your intelligences show up most when you learn, and the path adapts to you, not the other way around. It is the first step for everyone who joins the mentorship, and you can take it now, for free.',
       sinopse: 'Prisma shows which of your intelligences show up most when you learn. It is the foundation of the Smart Method: the path adapts to you, not the other way around.',
       cta: { rotulo: 'Take the Prisma test' } },
     liveterca: { titulo: 'Culture English Lives', meta: ['Live', 'Free'],
