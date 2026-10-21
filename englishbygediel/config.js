@@ -1,8 +1,8 @@
 // Tudo o que você precisa trocar fica aqui.
 window.EBG_CONFIG = {
   // Supabase → Project Settings → API. A chave "anon public" pode ficar no site.
-  supabaseUrl: '',          // ex.: 'https://abcdefgh.supabase.co'
-  supabaseAnonKey: '',      // ex.: 'eyJhbGciOi...'
+  supabaseUrl: 'https://iwivldvubmsqyzkkdxoy.supabase.co',
+  supabaseAnonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3aXZsZHZ1Ym1zcXl6a2tkeG95Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1OTE1MDgsImV4cCI6MjEwODE2NzUwOH0.eyoyRBBp4NAfLhG-ops6cj2-xck61Oalsj3d7h3h360',
 
   // WhatsApp com país + DDD, só números. Na landing antiga estava 55999895429
   // (faltava o 55 do Brasil antes do DDD 55). Confirme.
