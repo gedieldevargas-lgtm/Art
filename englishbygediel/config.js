@@ -12,7 +12,7 @@ window.EBG_CONFIG = {
   videoApresentacao: 'eXfovCYxdZw',
 
   // testes gratuitos: cole aqui o link de cada um
-  bussola: '',   // teste de nível (CEFR). Vazio = usa o teste rápido de 5 perguntas da própria página
+  bussola: 'https://nivelamentogediel.netlify.app/',   // teste de nível (CEFR). Vazio = usa o teste rápido de 5 perguntas da própria página
   prisma: 'https://testedeinteligencia1.netlify.app/',  // teste de múltiplas inteligências. Vazio = o botão pede o link pelo WhatsApp
 
   // links abertos ao público
