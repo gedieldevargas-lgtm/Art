@@ -1,0 +1,6 @@
+# Netlify: publica a landing que está na pasta englishbygediel.
+# Site estático, sem etapa de build.
+[build]
+  base = "englishbygediel"
+  publish = "."
+  command = ""
