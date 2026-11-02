@@ -108,6 +108,8 @@
           },
           body: JSON.stringify(linha)
         });
+        // banco ainda sem a coluna "modo" (admin.sql não rodado): manda o contato sem ela em vez de perder
+        if (r.status === 400 && tabela === 'leads' && 'modo' in linha) { delete linha.modo; continue; }
         // 409 = já existe (reenvio do mesmo lead): pode descartar.
         if (!r.ok && r.status !== 409) {
           if (r.status >= 400 && r.status < 500) console.warn('[englishbygediel] Supabase recusou', tabela, r.status, await r.text());
@@ -120,6 +122,68 @@
       }
     }
     enviando = false;
+  }
+
+  // Acessos: conta cada visita (uma vez por aba) e o modo ligado, mesmo de quem não se cadastrou.
+  // a sessão nasce no primeiro acesso da aba; quem só recarrega a página não conta de novo
+  let sessao = null, sessaoNova = true;
+  function idSessao() {
+    if (sessao) return sessao;
+    try {
+      sessao = sessionStorage.getItem('ebg:sessao');
+      if (sessao) sessaoNova = false;
+      else { sessao = uuid(); sessionStorage.setItem('ebg:sessao', sessao); }
+    } catch (e) { sessao = uuid(); }
+    return sessao;
+  }
+  function contarAcesso(tipo, item = null) {
+    enfileirar('acessos', { sessao: idSessao(), tipo, item, origem: origem(), dispositivo: navigator.userAgent.slice(0, 300) });
+  }
+
+  // Produtos cadastrados no painel (/admin) entram no catálogo: na fileira do segmento com o mesmo nome,
+  // ou numa fileira nova quando o segmento é novo (ex.: Jogos, Prompts).
+  const semAcento = x => String(x || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const urlSegura = u => (/^https:\/\//i.test(u || '') ? String(u).replace(/"/g, '%22') : '');
+
+  async function carregarProdutos() {
+    if (!supabaseAtivo) return;
+    let lista;
+    try {
+      const r = await fetch(`${CFG.supabaseUrl.replace(/\/$/, '')}/rest/v1/produtos?select=*&ativo=eq.true&order=ordem.asc,created_at.asc`, {
+        headers: { apikey: CFG.supabaseAnonKey, Authorization: `Bearer ${CFG.supabaseAnonKey}` }
+      });
+      if (!r.ok) return;
+      lista = await r.json();
+    } catch (e) { return; }
+    if (!Array.isArray(lista) || !lista.length) return;
+
+    lista.forEach(p => {
+      const id = 'p-' + p.id;
+      const capa = urlSegura(p.capa_url);
+      const it = {
+        produto: true, titulo: p.titulo, trilha: p.segmento, sinopse: p.descricao || '',
+        img: capa, capa: capa ? undefined : 'texto', cor: '#15244a',
+        meta: p.tipo === 'pago' ? [p.preco || t('disponivel')] : p.tipo === 'gratis' ? [t('gratis')] : [p.segmento]
+      };
+      if (p.tipo === 'gratis') it.tipo = 'gratis';
+      if (p.tipo === 'pago') { it.aberto = true; it.selo = p.preco || t('disponivel'); }
+      if (p.tipo === 'mentoria') it.bloqueado = true;
+      if (p.tipo === 'breve') { it.breve = t('emBreve'); it.indisponivel = true; }
+      const link = urlSegura(p.link);
+      if (link && p.tipo !== 'mentoria') it.cta = { rotulo: p.botao || t(p.tipo === 'pago' ? 'quero' : 'abrirMaterial'), acao: 'link', href: link };
+      else if (p.tipo === 'breve') it.cta = { rotulo: t('meAvise'), acao: 'whatsapp', texto: t('whatsAvise', { item: p.titulo }) };
+      C.itens[id] = it;
+
+      const seg = semAcento(p.segmento);
+      let f = C.fileiras.find(x => x.id === seg || semAcento(x.titulo) === seg);
+      if (!f) {
+        f = { id: seg, titulo: p.segmento, formato: 'poster', itens: [] };
+        const fim = C.fileiras.findIndex(x => x.id === 'mais');
+        C.fileiras.splice(fim < 0 ? C.fileiras.length : fim, 0, f);
+      }
+      if (!f.itens.includes(id)) f.itens = [...f.itens, id];
+    });
+    if (catalogoMontado && document.body.dataset.tela === 'catalogo') montarFileiras();
   }
 
   function registrar(tipo, item = null, detalhe = null) {
@@ -274,6 +338,7 @@
     tela.hidden = false;
     setTimeout(() => {
       estado.modo = m.id;
+      contarAcesso('modo', m.id);
       guarda.gravar('ebg:modo', m.id);
       escolherPerfil(m.perfil);
       if (m.ir) abrirDestino(m.ir);
@@ -303,7 +368,9 @@
   function pedeCadastro(cta, id) {
     if (estado.lead) return false;
     const it = C.itens[id] || {};
-    return cta.acao === 'teste' || cta.acao === 'prisma' || (cta.acao === 'whatsapp' && it.grupo);
+    // e-books e materiais grátis cadastrados no painel também pedem o contato antes de abrir
+    return cta.acao === 'teste' || cta.acao === 'prisma' || (cta.acao === 'whatsapp' && it.grupo)
+      || (cta.acao === 'link' && it.produto && it.tipo === 'gratis');
   }
 
   function pedirDados(cta, id) {
@@ -321,7 +388,7 @@
 
   // o lead nasce aqui: já com o foco escolhido, nome e contato
   function criarLead() {
-    const lead = { ...estado.dados, objetivo: estado.perfil || 'fala' };
+    const lead = { ...estado.dados, objetivo: estado.perfil || 'fala', modo: estado.modo || null };
     estado.lead = lead;
     guarda.gravar('ebg:lead', { id: lead.id, nome: lead.nome, objetivo: lead.objetivo });
     enfileirar('leads', lead);
@@ -354,7 +421,10 @@
 
   function abrirDestino(alvo) {
     setTimeout(() => {
-      if (alvo.startsWith('#')) rolarAte(alvo.slice(1));
+      if (alvo.startsWith('#')) {
+        if (!$('#fileira-' + alvo.slice(1))) return aviso(t('secaoEmBreve'));
+        rolarAte(alvo.slice(1));
+      }
       else if (C.itens[alvo]) abrirFicha(alvo);
     }, 450);
   }
@@ -1059,6 +1129,9 @@
   ligarHistoria();
   arrastarFicha();
   descarregar();
+  idSessao();
+  if (sessaoNova) contarAcesso('entrou');
+  carregarProdutos();
 
   const abertura = $('#abertura');
   let jaViu = false;

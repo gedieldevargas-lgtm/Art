@@ -63,3 +63,20 @@ Links de anúncio podem levar `?utm_source=instagram&utm_campaign=live`; isso fi
 - **Live gratuita de terça:** o botão pede o link pelo WhatsApp. Se houver página ou grupo, troque em `content.js` (`liveterca`).
 - **English On Mission, Escola Infly e Infly Viagens:** apontam para os Instagrams. Troque em `config.js` se houver site.
 - **Preço e garantia** vieram da landing antiga (6x de R$ 297, 6 meses, 7 dias).
+
+## Painel do Gediel (`/admin`)
+
+Página só sua, com login: `SEU-SITE/admin`. Três abas:
+
+- **Números**: pessoas que entraram, cadastros, quem clicou na mentoria, modos mais escolhidos e de onde vieram (qual bio, Instagram, direto). Filtro de hoje, 7 dias, 30 dias ou tudo.
+- **Contatos**: cada pessoa cadastrada com botões de WhatsApp (mensagem pronta com o nome e o modo), e-mail e Direct do Instagram. Busca, filtro por modo, filtro "só quem clicou na mentoria" e botão pra baixar a planilha.
+- **Produtos**: adicionar, editar, esconder e apagar. Cada produto tem título, segmento (a fileira onde aparece; segmento novo vira fileira nova, como Jogos e Prompts), tipo (grátis, pago, só na mentoria ou em breve), preço, link, texto do botão, descrição, ordem e capa (envia a imagem ou cola o link). O que você salva aparece na landing na próxima visita. Produto grátis pede o contato antes de abrir o link.
+
+### Ligar o painel (uma vez)
+
+1. Supabase → **SQL Editor** → New query: cole `supabase/admin.sql` e clique em **Run**.
+2. Supabase → **Authentication → Users → Add user → Create new user**: seu e-mail (`gedieldevargas@gmail.com`) e uma senha. Marque **Auto Confirm User**.
+3. Abra `SEU-SITE/admin` e entre com esse e-mail e senha.
+
+Pra dar acesso a outra pessoa, adicione o e-mail dela na tabela `admins` e crie o usuário do mesmo jeito.
+

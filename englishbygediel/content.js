@@ -14,7 +14,10 @@ window.EBG = {
     { id: 'zero',        nome: 'Modo Zero',        perfil: 'zero',     img: 'img/modo-zero.webp',     recorte: 112 },
     { id: 'cultura',     nome: 'Modo Cultura',     perfil: 'fala',     img: 'img/modo-cultura.webp',  verde: true, ir: '#culture' },
     { id: 'nivel',       nome: 'Modo Nível',       perfil: 'zero',     img: 'img/modo-nivel.webp',    ir: 'teste' },
-    { id: 'intercambio', nome: 'Modo Intercâmbio', perfil: 'viagem',   img: 'img/modo-toronto.webp',  verde: true, ir: '#intercambio' }
+    { id: 'intercambio', nome: 'Modo Intercâmbio', perfil: 'viagem',   img: 'img/modo-toronto.webp',  verde: true, ir: '#intercambio' },
+    // Jogos e Prompts levam às fileiras com esses nomes, que nascem dos produtos cadastrados no painel
+    { id: 'jogos',       nome: 'Modo Jogos',       perfil: 'zero',     img: 'img/modo-jogos.webp',    ir: '#jogos' },
+    { id: 'prompts',     nome: 'Modo Prompts',     perfil: 'trabalho', img: 'img/modo-prompts.webp',  verde: true, ir: '#prompts' }
   ],
 
   perfis: [

@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Painel englishbygediel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- Entrar -->
+<main class="entrar" id="telaEntrar">
+  <form class="cartao entrar-form" id="formEntrar" novalidate>
+    <p class="marca">english<b>by</b>gediel</p>
+    <h1>Painel</h1>
+    <p class="sub">Só você entra aqui. Use o e-mail e a senha que você criou no Supabase.</p>
+    <label class="campo"><span>E-mail</span><input id="email" name="email" type="email" autocomplete="username" required></label>
+    <label class="campo"><span>Senha</span><input id="senha" name="senha" type="password" autocomplete="current-password" required></label>
+    <p class="erro" id="erroEntrar" role="alert"></p>
+    <button class="botao cheio" type="submit" id="botaoEntrar">Entrar</button>
+    <button class="link" type="button" id="esqueci">Esqueci a senha</button>
+  </form>
+</main>
+
+<!-- Painel -->
+<div class="painel" id="telaPainel" hidden>
+  <header class="topo">
+    <p class="marca">english<b>by</b>gediel <span>painel</span></p>
+    <nav class="abas" role="tablist">
+      <button type="button" role="tab" data-aba="numeros" aria-selected="true">Números</button>
+      <button type="button" role="tab" data-aba="contatos" aria-selected="false">Contatos</button>
+      <button type="button" role="tab" data-aba="produtos" aria-selected="false">Produtos</button>
+    </nav>
+    <div class="topo-dir">
+      <a class="link" href="../" target="_blank" rel="noopener">Ver a landing</a>
+      <button class="link" type="button" id="sair">Sair</button>
+    </div>
+  </header>
+
+  <!-- Números -->
+  <section class="aba" id="aba-numeros">
+    <div class="cabeca">
+      <h2>Números</h2>
+      <div class="periodo" role="group" aria-label="Período">
+        <button type="button" data-dias="1">Hoje</button>
+        <button type="button" data-dias="7" aria-pressed="true">7 dias</button>
+        <button type="button" data-dias="30">30 dias</button>
+        <button type="button" data-dias="0">Tudo</button>
+      </div>
+    </div>
+    <div class="kpis" id="kpis"></div>
+    <div class="duas">
+      <div class="cartao">
+        <h3>Modos mais escolhidos</h3>
+        <ol class="barras" id="barrasModos"></ol>
+      </div>
+      <div class="cartao">
+        <h3>De onde vieram</h3>
+        <ol class="barras" id="barrasOrigem"></ol>
+      </div>
+    </div>
+    <div class="cartao">
+      <h3>Últimos cadastros</h3>
+      <ul class="ultimos" id="ultimos"></ul>
+    </div>
+  </section>
+
+  <!-- Contatos -->
+  <section class="aba" id="aba-contatos" hidden>
+    <div class="cabeca">
+      <h2>Contatos <span class="conta" id="contaContatos"></span></h2>
+      <div class="filtros">
+        <input id="busca" type="search" placeholder="Buscar nome, @ ou e-mail" aria-label="Buscar contato">
+        <select id="filtroModo" aria-label="Filtrar por modo"><option value="">Todos os modos</option></select>
+        <label class="check"><input type="checkbox" id="filtroMentoria"> Só quem clicou na mentoria</label>
+        <button class="botao" type="button" id="exportar">Baixar planilha</button>
+      </div>
+    </div>
+    <div class="tabela-wrap">
+      <table class="tabela">
+        <thead><tr><th>Quando</th><th>Nome</th><th>Modo</th><th>Falar com</th><th>Interesse</th></tr></thead>
+        <tbody id="linhasContatos"></tbody>
+      </table>
+    </div>
+    <p class="vazio" id="vazioContatos" hidden>Nenhum contato ainda. Eles aparecem aqui quando alguém se cadastra na landing.</p>
+  </section>
+
+  <!-- Produtos -->
+  <section class="aba" id="aba-produtos" hidden>
+    <div class="cabeca">
+      <h2>Produtos</h2>
+      <button class="botao cheio" type="button" id="novoProduto">Adicionar produto</button>
+    </div>
+    <p class="sub">O que você cadastra aqui aparece no catálogo, na fileira com o nome do segmento. Segmento novo (ex.: Jogos, Prompts) vira uma fileira nova.</p>
+    <div class="grade-produtos" id="gradeProdutos"></div>
+    <p class="vazio" id="vazioProdutos" hidden>Nenhum produto cadastrado ainda. Clique em "Adicionar produto".</p>
+  </section>
+</div>
+
+<!-- Formulário de produto -->
+<dialog class="modal" id="modalProduto">
+  <form class="modal-corpo" id="formProduto" method="dialog" novalidate>
+    <h2 id="tituloModal">Novo produto</h2>
+    <div class="form-grade">
+      <div class="col">
+        <label class="campo"><span>Título</span><input id="p_titulo" required maxlength="120" placeholder="Ex.: E-book 100 frases pra viagem"></label>
+        <label class="campo"><span>Segmento (fileira)</span><input id="p_segmento" required maxlength="60" list="segmentos" placeholder="Ex.: Jogos"></label>
+        <datalist id="segmentos"></datalist>
+        <div class="linha2">
+          <label class="campo"><span>Tipo</span>
+            <select id="p_tipo">
+              <option value="gratis">Grátis (pede o contato antes)</option>
+              <option value="pago">Pago (abre o link de compra)</option>
+              <option value="mentoria">Só na mentoria (trancado)</option>
+              <option value="breve">Em breve</option>
+            </select>
+          </label>
+          <label class="campo"><span>Preço <small>se for pago</small></span><input id="p_preco" maxlength="40" placeholder="R$ 47"></label>
+        </div>
+        <label class="campo"><span>Link <small>e-book, jogo, checkout, Drive…</small></span><input id="p_link" type="url" maxlength="500" placeholder="https://"></label>
+        <label class="campo"><span>Texto do botão <small>opcional</small></span><input id="p_botao" maxlength="60" placeholder="Baixar o e-book"></label>
+        <label class="campo"><span>Descrição</span><textarea id="p_descricao" maxlength="1200" rows="4" placeholder="O que a pessoa recebe e pra quem é."></textarea></label>
+        <div class="linha2">
+          <label class="campo"><span>Ordem <small>menor aparece antes</small></span><input id="p_ordem" type="number" value="100"></label>
+          <label class="check grande"><input type="checkbox" id="p_ativo" checked> Visível na landing</label>
+        </div>
+      </div>
+      <div class="col">
+        <span class="rotulo">Capa</span>
+        <div class="capa-previa" id="capaPrevia"><span>Sem capa</span></div>
+        <label class="botao arquivo">Enviar imagem<input id="p_arquivo" type="file" accept="image/*"></label>
+        <label class="campo"><span>ou cole o link da imagem</span><input id="p_capa" type="url" maxlength="500" placeholder="https://"></label>
+        <p class="dica">Formato em pé (3:4) fica melhor. Imagem grande é reduzida automaticamente.</p>
+      </div>
+    </div>
+    <p class="erro" id="erroProduto" role="alert"></p>
+    <div class="modal-acoes">
+      <button class="link perigo" type="button" id="apagarProduto" hidden>Apagar produto</button>
+      <span></span>
+      <button class="botao" type="button" id="cancelarProduto">Cancelar</button>
+      <button class="botao cheio" type="submit" id="salvarProduto">Salvar</button>
+    </div>
+  </form>
+</dialog>
+
+<p class="aviso" id="aviso" role="status" aria-live="polite"></p>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="../config.js"></script>
+<script src="../content.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

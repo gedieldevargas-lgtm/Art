@@ -25,6 +25,7 @@ window.EBG_UI = {
     whatsConversar: 'Oi Gediel! Vim pelo catálogo e quero conversar sobre o meu caso.',
     whatsRodape: 'Oi Gediel! Vim pelo catálogo.',
     perguntasTitulo: 'Perguntas de quem está chegando',
+    secaoEmBreve: 'Essa seção chega em breve.', quero: 'Quero esse', abrirMaterial: 'Abrir o material', meAvise: 'Me avise quando lançar', whatsAvise: 'Oi Gediel! Quero ser avisado quando {item} lançar.',
     pctVoce: '% pra você', gratis: 'Grátis', seloMentoria: 'Mentoria', emBreve: 'Em breve', exclusivo: 'Exclusivo',
     resultadoAluno: 'Resultado de aluno', voltar: 'Voltar', avancar: 'Avançar', fechar: 'Fechar', assistir: 'Assistir',
     parteMentoria: 'Parte da Mentoria', exclusivoMentoria: 'Exclusivo da mentoria',
@@ -67,6 +68,7 @@ window.EBG_UI = {
     whatsConversar: "Hi Gediel! I found you through the catalog and I'd like to talk about my case.",
     whatsRodape: 'Hi Gediel! I found you through the catalog.',
     perguntasTitulo: 'Questions from people just arriving',
+    secaoEmBreve: 'This section is coming soon.', quero: 'I want this', abrirMaterial: 'Open the material', meAvise: 'Let me know when it launches', whatsAvise: 'Hi Gediel! Let me know when {item} launches.',
     pctVoce: '% match', gratis: 'Free', seloMentoria: 'Mentorship', emBreve: 'Coming soon', exclusivo: 'Exclusive',
     resultadoAluno: 'Student result', voltar: 'Back', avancar: 'Forward', fechar: 'Close', assistir: 'Watch',
     parteMentoria: 'Part of the mentorship', exclusivoMentoria: 'Mentorship only',
@@ -90,7 +92,8 @@ window.EBG_UI = {
 
 window.EBG_EN = {
   modos: [{ nome: 'Prisma Mode', marca: 'Start here' }, { nome: 'Speaking Mode' }, { nome: 'Career Mode' }, { nome: 'Travel Mode' }, { nome: 'Faith Mode' },
-    { nome: 'Start Mode' }, { nome: 'Culture Mode' }, { nome: 'Level Mode' }, { nome: 'Exchange Mode' }],
+    { nome: 'Start Mode' }, { nome: 'Culture Mode' }, { nome: 'Level Mode' }, { nome: 'Exchange Mode' },
+    { nome: 'Games Mode' }, { nome: 'Prompts Mode' }],
   perfis: [
     { nome: 'Unlock your speaking' }, { nome: 'English for work' }, { nome: 'Travel with confidence' },
     { nome: 'Christian English' }, { nome: 'Start from zero' }
