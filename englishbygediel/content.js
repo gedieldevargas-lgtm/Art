@@ -2,22 +2,23 @@
 // peso: quanto cada item combina com cada perfil (0 a 10). Vira a % "pra você" e a ordem da fileira "Escolhido pra você".
 
 window.EBG = {
-  // Entrada: os modos que giram em volta do Gediel. perfil = o foco que o catálogo usa;
+  // Entrada: os modos que giram em volta do Gediel. destaque = o item que abre o catálogo (no topo);
+  // fileira = a fileira que vem logo abaixo. Em Jogos e Prompts o destaque vira o 1º produto do painel. perfil = o foco que o catálogo usa;
   // ir = pra onde o catálogo leva logo depois (#fileira ou id de item). recorte = foto sem fundo saindo da moldura (h = altura).
   modos: [
     // o Prisma é a porta do método: vem primeiro e ganha a marca "Comece aqui"
-    { id: 'prisma',      nome: 'Modo Prisma',      perfil: 'fala',     img: 'img/modo-prisma.webp',   ir: 'prisma', marca: 'Comece aqui' },
-    { id: 'fala',        nome: 'Modo Fala',        perfil: 'fala',     img: 'img/modo-meet.webp' },
-    { id: 'carreira',    nome: 'Modo Carreira',    perfil: 'trabalho', img: 'img/modo-trabalho.webp', recorte: 122, verde: true },
-    { id: 'viagem',      nome: 'Modo Viagem',      perfil: 'viagem',   img: 'img/modo-viagem.webp',   recorte: 86 },
-    { id: 'fe',          nome: 'Modo Fé',          perfil: 'fe',       img: 'img/modo-fe.webp',       recorte: 104, verde: true },
-    { id: 'zero',        nome: 'Modo Zero',        perfil: 'zero',     img: 'img/modo-zero.webp',     recorte: 112 },
-    { id: 'cultura',     nome: 'Modo Cultura',     perfil: 'fala',     img: 'img/modo-cultura.webp',  verde: true, ir: '#culture' },
-    { id: 'nivel',       nome: 'Modo Nível',       perfil: 'zero',     img: 'img/modo-nivel.webp',    ir: 'teste' },
-    { id: 'intercambio', nome: 'Modo Intercâmbio', perfil: 'viagem',   img: 'img/modo-toronto.webp',  verde: true, ir: '#intercambio' },
-    // Jogos e Prompts levam às fileiras com esses nomes, que nascem dos produtos cadastrados no painel
-    { id: 'jogos',       nome: 'Modo Jogos',       perfil: 'zero',     img: 'img/modo-jogos.webp',    ir: '#jogos' },
-    { id: 'prompts',     nome: 'Modo Prompts',     perfil: 'trabalho', img: 'img/modo-prompts.webp',  verde: true, ir: '#prompts' }
+    { id: 'prisma',      nome: 'Modo Prisma',      perfil: 'fala',     img: 'img/modo-prisma.webp',   marca: 'Comece aqui', destaque: 'diagtestes', fileira: 'programa' },
+    { id: 'fala',        nome: 'Modo Fala',        perfil: 'fala',     img: 'img/modo-meet.webp', destaque: 'salas', fileira: 'programa' },
+    { id: 'carreira',    nome: 'Modo Carreira',    perfil: 'trabalho', img: 'img/modo-trabalho.webp', recorte: 122, verde: true, destaque: 'particular', fileira: 'alunos' },
+    { id: 'viagem',      nome: 'Modo Viagem',      perfil: 'viagem',   img: 'img/modo-viagem.webp',   recorte: 86, destaque: 'toronto', fileira: 'intercambio' },
+    { id: 'fe',          nome: 'Modo Fé',          perfil: 'fe',       img: 'img/modo-fe.webp',       recorte: 104, verde: true, destaque: 'eom', fileira: 'eom' },
+    { id: 'zero',        nome: 'Modo Zero',        perfil: 'zero',     img: 'img/modo-zero.webp',     recorte: 112, destaque: 'teste', fileira: 'gratis' },
+    { id: 'cultura',     nome: 'Modo Cultura',     perfil: 'fala',     img: 'img/modo-cultura.webp',  verde: true, destaque: 'liveterca', fileira: 'culture' },
+    { id: 'nivel',       nome: 'Modo Nível',       perfil: 'zero',     img: 'img/modo-nivel.webp',    destaque: 'teste', fileira: 'gratis' },
+    { id: 'intercambio', nome: 'Modo Intercâmbio', perfil: 'viagem',   img: 'img/modo-toronto.webp',  verde: true, destaque: 'toronto', fileira: 'intercambio' },
+    // as fileiras Jogos e Prompts nascem dos produtos cadastrados no painel com esses segmentos
+    { id: 'jogos',       nome: 'Modo Jogos',       perfil: 'zero',     img: 'img/modo-jogos.webp',    destaque: 'teste', fileira: 'jogos' },
+    { id: 'prompts',     nome: 'Modo Prompts',     perfil: 'trabalho', img: 'img/modo-prompts.webp',  verde: true, destaque: 'teste', fileira: 'prompts' }
   ],
 
   perfis: [

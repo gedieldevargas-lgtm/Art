@@ -183,7 +183,7 @@
       }
       if (!f.itens.includes(id)) f.itens = [...f.itens, id];
     });
-    if (catalogoMontado && document.body.dataset.tela === 'catalogo') montarFileiras();
+    if (catalogoMontado && document.body.dataset.tela === 'catalogo') { montarVitrine(); montarFileiras(); }
   }
 
   function registrar(tipo, item = null, detalhe = null) {
@@ -593,11 +593,9 @@
     if (document.body.dataset.tela !== 'catalogo') irPara('catalogo');
     pintarPerfil($('#avatar'));
     $('#avatar').setAttribute('aria-label', t('perfilAria', { nome: modoDe(estado.modo).nome }));
-    const m = C.itens.mentoria;
-    $('#vitrineMeta').innerHTML = `<span class="combina">${combina(m)}${t('pctVoce')}</span>` + m.meta.map(t => `<span>${esc(t)}</span>`).join('');
-    $('#vitrineSinopse').textContent = C.perfilTexto[estado.perfil] || m.sinopse;
-    montarProcura();
+    montarVitrine();
     montarFileiras();
+    montarMentoriaFinal();
     montarPerguntas();
     if (!catalogoMontado) {
       catalogoMontado = true;
@@ -642,29 +640,58 @@
     </button>`;
   }
 
+  // Topo do catálogo: o principal do modo ligado. Em Jogos e Prompts, o 1º produto cadastrado no painel.
+  function destaqueDoModo() {
+    const m = modoDe(estado.modo);
+    const f = C.fileiras.find(x => x.id === m.fileira);
+    if (f && f.itens.length && !C.itens[m.destaque]?.produto && m.fileira.match(/^(jogos|prompts)$/)) return f.itens[0];
+    return C.itens[m.destaque] ? m.destaque : 'teste';
+  }
+
+  function montarVitrine() {
+    const m = modoDe(estado.modo);
+    const id = destaqueDoModo();
+    const it = C.itens[id];
+    const img = $('#vitrineImg');
+    const foto = it.imgLarga || it.img;
+    img.src = foto || 'img/vitrine-gediel.webp';
+    img.alt = foto ? '' : 'Gediel Vargas';
+    $('#vitrineSelo').textContent = t('modoLigado', { modo: m.nome });
+    $('#vitrineTitulo').textContent = it.titulo;
+    $('#vitrineMeta').innerHTML = [it.tipo === 'gratis' ? `<span class="combina">${t('gratis')}</span>` : '', ...(it.meta || []).map(x => `<span>${esc(x)}</span>`)].join('');
+    $('#vitrineSinopse').textContent = it.sinopse || '';
+    // botão principal: a ação do próprio item; trancado leva pra mentoria lá embaixo
+    const principal = it.bloqueado ? { rotulo: t('conhecerMentoria'), acao: 'ficha', alvo: 'mentoria' } : it.cta;
+    $('#vitrineAcoes').innerHTML = (principal ? botaoCta(principal, id, 'botao-cheio') : '')
+      + (it.cta2 ? botaoCta(it.cta2, id, 'botao-claro') : '')
+      + `<button class="botao botao-cinza" type="button" data-abrir="${id}">${t('detalhes')}</button>`;
+  }
+
+  // só o essencial aparece: a fileira do modo e três fixas. O resto fica atrás de "Ver tudo".
+  const PRINCIPAIS = ['gratis', 'alunos', 'programa'];
   function montarFileiras() {
-    $('#fileiras').innerHTML = ordenarFileiras(C.fileiras).map(f => {
-      let itens = f.itens;
-      let sub = f.sub || '';
-      if (f.dinamica) {
-        itens = Object.keys(C.itens)
-          .filter(k => C.itens[k].peso && C.itens[k].tipo !== 'exclusivo' && !C.itens[k].indisponivel)
-          .sort((a, b) => (a === 'mentoria' ? -1 : b === 'mentoria' ? 1 : 0) || C.itens[b].peso[estado.perfil] - C.itens[a].peso[estado.perfil])
-          .slice(0, 8);
-        sub = perfilDe(estado.perfil).nome;
-      }
-      return `<section class="fileira${f.destaque ? ' fileira-destaque' : ''}" id="fileira-${f.id}" aria-labelledby="t-${f.id}">
-        <div class="fileira-cabeca"><h2 id="t-${f.id}">${esc(f.titulo)}${f.etiqueta ? ` <span class="etiqueta">${esc(f.etiqueta)}</span>` : ''}</h2>${sub ? `<span class="fileira-sub">${esc(sub)}</span>` : ''}</div>
-        <div class="trilho-wrap">
-          <button class="seta seta-esq" type="button" aria-label="${t('voltar')}" data-seta="-1">${SETA('esq')}</button>
-          <div class="trilho" role="list">${itens.map((id, i) => cardHTML(id, f.formato, i, f.dinamica)).join('')}</div>
-          <button class="seta seta-dir" type="button" aria-label="${t('avancar')}" data-seta="1">${SETA('dir')}</button>
-        </div>
-        ${f.acoes ? `<div class="fileira-acoes">${f.acoes.map(x => `<button class="pilula" type="button" data-cta="fileira-${f.id}" data-acao-cta='${esc(JSON.stringify({ acao: 'link', href: x.href }))}'>${INSTA}${esc(x.rotulo)}</button>`).join('')}</div>` : ''}
-      </section>`;
-    }).join('');
+    const m = modoDe(estado.modo);
+    const ordem = [m.fileira, ...PRINCIPAIS].filter((x, i, a) => a.indexOf(x) === i);
+    const visiveis = ordem.map(id => C.fileiras.find(f => f.id === id)).filter(Boolean);
+    const resto = C.fileiras.filter(f => !f.dinamica && !visiveis.includes(f));
+    $('#fileiras').innerHTML = visiveis.map(htmlFileira).join('');
+    $('#fileirasMais').innerHTML = resto.map(htmlFileira).join('');
     $$('.trilho').forEach(t => observador && observador.observe(t));
     $$('.trilho').forEach(ligarTrilho);
+  }
+
+  function htmlFileira(f) {
+    const itens = f.itens;
+    const sub = f.sub || '';
+    return `<section class="fileira${f.destaque ? ' fileira-destaque' : ''}" id="fileira-${f.id}" aria-labelledby="t-${f.id}">
+      <div class="fileira-cabeca"><h2 id="t-${f.id}">${esc(f.titulo)}${f.etiqueta ? ` <span class="etiqueta">${esc(f.etiqueta)}</span>` : ''}</h2>${sub ? `<span class="fileira-sub">${esc(sub)}</span>` : ''}</div>
+      <div class="trilho-wrap">
+        <button class="seta seta-esq" type="button" aria-label="${t('voltar')}" data-seta="-1">${SETA('esq')}</button>
+        <div class="trilho" role="list">${itens.map((id, i) => cardHTML(id, f.formato, i)).join('')}</div>
+        <button class="seta seta-dir" type="button" aria-label="${t('avancar')}" data-seta="1">${SETA('dir')}</button>
+      </div>
+      ${f.acoes ? `<div class="fileira-acoes">${f.acoes.map(x => `<button class="pilula" type="button" data-cta="fileira-${f.id}" data-acao-cta='${esc(JSON.stringify({ acao: 'link', href: x.href }))}'>${INSTA}${esc(x.rotulo)}</button>`).join('')}</div>` : ''}
+    </section>`;
   }
 
   /* ---------------- fileiras que andam sozinhas ----------------
@@ -725,22 +752,57 @@
   }
   if (!reduz) requestAnimationFrame(andar);
 
-  function montarProcura() {
-    const ordem = [...(origemCfg().procura || []), ...((C.procuraPorPerfil || {})[estado.perfil] || [])];
-    const lista = [...C.procura].sort((a, b) => {
-      const ia = ordem.indexOf(a.id), ib = ordem.indexOf(b.id);
-      return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
-    });
-    $('#procuraChips').innerHTML = lista.map(x => `<button class="chip-procura" type="button" data-procura="${x.id}">${esc(x.rotulo)}</button>`).join('');
+  // A mentoria fecha o catálogo como uma landing própria: promessa, pra quem é, o que inclui,
+  // como funciona, alunos, objeções, preço e garantia. O mesmo conteúdo da ficha, em página.
+  function montarMentoriaFinal() {
+    const m = C.itens.mentoria;
+    const lista = xs => `<ul class="inclui" role="list">${xs.map(x => `<li>${CHECK}<span>${esc(x)}</span></li>`).join('')}</ul>`;
+    const vaga = `<button class="botao botao-cheio botao-vaga" type="button" data-cta="mentoria" data-acao-cta='{"acao":"checkout"}'>
+      <span>${t('vaga')}</span> <s class="vaga-de">${t('vagaDe')}</s> <span class="vaga-preco">${t('vagaPreco')}</span></button>`;
+    const duvida = `<button class="botao botao-cinza botao-whats" type="button" data-whats="whatsMentoria">${WHATS}<span>${t('duvida')}</span></button>`;
+    $('#mentoria').innerHTML = `
+      <div class="mf-abre">
+        <div class="mf-foto"><img src="${m.img}" alt="Gediel Vargas" loading="lazy"></div>
+        <div class="mf-texto">
+          <p class="mf-selo"><span class="ponto"></span> ${t('proximoPasso')}</p>
+          <h2 id="mentoriaTitulo">${t('vitrine1')} <em>${t('vitrine2')}</em></h2>
+          <p class="mf-sinopse">${esc(m.sinopse)}</p>
+          <div class="vitrine-acoes">${vaga}
+            <button class="botao botao-claro" type="button" data-video="${m.video}" data-item="mentoria">${PLAY}<span>${t('apresentacao')}</span></button>
+            ${duvida}</div>
+          <p class="vitrine-prova">${t('prova')}</p>
+        </div>
+      </div>
+      <div class="mf-grade">
+        <div><h3>${t('paraQuem')}</h3>${lista(m.paraQuem)}<p class="nao-e"><b>${t('naoE')}</b> ${m.naoE.map(esc).join('. ')}.</p></div>
+        <div><h3>${t('incluido')}</h3>${lista(m.inclui)}</div>
+      </div>
+      <h3>${t('etapas')}</h3>
+      <ol class="mf-etapas">${m.etapas.map(e => { const ep = C.itens[e]; return `<li><img src="${ep.img}" alt="" loading="lazy"><strong>${esc(ep.titulo)}</strong><span>${esc(ep.duracao)}</span></li>`; }).join('')}</ol>
+      <h3>${t('alunos')}</h3>
+      <div class="alunos-mini">${Object.keys(C.itens).filter(k => C.itens[k].tipo === 'aluno').map(a => {
+        const al = C.itens[a];
+        return `<button type="button" data-video="${al.video}" data-item="${a}" data-vertical="1"><img src="${al.img}" alt="${esc(al.nome)}" loading="lazy"><span>${esc(al.nome)}</span></button>`;
+      }).join('')}</div>
+      <div class="mf-grade">
+        <div><h3>${t('objecoes')}</h3><dl class="objecoes">${m.objecoes.map(([q, r]) => `<dt>${esc(q)}</dt><dd>${esc(r)}</dd>`).join('')}</dl></div>
+        <div>
+          <h3>${t('depois')}</h3><ol class="depois">${m.depois.map(x => `<li>${esc(x)}</li>`).join('')}</ol>
+          <div class="preco">
+            <p class="preco-agora">${t('comeceSemana')}</p>
+            <p class="preco-de">${esc(m.preco.separado)}</p>
+            <p class="preco-por">${esc(m.preco.parcelas)}</p>
+            <p class="preco-nota">${esc(m.preco.nota)}</p>
+            <p class="preco-garantia"><b>${t('garantia')}</b> ${t('garantiaTexto')}</p>
+            <div class="mf-fecha">${vaga}${duvida}</div>
+          </div>
+        </div>
+      </div>`;
   }
 
-  // fileira que mais combina com o foco sobe pra logo depois do Programa Inteligente
-  function ordenarFileiras(fileiras) {
-    const sobe = (C.ordemPorPerfil || {})[estado.perfil];
-    const lista = fileiras.filter(f => f.id !== sobe);
-    const alvo = fileiras.find(f => f.id === sobe);
-    if (alvo) lista.splice(lista.findIndex(f => f.id === 'programa') + 1, 0, alvo);
-    return lista;
+  function irParaMentoria() {
+    if (fichaAberta) fecharFicha();
+    setTimeout(() => $('#mentoria').scrollIntoView({ behavior: reduz ? 'auto' : 'smooth', block: 'start' }), fichaAberta ? 320 : 0);
   }
 
   function montarPerguntas() {
@@ -762,28 +824,21 @@
         observador.unobserve(e.target);
       });
     }, { rootMargin: '0px 0px -12% 0px', threshold: 0.05 });
-    $$('.trilho, .proximo, .perguntas, .rodape').forEach(el => {
-      if (!el.classList.contains('trilho') && !el.classList.contains('proximo')) el.classList.add('revela');
-      if (el.classList.contains('proximo')) el.querySelector('.proximo-texto').classList.add('revela');
+    $$('.trilho, .mentoria-final, .perguntas, .rodape').forEach(el => {
+      if (!el.classList.contains('trilho')) el.classList.add('revela');
       observador.observe(el);
     });
-    // .proximo-texto também precisa ficar visível
-    const prox = $('.proximo');
-    new IntersectionObserver((es, o) => es.forEach(e => {
-      if (e.isIntersecting) { prox.querySelector('.proximo-texto').classList.add('visivel'); o.disconnect(); }
-    }), { threshold: 0.2 }).observe(prox);
-
-    // barra da mentoria: aparece quando a vitrine e o "próximo episódio" saem da tela
-    const vis = { vitrine: true, proximo: false, rodape: false };
+    // barra da mentoria: aparece depois do topo e some quando a seção da mentoria ou o rodapé estão na tela
+    const vis = { vitrine: true, mentoria: false, rodape: false };
     const obsBarra = new IntersectionObserver(es => {
       es.forEach(e => { vis[e.target.dataset.barra] = e.isIntersecting; });
       atualizarBarra();
     });
-    [['.vitrine', 'vitrine'], ['.proximo', 'proximo'], ['.rodape', 'rodape']].forEach(([sel, nome]) => {
+    [['.vitrine', 'vitrine'], ['#mentoria', 'mentoria'], ['.rodape', 'rodape']].forEach(([sel, nome]) => {
       const el = $(sel); el.dataset.barra = nome; obsBarra.observe(el);
     });
     atualizarBarra = () => {
-      $('#barraVaga').hidden = document.body.dataset.tela !== 'catalogo' || Boolean(fichaAberta) || vis.vitrine || vis.proximo || vis.rodape;
+      $('#barraVaga').hidden = document.body.dataset.tela !== 'catalogo' || Boolean(fichaAberta) || vis.vitrine || vis.mentoria || vis.rodape;
     };
 
     const topo = $('#topo');
@@ -1020,7 +1075,9 @@
         abrirVideo(cta.video, id, cta.vertical);
         break;
       case 'ficha':
-        abrirFicha(cta.alvo);
+        // a mentoria mora no fim do catálogo: em vez de abrir ficha, leva até lá
+        if (cta.alvo === 'mentoria') irParaMentoria();
+        else abrirFicha(cta.alvo);
         break;
     }
   }
@@ -1037,20 +1094,12 @@
     if (cta) return executar(JSON.parse(cta.dataset.acaoCta), cta.dataset.cta);
 
     const abrir = alvo.closest('[data-abrir]');
-    if (abrir) return abrirFicha(abrir.dataset.abrir);
+    if (abrir) return abrir.dataset.abrir === 'mentoria' ? irParaMentoria() : abrirFicha(abrir.dataset.abrir);
 
     const whats = alvo.closest('[data-whats]');
     if (whats) { e.preventDefault(); registrar('clicou', 'whatsapp', { de: 'pagina' }); return abrirFora(linkWhats(t(whats.dataset.whats))); }
 
     if (alvo.closest('[data-idioma]')) return trocarIdioma();
-
-    const chip = alvo.closest('[data-procura]');
-    if (chip) {
-      const x = C.procura.find(p => p.id === chip.dataset.procura);
-      registrar('clicou', 'procura:' + x.id);
-      if (x.abrir) return abrirFicha(x.abrir);
-      return rolarAte(x.rolar);
-    }
 
     const seta = alvo.closest('[data-seta]');
     if (seta) {
@@ -1060,6 +1109,14 @@
 
     const acao = alvo.closest('[data-acao]');
     if (acao && acao.dataset.acao === 'fimHistoria') return fimHistoria(false);
+  });
+
+  $('#verTudo').addEventListener('click', e => {
+    const mais = $('#fileirasMais'), abre = mais.hidden;
+    mais.hidden = !abre;
+    e.currentTarget.setAttribute('aria-expanded', String(abre));
+    e.currentTarget.textContent = t(abre ? 'verMenos' : 'verTudo');
+    if (abre) $$('.trilho', mais).forEach(tr => { tr.classList.add('entra'); });
   });
 
   $('#fecharFicha').addEventListener('click', () => fecharFicha());
