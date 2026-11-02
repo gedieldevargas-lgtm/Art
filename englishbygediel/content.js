@@ -6,15 +6,12 @@ window.EBG = {
   // fileira = a fileira que vem logo abaixo. Em Jogos e Prompts o destaque vira o 1º produto do painel. perfil = o foco que o catálogo usa;
   // ir = pra onde o catálogo leva logo depois (#fileira ou id de item). recorte = foto sem fundo saindo da moldura (h = altura).
   modos: [
-    // o Prisma é a porta do método: vem primeiro e ganha a marca "Comece aqui"
-    { id: 'prisma',      nome: 'Modo Prisma',      perfil: 'fala',     img: 'img/modo-prisma.webp',   marca: 'Comece aqui', destaque: 'diagtestes', fileira: 'programa' },
-    { id: 'fala',        nome: 'Modo Fala',        perfil: 'fala',     img: 'img/modo-meet.webp', destaque: 'salas', fileira: 'programa' },
+    // o Teste (Prisma + Bússola) é a porta do método: vem primeiro e ganha a marca "Comece aqui"
+    { id: 'teste',       nome: 'Modo Teste',       perfil: 'zero',     img: 'img/modo-prisma.webp',   marca: 'Comece aqui', destaque: 'diagtestes', fileira: 'programa' },
     { id: 'carreira',    nome: 'Modo Carreira',    perfil: 'trabalho', img: 'img/modo-trabalho.webp', recorte: 122, verde: true, destaque: 'particular', fileira: 'alunos' },
     { id: 'viagem',      nome: 'Modo Viagem',      perfil: 'viagem',   img: 'img/modo-viagem.webp',   recorte: 86, destaque: 'toronto', fileira: 'intercambio' },
     { id: 'fe',          nome: 'Modo Fé',          perfil: 'fe',       img: 'img/modo-fe.webp',       recorte: 104, verde: true, destaque: 'eom', fileira: 'eom' },
     { id: 'zero',        nome: 'Modo Zero',        perfil: 'zero',     img: 'img/modo-zero.webp',     recorte: 112, destaque: 'teste', fileira: 'gratis' },
-    { id: 'cultura',     nome: 'Modo Cultura',     perfil: 'fala',     img: 'img/modo-cultura.webp',  verde: true, destaque: 'liveterca', fileira: 'culture' },
-    { id: 'nivel',       nome: 'Modo Nível',       perfil: 'zero',     img: 'img/modo-nivel.webp',    destaque: 'teste', fileira: 'gratis' },
     { id: 'intercambio', nome: 'Modo Intercâmbio', perfil: 'viagem',   img: 'img/modo-toronto.webp',  verde: true, destaque: 'toronto', fileira: 'intercambio' },
     // as fileiras Jogos e Prompts nascem dos produtos cadastrados no painel com esses segmentos
     { id: 'jogos',       nome: 'Modo Jogos',       perfil: 'zero',     img: 'img/modo-jogos.webp',    destaque: 'teste', fileira: 'jogos' },

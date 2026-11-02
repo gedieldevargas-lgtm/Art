@@ -91,9 +91,8 @@ window.EBG_UI = {
 };
 
 window.EBG_EN = {
-  modos: [{ nome: 'Prisma Mode', marca: 'Start here' }, { nome: 'Speaking Mode' }, { nome: 'Career Mode' }, { nome: 'Travel Mode' }, { nome: 'Faith Mode' },
-    { nome: 'Start Mode' }, { nome: 'Culture Mode' }, { nome: 'Level Mode' }, { nome: 'Exchange Mode' },
-    { nome: 'Games Mode' }, { nome: 'Prompts Mode' }],
+  modos: [{ nome: 'Test Mode', marca: 'Start here' }, { nome: 'Career Mode' }, { nome: 'Travel Mode' }, { nome: 'Faith Mode' },
+    { nome: 'Start Mode' }, { nome: 'Exchange Mode' }, { nome: 'Games Mode' }, { nome: 'Prompts Mode' }],
   perfis: [
     { nome: 'Unlock your speaking' }, { nome: 'English for work' }, { nome: 'Travel with confidence' },
     { nome: 'Christian English' }, { nome: 'Start from zero' }
