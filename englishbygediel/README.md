@@ -73,9 +73,17 @@ Página só sua, com login: `SEU-SITE/admin`. Três abas:
 - **Contatos**: cada pessoa cadastrada com botões de WhatsApp (mensagem pronta com o nome e o modo), e-mail e Direct do Instagram. Busca, filtro por modo, filtro "só quem clicou na mentoria" e botão pra baixar a planilha.
 - **Produtos**: adicionar, editar, esconder e apagar. Cada produto tem título, segmento (a fileira onde aparece; segmento novo vira fileira nova, como Jogos e Prompts), tipo (grátis, pago, só na mentoria ou em breve), preço, link, texto do botão, descrição, ordem e capa (envia a imagem ou cola o link). O que você salva aparece na landing na próxima visita. Produto grátis pede o contato antes de abrir o link.
 
+- **Agenda**: abra horários da consultoria gratuita (dias da semana, horários, duração e por quantas semanas). Cada reserva aparece com o nome, o modo e um botão de WhatsApp com a mensagem de confirmação pronta. "Cancelar" libera o horário de novo.
+
+Cada produto também tem **"Aparece nos modos"**: marque em quais páginas de modo ele entra. Produto sem modo marcado aparece só no Menu.
+
+### A página de cada modo
+
+Ao ligar um modo, a pessoa vê: voltar aos modos, o nome do modo, "Pra você no Modo X" (o que é daquele modo), Jogos do modo, depoimentos do modo, a consultoria gratuita com dia e horário, e a mentoria completa no fim. O botão **Menu** (no topo) mostra tudo por categoria: todos os depoimentos, todos os conteúdos grátis, cada segmento do painel (E-books, Prompts, Jogos…) e as trilhas. Os itens fixos do catálogo dizem seus modos em `content.js` (`modos: [...]`).
+
 ### Ligar o painel (uma vez)
 
-1. Supabase → **SQL Editor** → New query: cole `supabase/admin.sql` e clique em **Run**.
+1. Supabase → **SQL Editor** → New query: cole `supabase/admin.sql` e clique em **Run**. Depois, numa nova query, cole `supabase/agenda.sql` e clique em **Run**.
 2. Supabase → **Authentication → Users → Add user → Create new user**: seu e-mail (`gedieldevargas@gmail.com`) e uma senha. Marque **Auto Confirm User**.
 3. Abra `SEU-SITE/admin` e entre com esse e-mail e senha.
 

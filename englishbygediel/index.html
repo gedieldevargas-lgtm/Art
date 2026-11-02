@@ -12,7 +12,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Geist:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="img/vitrine-gediel.webp">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body data-tela="entrada">
@@ -64,35 +63,48 @@
 <main class="tela catalogo" id="catalogo" aria-label="Catálogo">
   <header class="topo" id="topo">
     <a class="marca" href="#inicio">english<b>by</b>gediel</a>
-    <nav class="atalhos" aria-label="Seções">
-      <a href="#mentoria" data-i18n="navMentoria">A mentoria</a>
-      <a href="#fileira-alunos" data-i18n="navAlunos">Alunos</a>
-      <a href="#fileira-gratis" data-i18n="navGratis">Grátis</a>
-    </nav>
-    <button class="idioma" type="button" data-idioma data-i18n="idiomaOutro" data-i18n-aria="idiomaAria">English</button>
     <nav class="redes" data-i18n-aria="redes" aria-label="Outros canais"></nav>
-    <button class="avatar" id="avatar" aria-label="Trocar perfil"></button>
+    <button class="idioma" type="button" data-idioma data-i18n="idiomaOutro" data-i18n-aria="idiomaAria">English</button>
+    <button class="botao-menu" type="button" id="abrirMenu" aria-haspopup="dialog">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span data-i18n="menu">Menu</span>
+    </button>
   </header>
 
-  <!-- topo: o principal do modo ligado (muda com o modo) -->
-  <section class="vitrine" id="inicio">
-    <div class="vitrine-fotos" aria-hidden="true">
-      <img id="vitrineImg" src="img/vitrine-gediel.webp" alt="" width="1024" height="1536" fetchpriority="high" decoding="async">
-    </div>
-    <div class="vitrine-texto">
-      <p class="vitrine-selo"><span class="ponto"></span> <span id="vitrineSelo"></span></p>
-      <h1 class="vitrine-titulo" id="vitrineTitulo"></h1>
-      <p class="vitrine-meta" id="vitrineMeta"></p>
-      <p class="vitrine-sinopse" id="vitrineSinopse"></p>
-      <div class="vitrine-acoes" id="vitrineAcoes"></div>
-    </div>
+  <!-- página do modo ligado: só o que é pertinente a ele. O resto fica no Menu. -->
+  <section class="pagina-modo" id="inicio">
+    <button class="voltar-modos" type="button" id="voltarModos">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span data-i18n="voltarModos">Voltar aos modos</span>
+    </button>
+    <p class="pm-selo"><span class="ponto"></span> <span data-i18n="ligadoAgora">Ligado agora</span></p>
+    <h1 class="pm-titulo" id="pmTitulo"></h1>
+    <p class="pm-texto" id="pmTexto"></p>
   </section>
 
   <div class="fileiras" id="fileiras"></div>
-  <div class="ver-tudo">
-    <button class="botao botao-cinza" type="button" id="verTudo" aria-expanded="false" aria-controls="fileirasMais" data-i18n="verTudo">Ver tudo do englishbygediel</button>
-  </div>
-  <div class="fileiras" id="fileirasMais" hidden></div>
+
+  <!-- consultoria gratuita: dia e horário que o Gediel abriu no painel -->
+  <section class="consultoria" id="consultoria" aria-labelledby="consultoriaTitulo">
+    <h2 id="consultoriaTitulo" data-i18n="consultoriaTitulo">Marque uma consultoria gratuita</h2>
+    <p class="consultoria-texto" data-i18n="consultoriaTexto">Uma conversa com o Gediel pra entender o seu momento no inglês e montar o seu próximo passo. Sem custo e sem compromisso.</p>
+    <div class="agenda" id="agenda">
+      <div class="agenda-bloco">
+        <h3 data-i18n="agendaDia">Escolha o dia</h3>
+        <div class="agenda-dias" id="agendaDias" role="listbox" aria-labelledby="consultoriaTitulo"></div>
+      </div>
+      <div class="agenda-bloco">
+        <h3 data-i18n="agendaHora">Escolha o horário</h3>
+        <div class="agenda-horas" id="agendaHoras"></div>
+      </div>
+    </div>
+    <div class="agenda-acao">
+      <button class="botao botao-cheio" type="button" id="reservar" disabled data-i18n="reservarEscolha">Escolha um dia e um horário</button>
+    </div>
+    <div class="agenda-vazia" id="agendaVazia" hidden>
+      <p data-i18n="agendaVazia">Os horários desta semana já foram preenchidos. Chame o Gediel no WhatsApp que ele encontra um horário pra você.</p>
+      <button class="botao botao-cinza botao-whats" type="button" data-whats="whatsConsultoria"><span data-i18n="chamarWhats">Chamar no WhatsApp</span></button>
+    </div>
+    <div class="agenda-ok" id="agendaOk" hidden role="status"></div>
+  </section>
 
   <!-- final: a mentoria como uma landing própria -->
   <section class="mentoria-final" id="mentoria" aria-labelledby="mentoriaTitulo"></section>
@@ -120,6 +132,16 @@
   <button class="botao botao-cinza barra-whats" type="button" data-whats="whatsMentoria" aria-label="Tirar dúvida no WhatsApp" data-i18n-aria="duvidaAria"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg></button>
   <button class="botao botao-cheio" type="button" data-cta="mentoria" data-acao-cta='{"acao":"checkout"}' data-i18n="vaga">Quero minha vaga</button>
 </div>
+
+<!-- Menu: tudo o que existe, por categoria -->
+<div class="menu-fundo" id="menuFundo" hidden></div>
+<nav class="menu" id="menu" aria-label="Menu" hidden>
+  <div class="menu-cabeca">
+    <p class="marca">english<b>by</b>gediel</p>
+    <button class="fechar" type="button" id="fecharMenu" aria-label="Fechar menu" data-i18n-aria="fechar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <ul class="menu-lista" id="menuLista" role="list"></ul>
+</nav>
 
 <!-- Ficha do título (estilo "mais informações") -->
 <div class="ficha-fundo" id="fichaFundo" hidden></div>

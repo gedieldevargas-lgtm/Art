@@ -149,3 +149,30 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--a
   .topo-dir .link:first-child { display: none; }
   .abas { order: 3; width: 100%; }
 }
+
+/* modos no produto */
+.modos-check { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; }
+.modos-check legend { font-size: .8125rem; color: var(--muted); margin-bottom: 8px; }
+.modos-check legend small { opacity: .7; }
+#p_modos { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+
+/* agenda */
+.abrir-horarios { display: flex; flex-direction: column; gap: 14px; }
+.dias-semana { display: flex; flex-wrap: wrap; gap: 6px; }
+.dia input { position: absolute; opacity: 0; pointer-events: none; }
+.dia span { display: inline-flex; min-width: 52px; min-height: 40px; align-items: center; justify-content: center; border-radius: 8px; background: var(--surface-2); color: var(--muted); cursor: pointer; }
+.dia input:checked + span { background: var(--verde-escuro); color: #fff; }
+.dia input:focus-visible + span { outline: 2px solid var(--azul-claro); }
+.linha3 { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 12px; }
+.abrir-horarios .botao { align-self: flex-start; }
+.agenda-lista { display: grid; gap: 18px; }
+.agenda-dia-admin h4 { margin: 0 0 8px; font-weight: 500; color: var(--muted); }
+.slots { display: flex; flex-wrap: wrap; gap: 8px; }
+.slot { display: inline-flex; align-items: center; gap: 8px; padding: 6px 8px 6px 12px; border-radius: 8px; background: var(--surface-2); font-size: .875rem; }
+.slot button { color: var(--muted); padding: 2px 6px; border-radius: 6px; }
+.slot button:hover { color: var(--ink); background: var(--surface-3); }
+.slot.reservado { background: var(--verde-escuro); color: #fff; flex-wrap: wrap; }
+.slot.reservado small { opacity: .8; }
+.slot .whats { display: inline-flex; align-items: center; gap: 4px; color: #fff; text-decoration: none; padding: 2px 8px; border-radius: 6px; background: rgba(255,255,255,.14); }
+.slot .whats svg { width: 14px; height: 14px; fill: currentColor; }
+@media (max-width: 720px) { .linha3 { grid-template-columns: 1fr 1fr; } }

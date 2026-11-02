@@ -25,6 +25,13 @@ window.EBG_UI = {
     whatsConversar: 'Oi Gediel! Vim pelo catálogo e quero conversar sobre o meu caso.',
     whatsRodape: 'Oi Gediel! Vim pelo catálogo.',
     perguntasTitulo: 'Perguntas de quem está chegando',
+    menu: 'Menu', voltarModos: 'Voltar aos modos', ligadoAgora: 'Ligado agora', conteudosModo: 'Pra você no {modo}', jogos: 'Jogos', modoVazio: 'Os conteúdos deste modo estão chegando. Abra o Menu pra ver tudo o que já existe.',
+    menuDepoimentos: 'Todos os depoimentos', menuGratis: 'Todos os conteúdos grátis',
+    consultoriaTitulo: 'Marque uma consultoria gratuita', consultoriaTexto: 'Uma conversa com o Gediel pra entender o seu momento no inglês e montar o seu próximo passo. Sem custo e sem compromisso.',
+    agendaDia: 'Escolha o dia', agendaHora: 'Escolha o horário', reservarEscolha: 'Escolha um dia e um horário', reservarEm: 'Reservar {dia} às {hora}', reservarQuando: '{dia}, às {hora}',
+    agendaVazia: 'Os horários desta semana já foram preenchidos. Chame o Gediel no WhatsApp que ele encontra um horário pra você.', chamarWhats: 'Chamar no WhatsApp',
+    agendaOcupado: 'Esse horário acabou de ser reservado. Escolha outro.', agendaOkTitulo: 'Consultoria marcada!', agendaOkTexto: 'O Gediel vai te chamar no WhatsApp pra confirmar.',
+    whatsConsultoria: 'Oi Gediel! Quero marcar uma consultoria gratuita.', whatsConsultoriaMarcada: 'Oi Gediel! Acabei de marcar a consultoria gratuita: {quando}.',
     secaoEmBreve: 'Essa seção chega em breve.', verTudo: 'Ver tudo do englishbygediel', verMenos: 'Mostrar menos', proximoPasso: 'O próximo passo', conhecerMentoria: 'Conhecer a mentoria', quero: 'Quero esse', abrirMaterial: 'Abrir o material', meAvise: 'Me avise quando lançar', whatsAvise: 'Oi Gediel! Quero ser avisado quando {item} lançar.',
     pctVoce: '% pra você', gratis: 'Grátis', seloMentoria: 'Mentoria', emBreve: 'Em breve', exclusivo: 'Exclusivo',
     resultadoAluno: 'Resultado de aluno', voltar: 'Voltar', avancar: 'Avançar', fechar: 'Fechar', assistir: 'Assistir',
@@ -68,6 +75,13 @@ window.EBG_UI = {
     whatsConversar: "Hi Gediel! I found you through the catalog and I'd like to talk about my case.",
     whatsRodape: 'Hi Gediel! I found you through the catalog.',
     perguntasTitulo: 'Questions from people just arriving',
+    menu: 'Menu', voltarModos: 'Back to modes', ligadoAgora: 'On now', conteudosModo: 'For you in {modo}', jogos: 'Games', modoVazio: "This mode's content is coming. Open the Menu to see everything that's already here.",
+    menuDepoimentos: 'All testimonials', menuGratis: 'All free content',
+    consultoriaTitulo: 'Book a free consultation', consultoriaTexto: 'A conversation with Gediel to understand where you are in English and plan your next step. Free, no strings attached.',
+    agendaDia: 'Choose the day', agendaHora: 'Choose the time', reservarEscolha: 'Choose a day and a time', reservarEm: 'Book {dia} at {hora}', reservarQuando: '{dia}, at {hora}',
+    agendaVazia: "This week's slots are full. Message Gediel on WhatsApp and he'll find a time for you.", chamarWhats: 'Message on WhatsApp',
+    agendaOcupado: 'That slot was just taken. Please choose another.', agendaOkTitulo: 'Consultation booked!', agendaOkTexto: 'Gediel will message you on WhatsApp to confirm.',
+    whatsConsultoria: "Hi Gediel! I'd like to book a free consultation.", whatsConsultoriaMarcada: 'Hi Gediel! I just booked the free consultation: {quando}.',
     secaoEmBreve: 'This section is coming soon.', verTudo: 'See everything from englishbygediel', verMenos: 'Show less', proximoPasso: 'The next step', conhecerMentoria: 'See the mentorship', quero: 'I want this', abrirMaterial: 'Open the material', meAvise: 'Let me know when it launches', whatsAvise: 'Hi Gediel! Let me know when {item} launches.',
     pctVoce: '% match', gratis: 'Free', seloMentoria: 'Mentorship', emBreve: 'Coming soon', exclusivo: 'Exclusive',
     resultadoAluno: 'Student result', voltar: 'Back', avancar: 'Forward', fechar: 'Close', assistir: 'Watch',
@@ -91,6 +105,16 @@ window.EBG_UI = {
 };
 
 window.EBG_EN = {
+  textoModo: {
+    teste: 'Start here: find out your type of intelligence and your English level. That is how the right path for you shows up.',
+    carreira: 'Meetings, clients, promotions. Content so you take part in English instead of staying silent.',
+    viagem: 'Airport, hotel, restaurant, the unexpected. Street English, so you travel without freezing.',
+    fe: 'English with the Bible: devotionals, verses and the vocabulary of faith, the way you live it.',
+    zero: 'Never studied, or stopped halfway? This is the right start, one step at a time.',
+    intercambio: 'Exchange programs and group trips with Infly, and everything to get you there prepared.',
+    jogos: 'Learn by playing: quick games to lock in vocabulary and structures without noticing.',
+    prompts: 'Ready-made prompts to practice English with AI, every day.'
+  },
   modos: [{ nome: 'Test Mode', marca: 'Start here' }, { nome: 'Career Mode' }, { nome: 'Travel Mode' }, { nome: 'Faith Mode' },
     { nome: 'Start Mode' }, { nome: 'Exchange Mode' }, { nome: 'Games Mode' }, { nome: 'Prompts Mode' }],
   perfis: [

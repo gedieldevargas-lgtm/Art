@@ -161,7 +161,7 @@
       const id = 'p-' + p.id;
       const capa = urlSegura(p.capa_url);
       const it = {
-        produto: true, titulo: p.titulo, trilha: p.segmento, sinopse: p.descricao || '',
+        produto: true, titulo: p.titulo, trilha: p.segmento, sinopse: p.descricao || '', modos: Array.isArray(p.modos) ? p.modos : [],
         img: capa, capa: capa ? undefined : 'texto', cor: '#15244a',
         meta: p.tipo === 'pago' ? [p.preco || t('disponivel')] : p.tipo === 'gratis' ? [t('gratis')] : [p.segmento]
       };
@@ -183,7 +183,7 @@
       }
       if (!f.itens.includes(id)) f.itens = [...f.itens, id];
     });
-    if (catalogoMontado && document.body.dataset.tela === 'catalogo') { montarVitrine(); montarFileiras(); }
+    if (catalogoMontado && document.body.dataset.tela === 'catalogo') { montarFileiras(); montarMenu(); }
   }
 
   function registrar(tipo, item = null, detalhe = null) {
@@ -200,10 +200,6 @@
   const perfilDe = id => C.perfis.find(p => p.id === id) || C.perfis[0];
   const primeiroNome = () => ((estado.lead || estado.dados || {}).nome || '').trim().split(/\s+/)[0] || '';
   const combina = item => Math.round(60 + ((item.peso && item.peso[estado.perfil]) || 7) * 3.8);
-
-  function pintarPerfil(el) {
-    el.innerHTML = `<img src="${modoDe(estado.modo).img}" alt="">`;
-  }
 
   function linkWhats(texto) {
     const nome = primeiroNome();
@@ -366,10 +362,10 @@
 
   // bônus grátis pedem nome e contato antes. Compra e conversa no WhatsApp nunca são travadas.
   function pedeCadastro(cta, id) {
-    if (estado.lead) return false;
+    if (estado.lead && (cta.acao !== 'reservar' || estado.lead.whatsapp)) return false;
     const it = C.itens[id] || {};
     // e-books e materiais grátis cadastrados no painel também pedem o contato antes de abrir
-    return cta.acao === 'teste' || cta.acao === 'prisma' || (cta.acao === 'whatsapp' && it.grupo)
+    return cta.acao === 'teste' || cta.acao === 'prisma' || cta.acao === 'reservar' || (cta.acao === 'whatsapp' && it.grupo)
       || (cta.acao === 'link' && it.produto && it.tipo === 'gratis');
   }
 
@@ -390,7 +386,8 @@
   function criarLead() {
     const lead = { ...estado.dados, objetivo: estado.perfil || 'fala', modo: estado.modo || null };
     estado.lead = lead;
-    guarda.gravar('ebg:lead', { id: lead.id, nome: lead.nome, objetivo: lead.objetivo });
+    // fica no aparelho da própria pessoa: assim ela marca a consultoria sem preencher de novo
+    guarda.gravar('ebg:lead', { id: lead.id, nome: lead.nome, objetivo: lead.objetivo, whatsapp: lead.whatsapp, email: lead.email, instagram: lead.instagram });
     enfileirar('leads', lead);
     estado.antes.splice(0).forEach(e => enfileirar('events', { lead_id: lead.id, ...e }));
     const p = estado.pendente;
@@ -591,10 +588,10 @@
 
   function abrirCatalogo() {
     if (document.body.dataset.tela !== 'catalogo') irPara('catalogo');
-    pintarPerfil($('#avatar'));
-    $('#avatar').setAttribute('aria-label', t('perfilAria', { nome: modoDe(estado.modo).nome }));
-    montarVitrine();
+    montarPaginaModo();
     montarFileiras();
+    montarMenu();
+    carregarHorarios();
     montarMentoriaFinal();
     montarPerguntas();
     if (!catalogoMontado) {
@@ -640,44 +637,162 @@
     </button>`;
   }
 
-  // Topo do catálogo: o principal do modo ligado. Em Jogos e Prompts, o 1º produto cadastrado no painel.
-  function destaqueDoModo() {
+  // Página do modo: só o que é pertinente ao modo ligado (item.modos ou, nos produtos do painel, p.modos).
+  // Tudo o mais continua acessível pelo Menu.
+  const doModo = (it, m) => (it.modos || []).includes(m.id);
+  const ehJogo = it => /^jogos?$/i.test(String(it.trilha || '').trim()) && it.produto;
+  const segmentoDe = it => String(it.trilha || '').trim().toLowerCase();
+
+  function montarPaginaModo() {
     const m = modoDe(estado.modo);
-    const f = C.fileiras.find(x => x.id === m.fileira);
-    if (f && f.itens.length && !C.itens[m.destaque]?.produto && m.fileira.match(/^(jogos|prompts)$/)) return f.itens[0];
-    return C.itens[m.destaque] ? m.destaque : 'teste';
+    $('#pmTitulo').textContent = m.nome;
+    $('#pmTexto').textContent = C.textoModo?.[m.id] || C.perfilTexto[m.perfil] || '';
   }
 
-  function montarVitrine() {
+  function itensDoModo() {
     const m = modoDe(estado.modo);
-    const id = destaqueDoModo();
-    const it = C.itens[id];
-    const img = $('#vitrineImg');
-    const foto = it.imgLarga || it.img;
-    img.src = foto || 'img/vitrine-gediel.webp';
-    img.alt = foto ? '' : 'Gediel Vargas';
-    $('#vitrineSelo').textContent = t('modoLigado', { modo: m.nome });
-    $('#vitrineTitulo').textContent = it.titulo;
-    $('#vitrineMeta').innerHTML = [it.tipo === 'gratis' ? `<span class="combina">${t('gratis')}</span>` : '', ...(it.meta || []).map(x => `<span>${esc(x)}</span>`)].join('');
-    $('#vitrineSinopse').textContent = it.sinopse || '';
-    // botão principal: a ação do próprio item; trancado leva pra mentoria lá embaixo
-    const principal = it.bloqueado ? { rotulo: t('conhecerMentoria'), acao: 'ficha', alvo: 'mentoria' } : it.cta;
-    $('#vitrineAcoes').innerHTML = (principal ? botaoCta(principal, id, 'botao-cheio') : '')
-      + (it.cta2 ? botaoCta(it.cta2, id, 'botao-claro') : '')
-      + `<button class="botao botao-cinza" type="button" data-abrir="${id}">${t('detalhes')}</button>`;
+    const ids = Object.keys(C.itens).filter(k => k !== 'mentoria');
+    const vale = k => { const it = C.itens[k]; return it.tipo !== 'etapa' && !it.indisponivel; };
+    let conteudo, jogos, alunos;
+    if (m.id === 'jogos' || m.id === 'prompts') {
+      // Modo Jogos e Modo Prompts: todos os produtos desse segmento
+      const seg = m.id === 'jogos' ? /^jogos?$/ : /^prompts?$/;
+      conteudo = ids.filter(k => C.itens[k].produto && seg.test(segmentoDe(C.itens[k])));
+      jogos = m.id === 'prompts' ? ids.filter(k => ehJogo(C.itens[k])) : [];
+      alunos = [];
+    } else {
+      conteudo = ids.filter(k => vale(k) && doModo(C.itens[k], m) && C.itens[k].tipo !== 'aluno' && !ehJogo(C.itens[k]));
+      jogos = ids.filter(k => ehJogo(C.itens[k]) && doModo(C.itens[k], m));
+      alunos = ids.filter(k => C.itens[k].tipo === 'aluno' && doModo(C.itens[k], m));
+    }
+    // o destaque do modo vem primeiro; depois o que é grátis ou aberto; trancados por último
+    const peso = k => (k === m.destaque ? 0 : C.itens[k].tipo === 'gratis' || C.itens[k].aberto ? 1 : C.itens[k].bloqueado ? 3 : 2);
+    conteudo.sort((a, b) => peso(a) - peso(b));
+    return { m, conteudo, jogos, alunos };
   }
 
-  // só o essencial aparece: a fileira do modo e três fixas. O resto fica atrás de "Ver tudo".
-  const PRINCIPAIS = ['gratis', 'alunos', 'programa'];
   function montarFileiras() {
-    const m = modoDe(estado.modo);
-    const ordem = [m.fileira, ...PRINCIPAIS].filter((x, i, a) => a.indexOf(x) === i);
-    const visiveis = ordem.map(id => C.fileiras.find(f => f.id === id)).filter(Boolean);
-    const resto = C.fileiras.filter(f => !f.dinamica && !visiveis.includes(f));
-    $('#fileiras').innerHTML = visiveis.map(htmlFileira).join('');
-    $('#fileirasMais').innerHTML = resto.map(htmlFileira).join('');
+    const { m, conteudo, jogos, alunos } = itensDoModo();
+    const fileiras = [
+      { id: 'modo', titulo: t('conteudosModo', { modo: m.nome }), formato: 'poster', itens: conteudo },
+      { id: 'jogos', titulo: t('jogos'), formato: 'quadrado', itens: jogos },
+      { id: 'alunos', titulo: t('alunos'), formato: 'poster', itens: alunos, acoes: (C.fileiras.find(f => f.id === 'alunos') || {}).acoes }
+    ].filter(f => f.itens.length);
+    $('#fileiras').innerHTML = fileiras.length ? fileiras.map(htmlFileira).join('')
+      : `<p class="modo-vazio">${t('modoVazio')}</p>`;
     $$('.trilho').forEach(t => observador && observador.observe(t));
     $$('.trilho').forEach(ligarTrilho);
+  }
+
+  /* ---------------- Menu: tudo, por categoria ---------------- */
+  function categorias() {
+    const todos = Object.keys(C.itens).filter(k => k !== 'mentoria' && C.itens[k].tipo !== 'etapa');
+    const lista = [
+      { id: 'alunos', rotulo: t('menuDepoimentos'), itens: todos.filter(k => C.itens[k].tipo === 'aluno') },
+      { id: 'gratis', rotulo: t('menuGratis'), itens: todos.filter(k => C.itens[k].tipo === 'gratis') }
+    ];
+    // segmentos dos produtos do painel (Prompts, Jogos, E-books, Mini cursos…) e as trilhas do catálogo
+    const segs = {};
+    todos.forEach(k => { const it = C.itens[k]; if (it.produto) (segs[it.trilha] = segs[it.trilha] || []).push(k); });
+    Object.keys(segs).sort().forEach(sg => lista.push({ id: 'seg-' + sg, rotulo: sg, itens: segs[sg] }));
+    C.fileiras.filter(f => !f.dinamica && !['alunos', 'gratis'].includes(f.id)).forEach(f => {
+      const itens = f.itens.filter(k => C.itens[k] && !C.itens[k].produto);
+      if (itens.length && !lista.some(x => x.rotulo === f.titulo)) lista.push({ id: 'f-' + f.id, rotulo: f.titulo, itens });
+    });
+    return lista.filter(x => x.itens.length);
+  }
+
+  function montarMenu() {
+    $('#menuLista').innerHTML = categorias().map(c =>
+      `<li><button type="button" data-categoria="${esc(c.id)}"><span>${esc(c.rotulo)}</span><small>${c.itens.length}</small></button></li>`).join('')
+      + `<li class="menu-sep"><button type="button" data-menu-ir="consultoria"><span>${t('consultoriaTitulo')}</span></button></li>
+         <li><button type="button" data-menu-ir="mentoria"><span>${t('vitrine1')} ${t('vitrine2')}</span></button></li>
+         <li><button type="button" data-menu-ir="modos"><span>${t('voltarModos')}</span></button></li>`;
+  }
+
+  function abrirMenu() { $('#menu').hidden = false; $('#menuFundo').hidden = false; document.body.style.overflow = 'hidden'; $('#fecharMenu').focus(); }
+  function fecharMenu() { $('#menu').hidden = true; $('#menuFundo').hidden = true; if (!fichaAberta) document.body.style.overflow = ''; }
+
+  function abrirCategoria(id) {
+    const c = categorias().find(x => x.id === id);
+    if (!c) return;
+    fecharMenu();
+    registrar('abriu', 'menu:' + c.id);
+    abrirFicha('lista', `<div class="ficha-corpo lista-categoria"><h2 id="fichaTitulo">${esc(c.rotulo)}</h2>
+      <div class="grade-cards">${c.itens.map((k, i) => cardHTML(k, 'poster', i)).join('')}</div></div>`);
+  }
+
+  function voltarAosModos() {
+    fecharMenu();
+    if (fichaAberta) fecharFicha();
+    perguntarFoco();
+    irPara('entrada');
+  }
+
+  /* ---------------- consultoria gratuita: agenda ---------------- */
+  const agenda = { horarios: [], dia: null, horario: null };
+  const fmtDia = d => { const x = d.toLocaleDateString(idioma === 'en' ? 'en-US' : 'pt-BR', { weekday: 'short', day: 'numeric', month: 'short' }).replace(/\./g, ''); return x.charAt(0).toUpperCase() + x.slice(1); };
+  const fmtHora = d => d.toLocaleTimeString(idioma === 'en' ? 'en-US' : 'pt-BR', { hour: '2-digit', minute: '2-digit' });
+  const chaveDia = d => `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+
+  async function carregarHorarios() {
+    if (!supabaseAtivo) return desenharAgenda();
+    try {
+      const agora = new Date(Date.now() + 30 * 60e3).toISOString();   // não oferece horário que começa em menos de 30 min
+      const r = await fetch(`${CFG.supabaseUrl.replace(/\/$/, '')}/rest/v1/horarios?select=id,inicio,duracao_min&reservado=eq.false&inicio=gt.${encodeURIComponent(agora)}&order=inicio.asc&limit=300`, {
+        headers: { apikey: CFG.supabaseAnonKey, Authorization: `Bearer ${CFG.supabaseAnonKey}` }
+      });
+      agenda.horarios = r.ok ? (await r.json()).map(h => ({ ...h, data: new Date(h.inicio) })) : [];
+    } catch (e) { agenda.horarios = []; }
+    desenharAgenda();
+  }
+
+  function desenharAgenda() {
+    const dias = [];
+    agenda.horarios.forEach(h => { const k = chaveDia(h.data); if (!dias.some(d => d.k === k)) dias.push({ k, data: h.data }); });
+    const vazio = !dias.length;
+    $('#agenda').hidden = vazio;
+    $('.agenda-acao').hidden = vazio;
+    $('#agendaVazia').hidden = !vazio;
+    if (vazio) return;
+    if (!dias.some(d => d.k === agenda.dia)) { agenda.dia = dias[0].k; agenda.horario = null; }
+    $('#agendaDias').innerHTML = dias.map(d => `<button type="button" role="option" class="agenda-dia" data-dia="${d.k}" aria-selected="${d.k === agenda.dia}">${esc(fmtDia(d.data))}</button>`).join('');
+    const doDia = agenda.horarios.filter(h => chaveDia(h.data) === agenda.dia);
+    $('#agendaHoras').innerHTML = doDia.map(h => `<button type="button" class="agenda-hora" data-horario="${h.id}" aria-pressed="${h.id === agenda.horario}">${esc(fmtHora(h.data))}</button>`).join('');
+    const h = agenda.horarios.find(x => x.id === agenda.horario);
+    const b = $('#reservar');
+    b.disabled = !h;
+    b.textContent = h ? t('reservarEm', { dia: fmtDia(h.data), hora: fmtHora(h.data) }) : t('reservarEscolha');
+  }
+
+  async function reservar(idHorario) {
+    const h = agenda.horarios.find(x => x.id === idHorario);
+    if (!h || !estado.lead) return;
+    const l = estado.lead;
+    const b = $('#reservar');
+    b.disabled = true;
+    let ok = false;
+    try {
+      const r = await fetch(`${CFG.supabaseUrl.replace(/\/$/, '')}/rest/v1/rpc/reservar_horario`, {
+        method: 'POST',
+        headers: { apikey: CFG.supabaseAnonKey, Authorization: `Bearer ${CFG.supabaseAnonKey}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ p_horario: h.id, p_nome: l.nome, p_whatsapp: l.whatsapp, p_email: l.email || null, p_instagram: l.instagram || null, p_modo: estado.modo || null, p_lead: l.id })
+      });
+      ok = r.ok && (await r.json()) === true;
+    } catch (e) { ok = false; }
+    if (!ok) {
+      aviso(t('agendaOcupado'));
+      agenda.horario = null;
+      return carregarHorarios();
+    }
+    registrar('clicou', 'consultoria', { inicio: h.inicio });
+    const quando = t('reservarQuando', { dia: fmtDia(h.data), hora: fmtHora(h.data) });
+    $('#agenda').hidden = true;
+    $('.agenda-acao').hidden = true;
+    const okBox = $('#agendaOk');
+    okBox.hidden = false;
+    okBox.innerHTML = `<h3>${t('agendaOkTitulo')}</h3><p>${esc(quando)}</p><p>${t('agendaOkTexto')}</p>
+      <button class="botao botao-cinza botao-whats" type="button" data-whats-texto="${esc(t('whatsConsultoriaMarcada', { quando }))}">${WHATS}<span>${t('chamarWhats')}</span></button>`;
   }
 
   function htmlFileira(f) {
@@ -834,7 +949,7 @@
       es.forEach(e => { vis[e.target.dataset.barra] = e.isIntersecting; });
       atualizarBarra();
     });
-    [['.vitrine', 'vitrine'], ['#mentoria', 'mentoria'], ['.rodape', 'rodape']].forEach(([sel, nome]) => {
+    [['.pagina-modo', 'vitrine'], ['#mentoria', 'mentoria'], ['.rodape', 'rodape']].forEach(([sel, nome]) => {
       const el = $(sel); el.dataset.barra = nome; obsBarra.observe(el);
     });
     atualizarBarra = () => {
@@ -1074,6 +1189,9 @@
       case 'video':
         abrirVideo(cta.video, id, cta.vertical);
         break;
+      case 'reservar':
+        reservar(cta.horario);
+        break;
       case 'ficha':
         // a mentoria mora no fim do catálogo: em vez de abrir ficha, leva até lá
         if (cta.alvo === 'mentoria') irParaMentoria();
@@ -1096,6 +1214,8 @@
     const abrir = alvo.closest('[data-abrir]');
     if (abrir) return abrir.dataset.abrir === 'mentoria' ? irParaMentoria() : abrirFicha(abrir.dataset.abrir);
 
+    const whatsTexto = alvo.closest('[data-whats-texto]');
+    if (whatsTexto) { registrar('clicou', 'whatsapp', { de: 'consultoria' }); return abrirFora(linkWhats(whatsTexto.dataset.whatsTexto)); }
     const whats = alvo.closest('[data-whats]');
     if (whats) { e.preventDefault(); registrar('clicou', 'whatsapp', { de: 'pagina' }); return abrirFora(linkWhats(t(whats.dataset.whats))); }
 
@@ -1111,14 +1231,6 @@
     if (acao && acao.dataset.acao === 'fimHistoria') return fimHistoria(false);
   });
 
-  $('#verTudo').addEventListener('click', e => {
-    const mais = $('#fileirasMais'), abre = mais.hidden;
-    mais.hidden = !abre;
-    e.currentTarget.setAttribute('aria-expanded', String(abre));
-    e.currentTarget.textContent = t(abre ? 'verMenos' : 'verTudo');
-    if (abre) $$('.trilho', mais).forEach(tr => { tr.classList.add('entra'); });
-  });
-
   $('#fecharFicha').addEventListener('click', () => fecharFicha());
   $('#fichaFundo').addEventListener('click', () => fecharFicha());
   $('#fecharVideo').addEventListener('click', fecharVideo);
@@ -1128,6 +1240,7 @@
     if (e.key !== 'Escape') return;
     if (!$('#video').hidden) return fecharVideo();
     if (fichaAberta) fecharFicha();
+    else if (!$('#menu').hidden) fecharMenu();
   });
 
   function trocarIdioma() {
@@ -1150,9 +1263,34 @@
     }
   }
 
-  $('#avatar').addEventListener('click', () => {
-    perguntarFoco();
-    irPara('entrada');
+  $('#voltarModos').addEventListener('click', voltarAosModos);
+  $('#abrirMenu').addEventListener('click', abrirMenu);
+  $('#fecharMenu').addEventListener('click', fecharMenu);
+  $('#menuFundo').addEventListener('click', fecharMenu);
+  $('#menuLista').addEventListener('click', e => {
+    const c = e.target.closest('[data-categoria]');
+    if (c) return abrirCategoria(c.dataset.categoria);
+    const ir = e.target.closest('[data-menu-ir]');
+    if (!ir) return;
+    if (ir.dataset.menuIr === 'modos') return voltarAosModos();
+    fecharMenu();
+    const alvo = $('#' + ir.dataset.menuIr);
+    if (alvo) alvo.scrollIntoView({ behavior: reduz ? 'auto' : 'smooth', block: 'start' });
+  });
+  $('#agendaDias').addEventListener('click', e => {
+    const d = e.target.closest('[data-dia]');
+    if (!d) return;
+    agenda.dia = d.dataset.dia; agenda.horario = null;
+    desenharAgenda();
+  });
+  $('#agendaHoras').addEventListener('click', e => {
+    const h = e.target.closest('[data-horario]');
+    if (!h) return;
+    agenda.horario = h.dataset.horario;
+    desenharAgenda();
+  });
+  $('#reservar').addEventListener('click', () => {
+    if (agenda.horario) executar({ acao: 'reservar', horario: agenda.horario }, 'consultoria');
   });
 
   document.addEventListener('submit', e => { if (e.target.id === 'passoDados') enviarDados(e); });

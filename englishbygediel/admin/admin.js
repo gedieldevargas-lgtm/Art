@@ -71,6 +71,7 @@
     if (aba === 'numeros') carregarNumeros();
     if (aba === 'contatos' && !carregadas.contatos) carregarContatos();
     if (aba === 'produtos' && !carregadas.produtos) carregarProdutos();
+    if (aba === 'agenda') carregarAgenda();
   }
 
   /* ---------------- números ---------------- */
@@ -227,7 +228,8 @@
       const capa = urlSegura(p.capa_url);
       return `${cab}<button class="produto${p.ativo ? '' : ' inativo'}" type="button" data-produto="${p.id}">
         <span class="produto-capa">${capa ? `<img src="${esc(capa)}" alt="" loading="lazy">` : esc(p.titulo)}</span>
-        <span class="produto-info"><strong>${esc(p.titulo)}</strong><small>${TIPOS[p.tipo] || ''}${p.preco ? ' · ' + esc(p.preco) : ''}${p.ativo ? '' : ' · escondido'}</small></span>
+        <span class="produto-info"><strong>${esc(p.titulo)}</strong><small>${TIPOS[p.tipo] || ''}${p.preco ? ' · ' + esc(p.preco) : ''}${p.ativo ? '' : ' · escondido'}</small>
+          <small>${(p.modos || []).length ? (p.modos || []).map(id => esc(nomeModo(id).replace(/^Modo /, '') || id)).join(', ') : 'Só no Menu'}</small></span>
       </button>`;
     }).join('');
   }
@@ -244,6 +246,9 @@
     $('#p_descricao').value = p ? p.descricao || '' : '';
     $('#p_ordem').value = p ? p.ordem : 100;
     $('#p_ativo').checked = p ? p.ativo : true;
+    const marcados = p ? p.modos || [] : [];
+    $('#p_modos').innerHTML = (C.modos || []).map(m =>
+      `<label class="check"><input type="checkbox" value="${esc(m.id)}"${marcados.includes(m.id) ? ' checked' : ''}> ${esc(m.nome.replace(/^Modo /, ''))}</label>`).join('');
     $('#p_capa').value = p ? p.capa_url || '' : '';
     $('#p_arquivo').value = '';
     $('#erroProduto').textContent = '';
@@ -302,6 +307,7 @@
       descricao: $('#p_descricao').value.trim() || null,
       ordem: parseInt($('#p_ordem').value, 10) || 100,
       ativo: $('#p_ativo').checked,
+      modos: $$('#p_modos input:checked').map(i => i.value),
       capa_url: $('#p_capa').value.trim() || null
     };
     const erro = $('#erroProduto');
@@ -334,6 +340,90 @@
     carregarProdutos();
   }
 
+  /* ---------------- agenda ---------------- */
+  const DIAS = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+  $('#diasSemana').innerHTML = DIAS.map((d, i) => `<label class="dia"><input type="checkbox" value="${i}"${i >= 1 && i <= 5 ? ' checked' : ''}><span>${d}</span></label>`).join('');
+  $('#h_inicio').value = new Date(Date.now() - new Date().getTimezoneOffset() * 6e4).toISOString().slice(0, 10);
+
+  async function criarHorarios(e) {
+    e.preventDefault();
+    const erro = $('#erroHorarios');
+    const dias = $$('#diasSemana input:checked').map(i => Number(i.value));
+    const horas = $('#h_horas').value.split(/[,;\s]+/).map(x => x.trim()).filter(Boolean);
+    const ruins = horas.filter(h => !/^([01]?\d|2[0-3])[:h]?([0-5]\d)?$/.test(h));
+    if (!dias.length) { erro.textContent = 'Marque pelo menos um dia da semana.'; return; }
+    if (!horas.length || ruins.length) { erro.textContent = ruins.length ? `Horário que não entendi: ${ruins.join(', ')}. Use 09:00 ou 14:30.` : 'Escreva os horários, ex.: 09:00, 14:30.'; return; }
+    const [a, m, d] = $('#h_inicio').value.split('-').map(Number);
+    const semanas = Number($('#h_semanas').value), duracao = Number($('#h_duracao').value);
+    const linhas = [];
+    for (let i = 0; i < semanas * 7; i++) {
+      const dia = new Date(a, m - 1, d + i);
+      if (!dias.includes(dia.getDay())) continue;
+      horas.forEach(h => {
+        const [hh, mm] = h.replace('h', ':').split(':').map(Number);
+        const inicio = new Date(dia.getFullYear(), dia.getMonth(), dia.getDate(), hh, mm || 0);
+        if (inicio > new Date()) linhas.push({ inicio: inicio.toISOString(), duracao_min: duracao });
+      });
+    }
+    if (!linhas.length) { erro.textContent = 'Nenhum horário futuro nesse período.'; return; }
+    erro.textContent = '';
+    $('#criarHorarios').disabled = true;
+    // horário que já existe é ignorado: dá pra rodar de novo sem duplicar
+    const { error } = await sb.from('horarios').upsert(linhas, { onConflict: 'inicio', ignoreDuplicates: true });
+    $('#criarHorarios').disabled = false;
+    if (error) { erro.textContent = 'Não deu pra criar. Confira se o agenda.sql foi rodado no Supabase.'; return; }
+    aviso(`${linhas.length} horário(s) abertos.`);
+    carregarAgenda();
+  }
+
+  let horarios = [], reservas = {};
+  async function carregarAgenda() {
+    const desde = new Date(Date.now() - 2 * 36e5).toISOString();
+    const [h, r] = await Promise.all([
+      sb.from('horarios').select('*').gte('inicio', desde).order('inicio').limit(500),
+      sb.from('agendamentos').select('*').limit(1000)
+    ]);
+    if (h.error) { $('#agendaLista').innerHTML = '<p class="vazio">Não deu pra carregar a agenda. Confira se o agenda.sql foi rodado.</p>'; return; }
+    horarios = h.data || [];
+    reservas = Object.fromEntries((r.data || []).map(x => [x.horario_id, x]));
+    desenharAgendaAdmin();
+  }
+
+  function desenharAgendaAdmin() {
+    if (!horarios.length) { $('#agendaLista').innerHTML = '<p class="vazio">Nenhum horário aberto. Use o formulário acima.</p>'; return; }
+    const porDia = {};
+    horarios.forEach(h => { const k = new Date(h.inicio).toDateString(); (porDia[k] = porDia[k] || []).push(h); });
+    $('#agendaLista').innerHTML = Object.values(porDia).map(lista => {
+      const d = new Date(lista[0].inicio);
+      const titulo = d.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' });
+      return `<div class="agenda-dia-admin"><h4>${titulo.charAt(0).toUpperCase() + titulo.slice(1)}</h4><div class="slots">${lista.map(h => {
+        const hora = new Date(h.inicio).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+        const r = reservas[h.id];
+        if (!r) return `<span class="slot livre">${hora}<button type="button" data-tirar="${h.id}" aria-label="Fechar o horário das ${hora}">×</button></span>`;
+        const nome = String(r.nome || '').split(/\s+/)[0];
+        const msg = `Oi ${nome}! Aqui é o Gediel. Confirmando nossa consultoria gratuita ${d.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' })}, às ${hora}. Te mando o link da chamada por aqui, combinado?`;
+        return `<span class="slot reservado"><b>${hora}</b> ${esc(r.nome)}${r.modo ? ` <small>· ${esc(nomeModo(r.modo))}</small>` : ''}
+          <a class="whats" href="https://wa.me/${esc(String(r.whatsapp).replace(/\D/g, ''))}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">${ICONES.whats}Confirmar</a>
+          <button type="button" data-cancelar="${r.id}">Cancelar</button></span>`;
+      }).join('')}</div></div>`;
+    }).join('');
+  }
+
+  async function cliqueAgenda(e) {
+    const tirar = e.target.closest('[data-tirar]');
+    const cancelar = e.target.closest('[data-cancelar]');
+    const b = tirar || cancelar;
+    if (!b) return;
+    // confirmação em dois cliques, sem caixa do navegador
+    if (b.dataset.confirma !== '1') { b.dataset.confirma = '1'; b.textContent = tirar ? 'Fechar?' : 'Clique de novo'; return; }
+    const { error } = tirar
+      ? await sb.from('horarios').delete().eq('id', b.dataset.tirar)
+      : await sb.from('agendamentos').delete().eq('id', b.dataset.cancelar);
+    if (error) { aviso('Não deu pra fazer isso agora.'); return; }
+    aviso(tirar ? 'Horário fechado.' : 'Reserva cancelada. O horário voltou a ficar livre.');
+    carregarAgenda();
+  }
+
   /* ---------------- ligações ---------------- */
   $('#formEntrar').addEventListener('submit', entrar);
   $('#esqueci').addEventListener('click', esqueci);
@@ -356,6 +446,8 @@
   $('#formProduto').addEventListener('submit', salvarProduto);
   $('#cancelarProduto').addEventListener('click', () => $('#modalProduto').close());
   $('#apagarProduto').addEventListener('click', apagarProduto);
+  $('#formHorarios').addEventListener('submit', criarHorarios);
+  $('#agendaLista').addEventListener('click', cliqueAgenda);
 
   // quem já entrou antes (ou voltou do link de nova senha) cai direto no painel
   sb.auth.onAuthStateChange(async (evento) => {

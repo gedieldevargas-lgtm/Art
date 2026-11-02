@@ -34,6 +34,7 @@
       <button type="button" role="tab" data-aba="numeros" aria-selected="true">Números</button>
       <button type="button" role="tab" data-aba="contatos" aria-selected="false">Contatos</button>
       <button type="button" role="tab" data-aba="produtos" aria-selected="false">Produtos</button>
+      <button type="button" role="tab" data-aba="agenda" aria-selected="false">Agenda</button>
     </nav>
     <div class="topo-dir">
       <a class="link" href="../" target="_blank" rel="noopener">Ver a landing</a>
@@ -99,7 +100,30 @@
     <div class="grade-produtos" id="gradeProdutos"></div>
     <p class="vazio" id="vazioProdutos" hidden>Nenhum produto cadastrado ainda. Clique em "Adicionar produto".</p>
   </section>
+
+  <!-- Agenda da consultoria gratuita -->
+  <section class="aba" id="aba-agenda" hidden>
+    <div class="cabeca"><h2>Agenda da consultoria</h2></div>
+    <p class="sub">Abra os horários em que você pode atender. Na landing, a pessoa escolhe um deles; o horário some pros outros e a reserva aparece aqui embaixo com o botão de WhatsApp.</p>
+    <form class="cartao abrir-horarios" id="formHorarios" novalidate>
+      <h3>Abrir horários</h3>
+      <div class="dias-semana" id="diasSemana" role="group" aria-label="Dias da semana"></div>
+      <div class="linha3">
+        <label class="campo"><span>Horários <small>separe por vírgula</small></span><input id="h_horas" placeholder="09:00, 10:00, 14:30, 19:00"></label>
+        <label class="campo"><span>Duração</span><select id="h_duracao"><option value="30">30 min</option><option value="45">45 min</option><option value="60">1 hora</option></select></label>
+        <label class="campo"><span>A partir de</span><input id="h_inicio" type="date"></label>
+        <label class="campo"><span>Por quantas semanas</span><select id="h_semanas"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>6</option><option>8</option></select></label>
+      </div>
+      <p class="erro" id="erroHorarios" role="alert"></p>
+      <button class="botao cheio" type="submit" id="criarHorarios">Criar horários</button>
+    </form>
+    <div class="cartao">
+      <h3>Próximos horários</h3>
+      <div class="agenda-lista" id="agendaLista"></div>
+    </div>
+  </section>
 </div>
+
 
 <!-- Formulário de produto -->
 <dialog class="modal" id="modalProduto">
@@ -124,6 +148,10 @@
         <label class="campo"><span>Link <small>e-book, jogo, checkout, Drive…</small></span><input id="p_link" type="url" maxlength="500" placeholder="https://"></label>
         <label class="campo"><span>Texto do botão <small>opcional</small></span><input id="p_botao" maxlength="60" placeholder="Baixar o e-book"></label>
         <label class="campo"><span>Descrição</span><textarea id="p_descricao" maxlength="1200" rows="4" placeholder="O que a pessoa recebe e pra quem é."></textarea></label>
+        <fieldset class="modos-check">
+          <legend>Aparece nos modos <small>marque onde ele faz sentido; o Menu mostra tudo</small></legend>
+          <div id="p_modos"></div>
+        </fieldset>
         <div class="linha2">
           <label class="campo"><span>Ordem <small>menor aparece antes</small></span><input id="p_ordem" type="number" value="100"></label>
           <label class="check grande"><input type="checkbox" id="p_ativo" checked> Visível na landing</label>
