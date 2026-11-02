@@ -43,7 +43,7 @@ window.EBG_UI = {
     cadastroTitulo: 'Falta pouco! Como te chamo?', cadastroSub: 'Deixe seu contato e libere agora: “{item}”',
     paraQuem: 'É pra você se…', naoE: 'Sendo honesto:', objecoes: 'O que costuma segurar quem está pensando',
     depois: 'O que acontece depois que você entra',
-    comeceSemana: 'Entre hoje e já participe da aula ao vivo desta semana.', video: 'Vídeo', verInstagram: 'Conferir no Instagram', disponivel: 'Disponível', redes: 'Outros canais', whatsPrisma: 'Oi Gediel! Quero fazer o teste Prisma de múltiplas inteligências.', procuraTitulo: 'O que você procura?', vaga: 'Quero minha vaga', vagaDe: '6x R$ 500', vagaPreco: '6x R$ 297', prova: '+700 alunos · 11 anos ensinando · Garantia de 7 dias', apresentacao: 'Apresentação', detalhes: 'Detalhes', barraNome: 'Mentoria Inglês Inteligente', barraInfo: 'de 6x R$ 500 por 6x R$ 297'
+    comeceSemana: 'Entre hoje e já participe da aula ao vivo desta semana.', video: 'Vídeo', verInstagram: 'Conferir no Instagram', disponivel: 'Disponível', redes: 'Outros canais', whatsPrisma: 'Oi Gediel! Quero descobrir qual é o meu tipo de inteligência.', procuraTitulo: 'O que você procura?', vaga: 'Quero minha vaga', vagaDe: '6x R$ 500', vagaPreco: '6x R$ 297', prova: '+700 alunos · 11 anos ensinando · Garantia de 7 dias', apresentacao: 'Apresentação', detalhes: 'Detalhes', barraNome: 'Mentoria Inglês Inteligente', barraInfo: 'de 6x R$ 500 por 6x R$ 297'
   },
   en: {
     idiomaOutro: 'Português', idiomaAria: 'Ver a página em português',
@@ -86,7 +86,7 @@ window.EBG_UI = {
     cadastroTitulo: 'Almost there! What should I call you?', cadastroSub: 'Leave your contact and get it now: “{item}”',
     paraQuem: "It's for you if…", naoE: 'To be honest:', objecoes: 'What usually holds people back',
     depois: 'What happens after you join',
-    comeceSemana: "Join today and you're in this week's live class.", video: 'Video', verInstagram: 'See on Instagram', disponivel: 'Available', redes: 'Other channels', whatsPrisma: "Hi Gediel! I'd like to take the Prisma multiple intelligences test.", procuraTitulo: 'What are you looking for?', vaga: 'Save my spot', vagaDe: '6x R$ 500', vagaPreco: '6x R$ 297', prova: '700+ students · 11 years teaching · 7-day guarantee', apresentacao: 'Intro', detalhes: 'Details', barraNome: 'Inglês Inteligente Mentorship', barraInfo: 'was 6x R$ 500, now 6x R$ 297'
+    comeceSemana: "Join today and you're in this week's live class.", video: 'Video', verInstagram: 'See on Instagram', disponivel: 'Available', redes: 'Other channels', whatsPrisma: "Hi Gediel! I'd like to find out my type of intelligence.", procuraTitulo: 'What are you looking for?', vaga: 'Save my spot', vagaDe: '6x R$ 500', vagaPreco: '6x R$ 297', prova: '700+ students · 11 years teaching · 7-day guarantee', apresentacao: 'Intro', detalhes: 'Details', barraNome: 'Inglês Inteligente Mentorship', barraInfo: 'was 6x R$ 500, now 6x R$ 297'
   }
 };
 
@@ -111,7 +111,7 @@ window.EBG_EN = {
     viagens: { ola: 'Coming from Infly Travel? Enrollment for Toronto 2027 is open.' }
   },
   procura: [
-    { rotulo: 'Mentorship' }, { rotulo: 'Free level test' }, { rotulo: 'How you learn' }, { rotulo: 'Toronto exchange' },
+    { rotulo: 'Mentorship' }, { rotulo: 'Free level test' }, { rotulo: 'Your type of intelligence' }, { rotulo: 'Toronto exchange' },
     { rotulo: 'English with the Bible' }, { rotulo: 'Free groups' }, { rotulo: 'Private lessons' }, { rotulo: 'Travel vlogs' }, { rotulo: 'Infly School' }
   ],
   perfilTexto: {
@@ -183,9 +183,9 @@ window.EBG_EN = {
     eomalycia: { sinopse: 'Alycia shares, on video, what her experience at English On Mission was like.' },
     eomguilherme: { sinopse: 'Guilherme shares, on video, what his experience at English On Mission was like.' },
 
-    diagtestes: { titulo: 'Assessments and Tests', trilha: 'Smart Program', meta: ['Prisma test', 'Bússola test', 'Unlocked'],
-      sinopse: 'The starting point of the Smart Method, unlocked for you to take now. First Prisma, which shows how you learn through multiple intelligences. Then Bússola, which shows your English level, from A1 to C2.',
-      cta: { rotulo: 'Take the Prisma test' }, cta2: { rotulo: 'Take the Bússola level test' } },
+    diagtestes: { titulo: 'Assessments and Tests', trilha: 'Smart Program', meta: ['Type of intelligence', 'English level'],
+      sinopse: 'The starting point of the Smart Method, unlocked for you to take now. First, find out your type of intelligence: it shows how you learn best. Then, find out your English level, from A1 to C2.',
+      cta: { rotulo: 'Find out your type of intelligence' }, cta2: { rotulo: "What's your English level?" } },
     cronograma: { titulo: 'Study Plan', trilha: 'Smart Program', sinopse: 'Your week-by-week study plan, built from your assessment.' },
     salas: { titulo: 'Conversation Rooms', trilha: 'Smart Program', sinopse: 'Live group conversation, by level, with on-the-spot correction.' },
     aulas: { titulo: 'Lessons', trilha: 'Smart Program', sinopse: 'The platform lessons, to study at your pace and rewatch as many times as you want.' },
@@ -214,13 +214,12 @@ window.EBG_EN = {
       sinopse: "Three cities, three accents and the 2024 travel journal. The vlogs are open on Infly's YouTube.",
       cta: { rotulo: 'Watch on YouTube' } },
 
-    teste: { titulo: "What's your level?", meta: ['Bússola test', 'A1 → C2'],
-      sinopse: "Bússola is the Smart Method level test: the questions adapt to your answers and show where you stand on the European framework, from A1 to C2. Starting in the right place saves time and motivation.",
-      cta: { rotulo: 'Take the Bússola test' } },
-    prisma: { titulo: 'Prisma test: how do you learn?', meta: ['Multiple intelligences', 'The base of the Smart Method'],
-      sinopse: 'Everything in the Smart Method starts here. Prisma shows which of your intelligences show up most when you learn, and the path adapts to you, not the other way around. It is the first step for everyone who joins the mentorship, and you can take it now, for free.',
-      sinopse: 'Prisma shows which of your intelligences show up most when you learn. It is the foundation of the Smart Method: the path adapts to you, not the other way around.',
-      cta: { rotulo: 'Take the Prisma test' } },
+    teste: { titulo: "What's your English level?", meta: ['Free level test', 'A1 → C2'],
+      sinopse: 'Find out your English level. The questions adapt to your answers and show where you stand, from A1 to C2. Starting in the right place saves time and motivation.',
+      cta: { rotulo: 'Find out my English level' } },
+    prisma: { titulo: 'Find out your type of intelligence', meta: ['Free test', 'The base of the Smart Method'],
+      sinopse: 'Everything in the Smart Method starts here. The test shows which of your intelligences show up most when you learn, and the path adapts to you, not the other way around. It is the first step for everyone who joins the mentorship, and you can take it now, for free.',
+      cta: { rotulo: 'Find out my type of intelligence' } },
     liveterca: { titulo: 'Culture English Lives', meta: ['Live', 'Free'],
       sinopse: 'Open Culture English live classes with Gediel: real English from TV shows, movies and music, live.',
       cta: { rotulo: 'Remind me about the lives', texto: "Hi Gediel! I'd like the link for the Culture English live classes." } },

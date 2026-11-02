@@ -55,7 +55,7 @@ window.EBG = {
   procura: [
     { id: 'mentoria',   rotulo: 'Mentoria',              abrir: 'mentoria' },
     { id: 'teste',      rotulo: 'Teste de nível grátis', abrir: 'teste' },
-    { id: 'prisma',     rotulo: 'Como você aprende',     abrir: 'prisma' },
+    { id: 'prisma',     rotulo: 'Seu tipo de inteligência', abrir: 'prisma' },
     { id: 'toronto',    rotulo: 'Intercâmbio Toronto',   abrir: 'toronto' },
     { id: 'eom',        rotulo: 'Inglês com a Bíblia',   rolar: 'eom' },
     { id: 'grupos',     rotulo: 'Grupos grátis',         rolar: 'gratis' },
@@ -172,10 +172,10 @@ window.EBG = {
     // Quando chegar a capa original do Cakto, troque capa: 'texto' por img: 'img/arquivo.webp'.
     // liberado: é a porta do Programa Inteligente, com os dois testes grátis
     diagtestes: { titulo: 'Diagnósticos e Testes', trilha: 'Programa Inteligente', tipo: 'gratis', pulsa: true, img: 'img/card-diagnostico.webp',
-      meta: ['Teste Prisma', 'Teste Bússola', 'Liberado'],
-      sinopse: 'O ponto de partida do Método Inteligente, liberado pra você fazer agora. Primeiro o Prisma, que mostra como você aprende pelas múltiplas inteligências. Depois a Bússola, que mostra o seu nível de inglês, do A1 ao C2.',
-      cta: { rotulo: 'Fazer o teste Prisma', acao: 'prisma' },
-      cta2: { rotulo: 'Fazer o teste Bússola (nível)', acao: 'teste' },
+      meta: ['Tipo de inteligência', 'Nível de inglês'],
+      sinopse: 'O ponto de partida do Método Inteligente, liberado pra você fazer agora. Primeiro, descubra qual é o seu tipo de inteligência: ele mostra como você aprende melhor. Depois, descubra qual é o seu nível de inglês, do A1 ao C2.',
+      cta: { rotulo: 'Descubra seu tipo de inteligência', acao: 'prisma' },
+      cta2: { rotulo: 'Qual é o seu nível de inglês?', acao: 'teste' },
       peso: { fala: 9, trabalho: 9, viagem: 8, fe: 8, zero: 10 } },
     cronograma: { titulo: 'Cronograma', trilha: 'Programa Inteligente', bloqueado: true, img: 'img/card-cronograma.webp',
       sinopse: 'Seu plano de estudo semana a semana, montado a partir do diagnóstico.' },
@@ -230,16 +230,16 @@ window.EBG = {
     // Bônus gratuitos
     // Bússola: teste de nível adaptativo (CEFR). Com o link em config.js, o botão abre o Bússola;
     // sem link, roda o teste rápido de 5 perguntas desta página.
-    teste: { titulo: 'Qual é o seu nível?', tipo: 'gratis', img: 'img/card-teste.webp',
-      meta: ['Teste Bússola', 'A1 → C2'],
-      sinopse: 'O Bússola é o teste de nível do Método Inteligente: as perguntas se ajustam às suas respostas e mostram onde você está no quadro europeu, do A1 ao C2. Começar pelo ponto certo poupa tempo e motivação.',
-      cta: { rotulo: 'Fazer o teste Bússola', acao: 'teste' },
+    teste: { titulo: 'Qual é o seu nível de inglês?', tipo: 'gratis', img: 'img/card-teste.webp',
+      meta: ['Teste de nível grátis', 'A1 → C2'],
+      sinopse: 'Descubra qual é o seu nível de inglês. As perguntas se ajustam às suas respostas e mostram onde você está, do A1 ao C2. Começar pelo ponto certo poupa tempo e motivação.',
+      cta: { rotulo: 'Descobrir meu nível de inglês', acao: 'teste' },
       peso: { fala: 8, trabalho: 7, viagem: 7, fe: 7, zero: 10 } },
     // Prisma: teste de múltiplas inteligências
-    prisma: { titulo: 'Teste Prisma: como você aprende?', tipo: 'gratis', pulsa: true, img: 'img/card-diagnostico.webp',
-      meta: ['Múltiplas inteligências', 'Base do Método Inteligente'],
-      sinopse: 'Tudo no Método Inteligente começa aqui. O Prisma mostra quais das suas inteligências mais aparecem quando você aprende, e a partir disso o caminho se adapta a você, não o contrário. É o primeiro passo de quem entra na mentoria, e você pode fazer agora, de graça.',
-      cta: { rotulo: 'Fazer o teste Prisma', acao: 'prisma' },
+    prisma: { titulo: 'Descubra qual é o seu tipo de inteligência', tipo: 'gratis', pulsa: true, img: 'img/card-diagnostico.webp',
+      meta: ['Teste grátis', 'Base do Método Inteligente'],
+      sinopse: 'Tudo no Método Inteligente começa aqui. O teste mostra quais das suas inteligências mais aparecem quando você aprende, e a partir disso o caminho se adapta a você, não o contrário. É o primeiro passo de quem entra na mentoria, e você pode fazer agora, de graça.',
+      cta: { rotulo: 'Descobrir meu tipo de inteligência', acao: 'prisma' },
       peso: { fala: 7, trabalho: 7, viagem: 6, fe: 6, zero: 9 } },
     liveterca: { titulo: 'Culture English Lives', tipo: 'gratis', img: 'img/card-culture-lives.webp',
       meta: ['Ao vivo', 'Gratuito'],
