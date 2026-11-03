@@ -215,7 +215,7 @@
     if (error) { aviso('Não deu pra carregar os produtos. Confira se o admin.sql foi rodado.'); return; }
     carregadas.produtos = true;
     produtos = data || [];
-    const segs = [...new Set([...(C.fileiras || []).filter(f => !f.dinamica && f.id !== 'alunos').map(f => f.titulo), 'Jogos', 'Prompts', ...produtos.map(p => p.segmento)])];
+    const segs = [...new Set([...(C.fileiras || []).filter(f => !f.dinamica && f.id !== 'alunos').map(f => f.titulo), 'Jogos', 'Prompts', 'E-books', 'Guias', ...produtos.map(p => p.segmento)])];
     $('#segmentos').innerHTML = segs.map(s => `<option value="${esc(s)}">`).join('');
     desenharProdutos();
   }

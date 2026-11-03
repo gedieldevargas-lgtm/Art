@@ -25,7 +25,7 @@ window.EBG_UI = {
     whatsConversar: 'Oi Gediel! Vim pelo catálogo e quero conversar sobre o meu caso.',
     whatsRodape: 'Oi Gediel! Vim pelo catálogo.',
     perguntasTitulo: 'Perguntas de quem está chegando',
-    menu: 'Menu', voltarModos: 'Voltar aos modos', ligadoAgora: 'Ligado agora', conteudosModo: 'Pra você no {modo}', jogos: 'Jogos', modoVazio: 'Os conteúdos deste modo estão chegando. Abra o Menu pra ver tudo o que já existe.',
+    menu: 'Menu', voltarModos: 'Voltar aos modos', ligadoAgora: 'Ligado agora', conteudosModo: 'Pra você no {modo}', hubGratis: 'Grátis · {seg}', hubGratisTudo: 'Grátis pra começar hoje', hubPagos: 'Pra ir mais fundo · {seg}', jogos: 'Jogos', modoVazio: 'Os conteúdos deste modo estão chegando. Abra o Menu pra ver tudo o que já existe.',
     menuDepoimentos: 'Todos os depoimentos', menuGratis: 'Todos os conteúdos grátis',
     consultoriaTitulo: 'Marque uma consultoria gratuita', consultoriaTexto: 'Uma conversa com o Gediel pra entender o seu momento no inglês e montar o seu próximo passo. Sem custo e sem compromisso.',
     agendaDia: 'Escolha o dia', agendaHora: 'Escolha o horário', reservarEscolha: 'Escolha um dia e um horário', reservarEm: 'Reservar {dia} às {hora}', reservarQuando: '{dia}, às {hora}',
@@ -75,7 +75,7 @@ window.EBG_UI = {
     whatsConversar: "Hi Gediel! I found you through the catalog and I'd like to talk about my case.",
     whatsRodape: 'Hi Gediel! I found you through the catalog.',
     perguntasTitulo: 'Questions from people just arriving',
-    menu: 'Menu', voltarModos: 'Back to modes', ligadoAgora: 'On now', conteudosModo: 'For you in {modo}', jogos: 'Games', modoVazio: "This mode's content is coming. Open the Menu to see everything that's already here.",
+    menu: 'Menu', voltarModos: 'Back to modes', ligadoAgora: 'On now', conteudosModo: 'For you in {modo}', hubGratis: 'Free · {seg}', hubGratisTudo: 'Free to start today', hubPagos: 'Go deeper · {seg}', jogos: 'Games', modoVazio: "This mode's content is coming. Open the Menu to see everything that's already here.",
     menuDepoimentos: 'All testimonials', menuGratis: 'All free content',
     consultoriaTitulo: 'Book a free consultation', consultoriaTexto: 'A conversation with Gediel to understand where you are in English and plan your next step. Free, no strings attached.',
     agendaDia: 'Choose the day', agendaHora: 'Choose the time', reservarEscolha: 'Choose a day and a time', reservarEm: 'Book {dia} at {hora}', reservarQuando: '{dia}, at {hora}',
@@ -113,10 +113,11 @@ window.EBG_EN = {
     zero: 'Never studied, or stopped halfway? This is the right start, one step at a time.',
     intercambio: 'Exchange programs and group trips with Infly, and everything to get you there prepared.',
     jogos: 'Learn by playing: quick games to lock in vocabulary and structures without noticing.',
-    prompts: 'Ready-made prompts to practice English with AI, every day.'
+    prompts: 'Ready-made prompts to practice English with AI, every day.',
+    materiais: 'Everything free in one place: prompts, e-books, guides and tests. Grab it and use it today. When you want to go deeper, the full materials are right below.'
   },
   modos: [{ nome: 'Test Mode', marca: 'Start here' }, { nome: 'Career Mode' }, { nome: 'Travel Mode' }, { nome: 'Faith Mode' },
-    { nome: 'Start Mode' }, { nome: 'Exchange Mode' }, { nome: 'Games Mode' }, { nome: 'Prompts Mode' }],
+    { nome: 'Start Mode' }, { nome: 'Exchange Mode' }, { nome: 'Games Mode' }, { nome: 'Prompts Mode' }, { nome: 'Materials Hub', marca: 'Free' }],
   perfis: [
     { nome: 'Unlock your speaking' }, { nome: 'English for work' }, { nome: 'Travel with confidence' },
     { nome: 'Christian English' }, { nome: 'Start from zero' }

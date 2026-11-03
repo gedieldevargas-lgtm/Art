@@ -15,7 +15,9 @@ window.EBG = {
     { id: 'intercambio', nome: 'Modo Intercâmbio', perfil: 'viagem',   img: 'img/modo-toronto.webp',  verde: true, destaque: 'toronto', fileira: 'intercambio' },
     // as fileiras Jogos e Prompts nascem dos produtos cadastrados no painel com esses segmentos
     { id: 'jogos',       nome: 'Modo Jogos',       perfil: 'zero',     img: 'img/modo-jogos.webp',    destaque: 'teste', fileira: 'jogos' },
-    { id: 'prompts',     nome: 'Modo Prompts',     perfil: 'trabalho', img: 'img/modo-prompts.webp',  verde: true, destaque: 'teste', fileira: 'prompts' }
+    { id: 'prompts',     nome: 'Modo Prompts',     perfil: 'trabalho', img: 'img/modo-prompts.webp',  verde: true, destaque: 'teste', fileira: 'prompts' },
+    // Hub de Materiais: tudo o que é grátis em cima (prompts, e-books, guias…), por segmento; os pagos embaixo
+    { id: 'materiais',   nome: 'Hub de Materiais', perfil: 'zero',     img: 'img/gediel-reading.webp', marca: 'Grátis', destaque: 'teste', fileira: 'gratis' }
   ],
 
   perfis: [
@@ -77,7 +79,8 @@ window.EBG = {
     zero: 'Nunca estudou ou parou no meio? Aqui é o começo certo, um passo de cada vez.',
     intercambio: 'Intercâmbio e viagens em grupo com a Infly, e tudo pra você chegar lá preparado.',
     jogos: 'Aprender jogando: jogos rápidos pra fixar vocabulário e estruturas sem perceber.',
-    prompts: 'Prompts prontos pra treinar inglês com inteligência artificial, todos os dias.'
+    prompts: 'Prompts prontos pra treinar inglês com inteligência artificial, todos os dias.',
+    materiais: 'Tudo o que é grátis num lugar só: prompts, e-books, guias e testes. Pegue e use hoje. Quando quiser ir mais fundo, os materiais completos estão logo abaixo.'
   },
 
   perfilTexto: {
