@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hub · English by Gediel</title>
+<meta name="description" content="Materiais grátis de inglês do Gediel: prompts, e-books, guias e testes. E, quando quiser ir mais fundo, os materiais completos.">
+<meta name="theme-color" content="#cfe6ff">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ceu1:#eaf4ff; --ceu2:#bcdcff; --ceu3:#7fb8ff; --azul:#2f7bff; --azul-esc:#0d3fa8;
+  --tinta:#0b1630; --suave:#5b6b88; --vidro:rgba(255,255,255,.58); --vidro-borda:rgba(255,255,255,.85);
+  --sombra:0 18px 40px -18px rgba(22,72,160,.35); --r:28px;
+}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--tinta);min-height:100vh;
+  background:radial-gradient(1200px 600px at 10% -10%,#fff 0,transparent 60%),
+             radial-gradient(900px 500px at 110% 10%,#d9c8ff 0,transparent 55%),
+             linear-gradient(180deg,var(--ceu1),var(--ceu2) 55%,#a9cfff);
+  padding-bottom:110px}
+html{background:#a9cfff}
+img{display:block;max-width:100%}
+button,a{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer}
+a{text-decoration:none}
+.vidro{background:var(--vidro);border:1px solid var(--vidro-borda);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);box-shadow:var(--sombra)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+
+/* topo */
+.topo{display:flex;align-items:center;gap:12px;padding:18px 0 8px}
+.avatar{width:46px;height:46px;border-radius:50%;object-fit:cover;object-position:top;border:2px solid #fff;box-shadow:var(--sombra)}
+.ola small{display:block;font-size:12px;color:var(--suave);font-weight:600}
+.ola strong{font-size:17px;font-weight:800}
+.topo-acoes{margin-left:auto;display:flex;gap:8px}
+.pilula{display:inline-flex;align-items:center;gap:6px;height:42px;padding:0 16px;border-radius:999px;font-size:13px;font-weight:700}
+.redondo{width:42px;padding:0;justify-content:center}
+
+/* hero */
+.hero{position:relative;margin-top:12px;border-radius:34px;overflow:hidden;min-height:440px;
+  background:linear-gradient(180deg,#4f9bff 0,#8cc4ff 55%,#d7ebff 100%);box-shadow:var(--sombra);isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(120px 60px at 18% 30%,#fff9 0,transparent 70%),radial-gradient(160px 70px at 80% 18%,#fffa 0,transparent 70%),radial-gradient(200px 80px at 60% 70%,#fff7 0,transparent 70%)}
+.hero-marca{position:absolute;top:18px;left:0;right:0;text-align:center;font-family:'Bagel Fat One';font-size:clamp(78px,20vw,190px);line-height:.9;
+  color:rgba(255,255,255,.35);letter-spacing:-2px;z-index:-1;user-select:none}
+.hero-foto{position:absolute;right:-4%;bottom:0;height:92%;width:auto;max-width:none;object-fit:cover;object-position:top;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 25%),linear-gradient(180deg,#000 75%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent,#000 25%),linear-gradient(180deg,#000 75%,transparent);mask-composite:intersect}
+.hero-texto{position:absolute;left:20px;top:110px;max-width:62%}
+.bolha{font-family:'Bagel Fat One';color:#fff;font-size:clamp(40px,10vw,84px);line-height:.92;transform:rotate(-4deg);
+  text-shadow:0 3px 0 #1a5fe0,0 6px 18px rgba(10,50,140,.35);-webkit-text-stroke:1.5px #1a5fe0}
+.hero-card{position:absolute;left:12px;right:12px;bottom:12px;padding:18px;border-radius:24px;text-align:center}
+.hero-card h1{font-size:20px;font-weight:800;line-height:1.2}
+.hero-card p{font-size:13px;color:var(--suave);margin:6px auto 14px;max-width:34ch}
+.btn-swipe{display:flex;align-items:center;gap:12px;background:var(--tinta);color:#fff;border-radius:999px;padding:6px 22px 6px 6px;font-weight:700;font-size:15px;width:min(100%,320px);margin:0 auto}
+.btn-swipe span:first-child{width:44px;height:44px;border-radius:50%;background:#fff;color:var(--tinta);display:grid;place-items:center;font-size:20px}
+.btn-swipe span:last-child{flex:1;text-align:center}
+
+/* chips com ícone */
+.chips{display:flex;gap:14px;overflow-x:auto;padding:22px 2px 6px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--suave)}
+.chip i{width:54px;height:54px;border-radius:18px;display:grid;place-items:center;font-style:normal;font-size:24px;
+  background:linear-gradient(160deg,#fff,var(--c,#cfe3ff));box-shadow:inset 0 -6px 12px rgba(0,0,0,.08),0 10px 20px -10px var(--c,#7fb8ff);transition:transform .2s}
+.chip[aria-pressed="true"]{color:var(--tinta)}
+.chip[aria-pressed="true"] i{transform:translateY(-3px) scale(1.06);outline:2px solid #fff}
+
+/* seções */
+.secao{margin-top:26px}
+.secao-cab{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:12px}
+.secao-cab h2{font-size:22px;font-weight:800;letter-spacing:-.4px}
+.secao-cab p{font-size:13px;color:var(--suave);margin-top:2px}
+.etq{font-size:11px;font-weight:800;padding:6px 10px;border-radius:999px;background:#fff;color:var(--azul)}
+.grade{display:grid;gap:14px;grid-template-columns:repeat(2,minmax(0,1fr))}
+
+.card{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:3/4;text-align:left;display:block;width:100%;
+  background:linear-gradient(160deg,#7fb2ff,#2f62d8);box-shadow:var(--sombra);transition:transform .25s}
+.card:hover{transform:translateY(-4px)}
+.card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(8,30,80,.78))}
+.card-topo{position:absolute;top:10px;left:10px;right:10px;display:flex;justify-content:space-between;z-index:1}
+.tag{font-size:11px;font-weight:800;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.tag.gratis{color:#0a7a3e}
+.tag.preco{background:var(--tinta);color:#fff}
+.card-base{position:absolute;left:12px;right:12px;bottom:12px;z-index:1;color:#fff}
+.card-base strong{display:block;font-size:16px;font-weight:800;line-height:1.15}
+.card-base small{display:inline-block;margin-top:8px;font-size:11px;font-weight:600;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.22);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.card.texto .card-titulo-grande{position:absolute;inset:50px 14px auto;font-family:'Bagel Fat One';font-size:30px;line-height:.95;color:#fff;opacity:.95}
+
+.pago{border-radius:var(--r);padding:12px;display:flex;gap:12px;align-items:center;text-align:left;width:100%}
+.pago img,.pago .mini{width:76px;height:76px;border-radius:18px;object-fit:cover;flex:0 0 auto;background:linear-gradient(160deg,#7fb2ff,#2f62d8)}
+.pago div{flex:1;min-width:0}
+.pago strong{display:block;font-size:15px;font-weight:800}
+.pago p{font-size:12px;color:var(--suave);margin-top:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pago .tag{flex:0 0 auto}
+.lista{display:grid;gap:12px}
+
+.mentoria{margin-top:26px;border-radius:34px;padding:22px;display:grid;gap:16px;align-items:center;
+  background:linear-gradient(135deg,#0d3fa8,#2f7bff 60%,#8f6bff);color:#fff;box-shadow:var(--sombra);overflow:hidden;position:relative}
+.mentoria h2{font-family:'Bagel Fat One';font-size:clamp(30px,4.4vw,48px);margin-bottom:10px;line-height:.95;font-weight:400}
+.mentoria p{opacity:.9;font-size:14px;max-width:46ch}
+.mentoria .btn{justify-self:start;background:#fff;color:var(--azul-esc);border-radius:999px;padding:14px 22px;font-weight:800}
+.mentoria img{width:100%;max-height:260px;object-fit:cover;object-position:top;border-radius:24px}
+
+/* barra de baixo */
+.barra{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);width:min(440px,calc(100% - 24px));height:70px;border-radius:26px;
+  display:flex;align-items:center;justify-content:space-around;z-index:10}
+.barra a,.barra button{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;font-weight:700;color:var(--suave)}
+.barra .ativo{color:var(--tinta)}
+.barra svg{width:22px;height:22px}
+.orbe{width:62px;height:62px;border-radius:50%;margin-top:-34px;border:4px solid #fff;
+  background:radial-gradient(circle at 35% 30%,#bfe0ff 0,#3a8bff 30%,#0b2f8a 70%,#020a26);box-shadow:0 12px 26px -8px #1d4fd8,inset 0 -6px 14px rgba(0,0,0,.4)}
+
+.vazio{padding:24px;border-radius:24px;text-align:center;color:var(--suave);font-size:14px}
+
+@media (min-width:760px){
+  body{padding-bottom:40px}
+  .hero{min-height:520px}
+  .hero-texto{left:48px;top:60px}
+  .hero-card{left:auto;right:auto;left:40px;bottom:40px;width:420px;text-align:left}
+  .hero-card p{margin-left:0}
+  .btn-swipe{margin:0}
+  .hero-foto{right:4%}
+  .grade{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .lista{grid-template-columns:repeat(2,1fr)}
+  .mentoria{grid-template-columns:1.2fr 1fr;padding:40px}
+  .barra{top:16px;bottom:auto;width:auto;height:56px;padding:0 10px;gap:6px;left:auto;right:max(16px,calc((100vw - 1180px)/2 + 16px));transform:none}
+  .barra a,.barra button{flex-direction:row;gap:6px;font-size:13px;padding:0 12px}
+  .orbe{width:40px;height:40px;margin:0;border-width:2px}
+  .topo{padding-right:420px}
+  .topo-acoes{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="topo">
+    <img class="avatar" src="img/gediel-brooklyn.webp" alt="Gediel">
+    <div class="ola"><small id="saudacao">Olá 👋</small><strong>Hub do Gediel</strong></div>
+    <div class="topo-acoes">
+      <a class="pilula vidro" href="index.html">Catálogo</a>
+    </div>
+  </header>
+
+  <section class="hero" aria-label="Materiais grátis">
+    <div class="hero-marca" aria-hidden="true">FREE</div>
+    <img class="hero-foto" src="img/gediel-liberty-tall.webp" alt="">
+    <div class="hero-texto"><div class="bolha">Pega<br>de graça!</div></div>
+    <div class="hero-card vidro">
+      <h1>Seu inglês começa hoje, sem pagar nada</h1>
+      <p>Prompts, e-books, guias e testes do Gediel. Escolha um e use agora.</p>
+      <a class="btn-swipe" href="#gratis"><span>→</span><span>Ver materiais grátis</span></a>
+    </div>
+  </section>
+
+  <nav class="chips" id="chips" aria-label="Filtrar"></nav>
+
+  <section class="secao" id="gratis">
+    <div class="secao-cab"><div><h2>Grátis pra você</h2><p>Pegue, use, compartilhe.</p></div><span class="etq" id="contaGratis"></span></div>
+    <div class="grade" id="gradeGratis"></div>
+  </section>
+
+  <section class="secao" id="pagos">
+    <div class="secao-cab"><div><h2>Pra ir mais fundo</h2><p>Os materiais completos, quando você quiser mais.</p></div></div>
+    <div class="lista" id="listaPagos"></div>
+  </section>
+
+  <section class="mentoria" id="mentoria">
+    <div>
+      <h2>Quer destravar de vez?</h2>
+      <p>Na Mentoria Inglês Inteligente você fala ao vivo com o Gediel toda semana, no seu nível, com um cronograma pra cada dia.</p>
+      <br><a class="btn" id="btnMentoria" href="#">Conhecer a mentoria</a>
+    </div>
+    <img src="img/aula-turma.webp" alt="Aula ao vivo da mentoria" loading="lazy">
+  </section>
+</div>
+
+<nav class="barra vidro" aria-label="Navegação">
+  <a href="#" class="ativo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 3 10v10h6v-6h6v6h6V10z"/></svg>Início</a>
+  <a href="#gratis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>Grátis</a>
+  <a href="#mentoria" aria-label="Mentoria"><span class="orbe"></span></a>
+  <a href="#pagos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 8.6a5 5 0 0 0-8.8-3.2 5 5 0 0 0-8.8 3.2c0 6 8.8 11 8.8 11s8.8-5 8.8-11z"/></svg>Completos</a>
+  <a href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>Catálogo</a>
+</nav>
+
+<script src="config.js"></script>
+<script src="content.js"></script>
+<script>
+(() => {
+  const C = window.EBG, CFG = window.EBG_CONFIG || {};
+  const $ = s => document.querySelector(s);
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const https = u => /^https:\/\//i.test(u || '') ? u : '';
+
+  // saudação pela hora + nome salvo no catálogo
+  const h = new Date().getHours();
+  let nome = ''; try { nome = (JSON.parse(localStorage.getItem('ebg:lead')) || {}).nome || ''; } catch (e) {}
+  $('#saudacao').textContent = (h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite') + (nome ? ', ' + nome.split(' ')[0] : '') + ' 👋';
+
+  function destino(cta) {
+    if (!cta) return '';
+    if (cta.acao === 'whatsapp') return `https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent(cta.texto || '')}`;
+    if (cta.acao === 'teste') return https(CFG.bussola) || 'index.html';
+    if (cta.acao === 'prisma') return https(CFG.prisma) || 'index.html';
+    if (cta.acao === 'checkout') return https(CFG.checkoutMentoria);
+    if (cta.acao === 'link') return https(cta.href) || https(CFG[cta.href]) || https((CFG.instagram || {})[cta.href]) || '';
+    return '';
+  }
+  $('#btnMentoria').href = https(CFG.checkoutMentoria) || 'index.html';
+
+  // materiais do catálogo: grátis
+  const categoriaDe = (k, it) => /teste|prisma|diag/.test(k) ? 'Testes' : it.grupo ? 'Comunidade' : 'Ao vivo';
+  let itens = Object.entries(C.itens)
+    .filter(([k, it]) => it.tipo === 'gratis' && !it.indisponivel)
+    .map(([k, it]) => ({ id: k, titulo: it.titulo, img: it.img, linha: (it.meta || [])[0] || '', cat: categoriaDe(k, it), gratis: true, href: destino(it.cta) }));
+
+  const ICONES = { Tudo: ['✨', '#cfe3ff'], Prompts: ['💬', '#d8ccff'], 'E-books': ['📘', '#bfe0ff'], Guias: ['🧭', '#c6f1d6'],
+    Testes: ['🎯', '#ffd6c2'], Comunidade: ['👥', '#c6f1d6'], 'Ao vivo': ['🎙️', '#ffd0dc'], Jogos: ['🎮', '#ffe6a8'] };
+  let filtro = 'Tudo';
+
+  function cardGratis(m) {
+    const temImg = m.img && !/^img\/logo/.test(m.img);
+    return `<a class="card${temImg ? '' : ' texto'}" href="${esc(m.href || '#')}" ${m.href ? 'target="_blank" rel="noopener"' : ''}>
+      ${temImg ? `<img src="${esc(m.img)}" alt="" loading="lazy">` : `<span class="card-titulo-grande">${esc(m.cat)}</span>`}
+      <span class="card-topo"><span class="tag gratis">Grátis</span></span>
+      <span class="card-base"><strong>${esc(m.titulo)}</strong>${m.linha ? `<small>${esc(m.linha)}</small>` : ''}</span></a>`;
+  }
+  function cardPago(m) {
+    return `<a class="pago vidro" href="${esc(m.href || '#')}" ${m.href ? 'target="_blank" rel="noopener"' : ''}>
+      ${m.img ? `<img src="${esc(m.img)}" alt="" loading="lazy">` : '<span class="mini"></span>'}
+      <div><strong>${esc(m.titulo)}</strong><p>${esc(m.desc || m.cat)}</p></div>
+      <span class="tag preco">${esc(m.preco || 'Ver')}</span></a>`;
+  }
+
+  function desenhar() {
+    const gratis = itens.filter(m => m.gratis && (filtro === 'Tudo' || m.cat === filtro));
+    const pagos = itens.filter(m => !m.gratis && (filtro === 'Tudo' || m.cat === filtro));
+    $('#gradeGratis').innerHTML = gratis.map(cardGratis).join('') || '<p class="vazio vidro" style="grid-column:1/-1">Nada grátis aqui ainda. Os próximos materiais chegam em breve.</p>';
+    $('#contaGratis').textContent = gratis.length + (gratis.length === 1 ? ' material' : ' materiais');
+    $('#pagos').hidden = !pagos.length;
+    $('#listaPagos').innerHTML = pagos.map(cardPago).join('');
+    const cats = ['Tudo', ...new Set(itens.map(m => m.cat))];
+    $('#chips').innerHTML = cats.map(c => { const [ic, cor] = ICONES[c] || ['📎', '#dfe9ff'];
+      return `<button class="chip" type="button" aria-pressed="${c === filtro}" data-cat="${esc(c)}"><i style="--c:${cor}">${ic}</i>${esc(c)}</button>`; }).join('');
+  }
+  $('#chips').addEventListener('click', e => { const b = e.target.closest('[data-cat]'); if (b) { filtro = b.dataset.cat; desenhar(); } });
+  desenhar();
+
+  // produtos do painel (Prompts, E-books, Guias…): grátis em cima, pagos embaixo
+  if (CFG.supabaseUrl && CFG.supabaseAnonKey) {
+    fetch(`${CFG.supabaseUrl.replace(/\/$/, '')}/rest/v1/produtos?select=*&ativo=eq.true&order=ordem.asc,created_at.asc`,
+      { headers: { apikey: CFG.supabaseAnonKey, Authorization: `Bearer ${CFG.supabaseAnonKey}` } })
+      .then(r => r.ok ? r.json() : [])
+      .then(lista => {
+        if (!Array.isArray(lista)) return;
+        const novos = lista.filter(p => p.tipo === 'gratis' || p.tipo === 'pago').map(p => ({
+          id: 'p-' + p.id, titulo: p.titulo, img: https(p.capa_url), cat: p.segmento, desc: p.descricao,
+          gratis: p.tipo === 'gratis', preco: p.preco, linha: p.segmento, href: https(p.link)
+        }));
+        itens = [...novos.filter(n => n.gratis), ...itens, ...novos.filter(n => !n.gratis)];
+        desenhar();
+      }).catch(() => {});
+  }
+})();
+</script>
+</body>
+</html>
