@@ -60,7 +60,7 @@ a{text-decoration:none}
 .atalho small{font-size:10.5px;color:#c9d3e2}
 
 /* destaque vídeo */
-.destaque{display:grid;grid-template-columns:1.15fr 1fr;gap:16px;align-items:center;margin-top:16px;padding:12px;border-radius:24px;background:var(--card);border:1px solid var(--linha);box-shadow:var(--sombra);position:relative}
+.destaque{background:linear-gradient(90deg,rgba(10,20,38,.35),rgba(10,20,38,.85)),url(img/gradiente-azul.webp) left center/cover!important;display:grid;grid-template-columns:1.15fr 1fr;gap:16px;align-items:center;margin-top:16px;padding:12px;border-radius:24px;background:var(--card);border:1px solid var(--linha);box-shadow:var(--sombra);position:relative}
 .destaque .thumb{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:16/11}
 .destaque .thumb img{width:100%;height:100%;object-fit:cover}
 .play{position:absolute;inset:0;margin:auto;width:58px;height:58px;border-radius:50%;background:rgba(10,20,38,.55);border:1px solid rgba(255,255,255,.4);display:grid;place-items:center;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
@@ -79,11 +79,30 @@ a{text-decoration:none}
 .filtros::-webkit-scrollbar,.trilho::-webkit-scrollbar{display:none}
 .filtro{flex:0 0 auto;padding:8px 14px;border-radius:99px;border:1px solid var(--linha);font-size:12.5px;font-weight:600;color:var(--dim)}
 .filtro[aria-pressed="true"]{background:var(--marfim);color:var(--bg);border-color:var(--marfim)}
-.trilho{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:10px 2px 26px;margin:-10px -2px -20px}
+.trilho{display:flex;align-items:flex-start;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:10px 2px 26px;margin:-10px -2px -20px}
 .post{display:flex;flex-direction:column;position:relative;flex:0 0 clamp(150px,42vw,230px);scroll-snap-align:start;border-radius:18px;overflow:hidden;background:var(--card);border:1px solid var(--linha);text-align:left;box-shadow:var(--sombra)}
 .post .foto{display:block;aspect-ratio:1/1;overflow:hidden;background:linear-gradient(150deg,#2c3a22,#13233f)}
 .post .foto img{width:100%;height:100%;object-fit:cover}
-.post .foto .letra{height:100%;font-size:32px!important;display:grid;place-items:center;font-family:'Playfair Display',serif;font-size:42px;color:var(--cobre2);font-style:italic}
+.post .foto .letra{position:relative;overflow:hidden;height:100%;font-size:32px;display:grid;place-items:center;font-family:'Playfair Display',serif;color:#fff;font-style:italic;text-shadow:0 4px 20px rgba(0,0,0,.35)}
+/* cards sem foto: o gradiente azul, com variações (espelhado, girado, puxado pro verde militar) */
+.grad{position:relative;overflow:hidden}
+.grad::before{content:"";position:absolute;inset:-12%;background:url(img/gradiente-azul.webp) center/cover;transform:var(--gt,none);filter:var(--gf,none);z-index:0;animation:respira 14s ease-in-out infinite alternate}
+.grad > *{position:relative;z-index:1}
+.g1{--gt:scaleX(-1)}
+.g2{--gt:rotate(180deg)}
+.g3{--gt:scaleY(-1);--gf:hue-rotate(-95deg) saturate(.55) brightness(.8)}
+.g4{--gt:rotate(90deg) scale(1.8);--gf:brightness(.75)}
+.g5{--gf:hue-rotate(-100deg) saturate(.45) brightness(.7)}
+@keyframes respira{to{background-position:30% 70%;scale:1.08}}
+/* ícones girando de leve */
+@keyframes balanca{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(10deg)}}
+@keyframes gira3d{0%,100%{transform:rotateY(-25deg) rotate(-6deg)}50%{transform:rotateY(25deg) rotate(6deg)}}
+.ico svg,.redes svg{animation:balanca 3.6s ease-in-out infinite;transform-origin:50% 60%}
+.ico{animation:gira3d 5s ease-in-out infinite}
+.atalho:nth-child(2) .ico,.redes a:nth-child(2) svg{animation-delay:-.9s}
+.atalho:nth-child(3) .ico,.redes a:nth-child(3) svg{animation-delay:-1.8s}
+.atalho:nth-child(4) .ico,.redes a:nth-child(4) svg{animation-delay:-2.7s}
+.seta svg{animation:balanca 2.8s ease-in-out infinite}
 .post .rodape{display:flex;align-items:center;gap:8px;padding:10px 10px 12px;background:#fff;color:var(--bg)}
 .post .rodape span{flex:1;min-width:0;font-family:'Playfair Display',serif;font-weight:700;font-size:16px;line-height:1.1}
 .post .rodape small{display:block;font-family:Inter;font-weight:600;font-size:11px;color:#4f5d73;margin-top:3px}
@@ -93,7 +112,7 @@ a{text-decoration:none}
 .selo.gratis{background:var(--cobre);color:#fff}
 
 /* chat de aplicação */
-.chat{margin-top:34px;border-radius:26px;background:linear-gradient(180deg,var(--card),var(--bg2));border:1px solid var(--linha);overflow:hidden;box-shadow:var(--sombra)}
+.chat{margin-top:34px;border-radius:26px;background:linear-gradient(180deg,rgba(10,20,38,.55),rgba(10,20,38,.92)),url(img/gradiente-azul.webp) center/cover;border:1px solid var(--linha);overflow:hidden;box-shadow:var(--sombra)}
 .chat-topo{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--linha)}
 .chat-topo img{width:42px;height:42px;border-radius:50%;object-fit:cover;object-position:top}
 .chat-topo strong{color:var(--marfim);display:block;font-size:14px}
@@ -163,8 +182,8 @@ a{text-decoration:none}
 .gediel{position:absolute;left:50%;bottom:0;height:min(64vh,640px);transform:translateX(-50%);z-index:5;pointer-events:none;filter:drop-shadow(0 30px 40px rgba(0,0,0,.5))}
 .aura{position:absolute;left:50%;bottom:8%;width:min(80vw,620px);aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(143,166,106,.35),transparent 65%);filter:blur(10px)}
 .giro{position:absolute;left:50%;top:34%;width:0;height:0}
-.modo{position:absolute;width:clamp(108px,26vw,170px);aspect-ratio:3/4;margin-left:calc(clamp(108px,26vw,170px)/-2);margin-top:calc(clamp(108px,26vw,170px)*-.66);border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#1b2d4d,#0e1b33);border:1px solid var(--linha);backface-visibility:hidden;box-shadow:0 20px 40px -18px #000;transition:box-shadow .3s,border-color .3s;text-align:left}
-.modo.verde{background:linear-gradient(180deg,#3a4a2a,#1c2614)}
+.modo{position:absolute;background-image:url(img/gradiente-azul.webp)!important;background-size:cover!important;width:clamp(108px,26vw,170px);aspect-ratio:3/4;margin-left:calc(clamp(108px,26vw,170px)/-2);margin-top:calc(clamp(108px,26vw,170px)*-.66);border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#1b2d4d,#0e1b33);border:1px solid var(--linha);backface-visibility:hidden;box-shadow:0 20px 40px -18px #000;transition:box-shadow .3s,border-color .3s;text-align:left}
+.modo.verde{background-image:linear-gradient(180deg,rgba(62,80,44,.82),rgba(26,36,18,.9)),url(img/gradiente-azul.webp)!important}
 .modo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .modo.recorte img{object-fit:contain;object-position:bottom}
 .modo::after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(6,12,24,.92))}
@@ -339,7 +358,7 @@ a{text-decoration:none}
     if (modo && itens[modo.destaque]) { f.splice(f.indexOf(modo.destaque), f.includes(modo.destaque) ? 1 : 0); f.unshift(modo.destaque); }
     return f.filter(k => itens[k].gratis || itens[k].pago || itens[k].aluno).length > 2 ? f : ks; };
   const cardPost = (k, sub) => { const m = itens[k];
-    const foto = m.img && !/logo-/.test(m.img) ? `<img src="${esc(m.img)}" alt="" loading="lazy">` : `<span class="letra">${esc(m.cat === 'Comunidade' ? 'Grupo' : m.cat)}</span>`;
+    const foto = m.img && !/logo-/.test(m.img) ? `<img src="${esc(m.img)}" alt="" loading="lazy">` : `<span class="letra grad g${[...k].reduce((a, c) => a + c.charCodeAt(0), 0) % 6}"><span>${esc(m.cat === 'Comunidade' ? 'Grupo' : m.cat)}</span></span>`;
     const selo = m.gratis ? '<span class="selo gratis">Grátis</span>' : m.preco && typeof m.preco === 'string' ? `<span class="selo">${esc(m.preco)}</span>` : '';
     return `<button class="post t3d" data-abrir="${esc(k)}"><span class="brilho"></span>${selo}<span class="foto">${foto}</span>
       <span class="rodape"><span>${esc(m.aluno ? '“' + m.titulo + '”' : m.titulo)}<small>${esc(sub(m))}</small></span><i class="seta">${SETA}</i></span></button>`; };
