@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Gediel · Hub</title>
 <meta name="description" content="Materiais grátis de inglês do Gediel, materiais completos e a aplicação para a Mentoria Inglês Inteligente.">
-<meta name="theme-color" content="#120f0c">
+<meta name="theme-color" content="#0a1426">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Caveat:wght@500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#120f0c; --bg2:#1a1612; --card:#221d18; --linha:rgba(255,240,220,.09);
-  --marfim:#f3ece2; --dim:#a89c8c; --cobre:#c98a4b; --cobre2:#e2a868;
+  --bg:#0a1426; --bg2:#0e1b33; --card:#13233f; --linha:rgba(255,255,255,.09);
+  --marfim:#ffffff; --dim:#a7b3c6; --cobre:#4a5a35; --cobre2:#8fa66a;
   --r:20px; --sombra:0 24px 50px -24px rgba(0,0,0,.8);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -28,14 +28,14 @@ a{text-decoration:none}
 /* HERO */
 .hero{position:relative;height:min(78vh,640px);min-height:520px;margin:0 -16px;overflow:hidden;isolation:isolate}
 .hero-bg{position:absolute;inset:-6% 0 0;width:100%;height:112%;object-fit:cover;object-position:center 20%;z-index:-2;will-change:transform}
-.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(18,15,12,.15) 0,rgba(18,15,12,.2) 40%,rgba(18,15,12,.92) 82%,var(--bg))}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(10,20,38,.15) 0,rgba(10,20,38,.2) 40%,rgba(10,20,38,.92) 82%,var(--bg))}
 .manuscrito{position:absolute;top:28px;left:22px;font-family:Caveat,cursive;font-size:30px;line-height:1;color:rgba(255,255,255,.85);transform:rotate(-8deg)}
 .hero-info{position:absolute;left:0;right:0;bottom:22px;text-align:center;padding:0 20px}
 .avatar{width:96px;height:96px;border-radius:50%;object-fit:cover;object-position:top;margin:0 auto 12px;border:3px solid var(--marfim);box-shadow:var(--sombra)}
 .nome{font-size:clamp(36px,7vw,58px);line-height:1;display:inline-flex;align-items:center;gap:10px}
 .nome svg{width:24px;height:24px}
 .cargo{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--marfim);margin:10px 0 8px;opacity:.9}
-.bio{max-width:44ch;margin:0 auto;font-size:14px;color:#d8cdbf}
+.bio{max-width:44ch;margin:0 auto;font-size:14px;color:#d6deea}
 .redes{display:flex;justify-content:center;gap:10px;margin-top:16px}
 .redes a{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);border:1px solid var(--linha);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:background .2s}
 .redes a:hover{background:rgba(255,255,255,.16)}
@@ -52,20 +52,20 @@ a{text-decoration:none}
 .atalhos{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
 .atalho{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:3/4;text-align:left;box-shadow:var(--sombra);border:1px solid var(--linha);background:var(--card)}
 .atalho img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.atalho::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(10,8,6,.9))}
+.atalho::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(6,12,24,.9))}
 .atalho .pop{display:block;position:absolute;left:10px;right:10px;bottom:10px;z-index:1}
 .ico{display:grid;width:30px;height:30px;border-radius:50%;background:var(--marfim);color:var(--bg);display:grid;place-items:center;margin-bottom:6px}
 .ico svg{width:15px;height:15px}
 .atalho small{display:block}.atalho strong{display:block;color:var(--marfim);font-size:13px;font-weight:600;line-height:1.2}
-.atalho small{font-size:10.5px;color:#cfc3b3}
+.atalho small{font-size:10.5px;color:#c9d3e2}
 
 /* destaque vídeo */
 .destaque{display:grid;grid-template-columns:1.15fr 1fr;gap:16px;align-items:center;margin-top:16px;padding:12px;border-radius:24px;background:var(--card);border:1px solid var(--linha);box-shadow:var(--sombra);position:relative}
 .destaque .thumb{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:16/11}
 .destaque .thumb img{width:100%;height:100%;object-fit:cover}
-.play{position:absolute;inset:0;margin:auto;width:58px;height:58px;border-radius:50%;background:rgba(18,15,12,.55);border:1px solid rgba(255,255,255,.4);display:grid;place-items:center;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.play{position:absolute;inset:0;margin:auto;width:58px;height:58px;border-radius:50%;background:rgba(10,20,38,.55);border:1px solid rgba(255,255,255,.4);display:grid;place-items:center;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .play svg{width:22px;fill:#fff;margin-left:3px}
-.rotulo{display:inline-block;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--cobre2);border:1px solid rgba(201,138,75,.4);padding:4px 9px;border-radius:99px;margin-bottom:8px}
+.rotulo{display:inline-block;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--cobre2);border:1px solid rgba(143,166,106,.4);padding:4px 9px;border-radius:99px;margin-bottom:8px}
 .destaque h2{font-size:clamp(26px,4vw,40px);line-height:1}
 .destaque p{font-size:13px;margin:8px 0 14px}
 .pilula{display:inline-flex;align-items:center;gap:8px;background:var(--marfim);color:var(--bg);border-radius:99px;padding:10px 16px;font-size:13px;font-weight:600}
@@ -81,16 +81,16 @@ a{text-decoration:none}
 .filtro[aria-pressed="true"]{background:var(--marfim);color:var(--bg);border-color:var(--marfim)}
 .trilho{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:10px 2px 26px;margin:-10px -2px -20px}
 .post{display:flex;flex-direction:column;position:relative;flex:0 0 clamp(150px,42vw,230px);scroll-snap-align:start;border-radius:18px;overflow:hidden;background:var(--card);border:1px solid var(--linha);text-align:left;box-shadow:var(--sombra)}
-.post .foto{display:block;aspect-ratio:1/1;overflow:hidden;background:linear-gradient(150deg,#3a2c20,#1d1712)}
+.post .foto{display:block;aspect-ratio:1/1;overflow:hidden;background:linear-gradient(150deg,#2c3a22,#13233f)}
 .post .foto img{width:100%;height:100%;object-fit:cover}
 .post .foto .letra{height:100%;font-size:32px!important;display:grid;place-items:center;font-family:'Playfair Display',serif;font-size:42px;color:var(--cobre2);font-style:italic}
-.post .rodape{display:flex;align-items:center;gap:8px;padding:10px 10px 12px;background:var(--marfim);color:var(--bg)}
+.post .rodape{display:flex;align-items:center;gap:8px;padding:10px 10px 12px;background:#fff;color:var(--bg)}
 .post .rodape span{flex:1;min-width:0;font-family:'Playfair Display',serif;font-weight:700;font-size:16px;line-height:1.1}
-.post .rodape small{display:block;font-family:Inter;font-weight:600;font-size:11px;color:#6d5f4f;margin-top:3px}
+.post .rodape small{display:block;font-family:Inter;font-weight:600;font-size:11px;color:#4f5d73;margin-top:3px}
 .seta{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--bg);color:var(--marfim);display:grid;place-items:center}
 .seta svg{width:14px;height:14px}
-.selo{position:absolute;top:10px;left:10px;z-index:1;font-size:10.5px;font-weight:700;padding:5px 9px;border-radius:99px;background:rgba(18,15,12,.7);color:var(--marfim);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-.selo.gratis{background:var(--marfim);color:#2d6b3c}
+.selo{position:absolute;top:10px;left:10px;z-index:1;font-size:10.5px;font-weight:700;padding:5px 9px;border-radius:99px;background:rgba(10,20,38,.7);color:var(--marfim);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.selo.gratis{background:var(--cobre);color:#fff}
 
 /* chat de aplicação */
 .chat{margin-top:34px;border-radius:26px;background:linear-gradient(180deg,var(--card),var(--bg2));border:1px solid var(--linha);overflow:hidden;box-shadow:var(--sombra)}
@@ -102,7 +102,7 @@ a{text-decoration:none}
 .chat-barra i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cobre),var(--cobre2));transition:width .4s}
 .msgs{padding:16px;display:flex;flex-direction:column;gap:10px;min-height:240px;max-height:520px;overflow-y:auto}
 .msg{max-width:82%;padding:10px 14px;border-radius:18px;font-size:14px;line-height:1.45;animation:entra .35s ease both;white-space:pre-line}
-.msg.ele{background:#2c251f;color:var(--marfim);border-bottom-left-radius:6px}
+.msg.ele{background:#1b2d4d;color:var(--marfim);border-bottom-left-radius:6px}
 .msg.eu{align-self:flex-end;background:var(--cobre);color:#fff;border-bottom-right-radius:6px}
 .digitando{display:inline-flex;gap:4px}
 .digitando i{width:6px;height:6px;border-radius:50%;background:var(--dim);animation:pula 1s infinite}
@@ -110,16 +110,16 @@ a{text-decoration:none}
 @keyframes pula{50%{transform:translateY(-4px);opacity:.5}}
 @keyframes entra{from{opacity:0;transform:translateY(8px)}}
 .resp{padding:12px 16px 16px;display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid var(--linha)}
-.resp .op{padding:10px 14px;border-radius:99px;border:1px solid rgba(201,138,75,.45);color:var(--marfim);font-size:13px;font-weight:500;transition:background .15s}
-.resp .op:hover,.resp .op.on{background:rgba(201,138,75,.18)}
+.resp .op{padding:10px 14px;border-radius:99px;border:1px solid rgba(143,166,106,.45);color:var(--marfim);font-size:13px;font-weight:500;transition:background .15s}
+.resp .op:hover,.resp .op.on{background:rgba(143,166,106,.18)}
 .resp form{display:flex;gap:8px;width:100%}
-.resp input,.resp textarea{flex:1;min-width:0;background:#0d0b09;border:1px solid var(--linha);border-radius:14px;padding:12px 14px;color:var(--marfim);outline:none;resize:none}
+.resp input,.resp textarea{flex:1;min-width:0;background:#081120;border:1px solid var(--linha);border-radius:14px;padding:12px 14px;color:var(--marfim);outline:none;resize:none}
 .resp input:focus,.resp textarea:focus{border-color:var(--cobre)}
 .enviar{flex:0 0 auto;padding:0 18px;border-radius:14px;background:linear-gradient(135deg,var(--cobre),var(--cobre2));color:#fff;font-weight:700;font-size:13px}
 .enviar.grande{width:100%;padding:15px;letter-spacing:.12em;text-transform:uppercase}
 
 /* rodapé */
-.rodape-site{text-align:center;margin-top:40px;font-size:12px;color:#6d6255}
+.rodape-site{text-align:center;margin-top:40px;font-size:12px;color:#5f6e86}
 .rodape-site .serif{font-size:18px;display:block;margin-bottom:6px}
 
 /* ficha (detalhes ao tocar) */
@@ -134,19 +134,50 @@ a{text-decoration:none}
 .ficha h3{font-size:32px;line-height:1.05}
 .metas{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
 .metas span{font-size:11.5px;padding:5px 10px;border-radius:99px;border:1px solid var(--linha);color:var(--marfim)}
-.ficha p{font-size:14.5px;color:#cfc3b3}
-.ficha ul{margin:12px 0 0 18px;font-size:13.5px;color:#cfc3b3}
+.ficha p{font-size:14.5px;color:#c9d3e2}
+.ficha ul{margin:12px 0 0 18px;font-size:13.5px;color:#c9d3e2}
 .ficha .preco{margin-top:14px;color:var(--marfim);font-size:14px}
 .ficha .preco b{font-family:'Playfair Display',serif;font-size:28px;color:var(--cobre2)}
 .botoes{display:grid;gap:8px;margin-top:18px}
 .botoes a,.botoes button{text-align:center;padding:14px;border-radius:14px;font-weight:700;font-size:14px}
 .b1{background:linear-gradient(135deg,var(--cobre),var(--cobre2));color:#fff}
 .b2{border:1px solid var(--linha);color:var(--marfim)}
-.fechar{position:absolute;top:12px;right:12px;z-index:2;width:38px;height:38px;border-radius:50%;background:rgba(18,15,12,.7);color:#fff;font-size:18px}
+.fechar{position:absolute;top:12px;right:12px;z-index:2;width:38px;height:38px;border-radius:50%;background:rgba(10,20,38,.7);color:#fff;font-size:18px}
 .alca{width:44px;height:5px;border-radius:9px;background:rgba(255,255,255,.25);position:absolute;top:8px;left:50%;transform:translateX(-50%);z-index:2}
 
 .aparece{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
 .aparece.ok{opacity:1;transform:none}
+
+/* ENTRADA: escolher o modo */
+.entrada{position:fixed;inset:0;z-index:30;background:radial-gradient(80% 60% at 50% 55%,#1c3157 0,var(--bg) 70%);display:flex;flex-direction:column;align-items:center;overflow:hidden;transition:opacity .6s,transform .6s}
+.entrada.sai{opacity:0;transform:scale(1.06);pointer-events:none}
+.ent-topo{width:100%;max-width:1120px;display:flex;justify-content:space-between;align-items:center;padding:18px 18px 0;color:#fff;font-weight:700;letter-spacing:-.3px}
+.ent-topo b{color:var(--cobre2)}
+.ent-titulo{text-align:center;margin-top:3vh;padding:0 16px}
+.ent-titulo small{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--dim)}
+.ent-titulo h1{font-size:clamp(32px,7vw,60px);line-height:1.02;margin-top:8px}
+.ent-titulo h1 em{color:var(--cobre2)}
+.ent-titulo p{font-size:13px;margin-top:8px}
+.anel{position:relative;flex:1;width:100%;perspective:1100px;touch-action:pan-y;cursor:grab;user-select:none}
+.anel:active{cursor:grabbing}
+.gediel{position:absolute;left:50%;bottom:0;height:min(64vh,640px);transform:translateX(-50%);z-index:5;pointer-events:none;filter:drop-shadow(0 30px 40px rgba(0,0,0,.5))}
+.aura{position:absolute;left:50%;bottom:8%;width:min(80vw,620px);aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(143,166,106,.35),transparent 65%);filter:blur(10px)}
+.giro{position:absolute;left:50%;top:34%;width:0;height:0}
+.modo{position:absolute;width:clamp(108px,26vw,170px);aspect-ratio:3/4;margin-left:calc(clamp(108px,26vw,170px)/-2);margin-top:calc(clamp(108px,26vw,170px)*-.66);border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#1b2d4d,#0e1b33);border:1px solid var(--linha);backface-visibility:hidden;box-shadow:0 20px 40px -18px #000;transition:box-shadow .3s,border-color .3s;text-align:left}
+.modo.verde{background:linear-gradient(180deg,#3a4a2a,#1c2614)}
+.modo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.modo.recorte img{object-fit:contain;object-position:bottom}
+.modo::after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(6,12,24,.92))}
+.modo span{position:absolute;left:10px;right:10px;bottom:10px;z-index:1;color:#fff;font-weight:700;font-size:13px;line-height:1.1}
+.modo i{position:absolute;top:8px;right:8px;z-index:1;width:36px;height:20px;border-radius:99px;background:rgba(255,255,255,.25);font-style:normal}
+.modo i::after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:#fff;transition:left .25s}
+.modo.on{border-color:var(--cobre2);box-shadow:0 0 0 2px var(--cobre2),0 24px 50px -16px rgba(143,166,106,.6)}
+.modo.on i{background:var(--cobre2)}.modo.on i::after{left:19px}
+.modo em{position:absolute;bottom:36px;left:10px;z-index:1;font-style:normal;font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:#fff;color:var(--bg);padding:4px 7px;border-radius:99px}
+.ligar{position:relative;z-index:6;width:min(420px,calc(100% - 32px));margin:0 0 max(18px,env(safe-area-inset-bottom));padding:17px;border-radius:16px;background:var(--cobre);color:#fff;font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:13px;box-shadow:0 18px 40px -14px rgba(74,90,53,.9);border:1px solid rgba(255,255,255,.15)}
+.trocar{position:fixed;top:14px;right:14px;z-index:15;padding:10px 14px;border-radius:99px;background:rgba(10,20,38,.65);border:1px solid var(--linha);color:#fff;font-size:12.5px;font-weight:700;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.trocar b{color:var(--cobre2)}
+.modo-texto{max-width:46ch;margin:0 auto;font-size:14px;color:#d6deea}
 
 @media (min-width:820px){
   .hero{margin:16px 0 0;border-radius:30px;height:600px}
@@ -170,6 +201,22 @@ a{text-decoration:none}
 </style>
 </head>
 <body>
+<section class="entrada" id="entrada" aria-label="Escolha o seu modo">
+  <div class="ent-topo"><span>english<b>by</b>gediel</span></div>
+  <div class="ent-titulo">
+    <small>Escolha o seu caminho</small>
+    <h1 class="serif">Qual modo você quer <em>ligar</em> hoje?</h1>
+    <p>Toque num card ou arraste pra girar.</p>
+  </div>
+  <div class="anel" id="anel">
+    <span class="aura"></span>
+    <div class="giro" id="giro"></div>
+    <img class="gediel" src="img/modo-fala.webp" alt="Gediel de braços abertos">
+  </div>
+  <button class="ligar" id="ligar" type="button">Ligar modo</button>
+</section>
+<button class="trocar" id="trocar" type="button" hidden>Modo <b id="trocarNome"></b> · trocar</button>
+
 <main class="pagina">
   <header class="hero">
     <img class="hero-bg" id="heroBg" src="img/gediel-liberty-tall.webp" alt="">
@@ -178,7 +225,7 @@ a{text-decoration:none}
       <img class="avatar" src="img/gediel-brooklyn.webp" alt="Gediel">
       <h1 class="nome serif">Gediel Vargas <svg viewBox="0 0 24 24"><path fill="#3b9bff" d="m12 1 2.6 2 3.3-.3 1 3.1 2.8 1.8-.9 3.2.9 3.2-2.8 1.8-1 3.1-3.3-.3L12 23l-2.6-2-3.3.3-1-3.1-2.8-1.8.9-3.2-.9-3.2 2.8-1.8 1-3.1 3.3.3z"/><path fill="#fff" d="m10.5 15.6-3.2-3.2 1.4-1.4 1.8 1.8 4.8-4.8 1.4 1.4z"/></svg></h1>
       <p class="cargo">Professor · Mentor · Inglês Inteligente</p>
-      <p class="bio">Onze anos de sala de aula e mais de 700 alunos. Aqui estão meus materiais grátis, os completos e a porta pra mentoria.</p>
+      <p class="bio" id="bio">Onze anos de sala de aula e mais de 700 alunos. Aqui estão meus materiais grátis, os completos e a porta pra mentoria.</p>
       <nav class="redes" id="redes" aria-label="Redes"></nav>
     </div>
   </header>
@@ -277,16 +324,20 @@ a{text-decoration:none}
   const itens = {};
   Object.entries(C.itens).forEach(([k, it]) => {
     if (it.tipo === 'gratis' && !it.indisponivel)
-      itens[k] = { titulo: it.titulo, img: it.img, cat: cat(k, it), gratis: true, sinopse: it.sinopse, meta: it.meta, cta: it.cta, cta2: it.cta2 };
+      itens[k] = { modos: it.modos || [], titulo: it.titulo, img: it.img, cat: cat(k, it), gratis: true, sinopse: it.sinopse, meta: it.meta, cta: it.cta, cta2: it.cta2 };
     if (it.tipo === 'aluno' && !/^eom/.test(k))
-      itens[k] = { titulo: it.titulo, img: it.img, cat: 'aluno', aluno: true, nome: it.nome, sinopse: it.sinopse, video: it.video, meta: [it.nome, it.arroba] };
+      itens[k] = { modos: it.modos || [], titulo: it.titulo, img: it.img, cat: 'aluno', aluno: true, nome: it.nome, sinopse: it.sinopse, video: it.video, meta: [it.nome, it.arroba] };
   });
   const M = C.itens.mentoria;
   itens.mentoria = { titulo: M.titulo, img: M.imgLarga || M.img, video: M.video || CFG.videoApresentacao, sinopse: M.sinopse, meta: M.meta, inclui: M.inclui,
     preco: M.preco, cta: { rotulo: 'Aplicar pra mentoria', acao: 'aplicar' }, cta2: { rotulo: M.cta.rotulo, acao: 'checkout' } };
 
-  let filtro = 'Tudo';
-  const ordem = () => Object.keys(itens);
+  let filtro = 'Tudo', modo = null;
+  const doModo = k => { const ms = itens[k].modos || []; return !modo || modo.id === 'materiais' || !ms.length || ms.includes(modo.id); };
+  const ordem = () => { const ks = Object.keys(itens); const f = ks.filter(doModo);
+    // o destaque do modo sobe pro começo
+    if (modo && itens[modo.destaque]) { f.splice(f.indexOf(modo.destaque), f.includes(modo.destaque) ? 1 : 0); f.unshift(modo.destaque); }
+    return f.filter(k => itens[k].gratis || itens[k].pago || itens[k].aluno).length > 2 ? f : ks; };
   const cardPost = (k, sub) => { const m = itens[k];
     const foto = m.img && !/logo-/.test(m.img) ? `<img src="${esc(m.img)}" alt="" loading="lazy">` : `<span class="letra">${esc(m.cat === 'Comunidade' ? 'Grupo' : m.cat)}</span>`;
     const selo = m.gratis ? '<span class="selo gratis">Grátis</span>' : m.preco && typeof m.preco === 'string' ? `<span class="selo">${esc(m.preco)}</span>` : '';
@@ -314,7 +365,7 @@ a{text-decoration:none}
         if (!Array.isArray(lista)) return;
         const novos = {};
         lista.filter(p => p.tipo === 'gratis' || p.tipo === 'pago').forEach(p => {
-          novos['p-' + p.id] = { titulo: p.titulo, img: https(p.capa_url), cat: p.segmento, sinopse: p.descricao, meta: [p.segmento],
+          novos['p-' + p.id] = { modos: Array.isArray(p.modos) ? p.modos : [], titulo: p.titulo, img: https(p.capa_url), cat: p.segmento, sinopse: p.descricao, meta: [p.segmento],
             gratis: p.tipo === 'gratis', pago: p.tipo === 'pago', preco: p.preco || '',
             cta: https(p.link) ? { rotulo: p.botao || (p.tipo === 'pago' ? 'Quero esse' : 'Abrir material'), acao: 'link', href: p.link } : null };
         });
@@ -475,6 +526,69 @@ a{text-decoration:none}
   // o chat começa quando aparece na tela
   const chatIO = 'IntersectionObserver' in window ? new IntersectionObserver(es => { if (es[0].isIntersecting && passo < 0) { proxima(); chatIO.disconnect(); } }, { threshold: .3 }) : null;
   chatIO ? chatIO.observe($('.chat')) : proxima();
+
+  /* ENTRADA: os modos giram em volta do Gediel (como na landing). Arraste pra girar, toque pra escolher. */
+  const modos = C.modos;
+  const giro = $('#giro');
+  giro.innerHTML = modos.map(m => `<button class="modo${m.verde ? ' verde' : ''}${m.recorte ? ' recorte' : ''}" type="button" data-modo="${esc(m.id)}" aria-pressed="false">
+      <img src="${esc(m.img)}" alt="" draggable="false">${m.marca ? `<em>${esc(m.marca)}</em>` : ''}<i></i><span>${esc(m.nome)}</span></button>`).join('');
+  const cards = $$('#giro .modo');
+  const passoAng = 360 / cards.length;
+  let ang = 0, alvo = 0, escolhido = null, arrasto = null;
+  const raio = () => Math.min(innerWidth * .62, 520);
+  function posicionar() {
+    const r = raio();
+    cards.forEach((c, i) => {
+      const a = (i * passoAng + ang) * Math.PI / 180;
+      const z = Math.cos(a);              // 1 = na frente, -1 = atrás da cabeça
+      c.style.transform = `perspective(1100px) translate3d(${Math.sin(a) * r}px, ${z * Math.min(innerHeight * .2, 170)}px, ${z * r * .5}px) rotateY(${Math.sin(a) * -18}deg) scale(${.62 + (z + 1) * .23})`;
+      c.style.zIndex = z > .15 ? 6 + Math.round(z * 10) : 1;
+      c.style.opacity = (.35 + (z + 1) * .33).toFixed(2);
+      c.style.filter = z < 0 ? `brightness(${.55 + (z + 1) * .45})` : '';
+    });
+  }
+  function animar() {
+    ang += (alvo - ang) * .12;
+    posicionar();
+    if (Math.abs(alvo - ang) > .05) requestAnimationFrame(animar);
+  }
+  let parado = 0;
+  function sozinho() { if (!arrasto && !escolhido && Date.now() - parado > 2500 && !reduz) { alvo -= .12; ang = alvo; posicionar(); } if (!$('#entrada').classList.contains('sai')) requestAnimationFrame(sozinho); }
+  function escolher(id) {
+    escolhido = modos.find(m => m.id === id);
+    cards.forEach(c => { const on = c.dataset.modo === id; c.classList.toggle('on', on); c.setAttribute('aria-pressed', on); });
+    const i = modos.indexOf(escolhido);
+    let a = -i * passoAng; while (a - alvo > 180) a -= 360; while (alvo - a > 180) a += 360;
+    alvo = a; requestAnimationFrame(animar);
+    $('#ligar').textContent = 'Ligar ' + escolhido.nome;
+  }
+  const anel = $('#anel');
+  anel.addEventListener('pointerdown', e => { arrasto = { x: e.clientX, a: alvo, moveu: false }; });
+  addEventListener('pointermove', e => { if (!arrasto) return; const dx = e.clientX - arrasto.x; if (Math.abs(dx) > 6) arrasto.moveu = true; alvo = arrasto.a + dx * .35; ang = alvo; posicionar(); });
+  addEventListener('pointerup', () => { if (arrasto) { parado = Date.now(); setTimeout(() => { arrasto = null; }, 0); } });
+  anel.addEventListener('click', e => { const c = e.target.closest('.modo'); if (c && !(arrasto && arrasto.moveu)) escolher(c.dataset.modo); });
+
+  function ligarModo(m) {
+    modo = m;
+    try { localStorage.setItem('ebg:hubmodo', m.id); } catch (e) {}
+    $('#trocarNome').textContent = m.nome.replace(/^Modo /, '');
+    $('#trocar').hidden = false;
+    const t = (C.textoModo || {})[m.id]; if (t) $('#bio').textContent = t;
+    $('.cargo').textContent = m.nome + ' · ligado';
+    if (itens[m.destaque] && m.destaque !== 'mentoria') { /* o destaque do modo abre primeiro na fileira grátis */ }
+    filtro = 'Tudo'; desenhar();
+    $('#entrada').classList.add('sai'); document.body.style.overflow = '';
+    scrollTo(0, 0); setTimeout(mover, 50);
+  }
+  $('#ligar').addEventListener('click', () => ligarModo(escolhido || modos[0]));
+  $('#trocar').addEventListener('click', () => { $('#entrada').classList.remove('sai'); document.body.style.overflow = 'hidden'; requestAnimationFrame(sozinho); });
+
+  let salvo = null; try { salvo = localStorage.getItem('ebg:hubmodo'); } catch (e) {}
+  escolher((modos.find(m => m.id === salvo) || modos[0]).id);
+  ang = alvo; posicionar();
+  document.body.style.overflow = 'hidden';
+  requestAnimationFrame(sozinho);
+  addEventListener('resize', posicionar);
 
   desenhar();
 })();
