@@ -39,7 +39,7 @@ a{text-decoration:none}
 .redes{display:flex;justify-content:center;gap:10px;margin-top:16px}
 .redes a{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);border:1px solid var(--linha);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:background .2s}
 .redes a:hover{background:rgba(255,255,255,.16)}
-.redes svg{width:19px;height:19px;fill:var(--marfim)}
+.redes svg{width:19px;height:19px;fill:var(--marfim);color:var(--marfim)}
 
 /* 3D */
 .cena{perspective:900px}
@@ -225,6 +225,25 @@ a{text-decoration:none}
   .destaque{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.aparece{opacity:1;transform:none}}
+/* botões estilo Apple */
+.pilula,.b1,.b2,.enviar,.ligar,.filtro,.trocar,.resp .op,.cab button,.botoes a,.botoes button{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display",Inter,system-ui,sans-serif!important;
+  border-radius:980px!important;letter-spacing:-.01em!important;text-transform:none!important;font-weight:600!important;
+  transition:transform .18s cubic-bezier(.3,.7,.4,1),background-color .2s,filter .2s!important;-webkit-tap-highlight-color:transparent}
+.pilula:active,.b1:active,.b2:active,.enviar:active,.ligar:active,.filtro:active,.trocar:active,.resp .op:active,.botoes a:active{transform:scale(.96)!important}
+.b1,.enviar,.ligar{background:#fff!important;color:#0a1426!important;border:0!important;box-shadow:none!important}
+.b1:hover,.enviar:hover,.ligar:hover{filter:brightness(.92)}
+.b2,.trocar,.resp .op,.filtro{background:rgba(255,255,255,.12)!important;color:#fff!important;border:0!important;backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px)}
+.b2:hover,.trocar:hover,.resp .op:hover,.filtro:hover{background:rgba(255,255,255,.2)!important}
+.filtro[aria-pressed="true"],.resp .op.on{background:#fff!important;color:#0a1426!important}
+.ligar{font-size:17px!important;padding:16px!important}
+.botoes a,.botoes button{font-size:17px!important;padding:15px!important}
+.pilula{font-size:15px!important;padding:11px 20px!important}
+.enviar{font-size:15px!important}
+.enviar.grande{font-size:17px!important;padding:16px!important}
+.enviar:disabled{opacity:.4}
+/* fileiras andam sozinhas: sem encaixe pra não travar o movimento */
+.trilho{scroll-snap-type:none!important}
 </style>
 </head>
 <body>
@@ -328,7 +347,7 @@ a{text-decoration:none}
   const IC = {
     youtube: '<path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.7 15V9l5.8 3z"/>',
     tiktok: '<path d="M16.6 3c.4 2.2 1.8 3.7 4 3.9v3.2a7.4 7.4 0 0 1-4-1.2v6.3A6.3 6.3 0 1 1 10.3 9v3.3a3 3 0 1 0 3 3V3z"/>',
-    insta: '<path d="M12 7.3A4.7 4.7 0 1 0 16.7 12 4.7 4.7 0 0 0 12 7.3zm0 7.7a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm6-7.9a1.1 1.1 0 1 1-1.1-1.1A1.1 1.1 0 0 1 18 7.1zM21.9 8a5.4 5.4 0 0 0-1.5-3.9A5.4 5.4 0 0 0 16.5 2.6C15 2.5 9 2.5 7.5 2.6a5.4 5.4 0 0 0-3.9 1.5A5.4 5.4 0 0 0 2.1 8C2 9.5 2 14.5 2.1 16a5.4 5.4 0 0 0 1.5 3.9 5.4 5.4 0 0 0 3.9 1.5c1.5.1 7.5.1 9 0a5.4 5.4 0 0 0 3.9-1.5 5.4 5.4 0 0 0 1.5-3.9c.1-1.5.1-6.5 0-8z"/>',
+    insta: '<rect x="3" y="3" width="18" height="18" rx="5.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3"/>',
     whats: '<path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2s-1 .3-3.4-.7a11.7 11.7 0 0 1-4.6-4.1 5.2 5.2 0 0 1-1.1-2.8 3 3 0 0 1 1-2.2 1 1 0 0 1 .7-.3h.5c.2 0 .4 0 .6.5l.9 2.1a.6.6 0 0 1 0 .5l-.3.5-.4.5c-.2.1-.3.3-.1.6a8 8 0 0 0 1.5 1.8 7 7 0 0 0 2.1 1.3c.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3a2.2 2.2 0 0 1-.1 1.2z"/>'
   };
   const links = [['youtube', (CFG.redes || {}).youtube], ['tiktok', (CFG.redes || {}).tiktok], ['insta', (CFG.instagram || {}).ebg], ['whats', whats('Oi Gediel! Vim pelo Hub.')]];
@@ -351,8 +370,14 @@ a{text-decoration:none}
   Object.entries(C.itens).forEach(([k, it]) => {
     if (it.tipo === 'gratis' && !it.indisponivel)
       itens[k] = { modos: it.modos || [], titulo: it.titulo, img: it.img, cat: cat(k, it), gratis: true, sinopse: it.sinopse, meta: it.meta, cta: it.cta, cta2: it.cta2 };
-    if (it.tipo === 'aluno' && !/^eom/.test(k))
+    if (it.tipo === 'aluno')
       itens[k] = { modos: it.modos || [], titulo: it.titulo, img: it.img, cat: 'aluno', aluno: true, nome: it.nome, sinopse: it.sinopse, video: it.video, meta: [it.nome, it.arroba] };
+  });
+  (C.materiais || []).forEach(x => {
+    itens[x.id] = { modos: x.modos || [], titulo: x.titulo, img: x.img, cat: x.cat, linha: x.linha, sinopse: x.sinopse, meta: x.meta,
+      gratis: !!x.gratis, pago: !x.gratis, preco: x.preco || '',
+      cta: x.link ? { rotulo: x.gratis ? 'Pegar de graça' : 'Quero o ' + x.titulo, acao: 'link', href: x.link }
+        : { rotulo: 'Quero saber quando sai', acao: 'whatsapp', texto: `Oi Gediel! Quero o ${x.titulo}.` } };
   });
   const M = C.itens.mentoria;
   itens.mentoria = { titulo: M.titulo, img: M.imgLarga || M.img, video: M.video || CFG.videoApresentacao, sinopse: M.sinopse, meta: M.meta, inclui: M.inclui,
@@ -366,9 +391,9 @@ a{text-decoration:none}
     return f.filter(k => itens[k].gratis || itens[k].pago || itens[k].aluno).length > 2 ? f : ks; };
   const cardPost = (k, sub) => { const m = itens[k];
     const foto = m.img && !/logo-/.test(m.img) ? `<img src="${esc(m.img)}" alt="" loading="lazy">` : `<span class="letra grad g${[...k].reduce((a, c) => a + c.charCodeAt(0), 0) % 6}"><span>${esc(m.cat === 'Comunidade' ? 'Grupo' : m.cat)}</span></span>`;
-    const selo = m.gratis ? '<span class="selo gratis">Grátis</span>' : m.preco && typeof m.preco === 'string' ? `<span class="selo">${esc(m.preco)}</span>` : '';
+    const selo = m.gratis ? '<span class="selo gratis">Grátis</span>' : m.preco && typeof m.preco === 'string' ? `<span class="selo">${esc(m.preco)}</span>` : m.pago ? '<span class="selo">Novo</span>' : '';
     return `<button class="post t3d" data-abrir="${esc(k)}"><span class="brilho"></span>${selo}<span class="foto">${foto}</span>
-      <span class="rodape"><span>${esc(m.aluno ? '“' + m.titulo + '”' : m.titulo)}<small>${esc(sub(m))}</small></span><i class="seta">${SETA}</i></span></button>`; };
+      <span class="rodape"><span>${esc(m.aluno ? '“' + m.titulo + '”' : m.titulo)}<small>${esc(m.linha || sub(m))}</small></span><i class="seta">${SETA}</i></span></button>`; };
 
   function desenhar() {
     const gr = ordem().filter(k => itens[k].gratis && (filtro === 'Tudo' || itens[k].cat === filtro));
@@ -376,10 +401,16 @@ a{text-decoration:none}
     $('#contaGratis').textContent = gr.length + ' materiais';
     const cats = ['Tudo', ...new Set(ordem().filter(k => itens[k].gratis).map(k => itens[k].cat))];
     $('#filtros').innerHTML = cats.map(c => `<button class="filtro" aria-pressed="${c === filtro}" data-filtro="${esc(c)}">${esc(c)}</button>`).join('');
-    const pg = ordem().filter(k => itens[k].pago);
+    // materiais à venda: todos sempre aparecem; os do modo primeiro
+    const doMp = k => modo && (itens[k].modos || []).includes(modo.id) ? 0 : 1;
+    const pg = Object.keys(itens).filter(k => itens[k].pago).sort((a, b) => doMp(a) - doMp(b));
     $('#pagos').hidden = !pg.length;
     $('#trilhoPagos').innerHTML = pg.map(k => cardPost(k, m => m.cat)).join('');
-    $('#trilhoAlunos').innerHTML = ordem().filter(k => itens[k].aluno).map(k => cardPost(k, m => m.nome)).join('');
+    // depoimentos: todos, independente do modo; os que combinam com o modo vêm primeiro
+    const al = Object.keys(itens).filter(k => itens[k].aluno);
+    const doM = k => modo && (itens[k].modos || []).includes(modo.id) ? 0 : 1;
+    al.sort((a, b) => doM(a) - doM(b));
+    $('#trilhoAlunos').innerHTML = al.map(k => cardPost(k, m => m.nome)).join('');
     ligar3d();
   }
 
@@ -484,6 +515,24 @@ a{text-decoration:none}
     const bg = $('#heroBg'); if (bg) bg.style.transform = `translateY(${Math.min(scrollY, 700) * .25}px) scale(${1 + Math.min(scrollY, 700) / 4000})`;
   }
   addEventListener('scroll', pedir, { passive: true });
+  const parada = new WeakMap();
+  function andarFileiras(t) {
+    if (!reduz) $$('.trilho').forEach(tr => {
+      const max = tr.scrollWidth - tr.clientWidth; if (max < 4) return;
+      if ((parada.get(tr) || 0) > Date.now()) return;
+      const r = tr.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return;
+      tr._dir = tr._dir || 1; tr._x = tr._x ?? tr.scrollLeft;
+      tr._x += tr._dir * .45;
+      if (tr._x >= max) { tr._x = max; tr._dir = -1; } else if (tr._x <= 0) { tr._x = 0; tr._dir = 1; }
+      tr.scrollLeft = tr._x;
+    });
+    requestAnimationFrame(andarFileiras);
+  }
+  ['pointerdown', 'touchstart', 'wheel'].forEach(ev => document.addEventListener(ev, e => {
+    const tr = e.target.closest && e.target.closest('.trilho'); if (tr) { parada.set(tr, Date.now() + 3500); tr._x = null; }
+  }, { passive: true }));
+  document.addEventListener('scroll', e => { const tr = e.target; if (tr.classList && tr.classList.contains('trilho') && (parada.get(tr) || 0) > Date.now()) tr._x = tr.scrollLeft; }, { passive: true, capture: true });
+  requestAnimationFrame(andarFileiras);
   addEventListener('resize', pedir);
 
   const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { x.target.classList.add('ok'); io.unobserve(x.target); } }), { threshold: .12 }) : null;
@@ -580,7 +629,13 @@ a{text-decoration:none}
     if (Math.abs(alvo - ang) > .05) requestAnimationFrame(animar);
   }
   let parado = 0;
-  function sozinho() { if (!arrasto && !escolhido && Date.now() - parado > 2500 && !reduz) { alvo -= .12; ang = alvo; posicionar(); } if (!$('#entrada').classList.contains('sai')) requestAnimationFrame(sozinho); }
+  let mexeu = false;
+  function frente() { const n = modos.length; return ((Math.round(-ang / passoAng) % n) + n) % n; }
+  function marcar(m) { escolhido = m; cards.forEach(c => { const on = c.dataset.modo === m.id; c.classList.toggle('on', on); c.setAttribute('aria-pressed', on); }); $('#ligar').textContent = 'Ligar ' + m.nome; }
+  function sozinho() {
+    if (!arrasto && !reduz && !mexeu && Date.now() - parado > 1200) { alvo -= .14; ang = alvo; posicionar(); const f = modos[frente()]; if (f !== escolhido) marcar(f); }
+    if (!$('#entrada').classList.contains('sai')) requestAnimationFrame(sozinho);
+  }
   function escolher(id) {
     escolhido = modos.find(m => m.id === id);
     cards.forEach(c => { const on = c.dataset.modo === id; c.classList.toggle('on', on); c.setAttribute('aria-pressed', on); });
@@ -592,10 +647,10 @@ a{text-decoration:none}
   const anel = $('#anel');
   anel.addEventListener('pointermove', e => { const c = e.target.closest('.modo.recorte'); if (!c) return; const r = c.getBoundingClientRect();
     c.style.setProperty('--p', (((e.clientX - r.left) / r.width - .5) * 2).toFixed(3)); c.style.setProperty('--q', (((e.clientY - r.top) / r.height - .5) * 2).toFixed(3)); });
-  anel.addEventListener('pointerdown', e => { arrasto = { x: e.clientX, a: alvo, moveu: false }; });
+  anel.addEventListener('pointerdown', e => { mexeu = true; parado = Date.now(); arrasto = { x: e.clientX, a: alvo, moveu: false }; });
   addEventListener('pointermove', e => { if (!arrasto) return; const dx = e.clientX - arrasto.x; if (Math.abs(dx) > 6) arrasto.moveu = true; alvo = arrasto.a + dx * .35; ang = alvo; posicionar(); });
   addEventListener('pointerup', () => { if (arrasto) { parado = Date.now(); setTimeout(() => { arrasto = null; }, 0); } });
-  anel.addEventListener('click', e => { const c = e.target.closest('.modo'); if (c && !(arrasto && arrasto.moveu)) escolher(c.dataset.modo); });
+  anel.addEventListener('click', e => { const c = e.target.closest('.modo'); if (c && !(arrasto && arrasto.moveu)) { mexeu = true; parado = Date.now(); escolher(c.dataset.modo); } });
 
   function ligarModo(m) {
     modo = m;
