@@ -5,6 +5,7 @@
   const CFG = window.EBG_CONFIG || {};
   const C = window.EBG || {};
   const sb = window.supabase.createClient(CFG.supabaseUrl, CFG.supabaseAnonKey);
+  window.EBG_ADMIN = { sb, aviso: t => aviso(t) }; // a aba Hub (hub-editor.js) usa o mesmo login
 
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -72,6 +73,7 @@
     if (aba === 'contatos' && !carregadas.contatos) carregarContatos();
     if (aba === 'produtos' && !carregadas.produtos) carregarProdutos();
     if (aba === 'agenda') carregarAgenda();
+    if (aba === 'hub' && window.EBG_HUBED) window.EBG_HUBED.abrir();
   }
 
   /* ---------------- números ---------------- */
@@ -215,7 +217,7 @@
     if (error) { aviso('Não deu pra carregar os produtos. Confira se o admin.sql foi rodado.'); return; }
     carregadas.produtos = true;
     produtos = data || [];
-    const segs = [...new Set([...(C.fileiras || []).filter(f => !f.dinamica && f.id !== 'alunos').map(f => f.titulo), 'Jogos', 'Prompts', ...produtos.map(p => p.segmento)])];
+    const segs = [...new Set([...(C.fileiras || []).filter(f => !f.dinamica && f.id !== 'alunos').map(f => f.titulo), 'Jogos', 'Prompts', 'E-books', 'Guias', ...produtos.map(p => p.segmento)])];
     $('#segmentos').innerHTML = segs.map(s => `<option value="${esc(s)}">`).join('');
     desenharProdutos();
   }

@@ -671,7 +671,28 @@
     return { m, conteudo, jogos, alunos };
   }
 
+  // Hub de Materiais: uma fileira por segmento com o que é grátis (produtos do painel), os bônus grátis
+  // do catálogo, e embaixo uma fileira por segmento com o que é pago.
+  function fileirasHub() {
+    const ids = Object.keys(C.itens).filter(k => { const it = C.itens[k]; return k !== 'mentoria' && it.tipo !== 'etapa' && it.tipo !== 'aluno' && !it.indisponivel; });
+    const porSeg = filtro => {
+      const g = {};
+      ids.filter(k => C.itens[k].produto && filtro(C.itens[k])).forEach(k => { const sg = C.itens[k].trilha; (g[sg] = g[sg] || []).push(k); });
+      return Object.keys(g).sort((a, b) => a.localeCompare(b)).map(sg => ({ sg, itens: g[sg] }));
+    };
+    const gratis = porSeg(it => it.tipo === 'gratis').map(x => ({ id: 'hub-g-' + semAcento(x.sg), titulo: t('hubGratis', { seg: x.sg }), formato: 'poster', itens: x.itens }));
+    const bonus = ids.filter(k => !C.itens[k].produto && C.itens[k].tipo === 'gratis');
+    const pagos = porSeg(it => it.aberto && it.tipo !== 'gratis').map(x => ({ id: 'hub-p-' + semAcento(x.sg), titulo: t('hubPagos', { seg: x.sg }), formato: 'poster', itens: x.itens }));
+    return [...gratis, { id: 'hub-bonus', titulo: t('hubGratisTudo'), formato: 'largo', itens: bonus }, ...pagos].filter(f => f.itens.length);
+  }
+
   function montarFileiras() {
+    if (modoDe(estado.modo).id === 'materiais') {
+      $('#fileiras').innerHTML = fileirasHub().map(htmlFileira).join('');
+      $$('.trilho').forEach(t => observador && observador.observe(t));
+      $$('.trilho').forEach(ligarTrilho);
+      return;
+    }
     const { m, conteudo, jogos, alunos } = itensDoModo();
     const fileiras = [
       { id: 'modo', titulo: t('conteudosModo', { modo: m.nome }), formato: 'poster', itens: conteudo },

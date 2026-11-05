@@ -15,7 +15,9 @@ window.EBG = {
     { id: 'intercambio', nome: 'Modo Intercâmbio', perfil: 'viagem',   img: 'img/modo-toronto.webp',  verde: true, destaque: 'toronto', fileira: 'intercambio' },
     // as fileiras Jogos e Prompts nascem dos produtos cadastrados no painel com esses segmentos
     { id: 'jogos',       nome: 'Modo Jogos',       perfil: 'zero',     img: 'img/modo-jogos.webp',    destaque: 'teste', fileira: 'jogos' },
-    { id: 'prompts',     nome: 'Modo Prompts',     perfil: 'trabalho', img: 'img/modo-prompts.webp',  verde: true, destaque: 'teste', fileira: 'prompts' }
+    { id: 'prompts',     nome: 'Modo Prompts',     perfil: 'trabalho', img: 'img/modo-prompts.webp',  verde: true, destaque: 'teste', fileira: 'prompts' },
+    // Hub de Materiais: tudo o que é grátis em cima (prompts, e-books, guias…), por segmento; os pagos embaixo
+    { id: 'materiais',   nome: 'Hub de Materiais', perfil: 'zero',     img: 'img/gediel-reading.webp', marca: 'Grátis', destaque: 'teste', fileira: 'gratis' }
   ],
 
   perfis: [
@@ -77,7 +79,8 @@ window.EBG = {
     zero: 'Nunca estudou ou parou no meio? Aqui é o começo certo, um passo de cada vez.',
     intercambio: 'Intercâmbio e viagens em grupo com a Infly, e tudo pra você chegar lá preparado.',
     jogos: 'Aprender jogando: jogos rápidos pra fixar vocabulário e estruturas sem perceber.',
-    prompts: 'Prompts prontos pra treinar inglês com inteligência artificial, todos os dias.'
+    prompts: 'Prompts prontos pra treinar inglês com inteligência artificial, todos os dias.',
+    materiais: 'Tudo o que é grátis num lugar só: prompts, e-books, guias e testes. Pegue e use hoje. Quando quiser ir mais fundo, os materiais completos estão logo abaixo.'
   },
 
   perfilTexto: {
@@ -87,6 +90,27 @@ window.EBG = {
     fe: 'Orar, servir e conversar em inglês. A mentoria cuida da conversa, e o English On Mission entra como bônus pra estudar a Palavra em inglês.',
     zero: 'Começar do zero é ponto de partida, não problema. O diagnóstico mostra por onde ir, e a turma A1 anda no seu ritmo.'
   },
+
+  // Materiais do Hub (capa 4:5). link = landing do material. preco vazio = sem preço na capa.
+  // gratis: true vai pra fileira "Materiais grátis"; o resto vai pra "Pra ir mais fundo".
+  materiais: [
+    { id: 'passaporte', titulo: 'Passaporte do Inglês', linha: 'Inglês para Viagens', cat: 'E-books', img: 'img/capa-viagens.webp',
+      preco: 'R$ 27', link: 'https://ebookviagens.netlify.app/', modos: ['viagem', 'intercambio', 'zero'],
+      meta: ['E-book', '9 capítulos', 'Pagamento único'],
+      sinopse: 'O manual pra quem tem viagem marcada e não quer depender de ninguém lá fora. 9 capítulos na ordem da viagem, com vocabulário com imagem, frases, o que você vai ouvir e diálogos reais. Inclui o Kit de Sobrevivência com as 20 frases que salvam qualquer situação.' },
+    { id: 'guiaa1b2', titulo: 'Guia A1 até B2', linha: 'Seu próximo passo no inglês', cat: 'Guias', img: 'img/capa-guia.webp',
+      preco: 'R$ 27', link: 'https://guia-a1-b2.netlify.app/', modos: ['teste', 'zero', 'carreira'],
+      meta: ['Guia digital', '20 páginas em PDF', 'A1 → B2'],
+      sinopse: 'Um mapa claro do A1 ao B2, sem ficar pulando de vídeo em vídeo. Descubra o que estudar em cada fase, organize sua rotina com planos semanais de 30 a 60 minutos e transforme conteúdo em prática real com missões e checklists.' },
+    { id: 'kitfrases', titulo: 'Kit Frases', linha: 'Situações essenciais', cat: 'E-books', img: 'img/capa-frases.webp',
+      preco: '', link: '', modos: ['viagem', 'carreira', 'zero'],
+      meta: ['Kit', 'Frases prontas'],
+      sinopse: 'As frases que você precisa nas situações essenciais do dia a dia, prontas pra usar.' },
+    { id: 'professorai', titulo: 'Seu Professor Particular com IA', linha: 'Prompt pro ChatGPT', cat: 'Prompts', gratis: true,
+      link: 'https://promptchatgpt1.netlify.app/', modos: ['prompts', 'carreira', 'zero', 'teste'],
+      meta: ['Grátis', 'ChatGPT', 'No seu ritmo'],
+      sinopse: 'Um prompt que transforma o ChatGPT no seu professor particular de inglês: ele descobre seu nível, seus interesses e suas dificuldades, e cria conversas do seu jeito. É só copiar, colar e começar. Dá pra usar o modo de voz.' }
+  ],
 
   destaque: 'mentoria',
 
