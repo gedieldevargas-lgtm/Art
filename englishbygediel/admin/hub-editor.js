@@ -12,10 +12,10 @@
 
   // o que cada seção tem. [chave, rótulo, tipo, ajuda]
   const OPC = {
-    tipoCard: [['gratis', 'Grátis'], ['pago', 'À venda'], ['aluno', 'Depoimento de aluno']],
+    tipoCard: [['gratis', 'Grátis'], ['pago', 'À venda'], ['membros', 'Dentro da mentoria (trancado)'], ['extra', 'Ecossistema'], ['aluno', 'Depoimento de aluno']],
     rede: [['youtube', 'YouTube'], ['tiktok', 'TikTok'], ['instagram', 'Instagram'], ['whatsapp', 'WhatsApp'], ['link', 'Outro link']],
-    ir: [['gratis', 'Materiais grátis'], ['pagos', 'À venda'], ['alunos', 'Alunos'], ['aplicar', 'Chat da mentoria']],
-    icone: [['estrela', 'Estrela'], ['livro', 'Livro'], ['pessoas', 'Pessoas'], ['chat', 'Balão'], ['play', 'Play'], ['coracao', 'Coração']]
+    ir: [['gratis', 'Materiais grátis'], ['pagos', 'À venda'], ['membros', 'Dentro da mentoria'], ['extras', 'Ecossistema'], ['alunos', 'Alunos'], ['aplicar', 'Chat da mentoria'], ['login', 'Entrar (área de membros)']],
+    icone: [['estrela', 'Estrela'], ['livro', 'Livro'], ['pessoas', 'Pessoas'], ['chat', 'Balão'], ['play', 'Play'], ['coracao', 'Coração'], ['cadeado', 'Cadeado']]
   };
   const SECOES = [
     { k: 'tema', t: 'Cores e fundo', d: 'As cores do Hub inteiro e a imagem de gradiente usada nos fundos e nos cards sem foto.', campos: [
@@ -46,8 +46,8 @@
       ['precoDe', 'Preço "de"'], ['precoPor', 'Preço "por"'], ['nota', 'Observação do preço'], ['video', 'Vídeo do YouTube (link ou código)', 'video'],
       ['img', 'Imagem (se não tiver vídeo)', 'img'], ['checkout', 'Link de compra', 'url'], ['botaoAplicar', 'Botão que leva ao chat'], ['botaoComprar', 'Botão de compra']] },
     { k: 'secoes', t: 'Títulos das fileiras', campos: [
-      ['gratis', 'Fileira grátis'], ['pagos', 'Fileira à venda'], ['botaoPagos', 'Link ao lado do título à venda'], ['alunos', 'Fileira de alunos'], ['botaoAluno', 'Botão na ficha do aluno']] },
-    { k: 'cards', t: 'Cards (materiais e depoimentos)', d: 'Tudo o que aparece nas fileiras. Grátis vão pra fileira grátis, à venda pra "Pra ir mais fundo", depoimentos pra fileira de alunos. Marque os modos onde o card aparece primeiro (sem nenhum marcado, aparece em todos).',
+      ['gratis', 'Fileira grátis'], ['pagos', 'Fileira à venda'], ['botaoPagos', 'Link ao lado do título à venda'], ['membros', 'Fileira dentro da mentoria'], ['membrosSub', 'Link ao lado (abre o login)'], ['extras', 'Fileira ecossistema'], ['alunos', 'Fileira de alunos'], ['botaoAluno', 'Botão na ficha do aluno']] },
+    { k: 'cards', t: 'Cards (materiais e depoimentos)', d: 'Tudo o que aparece nas fileiras. Grátis vão pra fileira grátis, à venda pra "Pra ir mais fundo", trancados pra "Dentro da mentoria", ecossistema pra fileira própria e depoimentos pra fileira de alunos. Marque os modos onde o card aparece primeiro (sem nenhum marcado, aparece em todos).',
       lista: true, filtro: true, titulo: 'titulo', foto: 'img',
       novo: () => ({ id: 'c' + Date.now().toString(36), tipo: 'gratis', ativo: true, titulo: 'Novo material', linha: '', nome: '', setor: '', img: '', preco: '', link: '', botao: '', link2: '', botao2: '', video: '', sinopse: '', meta: '', modos: [] }),
       campos: [['tipo', 'Tipo', 'sel', OPC.tipoCard], ['ativo', 'Visível', 'bool'], ['titulo', 'Título (no depoimento, a frase)'], ['linha', 'Linha embaixo do título'],
@@ -55,6 +55,9 @@
         ['preco', 'Preço (à venda)'], ['link', 'Link do botão (landing, checkout, PDF…)', 'url'], ['botao', 'Texto do botão'],
         ['link2', 'Segundo link (opcional)', 'url'], ['botao2', 'Texto do segundo botão'], ['video', 'Vídeo do YouTube (link ou código)', 'video'],
         ['sinopse', 'Descrição (aparece ao tocar)', 'area'], ['meta', 'Etiquetas (separe por vírgula)'], ['modos', 'Aparece primeiro nos modos', 'modos']] },
+    { k: 'membros', t: 'Entrar (área de membros)', d: 'O botão Entrar no topo e a janela de login. Cole o link da sua área de membros (Cakto, plataforma etc.). Sem link, o botão abre seu WhatsApp.', campos: [
+      ['url', 'Link da área de membros', 'url'], ['botaoTopo', 'Texto do botão no topo'], ['titulo', 'Título da janela'], ['texto', 'Texto da janela', 'area'],
+      ['botao', 'Botão que abre a área de membros'], ['semConta', 'Botão pra quem ainda não é aluno'], ['cardBotao', 'Botão nos cards "dentro da mentoria"']] },
     { k: 'aplicacao', t: 'Chat de aplicação', d: 'A seção final, com o chat que manda as respostas pro seu WhatsApp.', campos: [
       ['rotulo', 'Etiqueta'], ['titulo', 'Título'], ['destaque', 'Final do título (em destaque)'], ['texto', 'Texto', 'area'], ['foto', 'Foto no chat', 'img'],
       ['whatsapp', 'WhatsApp que recebe (55 + DDD + número)']] },
@@ -177,7 +180,7 @@
 
   function previa() {
     try { localStorage.setItem('ebg:hubrascunho', JSON.stringify(H)); } catch (e) { aviso('O navegador não deixou guardar a prévia.'); return; }
-    window.open('../hub.html?rascunho=1', '_blank', 'noopener');
+    window.open('../?rascunho=1', '_blank', 'noopener');
   }
 
   async function restaurar() {

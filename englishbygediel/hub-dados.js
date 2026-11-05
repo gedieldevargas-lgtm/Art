@@ -27,6 +27,15 @@
         video: '', sinopse: it.sinopse || '', meta: (it.meta || []).join(', '), modos: it.modos || [] });
     });
     (C.materiais || []).filter(x => !x.gratis).forEach(x => cards.push(material(x)));
+    // o que fica dentro da mentoria (trancado) e o resto do ecossistema (escola, viagens, intercâmbio, aulas particulares)
+    Object.entries(C.itens || {}).forEach(([k, it]) => {
+      if (it.indisponivel || it.tipo === 'etapa' || it.tipo === 'aluno' || it.tipo === 'gratis' || k === 'mentoria') return;
+      const membros = !!it.bloqueado;
+      cards.push({ id: k, tipo: membros ? 'membros' : 'extra', ativo: true, titulo: it.titulo, linha: it.trilha || (it.meta || [])[0] || '', nome: '',
+        setor: it.trilha || 'Ecossistema', img: it.img && !/logo-/.test(it.img) ? it.img : (it.img || ''), preco: it.selo && !membros ? it.selo : '',
+        link: membros ? '' : destino(it.cta), botao: membros ? '' : (it.cta || {}).rotulo || '', link2: '', botao2: '', video: '',
+        sinopse: it.sinopse || '', meta: (it.meta || []).join(', '), modos: it.modos || [] });
+    });
     Object.entries(C.itens || {}).forEach(([k, it]) => {
       if (it.tipo !== 'aluno') return;
       cards.push({ id: k, tipo: 'aluno', ativo: true, titulo: it.titulo, linha: '', nome: it.nome, setor: 'Alunos',
@@ -59,7 +68,8 @@
         { titulo: 'Grátis', sub: 'Pegue e use hoje', img: 'img/card-teste.webp', ir: 'gratis', icone: 'estrela' },
         { titulo: 'Completos', sub: 'Pra ir mais fundo', img: 'img/card-aulas.webp', ir: 'pagos', icone: 'livro' },
         { titulo: 'Alunos', sub: 'Resultados reais', img: 'img/aula-turma.webp', ir: 'alunos', icone: 'pessoas' },
-        { titulo: 'Mentoria', sub: 'Fale comigo', img: 'img/gediel-london.webp', ir: 'aplicar', icone: 'chat' }
+        { titulo: 'Mentoria', sub: 'Fale comigo', img: 'img/gediel-london.webp', ir: 'aplicar', icone: 'chat' },
+        { titulo: 'Entrar', sub: 'Área de membros', img: 'img/card-aulas.webp', ir: 'login', icone: 'cadeado' }
       ],
       destaque: { rotulo: 'Vídeo em destaque', titulo: 'Mentoria Inglês Inteligente', img: 'img/apresentacao.webp', botao: '▶ Assistir e ver detalhes',
         texto: 'Aula ao vivo toda semana no seu nível, cronograma pra cada dia e acompanhamento de perto.' },
@@ -67,7 +77,11 @@
         meta: (M.meta || []).join(', '), precoDe: (M.preco || {}).separado || '', precoPor: (M.preco || {}).parcelas || '', nota: (M.preco || {}).nota || '',
         video: M.video || CFG.videoApresentacao || '', img: M.imgLarga || M.img || '', checkout: CFG.checkoutMentoria || '',
         botaoAplicar: 'Aplicar pra mentoria', botaoComprar: (M.cta || {}).rotulo || 'Quero minha vaga' },
-      secoes: { gratis: 'Materiais grátis', pagos: 'Pra ir mais fundo', botaoPagos: 'Mentoria →', alunos: 'Alunos que destravaram', botaoAluno: 'Quero esse resultado' },
+      secoes: { gratis: 'Materiais grátis', pagos: 'Pra ir mais fundo', botaoPagos: 'Mentoria →', membros: 'Dentro da mentoria', membrosSub: 'Só pra alunos',
+        extras: 'Ecossistema', alunos: 'Alunos que destravaram', botaoAluno: 'Quero esse resultado' },
+      membros: { botaoTopo: 'Entrar', titulo: 'Área de membros', url: '',
+        texto: 'Já é aluno ou comprou um material? Entre com o e-mail que você usou na compra pra acessar suas aulas, trilhas e materiais.',
+        botao: 'Entrar na área de membros', semConta: 'Ainda não sou aluno', cardBotao: 'Já sou aluno, entrar' },
       cards,
       aplicacao: { rotulo: 'Aplicação · menos de 2 minutos', titulo: 'Seu inglês precisa caber', destaque: 'na sua vida.',
         texto: 'Estou selecionando pessoas pra um processo de inglês adaptado à rotina real e aos objetivos de cada uma. Responda aqui no chat; no fim, as respostas vão organizadas pro meu WhatsApp.',

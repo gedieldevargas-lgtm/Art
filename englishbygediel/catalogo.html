@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>englishbygediel</title>
+<meta name="description" content="Mentoria Inglês Inteligente, aulas, bônus gratuitos e tudo do ecossistema do Gediel, num só lugar.">
+<meta name="theme-color" content="#0b0b0d">
+<meta property="og:title" content="englishbygediel">
+<meta property="og:description" content="Escolha o seu caminho no inglês: mentoria, aulas e bônus gratuitos.">
+<meta property="og:image" content="img/gediel-liberty.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Geist:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-tela="entrada">
+
+<!-- 1 · ENTRADA: Gediel no centro, os modos girando em volta como uma auréola -->
+<section class="tela entrada" id="entrada" aria-label="Entrada">
+  <div class="faixa faixa-1" aria-hidden="true"><div><span id="faixaModos"></span><span id="faixaModos2"></span></div></div>
+  <div class="faixa faixa-2" aria-hidden="true"><div><span>Inglês Inteligente <i></i> All modes <i></i> Inglês Inteligente <i></i> All modes <i></i></span><span>Inglês Inteligente <i></i> All modes <i></i> Inglês Inteligente <i></i> All modes <i></i></span></div></div>
+
+  <div class="abertura" id="abertura" aria-hidden="true">
+    <span class="marca-grande">englishbygediel</span>
+  </div>
+
+  <div class="entrada-corpo">
+    <div class="entrada-topo">
+      <a class="marca" href="#" aria-label="englishbygediel">english<b>by</b>gediel</a>
+      <div class="topo-direita"><nav class="redes" data-i18n-aria="redes" aria-label="Outros canais"></nav><button class="idioma" type="button" data-idioma data-i18n="idiomaOutro" data-i18n-aria="idiomaAria">English</button></div>
+    </div>
+
+    <div class="passo passo-perfil ativo" id="passoPerfil">
+      <p class="modos-rotulo" data-i18n="modosRotulo">Escolha o seu caminho</p>
+      <h1 class="pergunta-foco" id="tituloFoco">Qual modo você quer <em>ligar</em> hoje?</h1>
+      <p class="ola-origem" hidden></p>
+      <p class="modos-dica" data-i18n="modosDica">Toque num card ou arraste pra girar.</p>
+    </div>
+  </div>
+
+  <div class="cena" id="cena">
+    <span class="aura" aria-hidden="true"></span>
+    <img class="gediel-centro" src="img/modo-fala.webp" alt="Gediel de braços abertos" width="707" height="800" decoding="async">
+  </div>
+
+  <div class="ligar" id="ligar"><button type="button" id="botaoLigar">Ligar modo</button></div>
+</section>
+
+<!-- transição: o modo escolhido "liga" antes do catálogo abrir -->
+<div class="ligando" id="ligando" hidden aria-live="polite"><span class="ligando-chave" aria-hidden="true"></span><strong id="ligandoNome"></strong></div>
+
+<!-- 2 · HISTÓRIA (stories) -->
+<section class="tela historia" id="historia" aria-label="Apresentação" aria-roledescription="stories">
+  <div class="barras" id="barras"></div>
+  <button class="pular" id="pular" data-i18n="pular">Pular</button>
+  <div class="slides" id="slides"></div>
+  <button class="toque toque-voltar" id="toqueVoltar" aria-label="Anterior" data-i18n-aria="anterior"></button>
+  <button class="toque toque-avancar" id="toqueAvancar" aria-label="Próximo" data-i18n-aria="proximo"></button>
+</section>
+
+<!-- 3 · CATÁLOGO -->
+<main class="tela catalogo" id="catalogo" aria-label="Catálogo">
+  <header class="topo" id="topo">
+    <a class="marca" href="#inicio">english<b>by</b>gediel</a>
+    <nav class="redes" data-i18n-aria="redes" aria-label="Outros canais"></nav>
+    <button class="idioma" type="button" data-idioma data-i18n="idiomaOutro" data-i18n-aria="idiomaAria">English</button>
+    <button class="botao-menu" type="button" id="abrirMenu" aria-haspopup="dialog">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span data-i18n="menu">Menu</span>
+    </button>
+  </header>
+
+  <!-- página do modo ligado: só o que é pertinente a ele. O resto fica no Menu. -->
+  <section class="pagina-modo" id="inicio">
+    <button class="voltar-modos" type="button" id="voltarModos">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span data-i18n="voltarModos">Voltar aos modos</span>
+    </button>
+    <p class="pm-selo"><span class="ponto"></span> <span data-i18n="ligadoAgora">Ligado agora</span></p>
+    <h1 class="pm-titulo" id="pmTitulo"></h1>
+    <p class="pm-texto" id="pmTexto"></p>
+  </section>
+
+  <div class="fileiras" id="fileiras"></div>
+
+  <!-- consultoria gratuita: dia e horário que o Gediel abriu no painel -->
+  <section class="consultoria" id="consultoria" aria-labelledby="consultoriaTitulo">
+    <h2 id="consultoriaTitulo" data-i18n="consultoriaTitulo">Marque uma consultoria gratuita</h2>
+    <p class="consultoria-texto" data-i18n="consultoriaTexto">Uma conversa com o Gediel pra entender o seu momento no inglês e montar o seu próximo passo. Sem custo e sem compromisso.</p>
+    <div class="agenda" id="agenda">
+      <div class="agenda-bloco">
+        <h3 data-i18n="agendaDia">Escolha o dia</h3>
+        <div class="agenda-dias" id="agendaDias" role="listbox" aria-labelledby="consultoriaTitulo"></div>
+      </div>
+      <div class="agenda-bloco">
+        <h3 data-i18n="agendaHora">Escolha o horário</h3>
+        <div class="agenda-horas" id="agendaHoras"></div>
+      </div>
+    </div>
+    <div class="agenda-acao">
+      <button class="botao botao-cheio" type="button" id="reservar" disabled data-i18n="reservarEscolha">Escolha um dia e um horário</button>
+    </div>
+    <div class="agenda-vazia" id="agendaVazia" hidden>
+      <p data-i18n="agendaVazia">Os horários desta semana já foram preenchidos. Chame o Gediel no WhatsApp que ele encontra um horário pra você.</p>
+      <button class="botao botao-cinza botao-whats" type="button" data-whats="whatsConsultoria"><span data-i18n="chamarWhats">Chamar no WhatsApp</span></button>
+    </div>
+    <div class="agenda-ok" id="agendaOk" hidden role="status"></div>
+  </section>
+
+  <!-- final: a mentoria como uma landing própria -->
+  <section class="mentoria-final" id="mentoria" aria-labelledby="mentoriaTitulo"></section>
+
+  <section class="perguntas" aria-labelledby="perguntasTitulo">
+    <h2 id="perguntasTitulo" data-i18n="perguntasTitulo">Perguntas de quem está chegando</h2>
+    <div id="listaPerguntas"></div>
+  </section>
+
+  <footer class="rodape">
+    <p class="rodape-marca">english<b>by</b>gediel</p>
+    <ul class="rodape-links" role="list">
+      <li><a href="https://instagram.com/englishbygediel" target="_blank" rel="noopener">@englishbygediel</a></li>
+      <li><a href="https://instagram.com/englishonmission" target="_blank" rel="noopener">@englishonmission</a></li>
+      <li><a href="https://instagram.com/metodoinglesinteligente" target="_blank" rel="noopener">@metodoinglesinteligente</a></li>
+      <li><a href="#" data-whats="whatsRodape">WhatsApp</a></li>
+    </ul>
+    <p class="rodape-nota">© 2026 Mentor Gediel · Inglês Inteligente</p>
+  </footer>
+</main>
+
+<!-- Barra fixa da mentoria no celular (aparece ao rolar o catálogo) -->
+<div class="barra-vaga" id="barraVaga" hidden>
+  <p><strong data-i18n="barraNome">Mentoria Inglês Inteligente</strong><span data-i18n="barraInfo">de 6x R$ 500 por 6x R$ 297</span></p>
+  <button class="botao botao-cinza barra-whats" type="button" data-whats="whatsMentoria" aria-label="Tirar dúvida no WhatsApp" data-i18n-aria="duvidaAria"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg></button>
+  <button class="botao botao-cheio" type="button" data-cta="mentoria" data-acao-cta='{"acao":"checkout"}' data-i18n="vaga">Quero minha vaga</button>
+</div>
+
+<!-- Menu: tudo o que existe, por categoria -->
+<div class="menu-fundo" id="menuFundo" hidden></div>
+<nav class="menu" id="menu" aria-label="Menu" hidden>
+  <div class="menu-cabeca">
+    <p class="marca">english<b>by</b>gediel</p>
+    <button class="fechar" type="button" id="fecharMenu" aria-label="Fechar menu" data-i18n-aria="fechar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <ul class="menu-lista" id="menuLista" role="list"></ul>
+</nav>
+
+<!-- Ficha do título (estilo "mais informações") -->
+<div class="ficha-fundo" id="fichaFundo" hidden></div>
+<div class="ficha" id="ficha" role="dialog" aria-modal="true" aria-labelledby="fichaTitulo" hidden>
+  <button class="fechar" id="fecharFicha" aria-label="Fechar" data-i18n-aria="fechar">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <div class="ficha-alca" aria-hidden="true"></div>
+  <div class="ficha-conteudo" id="fichaConteudo"></div>
+</div>
+
+<!-- Cadastro: aparece na ficha quando a pessoa pede um bônus grátis -->
+<template id="tplCadastro">
+  <form class="cadastro" id="passoDados" novalidate>
+    <h2 class="cadastro-titulo" id="cadastroTitulo"></h2>
+    <p class="cadastro-sub" id="cadastroSub"></p>
+    <label class="campo">
+      <span data-i18n="nome">Seu nome</span>
+      <input name="nome" autocomplete="given-name" required maxlength="80" placeholder="Como gosta de ser chamado" data-i18n-ph="nomePh">
+    </label>
+    <label class="campo">
+      <span data-i18n="whats">WhatsApp</span>
+      <input name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" required placeholder="(55) 99999-9999">
+    </label>
+    <label class="campo">
+      <span><span data-i18n="insta">Instagram</span> <small data-i18n="opcional">opcional</small></span>
+      <input name="instagram" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="40" placeholder="@seuperfil" data-i18n-ph="instaPh">
+    </label>
+    <label class="campo">
+      <span><span data-i18n="email">E-mail</span> <small data-i18n="opcional">opcional</small></span>
+      <input name="email" type="email" inputmode="email" autocomplete="email" maxlength="200" placeholder="voce@email.com" data-i18n-ph="emailPh">
+    </label>
+    <p class="erro" id="erroDados" role="alert"></p>
+    <button class="botao botao-cheio" type="submit" id="enviarDados" data-i18n="continuar">Continuar</button>
+    <p class="nota" data-i18n="nota">Seus dados ficam só com o Gediel. Nada de spam.</p>
+  </form>
+</template>
+
+<!-- Vídeo -->
+<div class="video" id="video" role="dialog" aria-modal="true" aria-label="Vídeo" hidden>
+  <button class="fechar" id="fecharVideo" aria-label="Fechar vídeo">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <div class="video-quadro" id="videoQuadro"></div>
+</div>
+
+<p class="aviso" id="aviso" role="status" aria-live="polite"></p>
+
+<noscript><p class="semjs">Ative o JavaScript para ver o catálogo, ou fale com o Gediel no Instagram <a href="https://instagram.com/englishbygediel">@englishbygediel</a>.</p></noscript>
+
+<script src="config.js"></script>
+<script src="content.js"></script>
+<script src="i18n.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
