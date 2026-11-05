@@ -1,13 +1,9 @@
-/* Aba "Hub" do painel: edita tudo do hub.html (cores, abertura, modos, cards, textos, links, fotos).
+/* Editor do Hub: o mesmo editor serve a aba "Hub" do painel (/admin) e o modo editor na própria página (/?editar).
    Salva uma linha na tabela site_config (id 'hub'), que o Hub lê ao abrir. Rode supabase/hub.sql antes. */
 (() => {
-  const A = window.EBG_ADMIN;
-  if (!A) return;
-  const { sb, aviso } = A;
   const C = window.EBG || {}, CFG = window.EBG_CONFIG || {};
   const $ = (s, el = document) => el.querySelector(s);
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const verImg = u => (!u ? '' : /^(https?:|data:|blob:)/.test(u) ? u : '../' + u);
   const copia = o => JSON.parse(JSON.stringify(o));
 
   // o que cada seção tem. [chave, rótulo, tipo, ajuda]
@@ -64,68 +60,130 @@
     { k: 'rodape', t: 'Rodapé', campos: [['nome', 'Nome'], ['linha', 'Linha de baixo']] }
   ];
 
-  let H = null, base = null, sujo = false, filtroTipo = '', filtroModo = '';
-  const abertos = new Set();
+  /* Monta um editor dentro de opt.root.
+     opt: { root, H (o objeto que vai sendo editado), sb (Supabase, pra enviar fotos), aviso(txt),
+            imgBase ('../' no painel, '' na página), onChange(), so: { sec, item } pra mostrar só uma seção ou um item } */
+  function criar(opt) {
+    const H = opt.H;
+    const root = opt.root;
+    const aviso = opt.aviso || (t => alert(t));
+    const verImg = u => (!u ? '' : /^(https?:|data:|blob:)/.test(u) ? u : (opt.imgBase || '') + u);
+    let filtroTipo = '', filtroModo = '';
+    const abertos = new Set(opt.so ? [opt.so.sec, opt.so.item != null ? `${opt.so.sec}.${opt.so.item}` : ''] : []);
 
-  function marcar() { sujo = true; $('#hubEstado').textContent = 'Alterações não salvas'; $('#hubEstado').className = 'hub-estado sujo'; }
+    const marcar = () => opt.onChange && opt.onChange();
+    const videoId = v => { const m = String(v || '').match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{6,})/); return m ? m[1] : String(v || '').trim(); };
 
-  function videoId(v) { const m = String(v || '').match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{6,})/); return m ? m[1] : String(v || '').trim(); }
+    function campoHTML(f, obj, caminho) {
+      const [k, rot, tipo = 'txt', ops] = f;
+      const v = obj[k];
+      const nome = `${caminho}.${k}`;
+      if (tipo === 'bool') return `<label class="check grande hub-bool"><input type="checkbox" data-c="${nome}" ${v !== false && v ? 'checked' : ''}> ${esc(rot)}</label>`;
+      let entrada;
+      if (tipo === 'area') entrada = `<textarea data-c="${nome}" rows="3">${esc(v)}</textarea>`;
+      else if (tipo === 'cor') entrada = `<span class="hub-cor"><input type="color" data-c="${nome}" value="${esc(/^#[0-9a-f]{6}$/i.test(v || '') ? v : '#000000')}"><input data-c="${nome}" value="${esc(v)}" maxlength="9"></span>`;
+      else if (tipo === 'num') entrada = `<input type="number" data-c="${nome}" value="${esc(v)}" min="20" max="130">`;
+      else if (tipo === 'sel') entrada = `<select data-c="${nome}">${ops.map(([a, b]) => `<option value="${a}" ${a === v ? 'selected' : ''}>${esc(b)}</option>`).join('')}</select>`;
+      else if (tipo === 'modos') return `<fieldset class="modos-check"><legend>${esc(rot)}</legend><div class="hub-modos">${(H.modos || []).map(m =>
+        `<label class="check"><input type="checkbox" data-modo="${nome}" value="${esc(m.id)}" ${(v || []).includes(m.id) ? 'checked' : ''}> ${esc(m.nome)}</label>`).join('')}</div></fieldset>`;
+      else if (tipo === 'img') return `<div class="campo hub-img"><span>${esc(rot)}</span><div class="hub-img-linha">
+          <div class="hub-mini">${v ? `<img src="${esc(verImg(v))}" alt="">` : '<i>sem foto</i>'}</div>
+          <div class="hub-img-acoes"><label class="botao arquivo">Enviar foto<input type="file" accept="image/*" data-up="${nome}"></label>
+          <input data-c="${nome}" value="${esc(v)}" placeholder="ou cole o link da imagem">${v ? `<button class="link perigo" type="button" data-limpa="${nome}">Tirar foto</button>` : ''}</div></div></div>`;
+      else entrada = `<input data-c="${nome}" value="${esc(v)}" ${tipo === 'url' ? 'type="url" placeholder="https://"' : ''} ${tipo === 'video' ? 'placeholder="https://youtu.be/…"' : ''}>`;
+      return `<label class="campo"><span>${esc(rot)}</span>${entrada}</label>`;
+    }
 
-  function campoHTML(sec, f, obj, caminho) {
-    const [k, rot, tipo = 'txt', ops] = f;
-    const v = obj[k];
-    const nome = `${caminho}.${k}`;
-    if (tipo === 'bool') return `<label class="check grande hub-bool"><input type="checkbox" data-c="${nome}" ${v !== false && v ? 'checked' : ''}> ${esc(rot)}</label>`;
-    let entrada;
-    if (tipo === 'area') entrada = `<textarea data-c="${nome}" rows="3">${esc(v)}</textarea>`;
-    else if (tipo === 'cor') entrada = `<span class="hub-cor"><input type="color" data-c="${nome}" value="${esc(/^#[0-9a-f]{6}$/i.test(v || '') ? v : '#000000')}"><input data-c="${nome}" value="${esc(v)}" maxlength="9"></span>`;
-    else if (tipo === 'num') entrada = `<input type="number" data-c="${nome}" value="${esc(v)}" min="20" max="130">`;
-    else if (tipo === 'sel') entrada = `<select data-c="${nome}">${ops.map(([a, b]) => `<option value="${a}" ${a === v ? 'selected' : ''}>${esc(b)}</option>`).join('')}</select>`;
-    else if (tipo === 'modos') return `<fieldset class="modos-check"><legend>${esc(rot)}</legend><div class="hub-modos">${(H.modos || []).map(m =>
-      `<label class="check"><input type="checkbox" data-modo="${nome}" value="${esc(m.id)}" ${(v || []).includes(m.id) ? 'checked' : ''}> ${esc(m.nome)}</label>`).join('')}</div></fieldset>`;
-    else if (tipo === 'img') return `<div class="campo hub-img"><span>${esc(rot)}</span><div class="hub-img-linha">
-        <div class="hub-mini">${v ? `<img src="${esc(verImg(v))}" alt="">` : '<i>sem foto</i>'}</div>
-        <div class="hub-img-acoes"><label class="botao arquivo">Enviar foto<input type="file" accept="image/*" data-up="${nome}"></label>
-        <input data-c="${nome}" value="${esc(v)}" placeholder="ou cole o link da imagem">${v ? `<button class="link perigo" type="button" data-limpa="${nome}">Tirar foto</button>` : ''}</div></div></div>`;
-    else entrada = `<input data-c="${nome}" value="${esc(v)}" ${tipo === 'url' ? 'type="url" placeholder="https://"' : ''} ${tipo === 'video' ? 'placeholder="https://youtu.be/…"' : ''}>`;
-    return `<label class="campo"><span>${esc(rot)}</span>${entrada}</label>`;
+    function itemHTML(sec, it, i) {
+      const caminho = `${sec.k}.${i}`;
+      const tit = sec.k === 'redes' ? (OPC.rede.find(x => x[0] === it.tipo) || [, it.tipo])[1] : it[sec.titulo] || '(sem título)';
+      const tag = sec.k === 'cards' ? `<span class="hub-tag ${it.tipo}">${esc((OPC.tipoCard.find(x => x[0] === it.tipo) || [, ''])[1])}</span>` : '';
+      const off = it.ativo === false ? '<span class="hub-tag off">Escondido</span>' : '';
+      return `<details class="hub-item" data-item="${caminho}" ${abertos.has(caminho) ? 'open' : ''}>
+        <summary>${sec.foto ? `<span class="hub-mini p">${it[sec.foto] ? `<img src="${esc(verImg(it[sec.foto]))}" alt="">` : ''}</span>` : ''}
+          <strong>${esc(tit)}</strong>${tag}${off}
+          <span class="hub-ordem"><button type="button" data-sobe="${caminho}" aria-label="Subir">↑</button><button type="button" data-desce="${caminho}" aria-label="Descer">↓</button></span></summary>
+        <div class="hub-campos">${sec.campos.map(f => campoHTML(f, it, caminho)).join('')}
+          <div class="hub-item-acoes"><button class="botao" type="button" data-dup="${caminho}">Duplicar</button><button class="link perigo" type="button" data-apaga="${caminho}">Apagar</button></div>
+        </div></details>`;
+    }
+
+    function desenhar() {
+      const lista = opt.so ? SECOES.filter(s => s.k === opt.so.sec) : SECOES;
+      root.innerHTML = lista.map(sec => {
+        let corpo;
+        if (sec.lista) {
+          const itens = H[sec.k] || [];
+          let vis = itens.map((it, i) => [it, i]);
+          if (opt.so && opt.so.item != null) vis = vis.filter(([, i]) => i === opt.so.item);
+          else if (sec.filtro) vis = vis.filter(([it]) => (!filtroTipo || it.tipo === filtroTipo) && (!filtroModo || (it.modos || []).includes(filtroModo) || !(it.modos || []).length));
+          const filtros = sec.filtro && !(opt.so && opt.so.item != null) ? `<div class="hub-filtros"><select data-filtro-tipo><option value="">Todos os tipos</option>${OPC.tipoCard.map(([a, b]) => `<option value="${a}" ${a === filtroTipo ? 'selected' : ''}>${b}</option>`).join('')}</select>
+            <select data-filtro-modo><option value="">Todos os modos</option>${(H.modos || []).map(m => `<option value="${esc(m.id)}" ${m.id === filtroModo ? 'selected' : ''}>${esc(m.nome)}</option>`).join('')}</select>
+            <span class="conta">${vis.length} de ${itens.length}</span></div>` : '';
+          corpo = filtros + `<div class="hub-lista">${vis.map(([it, i]) => itemHTML(sec, it, i)).join('')}</div>`
+            + (opt.so && opt.so.item != null ? '' : `<button class="botao cheio" type="button" data-novo="${sec.k}">Adicionar ${sec.k === 'cards' ? 'card' : sec.k === 'modos' ? 'modo' : sec.k === 'redes' ? 'rede' : 'atalho'}</button>`);
+        } else corpo = `<div class="hub-campos">${sec.campos.map(f => campoHTML(f, H[sec.k] = H[sec.k] || {}, sec.k)).join('')}</div>`;
+        const aberto = opt.so || abertos.has(sec.k);
+        return `<details class="cartao hub-sec" data-sec="${sec.k}" ${aberto ? 'open' : ''}><summary><h3>${esc(sec.t)}</h3></summary>${sec.d && !(opt.so && opt.so.item != null) ? `<p class="sub">${esc(sec.d)}</p>` : ''}${corpo}</details>`;
+      }).join('');
+    }
+
+    const pegar = caminho => { const ps = caminho.split('.'); const k = ps.pop(); let o = H; ps.forEach(p => { o = o[p]; }); return [o, k]; };
+    function valor(caminho, v) { const [o, k] = pegar(caminho); o[k] = v; marcar(); }
+
+    async function enviar(input) {
+      const arq = input.files[0]; if (!arq) return;
+      const caminho = input.dataset.up;
+      const box = input.closest('.hub-img').querySelector('.hub-mini');
+      box.innerHTML = '<i>enviando…</i>';
+      try { valor(caminho, await enviarFoto(opt.sb, arq)); desenhar(); }
+      catch (e) { aviso('Não deu pra enviar a foto. Tente outra, ou cole o link.'); box.innerHTML = '<i>erro</i>'; }
+    }
+
+    function mover(caminho, d) {
+      const [lista, i] = pegar(caminho); const a = Number(i), b = a + d;
+      if (b < 0 || b >= lista.length) return;
+      [lista[a], lista[b]] = [lista[b], lista[a]];
+      if (opt.so && opt.so.item === a) opt.so.item = b;
+      marcar(); desenhar();
+    }
+
+    root.addEventListener('input', e => {
+      const el = e.target;
+      if (el.matches('[data-filtro-tipo],[data-filtro-modo]')) { filtroTipo = root.querySelector('[data-filtro-tipo]').value; filtroModo = root.querySelector('[data-filtro-modo]').value; desenhar(); return; }
+      if (el.dataset.c) {
+        const [, k] = pegar(el.dataset.c);
+        let v = el.type === 'checkbox' ? el.checked : el.value;
+        if (el.type === 'number') v = Number(v) || 100;
+        if (/video/.test(k)) v = videoId(v);
+        if (k === 'id') v = String(v).toLowerCase().replace(/[^a-z0-9-]/g, '');
+        valor(el.dataset.c, v);
+        if (el.type === 'color') { const t = el.parentElement.querySelector('input:not([type=color])'); if (t) t.value = el.value; }
+        else if (el.parentElement.classList.contains('hub-cor')) { const c = el.parentElement.querySelector('input[type=color]'); if (c && /^#[0-9a-f]{6}$/i.test(v)) c.value = v; }
+        if (el.type === 'checkbox' || el.tagName === 'SELECT') desenhar();
+      }
+      if (el.dataset.modo) valor(el.dataset.modo, [...root.querySelectorAll(`[data-modo="${el.dataset.modo}"]:checked`)].map(x => x.value));
+    });
+    root.addEventListener('change', e => { if (e.target.dataset && e.target.dataset.up) enviar(e.target); });
+    root.addEventListener('toggle', e => {
+      const d = e.target; const id = d.dataset && (d.dataset.item || d.dataset.sec); if (!id) return;
+      d.open ? abertos.add(id) : abertos.delete(id);
+    }, true);
+    root.addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b || !root.contains(b)) return;
+      const d = b.dataset;
+      if (d.sobe || d.desce) { e.preventDefault(); mover(d.sobe || d.desce, d.sobe ? -1 : 1); }
+      else if (d.novo) { const sec = SECOES.find(s => s.k === d.novo); H[d.novo] = H[d.novo] || []; H[d.novo].push(sec.novo()); abertos.add(`${d.novo}.${H[d.novo].length - 1}`); marcar(); desenhar(); }
+      else if (d.apaga) { const [lista, i] = pegar(d.apaga); if (confirm('Apagar este item?')) { lista.splice(Number(i), 1); marcar(); if (opt.so && opt.so.item != null && opt.onApagar) opt.onApagar(); else desenhar(); } }
+      else if (d.dup) { const [lista, i] = pegar(d.dup); const n = copia(lista[i]); if ('id' in n) n.id = (n.id || 'c') + '-' + Date.now().toString(36).slice(-4); if (n.titulo) n.titulo += ' (cópia)'; lista.splice(Number(i) + 1, 0, n); marcar(); desenhar(); }
+      else if (d.limpa) { valor(d.limpa, ''); desenhar(); }
+    });
+
+    desenhar();
+    return { desenhar };
   }
 
-  function itemHTML(sec, it, i) {
-    const caminho = `${sec.k}.${i}`;
-    const aberto = abertos.has(caminho);
-    const tit = sec.k === 'redes' ? (OPC.rede.find(x => x[0] === it.tipo) || [, it.tipo])[1] : it[sec.titulo] || '(sem título)';
-    const tag = sec.k === 'cards' ? `<span class="hub-tag ${it.tipo}">${esc((OPC.tipoCard.find(x => x[0] === it.tipo) || [, ''])[1])}</span>` : '';
-    const off = it.ativo === false ? '<span class="hub-tag off">Escondido</span>' : '';
-    return `<details class="hub-item" data-item="${caminho}" ${aberto ? 'open' : ''}>
-      <summary>${sec.foto ? `<span class="hub-mini p">${it[sec.foto] ? `<img src="${esc(verImg(it[sec.foto]))}" alt="">` : ''}</span>` : ''}
-        <strong>${esc(tit)}</strong>${tag}${off}
-        <span class="hub-ordem"><button type="button" data-sobe="${caminho}" aria-label="Subir">↑</button><button type="button" data-desce="${caminho}" aria-label="Descer">↓</button></span></summary>
-      <div class="hub-campos">${sec.campos.map(f => campoHTML(sec, f, it, caminho)).join('')}
-        <div class="hub-item-acoes"><button class="botao" type="button" data-dup="${caminho}">Duplicar</button><button class="link perigo" type="button" data-apaga="${caminho}">Apagar</button></div>
-      </div></details>`;
-  }
-
-  function desenhar() {
-    $('#hubEditor').innerHTML = SECOES.map(sec => {
-      let corpo;
-      if (sec.lista) {
-        const lista = H[sec.k] || [];
-        const visiveis = lista.map((it, i) => [it, i]).filter(([it]) => !sec.filtro
-          || ((!filtroTipo || it.tipo === filtroTipo) && (!filtroModo || (it.modos || []).includes(filtroModo) || !(it.modos || []).length)));
-        const filtros = sec.filtro ? `<div class="hub-filtros"><select id="hubFTipo"><option value="">Todos os tipos</option>${OPC.tipoCard.map(([a, b]) => `<option value="${a}" ${a === filtroTipo ? 'selected' : ''}>${b}</option>`).join('')}</select>
-          <select id="hubFModo"><option value="">Todos os modos</option>${(H.modos || []).map(m => `<option value="${esc(m.id)}" ${m.id === filtroModo ? 'selected' : ''}>${esc(m.nome)}</option>`).join('')}</select>
-          <span class="conta">${visiveis.length} de ${lista.length}</span></div>` : '';
-        corpo = filtros + `<div class="hub-lista">${visiveis.map(([it, i]) => itemHTML(sec, it, i)).join('')}</div>
-          <button class="botao cheio" type="button" data-novo="${sec.k}">Adicionar ${sec.k === 'cards' ? 'card' : sec.k === 'modos' ? 'modo' : sec.k === 'redes' ? 'rede' : 'atalho'}</button>`;
-      } else corpo = `<div class="hub-campos">${sec.campos.map(f => campoHTML(sec, f, H[sec.k] || {}, sec.k)).join('')}</div>`;
-      return `<details class="cartao hub-sec" data-sec="${sec.k}" ${abertos.has(sec.k) ? 'open' : ''}><summary><h3>${esc(sec.t)}</h3></summary>${sec.d ? `<p class="sub">${esc(sec.d)}</p>` : ''}${corpo}</details>`;
-    }).join('');
-  }
-
-  const pegar = caminho => { const ps = caminho.split('.'); const k = ps.pop(); let o = H; ps.forEach(p => { o = o[p]; }); return [o, k]; };
-  function valor(caminho, v) { const [o, k] = pegar(caminho); o[k] = v; marcar(); }
-
+  // reduz a foto no navegador e envia pra pasta 'capas' do Supabase. webp mantém a transparência das fotos sem fundo.
   function reduzir(arquivo) {
     return new Promise((ok, falha) => {
       const img = new Image();
@@ -134,37 +192,38 @@
         const cv = document.createElement('canvas');
         cv.width = Math.round(img.width * escala); cv.height = Math.round(img.height * escala);
         cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
-        cv.toBlob(b => (b ? ok(b) : falha(new Error('imagem'))), 'image/webp', 0.88); // webp mantém a transparência das fotos sem fundo
+        cv.toBlob(b => (b ? ok(b) : falha(new Error('imagem'))), 'image/webp', 0.88);
         URL.revokeObjectURL(img.src);
       };
       img.onerror = () => falha(new Error('imagem'));
       img.src = URL.createObjectURL(arquivo);
     });
   }
-
-  async function enviar(input) {
-    const arq = input.files[0]; if (!arq) return;
-    const caminho = input.dataset.up;
-    const box = input.closest('.hub-img').querySelector('.hub-mini');
-    box.innerHTML = '<i>enviando…</i>';
-    try {
-      const blob = await reduzir(arq);
-      const nome = `hub/${crypto.randomUUID()}.webp`;
-      const { error } = await sb.storage.from('capas').upload(nome, blob, { contentType: 'image/webp', upsert: false });
-      if (error) throw error;
-      valor(caminho, sb.storage.from('capas').getPublicUrl(nome).data.publicUrl);
-      desenhar();
-    } catch (e) { aviso('Não deu pra enviar a foto. Tente outra, ou cole o link.'); box.innerHTML = '<i>erro</i>'; }
+  async function enviarFoto(sb, arq) {
+    const blob = await reduzir(arq);
+    const nome = `hub/${crypto.randomUUID()}.webp`;
+    const { error } = await sb.storage.from('capas').upload(nome, blob, { contentType: 'image/webp', upsert: false });
+    if (error) throw error;
+    return sb.storage.from('capas').getPublicUrl(nome).data.publicUrl;
   }
 
+  window.HubEditor = { criar, enviarFoto, SECOES, OPC };
+
+  /* ---------- aba Hub do painel ---------- */
+  const A = window.EBG_ADMIN;
+  if (!A) return;
+  const { sb, aviso } = A;
+  let H = null, sujo = false;
+  const estado = (t, cls = '') => { $('#hubEstado').textContent = t; $('#hubEstado').className = 'hub-estado ' + cls; };
+
   async function carregar() {
-    base = window.HUB_DADOS.padrao(C, CFG);
+    const base = window.HUB_DADOS.padrao(C, CFG);
     const { data, error } = await sb.from('site_config').select('dados, updated_at').eq('id', 'hub').maybeSingle();
-    if (error) { $('#hubEstado').textContent = 'Rode o supabase/hub.sql no Supabase pra poder salvar.'; $('#hubEstado').className = 'hub-estado sujo'; }
     H = window.HUB_DADOS.juntar(copia(base), data && data.dados);
-    if (!error) { $('#hubEstado').textContent = data ? 'Salvo em ' + new Date(data.updated_at).toLocaleString('pt-BR') : 'Usando o conteúdo padrão'; $('#hubEstado').className = 'hub-estado'; }
+    if (error) estado('Rode o supabase/hub.sql no Supabase pra poder salvar.', 'sujo');
+    else estado(data ? 'Salvo em ' + new Date(data.updated_at).toLocaleString('pt-BR') : 'Usando o conteúdo padrão');
     sujo = false;
-    desenhar();
+    criar({ root: $('#hubEditor'), H, sb, aviso, imgBase: '../', onChange: () => { sujo = true; estado('Alterações não salvas', 'sujo'); } });
   }
 
   async function salvar() {
@@ -174,7 +233,8 @@
     const { error } = await sb.from('site_config').upsert({ id: 'hub', dados: H, updated_at: new Date().toISOString() });
     $('#hubSalvar').disabled = false;
     if (error) { aviso('Não deu pra salvar. Rode o supabase/hub.sql no Supabase e tente de novo.'); return; }
-    sujo = false; $('#hubEstado').textContent = 'Salvo agora. O Hub já mostra a versão nova.'; $('#hubEstado').className = 'hub-estado ok';
+    sujo = false; estado('Salvo agora. O Hub já mostra a versão nova.', 'ok');
+    try { localStorage.removeItem('ebg:hubrascunho'); } catch (e) {}
     aviso('Hub salvo.');
   }
 
@@ -190,50 +250,6 @@
     aviso('Hub voltou pro padrão.'); carregar();
   }
 
-  function mover(caminho, d) {
-    const [lista, i] = pegar(caminho); const a = Number(i), b = a + d;
-    if (b < 0 || b >= lista.length) return;
-    [lista[a], lista[b]] = [lista[b], lista[a]]; marcar(); desenhar();
-  }
-
-  // eventos
-  const ed = () => $('#hubEditor');
-  document.addEventListener('input', e => {
-    const el = e.target;
-    if (!ed() || !ed().contains(el)) return;
-    if (el.id === 'hubFTipo' || el.id === 'hubFModo') { filtroTipo = $('#hubFTipo').value; filtroModo = $('#hubFModo').value; desenhar(); return; }
-    if (el.dataset.c) {
-      const [, k] = pegar(el.dataset.c);
-      let v = el.type === 'checkbox' ? el.checked : el.value;
-      if (el.type === 'number') v = Number(v) || 100;
-      if (/video/.test(k)) v = videoId(v);
-      if (k === 'id') v = String(v).toLowerCase().replace(/[^a-z0-9-]/g, '');
-      valor(el.dataset.c, v);
-      if (el.type === 'color') { const t = el.parentElement.querySelector('input:not([type=color])'); if (t) t.value = el.value; }
-      else if (el.parentElement.classList.contains('hub-cor')) { const c = el.parentElement.querySelector('input[type=color]'); if (c && /^#[0-9a-f]{6}$/i.test(v)) c.value = v; }
-      if (el.type === 'checkbox' || el.tagName === 'SELECT') desenhar();
-    }
-    if (el.dataset.modo) {
-      const lista = [...ed().querySelectorAll(`[data-modo="${el.dataset.modo}"]:checked`)].map(x => x.value);
-      valor(el.dataset.modo, lista);
-    }
-  });
-  document.addEventListener('change', e => { if (e.target.dataset && e.target.dataset.up && ed() && ed().contains(e.target)) enviar(e.target); });
-  document.addEventListener('toggle', e => {
-    const d = e.target; if (!d.matches || !ed() || !ed().contains(d)) return;
-    const id = d.dataset.item || d.dataset.sec; if (!id) return;
-    d.open ? abertos.add(id) : abertos.delete(id);
-  }, true);
-  document.addEventListener('click', e => {
-    if (!ed() || !ed().contains(e.target)) return;
-    const b = e.target.closest('button'); if (!b) return;
-    const d = b.dataset;
-    if (d.sobe || d.desce) { e.preventDefault(); mover(d.sobe || d.desce, d.sobe ? -1 : 1); }
-    else if (d.novo) { const sec = SECOES.find(s => s.k === d.novo); H[d.novo] = H[d.novo] || []; H[d.novo].push(sec.novo()); abertos.add(`${d.novo}.${H[d.novo].length - 1}`); marcar(); desenhar(); }
-    else if (d.apaga) { const [lista, i] = pegar(d.apaga); if (confirm('Apagar este item?')) { lista.splice(Number(i), 1); marcar(); desenhar(); } }
-    else if (d.dup) { const [lista, i] = pegar(d.dup); const n = copia(lista[i]); if ('id' in n) n.id = (n.id || 'c') + '-' + Date.now().toString(36).slice(-4); if (n.titulo) n.titulo += ' (cópia)'; if (n.nome && !n.titulo) n.nome += ' (cópia)'; lista.splice(Number(i) + 1, 0, n); marcar(); desenhar(); }
-    else if (d.limpa) { valor(d.limpa, ''); desenhar(); }
-  });
   addEventListener('beforeunload', e => { if (sujo) { e.preventDefault(); e.returnValue = ''; } });
 
   window.EBG_HUBED = {
@@ -244,6 +260,7 @@
         $('#hubPrevia').addEventListener('click', previa);
         $('#hubRestaurar').addEventListener('click', restaurar);
         $('#hubDesfazer').addEventListener('click', () => { if (!sujo || confirm('Descartar o que você mudou desde o último salvar?')) carregar(); });
+        const ed = $('#hubEditarPagina'); if (ed) ed.addEventListener('click', () => window.open('../?editar', '_blank'));
       }
       if (!H) carregar();
     }

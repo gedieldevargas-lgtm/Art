@@ -106,7 +106,7 @@
   async function carregar(C, CFG) {
     const base = padrao(C, CFG);
     // pré-visualização do painel: o rascunho fica no navegador de quem edita
-    if (/[?&]rascunho\b/.test(location.search)) {
+    if (/[?&](rascunho|editar)\b/.test(location.search)) {
       try { const r = JSON.parse(localStorage.getItem('ebg:hubrascunho')); if (r) return juntar(base, r); } catch (e) {}
     }
     if (!CFG.supabaseUrl || !CFG.supabaseAnonKey) return base;

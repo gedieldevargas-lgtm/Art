@@ -352,10 +352,12 @@ a{text-decoration:none}
 <script src="config.js"></script>
 <script src="content.js"></script>
 <script src="hub-dados.js"></script>
+<script>if (/[?&]editar\b/.test(location.search)) document.write('<script src="editor.js" defer><\/script>');</script>
 <script>
 (async () => {
   const C = window.EBG, CFG = window.EBG_CONFIG || {};
   const H = await window.HUB_DADOS.carregar(C, CFG);
+  window.HUB_ATUAL = H; // o modo editor (?editar) edita este objeto
   const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const https = u => /^https:\/\//i.test(u || '') ? u : '';
