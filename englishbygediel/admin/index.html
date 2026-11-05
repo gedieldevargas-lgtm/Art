@@ -35,9 +35,11 @@
       <button type="button" role="tab" data-aba="contatos" aria-selected="false">Contatos</button>
       <button type="button" role="tab" data-aba="produtos" aria-selected="false">Produtos</button>
       <button type="button" role="tab" data-aba="agenda" aria-selected="false">Agenda</button>
+      <button type="button" role="tab" data-aba="hub" aria-selected="false">Hub</button>
     </nav>
     <div class="topo-dir">
       <a class="link" href="../" target="_blank" rel="noopener">Ver a landing</a>
+      <a class="link" href="../hub.html" target="_blank" rel="noopener">Ver o Hub</a>
       <button class="link" type="button" id="sair">Sair</button>
     </div>
   </header>
@@ -122,6 +124,22 @@
       <div class="agenda-lista" id="agendaLista"></div>
     </div>
   </section>
+
+  <!-- Hub: tudo do hub.html editável -->
+  <section class="aba" id="aba-hub" hidden>
+    <div class="cabeca hub-cabeca">
+      <h2>Hub</h2>
+      <div class="hub-botoes">
+        <span class="hub-estado" id="hubEstado"></span>
+        <button class="botao" type="button" id="hubDesfazer">Desfazer</button>
+        <button class="botao" type="button" id="hubPrevia">Pré-visualizar</button>
+        <button class="botao cheio" type="button" id="hubSalvar">Salvar e publicar</button>
+      </div>
+    </div>
+    <p class="sub">Edite cores, abertura, modos, cards, fotos, textos e links. Abra cada seção, mude o que quiser, use "Pré-visualizar" pra ver antes e "Salvar e publicar" pra colocar no ar.</p>
+    <div id="hubEditor" class="hub-editor"></div>
+    <button class="link perigo" type="button" id="hubRestaurar">Voltar tudo pro padrão</button>
+  </section>
 </div>
 
 
@@ -180,6 +198,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script src="../config.js"></script>
 <script src="../content.js"></script>
+<script src="../hub-dados.js"></script>
 <script src="admin.js"></script>
+<script src="hub-editor.js"></script>
 </body>
 </html>

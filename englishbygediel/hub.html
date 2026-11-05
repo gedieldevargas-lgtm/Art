@@ -12,7 +12,7 @@
 <style>
 @font-face{font-family:'Advercase';src:url('fonts/advercase.woff2') format('woff2'),url('fonts/advercase.otf') format('opentype');font-display:swap}
 :root{
-  --bg:#0a1426; --bg2:#0e1b33; --card:#13233f; --linha:rgba(255,255,255,.09);
+  --bg:#0a1426; --bg2:color-mix(in srgb,var(--bg) 82%,#fff 4%); --card:#13233f; --grad:url(img/gradiente-azul.webp); --linha:rgba(255,255,255,.09);
   --marfim:#ffffff; --dim:#a7b3c6; --cobre:#4a5a35; --cobre2:#8fa66a;
   --r:20px; --sombra:0 24px 50px -24px rgba(0,0,0,.8);
 }
@@ -60,7 +60,7 @@ a{text-decoration:none}
 .atalho small{font-size:10.5px;color:#c9d3e2}
 
 /* destaque vídeo */
-.destaque{background:linear-gradient(90deg,rgba(10,20,38,.35),rgba(10,20,38,.85)),url(img/gradiente-azul.webp) left center/cover!important;display:grid;grid-template-columns:1.15fr 1fr;gap:16px;align-items:center;margin-top:16px;padding:12px;border-radius:24px;background:var(--card);border:1px solid var(--linha);box-shadow:var(--sombra);position:relative}
+.destaque{background:linear-gradient(90deg,rgba(10,20,38,.35),rgba(10,20,38,.85)),var(--grad) left center/cover!important;display:grid;grid-template-columns:1.15fr 1fr;gap:16px;align-items:center;margin-top:16px;padding:12px;border-radius:24px;background:var(--card);border:1px solid var(--linha);box-shadow:var(--sombra);position:relative}
 .destaque .thumb{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:16/11}
 .destaque .thumb img{width:100%;height:100%;object-fit:cover}
 .play{position:absolute;inset:0;margin:auto;width:58px;height:58px;border-radius:50%;background:rgba(10,20,38,.55);border:1px solid rgba(255,255,255,.4);display:grid;place-items:center;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
@@ -86,7 +86,7 @@ a{text-decoration:none}
 .post .foto .letra{position:relative;overflow:hidden;height:100%;font-size:32px;display:grid;place-items:center;font-family:'Advercase','Instrument Serif',serif;color:#fff;font-style:italic;text-shadow:0 4px 20px rgba(0,0,0,.35)}
 /* cards sem foto: o gradiente azul, com variações (espelhado, girado, puxado pro verde militar) */
 .grad{position:relative;overflow:hidden}
-.grad::before{content:"";position:absolute;inset:-12%;background:url(img/gradiente-azul.webp) center/cover;transform:var(--gt,none);filter:var(--gf,none);z-index:0;animation:respira 14s ease-in-out infinite alternate}
+.grad::before{content:"";position:absolute;inset:-12%;background:var(--grad) center/cover;transform:var(--gt,none);filter:var(--gf,none);z-index:0;animation:respira 14s ease-in-out infinite alternate}
 .grad > *{position:relative;z-index:1}
 .g1{--gt:scaleX(-1)}
 .g2{--gt:rotate(180deg)}
@@ -112,7 +112,7 @@ a{text-decoration:none}
 .selo.gratis{background:var(--cobre);color:#fff}
 
 /* chat de aplicação */
-.chat{margin-top:34px;border-radius:26px;background:linear-gradient(180deg,rgba(10,20,38,.55),rgba(10,20,38,.92)),url(img/gradiente-azul.webp) center/cover;border:1px solid var(--linha);overflow:hidden;box-shadow:var(--sombra)}
+.chat{margin-top:34px;border-radius:26px;background:linear-gradient(180deg,rgba(10,20,38,.55),rgba(10,20,38,.92)),var(--grad) center/cover;border:1px solid var(--linha);overflow:hidden;box-shadow:var(--sombra)}
 .chat-topo{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--linha)}
 .chat-topo img{width:42px;height:42px;border-radius:50%;object-fit:cover;object-position:top}
 .chat-topo strong{color:var(--marfim);display:block;font-size:14px}
@@ -168,7 +168,7 @@ a{text-decoration:none}
 .aparece.ok{opacity:1;transform:none}
 
 /* ENTRADA: escolher o modo */
-.entrada{position:fixed;inset:0;z-index:30;background:linear-gradient(180deg,rgba(10,20,38,.55),rgba(10,20,38,.15) 45%,rgba(10,20,38,.7)),url(img/gradiente-azul.webp) center/cover,var(--bg);display:flex;flex-direction:column;align-items:center;overflow:hidden;transition:opacity .6s,transform .6s}
+.entrada{position:fixed;inset:0;z-index:30;background:linear-gradient(180deg,rgba(10,20,38,.55),rgba(10,20,38,.15) 45%,rgba(10,20,38,.7)),var(--grad) center/cover,var(--bg);display:flex;flex-direction:column;align-items:center;overflow:hidden;transition:opacity .6s,transform .6s}
 .entrada.sai{opacity:0;transform:scale(1.06);pointer-events:none}
 .ent-topo{width:100%;max-width:1120px;display:flex;justify-content:space-between;align-items:center;padding:18px 18px 0;color:#fff;font-weight:700;letter-spacing:-.3px}
 .ent-topo b{color:var(--cobre2)}
@@ -182,12 +182,12 @@ a{text-decoration:none}
 .gediel{position:absolute;left:50%;bottom:0;height:min(64vh,640px);transform:translateX(-50%);z-index:5;pointer-events:none;filter:drop-shadow(0 30px 40px rgba(0,0,0,.5))}
 .aura{position:absolute;left:50%;bottom:8%;width:min(80vw,620px);aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(143,166,106,.35),transparent 65%);filter:blur(10px)}
 .giro{position:absolute;left:50%;top:34%;width:0;height:0}
-.modo{clip-path:inset(0 round 18px);-webkit-mask-image:-webkit-radial-gradient(white,black);isolation:isolate;position:absolute;background-image:url(img/gradiente-azul.webp)!important;background-size:cover!important;width:clamp(108px,26vw,170px);aspect-ratio:3/4;margin-left:calc(clamp(108px,26vw,170px)/-2);margin-top:calc(clamp(108px,26vw,170px)*-.66);border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#1b2d4d,#0e1b33);border:1px solid var(--linha);backface-visibility:hidden;box-shadow:0 20px 40px -18px #000;transition:box-shadow .3s,border-color .3s;text-align:left}
-.modo.verde{background-image:linear-gradient(180deg,rgba(62,80,44,.82),rgba(26,36,18,.9)),url(img/gradiente-azul.webp)!important}
+.modo{clip-path:inset(0 round 18px);-webkit-mask-image:-webkit-radial-gradient(white,black);isolation:isolate;position:absolute;background-image:var(--grad)!important;background-size:cover!important;width:clamp(108px,26vw,170px);aspect-ratio:3/4;margin-left:calc(clamp(108px,26vw,170px)/-2);margin-top:calc(clamp(108px,26vw,170px)*-.66);border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#1b2d4d,#0e1b33);border:1px solid var(--linha);backface-visibility:hidden;box-shadow:0 20px 40px -18px #000;transition:box-shadow .3s,border-color .3s;text-align:left}
+.modo.verde{background-image:linear-gradient(180deg,rgba(62,80,44,.82),rgba(26,36,18,.9)),var(--grad)!important}
 .modo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .modo.recorte{background-image:none!important}
 /* profundidade: fundo (gradiente) atrás, sombra no chão, pessoa na frente. Cada camada anda num sentido. */
-.modo .m-bg{z-index:0;position:absolute;inset:-14%;background:url(img/gradiente-azul.webp) center/cover;transform:translate3d(calc(var(--p,0) * -16px),calc(var(--q,0) * -10px),0) scale(1.08);transition:transform .25s ease-out}
+.modo .m-bg{z-index:0;position:absolute;inset:-14%;background:var(--grad) center/cover;transform:translate3d(calc(var(--p,0) * -16px),calc(var(--q,0) * -10px),0) scale(1.08);transition:transform .25s ease-out}
 .modo.verde .m-bg{filter:hue-rotate(-95deg) saturate(.55) brightness(.75)}
 .modo .m-luz{z-index:0;position:absolute;inset:0;background:radial-gradient(60% 40% at calc(50% + var(--p,0) * 30%) 30%,rgba(255,255,255,.28),transparent 70%);mix-blend-mode:screen;pointer-events:none}
 .modo .m-sombra{z-index:0;right:auto;position:absolute;left:50%;bottom:4%;width:78%;height:12%;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.65),transparent);transform:translateX(calc(-50% + var(--p,0) * 10px)) scaleX(calc(1 + var(--p,0) * .08));filter:blur(4px)}
@@ -248,16 +248,16 @@ a{text-decoration:none}
 </head>
 <body>
 <section class="entrada" id="entrada" aria-label="Escolha o seu modo">
-  <div class="ent-topo"><span>english<b>by</b>gediel</span></div>
+  <div class="ent-topo"><span id="eMarca">english<b>by</b>gediel</span></div>
   <div class="ent-titulo">
-    <small>Escolha o seu caminho</small>
-    <h1 class="serif">Qual modo você quer <em>ligar</em> hoje?</h1>
-    <p>Toque num card ou arraste pra girar.</p>
+    <small id="eRotulo">Escolha o seu caminho</small>
+    <h1 class="serif" id="eTitulo">Qual modo você quer <em>ligar</em> hoje?</h1>
+    <p id="eDica">Toque num card ou arraste pra girar.</p>
   </div>
   <div class="anel" id="anel">
     <span class="aura"></span>
     <div class="giro" id="giro"></div>
-    <img class="gediel" src="img/modo-fala.webp" alt="Gediel de braços abertos">
+    <img class="gediel" id="eFoto" src="img/modo-fala.webp" alt="Gediel de braços abertos">
   </div>
   <button class="ligar" id="ligar" type="button">Ligar modo</button>
 </section>
@@ -267,63 +267,58 @@ a{text-decoration:none}
   <header class="hero">
     <img class="hero-bg" id="heroBg" src="img/gradiente-azul.webp" alt="">
     <div class="hero-info">
-      <img class="avatar" src="img/gediel-brooklyn.webp" alt="Gediel">
-      <h1 class="nome serif">Gediel Vargas <svg viewBox="0 0 24 24"><path fill="#3b9bff" d="m12 1 2.6 2 3.3-.3 1 3.1 2.8 1.8-.9 3.2.9 3.2-2.8 1.8-1 3.1-3.3-.3L12 23l-2.6-2-3.3.3-1-3.1-2.8-1.8.9-3.2-.9-3.2 2.8-1.8 1-3.1 3.3.3z"/><path fill="#fff" d="m10.5 15.6-3.2-3.2 1.4-1.4 1.8 1.8 4.8-4.8 1.4 1.4z"/></svg></h1>
-      <p class="cargo">Professor · Mentor · Inglês Inteligente</p>
+      <img class="avatar" id="tAvatar" src="img/gediel-brooklyn.webp" alt="">
+      <h1 class="nome serif"><span id="tNome">Gediel Vargas</span> <svg id="tSelo" viewBox="0 0 24 24"><path fill="#3b9bff" d="m12 1 2.6 2 3.3-.3 1 3.1 2.8 1.8-.9 3.2.9 3.2-2.8 1.8-1 3.1-3.3-.3L12 23l-2.6-2-3.3.3-1-3.1-2.8-1.8.9-3.2-.9-3.2 2.8-1.8 1-3.1 3.3.3z"/><path fill="#fff" d="m10.5 15.6-3.2-3.2 1.4-1.4 1.8 1.8 4.8-4.8 1.4 1.4z"/></svg></h1>
+      <p class="cargo" id="tCargo">Professor · Mentor · Inglês Inteligente</p>
       <p class="bio" id="bio">Onze anos de sala de aula e mais de 700 alunos. Aqui estão meus materiais grátis, os completos e a porta pra mentoria.</p>
       <nav class="redes" id="redes" aria-label="Redes"></nav>
     </div>
   </header>
 
-  <section class="atalhos cena" aria-label="Atalhos">
-    <button class="atalho t3d" data-ir="#gratis"><img src="img/card-teste.webp" alt=""><span class="brilho"></span><span class="pop"><span class="ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 9 9H2l6 4.5L5.5 21 12 16.5 18.5 21 16 13.5 22 9h-7z"/></svg></span><strong>Grátis</strong><small>Pegue e use hoje</small></span></button>
-    <button class="atalho t3d" data-ir="#pagos"><img src="img/card-aulas.webp" alt=""><span class="brilho"></span><span class="pop"><span class="ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h12a2 2 0 0 1 2 2v14l-4-2-4 2-4-2-4 2V6a2 2 0 0 1 2-2z"/></svg></span><strong>Completos</strong><small>Pra ir mais fundo</small></span></button>
-    <button class="atalho t3d" data-ir="#alunos"><img src="img/aula-turma.webp" alt=""><span class="brilho"></span><span class="pop"><span class="ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm8 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM2 20c0-3.3 2.7-6 6-6s6 2.7 6 6zm13 0c0-2-.7-3.8-1.9-5.2A5 5 0 0 1 22 19v1z"/></svg></span><strong>Alunos</strong><small>Resultados reais</small></span></button>
-    <button class="atalho t3d" data-ir="#aplicar"><img src="img/gediel-london.webp" alt=""><span class="brilho"></span><span class="pop"><span class="ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16v12H7l-3 3z"/></svg></span><strong>Mentoria</strong><small>Fale comigo</small></span></button>
-  </section>
+  <section class="atalhos cena" aria-label="Atalhos" id="atalhos"></section>
 
   <section class="destaque t3d aparece" data-abrir="mentoria" role="button" tabindex="0">
     <span class="brilho"></span>
-    <div class="thumb"><img src="img/apresentacao.webp" alt=""><span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span></div>
+    <div class="thumb"><img id="dImg" src="img/apresentacao.webp" alt=""><span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span></div>
     <div class="pop">
-      <span class="rotulo">Vídeo em destaque</span>
-      <h2 class="serif">Mentoria Inglês Inteligente</h2>
-      <p>Aula ao vivo toda semana no seu nível, cronograma pra cada dia e acompanhamento de perto.</p>
-      <span class="pilula">▶ Assistir e ver detalhes</span>
+      <span class="rotulo" id="dRotulo"></span>
+      <h2 class="serif" id="dTitulo"></h2>
+      <p id="dTexto"></p>
+      <span class="pilula" id="dBotao"></span>
     </div>
   </section>
 
   <section class="secao aparece" id="gratis">
-    <div class="cab"><h2 class="serif">Materiais grátis</h2><small id="contaGratis"></small></div>
+    <div class="cab"><h2 class="serif" id="sGratis">Materiais grátis</h2><small id="contaGratis"></small></div>
     <div class="filtros" id="filtros"></div>
     <div class="trilho cena" id="trilhoGratis"></div>
   </section>
 
   <section class="secao aparece" id="pagos">
-    <div class="cab"><h2 class="serif">Pra ir mais fundo</h2><button data-ir="#aplicar">Mentoria →</button></div>
+    <div class="cab"><h2 class="serif" id="sPagos">Pra ir mais fundo</h2><button data-ir="#aplicar" id="sBotaoPagos">Mentoria →</button></div>
     <div class="trilho cena" id="trilhoPagos"></div>
   </section>
 
   <section class="secao aparece" id="alunos">
-    <div class="cab"><h2 class="serif">Alunos que destravaram</h2></div>
+    <div class="cab"><h2 class="serif" id="sAlunos">Alunos que destravaram</h2></div>
     <div class="trilho cena" id="trilhoAlunos"></div>
   </section>
 
   <section class="secao aparece chat-wrap" id="aplicar">
     <div>
-      <span class="rotulo">Aplicação · menos de 2 minutos</span>
-      <h2 class="serif" style="font-size:clamp(34px,5vw,52px);line-height:1">Seu inglês precisa caber <em style="color:var(--cobre2)">na sua vida.</em></h2>
-      <p style="margin-top:10px;max-width:42ch">Estou selecionando pessoas pra um processo de inglês adaptado à rotina real e aos objetivos de cada uma. Responda aqui no chat; no fim, as respostas vão organizadas pro meu WhatsApp.</p>
+      <span class="rotulo" id="aRotulo"></span>
+      <h2 class="serif" id="aTitulo" style="font-size:clamp(34px,5vw,52px);line-height:1"></h2>
+      <p id="aTexto" style="margin-top:10px;max-width:42ch">Estou selecionando pessoas pra um processo de inglês adaptado à rotina real e aos objetivos de cada uma. Responda aqui no chat; no fim, as respostas vão organizadas pro meu WhatsApp.</p>
     </div>
     <div class="chat">
-      <div class="chat-topo"><img src="img/gediel-brooklyn.webp" alt=""><div><strong>Gediel</strong><small>● online agora</small></div></div>
+      <div class="chat-topo"><img id="aFoto" src="img/gediel-brooklyn.webp" alt=""><div><strong id="aNome">Gediel</strong><small>● online agora</small></div></div>
       <div class="chat-barra"><i id="barra"></i></div>
       <div class="msgs" id="msgs" aria-live="polite"></div>
       <div class="resp" id="resp"></div>
     </div>
   </section>
 
-  <footer class="rodape-site"><span class="serif">Gediel Vargas</span>English by Gediel · Método Inteligente</footer>
+  <footer class="rodape-site"><span class="serif" id="rNome"></span><span id="rLinha"></span></footer>
 </main>
 
 <div id="camada">
@@ -333,15 +328,57 @@ a{text-decoration:none}
 
 <script src="config.js"></script>
 <script src="content.js"></script>
+<script src="hub-dados.js"></script>
 <script>
-(() => {
+(async () => {
   const C = window.EBG, CFG = window.EBG_CONFIG || {};
+  const H = await window.HUB_DADOS.carregar(C, CFG);
   const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const https = u => /^https:\/\//i.test(u || '') ? u : '';
   const reduz = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const SETA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
-  const whats = t => `https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent(t || '')}`;
+  const whats = t => `https://wa.me/${(H.aplicacao.whatsapp || CFG.whatsapp)}?text=${encodeURIComponent(t || '')}`;
+
+  /* tema e textos editáveis no painel */
+  const raiz = document.documentElement.style, T = H.tema || {};
+  const urlCss = u => `url("${String(u || '').replace(/["\\\n]/g, '')}")`;
+  if (T.fundo) raiz.setProperty('--bg', T.fundo);
+  if (T.card) raiz.setProperty('--card', T.card);
+  if (T.destaque) raiz.setProperty('--cobre', T.destaque);
+  if (T.destaqueClaro) raiz.setProperty('--cobre2', T.destaqueClaro);
+  if (T.texto) raiz.setProperty('--marfim', T.texto);
+  if (T.suave) raiz.setProperty('--dim', T.suave);
+  if (T.gradiente) raiz.setProperty('--grad', urlCss(T.gradiente));
+  document.querySelector('meta[name=theme-color]').content = T.fundo || '#0a1426';
+  const txt = (sel, v) => { const el = $(sel); if (el && v != null) el.textContent = v; };
+  const src = (sel, v) => { const el = $(sel); if (el && v) el.src = v; };
+  const E = H.entrada;
+  txt('#eMarca', E.marca); txt('#eRotulo', E.rotulo); txt('#eDica', E.dica); src('#eFoto', E.foto);
+  $('#eTitulo').innerHTML = `${esc(E.titulo)} <em>${esc(E.palavra)}</em> ${esc(E.tituloFim)}`;
+  if (E.fundo) $('#entrada').style.setProperty('--grad', urlCss(E.fundo));
+  const TP = H.topo;
+  txt('#tNome', TP.nome); txt('#tCargo', TP.cargo); txt('#bio', TP.bio); src('#tAvatar', TP.avatar); src('#heroBg', TP.fundo);
+  $('#tSelo').style.display = TP.verificado === false ? 'none' : '';
+  const D = H.destaque;
+  txt('#dRotulo', D.rotulo); txt('#dTitulo', D.titulo); txt('#dTexto', D.texto); txt('#dBotao', D.botao); src('#dImg', D.img);
+  const S = H.secoes;
+  txt('#sGratis', S.gratis); txt('#sPagos', S.pagos); txt('#sBotaoPagos', S.botaoPagos); txt('#sAlunos', S.alunos);
+  const A = H.aplicacao;
+  txt('#aRotulo', A.rotulo); txt('#aTexto', A.texto); src('#aFoto', A.foto);
+  $('#aTitulo').innerHTML = `${esc(A.titulo)} <em style="color:var(--cobre2)">${esc(A.destaque)}</em>`;
+  txt('#aNome', (TP.nome || '').split(' ')[0]);
+  txt('#rNome', H.rodape.nome); txt('#rLinha', H.rodape.linha);
+  const ICO_AT = {
+    estrela: '<path d="M12 2 9 9H2l6 4.5L5.5 21 12 16.5 18.5 21 16 13.5 22 9h-7z"/>',
+    livro: '<path d="M4 4h12a2 2 0 0 1 2 2v14l-4-2-4 2-4-2-4 2V6a2 2 0 0 1 2-2z"/>',
+    pessoas: '<path d="M8 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm8 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM2 20c0-3.3 2.7-6 6-6s6 2.7 6 6zm13 0c0-2-.7-3.8-1.9-5.2A5 5 0 0 1 22 19v1z"/>',
+    chat: '<path d="M4 4h16v12H7l-3 3z"/>',
+    play: '<path d="M7 4l13 8-13 8z"/>',
+    coracao: '<path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/>'
+  };
+  $('#atalhos').innerHTML = (H.atalhos || []).map(a => `<button class="atalho t3d" data-ir="#${esc(a.ir || 'gratis')}">${a.img ? `<img src="${esc(a.img)}" alt="">` : ''}<span class="brilho"></span><span class="pop"><span class="ico"><svg viewBox="0 0 24 24" fill="currentColor">${ICO_AT[a.icone] || ICO_AT.estrela}</svg></span><strong>${esc(a.titulo)}</strong><small>${esc(a.sub)}</small></span></button>`).join('');
+  $('#atalhos').style.gridTemplateColumns = `repeat(${Math.max(1, Math.min(4, (H.atalhos || []).length))},1fr)`;
 
   /* redes */
   const IC = {
@@ -350,7 +387,9 @@ a{text-decoration:none}
     insta: '<rect x="3" y="3" width="18" height="18" rx="5.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3"/>',
     whats: '<path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2s-1 .3-3.4-.7a11.7 11.7 0 0 1-4.6-4.1 5.2 5.2 0 0 1-1.1-2.8 3 3 0 0 1 1-2.2 1 1 0 0 1 .7-.3h.5c.2 0 .4 0 .6.5l.9 2.1a.6.6 0 0 1 0 .5l-.3.5-.4.5c-.2.1-.3.3-.1.6a8 8 0 0 0 1.5 1.8 7 7 0 0 0 2.1 1.3c.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3a2.2 2.2 0 0 1-.1 1.2z"/>'
   };
-  const links = [['youtube', (CFG.redes || {}).youtube], ['tiktok', (CFG.redes || {}).tiktok], ['insta', (CFG.instagram || {}).ebg], ['whats', whats('Oi Gediel! Vim pelo Hub.')]];
+  IC.link = '<path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1" fill="none" stroke="currentColor" stroke-width="2"/>';
+  const TIPO_IC = { youtube: 'youtube', tiktok: 'tiktok', instagram: 'insta', whatsapp: 'whats', link: 'link' };
+  const links = (H.redes || []).map(r => [TIPO_IC[r.tipo] || 'link', r.url]);
   $('#redes').innerHTML = links.filter(l => https(l[1])).map(([k, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener" aria-label="${k}"><svg viewBox="0 0 24 24">${IC[k]}</svg></a>`).join('');
 
   /* destino de cada botão */
@@ -364,24 +403,22 @@ a{text-decoration:none}
     return '';
   }
 
-  /* dados: catálogo + painel */
-  const cat = (k, it) => /teste|prisma|diag/.test(k) ? 'Testes' : it.grupo ? 'Comunidade' : 'Ao vivo';
+  /* cards: tudo vem do Hub editável (hub-dados.js + painel) */
   const itens = {};
-  Object.entries(C.itens).forEach(([k, it]) => {
-    if (it.tipo === 'gratis' && !it.indisponivel)
-      itens[k] = { modos: it.modos || [], titulo: it.titulo, img: it.img, cat: cat(k, it), gratis: true, sinopse: it.sinopse, meta: it.meta, cta: it.cta, cta2: it.cta2 };
-    if (it.tipo === 'aluno')
-      itens[k] = { modos: it.modos || [], titulo: it.titulo, img: it.img, cat: 'aluno', aluno: true, nome: it.nome, sinopse: it.sinopse, video: it.video, meta: [it.nome, it.arroba] };
+  (H.cards || []).filter(c => c.ativo !== false).forEach(c => {
+    const link = https(c.link), link2 = https(c.link2);
+    itens[c.id] = { modos: c.modos || [], titulo: c.titulo, img: c.img, cat: c.setor || '', linha: c.linha, sinopse: c.sinopse,
+      meta: String(c.meta || '').split(',').map(x => x.trim()).filter(Boolean),
+      gratis: c.tipo === 'gratis', pago: c.tipo === 'pago', aluno: c.tipo === 'aluno', nome: c.nome, video: c.video, preco: c.preco || '',
+      cta: c.tipo === 'aluno' ? null : link ? { rotulo: c.botao || 'Abrir', acao: 'link', href: link }
+        : { rotulo: c.botao || 'Quero saber mais', acao: 'whatsapp', texto: `Oi Gediel! Quero o ${c.titulo}.` },
+      cta2: link2 ? { rotulo: c.botao2 || 'Saber mais', acao: 'link', href: link2 } : null };
   });
-  (C.materiais || []).forEach(x => {
-    itens[x.id] = { modos: x.modos || [], titulo: x.titulo, img: x.img, cat: x.cat, linha: x.linha, sinopse: x.sinopse, meta: x.meta,
-      gratis: !!x.gratis, pago: !x.gratis, preco: x.preco || '',
-      cta: x.link ? { rotulo: x.gratis ? 'Pegar de graça' : 'Quero o ' + x.titulo, acao: 'link', href: x.link }
-        : { rotulo: 'Quero saber quando sai', acao: 'whatsapp', texto: `Oi Gediel! Quero o ${x.titulo}.` } };
-  });
-  const M = C.itens.mentoria;
-  itens.mentoria = { titulo: M.titulo, img: M.imgLarga || M.img, video: M.video || CFG.videoApresentacao, sinopse: M.sinopse, meta: M.meta, inclui: M.inclui,
-    preco: M.preco, cta: { rotulo: 'Aplicar pra mentoria', acao: 'aplicar' }, cta2: { rotulo: M.cta.rotulo, acao: 'checkout' } };
+  const MT = H.mentoria;
+  itens.mentoria = { titulo: MT.titulo, img: MT.img, video: MT.video, sinopse: MT.sinopse, meta: String(MT.meta || '').split(',').map(x => x.trim()).filter(Boolean),
+    inclui: String(MT.inclui || '').split('\n').map(x => x.trim()).filter(Boolean),
+    preco: MT.precoPor ? { separado: MT.precoDe, parcelas: MT.precoPor, nota: MT.nota } : '',
+    cta: { rotulo: MT.botaoAplicar, acao: 'aplicar' }, cta2: https(MT.checkout) ? { rotulo: MT.botaoComprar, acao: 'link', href: MT.checkout } : null };
 
   let filtro = 'Tudo', modo = null;
   const doModo = k => { const ms = itens[k].modos || []; return !modo || modo.id === 'materiais' || !ms.length || ms.includes(modo.id); };
@@ -446,7 +483,7 @@ a{text-decoration:none}
       if (c.acao === 'aplicar') return `<button class="${cls}" data-ir="#aplicar" data-fechar>${esc(c.rotulo)}</button>`;
       const u = destino(c); return u ? `<a class="${cls}" href="${esc(u)}" target="_blank" rel="noopener">${esc(c.rotulo)}</a>` : '';
     };
-    const preco = m.preco && typeof m.preco === 'object' ? `<p class="preco">${esc(m.preco.separado)} <b>${esc(m.preco.parcelas)}</b><br><small>${esc(m.preco.nota)}</small></p>`
+    const preco = m.preco && typeof m.preco === 'object' ? `<p class="preco">${esc(m.preco.separado || '')} <b>${esc(m.preco.parcelas)}</b><br><small>${esc(m.preco.nota)}</small></p>`
       : m.preco ? `<p class="preco"><b>${esc(m.preco)}</b></p>` : '';
     $('#ficha').innerHTML = `<span class="alca"></span><button class="fechar" data-fechar aria-label="Fechar">✕</button>
       ${midia ? `<div class="ficha-img">${midia}</div>` : ''}
@@ -455,7 +492,7 @@ a{text-decoration:none}
         <p>${esc(m.sinopse)}</p>
         ${m.inclui ? `<ul>${m.inclui.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
         ${preco}
-        <div class="botoes">${botao(m.cta, 'b1')}${botao(m.cta2, 'b2')}${m.aluno ? '<button class="b1" data-ir="#aplicar" data-fechar>Quero esse resultado</button>' : ''}</div>
+        <div class="botoes">${botao(m.cta, 'b1')}${botao(m.cta2, 'b2')}${m.aluno ? `<button class="b1" data-ir="#aplicar" data-fechar>${esc(H.secoes.botaoAluno || 'Quero esse resultado')}</button>` : ''}</div>
       </div>`;
     document.body.classList.add('aberta'); document.body.style.overflow = 'hidden';
     $('#ficha .fechar').focus();
@@ -603,10 +640,10 @@ a{text-decoration:none}
   chatIO ? chatIO.observe($('.chat')) : proxima();
 
   /* ENTRADA: os modos giram em volta do Gediel (como na landing). Arraste pra girar, toque pra escolher. */
-  const modos = C.modos;
+  const modos = (H.modos || []).filter(m => m.ativo !== false);
   const giro = $('#giro');
   giro.innerHTML = modos.map(m => `<button class="modo${m.verde ? ' verde' : ''}${m.recorte ? ' recorte' : ''}" type="button" data-modo="${esc(m.id)}" aria-pressed="false">
-      ${m.recorte ? `<span class="m-bg"></span><span class="m-luz"></span><span class="m-sombra"></span><img class="m-pessoa" src="${esc(m.img)}" alt="" draggable="false" onload="if(this.naturalWidth/this.naturalHeight>1.2)this.style.setProperty('--h','80%')" style="--h:${Math.min(m.recorte, 112) * .7}%">` : `<img src="${esc(m.img)}" alt="" draggable="false">`}${m.marca ? `<em>${esc(m.marca)}</em>` : ''}<i></i><span>${esc(m.nome)}</span></button>`).join('');
+      ${m.recorte ? `<span class="m-bg"></span><span class="m-luz"></span><span class="m-sombra"></span><img class="m-pessoa" src="${esc(m.img)}" alt="" draggable="false" onload="if(this.naturalWidth/this.naturalHeight>1.2)this.style.setProperty('--h','80%')" style="--h:${Math.min(Number(m.tamanho) || 100, 130) * .7}%">` : `<img src="${esc(m.img)}" alt="" draggable="false">`}${m.marca ? `<em>${esc(m.marca)}</em>` : ''}<i></i><span>${esc(m.nome)}</span></button>`).join('');
   const cards = $$('#giro .modo');
   const passoAng = 360 / cards.length;
   let ang = 0, alvo = 0, escolhido = null, arrasto = null;
@@ -631,7 +668,7 @@ a{text-decoration:none}
   let parado = 0;
   let mexeu = false;
   function frente() { const n = modos.length; return ((Math.round(-ang / passoAng) % n) + n) % n; }
-  function marcar(m) { escolhido = m; cards.forEach(c => { const on = c.dataset.modo === m.id; c.classList.toggle('on', on); c.setAttribute('aria-pressed', on); }); $('#ligar').textContent = 'Ligar ' + m.nome; }
+  function marcar(m) { escolhido = m; cards.forEach(c => { const on = c.dataset.modo === m.id; c.classList.toggle('on', on); c.setAttribute('aria-pressed', on); }); $('#ligar').textContent = (E.botao || 'Ligar') + ' ' + m.nome; }
   function sozinho() {
     if (!arrasto && !reduz && !mexeu && Date.now() - parado > 1200) { alvo -= .14; ang = alvo; posicionar(); const f = modos[frente()]; if (f !== escolhido) marcar(f); }
     if (!$('#entrada').classList.contains('sai')) requestAnimationFrame(sozinho);
@@ -642,7 +679,7 @@ a{text-decoration:none}
     const i = modos.indexOf(escolhido);
     let a = -i * passoAng; while (a - alvo > 180) a -= 360; while (alvo - a > 180) a += 360;
     alvo = a; requestAnimationFrame(animar);
-    $('#ligar').textContent = 'Ligar ' + escolhido.nome;
+    $('#ligar').textContent = (E.botao || 'Ligar') + ' ' + escolhido.nome;
   }
   const anel = $('#anel');
   anel.addEventListener('pointermove', e => { const c = e.target.closest('.modo.recorte'); if (!c) return; const r = c.getBoundingClientRect();
@@ -657,7 +694,7 @@ a{text-decoration:none}
     try { localStorage.setItem('ebg:hubmodo', m.id); } catch (e) {}
     $('#trocarNome').textContent = m.nome.replace(/^Modo /, '');
     $('#trocar').hidden = false;
-    const t = (C.textoModo || {})[m.id]; if (t) $('#bio').textContent = t;
+    $('#bio').textContent = m.texto || TP.bio;
     $('.cargo').textContent = m.nome + ' · ligado';
     if (itens[m.destaque] && m.destaque !== 'mentoria') { /* o destaque do modo abre primeiro na fileira grátis */ }
     filtro = 'Tudo'; desenhar();
