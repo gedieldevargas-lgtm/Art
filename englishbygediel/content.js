@@ -94,6 +94,10 @@ window.EBG = {
   // Materiais do Hub (capa 4:5). link = landing do material. preco vazio = sem preço na capa.
   // gratis: true vai pra fileira "Materiais grátis"; o resto vai pra "Pra ir mais fundo".
   materiais: [
+    { id: 'centralprompts', titulo: 'Central de Prompts', linha: '50 prompts grátis pra ChatGPT e Claude', cat: 'Prompts', gratis: true, img: 'img/capa-prompts.webp',
+      link: 'central-prompts.html', modos: ['prompts', 'carreira', 'viagem', 'zero', 'teste'],
+      meta: ['Grátis', '50 prompts', 'Sem cadastro'],
+      sinopse: 'A biblioteca completa: 50 prompts pra conversar, simular entrevistas, praticar sua profissão, viajar e aprender do seu jeito. Personalize com seu nível e sua forma de aprender, copie e cole no ChatGPT ou no Claude.' },
     { id: 'passaporte', titulo: 'Passaporte do Inglês', linha: 'Inglês para Viagens', cat: 'E-books', img: 'img/capa-viagens.webp',
       preco: 'R$ 27', link: 'https://ebookviagens.netlify.app/', modos: ['viagem', 'intercambio', 'zero'],
       meta: ['E-book', '9 capítulos', 'Pagamento único'],

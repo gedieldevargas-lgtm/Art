@@ -86,6 +86,11 @@
       aplicacao: { rotulo: 'Aplicação · menos de 2 minutos', titulo: 'Seu inglês precisa caber', destaque: 'na sua vida.',
         texto: 'Estou selecionando pessoas pra um processo de inglês adaptado à rotina real e aos objetivos de cada uma. Responda aqui no chat; no fim, as respostas vão organizadas pro meu WhatsApp.',
         foto: 'img/gediel-brooklyn.webp', whatsapp: CFG.whatsapp || '' },
+      // sites inteiros que aparecem dentro de um modo (ex.: a Central de Prompts no Modo Prompts)
+      embutidos: [
+        { modo: 'prompts', ativo: true, titulo: 'Central de Prompts', sub: '50 prompts grátis. Escolha, personalize, copie e cole no ChatGPT ou no Claude.',
+          url: 'central-prompts.html', altura: 88, botao: 'Abrir em tela cheia' }
+      ],
       rodape: { nome: 'Gediel Vargas', linha: 'English by Gediel · Método Inteligente' }
     };
   }

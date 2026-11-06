@@ -54,6 +54,9 @@
     { k: 'membros', t: 'Entrar (área de membros)', d: 'O botão Entrar no topo e a janela de login. Cole o link da sua área de membros (Cakto, plataforma etc.). Sem link, o botão abre seu WhatsApp.', campos: [
       ['url', 'Link da área de membros', 'url'], ['botaoTopo', 'Texto do botão no topo'], ['titulo', 'Título da janela'], ['texto', 'Texto da janela', 'area'],
       ['botao', 'Botão que abre a área de membros'], ['semConta', 'Botão pra quem ainda não é aluno'], ['cardBotao', 'Botão nos cards "dentro da mentoria"']] },
+    { k: 'embutidos', t: 'Sites dentro dos modos', d: 'Um site inteiro que aparece logo abaixo do topo quando a pessoa liga um modo (ex.: a Central de Prompts no Modo Prompts). Use o código do modo (veja em Modos) e o link do site.', lista: true, titulo: 'titulo',
+      novo: () => ({ modo: 'prompts', ativo: true, titulo: 'Novo site', sub: '', url: 'https://', altura: 88, botao: 'Abrir em tela cheia' }),
+      campos: [['modo', 'Código do modo onde aparece'], ['ativo', 'Visível', 'bool'], ['titulo', 'Título'], ['sub', 'Texto embaixo do título'], ['url', 'Link do site'], ['botao', 'Texto do botão de tela cheia'], ['altura', 'Altura (% da tela)', 'num']] },
     { k: 'aplicacao', t: 'Chat de aplicação', d: 'A seção final, com o chat que manda as respostas pro seu WhatsApp.', campos: [
       ['rotulo', 'Etiqueta'], ['titulo', 'Título'], ['destaque', 'Final do título (em destaque)'], ['texto', 'Texto', 'area'], ['foto', 'Foto no chat', 'img'],
       ['whatsapp', 'WhatsApp que recebe (55 + DDD + número)']] },
@@ -121,7 +124,7 @@
             <select data-filtro-modo><option value="">Todos os modos</option>${(H.modos || []).map(m => `<option value="${esc(m.id)}" ${m.id === filtroModo ? 'selected' : ''}>${esc(m.nome)}</option>`).join('')}</select>
             <span class="conta">${vis.length} de ${itens.length}</span></div>` : '';
           corpo = filtros + `<div class="hub-lista">${vis.map(([it, i]) => itemHTML(sec, it, i)).join('')}</div>`
-            + (opt.so && opt.so.item != null ? '' : `<button class="botao cheio" type="button" data-novo="${sec.k}">Adicionar ${sec.k === 'cards' ? 'card' : sec.k === 'modos' ? 'modo' : sec.k === 'redes' ? 'rede' : 'atalho'}</button>`);
+            + (opt.so && opt.so.item != null ? '' : `<button class="botao cheio" type="button" data-novo="${sec.k}">Adicionar ${sec.k === 'cards' ? 'card' : sec.k === 'modos' ? 'modo' : sec.k === 'redes' ? 'rede' : sec.k === 'embutidos' ? 'site' : 'atalho'}</button>`);
         } else corpo = `<div class="hub-campos">${sec.campos.map(f => campoHTML(f, H[sec.k] = H[sec.k] || {}, sec.k)).join('')}</div>`;
         const aberto = opt.so || abertos.has(sec.k);
         return `<details class="cartao hub-sec" data-sec="${sec.k}" ${aberto ? 'open' : ''}><summary><h3>${esc(sec.t)}</h3></summary>${sec.d && !(opt.so && opt.so.item != null) ? `<p class="sub">${esc(sec.d)}</p>` : ''}${corpo}</details>`;

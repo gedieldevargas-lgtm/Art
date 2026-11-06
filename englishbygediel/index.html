@@ -225,6 +225,13 @@ a{text-decoration:none}
   .destaque{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.aparece{opacity:1;transform:none}}
+/* site inteiro dentro de um modo */
+.embutido{margin-top:20px}
+.emb-moldura{border-radius:22px;overflow:hidden;border:1px solid var(--linha);box-shadow:var(--sombra);background:#f7faff;clip-path:inset(0 round 22px)}
+.emb-moldura iframe{display:block;width:100%;border:0;height:var(--alt,88vh)}
+.embutido .cab{align-items:flex-end;gap:12px}
+#embAbrir{color:#0a1426!important;flex:0 0 auto;font-size:14px!important}
+@media (max-width:640px){.embutido .cab{flex-direction:column;align-items:flex-start}}
 /* entrar (área de membros) */
 .entrar-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 15px;border-radius:980px;background:rgba(255,255,255,.12);color:#fff;font:600 14px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text",Inter,system-ui,sans-serif;backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);transition:transform .18s,background .2s}
 .entrar-btn:hover{background:rgba(255,255,255,.2)}.entrar-btn:active{transform:scale(.96)}
@@ -287,6 +294,11 @@ a{text-decoration:none}
       <nav class="redes" id="redes" aria-label="Redes"></nav>
     </div>
   </header>
+
+  <section class="secao embutido" id="embutido" hidden>
+    <div class="cab"><div><h2 class="serif" id="embTitulo"></h2><p id="embSub" style="font-size:13px;margin-top:4px"></p></div><a class="pilula" id="embAbrir" target="_blank" rel="noopener"></a></div>
+    <div class="emb-moldura"><iframe id="embFrame" title="" loading="lazy"></iframe></div>
+  </section>
 
   <section class="atalhos cena" aria-label="Atalhos" id="atalhos"></section>
 
@@ -435,7 +447,8 @@ a{text-decoration:none}
   /* cards: tudo vem do Hub editável (hub-dados.js + painel) */
   const itens = {};
   (H.cards || []).filter(c => c.ativo !== false).forEach(c => {
-    const link = https(c.link), link2 = https(c.link2);
+    const interno = u => (/^[\w-]+\.html([?#].*)?$/.test(u || '') ? u : '');
+    const link = https(c.link) || interno(c.link), link2 = https(c.link2) || interno(c.link2);
     itens[c.id] = { modos: c.modos || [], titulo: c.titulo, img: c.img, cat: c.setor || '', linha: c.linha, sinopse: c.sinopse,
       meta: String(c.meta || '').split(',').map(x => x.trim()).filter(Boolean),
       gratis: c.tipo === 'gratis', pago: c.tipo === 'pago', aluno: c.tipo === 'aluno', membros: c.tipo === 'membros', extra: c.tipo === 'extra',
@@ -743,6 +756,16 @@ a{text-decoration:none}
     try { localStorage.setItem('ebg:hubmodo', m.id); } catch (e) {}
     $('#trocarNome').textContent = m.nome.replace(/^Modo /, '');
     $('#trocar').hidden = false; $('#entrarFixo').hidden = false;
+    // site inteiro dentro do modo (ex.: Central de Prompts no Modo Prompts)
+    const emb = (H.embutidos || []).find(x => x.ativo !== false && x.modo === m.id);
+    const urlEmb = emb && (https(emb.url) || (/^[\w-]+\.html([?#].*)?$/.test(emb.url || '') ? emb.url : ''));
+    $('#embutido').hidden = !urlEmb;
+    if (urlEmb) {
+      txt('#embTitulo', emb.titulo); txt('#embSub', emb.sub); txt('#embAbrir', emb.botao || 'Abrir em tela cheia');
+      $('#embAbrir').href = urlEmb; $('#embFrame').title = emb.titulo || '';
+      $('#embutido').style.setProperty('--alt', (Number(emb.altura) || 88) + 'vh');
+      if ($('#embFrame').getAttribute('src') !== urlEmb) $('#embFrame').src = urlEmb;
+    }
     $('#bio').textContent = m.texto || TP.bio;
     $('.cargo').textContent = m.nome + ' · ligado';
     if (itens[m.destaque] && m.destaque !== 'mentoria') { /* o destaque do modo abre primeiro na fileira grátis */ }
