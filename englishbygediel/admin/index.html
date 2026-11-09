@@ -37,6 +37,7 @@
       <button type="button" role="tab" data-aba="agenda" aria-selected="false">Agenda</button>
       <button type="button" role="tab" data-aba="hub" aria-selected="false">Hub</button>
       <button type="button" role="tab" data-aba="dados" aria-selected="false">Dados do Hub</button>
+      <button type="button" role="tab" data-aba="pessoas" aria-selected="false">Pessoas</button>
     </nav>
     <div class="topo-dir">
       <a class="link" href="../" target="_blank" rel="noopener">Ver o Hub</a>
@@ -141,6 +142,25 @@
     <div id="dadosHub"></div>
   </section>
 
+  <!-- Pessoas: todo mundo que deixou contato, com interesses -->
+  <section class="aba" id="aba-pessoas" hidden>
+    <div class="cabeca">
+      <h2>Pessoas</h2>
+      <div class="filtros"><button class="botao" type="button" id="pessoasRecarregar">Atualizar</button><button class="botao cheio" type="button" id="pessoasBaixar">Baixar planilha</button></div>
+    </div>
+    <p class="sub">Todo mundo que deixou contato: chat do Programa, pedido de Mentoria, catálogo antigo e quem comprou. A mesma pessoa aparece uma vez só (juntamos pelo WhatsApp, e-mail ou Instagram). Toque numa pessoa pra ver tudo o que ela fez.</p>
+    <p class="erro" id="pessoasAviso"></p>
+    <div class="filtros pessoas-filtros" id="pessoasFiltros">
+      <input id="pfBusca" type="search" placeholder="Buscar nome, telefone, e-mail, @ ou interesse" aria-label="Buscar pessoa">
+      <select id="pfFonte" aria-label="Veio por"><option value="">Veio por: todos</option><option value="programa">Programa (chat)</option><option value="mentoria">Mentoria particular</option><option value="catalogo">Catálogo antigo</option><option value="compra">Comprou</option></select>
+      <select id="pfInteresse" aria-label="Interesse"><option value="">Todos os interesses</option></select>
+      <select id="pfTem" aria-label="Tem"><option value="">Qualquer contato</option><option value="whatsapp">Com WhatsApp</option><option value="email">Com e-mail</option><option value="instagram">Com Instagram</option><option value="comprou">Já comprou</option><option value="naocomprou">Ainda não comprou</option></select>
+      <select id="pfPeriodo" aria-label="Período"><option value="0">Desde sempre</option><option value="1">Hoje</option><option value="7">7 dias</option><option value="30">30 dias</option><option value="90">90 dias</option></select>
+    </div>
+    <div class="kpis" id="pessoasResumo"></div>
+    <div id="pessoasLista"></div>
+  </section>
+
   <!-- Hub: tudo do hub.html editável -->
   <section class="aba" id="aba-hub" hidden>
     <div class="cabeca hub-cabeca">
@@ -210,6 +230,8 @@
   </form>
 </dialog>
 
+<dialog class="modal" id="modalPessoa"><div class="modal-corpo"><button class="link" type="button" id="fecharPessoa" style="float:right">Fechar</button><div id="pessoaCorpo"></div></div></dialog>
+
 <p class="aviso" id="aviso" role="status" aria-live="polite"></p>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -219,5 +241,6 @@
 <script src="admin.js"></script>
 <script src="hub-editor.js"></script>
 <script src="hub-numeros.js"></script>
+<script src="hub-pessoas.js"></script>
 </body>
 </html>

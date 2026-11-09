@@ -32,7 +32,7 @@
   async function carregar() {
     const box = $('#dadosHub');
     box.innerHTML = '<p class="sub">Carregando…</p>';
-    let visitas, eventos, programa, mentoria;
+    let visitas, eventos, programa, mentoria, vendas = [];
     try {
       [visitas, eventos, programa, mentoria] = await Promise.all([
         tudo('hub_visitas', 'created_at,visitante,nova,origem,utm_source,utm_campaign,de,tipo_aparelho,fuso,idioma'),
@@ -44,7 +44,8 @@
       box.innerHTML = '<p class="vazio">Ainda não há tabelas de dados. Rode o arquivo <b>supabase/dados.sql</b> no Supabase (SQL Editor → New query → Run).</p>';
       return;
     }
-    cache = { programa, mentoria };
+    try { vendas = await tudo('vendas', 'created_at,pedido,status,produto,valor,nome,email,metodo,utm_source'); } catch (e) { vendas = null; }
+    cache = { programa, mentoria, vendas: vendas || [] };
     const unicos = new Set(visitas.map(v => v.visitante)).size;
     const novos = visitas.filter(v => v.nova).length;
     const cliques = eventos.filter(e => e.tipo === 'clique' || e.tipo === 'link' || e.tipo === 'login');
@@ -62,6 +63,7 @@
         ${kpi(cliques.length, 'cliques')}${kpi(media >= 60 ? Math.floor(media / 60) + 'min ' + (media % 60) + 's' : media + 's', 'tempo médio na página')}
         ${kpi(rolMedia + '%', 'quanto rolam, em média')}${kpi(comecaram, 'começaram o chat')}${kpi(programa.length, 'cadastros no Programa')}${kpi(mentoria.length, 'pedidos de Mentoria')}
       </div>
+      ${vendasHTML(vendas, eventos)}
       <div class="duas">
         <div class="cartao"><h3>Mais clicados</h3>${ranking(contar(cliques, e => e.rotulo || e.item), 'Nenhum clique ainda.')}</div>
         <div class="cartao"><h3>Mais vistos (cards na tela por 1s)</h3>${ranking(contar(eventos.filter(e => e.tipo === 'visto'), e => e.rotulo || e.item), 'Nada visto ainda.')}</div>
@@ -89,6 +91,22 @@
       <div class="cartao"><h3>Últimas visitas</h3>
         ${tabela(visitas.slice(0, 40), [['created_at', 'Quando', quando], ['tipo_aparelho', 'Aparelho'], ['nova', 'Primeira vez', v => v ? 'sim' : 'não'], ['origem', 'De onde', (v, l) => esc(origemDe(l))], ['fuso', 'Fuso'], ['idioma', 'Idioma']], 'Sem visitas no período.')}
       </div>`;
+  }
+
+  function vendasHTML(vendas, eventos) {
+    const real = v => Number(v || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    if (vendas === null) return '<div class="cartao"><h3>Vendas</h3><p class="vazio">Pra ver as vendas, rode <b>supabase/vendas.sql</b> no Supabase e ligue o webhook da Kiwify (passo a passo no Claude).</p></div>';
+    const pagas = vendas.filter(v => v.status === 'paid' || v.status === 'approved');
+    const receita = pagas.reduce((a, v) => a + Number(v.valor || 0), 0);
+    const reemb = vendas.filter(v => /refund|charge/.test(v.status || '')).length;
+    const pend = vendas.filter(v => /waiting|pending/.test(v.status || '')).length;
+    // intenção de compra: cliques que levam a checkout ou landing de produto
+    const compra = eventos.filter(e => (e.tipo === 'link' || e.tipo === 'clique') && /kiwify|hotmart|pay\.|checkout|netlify\.app|quero|comprar|vaga/i.test((e.item || '') + ' ' + (e.rotulo || '')));
+    const k = (n, r) => `<div class="kpi"><b>${n}</b><span>${r}</span></div>`;
+    return `<div class="cartao"><h3>Vendas (Kiwify)</h3><div class="kpis">${k(real(receita), 'faturado (pagos)')}${k(pagas.length, 'vendas pagas')}${k(pend, 'aguardando pagamento')}${k(reemb, 'reembolsos/estornos')}${k(compra.length, 'cliques pra comprar no Hub')}</div>
+      <div class="duas" style="margin-top:14px"><div><h3>Vendas por produto</h3>${ranking(contar(pagas, v => v.produto), 'Nenhuma venda paga no período.')}</div>
+      <div><h3>Cliques pra comprar (intenção)</h3>${ranking(contar(compra, e => e.rotulo || e.item), 'Nenhum clique de compra ainda.')}</div></div>
+      ${vendas.length ? `<div class="cabeca" style="margin-top:14px"><h3>Últimas vendas</h3><button class="botao" type="button" data-baixar="vendas">Baixar planilha</button></div>${tabela(vendas.slice(0, 30), [['created_at', 'Quando', quando], ['produto', 'Produto'], ['valor', 'Valor', v => real(v)], ['status', 'Status'], ['metodo', 'Pagamento'], ['nome', 'Cliente'], ['email', 'E-mail'], ['utm_source', 'Origem']], '')}` : ''}</div>`;
   }
 
   function tabela(linhas, cols, vazio) {
