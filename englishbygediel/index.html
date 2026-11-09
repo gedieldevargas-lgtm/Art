@@ -504,7 +504,7 @@ a{text-decoration:none}
     if (cta.acao === 'teste') return https(CFG.bussola);
     if (cta.acao === 'prisma') return https(CFG.prisma);
     if (cta.acao === 'checkout') return https(CFG.checkoutMentoria);
-    if (cta.acao === 'link') return https(cta.href) || https(CFG[cta.href]) || https((CFG.instagram || {})[cta.href]);
+    if (cta.acao === 'link') return https(cta.href) || (/^[\w-]+\.html([?#].*)?$/.test(cta.href || '') ? cta.href : '') || https(CFG[cta.href]) || https((CFG.instagram || {})[cta.href]);
     return '';
   }
 
