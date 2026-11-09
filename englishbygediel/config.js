@@ -8,7 +8,10 @@ window.EBG_CONFIG = {
   // (faltava o 55 do Brasil antes do DDD 55). Confirme.
   whatsapp: '5555999895429',
 
-  checkoutMentoria: 'https://pay.hotmart.com/Y101022807Y',
+  // Programa de Acompanhamento (antes chamado de mentoria): checkout da Kiwify
+  checkoutMentoria: 'https://pay.kiwify.com.br/CohRPDI',
+  // Mentoria particular (aulas individuais, casal ou amigos): formulário
+  mentoriaParticular: 'https://formularioaulas.netlify.app/',
   videoApresentacao: 'eXfovCYxdZw',
 
   // testes gratuitos: cole aqui o link de cada um

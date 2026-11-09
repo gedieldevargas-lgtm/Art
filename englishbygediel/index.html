@@ -370,6 +370,70 @@ a{text-decoration:none}
   const C = window.EBG, CFG = window.EBG_CONFIG || {};
   const H = await window.HUB_DADOS.carregar(C, CFG);
   window.HUB_ATUAL = H; // o modo editor (?editar) edita este objeto
+
+  /* DADOS: tudo vai pro Supabase (tabelas hub_visitas, hub_eventos, leads_programa; supabase/dados.sql).
+     Só grava; quem lê é o painel. No modo editor nada é gravado. */
+  const DADOS = (() => {
+    const ativo = CFG.supabaseUrl && CFG.supabaseAnonKey && !/[?&](editar|rascunho)\b/.test(location.search);
+    const id = () => (crypto.randomUUID ? crypto.randomUUID() : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 3 | 8)).toString(16); }));
+    let visitante = null, nova = false;
+    try { visitante = localStorage.getItem('ebg:visitante'); if (!visitante) { visitante = id(); nova = true; localStorage.setItem('ebg:visitante', visitante); } } catch (e) { visitante = id(); nova = true; }
+    const sessao = id();
+    const fila = [];
+    let modoAtual = null;
+    const corta = (v, n) => (v == null ? null : String(v).slice(0, n));
+    const post = (tabela, linhas, manter) => fetch(`${CFG.supabaseUrl.replace(/\/$/, '')}/rest/v1/${tabela}`, {
+      method: 'POST', keepalive: !!manter,
+      headers: { apikey: CFG.supabaseAnonKey, Authorization: `Bearer ${CFG.supabaseAnonKey}`, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+      body: JSON.stringify(linhas) }).catch(() => {});
+    function enviar(manter) { if (!ativo || !fila.length) return; post('hub_eventos', fila.splice(0, 60), manter); }
+    setInterval(() => enviar(false), 5000);
+    addEventListener('pagehide', () => { evento('tempo', 'pagina', null, null, Math.round(performance.now() / 1000)); evento('tempo', 'rolagem_max', null, null, rolMax); enviar(true); });
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') enviar(true); });
+    let rolMax = 0;
+    addEventListener('scroll', () => { const h = document.documentElement.scrollHeight - innerHeight; if (h > 0) rolMax = Math.max(rolMax, Math.round(scrollY / h * 100)); }, { passive: true });
+    function evento(tipo, item, rotulo, secao, valor) {
+      if (!ativo) return;
+      fila.push({ visitante, sessao, tipo, item: corta(item, 120), rotulo: corta(rotulo, 200), secao: corta(secao, 60), modo: modoAtual, valor: valor == null ? null : Math.round(valor) });
+      if (fila.length >= 30) enviar(false);
+    }
+    // a visita: de onde veio e com que aparelho
+    if (ativo) {
+      const q = new URLSearchParams(location.search), ua = navigator.userAgent || '';
+      post('hub_visitas', [{ visitante, sessao, nova, pagina: corta(location.pathname + location.search, 300), origem: corta(document.referrer || null, 500),
+        utm_source: corta(q.get('utm_source'), 120), utm_medium: corta(q.get('utm_medium'), 120), utm_campaign: corta(q.get('utm_campaign'), 160), utm_content: corta(q.get('utm_content'), 160),
+        de: corta(q.get('de'), 60), dispositivo: corta(ua, 400), tipo_aparelho: /iPad|Tablet/i.test(ua) ? 'tablet' : /Mobi|Android|iPhone/i.test(ua) ? 'celular' : 'computador',
+        tela: `${screen.width}x${screen.height}`, idioma: corta(navigator.language, 30), fuso: corta(Intl.DateTimeFormat().resolvedOptions().timeZone, 60) }]);
+    }
+    // cliques em qualquer coisa clicável
+    document.addEventListener('click', e => {
+      const el = e.target.closest && e.target.closest('a,button,[data-abrir],[data-ir],[data-login],[role=button]');
+      if (!el) return;
+      const sec = el.closest('section,header,footer,aside,.ficha,.entrada');
+      const nomeSec = sec ? (sec.id || sec.className.split(' ')[0]) : '';
+      const texto = (el.getAttribute('aria-label') || el.innerText || '').replace(/\s+/g, ' ').trim();
+      const item = el.dataset.abrir || el.dataset.modo || el.dataset.item || (el.dataset.ir || '').replace('#', '') || (el.matches('[data-login]') ? 'login' : '') || (el.href ? el.href : '') || el.id || texto;
+      evento(el.href && !el.dataset.abrir ? 'link' : el.matches('[data-login]') ? 'login' : 'clique', item, texto, nomeSec);
+    }, true);
+    // o que foi visto: card que ficou 1 segundo na tela, seção que apareceu
+    const vistos = new Set(), tempos = new Map();
+    const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(x => {
+      const el = x.target, k = el.dataset.abrir || el.id;
+      if (x.isIntersecting) tempos.set(el, setTimeout(() => {
+        if (vistos.has(k)) return; vistos.add(k);
+        if (el.dataset.abrir) { const t = el.querySelector('.rodape > span'); evento('visto', k, t ? t.firstChild.textContent : '', (el.closest('section') || {}).id); }
+        else evento('secao', k, '', k);
+      }, 1000));
+      else clearTimeout(tempos.get(el));
+    }), { threshold: .6 }) : null;
+    function observar() { if (!io) return; document.querySelectorAll('.post[data-abrir]:not([data-o]),main section[id]:not([data-o])').forEach(el => { el.dataset.o = 1; io.observe(el); }); }
+    new MutationObserver(observar).observe(document.body, { childList: true, subtree: true });
+    return {
+      evento, observar, visitante, sessao,
+      modo(m) { modoAtual = m; },
+      lead(tabela, linha) { if (ativo) post(tabela, [{ visitante, sessao, modo: modoAtual, ...linha }]); }
+    };
+  })();
   const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const https = u => /^https:\/\//i.test(u || '') ? u : '';
@@ -417,7 +481,7 @@ a{text-decoration:none}
     play: '<path d="M7 4l13 8-13 8z"/>',
     coracao: '<path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/>'
   };
-  $('#atalhos').innerHTML = (H.atalhos || []).map(a => `<button class="atalho t3d" ${a.ir === 'login' ? 'data-login' : `data-ir="#${esc(a.ir || 'gratis')}"`}>${a.img ? `<img src="${esc(a.img)}" alt="">` : ''}<span class="brilho"></span><span class="pop"><span class="ico"><svg viewBox="0 0 24 24" fill="currentColor">${ICO_AT[a.icone] || ICO_AT.estrela}</svg></span><strong>${esc(a.titulo)}</strong><small>${esc(a.sub)}</small></span></button>`).join('');
+  $('#atalhos').innerHTML = (H.atalhos || []).map(a => `<${a.ir === 'link' ? `a href="${esc(https(a.url))}" target="_blank" rel="noopener"` : 'button'} class="atalho t3d" ${a.ir === 'login' ? 'data-login' : a.ir === 'link' ? `data-item="atalho:${esc(a.titulo)}"` : `data-ir="#${esc(a.ir || 'gratis')}"`}>${a.img ? `<img src="${esc(a.img)}" alt="">` : ''}<span class="brilho"></span><span class="pop"><span class="ico"><svg viewBox="0 0 24 24" fill="currentColor">${ICO_AT[a.icone] || ICO_AT.estrela}</svg></span><strong>${esc(a.titulo)}</strong><small>${esc(a.sub)}</small></span></${a.ir === 'link' ? 'a' : 'button'}>`).join('');
   $('#atalhos').style.gridTemplateColumns = `repeat(${Math.max(1, (H.atalhos || []).length)},1fr)`;
   $('#atalhos').classList.toggle('muitos', (H.atalhos || []).length > 4);
 
@@ -455,7 +519,7 @@ a{text-decoration:none}
       nome: c.nome, video: c.video, preco: c.preco || '',
       cta: c.tipo === 'aluno' ? null : c.tipo === 'membros' ? { rotulo: (H.membros || {}).cardBotao || 'Já sou aluno, entrar', acao: 'login' } : link ? { rotulo: c.botao || 'Abrir', acao: 'link', href: link }
         : { rotulo: c.botao || 'Quero saber mais', acao: 'whatsapp', texto: `Oi Gediel! Quero o ${c.titulo}.` },
-      cta2: link2 ? { rotulo: c.botao2 || 'Saber mais', acao: 'link', href: link2 } : c.tipo === 'membros' ? { rotulo: (H.mentoria || {}).botaoAplicar || 'Quero entrar na mentoria', acao: 'aplicar' } : null };
+      cta2: link2 ? { rotulo: c.botao2 || 'Saber mais', acao: 'link', href: link2 } : c.tipo === 'membros' ? { rotulo: (H.mentoria || {}).botaoAplicar || 'Quero entrar no programa', acao: 'aplicar' } : null };
   });
   const MT = H.mentoria;
   itens.mentoria = { titulo: MT.titulo, img: MT.img, video: MT.video, sinopse: MT.sinopse, meta: String(MT.meta || '').split(',').map(x => x.trim()).filter(Boolean),
@@ -471,7 +535,7 @@ a{text-decoration:none}
     return f.filter(k => itens[k].gratis || itens[k].pago || itens[k].aluno).length > 2 ? f : ks; };
   const cardPost = (k, sub) => { const m = itens[k];
     const foto = m.img && !/logo-/.test(m.img) ? `<img src="${esc(m.img)}" alt="" loading="lazy">` : `<span class="letra grad g${[...k].reduce((a, c) => a + c.charCodeAt(0), 0) % 6}"><span>${esc(m.cat === 'Comunidade' ? 'Grupo' : m.cat)}</span></span>`;
-    const selo = m.membros ? '<span class="selo tranca">🔒 Na mentoria</span>' : m.gratis ? '<span class="selo gratis">Grátis</span>' : m.preco && typeof m.preco === 'string' ? `<span class="selo">${esc(m.preco)}</span>` : m.pago ? '<span class="selo">Novo</span>' : '';
+    const selo = m.membros ? '<span class="selo tranca">🔒 No programa</span>' : m.gratis ? '<span class="selo gratis">Grátis</span>' : m.preco && typeof m.preco === 'string' ? `<span class="selo">${esc(m.preco)}</span>` : m.pago ? '<span class="selo">Novo</span>' : '';
     return `<button class="post t3d" data-abrir="${esc(k)}"><span class="brilho"></span>${selo}<span class="foto">${foto}</span>
       <span class="rodape"><span>${esc(m.aluno ? '“' + m.titulo + '”' : m.titulo)}<small>${esc(m.linha || sub(m))}</small></span><i class="seta">${SETA}</i></span></button>`; };
 
@@ -522,6 +586,7 @@ a{text-decoration:none}
   /* ficha: os detalhes só aparecem quando a pessoa toca */
   let ultimoFoco = null;
   function abrir(k) {
+    DADOS.evento('ficha', k, (itens[k] || {}).titulo);
     const m = itens[k]; if (!m) return;
     ultimoFoco = document.activeElement;
     const midia = m.video ? `<iframe src="https://www.youtube-nocookie.com/embed/${esc(m.video)}?autoplay=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen title="Vídeo"></iframe>`
@@ -686,8 +751,11 @@ a{text-decoration:none}
       }
     }, reduz ? 0 : 650);
   }
-  function responder(v) { R[P[passo].id] = v; fala(v, true); proxima(); }
+  function responder(v) { DADOS.evento('chat', 'passo', P[passo].id, 'aplicar', passo + 1); R[P[passo].id] = v; fala(v, true); proxima(); }
   function fim() {
+    DADOS.evento('chat', 'concluiu', R.nome);
+    DADOS.lead('leads_programa', { nome: R.nome, whatsapp: R.wpp, instagram: R.ig === '—' ? null : R.ig, modalidade: R.modo, parceiro_nome: R.parcNome || null, parceiro_nivel: R.parcNivel || null,
+      nivel: R.nivel, dificuldades: R.dif, objetivos: R.obj, tempo: R.tempo, porque: R.porque, investimento: R.inv });
     $('#barra').style.width = '100%';
     fala(`Perfeito, ${(R.nome || '').split(' ')[0]}! Suas respostas estão prontas. Toque no botão e elas chegam organizadas no meu WhatsApp. 🙌`);
     const texto = ['Olá, Gediel! 👋', 'Fiz a aplicação pelo Hub e quero entender qual o melhor caminho pra mim.', '',
@@ -752,6 +820,7 @@ a{text-decoration:none}
   anel.addEventListener('click', e => { const c = e.target.closest('.modo'); if (c && !(arrasto && arrasto.moveu)) { mexeu = true; parado = Date.now(); escolher(c.dataset.modo); } });
 
   function ligarModo(m) {
+    DADOS.modo(m.id); DADOS.evento('modo', m.id, m.nome);
     modo = m;
     try { localStorage.setItem('ebg:hubmodo', m.id); } catch (e) {}
     $('#trocarNome').textContent = m.nome.replace(/^Modo /, '');
