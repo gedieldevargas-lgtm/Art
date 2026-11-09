@@ -221,3 +221,12 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--a
 .hub-filtros select { width: auto; }
 .hub-campos input[type=checkbox], .hub-modos input[type=checkbox] { width: auto; padding: 0; }
 .hub-bool { display: flex; gap: 8px; align-items: center; justify-content: flex-start; }
+
+/* aba Dados do Hub */
+#dadosHub { display: grid; gap: 14px; margin-top: 14px; }
+#dadosHub .kpis { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+#dadosHub .kpi b { display: block; font: 400 2.1rem/1.1 var(--serif); margin-bottom: 4px; font-variant-numeric: tabular-nums; }
+#dadosHub .barras li { grid-template-columns: minmax(0, 14rem) 1fr auto; }
+#dadosHub .cabeca { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px; }
+#dadosHub .cabeca h3 { margin: 0; }
+#dadosHub .tabela td { max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

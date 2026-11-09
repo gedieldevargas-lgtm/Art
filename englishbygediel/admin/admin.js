@@ -74,6 +74,7 @@
     if (aba === 'produtos' && !carregadas.produtos) carregarProdutos();
     if (aba === 'agenda') carregarAgenda();
     if (aba === 'hub' && window.EBG_HUBED) window.EBG_HUBED.abrir();
+    if (aba === 'dados' && window.EBG_HUBNUM) window.EBG_HUBNUM.abrir();
   }
 
   /* ---------------- números ---------------- */

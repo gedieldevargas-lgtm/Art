@@ -36,6 +36,7 @@
       <button type="button" role="tab" data-aba="produtos" aria-selected="false">Produtos</button>
       <button type="button" role="tab" data-aba="agenda" aria-selected="false">Agenda</button>
       <button type="button" role="tab" data-aba="hub" aria-selected="false">Hub</button>
+      <button type="button" role="tab" data-aba="dados" aria-selected="false">Dados do Hub</button>
     </nav>
     <div class="topo-dir">
       <a class="link" href="../" target="_blank" rel="noopener">Ver o Hub</a>
@@ -125,6 +126,21 @@
     </div>
   </section>
 
+  <!-- Dados do Hub: visitas, cliques, vistos e cadastros -->
+  <section class="aba" id="aba-dados" hidden>
+    <div class="cabeca">
+      <h2>Dados do Hub</h2>
+      <div class="periodo" role="group" aria-label="Período">
+        <button type="button" data-dias-hub="1">Hoje</button>
+        <button type="button" data-dias-hub="7" aria-pressed="true">7 dias</button>
+        <button type="button" data-dias-hub="30">30 dias</button>
+        <button type="button" data-dias-hub="0">Tudo</button>
+      </div>
+    </div>
+    <p class="sub">Quem entrou no Hub, de onde veio, o que clicou, o que viu e quem se cadastrou.</p>
+    <div id="dadosHub"></div>
+  </section>
+
   <!-- Hub: tudo do hub.html editável -->
   <section class="aba" id="aba-hub" hidden>
     <div class="cabeca hub-cabeca">
@@ -202,5 +218,6 @@
 <script src="../hub-dados.js"></script>
 <script src="admin.js"></script>
 <script src="hub-editor.js"></script>
+<script src="hub-numeros.js"></script>
 </body>
 </html>

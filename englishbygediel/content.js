@@ -121,7 +121,7 @@ window.EBG = {
   // modos: em quais páginas de modo o item aparece (o Menu mostra tudo)
   itens: {
     mentoria: {
-      titulo: 'Mentoria Inglês Inteligente',
+      titulo: 'Programa de Acompanhamento Inglês Inteligente',
       tipo: 'pago', selo: 'Comece esta semana',
       img: 'img/gediel-brooklyn.webp', imgLarga: 'img/gediel-liberty.webp',
       video: 'eXfovCYxdZw',
@@ -314,10 +314,10 @@ window.EBG = {
       sinopse: 'Viagens e intercâmbio pra colocar o inglês em uso. Foi assim que alunos como o Bruno descobriram que nada mais travava.',
       cta: { rotulo: 'Ver no Instagram', acao: 'link', href: 'viagens' },
       peso: { fala: 4, trabalho: 4, viagem: 10, fe: 4, zero: 3 } },
-    particular: { modos: ['carreira', 'viagem'], titulo: 'Aulas particulares', tipo: 'exclusivo', img: 'img/card-particular.webp',
-      meta: ['Só para alunos'],
-      sinopse: 'Pacotes de aulas individuais, em casal ou com amigos, com o Gediel. Contratados por dentro do programa, pra quem já é aluno.',
-      cta: { rotulo: 'Já sou aluno, quero agendar', acao: 'whatsapp', texto: 'Oi Gediel! Já sou aluno do programa e quero agendar aulas particulares.' },
+    particular: { modos: ['carreira', 'viagem'], titulo: 'Mentoria particular', tipo: 'exclusivo', img: 'img/card-particular.webp',
+      meta: ['Particular', 'Individual, casal ou amigos'],
+      sinopse: 'Pra quem quer algo só seu: aulas particulares com o Gediel, individuais, em casal ou com amigos, no seu ritmo e no seu objetivo. Preencha o formulário que eu entro em contato.',
+      cta: { rotulo: 'Quero minha mentoria particular', acao: 'link', href: 'mentoriaParticular' },
       peso: { fala: 5, trabalho: 6, viagem: 4, fe: 4, zero: 3 } }
   },
 

@@ -10,7 +10,7 @@
   const OPC = {
     tipoCard: [['gratis', 'Grátis'], ['pago', 'À venda'], ['membros', 'Dentro da mentoria (trancado)'], ['extra', 'Ecossistema'], ['aluno', 'Depoimento de aluno']],
     rede: [['youtube', 'YouTube'], ['tiktok', 'TikTok'], ['instagram', 'Instagram'], ['whatsapp', 'WhatsApp'], ['link', 'Outro link']],
-    ir: [['gratis', 'Materiais grátis'], ['pagos', 'À venda'], ['membros', 'Dentro da mentoria'], ['extras', 'Ecossistema'], ['alunos', 'Alunos'], ['aplicar', 'Chat da mentoria'], ['login', 'Entrar (área de membros)']],
+    ir: [['gratis', 'Materiais grátis'], ['pagos', 'À venda'], ['membros', 'Dentro da mentoria'], ['extras', 'Ecossistema'], ['alunos', 'Alunos'], ['aplicar', 'Chat do programa'], ['login', 'Entrar (área de membros)'], ['link', 'Um link (preencha o campo Link)']],
     icone: [['estrela', 'Estrela'], ['livro', 'Livro'], ['pessoas', 'Pessoas'], ['chat', 'Balão'], ['play', 'Play'], ['coracao', 'Coração'], ['cadeado', 'Cadeado']]
   };
   const SECOES = [
@@ -34,7 +34,7 @@
       campos: [['tipo', 'Rede', 'sel', OPC.rede], ['url', 'Link', 'url']] },
     { k: 'atalhos', t: 'Atalhos', d: 'Os 4 quadrados com ícone que giram, logo abaixo do topo.', lista: true, titulo: 'titulo', foto: 'img',
       novo: () => ({ titulo: 'Novo', sub: '', img: '', ir: 'gratis', icone: 'estrela' }),
-      campos: [['titulo', 'Título'], ['sub', 'Subtítulo'], ['img', 'Foto', 'img'], ['ir', 'Leva até', 'sel', OPC.ir], ['icone', 'Ícone', 'sel', OPC.icone]] },
+      campos: [['titulo', 'Título'], ['sub', 'Subtítulo'], ['img', 'Foto', 'img'], ['ir', 'Leva até', 'sel', OPC.ir], ['url', 'Link (quando "Leva até" for um link)', 'url'], ['icone', 'Ícone', 'sel', OPC.icone]] },
     { k: 'destaque', t: 'Vídeo em destaque', d: 'O cartão grande. Ao tocar, abre a ficha da mentoria.', campos: [
       ['rotulo', 'Etiqueta'], ['titulo', 'Título'], ['texto', 'Texto', 'area'], ['botao', 'Botão'], ['img', 'Imagem', 'img']] },
     { k: 'mentoria', t: 'Ficha da mentoria', d: 'O que aparece ao tocar no vídeo em destaque.', campos: [
