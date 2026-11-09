@@ -296,7 +296,7 @@ a{text-decoration:none}
   </header>
 
   <section class="secao embutido" id="embutido" hidden>
-    <div class="cab"><div><h2 class="serif" id="embTitulo"></h2><p id="embSub" style="font-size:13px;margin-top:4px"></p></div><a class="pilula" id="embAbrir" target="_blank" rel="noopener"></a></div>
+    <div class="cab"><div><h2 class="serif" id="embTitulo"></h2><p id="embSub" style="font-size:13px;margin-top:4px"></p></div><a class="pilula" id="embAbrir"></a></div>
     <div class="emb-moldura"><iframe id="embFrame" title="" loading="lazy"></iframe></div>
   </section>
 
@@ -595,7 +595,9 @@ a{text-decoration:none}
       if (!c) return '';
       if (c.acao === 'aplicar') return `<button class="${cls}" data-ir="#aplicar" data-fechar>${esc(c.rotulo)}</button>`;
       if (c.acao === 'login') return `<button class="${cls}" data-login>${esc(c.rotulo)}</button>`;
-      const u = destino(c); return u ? `<a class="${cls}" href="${esc(u)}" target="_blank" rel="noopener">${esc(c.rotulo)}</a>` : '';
+      // página do próprio site abre na mesma aba; outro site (checkout, Instagram…) abre em aba nova
+      const u = destino(c), fora = /^https?:/i.test(u || '');
+      return u ? `<a class="${cls}" href="${esc(u)}"${fora ? ' target="_blank" rel="noopener"' : ''}>${esc(c.rotulo)}</a>` : '';
     };
     const preco = m.preco && typeof m.preco === 'object' ? `<p class="preco">${esc(m.preco.separado || '')} <b>${esc(m.preco.parcelas)}</b><br><small>${esc(m.preco.nota)}</small></p>`
       : m.preco ? `<p class="preco"><b>${esc(m.preco)}</b></p>` : '';
@@ -853,6 +855,17 @@ a{text-decoration:none}
   addEventListener('resize', posicionar);
 
   desenhar();
+
+  // voltou de uma página do site (ex.: Central de Prompts): reabre no mesmo modo e na mesma altura
+  addEventListener('pagehide', () => { try { if ($('#entrada').classList.contains('sai')) sessionStorage.setItem('hub:volta', JSON.stringify({ modo: (modo || {}).id, y: scrollY })); else sessionStorage.removeItem('hub:volta'); } catch (e) {} });
+  try {
+    const v = JSON.parse(sessionStorage.getItem('hub:volta') || 'null');
+    if (v && !/[?&]editar\b/.test(location.search)) {
+      const m = modos.find(x => x.id === v.modo) || escolhido || modos[0];
+      escolher(m.id); ligarModo(m);
+      requestAnimationFrame(() => setTimeout(() => scrollTo(0, v.y || 0), 80));
+    }
+  } catch (e) {}
 })();
 </script>
 </body>
