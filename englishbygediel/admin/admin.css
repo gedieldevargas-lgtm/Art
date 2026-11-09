@@ -230,3 +230,24 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--a
 #dadosHub .cabeca { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px; }
 #dadosHub .cabeca h3 { margin: 0; }
 #dadosHub .tabela td { max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* aba Pessoas */
+.pessoas-filtros { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.pessoas-filtros input { flex: 1 1 260px; }
+.pessoas-filtros input, .pessoas-filtros select { background: var(--surface-2); border: 1px solid var(--linha); border-radius: 8px; padding: 10px 12px; }
+#pessoasResumo { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-bottom: 14px; }
+#pessoasResumo .kpi b { display: block; font: 400 1.9rem/1.1 var(--serif); margin-bottom: 4px; }
+.tabela.pessoas tbody tr { cursor: pointer; }
+.tabela.pessoas tbody tr:hover { background: var(--surface-2); }
+.tabela.pessoas td small { display: block; color: var(--muted); font-size: .78rem; margin-top: 2px; }
+.chip-int { display: inline-block; font-size: .72rem; padding: 3px 8px; border-radius: 99px; background: var(--accent); color: var(--azul-claro); margin: 2px 2px 0 0; }
+.hub-tag.programa { background: var(--verde-escuro); color: #cfe3b5; }
+.hub-tag.mentoria { background: #3b2a52; color: #d7c3f3; }
+.hub-tag.compra { background: #4a3a14; color: #f5d27a; }
+#modalPessoa .modal-corpo { max-width: 760px; }
+#modalPessoa h3 { margin-top: 18px; }
+.dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; margin: 10px 0 0; font-size: .875rem; }
+.dl dt { color: var(--muted); } .dl dd { margin: 0; white-space: pre-wrap; }
+.linha-tempo { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 6px; font-size: .875rem; max-height: 340px; overflow-y: auto; }
+.linha-tempo span { color: var(--muted); font-size: .78rem; margin-right: 6px; }
+#fecharPessoa { width: auto; border: 0; padding: 4px 8px; }
