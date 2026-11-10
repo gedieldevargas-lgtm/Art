@@ -82,12 +82,13 @@
         <input id="busca" type="search" placeholder="Buscar nome, @ ou e-mail" aria-label="Buscar contato">
         <select id="filtroModo" aria-label="Filtrar por modo"><option value="">Todos os modos</option></select>
         <label class="check"><input type="checkbox" id="filtroMentoria"> Só quem clicou na mentoria</label>
+        <label class="check"><input type="checkbox" id="filtroNaoChamei"> Só quem eu ainda não chamei</label>
         <button class="botao" type="button" id="exportar">Baixar planilha</button>
       </div>
     </div>
     <div class="tabela-wrap">
       <table class="tabela">
-        <thead><tr><th>Quando</th><th>Nome</th><th>Modo</th><th>Falar com</th><th>Interesse</th></tr></thead>
+        <thead><tr><th title="Já chamei no WhatsApp">Chamei</th><th>Quando</th><th>Nome</th><th>Modo</th><th>Falar com</th><th>Interesse</th></tr></thead>
         <tbody id="linhasContatos"></tbody>
       </table>
     </div>
@@ -99,6 +100,11 @@
     <div class="cabeca">
       <h2>Produtos</h2>
       <button class="botao cheio" type="button" id="novoProduto">Adicionar produto</button>
+    </div>
+    <div class="cartao kiwify-box">
+      <div class="cabeca"><h3>Produtos da Kiwify</h3><div class="filtros"><button class="botao" type="button" id="kiwifyVendas">Trazer vendas (último ano)</button><button class="botao cheio" type="button" id="kiwifyBuscar">Buscar produtos da Kiwify</button></div></div>
+      <p class="sub">Todos os produtos que você vende na Kiwify, com as vendas e o faturamento de cada um. "Colocar no Hub" cria o card do produto na fileira à venda.</p>
+      <div id="kiwifyLista"></div>
     </div>
     <p class="sub">O que você cadastra aqui aparece no catálogo, na fileira com o nome do segmento. Segmento novo (ex.: Jogos, Prompts) vira uma fileira nova.</p>
     <div class="grade-produtos" id="gradeProdutos"></div>
@@ -242,5 +248,6 @@
 <script src="hub-editor.js"></script>
 <script src="hub-numeros.js"></script>
 <script src="hub-pessoas.js"></script>
+<script src="hub-kiwify.js"></script>
 </body>
 </html>

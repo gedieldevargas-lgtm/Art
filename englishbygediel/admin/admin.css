@@ -251,3 +251,16 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--a
 .linha-tempo { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 6px; font-size: .875rem; max-height: 340px; overflow-y: auto; }
 .linha-tempo span { color: var(--muted); font-size: .78rem; margin-right: 6px; }
 #fecharPessoa { width: auto; border: 0; padding: 4px 8px; }
+
+/* checklist "já chamei" e Kiwify */
+.chamei { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+.chamei input { width: 20px; height: 20px; accent-color: var(--verde); cursor: pointer; }
+.chamei span { font-size: .72rem; color: var(--verde); white-space: nowrap; }
+.tabela tr.chamado td { opacity: .55; }
+.tabela tr.chamado td:first-child { opacity: 1; }
+.kiwify-box { margin: 14px 0 18px; }
+.kiwify-box .cabeca { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.kiwify-box .cabeca h3 { margin: 0; }
+.kiwify-kpis { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin: 12px 0; }
+.kiwify-kpis .kpi b { display: block; font: 400 1.8rem/1.1 var(--serif); margin-bottom: 4px; }
+.tabela td small { display: block; color: var(--muted); font-size: .78rem; }
