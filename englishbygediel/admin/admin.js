@@ -72,6 +72,7 @@
     if (aba === 'numeros') carregarNumeros();
     if (aba === 'contatos' && !carregadas.contatos) carregarContatos();
     if (aba === 'produtos' && !carregadas.produtos) carregarProdutos();
+    if (aba === 'produtos' && window.EBG_KIWIFY) window.EBG_KIWIFY.abrir();
     if (aba === 'agenda') carregarAgenda();
     if (aba === 'hub' && window.EBG_HUBED) window.EBG_HUBED.abrir();
     if (aba === 'dados' && window.EBG_HUBNUM) window.EBG_HUBNUM.abrir();
@@ -140,12 +141,15 @@
 
   /* ---------------- contatos ---------------- */
   let contatos = [], interesses = {};
+  let marcas = {};
 
   async function carregarContatos() {
-    const [{ data: leads, error }, { data: ev }] = await Promise.all([
+    const [{ data: leads, error }, { data: ev }, { data: mc }] = await Promise.all([
       sb.from('leads').select('*').order('created_at', { ascending: false }).limit(5000),
-      sb.from('events').select('lead_id,tipo,item').in('tipo', ['clicou', 'abriu']).limit(20000)
+      sb.from('events').select('lead_id,tipo,item').in('tipo', ['clicou', 'abriu']).limit(20000),
+      sb.from('crm_marcas').select('chave,chamado,chamado_em').like('chave', 'lead:%').limit(20000)
     ]);
+    marcas = Object.fromEntries((mc || []).map(m => [m.chave, m]));
     if (error) { aviso('Não deu pra carregar os contatos.'); return; }
     carregadas.contatos = true;
     contatos = leads || [];
@@ -167,7 +171,8 @@
     return contatos.filter(l =>
       (!q || [l.nome, l.instagram, l.email, l.whatsapp].some(v => String(v || '').toLowerCase().includes(q)))
       && (!modo || l.modo === modo)
-      && (!soMentoria || (interesses[l.id] || {}).mentoria));
+      && (!soMentoria || (interesses[l.id] || {}).mentoria)
+      && (!$('#filtroNaoChamei').checked || !(marcas['lead:' + l.id] || {}).chamado));
   }
 
   function msgWhats(l) {
@@ -184,12 +189,14 @@
       const i = interesses[l.id] || { mentoria: false, itens: new Set() };
       const outros = [...i.itens].filter(x => x !== 'mentoria').slice(0, 3);
       const ig = String(l.instagram || '').replace(/^@/, '');
-      return `<tr>
+      const mk = marcas['lead:' + l.id] || {};
+      return `<tr class="${mk.chamado ? 'chamado' : ''}">
+        <td><label class="chamei" title="${mk.chamado ? 'Chamado em ' + dataCurta(mk.chamado_em) : 'Marcar como chamado'}"><input type="checkbox" data-chamei="lead:${esc(l.id)}" ${mk.chamado ? 'checked' : ''}><span>${mk.chamado ? dataCurta(mk.chamado_em) : ''}</span></label></td>
         <td><small>${dataCurta(l.created_at)}</small></td>
         <td><strong>${esc(l.nome)}</strong>${ig ? `<small>@${esc(ig)}</small>` : ''}</td>
         <td>${esc(nomeModo(l.modo) || NOMES_FOCO[l.objetivo] || '')}</td>
         <td><div class="contato-acoes">
-          <a class="whats" href="https://wa.me/${esc(String(l.whatsapp || '').replace(/\D/g, ''))}?text=${encodeURIComponent(msgWhats(l))}" target="_blank" rel="noopener">${ICONES.whats}WhatsApp</a>
+          <a class="whats" data-marca-whats="lead:${esc(l.id)}" href="https://wa.me/${esc(String(l.whatsapp || '').replace(/\D/g, ''))}?text=${encodeURIComponent(msgWhats(l))}" target="_blank" rel="noopener">${ICONES.whats}WhatsApp</a>
           ${l.email ? `<a href="mailto:${esc(l.email)}?subject=${encodeURIComponent('Oi, aqui é o Gediel')}">${ICONES.email}E-mail</a>` : ''}
           ${ig ? `<a href="https://ig.me/m/${esc(encodeURIComponent(ig))}" target="_blank" rel="noopener">${ICONES.insta}Direct</a>` : ''}
         </div></td>
@@ -438,7 +445,19 @@
     $$('.periodo button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
     carregarNumeros();
   }));
-  ['#busca', '#filtroModo', '#filtroMentoria'].forEach(s => $(s).addEventListener('input', desenharContatos));
+  ['#busca', '#filtroModo', '#filtroMentoria', '#filtroNaoChamei'].forEach(s => $(s).addEventListener('input', desenharContatos));
+  // checklist "já chamei no WhatsApp": marca na mão ou sozinho quando você clica em WhatsApp
+  async function marcar(chave, chamado) {
+    const linha = { chave, chamado, chamado_em: chamado ? new Date().toISOString() : null, updated_at: new Date().toISOString() };
+    marcas[chave] = linha;
+    const { error } = await sb.from('crm_marcas').upsert(linha);
+    if (error) aviso('Não deu pra salvar a marcação. Rode o supabase/crm.sql no Supabase.');
+    desenharContatos();
+    if (window.EBG_PESSOAS && window.EBG_PESSOAS.marcou) window.EBG_PESSOAS.marcou(linha);
+  }
+  window.EBG_MARCAR = marcar;
+  document.addEventListener('change', e => { const c = e.target.closest && e.target.closest('[data-chamei]'); if (c) marcar(c.dataset.chamei, c.checked); });
+  document.addEventListener('click', e => { const w = e.target.closest && e.target.closest('[data-marca-whats]'); if (w && !(marcas[w.dataset.marcaWhats] || {}).chamado) marcar(w.dataset.marcaWhats, true); });
   $('#exportar').addEventListener('click', exportar);
   $('#novoProduto').addEventListener('click', () => abrirProduto(null));
   $('#gradeProdutos').addEventListener('click', e => {

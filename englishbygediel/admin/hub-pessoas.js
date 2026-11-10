@@ -14,7 +14,7 @@
   const insta = t => { const s = String(t || '').trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i, '').replace(/[/?].*$/, '').replace(/^@/, ''); return s ? '@' + s.toLowerCase() : ''; };
   const FONTES = { programa: 'Programa (chat)', mentoria: 'Mentoria particular', catalogo: 'Catálogo antigo', compra: 'Comprou' };
   const NOMES_MODO = Object.fromEntries((window.EBG && window.EBG.modos || []).map(m => [m.id, m.nome]));
-  let pessoas = [], eventosPorVisitante = new Map();
+  let pessoas = [], eventosPorVisitante = new Map(), marcas = {};
 
   async function ler(tabela, colunas = '*', max = 20000) {
     const out = [];
@@ -29,6 +29,8 @@
   async function carregar() {
     const box = $('#pessoasLista');
     box.innerHTML = '<p class="sub">Carregando…</p>';
+    const mc = await sb.from('crm_marcas').select('chave,chamado,chamado_em').like('chave', 'tel:%').limit(20000);
+    marcas = Object.fromEntries(((mc && mc.data) || []).map(m => [m.chave, m]));
     const [prog, ment, cat, vend, evs] = await Promise.all([
       ler('leads_programa'), ler('leads_mentoria'), ler('leads', 'id,created_at,nome,whatsapp,instagram,email,objetivo,origem'),
       ler('vendas', 'created_at,pedido,status,produto,valor,nome,email,whatsapp,instagram,utm_source,pago_em'),
@@ -104,9 +106,9 @@
       [f.length, 'pessoas'], [f.filter(p => p.whatsapp).length, 'com WhatsApp'], [f.filter(p => p.email).length, 'com e-mail'],
       [f.filter(p => p.instagram).length, 'com Instagram'], [comprou.length, 'compraram'], [real(comprou.reduce((a, p) => a + p.gasto, 0)), 'em vendas']
     ].map(([n, r]) => `<div class="kpi"><b>${n}</b><span>${r}</span></div>`).join('');
-    $('#pessoasLista').innerHTML = f.length ? `<div class="tabela-wrap"><table class="tabela pessoas"><thead><tr><th>Pessoa</th><th>Contato</th><th>Veio por</th><th>Interesses</th><th>Comprou</th><th>Último contato</th></tr></thead><tbody>${f.map((p, i) => `
-      <tr data-pessoa="${pessoas.indexOf(p)}"><td><b>${esc(p.nome || '(sem nome)')}</b>${p.nivel ? `<small>${esc(p.nivel)}</small>` : ''}</td>
-        <td>${p.whatsapp ? `<a class="link" target="_blank" rel="noopener" href="https://wa.me/${p.whatsapp}" data-sem-abrir>${esc(p.whatsapp)}</a>` : ''}${p.email ? `<small>${esc(p.email)}</small>` : ''}${p.instagram ? `<small><a class="link" target="_blank" rel="noopener" href="https://instagram.com/${esc(p.instagram.slice(1))}" data-sem-abrir>${esc(p.instagram)}</a></small>` : ''}</td>
+    $('#pessoasLista').innerHTML = f.length ? `<div class="tabela-wrap"><table class="tabela pessoas"><thead><tr><th>Chamei</th><th>Pessoa</th><th>Contato</th><th>Veio por</th><th>Interesses</th><th>Comprou</th><th>Último contato</th></tr></thead><tbody>${f.map((p, i) => `
+      <tr data-pessoa="${pessoas.indexOf(p)}" class="${(marcas['tel:' + p.whatsapp] || {}).chamado ? 'chamado' : ''}"><td data-sem-abrir>${p.whatsapp ? `<label class="chamei"><input type="checkbox" data-chamei="tel:${esc(p.whatsapp)}" ${(marcas['tel:' + p.whatsapp] || {}).chamado ? 'checked' : ''}><span>${(marcas['tel:' + p.whatsapp] || {}).chamado ? data((marcas['tel:' + p.whatsapp] || {}).chamado_em) : ''}</span></label>` : ''}</td><td><b>${esc(p.nome || '(sem nome)')}</b>${p.nivel ? `<small>${esc(p.nivel)}</small>` : ''}</td>
+        <td>${p.whatsapp ? `<a class="link" target="_blank" rel="noopener" href="https://wa.me/${p.whatsapp}" data-sem-abrir data-marca-whats="tel:${esc(p.whatsapp)}">${esc(p.whatsapp)}</a>` : ''}${p.email ? `<small>${esc(p.email)}</small>` : ''}${p.instagram ? `<small><a class="link" target="_blank" rel="noopener" href="https://instagram.com/${esc(p.instagram.slice(1))}" data-sem-abrir>${esc(p.instagram)}</a></small>` : ''}</td>
         <td>${[...p.fontes].map(x => `<span class="hub-tag ${x}">${esc(FONTES[x])}</span>`).join(' ')}</td>
         <td>${p.interesses.slice(0, 4).map(x => `<span class="chip-int">${esc(x)}</span>`).join(' ')}</td>
         <td>${p.gasto ? real(p.gasto) : '—'}</td><td>${data(p.ultimo)}</td></tr>`).join('')}</tbody></table></div>`
@@ -147,5 +149,5 @@
     if (tr && !e.target.closest('[data-sem-abrir]')) detalhe(pessoas[Number(tr.dataset.pessoa)]);
   });
 
-  window.EBG_PESSOAS = { abrir: () => { if (!pessoas.length) carregar(); } };
+  window.EBG_PESSOAS = { abrir: () => { if (!pessoas.length) carregar(); }, marcou: m => { if (m.chave.startsWith('tel:')) { marcas[m.chave] = m; if (pessoas.length) desenhar(); } } };
 })();
