@@ -94,8 +94,8 @@
       ],
       // destaque flutuante (pisca na abertura e no Hub) com contagem regressiva
       maratona: { ativo: true, rotulo: 'Maratona', titulo: 'O Inglês de Cada Dia', sub: 'Inglês dentro da sua rotina', selo: 'Turma Fundadora',
-        detalhe: '10 meses · apenas 15 pessoas serão selecionadas', foto: 'img/maratona-casal.webp', img: 'img/maratona.webp',
-        fim: '2026-11-30T23:59', textoFim: 'Inscrições encerradas',
+        detalhe: 'Começa 16/11 · 10 meses · só 15 pessoas selecionadas', foto: 'img/maratona-casal.webp', img: 'img/maratona.webp',
+        fim: '2026-11-16T00:00', textoFim: 'Começou! Fale comigo pra saber das vagas',
         texto: 'Uma maratona de 10 meses com o Gediel e a esposa, com o inglês dentro da sua rotina de verdade. É a Turma Fundadora: só 15 pessoas serão selecionadas.',
         link: '', botao: 'Quero minha vaga', mensagem: 'Oi Gediel! Quero uma vaga na Maratona O Inglês de Cada Dia (Turma Fundadora).' },
       rodape: { nome: 'Gediel Vargas', linha: 'English by Gediel · Método Inteligente' }
