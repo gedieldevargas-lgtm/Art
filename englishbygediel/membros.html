@@ -1,0 +1,1022 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Plataforma Inteligente · Área de membros</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+:root{
+  --bg:#f0f2f8;--sidebar:#ffffff;--surface:#ffffff;--surface2:#f5f6fb;
+  --border:#e8eaf2;--fg:#111827;--fg2:#6b7280;--fg3:#9ca3af;
+  --accent:#4f6ef7;--accent2:#8b5cf6;--gold:#f59e0b;--green:#10b981;--red:#ef4444;
+  --shadow:0 2px 12px rgba(79,110,247,.08);--shadow-md:0 4px 24px rgba(79,110,247,.12);
+  color-scheme:light;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1117;--sidebar:#16181f;--surface:#1e2028;--surface2:#252730;
+  --border:#2e3040;--fg:#f1f3fb;--fg2:#8892a4;--fg3:#5a6275;
+  --shadow:0 2px 12px rgba(0,0,0,.25);--shadow-md:0 4px 24px rgba(0,0,0,.35);
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0f1117;--sidebar:#16181f;--surface:#1e2028;--surface2:#252730;
+  --border:#2e3040;--fg:#f1f3fb;--fg2:#8892a4;--fg3:#5a6275;
+  --shadow:0 2px 12px rgba(0,0,0,.25);--shadow-md:0 4px 24px rgba(0,0,0,.35);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--fg)}
+body{display:flex;overflow:hidden}
+button,input,select,textarea{font-family:inherit}
+
+/* ── ANIMAÇÕES GLOBAIS ───────────────────── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes shimmer{0%{background-position:-400px 0}100%{background-position:400px 0}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+@keyframes popIn{0%{transform:scale(.85);opacity:0}60%{transform:scale(1.06)}100%{transform:scale(1);opacity:1}}
+@keyframes navIn{0%{transform:scale(.9);opacity:0}100%{transform:scale(1);opacity:1}}
+
+/* Pane transitions via JS classes */
+.pane{display:none;opacity:0}
+.pane.active{display:block}
+.pane.pane-enter{animation:fadeUp .28s cubic-bezier(.22,1,.36,1) both}
+.pane.pane-leave{animation:fadeIn .15s reverse both;pointer-events:none}
+
+/* Stagger cards */
+.stagger>*{animation:fadeUp .3s cubic-bezier(.22,1,.36,1) both}
+.stagger>*:nth-child(1){animation-delay:.03s}
+.stagger>*:nth-child(2){animation-delay:.07s}
+.stagger>*:nth-child(3){animation-delay:.11s}
+.stagger>*:nth-child(4){animation-delay:.15s}
+.stagger>*:nth-child(5){animation-delay:.19s}
+.stagger>*:nth-child(6){animation-delay:.23s}
+.stagger>*:nth-child(7){animation-delay:.27s}
+.stagger>*:nth-child(8){animation-delay:.31s}
+.stagger>*:nth-child(9){animation-delay:.35s}
+.stagger>*:nth-child(10){animation-delay:.38s}
+.stagger>*:nth-child(n+11){animation-delay:.4s}
+
+/* Nav pill click */
+.nav-pill{transition:background .18s,color .18s,transform .12s}
+.nav-pill:active{transform:scale(.93)}
+.nav-pill.active{animation:navIn .2s cubic-bezier(.22,1,.36,1)}
+
+/* Button press */
+button,.mat-card,.game-app-icon,.module-card,.live-card{transition:transform .12s,box-shadow .15s}
+button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transform:scale(.96)}
+
+/* ── SKELETON ────────────────────────── */
+.skel{background:linear-gradient(90deg,var(--surface2) 25%,var(--border) 50%,var(--surface2) 75%);background-size:800px 100%;animation:shimmer 1.4s infinite linear;border-radius:8px}
+
+/* ── SIDEBAR ─────────────────────────── */
+.sidebar{width:230px;min-width:230px;background:var(--sidebar);border-right:1px solid var(--border);display:flex;flex-direction:column;height:100vh;overflow:hidden}
+.sidebar-logo{padding:20px 16px 14px;display:flex;align-items:center;gap:10px}
+.logo-badge{width:36px;height:36px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,#4f6ef7,#8b5cf6);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:#fff}
+.logo-text{font-size:13px;font-weight:800;color:var(--fg);line-height:1.2}
+.logo-sub{font-size:10px;color:var(--fg3);font-weight:500}
+.nav-pill{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:12px;cursor:pointer;color:var(--fg2);font-size:13px;font-weight:500;margin:1px 10px}
+.nav-pill:hover{background:var(--surface2);color:var(--fg)}
+.nav-pill.active{background:linear-gradient(135deg,rgba(79,110,247,.12),rgba(139,92,246,.08));color:var(--accent);font-weight:700}
+.nav-icon{font-size:16px;width:20px;text-align:center;flex-shrink:0}
+.nav-badge{margin-left:auto;background:var(--accent);color:#fff;font-size:9px;font-weight:800;padding:2px 6px;border-radius:99px}
+.nav-section{font-size:9px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--fg3);padding:14px 22px 5px}
+.sidebar-level{margin:8px 10px;background:linear-gradient(135deg,rgba(79,110,247,.08),rgba(139,92,246,.05));border:1px solid rgba(79,110,247,.15);border-radius:14px;padding:12px 14px}
+.level-row{display:flex;align-items:center;gap:8px}
+.level-tag{background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff;font-size:12px;font-weight:800;padding:3px 10px;border-radius:8px}
+.level-lbl{font-size:11px;color:var(--fg2);font-weight:500}
+.sidebar-nav{flex:1;overflow-y:auto;padding:4px 0}
+.sidebar-footer{padding:10px;border-top:1px solid var(--border)}
+.user-chip{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;cursor:pointer;transition:.15s}
+.user-chip:hover{background:var(--surface2)}
+.user-ava{width:32px;height:32px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#4f6ef7,#8b5cf6);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#fff;overflow:hidden}
+.user-ava img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.user-name{font-size:12px;font-weight:700;color:var(--fg)}
+.user-sub{font-size:10px;color:var(--fg3)}
+
+/* ── MAIN ────────────────────────────── */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.topbar{background:var(--sidebar);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;padding:0 22px;height:52px;flex-shrink:0;transition:box-shadow .2s}
+.topbar-title{font-size:14px;font-weight:800;flex:1;color:var(--fg);transition:opacity .15s,transform .15s}
+.topbar-title.changing{opacity:0;transform:translateY(-6px)}
+.tb-btn{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:6px 13px;font-size:12px;font-weight:600;color:var(--fg2);cursor:pointer;transition:.12s}
+.tb-btn:hover{color:var(--fg);border-color:var(--accent)}
+.tb-btn:active{transform:scale(.92)}
+.notif-dot{position:absolute;top:5px;right:5px;width:6px;height:6px;background:var(--red);border-radius:50%}
+.content-wrap{flex:1;display:flex;overflow:hidden}
+.content{flex:1;overflow-y:auto;padding:22px 24px;min-width:0}
+.right-rail{width:270px;min-width:270px;border-left:1px solid var(--border);background:var(--sidebar);overflow-y:auto;padding:18px 14px;display:flex;flex-direction:column;gap:16px}
+
+/* ── GENERIC CARDS ───────────────────── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+.card-sm{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px;box-shadow:var(--shadow)}
+.sec-hd{font-size:13px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;color:var(--fg)}
+.sec-link{font-size:11px;color:var(--accent);font-weight:700;cursor:pointer}
+
+/* ── MODULE CARDS ────────────────────── */
+.module-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px}
+.module-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);opacity:.85;cursor:default}
+.mod-thumb{width:100%;height:72px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 18% 22%, #d2e6ff 0%, #6fa5ff 22%, #3060d0 46%, #0c1a60 70%, #040b28 100%)}
+.mod-thumb-lock{position:absolute;inset:0;background:rgba(4,11,40,.55);display:flex;align-items:center;justify-content:center;font-size:18px}
+.mod-body{padding:11px 12px 12px}
+.mod-name{font-size:12px;font-weight:700;line-height:1.35;color:var(--fg);margin-bottom:2px}
+.mod-sub{font-size:10px;color:var(--fg2)}
+.mod-lock-tag{display:inline-block;background:rgba(107,114,128,.12);color:var(--fg3);font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;margin-top:6px;letter-spacing:.4px}
+
+/* ── LIVE CARDS ──────────────────────── */
+.live-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
+.live-card.is-live{border-color:rgba(16,185,129,.35);background:linear-gradient(135deg,rgba(16,185,129,.04),rgba(79,110,247,.04))}
+.live-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
+.live-icon{width:44px;height:44px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:20px}
+.live-icon.meet{background:linear-gradient(135deg,rgba(79,110,247,.12),rgba(139,92,246,.08))}
+.live-icon.yt{background:rgba(239,68,68,.1)}
+.live-info{flex:1;min-width:0}
+.live-title{font-size:14px;font-weight:800;line-height:1.3;color:var(--fg);margin-bottom:2px}
+.live-sub{font-size:11px;color:var(--fg2)}
+.live-status-live{display:inline-flex;align-items:center;gap:5px;background:rgba(16,185,129,.12);color:#059669;font-size:10px;font-weight:800;padding:3px 9px;border-radius:99px;margin-top:5px}
+.live-status-next{display:inline-flex;align-items:center;gap:5px;background:var(--surface2);color:var(--fg2);font-size:10px;font-weight:700;padding:3px 9px;border-radius:99px;margin-top:5px}
+.live-dot{width:5px;height:5px;border-radius:50%;background:#10b981;animation:blink 1.2s ease-in-out infinite}
+.live-actions{display:flex;align-items:center;gap:8px}
+.live-btn{flex:1;border:none;border-radius:11px;padding:10px;font-size:12px;font-weight:700;cursor:pointer;transition:.12s;text-align:center;text-decoration:none;display:block}
+.live-btn-on{background:linear-gradient(135deg,#10b981,#059669);color:#fff}
+.live-btn-on:hover{filter:brightness(1.08)}
+.live-btn-off{background:var(--surface2);color:var(--fg3);cursor:not-allowed;border:1px solid var(--border)}
+.live-btn-remind{background:var(--surface2);color:var(--fg2);border:1px solid var(--border);border-radius:11px;padding:10px 13px;font-size:12px;font-weight:600;cursor:pointer;transition:.12s;white-space:nowrap;text-decoration:none;display:inline-block}
+.live-btn-remind:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── MARATONA ────────────────────────── */
+.mar-hero{background:linear-gradient(135deg,#4f6ef7,#8b5cf6);border-radius:16px;padding:16px;margin-bottom:14px}
+.ctx-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.ctx-chip{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:10px 4px;text-align:center;cursor:pointer;font-size:9px;color:var(--fg2);font-weight:700;line-height:1.4;transition:.15s}
+.ctx-chip:hover{border-color:var(--accent)}
+.ctx-chip.active{border-color:var(--accent);background:rgba(79,110,247,.08);color:var(--accent)}
+.ctx-chip .ce{font-size:18px;display:block;margin-bottom:3px}
+.mar-task{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:6px;display:flex;align-items:center;gap:10px;box-shadow:var(--shadow);transition:.15s}
+.mar-task:hover{border-color:rgba(79,110,247,.2)}
+.mar-chk{width:22px;height:22px;border-radius:7px;border:2px solid var(--border);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;transition:.2s}
+.mar-chk.chk{background:var(--green);border-color:var(--green);color:#fff;animation:popIn .25s cubic-bezier(.22,1,.36,1)}
+.mar-task-title{font-size:12px;font-weight:600;flex:1}
+
+/* ── JOGOS — APPLE ICON GRID ─────────── */
+.game-filters{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:22px}
+.gf-btn{background:var(--surface2);border:1.5px solid var(--border);border-radius:99px;padding:6px 14px;font-size:11px;font-weight:700;color:var(--fg2);cursor:pointer;transition:.15s}
+.gf-btn:hover{border-color:var(--accent);color:var(--accent)}
+.gf-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.gf-btn:active{transform:scale(.92)}
+
+/* Apple-style icon grid */
+.game-apple-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:20px 10px;padding:4px 0}
+.game-app-icon{display:flex;flex-direction:column;align-items:center;gap:7px;cursor:pointer;padding:6px;border-radius:16px;transition:.15s;-webkit-tap-highlight-color:transparent}
+.game-app-icon:hover .game-app-sq{transform:scale(1.08);box-shadow:0 8px 28px rgba(0,0,0,.18)}
+.game-app-sq{width:64px;height:64px;border-radius:17px;display:flex;align-items:center;justify-content:center;font-size:30px;transition:.18s cubic-bezier(.22,1,.36,1);box-shadow:0 4px 14px rgba(0,0,0,.12);flex-shrink:0}
+.game-app-name{font-size:10px;font-weight:600;color:var(--fg);text-align:center;line-height:1.3;max-width:72px}
+
+/* ── GAME BOTTOM SHEET ───────────────── */
+.sheet-overlay{position:fixed;inset:0;background:rgba(0,0,0,0);backdrop-filter:blur(0px);z-index:300;pointer-events:none;transition:background .25s,backdrop-filter .25s}
+.sheet-overlay.open{background:rgba(0,0,0,.45);backdrop-filter:blur(8px);pointer-events:all}
+.sheet-box{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:min(560px,100vw);background:var(--surface);border-radius:24px 24px 0 0;z-index:301;transition:transform .35s cubic-bezier(.22,1,.36,1);max-height:90vh;overflow-y:auto}
+.sheet-overlay.open .sheet-box{transform:translateX(-50%) translateY(0)}
+.sheet-handle{width:36px;height:4px;background:var(--border);border-radius:99px;margin:12px auto 0}
+.sheet-head{padding:16px 20px 14px;display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--border)}
+.sheet-head-icon{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.sheet-head-info{flex:1}
+.sheet-head-title{font-size:17px;font-weight:800;margin-bottom:2px}
+.sheet-head-sub{font-size:12px;color:var(--fg2)}
+.sheet-close{background:var(--surface2);border:none;border-radius:50%;width:30px;height:30px;font-size:14px;cursor:pointer;color:var(--fg2);display:flex;align-items:center;justify-content:center;transition:.12s;flex-shrink:0}
+.sheet-close:active{transform:scale(.88)}
+.sheet-body{padding:18px 20px 24px}
+.sheet-desc{font-size:13px;color:var(--fg2);line-height:1.7;margin-bottom:18px}
+.sheet-instr{background:linear-gradient(135deg,rgba(79,110,247,.06),rgba(139,92,246,.04));border:1px solid rgba(79,110,247,.15);border-radius:14px;padding:14px 16px;margin-bottom:18px}
+.sheet-instr-title{font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.sheet-instr-list{font-size:12px;color:var(--fg2);line-height:2}
+.sheet-config-title{font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--fg3);margin-bottom:10px}
+.sheet-config-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.sheet-fld label{display:block;font-size:10px;font-weight:800;color:var(--fg3);letter-spacing:.4px;text-transform:uppercase;margin-bottom:4px}
+.sheet-inp{width:100%;background:var(--surface2);border:1.5px solid var(--border);border-radius:11px;padding:9px 12px;font-size:13px;color:var(--fg);outline:none;transition:.15s}
+.sheet-inp:focus{border-color:var(--accent)}
+.sheet-play-btn{width:100%;border:none;border-radius:14px;padding:14px;font-size:14px;font-weight:800;cursor:pointer;background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff;letter-spacing:.3px;transition:.15s;box-shadow:0 4px 20px rgba(79,110,247,.35)}
+.sheet-play-btn:hover{filter:brightness(1.08);box-shadow:0 6px 28px rgba(79,110,247,.45)}
+.sheet-play-btn:active{transform:scale(.96)}
+
+/* ── BUSSOLA / PRISMA ────────────────── */
+.intel-banner{background:linear-gradient(135deg,rgba(79,110,247,.08),rgba(139,92,246,.05));border:1px solid rgba(79,110,247,.2);border-radius:18px;padding:20px;margin-bottom:16px}
+.intel-score-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.intel-score-tile{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:12px;text-align:center}
+.intel-score-val{font-size:22px;font-weight:800;color:var(--accent)}
+.intel-score-lbl{font-size:10px;color:var(--fg2);font-weight:600;margin-top:2px}
+.intel-bar-row{margin-bottom:10px}
+.intel-bar-lbl{display:flex;justify-content:space-between;font-size:11px;font-weight:600;color:var(--fg);margin-bottom:4px}
+.intel-bar{height:7px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.intel-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#4f6ef7,#8b5cf6);transition:width .6s cubic-bezier(.22,1,.36,1)}
+
+/* ── MATERIAIS ───────────────────────── */
+.mat-tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.mat-tab{background:var(--surface2);border:1.5px solid var(--border);border-radius:99px;padding:7px 16px;font-size:12px;font-weight:700;color:var(--fg2);cursor:pointer;transition:.15s}
+.mat-tab:hover{border-color:var(--accent);color:var(--accent)}
+.mat-tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.mat-tab:active{transform:scale(.92)}
+.mat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.mat-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer}
+.mat-card:hover{box-shadow:var(--shadow-md);border-color:rgba(79,110,247,.25)}
+.mat-thumb{height:60px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.mat-body{padding:12px}
+.mat-name{font-size:12px;font-weight:800;margin-bottom:3px;line-height:1.3;color:var(--fg)}
+.mat-desc{font-size:10px;color:var(--fg2);line-height:1.5;margin-bottom:8px}
+.mat-badge-free{background:rgba(16,185,129,.1);color:#059669;font-size:9px;font-weight:800;padding:2px 8px;border-radius:6px;display:inline-block}
+.mat-badge-paid{background:rgba(245,158,11,.1);color:#d97706;font-size:9px;font-weight:800;padding:2px 8px;border-radius:6px;display:inline-block}
+.mat-badge-incl{background:rgba(79,110,247,.1);color:var(--accent);font-size:9px;font-weight:800;padding:2px 8px;border-radius:6px;display:inline-block}
+.mat-btn{margin-top:8px;width:100%;border:none;border-radius:9px;padding:8px;font-size:11px;font-weight:800;cursor:pointer;transition:.12s}
+.mat-btn-dl{background:var(--surface2);color:var(--fg2);border:1px solid var(--border)}
+.mat-btn-dl:hover{border-color:var(--accent);color:var(--accent)}
+.mat-btn-buy{background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff}
+.mat-btn:active{transform:scale(.94)}
+
+/* ── SETTINGS MODAL ──────────────────── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0);backdrop-filter:blur(0px);z-index:200;display:flex;align-items:center;justify-content:center;pointer-events:none;transition:.22s}
+.modal-overlay.open{background:rgba(0,0,0,.4);backdrop-filter:blur(6px);pointer-events:all}
+.modal-box{background:var(--surface);border:1px solid var(--border);border-radius:22px;width:420px;max-width:calc(100vw - 32px);overflow:hidden;transform:translateY(28px) scale(.93);opacity:0;transition:.22s cubic-bezier(.22,1,.36,1);box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.modal-overlay.open .modal-box{transform:none;opacity:1}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 14px;border-bottom:1px solid var(--border)}
+.modal-header h2{font-size:15px;font-weight:800}
+.modal-close{background:var(--surface2);border:none;border-radius:8px;width:28px;height:28px;font-size:16px;cursor:pointer;color:var(--fg2);display:flex;align-items:center;justify-content:center;transition:.12s}
+.modal-close:hover{color:var(--fg)}
+.modal-close:active{transform:scale(.88)}
+.modal-body{padding:20px}
+.set-ava-row{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.set-ava{width:64px;height:64px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,#4f6ef7,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;color:#fff;overflow:hidden;cursor:pointer;position:relative;transition:.15s}
+.set-ava img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.set-ava::after{content:'📷';position:absolute;inset:0;background:rgba(0,0,0,.4);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;opacity:0;transition:.15s}
+.set-ava:hover::after{opacity:1}
+.set-ava-info{font-size:12px;color:var(--fg2);line-height:1.7}
+.set-fld{margin-bottom:14px}
+.set-lbl{font-size:10px;font-weight:800;color:var(--fg3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px}
+.set-inp{width:100%;background:var(--surface2);border:1.5px solid var(--border);border-radius:11px;padding:10px 13px;font-size:13px;color:var(--fg);outline:none;transition:.15s}
+.set-inp:focus{border-color:var(--accent)}
+.set-divider{height:1px;background:var(--border);margin:16px 0}
+.set-btn{width:100%;border:none;border-radius:12px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;transition:.15s;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:8px}
+.set-btn:active{transform:scale(.96)}
+.set-btn-primary{background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff}
+.set-btn-primary:hover{filter:brightness(1.08)}
+.set-btn-ghost{background:var(--surface2);color:var(--fg2);border:1.5px solid var(--border)}
+.set-btn-ghost:hover{color:var(--fg)}
+.set-btn-danger{background:rgba(239,68,68,.08);color:var(--red);border:1.5px solid rgba(239,68,68,.18)}
+.set-btn-danger:hover{background:rgba(239,68,68,.15)}
+.set-saved{font-size:11px;color:var(--green);text-align:center;height:16px;margin-top:4px;opacity:0;transition:.3s}
+.set-saved.show{opacity:1}
+.tb-theme-btn{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:5px 8px;cursor:pointer;font-size:15px;line-height:1;transition:.15s}
+.tb-theme-btn:hover{border-color:var(--accent)}
+.tb-theme-btn:active{transform:scale(.88)}
+
+/* ── STAT TILES ──────────────────────── */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+.stat-tile{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px;box-shadow:var(--shadow)}
+.stat-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:10px}
+.stat-val{font-size:26px;font-weight:800;line-height:1;margin-bottom:3px}
+.stat-label{font-size:11px;color:var(--fg2);font-weight:500}
+
+/* ── HOME HERO ───────────────────────── */
+.live-hero{background:linear-gradient(135deg,#4f6ef7 0%,#8b5cf6 100%);border-radius:20px;padding:20px 22px;margin-bottom:18px;cursor:pointer;position:relative;overflow:hidden;transition:.15s}
+.live-hero:hover{filter:brightness(1.04)}
+.live-hero:active{transform:scale(.98)}
+.live-hero::before{content:'';position:absolute;right:-30px;top:-30px;width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,.08);pointer-events:none}
+.live-pill{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.2);color:#fff;font-size:11px;font-weight:700;padding:5px 12px;border-radius:99px;margin-top:12px;backdrop-filter:blur(4px)}
+
+/* ── RAIL ────────────────────────────── */
+.rail-hd{font-size:11px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--fg3);margin-bottom:10px}
+.streak-card{background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(239,68,68,.06));border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:14px;display:flex;align-items:center;gap:12px}
+.streak-val{font-size:30px;font-weight:800;color:var(--gold);line-height:1}
+.upcoming-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)}
+.upcoming-item:last-child{border-bottom:none}
+.upc-date{width:38px;height:38px;background:var(--surface2);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;font-size:9px;font-weight:700;color:var(--fg2);line-height:1.1}
+.upc-date .day{font-size:16px;font-weight:800;color:var(--fg);display:block}
+.upc-title{font-size:12px;font-weight:600;line-height:1.3;margin-bottom:2px}
+.upc-time{font-size:10px;color:var(--fg2)}
+
+@media(max-width:1000px){.right-rail{display:none}.module-grid,.mat-grid{grid-template-columns:1fr 1fr}.game-apple-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:680px){.sidebar{width:54px;min-width:54px}.logo-text,.logo-sub,.nav-pill span:not(.nav-icon),.nav-badge,.sidebar-level,.user-name,.user-sub,.nav-section{display:none}.nav-pill{justify-content:center;padding:10px 0;margin:1px 8px}.sidebar-footer{padding:8px}.user-chip{justify-content:center}.module-grid,.mat-grid{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}.game-apple-grid{grid-template-columns:repeat(4,1fr)}.game-app-sq{width:54px;height:54px;font-size:26px}}
+
+/* ── LOGIN SCREEN ─────────────────────── */
+#login-screen{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:20px;transition:opacity .3s}
+#login-screen.hiding{opacity:0;pointer-events:none}
+.login-box{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:40px 36px;max-width:390px;width:100%;box-shadow:var(--shadow-md);animation:fadeUp .4s cubic-bezier(.22,1,.36,1)}
+.login-logo{width:54px;height:54px;border-radius:16px;background:linear-gradient(135deg,#4f6ef7,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 18px;box-shadow:0 4px 20px rgba(79,110,247,.3)}
+.login-brand{font-size:11px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent);text-align:center;margin-bottom:6px}
+.login-title{font-size:22px;font-weight:800;text-align:center;margin-bottom:4px}
+.login-sub{font-size:13px;color:var(--fg2);text-align:center;margin-bottom:28px}
+.login-label{font-size:11px;font-weight:700;color:var(--fg2);margin-bottom:5px;display:block}
+.login-wrap{margin-bottom:14px}
+.login-field{background:var(--surface2);border:1.5px solid var(--border);border-radius:12px;padding:12px 14px;width:100%;font-size:14px;color:var(--fg);outline:none;transition:.15s;display:block}
+.login-field:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,110,247,.12)}
+.login-btn{width:100%;background:var(--accent);color:#fff;border:none;border-radius:12px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;transition:.15s;margin-top:6px;letter-spacing:.3px}
+.login-btn:hover{filter:brightness(1.08)}
+.login-btn:active{transform:scale(.98)}
+.login-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.login-err{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:var(--red);border-radius:10px;padding:10px 12px;font-size:12px;font-weight:600;margin-bottom:12px;display:none;animation:fadeUp .2s}
+.login-err.show{display:block}
+.login-footer{text-align:center;font-size:11px;color:var(--fg3);margin-top:20px}
+</style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">🎓</div>
+    <div class="login-brand">Método Inteligente</div>
+    <div class="login-title">Bem-vindo/a de volta</div>
+    <div class="login-sub">Acesse sua área de membro</div>
+    <div id="login-err" class="login-err"></div>
+    <div class="login-wrap">
+      <label class="login-label" for="login-email">E-mail</label>
+      <input class="login-field" id="login-email" type="email" placeholder="seu@email.com" autocomplete="email">
+    </div>
+    <div class="login-wrap">
+      <label class="login-label" for="login-pass">Senha</label>
+      <input class="login-field" id="login-pass" type="password" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <button class="login-btn" id="login-submit" onclick="doLogin()">Entrar</button>
+    <div class="login-footer">Problemas com acesso? Fale com o suporte 💬</div>
+    <a href="./" style="display:block;text-align:center;margin-top:14px;font-size:12px;font-weight:700;color:var(--accent);text-decoration:none">← Voltar ao Hub</a>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-badge">P</div>
+    <div><div class="logo-text">Plataforma Inteligente</div><div class="logo-sub">Método Inteligente</div></div>
+  </div>
+  <div class="sidebar-nav">
+    <div class="nav-section">Menu</div>
+    <div class="nav-pill active" onclick="goTo('home',this)"><span class="nav-icon">🏠</span><span>Início</span></div>
+    <div class="nav-pill" onclick="goTo('maratona',this)"><span class="nav-icon">🏃</span><span>Maratona de Hoje</span><span class="nav-badge">Novo</span></div>
+    <div class="nav-pill" onclick="goTo('lives',this)"><span class="nav-icon">📺</span><span>Lives</span></div>
+    <div class="nav-pill" onclick="goTo('modulos',this)"><span class="nav-icon">📚</span><span>Módulos</span></div>
+    <div class="nav-pill" onclick="goTo('jogos',this)"><span class="nav-icon">🎮</span><span>Jogos</span></div>
+    <div class="nav-pill" onclick="goTo('materiais',this)"><span class="nav-icon">📦</span><span>Materiais</span></div>
+    <div class="nav-section">Perfil</div>
+    <div class="nav-pill" onclick="goTo('bussola',this)"><span class="nav-icon">🧭</span><span>Bússola CEFR</span></div>
+    <div class="nav-pill" onclick="goTo('prisma',this)"><span class="nav-icon">🔷</span><span>Prisma de Talentos</span></div>
+    <div class="nav-pill" onclick="openSettings()"><span class="nav-icon">⚙️</span><span>Configurações</span></div>
+    <a class="nav-pill" href="./" style="text-decoration:none"><span class="nav-icon">↩️</span><span>Voltar ao Hub</span></a>
+  </div>
+  <div class="sidebar-level">
+    <div class="level-lbl" style="font-size:9px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--fg3);margin-bottom:7px">Seu Perfil</div>
+    <div class="level-row"><span class="level-tag">B1</span><span class="level-lbl">Auditivo-Musical</span></div>
+  </div>
+  <div class="sidebar-footer">
+    <div class="user-chip" onclick="openSettings()">
+      <div class="user-ava" id="sidebar-ava">A</div>
+      <div style="flex:1;min-width:0"><div class="user-name" id="sidebar-name">Ana Lima</div><div class="user-sub">Membro ativo</div></div>
+      <span style="font-size:13px;color:var(--fg3)">⚙️</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <span class="topbar-title" id="topbar-title">Início</span>
+    <button class="tb-theme-btn" id="theme-toggle" onclick="toggleTheme()" title="Tema">☀️</button>
+    <button class="tb-btn" style="position:relative">🔔<span class="notif-dot"></span></button>
+  </div>
+  <div class="content-wrap">
+    <div class="content">
+
+      <!-- HOME -->
+      <div class="pane active pane-enter stagger" id="pane-home">
+        <div style="font-size:21px;font-weight:800;margin-bottom:4px">Bom dia, Ana! ☀️</div>
+        <div style="font-size:13px;color:var(--fg2);margin-bottom:20px">Quinta-feira, 5 de novembro · Sequência de <strong style="color:var(--gold)">7 dias 🔥</strong></div>
+        <div class="live-hero" onclick="goTo('lives',document.querySelectorAll('.nav-pill')[2])">
+          <div style="font-size:10px;font-weight:800;letter-spacing:1.4px;color:rgba(255,255,255,.7);margin-bottom:4px">📺 PRÓXIMAS LIVES</div>
+          <div style="font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">Interação A1/A2 · hoje às 18h30</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.7)">Conversação B1/B2 · hoje às 19h30 · Meet</div>
+          <div class="live-pill">Ver todas as lives →</div>
+        </div>
+        <div class="sec-hd">Seus números</div>
+        <div class="grid-2">
+          <div class="stat-tile"><div class="stat-icon" style="background:rgba(245,158,11,.12)">🔥</div><div class="stat-val" style="color:var(--gold)">7</div><div class="stat-label">Dias em sequência</div></div>
+          <div class="stat-tile"><div class="stat-icon" style="background:rgba(79,110,247,.1)">📖</div><div class="stat-val" style="color:var(--accent)">23</div><div class="stat-label">Aulas concluídas</div></div>
+        </div>
+        <div class="sec-hd">Continue de onde parou <span class="sec-link" onclick="goTo('modulos',document.querySelectorAll('.nav-pill')[3])">Ver módulos →</span></div>
+        <div class="module-grid">
+          <div class="module-card"><div class="mod-thumb"><div class="mod-thumb-lock">🔒</div></div><div class="mod-body"><div class="mod-name">Conversação A1–A2</div><div class="mod-sub">Módulo 6</div><div class="mod-lock-tag">EM BREVE</div></div></div>
+          <div class="module-card"><div class="mod-thumb"><div class="mod-thumb-lock">🔒</div></div><div class="mod-body"><div class="mod-name">Gramática A1</div><div class="mod-sub">Módulo 4</div><div class="mod-lock-tag">EM BREVE</div></div></div>
+          <div class="module-card"><div class="mod-thumb"><div class="mod-thumb-lock">🔒</div></div><div class="mod-body"><div class="mod-name">Inglês pela Música</div><div class="mod-sub">Módulo 11</div><div class="mod-lock-tag">EM BREVE</div></div></div>
+        </div>
+      </div>
+
+      <!-- MARATONA -->
+      <div class="pane" id="pane-maratona">
+        <div style="font-size:21px;font-weight:800;margin-bottom:4px">Maratona de Hoje</div>
+        <div style="font-size:13px;color:var(--fg2);margin-bottom:18px">Sessão personalizada B1 · Escolha seu contexto</div>
+        <div class="mar-hero">
+          <div style="font-size:10px;font-weight:800;letter-spacing:1.4px;color:rgba(255,255,255,.7);margin-bottom:3px">PLANO DO DIA</div>
+          <div style="font-size:16px;font-weight:800;color:#fff;margin-bottom:2px">Onde você está agora?</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.7)">Escolha e receba tarefas personalizadas</div>
+        </div>
+        <div class="ctx-grid stagger">
+          <div class="ctx-chip active" onclick="selCtx(this)"><span class="ce">🏠</span>Em Casa</div>
+          <div class="ctx-chip" onclick="selCtx(this)"><span class="ce">🚌</span>No Transporte</div>
+          <div class="ctx-chip" onclick="selCtx(this)"><span class="ce">💼</span>No Trabalho</div>
+          <div class="ctx-chip" onclick="selCtx(this)"><span class="ce">🏋️</span>Na Academia</div>
+        </div>
+        <div class="sec-hd" id="mar-ctx-title">Tarefas de hoje · Em Casa</div>
+        <div id="mar-tasks-list"></div>
+      </div>
+
+      <!-- LIVES -->
+      <div class="pane" id="pane-lives">
+        <div style="font-size:21px;font-weight:800;margin-bottom:4px">Lives</div>
+        <div style="font-size:13px;color:var(--fg2);margin-bottom:20px">Aulas ao vivo com Gediel — clique para entrar quando estiver no ar</div>
+        <div id="live-cards-container" class="stagger"></div>
+      </div>
+
+      <!-- MÓDULOS -->
+      <div class="pane" id="pane-modulos">
+        <div style="font-size:21px;font-weight:800;margin-bottom:4px">Módulos</div>
+        <div style="font-size:13px;color:var(--fg2);margin-bottom:18px">Conteúdo em gravação — em breve disponível</div>
+        <div class="module-grid stagger" id="modules-grid"></div>
+      </div>
+
+      <!-- JOGOS -->
+      <div class="pane" id="pane-jogos">
+        <div style="font-size:21px;font-weight:800;margin-bottom:4px">Jogos</div>
+        <div style="font-size:13px;color:var(--fg2);margin-bottom:18px">Toque para ver as instruções e configurar</div>
+        <div class="game-filters" id="game-filters">
+          <button class="gf-btn active" onclick="filterGames('all',this)">Todos</button>
+          <button class="gf-btn" onclick="filterGames('vocab',this)">Vocabulário</button>
+          <button class="gf-btn" onclick="filterGames('grammar',this)">Gramática</button>
+          <button class="gf-btn" onclick="filterGames('listening',this)">Listening</button>
+          <button class="gf-btn" onclick="filterGames('pronunciation',this)">Pronúncia</button>
+          <button class="gf-btn" onclick="filterGames('a1a2',this)">A1–A2</button>
+          <button class="gf-btn" onclick="filterGames('b1b2',this)">B1–B2</button>
+        </div>
+        <div class="game-apple-grid stagger" id="game-grid"></div>
+      </div>
+
+      <!-- MATERIAIS -->
+      <div class="pane" id="pane-materiais">
+        <div style="font-size:21px;font-weight:800;margin-bottom:4px">Materiais</div>
+        <div style="font-size:13px;color:var(--fg2);margin-bottom:18px">Recursos, ebooks, prompts e extras</div>
+        <div class="mat-tabs">
+          <button class="mat-tab active" onclick="matTab('todos',this)">Todos</button>
+          <button class="mat-tab" onclick="matTab('gratis',this)">Gratuitos</button>
+          <button class="mat-tab" onclick="matTab('incluido',this)">No plano</button>
+          <button class="mat-tab" onclick="matTab('pago',this)">Outros produtos</button>
+        </div>
+        <div class="mat-grid stagger" id="mat-grid"></div>
+      </div>
+
+      <!-- BUSSOLA -->
+      <div class="pane" id="pane-bussola">
+        <div style="font-size:21px;font-weight:800;margin-bottom:16px">Bússola CEFR</div>
+        <div class="intel-banner stagger">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+            <div style="width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#4f6ef7,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:#fff;flex-shrink:0">B1</div>
+            <div>
+              <div style="font-size:16px;font-weight:800">Nível Intermediário — B1</div>
+              <div style="font-size:12px;color:var(--fg2);margin-top:2px">Teste realizado em outubro de 2026 · 28/40 pontos</div>
+            </div>
+          </div>
+          <div style="font-size:12px;color:var(--fg2);line-height:1.7;margin-bottom:14px">Você já consegue se comunicar em situações cotidianas e do trabalho com boa fluência. Compreende os pontos principais de textos em inglês padrão e consegue produzir textos simples sobre temas que lhe são familiares.</div>
+          <div class="intel-score-row">
+            <div class="intel-score-tile"><div class="intel-score-val">82%</div><div class="intel-score-lbl">Listening</div></div>
+            <div class="intel-score-tile"><div class="intel-score-val">70%</div><div class="intel-score-lbl">Reading</div></div>
+            <div class="intel-score-tile"><div class="intel-score-val">63%</div><div class="intel-score-lbl">Grammar</div></div>
+          </div>
+        </div>
+        <div class="sec-hd">Progresso por habilidade</div>
+        <div class="card">
+          <div class="intel-bar-row"><div class="intel-bar-lbl"><span>Listening</span><span style="color:var(--accent)">B1+</span></div><div class="intel-bar"><div class="intel-bar-fill" style="width:82%"></div></div></div>
+          <div class="intel-bar-row" style="margin-top:10px"><div class="intel-bar-lbl"><span>Leitura & Vocabulário</span><span style="color:var(--accent)">B1</span></div><div class="intel-bar"><div class="intel-bar-fill" style="width:70%"></div></div></div>
+          <div class="intel-bar-row" style="margin-top:10px"><div class="intel-bar-lbl"><span>Gramática</span><span style="color:var(--gold)">A2+</span></div><div class="intel-bar"><div class="intel-bar-fill" style="width:63%"></div></div></div>
+          <div class="intel-bar-row" style="margin-top:10px"><div class="intel-bar-lbl"><span>Escrita</span><span style="color:var(--gold)">A2</span></div><div class="intel-bar"><div class="intel-bar-fill" style="width:50%"></div></div></div>
+          <div class="intel-bar-row" style="margin-top:10px"><div class="intel-bar-lbl"><span>Pronúncia</span><span style="color:var(--gold)">A2+</span></div><div class="intel-bar"><div class="intel-bar-fill" style="width:58%"></div></div></div>
+        </div>
+        <div style="margin-top:16px;text-align:center"><button class="set-btn set-btn-primary" style="max-width:220px;margin:0 auto">Refazer o teste →</button></div>
+      </div>
+
+      <!-- PRISMA -->
+      <div class="pane" id="pane-prisma">
+        <div style="font-size:21px;font-weight:800;margin-bottom:16px">Prisma de Talentos</div>
+        <div class="intel-banner stagger">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+            <div style="width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#8b5cf6,#ec4899);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0">🎵</div>
+            <div>
+              <div style="font-size:16px;font-weight:800">Inteligência Auditivo-Musical</div>
+              <div style="font-size:12px;color:var(--fg2);margin-top:2px">Sua inteligência dominante · Teoria de Howard Gardner</div>
+            </div>
+          </div>
+          <div style="font-size:12px;color:var(--fg2);line-height:1.7">Você aprende inglês de forma mais natural quando o conteúdo envolve <strong>ritmo, melodia e sons</strong>. Músicas, podcasts, shadowing e imitação de sotaque são seus maiores aliados. Você tem facilidade para perceber padrões sonoros, entonação e pronúncia — isso é uma vantagem enorme no inglês oral.</div>
+        </div>
+        <div class="sec-hd">Suas inteligências</div>
+        <div class="card">
+          <div class="intel-bar-row"><div class="intel-bar-lbl"><span>Auditivo-Musical</span><span style="color:var(--accent2)">Dominante</span></div><div class="intel-bar"><div class="intel-bar-fill" style="width:92%;background:linear-gradient(90deg,#8b5cf6,#ec4899)"></div></div></div>
+          <div class="intel-bar-row" style="margin-top:10px"><div class="intel-bar-lbl"><span>Interpessoal</span><span style="color:var(--fg2)">75%</span></div><div class="intel-bar"><div class="intel-bar-fill" style="width:75%"></div></div></div>
+          <div class="intel-bar-row" style="margin-top:10px"><div class="intel-bar-lbl"><span>Linguístico-Verbal</span><span style="color:var(--fg2)">68%</span></div><div class="intel-bar"><div class="intel-bar-fill" style="width:68%"></div></div></div>
+          <div class="intel-bar-row" style="margin-top:10px"><div class="intel-bar-lbl"><span>Visual-Espacial</span><span style="color:var(--fg2)">55%</span></div><div class="intel-bar"><div class="intel-bar-fill" style="width:55%"></div></div></div>
+          <div class="intel-bar-row" style="margin-top:10px"><div class="intel-bar-lbl"><span>Lógico-Matemático</span><span style="color:var(--fg2)">40%</span></div><div class="intel-bar"><div class="intel-bar-fill" style="width:40%"></div></div></div>
+        </div>
+        <div class="card" style="margin-top:14px">
+          <div style="font-size:12px;font-weight:800;margin-bottom:10px">Estratégias recomendadas para você</div>
+          <div style="font-size:12px;color:var(--fg2);line-height:1.8">• Estude com músicas — anote letras, cante, imite<br>• Priorize shadowing diário (mínimo 10 min)<br>• Use podcasts no transporte — sem legenda<br>• Grave sua voz falando em inglês e compare<br>• Aproveite o módulo <strong>Inglês pela Música</strong> como âncora</div>
+        </div>
+        <div style="margin-top:16px;text-align:center"><button class="set-btn set-btn-primary" style="max-width:220px;margin:0 auto">Refazer o Prisma →</button></div>
+      </div>
+
+    </div><!-- .content -->
+
+    <!-- RIGHT RAIL -->
+    <div class="right-rail">
+      <div>
+        <div class="rail-hd">Progresso</div>
+        <div class="streak-card" style="margin-bottom:12px">
+          <div class="streak-val">7🔥</div>
+          <div><div style="font-size:13px;font-weight:700;margin-bottom:2px">Dias seguidos</div><div style="font-size:11px;color:var(--fg2)">Continue até amanhã!</div></div>
+        </div>
+        <div class="card-sm">
+          <div style="display:flex;align-items:center;gap:12px">
+            <svg width="52" height="52" viewBox="0 0 52 52">
+              <circle cx="26" cy="26" r="22" fill="none" stroke="var(--border)" stroke-width="5"/>
+              <circle cx="26" cy="26" r="22" fill="none" stroke="url(#pg)" stroke-width="5" stroke-dasharray="138.2" stroke-dashoffset="48" stroke-linecap="round" transform="rotate(-90 26 26)"/>
+              <defs><linearGradient id="pg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#4f6ef7"/><stop offset="100%" stop-color="#8b5cf6"/></linearGradient></defs>
+              <text x="26" y="31" text-anchor="middle" font-size="11" font-weight="800" fill="var(--fg)" font-family="inherit">65%</text>
+            </svg>
+            <div><div style="font-size:13px;font-weight:700;margin-bottom:3px">Maratona de Hoje</div><div style="font-size:11px;color:var(--fg2)">3 de 4 tarefas feitas</div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="rail-hd">Próximas Lives</div>
+        <div class="upcoming-item"><div class="upc-date"><span class="day">6</span>NOV</div><div><div class="upc-title">Interação A1/A2</div><div class="upc-time">Quinta · 18h30</div></div></div>
+        <div class="upcoming-item"><div class="upc-date"><span class="day">6</span>NOV</div><div><div class="upc-title">Conversação B1/B2</div><div class="upc-time">Quinta · 19h30</div></div></div>
+        <div class="upcoming-item"><div class="upc-date"><span class="day">8</span>NOV</div><div><div class="upc-title">Devocional em Inglês</div><div class="upc-time">Sábado · 9h · YouTube</div></div></div>
+      </div>
+      <div>
+        <div class="rail-hd">Links Rápidos</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <a href="https://open.spotify.com" target="_blank" style="display:flex;align-items:center;gap:8px;background:rgba(30,215,96,.08);border:1px solid rgba(30,215,96,.18);border-radius:11px;padding:9px 12px;text-decoration:none;font-size:12px;font-weight:700;color:#059669;transition:.12s">Playlist New Beats</a>
+          <a href="https://www.youtube.com/@metodointeligente" target="_blank" style="display:flex;align-items:center;gap:8px;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:11px;padding:9px 12px;text-decoration:none;font-size:12px;font-weight:700;color:#dc2626;transition:.12s">Canal no YouTube</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast-global" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(12px);background:var(--accent);color:#fff;font-size:13px;font-weight:700;padding:10px 22px;border-radius:99px;z-index:999;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;box-shadow:0 4px 20px rgba(0,0,0,.18)"></div>
+
+<!-- GAME BOTTOM SHEET -->
+<div class="sheet-overlay" id="sheet-overlay" onclick="closeSheet(event)">
+  <div class="sheet-box" id="sheet-box">
+    <div class="sheet-handle"></div>
+    <div class="sheet-head">
+      <div class="sheet-head-icon" id="sh-icon"></div>
+      <div class="sheet-head-info">
+        <div class="sheet-head-title" id="sh-title"></div>
+        <div class="sheet-head-sub" id="sh-sub"></div>
+      </div>
+      <button class="sheet-close" onclick="closeSheet()">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div class="sheet-desc" id="sh-desc"></div>
+      <div class="sheet-instr">
+        <div class="sheet-instr-title">Como jogar</div>
+        <div class="sheet-instr-list" id="sh-instr"></div>
+      </div>
+      <div class="sheet-config-title">Configurar partida</div>
+      <div class="sheet-config-grid">
+        <div class="sheet-fld"><label>Nível</label>
+          <select class="sheet-inp" id="sh-level"><option>A1</option><option>A2</option><option selected>B1</option><option>B2</option></select></div>
+        <div class="sheet-fld"><label>Tempo por rodada</label>
+          <select class="sheet-inp" id="sh-time"><option>30 seg</option><option selected>60 seg</option><option>90 seg</option><option>Sem limite</option></select></div>
+        <div class="sheet-fld"><label>Nome do jogador</label>
+          <input class="sheet-inp" id="sh-player" type="text" placeholder="Ana Lima" value="Ana Lima"></div>
+        <div class="sheet-fld"><label>Nº de jogadores</label>
+          <select class="sheet-inp" id="sh-players"><option selected>1</option><option>2</option><option>3</option><option>4+</option></select></div>
+      </div>
+      <button class="sheet-play-btn" onclick="toast('Jogo em desenvolvimento! Em breve você vai jogar aqui 🎮','#4f6ef7');closeSheet()">▶ Jogar agora</button>
+    </div>
+  </div>
+</div>
+
+<!-- SETTINGS MODAL -->
+<input type="file" id="photo-input" accept="image/*" style="display:none">
+<div class="modal-overlay" id="settings-overlay">
+  <div class="modal-box">
+    <div class="modal-header"><h2>⚙️ Configurações</h2><button class="modal-close" onclick="closeSettings()">✕</button></div>
+    <div class="modal-body">
+      <div class="set-ava-row">
+        <div class="set-ava" id="set-ava-big" onclick="pickPhoto()">A</div>
+        <div class="set-ava-info">Clique na foto para trocar<br>JPG ou PNG · máx 5MB<br><span style="color:var(--accent);cursor:pointer;font-size:11px;font-weight:700" onclick="profile.photoUrl='';updateAva()">Remover foto</span></div>
+      </div>
+      <div class="set-fld"><div class="set-lbl">Nome</div><input class="set-inp" id="set-name" type="text" placeholder="Seu nome"></div>
+      <div class="set-fld"><div class="set-lbl">E-mail</div><input class="set-inp" id="set-email" type="email" readonly style="opacity:.5;cursor:not-allowed"></div>
+      <button class="set-btn set-btn-primary" onclick="saveProfile()">💾 Salvar alterações</button>
+      <div class="set-saved" id="set-saved">✅ Salvo!</div>
+      <div class="set-divider"></div>
+      <button class="set-btn set-btn-ghost" onclick="switchUser()">🔄 Trocar usuário</button>
+      <button class="set-btn set-btn-danger" onclick="logout()">🚪 Sair da conta</button>
+      <div id="logout-confirm" style="display:none;align-items:center;gap:8px;margin-top:4px;background:rgba(239,68,68,.08);border:1.5px solid rgba(239,68,68,.2);border-radius:12px;padding:10px 12px">
+        <span style="font-size:12px;color:var(--red);flex:1">Tem certeza?</span>
+        <button onclick="confirmLogout()" style="background:var(--red);color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer">Sair</button>
+        <button onclick="document.getElementById('logout-confirm').style.display='none'" style="background:var(--surface2);color:var(--fg2);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.0/dist/umd/supabase.min.js"></script>
+<script>
+// ═══════════════════════════ LIVES ═══════════════════════════
+var LIVES=[
+  {id:'a1a2',title:'Interação A1/A2',sub:'Nível iniciante · toda quinta-feira · 1h',icon:'💬',iconClass:'meet',day:4,startH:18,startM:30,endH:19,endM:30,link:'https://meet.google.com/ocs-zqws-kbt',type:'meet',startDate:new Date(2026,10,5)},
+  {id:'b1b2',title:'Conversação B1/B2',sub:'Nível intermediário · toda quinta-feira · 1h',icon:'🗣️',iconClass:'meet',day:4,startH:19,startM:30,endH:20,endM:30,link:'https://meet.google.com/zvj-jpgs-mpu',type:'meet',startDate:new Date(2026,10,5)},
+  {id:'series',title:'Inglês com Séries e Filmes',sub:'Toda terça-feira a partir de 17/11 · 1h',icon:'🎬',iconClass:'meet',day:2,startH:19,startM:0,endH:20,endM:0,link:'https://meet.google.com/zpq-npqi-swq',type:'meet',startDate:new Date(2026,10,17)},
+  {id:'devocional',title:'Devocional em Inglês',sub:'Todo sábado · livre · transmissão YouTube',icon:'✝️',iconClass:'yt',day:6,startH:9,startM:0,endH:10,endM:0,link:'https://youtube.com/live/QmDQciTioJI?feature=share',type:'youtube',startDate:new Date(2026,10,8)}
+];
+function nextOccurrence(live){
+  var now=new Date(),d=new Date(now);
+  var daysAhead=(live.day-d.getDay()+7)%7;
+  if(daysAhead===0){var endToday=new Date(d);endToday.setHours(live.endH,live.endM,0,0);if(now>endToday)daysAhead=7;}
+  d.setDate(d.getDate()+daysAhead);d.setHours(live.startH,live.startM,0,0);
+  if(live.startDate&&d<live.startDate){d=new Date(live.startDate);while(d.getDay()!==live.day)d.setDate(d.getDate()+1);d.setHours(live.startH,live.startM,0,0);}
+  return d;
+}
+function isLiveNow(live){
+  var now=new Date();if(now.getDay()!==live.day)return false;
+  var s=new Date(now);s.setHours(live.startH,live.startM,0,0);
+  var e=new Date(now);e.setHours(live.endH,live.endM,0,0);
+  if(live.startDate&&now<live.startDate)return false;
+  return now>=s&&now<=e;
+}
+function fmtCountdown(ms){
+  if(ms<=0)return 'Agora!';
+  var s=Math.floor(ms/1000),m=Math.floor(s/60),h=Math.floor(m/60),dd=Math.floor(h/24);
+  h=h%24;m=m%60;
+  if(dd>0)return dd+'d '+h+'h '+m+'min';if(h>0)return h+'h '+m+'min';return m+'min';
+}
+function calLink(live,nextDate){
+  var fmt=function(d){return d.toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';};
+  var end=new Date(nextDate);end.setHours(live.endH,live.endM,0,0);
+  var rrule=live.day===4?'RRULE:FREQ=WEEKLY;BYDAY=TH':live.day===2?'RRULE:FREQ=WEEKLY;BYDAY=TU':live.day===6?'RRULE:FREQ=WEEKLY;BYDAY=SA':'';
+  var p=['action=TEMPLATE','text='+encodeURIComponent(live.title+' – Gediel'),'dates='+fmt(nextDate)+'/'+fmt(end),'details='+encodeURIComponent('Link: '+live.link),'location='+encodeURIComponent(live.link)];
+  if(rrule)p.push('recur='+encodeURIComponent(rrule));
+  return 'https://calendar.google.com/calendar/render?'+p.join('&');
+}
+function dayLabel(d){var days=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],m=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];return days[d.getDay()]+', '+d.getDate()+' de '+m[d.getMonth()];}
+function renderLives(){
+  var c=document.getElementById('live-cards-container');c.innerHTML='';
+  LIVES.forEach(function(live){
+    var liveNow=isLiveNow(live),next=nextOccurrence(live),ms=next-new Date();
+    var el=document.createElement('div');el.className='live-card'+(liveNow?' is-live':'');
+    var statusHtml=liveNow
+      ?'<span class="live-status-live"><span class="live-dot"></span> AO VIVO AGORA</span>'
+      :'<span class="live-status-next">Falta '+fmtCountdown(ms)+' · '+dayLabel(next)+' às '+String(live.startH).padStart(2,'0')+'h'+String(live.startM).padStart(2,'0')+'</span>';
+    var btnHtml=liveNow
+      ?'<a href="'+live.link+'" target="_blank" class="live-btn live-btn-on">'+(live.type==='youtube'?'▶ Assistir no YouTube':'Entrar no Meet')+'</a>'
+      :'<button class="live-btn live-btn-off" disabled>'+(live.type==='youtube'?'▶ YouTube — indisponível':'Meet — indisponível')+'</button>';
+    el.innerHTML='<div class="live-top"><div class="live-icon '+live.iconClass+'">'+live.icon+'</div><div class="live-info"><div class="live-title">'+live.title+'</div><div class="live-sub">'+live.sub+'</div>'+statusHtml+'</div></div><div class="live-actions">'+btnHtml+'<a href="'+calLink(live,next)+'" target="_blank" class="live-btn-remind">📅 Lembrar-me</a></div>';
+    c.appendChild(el);
+  });
+}
+renderLives();setInterval(renderLives,30000);
+
+// ═══════════════════════════ MÓDULOS ═══════════════════════════
+var MODULES=['Orientação','Diagnóstico & Personalização','Sons & Pronúncia','Vocabulário Essencial','Gramática A1','Gramática A2–B1','Conversação A1–A2','Conversação B1','Listening & Compreensão','Phrasal Verbs','Idioms & Expressões','Inglês pela Música','Inglês por Séries','Business English','Escrita em Inglês'];
+var MODSUB=['3 aulas','3 aulas','8 aulas · A1–B1','8 aulas · A1–A2','8 aulas · A1','8 aulas · A2–B1','5 aulas','4 aulas · B1','5 aulas · A2–B1','6 aulas · B1','5 aulas · B1–B2','4 aulas · Todos','4 aulas · A2–B2','5 aulas · B1–B2','3 aulas · A2–B2'];
+(function(){
+  var g=document.getElementById('modules-grid');g.innerHTML='';
+  MODULES.forEach(function(name,i){g.innerHTML+='<div class="module-card"><div class="mod-thumb"><div class="mod-thumb-lock">🔒</div></div><div class="mod-body"><div class="mod-name">'+name+'</div><div class="mod-sub">'+MODSUB[i]+'</div><div class="mod-lock-tag">EM BREVE</div></div></div>';});
+})();
+
+// ═══════════════════════════ JOGOS — APPLE ICONS ═══════════════════════════
+var GAMES=[
+  {name:'Flashcards',emoji:'🃏',bg:'linear-gradient(145deg,#4f6ef7,#2d4fc8)',tags:['vocab','a1a2','b1b2'],
+    sub:'Vocabulário · A1–B2',
+    desc:'Revise palavras novas com cartões de memória. Veja o inglês, adivinhe o significado — ou o contrário. Perfeito para fixar vocabulário do dia a dia.',
+    instr:'① Uma palavra ou frase aparece na tela\n② Pense na tradução antes de virar\n③ Vire o card e confira sua resposta\n④ Marque "Acertei" ou "Errei"\n⑤ Erros voltam ao baralho automaticamente',
+  },
+  {name:'Quiz Phrasal',emoji:'🧩',bg:'linear-gradient(145deg,#10b981,#059669)',tags:['grammar','b1b2'],
+    sub:'Phrasal Verbs · B1–B2',
+    desc:'Teste seu domínio dos verbos frasais mais usados em inglês real — conversas, séries e textos. Não é decoreba: é contexto!',
+    instr:'① Leia a frase com o verbo frasais\n② Escolha o significado correto entre 4 opções\n③ Receba feedback imediato\n④ Acumule pontos e suba de nível\n⑤ Erros viram exercícios extras no fim',
+  },
+  {name:'Escuta Rápida',emoji:'⏱️',bg:'linear-gradient(145deg,#f59e0b,#d97706)',tags:['listening','a1a2','b1b2'],
+    sub:'Listening · A2–B1',
+    desc:'Um trecho de áudio toca uma vez — você tem que capturar o máximo possível. Treina atenção auditiva e vocabulário em contexto real.',
+    instr:'① O áudio toca automaticamente (1x só)\n② Escreva o que você entendeu\n③ Compare com a transcrição completa\n④ Veja quais palavras você captou\n⑤ Repita para melhorar o percentual',
+  },
+  {name:'Monta Frase',emoji:'🔧',bg:'linear-gradient(145deg,#8b5cf6,#6d28d9)',tags:['grammar','a1a2'],
+    sub:'Gramática · A1–A2',
+    desc:'Palavras embaralhadas na tela — você arranja na ordem certa. Treina estrutura de frases e ordem das palavras em inglês de forma visual.',
+    instr:'① Veja as palavras embaralhadas\n② Toque nas palavras na ordem correta\n③ Envie quando terminar\n④ Veja o feedback de ordem e gramática\n⑤ Complete todas as frases do nível',
+  },
+  {name:'Caça Erros',emoji:'🔍',bg:'linear-gradient(145deg,#ef4444,#dc2626)',tags:['grammar','b1b2'],
+    sub:'Correção · B1',
+    desc:'Um texto com erros gramaticais sutis — você precisa encontrá-los todos. Desenvolve senso crítico e gramática ativa.',
+    instr:'① Leia o parágrafo com atenção\n② Toque em cada erro que encontrar\n③ Explique o erro (ou confira a dica)\n④ Corrija e reescreva a versão certa\n⑤ Pontuação extra por erros difíceis',
+  },
+  {name:'Imite o Som',emoji:'🎙️',bg:'linear-gradient(145deg,#06b6d4,#0891b2)',tags:['pronunciation','a1a2','b1b2'],
+    sub:'Pronúncia · A1–B1',
+    desc:'Ouça um nativo falar. Repita em voz alta. O app compara sua pronúncia e mostra onde ajustar. Shadowing gamificado!',
+    instr:'① Ouça o áudio do nativo (pode repetir)\n② Grave a sua pronúncia\n③ Veja a comparação de sons\n④ Receba sugestão de ajuste\n⑤ Tente de novo para subir a nota',
+  },
+  {name:'Letra & Música',emoji:'🎵',bg:'linear-gradient(145deg,#ec4899,#be185d)',tags:['listening','vocab','a1a2','b1b2'],
+    sub:'Música · Todos os níveis',
+    desc:'Preencha as lacunas na letra enquanto a música toca. Um dos métodos mais poderosos para treinar listening e vocabulário ao mesmo tempo.',
+    instr:'① A música começa a tocar\n② Preencha os espaços da letra\n③ Pause e volte quantas vezes quiser\n④ Envie para corrigir\n⑤ Veja a pontuação e letra completa',
+  },
+  {name:'Complete',emoji:'✏️',bg:'linear-gradient(145deg,#f97316,#ea580c)',tags:['vocab','a1a2'],
+    sub:'Vocabulário · A1',
+    desc:'Frases com lacunas — escolha a palavra correta de um banco de palavras. Fácil de começar, difícil de parar!',
+    instr:'① Leia a frase com a lacuna\n② Arraste ou clique na palavra certa\n③ Errou? Veja a explicação\n④ Complete todas as frases do nível\n⑤ Desbloqueie o próximo tema',
+  },
+  {name:'Sons do IPA',emoji:'🔊',bg:'linear-gradient(145deg,#6366f1,#4338ca)',tags:['pronunciation','b1b2'],
+    sub:'Sons · B1–B2',
+    desc:'Aprenda os fonemas do inglês com o Alfabeto Fonético Internacional. Treine pares mínimos e sons que o português não tem.',
+    instr:'① Ouça dois sons parecidos (pares mínimos)\n② Identifique qual som foi pronunciado\n③ Pratique repetindo em voz alta\n④ Acumule pontos por acertos rápidos\n⑤ Desbloqueie sons mais difíceis',
+  }
+];
+
+var activeFilter='all';
+function filterGames(tag,btn){
+  activeFilter=tag;
+  document.querySelectorAll('.gf-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  renderGames();
+}
+function renderGames(){
+  var g=document.getElementById('game-grid');g.innerHTML='';
+  var visible=GAMES.filter(function(gm){return activeFilter==='all'||gm.tags.includes(activeFilter);});
+  if(!visible.length){g.innerHTML='<div style="color:var(--fg2);font-size:13px;grid-column:1/-1;padding:20px 0;text-align:center">Nenhum jogo nesse filtro ainda.</div>';return;}
+  visible.forEach(function(gm,i){
+    var d=document.createElement('div');
+    d.className='game-app-icon';
+    d.style.animationDelay=(i*.04)+'s';
+    d.setAttribute('data-game',JSON.stringify({name:gm.name,emoji:gm.emoji,bg:gm.bg,sub:gm.sub,desc:gm.desc,instr:gm.instr}));
+    d.onclick=function(){openSheet(JSON.parse(this.getAttribute('data-game')));};
+    d.innerHTML='<div class="game-app-sq" style="background:'+gm.bg+'">'+gm.emoji+'</div><div class="game-app-name">'+gm.name+'</div>';
+    g.appendChild(d);
+  });
+  // re-trigger stagger
+  g.classList.remove('stagger');void g.offsetWidth;g.classList.add('stagger');
+}
+renderGames();
+
+// ═══════════════════════════ GAME SHEET ═══════════════════════════
+function openSheet(gm){
+  document.getElementById('sh-icon').style.background=gm.bg;
+  document.getElementById('sh-icon').textContent=gm.emoji;
+  document.getElementById('sh-title').textContent=gm.name;
+  document.getElementById('sh-sub').textContent=gm.sub;
+  document.getElementById('sh-desc').textContent=gm.desc;
+  document.getElementById('sh-instr').innerHTML=gm.instr.replace(/\n/g,'<br>');
+  document.getElementById('sheet-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeSheet(e){
+  if(e&&e.target!==document.getElementById('sheet-overlay'))return;
+  document.getElementById('sheet-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeSheet();closeSettings();}});
+
+// ═══════════════════════════ MATERIAIS ═══════════════════════════
+var MATERIALS=[
+  {name:'O Inglês de Cada Dia',desc:'Curso completo — Método Inteligente',icon:'📗',bg:'linear-gradient(135deg,#4f6ef7,#8b5cf6)',type:'incluido',btn:'Acessar'},
+  {name:'Prompts de IA para Inglês',desc:'50+ prompts para estudar com ChatGPT',icon:'🤖',bg:'linear-gradient(135deg,#10b981,#059669)',type:'gratis',btn:'Baixar PDF'},
+  {name:'Checklist de Pronúncia',desc:'Guia prático de sons do inglês',icon:'✅',bg:'linear-gradient(135deg,#f59e0b,#d97706)',type:'gratis',btn:'Baixar PDF'},
+  {name:'Ebook Phrasal Verbs',desc:'200 verbos frasais com contexto real',icon:'📘',bg:'linear-gradient(135deg,#8b5cf6,#ec4899)',type:'pago',btn:'Comprar'},
+  {name:'Ebook Business English',desc:'Inglês profissional do zero',icon:'💼',bg:'linear-gradient(135deg,#0ea5e9,#4f6ef7)',type:'pago',btn:'Comprar'},
+  {name:'Playlist New Beats',desc:'Músicas selecionadas para shadowing',icon:'🎵',bg:'linear-gradient(135deg,#1db954,#17a74a)',type:'gratis',btn:'Abrir Spotify'},
+  {name:'Guia de Estudo Personalizado',desc:'Roteiro semanal para o seu perfil',icon:'📋',bg:'linear-gradient(135deg,#f59e0b,#ef4444)',type:'incluido',btn:'Acessar'},
+  {name:'Ebook Gramática A1–B1',desc:'Gramática do inglês com exemplos',icon:'📙',bg:'linear-gradient(135deg,#4f6ef7,#06b6d4)',type:'pago',btn:'Comprar'}
+];
+var activeMatTab='todos';
+function matTab(tab,btn){activeMatTab=tab;document.querySelectorAll('.mat-tab').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');renderMat();}
+function renderMat(){
+  var g=document.getElementById('mat-grid');g.innerHTML='';
+  var visible=MATERIALS.filter(function(m){return activeMatTab==='todos'||m.type===activeMatTab;});
+  if(!visible.length){g.innerHTML='<div style="color:var(--fg2);font-size:13px;grid-column:1/-1;padding:20px 0;text-align:center">Nenhum material nessa categoria.</div>';return;}
+  visible.forEach(function(m){
+    var badge=m.type==='gratis'?'<span class="mat-badge-free">GRATUITO</span>':m.type==='incluido'?'<span class="mat-badge-incl">INCLUÍDO</span>':'<span class="mat-badge-paid">PRODUTO</span>';
+    var btnCls=m.type==='pago'?'mat-btn mat-btn-buy':'mat-btn mat-btn-dl';
+    g.innerHTML+='<div class="mat-card"><div class="mat-thumb" style="background:'+m.bg+'"><span style="font-size:28px">'+m.icon+'</span></div><div class="mat-body"><div class="mat-name">'+m.name+'</div><div class="mat-desc">'+m.desc+'</div>'+badge+'<button class="'+btnCls+'" onclick="toast(\'Em breve! 📦\')">'+m.btn+'</button></div></div>';
+  });
+  g.classList.remove('stagger');void g.offsetWidth;g.classList.add('stagger');
+}
+renderMat();
+
+// ═══════════════════════════ NAVEGAÇÃO com animação ═══════════════════════════
+var TITLES={home:'Início',maratona:'Maratona de Hoje',lives:'Lives',modulos:'Módulos',jogos:'Jogos',materiais:'Materiais',bussola:'Bússola CEFR',prisma:'Prisma de Talentos'};
+var currentPage='home';
+function goTo(page,el){
+  if(page===currentPage)return;
+  var prev=document.getElementById('pane-'+currentPage);
+  if(prev){
+    prev.classList.add('pane-leave');
+    setTimeout(function(){
+      prev.classList.remove('active','pane-enter','pane-leave');
+      showPane(page,el);
+    },150);
+  }else{showPane(page,el);}
+  document.querySelectorAll('.nav-pill').forEach(function(n){n.classList.remove('active');});
+  if(el)el.classList.add('active');
+  // Topbar title animate
+  var t=document.getElementById('topbar-title');
+  t.classList.add('changing');
+  setTimeout(function(){t.textContent=TITLES[page]||page;t.classList.remove('changing');},150);
+  currentPage=page;
+}
+function showPane(page,el){
+  var pane=document.getElementById('pane-'+page);
+  pane.classList.add('active','pane-enter');
+  pane.style.opacity='1';
+}
+var CTX_TASKS={
+  'Em Casa':[
+    {icon:'🎙️',title:'Ouvir 15 min de podcast em inglês',sub:'EnglishPod, 6 Minute English ou seu favorito'},
+    {icon:'📺',title:'Assistir 1 cena de série com legenda em inglês',sub:'Netflix, Disney+, YouTube — legenda EN, não PT'},
+    {icon:'🃏',title:'Revisar 10 flashcards de vocabulário',sub:'Repita em voz alta cada palavra e exemplo'},
+    {icon:'🎵',title:'Shadowing — 10 min com música',sub:'Escolha uma música, leia a letra e imite a pronúncia'},
+    {icon:'✍️',title:'Escrever 3 frases no diário em inglês',sub:'Sobre o seu dia, sentimentos ou o que aprendeu'},
+    {icon:'📖',title:'Ler 5 min da Bíblia em inglês',sub:'YouVersion — versão NIV, NLT ou ESV'}
+  ],
+  'No Transporte':[
+    {icon:'🎙️',title:'Ouvir podcast durante toda a viagem',sub:'Modo passivo — apenas ouça, absorva o ritmo'},
+    {icon:'🎵',title:'Escutar playlist em inglês e memorizar 1 expressão',sub:'Repita mentalmente a frase que mais chamou atenção'},
+    {icon:'🃏',title:'Revisar 5 flashcards no app',sub:'Rápido, prático — Anki ou o app do método'},
+    {icon:'🗣️',title:'Shadowing baixinho — repita o que ouvir',sub:'Em voz bem baixa ou mentalmente, imite o falante'},
+    {icon:'📱',title:'Assistir 1 vídeo curto em inglês (5 min)',sub:'YouTube: canal de inglês, notícia, TED-Ed'},
+    {icon:'🧠',title:'Ouvir aula gravada do seu nível B1',sub:'Hotmart — revise o conteúdo da última semana'}
+  ],
+  'No Trabalho':[
+    {icon:'📱',title:'Mudar o idioma do celular para inglês',sub:'Configurações → Idioma → English — deixe por 1 dia'},
+    {icon:'✉️',title:'Escrever 1 mensagem ou e-mail em inglês',sub:'Pode ser fictício — apenas escreva e revise'},
+    {icon:'🎵',title:'Ouvir música em inglês enquanto trabalha',sub:'Playlist instrumental ou com letra — exposição passiva'},
+    {icon:'🃏',title:'Revisar 5 flashcards no intervalo',sub:'Aproveite 3 minutinhos do café ou almoço'},
+    {icon:'💬',title:'Pensar no seu trabalho em inglês por 5 min',sub:'Nomeie objetos, ações e colegas em inglês mentalmente'},
+    {icon:'📺',title:'Assistir 1 vídeo de inglês no almoço (5 min)',sub:'YouTube: Business English, BBC Learning English'}
+  ],
+  'Na Academia':[
+    {icon:'🎙️',title:'Ouvir podcast durante todo o treino',sub:'Substitua a playlist — inglês no ouvido, corpo em ação'},
+    {icon:'🎵',title:'Playlist em inglês + memorizar 1 expressão',sub:'Entre séries, foque na letra de 1 música'},
+    {icon:'🃏',title:'Revisar flashcards entre séries de exercícios',sub:'30 segundos de descanso = 1 card revisado'},
+    {icon:'🗣️',title:'Shadowing mental — repita internamente',sub:'Imite o falante mentalmente enquanto treina'},
+    {icon:'🧠',title:'Ouvir aula gravada do nível B1',sub:'Escuta ativa: preste atenção no vocabulário novo'}
+  ]
+};
+var _ctxChecked={};
+function selCtx(el){
+  document.querySelectorAll('.ctx-chip').forEach(function(c){c.classList.remove('active');});
+  el.classList.add('active');
+  var label=el.textContent.trim();
+  document.getElementById('mar-ctx-title').textContent='Tarefas de hoje · '+label;
+  renderMarTasks(label);
+}
+function renderMarTasks(label){
+  var tasks=CTX_TASKS[label]||CTX_TASKS['Em Casa'];
+  var key=label;
+  if(!_ctxChecked[key])_ctxChecked[key]=[];
+  var html='';
+  tasks.forEach(function(t,i){
+    var chk=_ctxChecked[key][i];
+    html+='<div class="mar-task" style="animation:fadeUp .22s '+(i*.05)+'s cubic-bezier(.22,1,.36,1) both">'
+      +'<div class="mar-chk'+(chk?' chk':'')+ '" onclick="chkMarTask(this,\''+key+'\','+i+')">'+(chk?'✓':'')+'</div>'
+      +'<div><div class="mar-task-title">'+t.icon+' '+t.title+'</div>'
+      +'<div style="font-size:11px;color:var(--fg3);margin-top:2px">'+t.sub+'</div></div>'
+      +'</div>';
+  });
+  document.getElementById('mar-tasks-list').innerHTML=html;
+}
+function chkMarTask(el,key,i){
+  _ctxChecked[key]=_ctxChecked[key]||[];
+  _ctxChecked[key][i]=!_ctxChecked[key][i];
+  el.classList.toggle('chk');
+  el.textContent=el.classList.contains('chk')?'✓':'';
+}
+function chkTask(el){el.classList.toggle('chk');el.textContent=el.classList.contains('chk')?'✓':'';}
+// init maratona tasks
+(function(){renderMarTasks('Em Casa');})();
+
+// ═══════════════════════════ TEMA ═══════════════════════════
+var dark=false;
+function toggleTheme(){dark=!dark;document.documentElement.setAttribute('data-theme',dark?'dark':'light');document.getElementById('theme-toggle').textContent=dark?'🌙':'☀️';}
+
+// ═══════════════════════════ SETTINGS ═══════════════════════════
+var profile={name:'Ana Lima',email:'ana@email.com',photoUrl:''};
+function openSettings(){document.getElementById('set-name').value=profile.name;document.getElementById('set-email').value=profile.email;updateAva();document.getElementById('settings-overlay').classList.add('open');}
+function closeSettings(){document.getElementById('settings-overlay').classList.remove('open');}
+document.getElementById('settings-overlay').addEventListener('click',function(e){if(e.target===this)closeSettings();});
+function updateAva(){var b=document.getElementById('set-ava-big');if(profile.photoUrl){b.innerHTML='<img src="'+profile.photoUrl+'" alt="">';}else{b.textContent=(profile.name||'?')[0].toUpperCase();}}
+function pickPhoto(){document.getElementById('photo-input').click();}
+document.getElementById('photo-input').addEventListener('change',function(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(e){profile.photoUrl=e.target.result;updateAva();};r.readAsDataURL(f);});
+function saveProfile(){
+  var n=document.getElementById('set-name').value.trim();if(!n)return;
+  profile.name=n;
+  document.getElementById('sidebar-name').textContent=n;
+  var ava=document.getElementById('sidebar-ava');
+  if(profile.photoUrl){ava.innerHTML='<img src="'+profile.photoUrl+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';}else{ava.textContent=n[0].toUpperCase();}
+  toast('✅ Salvo com sucesso!','#10b981');
+  var s=document.getElementById('set-saved');s.classList.add('show');setTimeout(function(){s.classList.remove('show');},2000);
+}
+function toast(msg,color){
+  var t=document.getElementById('toast-global');t.textContent=msg;t.style.background=color||'var(--accent)';
+  t.style.opacity=1;t.style.transform='translateX(-50%) translateY(0)';
+  clearTimeout(t._tid);t._tid=setTimeout(function(){t.style.opacity=0;t.style.transform='translateX(-50%) translateY(12px)';},2200);
+}
+function logout(){var box=document.getElementById('logout-confirm');box.style.display=box.style.display==='flex'?'none':'flex';}
+async function confirmLogout(){
+  document.getElementById('logout-confirm').style.display='none';
+  closeSettings();
+  await _sb.auth.signOut();
+  toast('Até logo! 👋','#ef4444');
+  setTimeout(function(){showLogin();},800);
+}
+function switchUser(){logout();}
+
+// Topbar shadow on scroll
+document.querySelector('.content').addEventListener('scroll',function(){
+  document.querySelector('.topbar').style.boxShadow=this.scrollTop>4?'0 2px 16px rgba(0,0,0,.08)':'none';
+});
+
+// Initial pane opacity
+document.getElementById('pane-home').style.opacity='1';
+
+// ═══════════════════════════ SUPABASE AUTH ═══════════════════════════
+var _sb=supabase.createClient(
+  'https://jzdxcefnlwjgimymgsux.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp6ZHhjZWZubHdqZ2lteW1nc3V4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQyMTgzNjMsImV4cCI6MjEwOTc5NDM2M30.Ehq4MCc_0LhgF757ngpimBGzyh0O2o9xSb4Qkr4zybI'
+);
+
+function showLogin(){
+  var s=document.getElementById('login-screen');
+  s.style.display='flex';s.classList.remove('hiding');
+  document.getElementById('login-email').value='';
+  document.getElementById('login-pass').value='';
+  document.getElementById('login-err').classList.remove('show');
+  document.getElementById('login-submit').disabled=false;
+  document.getElementById('login-submit').textContent='Entrar';
+}
+function hideLogin(){
+  var s=document.getElementById('login-screen');
+  s.classList.add('hiding');
+  setTimeout(function(){s.style.display='none';s.classList.remove('hiding');},300);
+}
+
+function setUserUI(user){
+  var meta=user.user_metadata||{};
+  var name=meta.full_name||meta.name||user.email.split('@')[0];
+  profile.name=name;
+  profile.email=user.email;
+  document.getElementById('sidebar-name').textContent=name;
+  var ava=document.getElementById('sidebar-ava');
+  if(meta.avatar_url){ava.innerHTML='<img src="'+meta.avatar_url+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';}
+  else{ava.textContent=name[0].toUpperCase();}
+}
+
+async function doLogin(){
+  var email=document.getElementById('login-email').value.trim();
+  var pass=document.getElementById('login-pass').value;
+  var btn=document.getElementById('login-submit');
+  var err=document.getElementById('login-err');
+  if(!email||!pass){err.textContent='Preencha e-mail e senha.';err.classList.add('show');return;}
+  err.classList.remove('show');
+  btn.disabled=true;btn.textContent='Entrando...';
+  var res=await _sb.auth.signInWithPassword({email:email,password:pass});
+  if(res.error){
+    var msg=res.error.message;
+    if(msg.includes('Invalid login')||msg.includes('invalid'))msg='E-mail ou senha incorretos.';
+    else if(msg.includes('Email not confirmed'))msg='Confirme seu e-mail antes de entrar.';
+    err.textContent=msg;err.classList.add('show');
+    btn.disabled=false;btn.textContent='Entrar';
+    return;
+  }
+  setUserUI(res.data.user);
+  hideLogin();
+  toast('✅ Bem-vindo/a!','#10b981');
+}
+
+// Listener de mudança de sessão (ex: expirou)
+_sb.auth.onAuthStateChange(function(event,session){
+  if(event==='SIGNED_OUT'||(!session&&event!=='INITIAL_SESSION')){showLogin();}
+});
+
+// Init: verificar sessão salva no browser
+(async function(){
+  var res=await _sb.auth.getSession();
+  if(res.data&&res.data.session){
+    setUserUI(res.data.session.user);
+    hideLogin();
+  }
+  // sem sessão → login-screen já está visível por padrão
+})();
+</script>
+</body>
+</html>

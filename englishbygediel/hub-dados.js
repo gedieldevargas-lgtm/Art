@@ -80,7 +80,7 @@
         botaoAplicar: 'Aplicar pro programa', botaoComprar: (M.cta || {}).rotulo || 'Quero minha vaga' },
       secoes: { gratis: 'Materiais grátis', pagos: 'Pra ir mais fundo', botaoPagos: 'Programa →', membros: 'Dentro do programa', membrosSub: 'Só pra alunos',
         extras: 'Ecossistema', alunos: 'Alunos que destravaram', botaoAluno: 'Quero esse resultado' },
-      membros: { botaoTopo: 'Entrar', titulo: 'Área de membros', url: '',
+      membros: { botaoTopo: 'Entrar', titulo: 'Área de membros', url: 'membros.html',
         texto: 'Já é aluno ou comprou um material? Entre com o e-mail que você usou na compra pra acessar suas aulas, trilhas e materiais.',
         botao: 'Entrar na área de membros', semConta: 'Ainda não sou aluno', cardBotao: 'Já sou aluno, entrar' },
       cards,

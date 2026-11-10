@@ -51,7 +51,7 @@
         ['preco', 'Preço (à venda)'], ['link', 'Link do botão (landing, checkout, PDF…)', 'url'], ['botao', 'Texto do botão'],
         ['link2', 'Segundo link (opcional)', 'url'], ['botao2', 'Texto do segundo botão'], ['video', 'Vídeo do YouTube (link ou código)', 'video'],
         ['sinopse', 'Descrição (aparece ao tocar)', 'area'], ['meta', 'Etiquetas (separe por vírgula)'], ['modos', 'Aparece primeiro nos modos', 'modos']] },
-    { k: 'membros', t: 'Entrar (área de membros)', d: 'O botão Entrar no topo e a janela de login. Cole o link da sua área de membros (Cakto, plataforma etc.). Sem link, o botão abre seu WhatsApp.', campos: [
+    { k: 'membros', t: 'Entrar (área de membros)', d: 'O botão Entrar no topo e a janela de login. O padrão é a Plataforma Inteligente do próprio site (membros.html). Pra usar outra área de membros, cole o link dela.', campos: [
       ['url', 'Link da área de membros', 'url'], ['botaoTopo', 'Texto do botão no topo'], ['titulo', 'Título da janela'], ['texto', 'Texto da janela', 'area'],
       ['botao', 'Botão que abre a área de membros'], ['semConta', 'Botão pra quem ainda não é aluno'], ['cardBotao', 'Botão nos cards "dentro da mentoria"']] },
     { k: 'embutidos', t: 'Sites dentro dos modos', d: 'Um site inteiro que aparece logo abaixo do topo quando a pessoa liga um modo (ex.: a Central de Prompts no Modo Prompts). Use o código do modo (veja em Modos) e o link do site.', lista: true, titulo: 'titulo',
