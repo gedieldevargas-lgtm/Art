@@ -52,7 +52,7 @@
     return {
       tema: { fundo: '#0a1426', card: '#13233f', destaque: '#4a5a35', destaqueClaro: '#8fa66a', texto: '#ffffff', suave: '#a7b3c6', gradiente: 'img/gradiente-azul.webp' },
       entrada: { marca: 'englishbygediel', rotulo: 'Escolha o seu caminho', titulo: 'Qual modo você quer', palavra: 'ligar', tituloFim: 'hoje?',
-        dica: 'Toque num card ou arraste pra girar.', foto: 'img/modo-fala.webp', fundo: 'img/gradiente-azul.webp', botao: 'Ligar' },
+        dica: 'Toque num card ou arraste pra girar.', foto: 'img/gediel-centro.webp', fundo: 'img/gradiente-azul.webp', botao: 'Ligar' },
       modos: (C.modos || []).map(m => ({ id: m.id, nome: m.nome, img: m.img, marca: m.marca || '', texto: (C.textoModo || {})[m.id] || '',
         recorte: !!m.recorte, tamanho: m.recorte || 100, verde: !!m.verde, ativo: true })),
       topo: { nome: 'Gediel Vargas', verificado: true, cargo: 'Professor · Mentor · Inglês Inteligente',
@@ -122,16 +122,32 @@
       try { const r = JSON.parse(localStorage.getItem('ebg:hubrascunho')); if (r) return juntar(base, r); } catch (e) {}
     }
     if (!CFG.supabaseUrl || !CFG.supabaseAnonKey) return base;
+    // abre na hora com o último conteúdo salvo neste aparelho e atualiza por trás pra próxima visita
+    let guardado = null;
+    try { guardado = JSON.parse(localStorage.getItem('ebg:hubcache') || 'null'); } catch (e) {}
+    const buscar = buscarSalvo(CFG).then(d => { if (d) try { localStorage.setItem('ebg:hubcache', JSON.stringify(d)); } catch (e) {} return d; });
+    if (guardado) return juntar(base, guardado);
+    const d = await buscar;
+    return juntar(base, d);
+  }
+
+  async function buscarSalvo(CFG) {
     try {
       const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 3500);
       const r = await fetch(`${CFG.supabaseUrl.replace(/\/$/, '')}/rest/v1/site_config?id=eq.hub&select=dados`,
         { headers: { apikey: CFG.supabaseAnonKey, Authorization: `Bearer ${CFG.supabaseAnonKey}` }, signal: ctl.signal });
       clearTimeout(t);
-      if (!r.ok) return base;
+      if (!r.ok) return null;
       const linhas = await r.json();
-      return juntar(base, linhas && linhas[0] && linhas[0].dados);
-    } catch (e) { return base; }
+      return (linhas && linhas[0] && linhas[0].dados) || null;
+    } catch (e) { return null; }
   }
 
-  window.HUB_DADOS = { padrao, juntar, carregar };
+  // a foto retangular antiga do centro vira a versão recortada (PNG sem fundo)
+  async function carregarFinal(C, CFG) {
+    const H = await carregar(C, CFG);
+    if (H && H.entrada && /0af69522-7693-482b-9cbf-76ce704eab22/.test(H.entrada.foto || '')) H.entrada.foto = 'img/gediel-centro.webp';
+    return H;
+  }
+  window.HUB_DADOS = { padrao, juntar, carregar: carregarFinal };
 })();
