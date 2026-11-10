@@ -172,14 +172,14 @@ a{text-decoration:none}
 .entrada.sai{opacity:0;transform:scale(1.06);pointer-events:none}
 .ent-topo{width:100%;max-width:1120px;display:flex;justify-content:space-between;align-items:center;padding:18px 18px 0;color:#fff;font-weight:700;letter-spacing:-.3px}
 .ent-topo b{color:var(--cobre2)}
-.ent-titulo{text-align:center;margin-top:3vh;padding:0 16px}
+.ent-titulo{text-align:center;margin-top:3vh;padding:0 16px;position:relative;z-index:6}
 .ent-titulo small{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--dim)}
-.ent-titulo h1{font-size:clamp(32px,7vw,60px);line-height:1.02;margin-top:8px}
+.ent-titulo h1{font-size:clamp(42px,9.5vw,96px);line-height:.98;margin-top:8px;letter-spacing:-.02em}
 .ent-titulo h1 em{color:var(--cobre2)}
 .ent-titulo p{font-size:13px;margin-top:8px}
 .anel{position:relative;flex:1;width:100%;perspective:1100px;touch-action:pan-y;cursor:grab;user-select:none}
 .anel:active{cursor:grabbing}
-.gediel{position:absolute;left:50%;bottom:0;height:min(64vh,640px);transform:translateX(-50%);z-index:5;pointer-events:none;filter:drop-shadow(0 30px 40px rgba(0,0,0,.5))}
+.gediel{position:absolute;left:50%;bottom:0;height:min(68vh,760px);max-width:none;-webkit-mask-image:linear-gradient(to bottom,#000 82%,transparent);mask-image:linear-gradient(to bottom,#000 82%,transparent);transform:translateX(-50%);z-index:5;pointer-events:none;filter:drop-shadow(0 30px 40px rgba(0,0,0,.5))}
 .aura{position:absolute;left:50%;bottom:8%;width:min(80vw,620px);aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(143,166,106,.35),transparent 65%);filter:blur(10px)}
 .giro{position:absolute;left:50%;top:34%;width:0;height:0}
 .modo{clip-path:inset(0 round 18px);-webkit-mask-image:-webkit-radial-gradient(white,black);isolation:isolate;position:absolute;background-image:var(--grad)!important;background-size:cover!important;width:clamp(108px,26vw,170px);aspect-ratio:3/4;margin-left:calc(clamp(108px,26vw,170px)/-2);margin-top:calc(clamp(108px,26vw,170px)*-.66);border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#1b2d4d,#0e1b33);border:1px solid var(--linha);backface-visibility:hidden;box-shadow:0 20px 40px -18px #000;transition:box-shadow .3s,border-color .3s;text-align:left}
@@ -232,6 +232,9 @@ a{text-decoration:none}
 .embutido .cab{align-items:flex-end;gap:12px}
 #embAbrir{color:#0a1426!important;flex:0 0 auto;font-size:14px!important}
 @media (max-width:640px){.embutido .cab{flex-direction:column;align-items:flex-start}}
+/* enquanto o conteúdo salvo carrega: nada pisca com a versão antiga */
+body.carregando .entrada>*,body.carregando main,body.carregando .mara{opacity:0}
+.entrada>*,main,.mara{transition:opacity .45s ease}
 /* fichas sempre na frente de tudo (inclusive da abertura e da Maratona) */
 .fundo{z-index:48!important}.ficha{z-index:50!important}
 /* Maratona: destaque flutuante que pisca, com contagem regressiva */
@@ -296,7 +299,7 @@ body.entrando .mara{bottom:96px}
 .trilho{scroll-snap-type:none!important}
 </style>
 </head>
-<body>
+<body class="carregando"><script>setTimeout(function(){document.body.classList.remove("carregando")},4000)</script>
 <section class="entrada" id="entrada" aria-label="Escolha o seu modo">
   <div class="ent-topo"><span id="eMarca">english<b>by</b>gediel</span><button class="entrar-btn" type="button" data-login><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg><span class="entrarTxt">Entrar</span></button></div>
   <div class="ent-titulo">
@@ -927,6 +930,7 @@ body.entrando .mara{bottom:96px}
   let salvo = null; try { salvo = localStorage.getItem('ebg:hubmodo'); } catch (e) {}
   escolher((modos.find(m => m.id === salvo) || modos[0]).id);
   ang = alvo; posicionar();
+  requestAnimationFrame(() => document.body.classList.remove('carregando'));
   document.body.style.overflow = 'hidden'; document.body.classList.add('entrando');
   requestAnimationFrame(sozinho);
   addEventListener('resize', posicionar);
