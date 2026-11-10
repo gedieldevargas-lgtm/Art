@@ -232,6 +232,37 @@ a{text-decoration:none}
 .embutido .cab{align-items:flex-end;gap:12px}
 #embAbrir{color:#0a1426!important;flex:0 0 auto;font-size:14px!important}
 @media (max-width:640px){.embutido .cab{flex-direction:column;align-items:flex-start}}
+/* fichas sempre na frente de tudo (inclusive da abertura e da Maratona) */
+.fundo{z-index:48!important}.ficha{z-index:50!important}
+/* Maratona: destaque flutuante que pisca, com contagem regressiva */
+.mara{position:fixed;left:14px;bottom:16px;z-index:45;width:min(310px,calc(100% - 28px));display:flex;gap:12px;align-items:center;padding:10px 12px 10px 10px;border-radius:22px;text-align:left;
+  background:linear-gradient(135deg,rgba(43,24,14,.94),rgba(20,14,12,.94));border:1px solid rgba(214,150,90,.55);color:#fff;
+  box-shadow:0 18px 40px -12px rgba(0,0,0,.7),0 0 0 0 rgba(214,150,90,.55);animation:maraPulsa 1.8s ease-in-out infinite,maraFlutua 5s ease-in-out infinite;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);font-family:-apple-system,BlinkMacSystemFont,Inter,system-ui,sans-serif}
+@keyframes maraPulsa{0%,100%{box-shadow:0 18px 40px -12px rgba(0,0,0,.7),0 0 0 0 rgba(214,150,90,.55)}50%{box-shadow:0 18px 40px -12px rgba(0,0,0,.7),0 0 0 9px rgba(214,150,90,0)}}
+@keyframes maraFlutua{0%,100%{translate:0 0}50%{translate:0 -6px}}
+.mara img{width:62px;height:76px;border-radius:14px;object-fit:cover;flex:0 0 auto}
+.mara .m-txt{flex:1;min-width:0}
+.mara .m-rot{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#f3c08d}
+.mara .m-rot i{width:7px;height:7px;border-radius:50%;background:#ff6b4a;animation:maraPisca 1s steps(2,end) infinite}
+@keyframes maraPisca{50%{opacity:.15}}
+.mara .m-tit{display:block;font-family:'Advercase','Instrument Serif',serif;font-size:19px;line-height:1.05;margin:3px 0 4px}
+.mara .m-det{display:block;font-size:11px;color:#e9cdb3;line-height:1.3}
+.mara .m-conta{display:flex;gap:4px;margin-top:6px}
+.mara .m-conta b{min-width:34px;text-align:center;padding:4px 0 3px;border-radius:8px;background:rgba(214,150,90,.18);font:700 13px/1 -apple-system,Inter,sans-serif;font-variant-numeric:tabular-nums}
+.mara .m-conta b small{display:block;font-size:8px;font-weight:600;color:#e9cdb3;margin-top:2px;letter-spacing:.06em}
+.mara .m-x{position:absolute;top:-8px;right:-8px;width:26px;height:26px;border-radius:50%;background:#2b180e;border:1px solid rgba(214,150,90,.55);color:#fff;font-size:13px;display:grid;place-items:center}
+.mara.mini{width:auto;padding:8px 14px 8px 8px;gap:8px}
+.mara.mini img{width:32px;height:32px;border-radius:50%}
+.mara.mini .m-tit,.mara.mini .m-det,.mara.mini .m-x{display:none}
+.mara.mini .m-conta{margin:2px 0 0}.mara.mini .m-conta b{min-width:0;padding:0 2px;background:none;font-size:12px}.mara.mini .m-conta b small{display:inline;margin-left:1px}
+body.entrando .mara{bottom:96px}
+@media (max-width:520px){.mara:not(.mini){width:calc(100% - 28px)}}
+@media (prefers-reduced-motion:reduce){.mara,.mara .m-rot i{animation:none}}
+.ficha .mara-arte{width:100%;display:block}
+.ficha .mara-conta{display:flex;gap:8px;margin:12px 0}
+.ficha .mara-conta b{flex:1;text-align:center;padding:10px 0;border-radius:12px;background:rgba(214,150,90,.16);font:700 22px/1 -apple-system,Inter,sans-serif;color:#fff}
+.ficha .mara-conta b small{display:block;font-size:10px;color:#e9cdb3;margin-top:4px}
 /* entrar (área de membros) */
 .entrar-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 15px;border-radius:980px;background:rgba(255,255,255,.12);color:#fff;font:600 14px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text",Inter,system-ui,sans-serif;backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);transition:transform .18s,background .2s}
 .entrar-btn:hover{background:rgba(255,255,255,.2)}.entrar-btn:active{transform:scale(.96)}
@@ -613,6 +644,50 @@ a{text-decoration:none}
     document.body.classList.add('aberta'); document.body.style.overflow = 'hidden';
     $('#ficha .fechar').focus();
   }
+  /* MARATONA: cartão flutuante que pisca, com contagem regressiva; toque abre a ficha */
+  const MA = H.maratona || {};
+  const maFim = MA.fim ? new Date(MA.fim) : null;
+  const pad = n => String(n).padStart(2, '0');
+  function maResta() {
+    if (!maFim || isNaN(maFim)) return null;
+    const ms = maFim - Date.now(); if (ms <= 0) return 0;
+    const s = Math.floor(ms / 1000);
+    return { d: Math.floor(s / 86400), h: Math.floor(s % 86400 / 3600), m: Math.floor(s % 3600 / 60), s: s % 60 };
+  }
+  const maConta = r => r === null ? '' : r === 0 ? `<b style="min-width:0;padding:4px 8px">${esc(MA.textoFim || 'Encerrado')}</b>`
+    : `<b>${r.d}<small>dias</small></b><b>${pad(r.h)}<small>h</small></b><b>${pad(r.m)}<small>min</small></b><b>${pad(r.s)}<small>s</small></b>`;
+  const maLink = () => https(MA.link) || (/^[\w-]+\.html([?#].*)?$/.test(MA.link || '') ? MA.link : '') || whats(MA.mensagem || 'Oi Gediel! Quero uma vaga na Maratona.');
+  if (MA.ativo !== false && MA.titulo) {
+    const el = document.createElement('button');
+    el.type = 'button'; el.className = 'mara'; el.id = 'mara'; el.setAttribute('aria-label', `${MA.rotulo || ''} ${MA.titulo}`);
+    el.innerHTML = `${MA.foto ? `<img src="${esc(MA.foto)}" alt="">` : ''}<span class="m-txt"><span class="m-rot"><i></i>${esc(MA.rotulo || 'Maratona')}${MA.selo ? ' · ' + esc(MA.selo) : ''}</span>
+      <span class="m-tit">${esc(MA.titulo)}</span><span class="m-det">${esc(MA.detalhe || '')}</span><span class="m-conta" id="maConta"></span></span><span class="m-x" data-mara-x aria-label="Minimizar">✕</span>`;
+    document.body.appendChild(el);
+    try { if (sessionStorage.getItem('mara:mini')) el.classList.add('mini'); } catch (e) {}
+    const tick = () => { const r = maResta(); $('#maConta').innerHTML = maConta(r); const f = $('#fichaMaraConta'); if (f) f.innerHTML = maConta(r); };
+    tick(); setInterval(tick, 1000);
+    el.addEventListener('click', e => {
+      if (e.target.closest('[data-mara-x]')) { e.stopPropagation(); el.classList.add('mini'); try { sessionStorage.setItem('mara:mini', 1); } catch (x) {} return; }
+      if (el.classList.contains('mini') && e.target.closest('img')) { el.classList.remove('mini'); try { sessionStorage.removeItem('mara:mini'); } catch (x) {} return; }
+      abrirMaratona();
+    });
+  }
+  function abrirMaratona() {
+    DADOS.evento('ficha', 'maratona', MA.titulo);
+    ultimoFoco = document.activeElement;
+    const u = maLink(), fora = /^https?:/i.test(u);
+    $('#ficha').innerHTML = `<span class="alca"></span><button class="fechar" data-fechar aria-label="Fechar">✕</button>
+      ${MA.img ? `<div class="ficha-img" style="aspect-ratio:auto"><img class="mara-arte" src="${esc(MA.img)}" alt="${esc(MA.titulo)}"></div>` : ''}
+      <div class="ficha-corpo"><h3 class="serif" id="fichaTitulo">${esc(MA.titulo)}</h3>
+        <div class="metas">${[MA.rotulo, MA.selo, MA.detalhe].filter(Boolean).map(x => `<span>${esc(x)}</span>`).join('')}</div>
+        <p>${esc(MA.texto || MA.sub || '')}</p>
+        <div class="mara-conta" id="fichaMaraConta">${maConta(maResta())}</div>
+        <div class="botoes"><a class="b1" href="${esc(u)}"${fora ? ' target="_blank" rel="noopener"' : ''}>${esc(MA.botao || 'Quero minha vaga')}</a></div>
+      </div>`;
+    document.body.classList.add('aberta'); document.body.style.overflow = 'hidden';
+    $('#ficha .fechar').focus();
+  }
+
   function abrirLogin() {
     const MB = H.membros || {};
     // área de membros: o link do painel; sem link, a Plataforma Inteligente do próprio site (membros.html)
@@ -823,6 +898,7 @@ a{text-decoration:none}
   anel.addEventListener('click', e => { const c = e.target.closest('.modo'); if (c && !(arrasto && arrasto.moveu)) { mexeu = true; parado = Date.now(); escolher(c.dataset.modo); } });
 
   function ligarModo(m) {
+    document.body.classList.remove('entrando');
     DADOS.modo(m.id); DADOS.evento('modo', m.id, m.nome);
     modo = m;
     try { localStorage.setItem('ebg:hubmodo', m.id); } catch (e) {}
@@ -846,12 +922,12 @@ a{text-decoration:none}
     scrollTo(0, 0); setTimeout(mover, 50);
   }
   $('#ligar').addEventListener('click', () => ligarModo(escolhido || modos[0]));
-  $('#trocar').addEventListener('click', () => { $('#entrarFixo').hidden = true; $('#entrada').classList.remove('sai'); document.body.style.overflow = 'hidden'; requestAnimationFrame(sozinho); });
+  $('#trocar').addEventListener('click', () => { document.body.classList.add('entrando'); $('#entrarFixo').hidden = true; $('#entrada').classList.remove('sai'); document.body.style.overflow = 'hidden'; requestAnimationFrame(sozinho); });
 
   let salvo = null; try { salvo = localStorage.getItem('ebg:hubmodo'); } catch (e) {}
   escolher((modos.find(m => m.id === salvo) || modos[0]).id);
   ang = alvo; posicionar();
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow = 'hidden'; document.body.classList.add('entrando');
   requestAnimationFrame(sozinho);
   addEventListener('resize', posicionar);
 

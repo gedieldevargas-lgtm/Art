@@ -57,6 +57,11 @@
     { k: 'embutidos', t: 'Sites dentro dos modos', d: 'Um site inteiro que aparece logo abaixo do topo quando a pessoa liga um modo (ex.: a Central de Prompts no Modo Prompts). Use o código do modo (veja em Modos) e o link do site.', lista: true, titulo: 'titulo',
       novo: () => ({ modo: 'prompts', ativo: true, titulo: 'Novo site', sub: '', url: 'https://', altura: 88, botao: 'Abrir em tela cheia' }),
       campos: [['modo', 'Código do modo onde aparece'], ['ativo', 'Visível', 'bool'], ['titulo', 'Título'], ['sub', 'Texto embaixo do título'], ['url', 'Link do site'], ['botao', 'Texto do botão de tela cheia'], ['altura', 'Altura (% da tela)', 'num']] },
+    { k: 'maratona', t: 'Maratona (destaque flutuante)', d: 'O cartão que flutua e pisca na abertura e no Hub, com contagem regressiva até a data final. Sem link, o botão abre seu WhatsApp com a mensagem abaixo.', campos: [
+      ['ativo', 'Mostrar o destaque', 'bool'], ['rotulo', 'Etiqueta'], ['titulo', 'Título'], ['sub', 'Frase'], ['selo', 'Selo'], ['detalhe', 'Detalhe (duração, vagas)'],
+      ['fim', 'Contagem até (AAAA-MM-DDTHH:MM, ex.: 2026-11-30T23:59)'], ['textoFim', 'Texto quando o prazo acabar'], ['texto', 'Texto da ficha', 'area'],
+      ['foto', 'Foto do cartão flutuante', 'img'], ['img', 'Imagem da ficha (arte completa)', 'img'], ['link', 'Link do botão (checkout, formulário…)', 'url'],
+      ['botao', 'Texto do botão'], ['mensagem', 'Mensagem do WhatsApp (se não tiver link)', 'area']] },
     { k: 'aplicacao', t: 'Chat de aplicação', d: 'A seção final, com o chat que manda as respostas pro seu WhatsApp.', campos: [
       ['rotulo', 'Etiqueta'], ['titulo', 'Título'], ['destaque', 'Final do título (em destaque)'], ['texto', 'Texto', 'area'], ['foto', 'Foto no chat', 'img'],
       ['whatsapp', 'WhatsApp que recebe (55 + DDD + número)']] },
