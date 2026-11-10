@@ -615,12 +615,13 @@ a{text-decoration:none}
   }
   function abrirLogin() {
     const MB = H.membros || {};
-    const url = https(MB.url);
+    // área de membros: o link do painel; sem link, a Plataforma Inteligente do próprio site (membros.html)
+    const url = https(MB.url) || (/^[\w-]+\.html([?#].*)?$/.test(MB.url || '') ? MB.url : '') || 'membros.html';
+    const fora = /^https?:/i.test(url);
     ultimoFoco = document.activeElement;
     $('#ficha').innerHTML = `<span class="alca"></span><button class="fechar" data-fechar aria-label="Fechar">✕</button>
       <div class="login-corpo"><img class="avatar" src="${esc(TP.avatar)}" alt=""><h3 class="serif" id="fichaTitulo">${esc(MB.titulo || 'Área de membros')}</h3><p>${esc(MB.texto)}</p>
-        <div class="botoes">${url ? `<a class="b1" href="${esc(url)}" target="_blank" rel="noopener">${esc(MB.botao || 'Entrar')}</a>`
-          : `<a class="b1" href="${esc(whats('Oi Gediel! Quero acessar a área de membros.'))}" target="_blank" rel="noopener">${esc(MB.botao || 'Entrar')}</a>`}
+        <div class="botoes"><a class="b1" href="${esc(url)}"${fora ? ' target="_blank" rel="noopener"' : ''}>${esc(MB.botao || 'Entrar')}</a>
           <button class="b2" data-ir="#aplicar" data-fechar>${esc(MB.semConta || 'Ainda não sou aluno')}</button></div></div>`;
     document.body.classList.add('aberta'); document.body.style.overflow = 'hidden';
     $('#ficha .fechar').focus();
