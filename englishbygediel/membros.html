@@ -339,8 +339,23 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
       <input class="login-field" id="login-pass" type="password" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
     </div>
     <button class="login-btn" id="login-submit" onclick="doLogin()">Entrar</button>
+    <button type="button" onclick="esqueciSenha()" style="display:block;margin:12px auto 0;background:none;border:0;color:var(--accent);font-size:12px;font-weight:700;cursor:pointer">Esqueci minha senha</button>
+    <div id="login-ok" style="display:none;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);color:#059669;border-radius:10px;padding:10px 12px;font-size:12px;font-weight:600;margin-top:12px"></div>
     <div class="login-footer">Problemas com acesso? Fale com o suporte 💬</div>
     <a href="./" style="display:block;text-align:center;margin-top:14px;font-size:12px;font-weight:700;color:var(--accent);text-decoration:none">← Voltar ao Hub</a>
+  </div>
+</div>
+
+<!-- NOVA SENHA (link do e-mail "esqueci minha senha") -->
+<div id="nova-senha-screen" style="display:none;position:fixed;inset:0;z-index:10000;background:var(--bg);align-items:center;justify-content:center;padding:20px">
+  <div class="login-box">
+    <div class="login-logo">🔑</div>
+    <div class="login-title">Crie sua nova senha</div>
+    <div class="login-sub">Mínimo de 8 caracteres</div>
+    <div id="nova-err" class="login-err"></div>
+    <div class="login-wrap"><label class="login-label" for="nova-1">Nova senha</label><input class="login-field" id="nova-1" type="password" autocomplete="new-password"></div>
+    <div class="login-wrap"><label class="login-label" for="nova-2">Repita a nova senha</label><input class="login-field" id="nova-2" type="password" autocomplete="new-password"></div>
+    <button class="login-btn" onclick="salvarNovaSenha('nova-1','nova-2','nova-err',true)">Salvar e entrar</button>
   </div>
 </div>
 
@@ -619,6 +634,12 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
       <div class="set-fld"><div class="set-lbl">E-mail</div><input class="set-inp" id="set-email" type="email" readonly style="opacity:.5;cursor:not-allowed"></div>
       <button class="set-btn set-btn-primary" onclick="saveProfile()">💾 Salvar alterações</button>
       <div class="set-saved" id="set-saved">✅ Salvo!</div>
+      <div class="set-divider"></div>
+      <div class="set-lbl">Trocar senha</div>
+      <div id="troca-err" class="login-err"></div>
+      <div class="set-fld"><input class="set-inp" id="troca-1" type="password" placeholder="Nova senha (mínimo 8 caracteres)" autocomplete="new-password"></div>
+      <div class="set-fld"><input class="set-inp" id="troca-2" type="password" placeholder="Repita a nova senha" autocomplete="new-password"></div>
+      <button class="set-btn set-btn-ghost" onclick="salvarNovaSenha('troca-1','troca-2','troca-err',false)">🔑 Trocar senha</button>
       <div class="set-divider"></div>
       <button class="set-btn set-btn-ghost" onclick="switchUser()">🔄 Trocar usuário</button>
       <button class="set-btn set-btn-danger" onclick="logout()">🚪 Sair da conta</button>
@@ -920,6 +941,7 @@ document.getElementById('photo-input').addEventListener('change',function(){var 
 function saveProfile(){
   var n=document.getElementById('set-name').value.trim();if(!n)return;
   profile.name=n;
+  if(typeof _sb!=='undefined')_sb.auth.updateUser({data:{full_name:n}}).catch(function(){});
   document.getElementById('sidebar-name').textContent=n;
   var ava=document.getElementById('sidebar-ava');
   if(profile.photoUrl){ava.innerHTML='<img src="'+profile.photoUrl+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';}else{ava.textContent=n[0].toUpperCase();}
@@ -1003,8 +1025,33 @@ async function doLogin(){
   toast('✅ Bem-vindo/a!','#10b981');
 }
 
+// Esqueci minha senha: manda o link pro e-mail; o link volta pra esta página
+async function esqueciSenha(){
+  var email=document.getElementById('login-email').value.trim();
+  var err=document.getElementById('login-err'),ok=document.getElementById('login-ok');
+  ok.style.display='none';
+  if(!email){err.textContent='Escreva seu e-mail acima e toque de novo em "Esqueci minha senha".';err.classList.add('show');return;}
+  err.classList.remove('show');
+  var r=await _sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});
+  if(r.error){err.textContent='Não deu pra enviar agora. Tente de novo em alguns minutos.';err.classList.add('show');return;}
+  ok.textContent='Pronto! Enviamos um link pro seu e-mail pra criar uma senha nova.';ok.style.display='block';
+}
+// Trocar senha (nas Configurações ou depois do link do e-mail)
+async function salvarNovaSenha(id1,id2,idErr,depoisEntra){
+  var a=document.getElementById(id1).value,b=document.getElementById(id2).value,err=document.getElementById(idErr);
+  if(a.length<8){err.textContent='Use pelo menos 8 caracteres.';err.classList.add('show');return;}
+  if(a!==b){err.textContent='As duas senhas estão diferentes.';err.classList.add('show');return;}
+  err.classList.remove('show');
+  var r=await _sb.auth.updateUser({password:a});
+  if(r.error){err.textContent='Não deu pra trocar a senha. Saia, entre de novo e tente outra vez.';err.classList.add('show');return;}
+  document.getElementById(id1).value='';document.getElementById(id2).value='';
+  toast('🔑 Senha trocada!','#10b981');
+  if(depoisEntra){document.getElementById('nova-senha-screen').style.display='none';if(r.data&&r.data.user)setUserUI(r.data.user);hideLogin();history.replaceState(null,'',location.pathname);}
+}
+
 // Listener de mudança de sessão (ex: expirou)
 _sb.auth.onAuthStateChange(function(event,session){
+  if(event==='PASSWORD_RECOVERY'){document.getElementById('nova-senha-screen').style.display='flex';return;}
   if(event==='SIGNED_OUT'||(!session&&event!=='INITIAL_SESSION')){showLogin();}
 });
 
