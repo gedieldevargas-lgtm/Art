@@ -79,11 +79,29 @@
         video: M.video || CFG.videoApresentacao || '', img: M.imgLarga || M.img || '', checkout: CFG.checkoutMentoria || '',
         botaoAplicar: 'Aplicar pro programa', botaoComprar: (M.cta || {}).rotulo || 'Quero minha vaga' },
       secoes: { gratis: 'Materiais grátis', pagos: 'Pra ir mais fundo', botaoPagos: 'Programa →', membros: 'Dentro do programa', membrosSub: 'Só pra alunos',
-        extras: 'Ecossistema', alunos: 'Alunos que destravaram', botaoAluno: 'Quero esse resultado' },
+        jogos: 'Jogos', simuladores: 'Simuladores', extras: 'Ecossistema', alunos: 'Alunos que destravaram', botaoAluno: 'Quero esse resultado' },
       membros: { botaoTopo: 'Entrar', titulo: 'Área de membros', url: 'membros.html',
         texto: 'Já é aluno ou comprou um material? Entre com o e-mail que você usou na compra pra acessar suas aulas, trilhas e materiais.',
         botao: 'Entrar na área de membros', semConta: 'Ainda não sou aluno', cardBotao: 'Já sou aluno, entrar' },
       cards,
+      // galerias em loop (ícones pequenos; ao tocar abre a ficha com o botão Jogar)
+      jogos: [
+        { ativo: true, titulo: 'Flashcards', icone: '🃏', img: '', sub: 'Vocabulário · A1–B1', sinopse: 'Cartas de vocabulário com repetição espaçada: o que você erra volta mais vezes, o que você já sabe espaça.', comoJogar: '', link: '', botao: 'Jogar' },
+        { ativo: true, titulo: 'Quiz Phrase', icone: '🧩', img: '', sub: 'Frases · A2–B1', sinopse: 'Monte a frase certa a partir de palavras soltas e pratique estruturas reais.', comoJogar: '', link: '', botao: 'Jogar' },
+        { ativo: true, titulo: 'Escuta Rápida', icone: '⏱️', img: '', sub: 'Listening · A2–B2', sinopse: 'Áudios curtos e perguntas rápidas pra treinar o ouvido.', comoJogar: '', link: '', botao: 'Jogar' },
+        { ativo: true, titulo: 'Monta Frase', icone: '🔧', img: '', sub: 'Gramática · A1–A2', sinopse: 'Arraste as palavras na ordem certa e fixe a estrutura da frase.', comoJogar: '', link: '', botao: 'Jogar' },
+        { ativo: true, titulo: 'Caça Erros', icone: '🔍', img: '', sub: 'Correção · B1', sinopse: 'Um texto com erros sutis: encontre todos e corrija.', comoJogar: '', link: '', botao: 'Jogar' },
+        { ativo: true, titulo: 'Imite o Som', icone: '🎙️', img: '', sub: 'Pronúncia · A1–B1', sinopse: 'Ouça um nativo, repita em voz alta e compare a sua pronúncia.', comoJogar: '', link: '', botao: 'Jogar' },
+        { ativo: true, titulo: 'Letra & Música', icone: '🎵', img: '', sub: 'Música · todos os níveis', sinopse: 'Preencha as lacunas da letra enquanto a música toca.', comoJogar: '', link: '', botao: 'Jogar' },
+        { ativo: true, titulo: 'Complete', icone: '✏️', img: '', sub: 'Vocabulário · A1', sinopse: 'Frases com lacunas: escolha a palavra certa do banco de palavras.', comoJogar: '', link: '', botao: 'Jogar' },
+        { ativo: true, titulo: 'Sons do IPA', icone: '🔊', img: '', sub: 'Sons · B1–B2', sinopse: 'Treine os fonemas do inglês e os pares mínimos.', comoJogar: '', link: '', botao: 'Jogar' }
+      ],
+      simuladores: [
+        { ativo: true, titulo: 'Entrevista de emprego', icone: '💼', img: '', sub: 'Carreira · B1–B2', sinopse: 'Simule uma entrevista em inglês, com perguntas reais e respostas pra treinar.', comoJogar: '', link: '', botao: 'Jogar' },
+        { ativo: true, titulo: 'Check-in no aeroporto', icone: '✈️', img: '', sub: 'Viagens · A2–B1', sinopse: 'Do balcão ao portão: treine o que falar em cada etapa da viagem.', comoJogar: '', link: '', botao: 'Jogar' },
+        { ativo: true, titulo: 'Pedir no restaurante', icone: '🍽️', img: '', sub: 'Dia a dia · A1–A2', sinopse: 'Peça a comida, tire dúvidas do cardápio e feche a conta.', comoJogar: '', link: '', botao: 'Jogar' },
+        { ativo: true, titulo: 'Reunião em inglês', icone: '🗣️', img: '', sub: 'Carreira · B1–B2', sinopse: 'Treine opinar, concordar e discordar numa reunião de trabalho.', comoJogar: '', link: '', botao: 'Jogar' }
+      ],
       aplicacao: { rotulo: 'Aplicação · menos de 2 minutos', titulo: 'Seu inglês precisa caber', destaque: 'na sua vida.',
         texto: 'Estou selecionando pessoas pra um processo de inglês adaptado à rotina real e aos objetivos de cada uma. Responda aqui no chat; no fim, as respostas vão organizadas pro meu WhatsApp.',
         foto: 'img/gediel-brooklyn.webp', whatsapp: CFG.whatsapp || '' },

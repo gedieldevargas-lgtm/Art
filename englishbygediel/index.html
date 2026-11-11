@@ -194,6 +194,21 @@ a{text-decoration:none}
 .modo.recorte img.m-pessoa{z-index:1;inset:auto auto 0 50%;left:50%;width:auto;max-width:none;height:var(--h,100%);object-fit:contain;object-position:bottom;
   transform:translate3d(calc(-50% + var(--p,0) * 10px),calc(var(--q,0) * 4px),0) scale(1.04);transform-origin:50% 100%;transition:transform .25s ease-out;
   filter:drop-shadow(0 14px 16px rgba(0,0,0,.55)) drop-shadow(0 2px 3px rgba(0,0,0,.4));animation:flutua 5s ease-in-out infinite}
+/* galerias em loop: ícones pequenos andando sem parar; encosta/toca e pausa */
+.loop{overflow:hidden;margin:0 -2px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.loop-faixa{display:flex;gap:16px;width:max-content;padding:8px 8px 4px;animation:loop var(--dur,40s) linear infinite}
+.loop:hover .loop-faixa,.loop:focus-within .loop-faixa,.loop.pausa .loop-faixa{animation-play-state:paused}
+@keyframes loop{to{transform:translateX(-50%)}}
+.jogo{flex:0 0 auto;width:86px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;color:var(--marfim)}
+.jogo-ico{width:86px;height:86px;border-radius:21px;display:grid;place-items:center;font-size:38px;overflow:hidden;border:1px solid var(--linha);box-shadow:0 12px 24px -12px rgba(0,0,0,.7);transition:transform .2s}
+.jogo-ico img{width:100%;height:100%;object-fit:cover}
+.jogo:hover .jogo-ico{transform:translateY(-3px) scale(1.04)}.jogo:active .jogo-ico{transform:scale(.94)}
+.jogo b{font-size:12px;font-weight:700;line-height:1.2}
+.ficha-jogo{display:flex;gap:14px;align-items:center;padding:22px 20px 0}
+.ficha-jogo .jogo-ico{width:78px;height:78px;flex:0 0 auto}
+.ficha-jogo small{color:var(--dim);font-size:12.5px}
+.b1.off{opacity:.55;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.loop{overflow-x:auto;-webkit-mask-image:none;mask-image:none}.loop-faixa{animation:none}}
 @keyframes flutua{50%{translate:0 -4px}}
 .modo::after{content:"";position:absolute;inset:40% 0 0;z-index:2;background:linear-gradient(transparent,rgba(6,12,24,.6) 40%,rgba(6,12,24,.96))}
 .modo span{position:absolute;left:10px;right:10px;bottom:10px;z-index:3;color:#fff;font-family:'Advercase','Archivo Black',sans-serif;font-size:13.5px;line-height:1.05;letter-spacing:.01em;text-shadow:0 2px 8px rgba(0,0,0,.9),0 0 2px rgba(0,0,0,.8)}
@@ -351,6 +366,16 @@ body.entrando .mara{bottom:96px}
     <div class="cab"><h2 class="serif" id="sGratis">Materiais grátis</h2><small id="contaGratis"></small></div>
     <div class="filtros" id="filtros"></div>
     <div class="trilho cena" id="trilhoGratis"></div>
+  </section>
+
+  <section class="secao aparece" id="jogos" hidden>
+    <div class="cab"><h2 class="serif" id="sJogos">Jogos</h2><small id="contaJogos"></small></div>
+    <div class="loop" id="loopJogos"></div>
+  </section>
+
+  <section class="secao aparece" id="simuladores" hidden>
+    <div class="cab"><h2 class="serif" id="sSimuladores">Simuladores</h2><small id="contaSimuladores"></small></div>
+    <div class="loop" id="loopSimuladores"></div>
   </section>
 
   <section class="secao aparece" id="pagos">
@@ -597,6 +622,34 @@ body.entrando .mara{bottom:96px}
     ligar3d();
   }
 
+  /* galerias em loop (Jogos e Simuladores) */
+  function galeria(tipo, idSec, idLoop, idConta, titulo) {
+    const lista = (H[tipo] || []).filter(x => x && x.ativo !== false && x.titulo);
+    $('#' + idSec).hidden = !lista.length; if (!lista.length) return;
+    txt('#' + titulo, (H.secoes || {})[tipo]); $('#' + idConta).textContent = lista.length + (tipo === 'jogos' ? ' jogos' : ' simuladores');
+    const um = lista.map((x, i) => `<button class="jogo t3d" type="button" data-jogo="${tipo}:${(H[tipo] || []).indexOf(x)}" aria-label="${esc(x.titulo)}"><span class="jogo-ico ${x.img ? '' : 'grad g' + (i % 5 + 1)}">${x.img ? `<img src="${esc(x.img)}" alt="" loading="lazy">` : `<span>${esc(x.icone || '🎮')}</span>`}</span><b>${esc(x.titulo)}</b></button>`).join('');
+    const copias = Math.max(1, Math.ceil(1500 / (lista.length * 102)));
+    $('#' + idLoop).innerHTML = `<div class="loop-faixa" style="--dur:${Math.max(24, lista.length * copias * 3.2)}s">${um.repeat(copias * 2)}</div>`;
+  }
+  function abrirJogo(ref) {
+    const [tipo, i] = ref.split(':'); const x = (H[tipo] || [])[+i]; if (!x) return;
+    DADOS.evento('ficha', tipo + ':' + x.titulo, x.titulo);
+    ultimoFoco = document.activeElement;
+    const passos = String(x.comoJogar || '').split('\n').map(s => s.trim()).filter(Boolean);
+    const u = https(x.link) || (/^[\w-]+\.html([?#].*)?$/.test(x.link || '') ? x.link : ''), fora = /^https?:/i.test(u);
+    $('#ficha').innerHTML = `<span class="alca"></span><button class="fechar" data-fechar aria-label="Fechar">✕</button>
+      <div class="ficha-jogo"><span class="jogo-ico grad g${(+i % 5) + 1}">${x.img ? `<img src="${esc(x.img)}" alt="">` : `<span>${esc(x.icone || '🎮')}</span>`}</span>
+        <div><h3 class="serif" id="fichaTitulo" style="font-size:26px;line-height:1.05">${esc(x.titulo)}</h3>${x.sub ? `<small>${esc(x.sub)}</small>` : ''}</div></div>
+      <div class="ficha-corpo">${x.sinopse ? `<p>${esc(x.sinopse)}</p>` : ''}
+        ${passos.length ? `<ul>${passos.map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}
+        <div class="botoes">${u ? `<a class="b1" href="${esc(u)}"${fora ? ' target="_blank" rel="noopener"' : ''}>${esc(x.botao || 'Jogar')}</a>` : '<button class="b1 off" type="button" disabled>Em breve</button>'}</div>
+      </div>`;
+    document.body.classList.add('aberta'); document.body.style.overflow = 'hidden';
+    $('#ficha .fechar').focus();
+  }
+  galeria('jogos', 'jogos', 'loopJogos', 'contaJogos', 'sJogos');
+  galeria('simuladores', 'simuladores', 'loopSimuladores', 'contaSimuladores', 'sSimuladores');
+
   /* produtos do painel: grátis entram na fileira grátis, pagos em "Pra ir mais fundo" */
   if (CFG.supabaseUrl && CFG.supabaseAnonKey) {
     fetch(`${CFG.supabaseUrl.replace(/\/$/, '')}/rest/v1/produtos?select=*&ativo=eq.true&order=ordem.asc,created_at.asc`,
@@ -713,6 +766,7 @@ body.entrando .mara{bottom:96px}
   document.addEventListener('click', e => {
     const f = e.target.closest('[data-filtro]'); if (f) { filtro = f.dataset.filtro; desenhar(); return; }
     const lg = e.target.closest('[data-login]'); if (lg) { e.preventDefault(); if (!$('#entrada').classList.contains('sai')) ligarModo(escolhido || modos[0]); abrirLogin(); return; }
+    const jg = e.target.closest('[data-jogo]'); if (jg) { abrirJogo(jg.dataset.jogo); return; }
     const a = e.target.closest('[data-abrir]'); if (a) { abrir(a.dataset.abrir); return; }
     const ir = e.target.closest('[data-ir]');
     if (e.target.closest('[data-fechar]')) fechar();
