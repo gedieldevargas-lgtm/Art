@@ -45,6 +45,8 @@ create table if not exists public.mi_lessons (
   quiz        jsonb not null default '[]'::jsonb,
   created_at  timestamptz not null default now()
 );
+-- release_at: data em que a aula libera pro aluno (null = libera assim que publicada)
+alter table public.mi_lessons add column if not exists release_at timestamptz;
 create index if not exists mi_lessons_module_idx on public.mi_lessons (module_id, ord);
 alter table public.mi_lessons enable row level security;
 drop policy if exists "alunos leem aulas" on public.mi_lessons;

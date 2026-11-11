@@ -762,6 +762,14 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
               Clique no módulo pra abrir as aulas. Em cada aula você cadastra o link do YouTube, a capa, a descrição e o quiz de 5 perguntas.<br>
               <strong>Medida da capa:</strong> 1280 × 720 px (16:9), JPG ou PNG, até 2 MB — a mesma medida da thumbnail do YouTube.
             </div>
+            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:rgba(79,110,247,.06);border:1px solid rgba(79,110,247,.18);border-radius:12px;padding:10px 12px;margin-bottom:14px">
+              <div style="font-size:12px;font-weight:800">📅 Cronograma automático</div>
+              <div style="font-size:11px;color:var(--fg2)">2 aulas por semana (seg + qui), na ordem dos módulos, a partir de</div>
+              <input class="admin-inp" id="adm-sched-start" type="date" value="2026-11-16" style="width:150px;padding:6px 10px;font-size:12px">
+              <label style="font-size:11px;color:var(--fg2);display:flex;align-items:center;gap:5px"><input type="checkbox" id="adm-sched-over"> sobrescrever datas já definidas</label>
+              <button class="admin-btn admin-btn-primary admin-btn-sm" onclick="scheduleAll()">Aplicar cronograma</button>
+              <span id="adm-sched-status" style="font-size:11px"></span>
+            </div>
             <div id="adm-mod-list"><div class="admin-loading">Carregando módulos...</div></div>
           </div>
         </div>
@@ -888,6 +896,9 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
             <option value="false">⏳ Em breve — alunos podem votar "esperando"</option>
             <option value="true">✅ Publicada — alunos assistem</option>
           </select>
+          <div class="adm-section">Data de liberação</div>
+          <input class="admin-inp" id="adm-les-rel" type="date">
+          <div style="font-size:11px;color:var(--fg3);margin-top:5px">Libera às 9h desse dia. Vazio = libera assim que tiver link e estiver publicada.</div>
         </div>
         <div>
           <div class="adm-section">Capa da aula · 1280 × 720 px</div>
@@ -1558,6 +1569,11 @@ function ytId(url){
 }
 function ytThumb(url){var id=ytId(url);return id?'https://i.ytimg.com/vi/'+id+'/hqdefault.jpg':null;}
 function lessonCover(l){return l.cover_url||ytThumb(l.youtube_url)||null;}
+function relDate(l){return l.release_at?new Date(l.release_at):null;}
+function relFuture(l){var d=relDate(l);return d&&d>new Date();}
+function isOpen(l){return !!(l.published&&ytId(l.youtube_url)&&!relFuture(l));}
+function fmtRel(l){var d=relDate(l);if(!d)return '';return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'}).replace('.','');}
+function daysUntil(l){var d=relDate(l);if(!d)return 0;return Math.ceil((d-new Date())/86400000);}
 function fmtDate(d){var x=new Date(d);return x.toLocaleDateString('pt-BR')+' '+x.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});}
 function nl2br(s){return esc(s||'').replace(/\n/g,'<br>');}
 function countBy(rows,key){var o={};(rows||[]).forEach(function(r){var k=r[key];o[k]=(o[k]||0)+1;});return o;}
@@ -1582,8 +1598,8 @@ async function loadStudentModules(force){
     if(r.error)throw r.error;
     var mods=r.data||[];
     if(!mods.length){renderStaticModules();return;}
-    var l=await _sb.from('mi_lessons').select('id,module_id,published').order('ord');
-    var byMod={};(l.data||[]).forEach(function(x){byMod[x.module_id]=byMod[x.module_id]||{t:0,p:0};byMod[x.module_id].t++;if(x.published)byMod[x.module_id].p++;});
+    var l=await _sb.from('mi_lessons').select('id,module_id,published,youtube_url,release_at').order('ord');
+    var byMod={};(l.data||[]).forEach(function(x){byMod[x.module_id]=byMod[x.module_id]||{t:0,p:0};byMod[x.module_id].t++;if(isOpen(x))byMod[x.module_id].p++;});
     _stMods=mods;
     var g=document.getElementById('modules-grid');g.innerHTML='';
     mods.forEach(function(m){
@@ -1622,11 +1638,12 @@ async function openModule(modId){
   ls.forEach(function(l,i){
     var cov=lessonCover(l);
     var q=mine[l.id];
-    html+='<div class="lesson-item '+(l.published?'':'locked')+'" onclick="openLesson(\''+l.id+'\')">'
-      +'<div class="lthumb">'+(cov?'<img src="'+esc(cov)+'" alt="">':'🎬')+(l.published?'':'<div class="mod-thumb-lock">⏳</div>')+'</div>'
+    var op=isOpen(l);
+    html+='<div class="lesson-item '+(op?'':'locked')+'" onclick="openLesson(\''+l.id+'\')">'
+      +'<div class="lthumb">'+(cov?'<img src="'+esc(cov)+'" alt="">':'🎬')+(op?'':'<div class="mod-thumb-lock">'+(relFuture(l)?'📅':'⏳')+'</div>')+'</div>'
       +'<div style="flex:1;min-width:0"><div class="lt">'+(i+1)+'. '+esc(l.title)+'</div><div class="ls">'
-      +(l.published?'<span style="color:var(--green);font-weight:700">▶ Disponível</span>':'<span style="color:var(--gold);font-weight:700">⏳ Em breve</span>')
-      +(!l.published&&votes[l.id]?'<span>🙋 '+votes[l.id]+' esperando</span>':'')
+      +(op?'<span style="color:var(--green);font-weight:700">▶ Disponível</span>':relFuture(l)?'<span style="color:var(--accent);font-weight:700">📅 Libera '+fmtRel(l)+'</span>':'<span style="color:var(--gold);font-weight:700">⏳ Em breve</span>')
+      +(!op&&votes[l.id]?'<span>🙋 '+votes[l.id]+' esperando</span>':'')
       +(reacts[l.id]?'<span>'+reacts[l.id]+' reaç'+(reacts[l.id]>1?'ões':'ão')+'</span>':'')
       +(q?'<span>🧩 Quiz '+q.score+'/'+q.total+'</span>':(l.quiz&&l.quiz.length?'<span>🧩 Quiz</span>':''))
       +'</div></div><div style="color:var(--fg3)">›</div></div>';
@@ -1637,7 +1654,7 @@ async function openModule(modId){
 async function openLesson(lesId){
   var ls=_stLessons[_stCurMod.id]||[];
   var l=ls.filter(function(x){return x.id===lesId;})[0];if(!l)return;
-  _stCurLes=l;_stQuizSel={};_stLesTab=l.published?'desc':'coment';
+  _stCurLes=l;_stQuizSel={};_stLesTab=isOpen(l)?'desc':'coment';
   var v=document.getElementById('mod-view-lesson');
   v.innerHTML='<button class="back-btn" onclick="openModule(\''+_stCurMod.id+'\')">← '+esc(_stCurMod.name)+'</button><div class="admin-loading">Carregando...</div>';
   modShow('lesson');
@@ -1658,11 +1675,12 @@ async function renderLesson(){
   html+='<div style="font-size:11px;color:var(--fg3);font-weight:700;letter-spacing:.5px;margin-bottom:4px">AULA '+idx+' · '+esc(_stCurMod.name).toUpperCase()+'</div>';
   html+='<div style="font-size:21px;font-weight:800;margin-bottom:14px">'+esc(l.title)+'</div>';
   var id=ytId(l.youtube_url);
-  if(l.published&&id){
+  if(isOpen(l)){
     html+='<div class="player-wrap"><iframe src="https://www.youtube-nocookie.com/embed/'+id+'?rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>';
   }else{
     var cov=lessonCover(l);
-    html+='<div class="waiting-box">'+(cov?'<img src="'+esc(cov)+'" alt="">':'')+'<div class="waiting-inner"><div class="big">⏳</div><div class="t">Essa aula ainda está sendo gravada</div>'
+    var fut=relFuture(l),dn=daysUntil(l);
+    html+='<div class="waiting-box">'+(cov?'<img src="'+esc(cov)+'" alt="">':'')+'<div class="waiting-inner"><div class="big">'+(fut?'📅':'⏳')+'</div><div class="t">'+(fut?'Essa aula libera em '+relDate(l).toLocaleDateString('pt-BR',{day:'numeric',month:'long'})+(dn===1?' — amanhã!':dn>1?' — faltam '+dn+' dias':''):'Essa aula ainda está sendo gravada')+'</div>'
       +'<div class="s">'+(votes.length?'<strong>'+votes.length+'</strong> '+(votes.length===1?'pessoa está esperando':'pessoas estão esperando')+' por ela':'Seja o primeiro a pedir essa aula')+'</div>'
       +'<button class="vote-btn '+(myVote?'on':'')+'" onclick="toggleVote()">'+(myVote?'✅ Você está esperando':'🙋 Estou esperando por essa aula')+'</button></div></div>';
   }
@@ -1823,8 +1841,9 @@ function renderAdminModules(){
         +'<div class="adm-cover-sm">'+(cov?'<img src="'+esc(cov)+'">':'🎬')+'</div>'
         +'<div style="flex:1;min-width:0"><div style="font-weight:700">'+esc(l.title)+'</div>'
         +'<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:3px">'
-        +'<span class="adm-pill '+(l.published?'adm-pill-on':'adm-pill-off')+'">'+(l.published?'PUBLICADA':'EM BREVE')+'</span>'
+        +'<span class="adm-pill '+(isOpen(l)?'adm-pill-on':'adm-pill-off')+'">'+(isOpen(l)?'NO AR':relFuture(l)?'LIBERA '+fmtRel(l).toUpperCase():'EM BREVE')+'</span>'
         +(ytId(l.youtube_url)?'':'<span class="adm-stat" style="color:var(--red)">sem vídeo</span>')
+        +(l.release_at?'<span class="adm-stat">📅 '+new Date(l.release_at).toLocaleDateString('pt-BR')+'</span>':'<span class="adm-stat" style="color:var(--gold)">sem data</span>')
         +'<span class="adm-stat">🙋 '+(st.votes[l.id]||0)+' esperando</span>'
         +'<span class="adm-stat">'+(rtot?rtxt.trim():'sem reações')+'</span>'
         +'<span class="adm-stat">💬 '+(st.comments[l.id]||0)+'</span>'
@@ -1856,6 +1875,31 @@ async function moveLesson(modId,i,dir){
   var order=ls.slice();var t=order[i];order[i]=order[j];order[j]=t;
   for(var k=0;k<order.length;k++){if(order[k].ord!==k+1)await _sb.from('mi_lessons').update({ord:k+1}).eq('id',order[k].id);}
   _stLessons={};loadAdminModules(true);
+}
+
+// ─── Cronograma: 2 aulas/semana (segunda e quinta) ───
+async function scheduleAll(){
+  var st=document.getElementById('adm-sched-status');
+  var start=document.getElementById('adm-sched-start').value;if(!start){st.innerHTML='<span style="color:var(--red)">Escolhe a data de início.</span>';return;}
+  var over=document.getElementById('adm-sched-over').checked;
+  var all=[];_admMods.forEach(function(m){(_admLessons[m.id]||[]).forEach(function(l){all.push(l);});});
+  if(!all.length){st.innerHTML='<span style="color:var(--red)">Nenhuma aula cadastrada.</span>';return;}
+  var base=new Date(start+'T09:00:00-03:00');
+  // alinha o início numa segunda-feira
+  var dow=base.getDay();if(dow!==1){base.setDate(base.getDate()+((8-dow)%7));}
+  var k=0,n=0,upd=[];
+  for(var i=0;i<all.length;i++){
+    var l=all[i];
+    if(l.release_at&&!over){continue;}
+    var d=new Date(base);d.setDate(d.getDate()+Math.floor(k/2)*7+(k%2?3:0));k++;
+    upd.push({id:l.id,release_at:d.toISOString()});
+  }
+  if(!upd.length){st.innerHTML='<span style="color:var(--gold)">Todas já têm data. Marca "sobrescrever" pra refazer.</span>';return;}
+  st.innerHTML='⏳ Agendando '+upd.length+' aulas...';
+  for(var j=0;j<upd.length;j++){var r=await _sb.from('mi_lessons').update({release_at:upd[j].release_at}).eq('id',upd[j].id);if(r.error){st.innerHTML='<span style="color:var(--red)">Erro: '+esc(r.error.message)+'</span>';return;}n++;}
+  var last=new Date(upd[upd.length-1].release_at);
+  st.innerHTML='<span style="color:var(--green)">✅ '+n+' aulas agendadas · última libera em '+last.toLocaleDateString('pt-BR')+'</span>';
+  toast('📅 Cronograma aplicado!','#10b981');_stMods=null;_stLessons={};loadAdminModules(true);
 }
 
 // ─── Capa: leitura, medida e upload ───
@@ -1938,6 +1982,7 @@ function openLesModal(modId,lesId){
   document.getElementById('adm-les-title').value=_editLes.title||'';
   document.getElementById('adm-les-yt').value=_editLes.youtube_url||'';
   document.getElementById('adm-les-pub').value=_editLes.published?'true':'false';
+  document.getElementById('adm-les-rel').value=_editLes.release_at?new Date(_editLes.release_at).toISOString().slice(0,10):'';
   document.getElementById('adm-les-desc').value=_editLes.description||'';
   var cov=lessonCover(_editLes);
   document.getElementById('adm-les-cover-prev').innerHTML=cov?'<img src="'+esc(cov)+'">':'🖼️';
@@ -1992,11 +2037,11 @@ async function saveLesson(){
   var title=document.getElementById('adm-les-title').value.trim();if(!title){st.innerHTML='<span style="color:var(--red)">Dá um título pra aula.</span>';return;}
   var yt=document.getElementById('adm-les-yt').value.trim();
   var pub=document.getElementById('adm-les-pub').value==='true';
-  if(pub&&!ytId(yt)){st.innerHTML='<span style="color:var(--red)">Pra publicar precisa de um link válido do YouTube.</span>';return;}
-  var quiz;try{quiz=readQuiz();}catch(e){st.innerHTML='<span style="color:var(--red)">'+esc(e.message)+'</span>';return;}
+    var quiz;try{quiz=readQuiz();}catch(e){st.innerHTML='<span style="color:var(--red)">'+esc(e.message)+'</span>';return;}
   st.innerHTML='⏳ Salvando...';
   try{
-    var row={module_id:_editLes.module_id,title:title,youtube_url:yt||null,published:pub,description:document.getElementById('adm-les-desc').value.trim()||null,quiz:quiz};
+    var relv=document.getElementById('adm-les-rel').value;
+    var row={module_id:_editLes.module_id,title:title,youtube_url:yt||null,published:pub,release_at:relv?new Date(relv+'T09:00:00-03:00').toISOString():null,description:document.getElementById('adm-les-desc').value.trim()||null,quiz:quiz};
     var id=_editLes.id;
     if(!id){row.ord=(_admLessons[_editLes.module_id]||[]).length+1;var ins=await _sb.from('mi_lessons').insert(row).select().single();if(ins.error)throw ins.error;id=ins.data.id;}
     var cov=await uploadCover('les',id);if(cov)row.cover_url=cov;
