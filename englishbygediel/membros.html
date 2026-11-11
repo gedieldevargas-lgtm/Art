@@ -503,8 +503,8 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
         <div class="mat-tabs">
           <button class="mat-tab active" onclick="matTab('todos',this)">Todos</button>
           <button class="mat-tab" onclick="matTab('gratis',this)">Gratuitos</button>
-          <button class="mat-tab" onclick="matTab('incluido',this)">No plano</button>
-          <button class="mat-tab" onclick="matTab('pago',this)">Outros produtos</button>
+          <button class="mat-tab" onclick="matTab('incluido',this)">Meus</button>
+          <button class="mat-tab" onclick="matTab('pago',this)">Para adquirir</button>
         </div>
         <div class="mat-grid stagger" id="mat-grid"></div>
       </div>
@@ -974,7 +974,7 @@ function renderMat(){
   });
   g.classList.remove('stagger');void g.offsetWidth;g.classList.add('stagger');
 }
-renderMat();
+renderMat.__antigo=renderMat;renderMat();
 
 // ═══════════════════════════ NAVEGAÇÃO com animação ═══════════════════════════
 var TITLES={home:'Início',maratona:'Maratona de Hoje',lives:'Lives',modulos:'Módulos',jogos:'Jogos',materiais:'Materiais',bussola:'Bússola CEFR',prisma:'Prisma de Talentos',admin:'🛡️ Painel Admin'};
@@ -1187,7 +1187,12 @@ _sb.auth.onAuthStateChange(function(event,session){
 
 // ═══════════════════════════ ADMIN PANEL ═══════════════════════════
 var SB_URL='https://jzdxcefnlwjgimymgsux.supabase.co';
-var SB_SRV='sb_secret_O8g4qKIkXwYSPVk7fdIduQ_xbM2Eb8s';
+// a chave secreta NÃO fica na página: as ações de admin passam pela função do Netlify
+async function admFetch(path,opt){
+  opt=opt||{};var ses=(await _sb.auth.getSession()).data.session;
+  return fetch('/.netlify/functions/membros-admin',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+(ses?ses.access_token:'')},
+    body:JSON.stringify({path:path,method:opt.method||'GET',body:opt.body?JSON.parse(opt.body):undefined})});
+}
 var _resetUserId=null;
 var _adminModules=null;
 
@@ -1206,8 +1211,7 @@ async function loadUsers(){
   var el=document.getElementById('adm-users-table');
   el.innerHTML='<div class="admin-loading">Carregando alunos...</div>';
   try{
-    var res=await fetch(SB_URL+'/auth/v1/admin/users?page=1&per_page=100',{
-      headers:{'apikey':SB_SRV,'Authorization':'Bearer '+SB_SRV}
+    var res=await admFetch('/auth/v1/admin/users?page=1&per_page=100',{
     });
     var data=await res.json();
     var users=(data.users||[]).sort(function(a,b){return new Date(b.created_at)-new Date(a.created_at);});
@@ -1249,9 +1253,8 @@ async function createUser(){
   }
   status.innerHTML='<span style="color:var(--fg2)">⏳ Criando acesso...</span>';
   try{
-    var res=await fetch(SB_URL+'/auth/v1/admin/users',{
+    var res=await admFetch('/auth/v1/admin/users',{
       method:'POST',
-      headers:{'apikey':SB_SRV,'Authorization':'Bearer '+SB_SRV,'Content-Type':'application/json'},
       body:JSON.stringify({email:email,password:pass,email_confirm:true,user_metadata:{full_name:name}})
     });
     var data=await res.json();
@@ -1282,8 +1285,7 @@ async function loadMetrics(){
   var recent=document.getElementById('adm-recent-list');
   tiles.innerHTML='<div class="admin-loading" style="grid-column:1/-1">Carregando...</div>';
   try{
-    var res=await fetch(SB_URL+'/auth/v1/admin/users?page=1&per_page=100',{
-      headers:{'apikey':SB_SRV,'Authorization':'Bearer '+SB_SRV}
+    var res=await admFetch('/auth/v1/admin/users?page=1&per_page=100',{
     });
     var data=await res.json();
     var users=data.users||[];
@@ -1390,9 +1392,8 @@ async function confirmResetPass(){
   }
   status.innerHTML='<span style="color:var(--fg2)">⏳ Resetando...</span>';
   try{
-    var res=await fetch(SB_URL+'/auth/v1/admin/users/'+_resetUserId,{
+    var res=await admFetch('/auth/v1/admin/users/'+_resetUserId,{
       method:'PUT',
-      headers:{'apikey':SB_SRV,'Authorization':'Bearer '+SB_SRV,'Content-Type':'application/json'},
       body:JSON.stringify({password:pass})
     });
     var data=await res.json();
@@ -1454,3 +1455,6 @@ function setManualLevel(lvl){
   }catch(e){}
 })();
 </script>
+<script src="membros-acesso.js"></script>
+</body>
+</html>
