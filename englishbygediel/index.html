@@ -552,7 +552,7 @@ body.entrando .mara{bottom:96px}
     itens[c.id] = { modos: c.modos || [], titulo: c.titulo, img: c.img, cat: c.setor || '', linha: c.linha, sinopse: c.sinopse,
       meta: String(c.meta || '').split(',').map(x => x.trim()).filter(Boolean),
       gratis: c.tipo === 'gratis', pago: c.tipo === 'pago', aluno: c.tipo === 'aluno', membros: c.tipo === 'membros', extra: c.tipo === 'extra',
-      nome: c.nome, video: c.video, preco: c.preco || '',
+      nome: c.nome, video: c.video, preco: c.preco || '', parcelas: c.parcelas || '',
       cta: c.tipo === 'aluno' ? null : c.tipo === 'membros' ? { rotulo: (H.membros || {}).cardBotao || 'Já sou aluno, entrar', acao: 'login' } : link ? { rotulo: c.botao || 'Abrir', acao: 'link', href: link }
         : { rotulo: c.botao || 'Quero saber mais', acao: 'whatsapp', texto: `Oi Gediel! Quero o ${c.titulo}.` },
       cta2: link2 ? { rotulo: c.botao2 || 'Saber mais', acao: 'link', href: link2 } : c.tipo === 'membros' ? { rotulo: (H.mentoria || {}).botaoAplicar || 'Quero entrar no programa', acao: 'aplicar' } : null };
@@ -569,9 +569,15 @@ body.entrando .mara{bottom:96px}
     // o destaque do modo sobe pro começo
     if (modo && itens[modo.destaque]) { f.splice(f.indexOf(modo.destaque), f.includes(modo.destaque) ? 1 : 0); f.unshift(modo.destaque); }
     return f.filter(k => itens[k].gratis || itens[k].pago || itens[k].aluno).length > 2 ? f : ks; };
-  const cardPost = (k, sub) => { const m = itens[k];
+  // preço parcelado: card com "parcelas" (ou, sem nada marcado, 6x a partir de R$ 300) mostra "6x de R$ X" e o valor cheio embaixo.
+  // Preço escrito à mão já com "x" (ex.: "6x de R$ 216,22") aparece como está. parcelas = 1 mostra só o valor cheio.
+  const parcelado = m => { const txt = typeof m.preco === 'string' ? m.preco : ''; if (!txt || /\dx\b|x de/i.test(txt)) return null;
+    const v = parseFloat(txt.replace(/[^\d,.]/g, '').replace(/\./g, '').replace(',', '.')); if (!isFinite(v) || v <= 0) return null;
+    const n = parseInt(m.parcelas, 10) || (v >= 300 ? 6 : 1); if (n < 2) return null;
+    return { n, cada: (v / n).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }), cheio: txt }; };
+  const cardPost = (k, sub) => { const m = itens[k]; const pc = parcelado(m);
     const foto = m.img && !/logo-/.test(m.img) ? `<img src="${esc(m.img)}" alt="" loading="lazy">` : `<span class="letra grad g${[...k].reduce((a, c) => a + c.charCodeAt(0), 0) % 6}"><span>${esc(m.cat === 'Comunidade' ? 'Grupo' : m.cat)}</span></span>`;
-    const selo = m.membros ? '<span class="selo tranca">🔒 No programa</span>' : m.gratis ? '<span class="selo gratis">Grátis</span>' : m.preco && typeof m.preco === 'string' ? `<span class="selo">${esc(m.preco)}</span>` : m.pago ? '<span class="selo">Novo</span>' : '';
+    const selo = m.membros ? '<span class="selo tranca">🔒 No programa</span>' : m.gratis ? '<span class="selo gratis">Grátis</span>' : m.preco && typeof m.preco === 'string' ? `<span class="selo">${esc(pc ? pc.n + 'x ' + pc.cada : m.preco)}</span>` : m.pago ? '<span class="selo">Novo</span>' : '';
     return `<button class="post t3d" data-abrir="${esc(k)}"><span class="brilho"></span>${selo}<span class="foto">${foto}</span>
       <span class="rodape"><span>${esc(m.aluno ? '“' + m.titulo + '”' : m.titulo)}<small>${esc(m.linha || sub(m))}</small></span><i class="seta">${SETA}</i></span></button>`; };
 
@@ -636,6 +642,7 @@ body.entrando .mara{bottom:96px}
       return u ? `<a class="${cls}" href="${esc(u)}"${fora ? ' target="_blank" rel="noopener"' : ''}>${esc(c.rotulo)}</a>` : '';
     };
     const preco = m.preco && typeof m.preco === 'object' ? `<p class="preco">${esc(m.preco.separado || '')} <b>${esc(m.preco.parcelas)}</b><br><small>${esc(m.preco.nota)}</small></p>`
+      : parcelado(m) ? `<p class="preco">${parcelado(m).n}x de <b>${esc(parcelado(m).cada)}</b><br><small>ou ${esc(parcelado(m).cheio)} à vista</small></p>`
       : m.preco ? `<p class="preco"><b>${esc(m.preco)}</b></p>` : '';
     $('#ficha').innerHTML = `<span class="alca"></span><button class="fechar" data-fechar aria-label="Fechar">✕</button>
       ${midia ? `<div class="ficha-img">${midia}</div>` : ''}
