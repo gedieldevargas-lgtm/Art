@@ -398,11 +398,13 @@ body.entrando .mara{bottom:96px}
 <script src="config.js"></script>
 <script src="content.js"></script>
 <script src="hub-dados.js"></script>
+<script src="jogos-hub.js"></script>
 <script>if (/[?&]editar\b/.test(location.search)) document.write('<script src="editor.js" defer><\/script>');</script>
 <script>
 (async () => {
   const C = window.EBG, CFG = window.EBG_CONFIG || {};
   const H = await window.HUB_DADOS.carregar(C, CFG);
+  if (Array.isArray(window.EBG_JOGOS) && Array.isArray(H.cards) && !H.cards.some(c => /^jg-/.test(c.id || ''))) H.cards = H.cards.concat(window.EBG_JOGOS);
   window.HUB_ATUAL = H; // o modo editor (?editar) edita este objeto
 
   /* DADOS: tudo vai pro Supabase (tabelas hub_visitas, hub_eventos, leads_programa; supabase/dados.sql).
