@@ -42,7 +42,7 @@
       ['precoDe', 'Preço "de"'], ['precoPor', 'Preço "por"'], ['nota', 'Observação do preço'], ['video', 'Vídeo do YouTube (link ou código)', 'video'],
       ['img', 'Imagem (se não tiver vídeo)', 'img'], ['checkout', 'Link de compra', 'url'], ['botaoAplicar', 'Botão que leva ao chat'], ['botaoComprar', 'Botão de compra']] },
     { k: 'secoes', t: 'Títulos das fileiras', campos: [
-      ['gratis', 'Fileira grátis'], ['pagos', 'Fileira à venda'], ['botaoPagos', 'Link ao lado do título à venda'], ['membros', 'Fileira dentro da mentoria'], ['membrosSub', 'Link ao lado (abre o login)'], ['extras', 'Fileira ecossistema'], ['alunos', 'Fileira de alunos'], ['botaoAluno', 'Botão na ficha do aluno']] },
+      ['gratis', 'Fileira grátis'], ['pagos', 'Fileira à venda'], ['botaoPagos', 'Link ao lado do título à venda'], ['membros', 'Fileira dentro da mentoria'], ['membrosSub', 'Link ao lado (abre o login)'], ['jogos', 'Galeria de jogos'], ['simuladores', 'Galeria de simuladores'], ['extras', 'Fileira ecossistema'], ['alunos', 'Fileira de alunos'], ['botaoAluno', 'Botão na ficha do aluno']] },
     { k: 'cards', t: 'Cards (materiais e depoimentos)', d: 'Tudo o que aparece nas fileiras. Grátis vão pra fileira grátis, à venda pra "Pra ir mais fundo", trancados pra "Dentro da mentoria", ecossistema pra fileira própria e depoimentos pra fileira de alunos. Marque os modos onde o card aparece primeiro (sem nenhum marcado, aparece em todos).',
       lista: true, filtro: true, titulo: 'titulo', foto: 'img',
       novo: () => ({ id: 'c' + Date.now().toString(36), tipo: 'gratis', ativo: true, titulo: 'Novo material', linha: '', nome: '', setor: '', img: '', preco: '', link: '', botao: '', link2: '', botao2: '', video: '', sinopse: '', meta: '', modos: [] }),
@@ -51,6 +51,14 @@
         ['preco', 'Preço (à venda)'], ['link', 'Link do botão (landing, checkout, PDF…)', 'url'], ['botao', 'Texto do botão'],
         ['link2', 'Segundo link (opcional)', 'url'], ['botao2', 'Texto do segundo botão'], ['video', 'Vídeo do YouTube (link ou código)', 'video'],
         ['sinopse', 'Descrição (aparece ao tocar)', 'area'], ['meta', 'Etiquetas (separe por vírgula)'], ['modos', 'Aparece primeiro nos modos', 'modos']] },
+    { k: 'jogos', t: 'Jogos (galeria em loop)', d: 'Ícones pequenos que andam em loop. Ao tocar, abre a ficha com a descrição e o botão Jogar. Sem link, o botão mostra "Em breve".', lista: true, titulo: 'titulo', foto: 'img',
+      novo: () => ({ ativo: true, titulo: 'Novo jogo', icone: '🎮', img: '', sub: '', sinopse: '', comoJogar: '', link: '', botao: 'Jogar' }),
+      campos: [['titulo', 'Nome'], ['ativo', 'Visível', 'bool'], ['icone', 'Emoji do ícone'], ['img', 'Ou uma imagem quadrada pro ícone', 'img'], ['sub', 'Linha embaixo (ex.: Vocabulário · A1)'],
+        ['sinopse', 'Descrição', 'area'], ['comoJogar', 'Como jogar (um passo por linha)', 'area'], ['link', 'Link do botão Jogar', 'url'], ['botao', 'Texto do botão']] },
+    { k: 'simuladores', t: 'Simuladores (galeria em loop)', d: 'Igual aos jogos, na galeria "Simuladores".', lista: true, titulo: 'titulo', foto: 'img',
+      novo: () => ({ ativo: true, titulo: 'Novo simulador', icone: '🎯', img: '', sub: '', sinopse: '', comoJogar: '', link: '', botao: 'Jogar' }),
+      campos: [['titulo', 'Nome'], ['ativo', 'Visível', 'bool'], ['icone', 'Emoji do ícone'], ['img', 'Ou uma imagem quadrada pro ícone', 'img'], ['sub', 'Linha embaixo (ex.: Carreira · B1)'],
+        ['sinopse', 'Descrição', 'area'], ['comoJogar', 'Como usar (um passo por linha)', 'area'], ['link', 'Link do botão', 'url'], ['botao', 'Texto do botão']] },
     { k: 'membros', t: 'Entrar (área de membros)', d: 'O botão Entrar no topo e a janela de login. O padrão é a Plataforma Inteligente do próprio site (membros.html). Pra usar outra área de membros, cole o link dela.', campos: [
       ['url', 'Link da área de membros', 'url'], ['botaoTopo', 'Texto do botão no topo'], ['titulo', 'Título da janela'], ['texto', 'Texto da janela', 'area'],
       ['botao', 'Botão que abre a área de membros'], ['semConta', 'Botão pra quem ainda não é aluno'], ['cardBotao', 'Botão nos cards "dentro da mentoria"']] },
@@ -129,7 +137,7 @@
             <select data-filtro-modo><option value="">Todos os modos</option>${(H.modos || []).map(m => `<option value="${esc(m.id)}" ${m.id === filtroModo ? 'selected' : ''}>${esc(m.nome)}</option>`).join('')}</select>
             <span class="conta">${vis.length} de ${itens.length}</span></div>` : '';
           corpo = filtros + `<div class="hub-lista">${vis.map(([it, i]) => itemHTML(sec, it, i)).join('')}</div>`
-            + (opt.so && opt.so.item != null ? '' : `<button class="botao cheio" type="button" data-novo="${sec.k}">Adicionar ${sec.k === 'cards' ? 'card' : sec.k === 'modos' ? 'modo' : sec.k === 'redes' ? 'rede' : sec.k === 'embutidos' ? 'site' : 'atalho'}</button>`);
+            + (opt.so && opt.so.item != null ? '' : `<button class="botao cheio" type="button" data-novo="${sec.k}">Adicionar ${sec.k === 'cards' ? 'card' : sec.k === 'modos' ? 'modo' : sec.k === 'redes' ? 'rede' : sec.k === 'embutidos' ? 'site' : sec.k === 'jogos' ? 'jogo' : sec.k === 'simuladores' ? 'simulador' : 'atalho'}</button>`);
         } else corpo = `<div class="hub-campos">${sec.campos.map(f => campoHTML(f, H[sec.k] = H[sec.k] || {}, sec.k)).join('')}</div>`;
         const aberto = opt.so || abertos.has(sec.k);
         return `<details class="cartao hub-sec" data-sec="${sec.k}" ${aberto ? 'open' : ''}><summary><h3>${esc(sec.t)}</h3></summary>${sec.d && !(opt.so && opt.so.item != null) ? `<p class="sub">${esc(sec.d)}</p>` : ''}${corpo}</details>`;
