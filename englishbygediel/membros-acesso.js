@@ -191,7 +191,7 @@
       }
       if(t.closest('[data-sync-dev]')){
         toast('Buscando no YouTube…');var ses=(await sb.auth.getSession()).data.session;
-        var rr=await fetch('/.netlify/functions/devocionais-sync',{method:'POST',headers:{Authorization:'Bearer '+(ses?ses.access_token:'')}});var j=await rr.json().catch(function(){return {};});
+        var rr=await fetch('/.netlify/functions/devocionais-agora',{method:'POST',headers:{Authorization:'Bearer '+(ses?ses.access_token:'')}});var j=await rr.json().catch(function(){return {};});
         toast(rr.ok?'✅ '+(j.novos||[]).length+' novos (de '+j.naPlaylist+' na playlist)':(j.erro||'Não deu certo 😕'),rr.ok?'#10b981':'#ef4444');return;
       }
       if(t.closest('[data-novo]')){var n=await sb.from('materiais').insert({nome:'Novo material',ordem:S.mats.length}).select().single();if(n.data){S.mats.push(n.data);desenharMats(tipos);}else toast('Não criou 😕');return;}
