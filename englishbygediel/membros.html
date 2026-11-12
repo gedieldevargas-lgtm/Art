@@ -304,6 +304,9 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
 .admin-table tr:last-child td{border-bottom:none}
 .admin-table tr:hover td{background:var(--surface2)}
 .admin-user-name{font-weight:700;color:var(--fg)}
+.adm-acc{display:inline-flex;align-items:center;gap:4px;background:rgba(16,185,129,.1);color:var(--green);font-size:10.5px;font-weight:700;padding:3px 4px 3px 8px;border-radius:7px;margin:2px 4px 2px 0;white-space:nowrap}
+.adm-acc button{background:none;border:none;color:var(--fg3);cursor:pointer;font-size:11px;padding:0 3px;border-radius:4px}
+.adm-acc button:hover{color:var(--red);background:rgba(239,68,68,.1)}
 .admin-user-email{font-size:11px;color:var(--fg3);margin-top:1px}
 .admin-status{display:inline-block;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:800}
 .admin-status-ok{background:rgba(16,185,129,.12);color:#059669}
@@ -912,6 +915,20 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
   <div class="modal-box adm-modal-box" style="width:560px">
     <div class="modal-header"><h2 id="task-modal-title">Tarefa</h2><button class="modal-close" onclick="closeTaskModal()">✕</button></div>
     <div class="modal-body" id="task-modal-body"></div>
+  </div>
+</div>
+
+<!-- MODAL: apagar aluno -->
+<div class="modal-overlay" id="adm-del-modal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal-box" style="width:440px;max-width:calc(100vw - 32px)">
+    <div class="modal-header"><h2>🗑️ Apagar aluno</h2><button class="modal-close" onclick="document.getElementById('adm-del-modal').classList.remove('open')">✕</button></div>
+    <div class="modal-body">
+      <div id="adm-del-txt" style="font-size:13px;line-height:1.6;color:var(--fg2)"></div>
+      <label id="adm-del-comp" style="display:flex;gap:8px;align-items:flex-start;margin-top:14px;font-size:12.5px;line-height:1.5"><input type="checkbox" id="adm-del-check" style="margin-top:3px"><span id="adm-del-comp-lbl"></span></label>
+      <div style="font-size:12px;color:var(--red);font-weight:700;margin-top:14px">Não dá pra desfazer.</div>
+      <div id="adm-del-st" style="font-size:12px;min-height:18px;margin-top:8px"></div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px"><button class="admin-btn admin-btn-ghost" onclick="document.getElementById('adm-del-modal').classList.remove('open')">Cancelar</button><button class="admin-btn admin-btn-danger" onclick="admConfirmaApagar()">Apagar de vez</button></div>
+    </div>
   </div>
 </div>
 
@@ -1667,9 +1684,13 @@ async function loadUsers(){
     });
     var data=await res.json();
     var users=(data.users||[]).sort(function(a,b){return new Date(b.created_at)-new Date(a.created_at);});
+    var cr=await _sb.from('compras').select('pedido,email,produto,created_at');var porEmail={};
+    (cr.data||[]).forEach(function(c){var k=(c.email||'').toLowerCase();(porEmail[k]=porEmail[k]||[]).push(c);});
+    window._admUsers={};users.forEach(function(u){window._admUsers[u.id]=u;});
+    window._admCompras=porEmail;
     if(!users.length){el.innerHTML='<div class="admin-loading">Nenhum aluno cadastrado ainda.</div>';return;}
     var html='<div style="overflow-x:auto"><table class="admin-table"><thead><tr>'
-      +'<th>Aluno</th><th>Status</th><th>Cadastro</th><th>Ações</th>'
+      +'<th>Aluno</th><th>Acessos</th><th>Status</th><th>Cadastro</th><th>Ações</th>'
       +'</tr></thead><tbody>';
     users.forEach(function(u){
       var meta=u.user_metadata||{};
@@ -1678,14 +1699,41 @@ async function loadUsers(){
       var dateStr=u.created_at?new Date(u.created_at).toLocaleDateString('pt-BR'):'—';
       html+='<tr>'
         +'<td><div class="admin-user-name">'+esc(name)+'</div><div class="admin-user-email">'+esc(u.email)+'</div></td>'
+        +'<td>'+((porEmail[(u.email||'').toLowerCase()]||[]).map(function(c){return '<span class="adm-acc">'+esc(c.produto||'produto')+'<button title="Tirar esse acesso" onclick="admTirarAcesso(\''+esc(c.pedido)+'\')">✕</button></span>';}).join('')||'<span style="font-size:11px;color:var(--fg3)">Nenhum</span>')+'</td>'
         +'<td><span class="admin-status '+(confirmed?'admin-status-ok':'admin-status-pend')+'">'+(confirmed?'Confirmado':'Pendente')+'</span></td>'
         +'<td style="font-size:11px;color:var(--fg2)">'+dateStr+'</td>'
-        +'<td><button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="openResetModal(\''+u.id+'\',\''+esc(u.email)+'\')">🔑 Resetar senha</button></td>'
+        +'<td style="white-space:nowrap"><button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="openResetModal(\''+u.id+'\',\''+esc(u.email)+'\')">🔑 Senha</button> <button class="admin-btn admin-btn-danger admin-btn-sm" onclick="admApagarAluno(\''+u.id+'\')">🗑️ Apagar</button></td>'
         +'</tr>';
     });
     html+='</tbody></table></div>';
     el.innerHTML=html;
   }catch(e){el.innerHTML='<div class="admin-loading" style="color:var(--red)">Erro ao carregar: '+e.message+'</div>';}
+}
+
+// ─── Tirar um acesso (compra) ou apagar o aluno ───
+async function admTirarAcesso(pedido){
+  var r=await _sb.from('compras').delete().eq('pedido',pedido);
+  if(r.error){toast('Não tirou: '+r.error.message,'#ef4444');return;}
+  toast('Acesso removido','#6b7280');loadUsers();
+}
+function admApagarAluno(id){
+  var u=(window._admUsers||{})[id];if(!u)return;
+  var comp=(window._admCompras||{})[(u.email||'').toLowerCase()]||[];
+  var ov=document.getElementById('adm-del-modal');
+  document.getElementById('adm-del-txt').innerHTML='<strong>'+esc(u.email)+'</strong> perde o login e não entra mais na área de membros. Comentários e dúvidas dele continuam.';
+  document.getElementById('adm-del-comp').style.display=comp.length?'flex':'none';
+  document.getElementById('adm-del-comp-lbl').textContent='Também remover os '+comp.length+' acesso'+(comp.length>1?'s':'')+' comprado'+(comp.length>1?'s':'')+' ('+comp.map(function(c){return c.produto;}).join(', ')+'). Sem isso, se ele criar a conta de novo com o mesmo e-mail, volta a ter acesso.';
+  document.getElementById('adm-del-check').checked=true;
+  document.getElementById('adm-del-st').innerHTML='';
+  ov.dataset.id=id;ov.classList.add('open');
+}
+async function admConfirmaApagar(){
+  var ov=document.getElementById('adm-del-modal'),id=ov.dataset.id,u=(window._admUsers||{})[id],st=document.getElementById('adm-del-st');
+  if(!u)return;st.innerHTML='⏳ Apagando...';
+  var r=await admFetch('/auth/v1/admin/users/'+id,{method:'DELETE'});
+  if(!r.ok){var j=await r.json().catch(function(){return {};});st.innerHTML='<span style="color:var(--red)">'+esc(j.erro||j.msg||'Não deu certo.')+'</span>';return;}
+  if(document.getElementById('adm-del-comp').style.display!=='none'&&document.getElementById('adm-del-check').checked){await _sb.from('compras').delete().ilike('email',u.email);}
+  ov.classList.remove('open');toast('🗑️ Aluno apagado','#6b7280');loadUsers();
 }
 
 // ─── Criar usuário ───

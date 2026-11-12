@@ -1,4 +1,4 @@
-// Painel Admin da área de membros: listar/criar alunos e trocar senha.
+// Painel Admin da área de membros: listar/criar/apagar alunos e trocar senha.
 // A chave secreta do Supabase dos membros fica SÓ aqui (variável MEMBROS_SERVICE_KEY no Netlify), nunca na página.
 const URL_MEMBROS = process.env.MEMBROS_URL || 'https://jzdxcefnlwjgimymgsux.supabase.co';
 const resp = (status, obj) => ({ statusCode: status, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(obj) });
@@ -21,7 +21,16 @@ exports.handler = async (event) => {
 
   let p; try { p = JSON.parse(event.body || '{}'); } catch (e) { return resp(400, { erro: 'pedido inválido' }); }
   const path = String(p.path || ''), method = String(p.method || 'GET').toUpperCase();
-  if (!/^\/auth\/v1\/admin\/users(\/[0-9a-f-]{36})?(\?[\w=&]*)?$/.test(path) || !['GET', 'POST', 'PUT'].includes(method)) return resp(400, { erro: 'ação não permitida' });
+  if (!/^\/auth\/v1\/admin\/users(\/[0-9a-f-]{36})?(\?[\w=&]*)?$/.test(path) || !['GET', 'POST', 'PUT', 'DELETE'].includes(method)) return resp(400, { erro: 'ação não permitida' });
+  if (method === 'DELETE') {
+    // apagar aluno: só um por vez, e nunca uma conta de admin
+    if (!/^\/auth\/v1\/admin\/users\/[0-9a-f-]{36}$/.test(path)) return resp(400, { erro: 'ação não permitida' });
+    const alvo = await fetch(URL_MEMBROS + path, { headers: sk });
+    if (!alvo.ok) return resp(404, { erro: 'Aluno não encontrado.' });
+    const alvoEmail = String((await alvo.json()).email || '').toLowerCase();
+    const ad = await fetch(`${URL_MEMBROS}/rest/v1/admins?select=email&email=ilike.${encodeURIComponent(alvoEmail)}`, { headers: sk });
+    if (ad.ok && (await ad.json()).length) return resp(400, { erro: 'Essa é uma conta de admin, não dá pra apagar por aqui.' });
+  }
   const r = await fetch(URL_MEMBROS + path, { method, headers: sk, body: method === 'GET' ? undefined : JSON.stringify(p.body || {}) });
   return { statusCode: r.status, headers: { 'Content-Type': 'application/json' }, body: await r.text() };
 };
