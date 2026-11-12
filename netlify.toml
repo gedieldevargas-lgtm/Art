@@ -4,3 +4,7 @@
   base = "englishbygediel"
   publish = "."
   command = ""
+
+# cadastra sozinho os devocionais da playlist do YouTube na área de membros
+[functions."devocionais-sync"]
+  schedule = "@hourly"
