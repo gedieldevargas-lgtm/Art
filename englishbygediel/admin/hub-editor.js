@@ -51,6 +51,12 @@
         ['preco', 'Preço (à venda)'], ['link', 'Link do botão (landing, checkout, PDF…)', 'url'], ['botao', 'Texto do botão'],
         ['link2', 'Segundo link (opcional)', 'url'], ['botao2', 'Texto do segundo botão'], ['video', 'Vídeo do YouTube (link ou código)', 'video'],
         ['sinopse', 'Descrição (aparece ao tocar)', 'area'], ['meta', 'Etiquetas (separe por vírgula)'], ['modos', 'Aparece primeiro nos modos', 'modos']] },
+    { k: 'lojinha', t: 'Lojinha (coluna lateral)', d: 'A coluna fina com os produtos andando na vertical, no canto direito. Ao tocar, abre a lojinha com os achados de afiliado, os seus e-books à venda (cards "À venda") e os grátis (cards grátis com link).', campos: [
+      ['ativo', 'Mostrar a lojinha', 'bool'], ['rail', 'Nome curto no topo da coluna'], ['titulo', 'Título da lojinha'], ['sub', 'Texto embaixo do título'], ['aviso', 'Aviso de afiliado (rodapé da lojinha)', 'area']] },
+    { k: 'achados', t: 'Achados (links de afiliado)', d: 'Produtos que você indica e ganha comissão (Amazon, Mercado Livre, seguro viagem…). A categoria vira filtro na lojinha (Estudo, Fé, Viagem…).', lista: true, titulo: 'titulo', foto: 'img',
+      novo: () => ({ ativo: true, cat: 'Estudo', loja: '', titulo: 'Novo achado', desc: '', preco: '', link: 'https://', img: '' }),
+      campos: [['titulo', 'Nome do produto'], ['ativo', 'Visível', 'bool'], ['cat', 'Categoria (Estudo, Fé, Viagem…)'], ['loja', 'Loja (Amazon, Mercado Livre…)'], ['desc', 'Descrição curta', 'area'],
+        ['preco', 'Preço (deixe vazio pra "ver preço na loja")'], ['link', 'Seu link de afiliado', 'url'], ['img', 'Foto do produto', 'img']] },
     { k: 'jogos', t: 'Jogos (galeria em loop)', d: 'Ícones pequenos que andam em loop. Ao tocar, abre a ficha com a descrição e o botão Jogar. Sem link, o botão mostra "Em breve".', lista: true, titulo: 'titulo', foto: 'img',
       novo: () => ({ ativo: true, titulo: 'Novo jogo', icone: '🎮', img: '', sub: '', sinopse: '', comoJogar: '', link: '', botao: 'Jogar' }),
       campos: [['titulo', 'Nome'], ['ativo', 'Visível', 'bool'], ['icone', 'Emoji do ícone'], ['img', 'Ou uma imagem quadrada pro ícone', 'img'], ['sub', 'Linha embaixo (ex.: Vocabulário · A1)'],
@@ -137,7 +143,7 @@
             <select data-filtro-modo><option value="">Todos os modos</option>${(H.modos || []).map(m => `<option value="${esc(m.id)}" ${m.id === filtroModo ? 'selected' : ''}>${esc(m.nome)}</option>`).join('')}</select>
             <span class="conta">${vis.length} de ${itens.length}</span></div>` : '';
           corpo = filtros + `<div class="hub-lista">${vis.map(([it, i]) => itemHTML(sec, it, i)).join('')}</div>`
-            + (opt.so && opt.so.item != null ? '' : `<button class="botao cheio" type="button" data-novo="${sec.k}">Adicionar ${sec.k === 'cards' ? 'card' : sec.k === 'modos' ? 'modo' : sec.k === 'redes' ? 'rede' : sec.k === 'embutidos' ? 'site' : sec.k === 'jogos' ? 'jogo' : sec.k === 'simuladores' ? 'simulador' : 'atalho'}</button>`);
+            + (opt.so && opt.so.item != null ? '' : `<button class="botao cheio" type="button" data-novo="${sec.k}">Adicionar ${sec.k === 'cards' ? 'card' : sec.k === 'modos' ? 'modo' : sec.k === 'redes' ? 'rede' : sec.k === 'embutidos' ? 'site' : sec.k === 'achados' ? 'achado' : sec.k === 'jogos' ? 'jogo' : sec.k === 'simuladores' ? 'simulador' : 'atalho'}</button>`);
         } else corpo = `<div class="hub-campos">${sec.campos.map(f => campoHTML(f, H[sec.k] = H[sec.k] || {}, sec.k)).join('')}</div>`;
         const aberto = opt.so || abertos.has(sec.k);
         return `<details class="cartao hub-sec" data-sec="${sec.k}" ${aberto ? 'open' : ''}><summary><h3>${esc(sec.t)}</h3></summary>${sec.d && !(opt.so && opt.so.item != null) ? `<p class="sub">${esc(sec.d)}</p>` : ''}${corpo}</details>`;

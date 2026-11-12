@@ -84,6 +84,19 @@
         texto: 'Já é aluno ou comprou um material? Entre com o e-mail que você usou na compra pra acessar suas aulas, trilhas e materiais.',
         botao: 'Entrar na área de membros', semConta: 'Ainda não sou aluno', cardBotao: 'Já sou aluno, entrar' },
       cards,
+      // lojinha: coluna fina na lateral (passarela vertical) + janela com os achados de afiliado e os seus produtos
+      lojinha: { ativo: true, rail: 'Achados', titulo: 'Achados do Gediel', sub: 'Minhas indicações pra estudar, ler e viajar, e os meus materiais.',
+        aviso: 'Alguns links são de afiliado: posso receber comissão por compras qualificadas, sem custo a mais pra você. Como associado da Amazon, eu ganho com compras qualificadas. Preços de referência, sujeitos a alteração: confira o valor e a disponibilidade na loja.' },
+      achados: [
+        { ativo: true, cat: 'Estudo', loja: 'Amazon', titulo: 'English for Everyone: English Grammar Guide', desc: 'Um guia visual de gramática para consultar enquanto você estuda.', preco: '', link: 'https://amzn.to/4iyoaQO', img: 'img/achados/0.webp' },
+        { ativo: true, cat: 'Estudo', loja: 'Amazon', titulo: 'The Five Minute Journal', desc: 'Um diário guiado para praticar a escrita em inglês em poucos minutos.', preco: '', link: 'https://link.amazon/B0cYbg3Hr', img: 'img/achados/1.webp' },
+        { ativo: true, cat: 'Fé', loja: 'Mercado Livre', titulo: 'Bíblia bilíngue NVI/NIV', desc: 'Leia a Bíblia em português e inglês e compare as duas traduções.', preco: '', link: 'https://meli.la/28NzfyU', img: 'img/achados/2.webp' },
+        { ativo: true, cat: 'Estudo', loja: 'Mercado Livre', titulo: 'Dobble Clássico', desc: 'Jogue com a família e experimente nomear os símbolos em inglês.', preco: '', link: 'https://meli.la/2uR3Mz4', img: 'img/achados/3.webp' },
+        { ativo: true, cat: 'Estudo', loja: 'Mercado Livre', titulo: 'Kit de cadernos A5 e A6', desc: 'Dois cadernos de discos para organizar frases, vocabulário e anotações.', preco: 'R$ 47,43', link: 'https://meli.la/1y58Nnf', img: 'img/achados/4.webp' },
+        { ativo: true, cat: 'Viagem', loja: 'Mercado Livre', titulo: 'Organizador de mala de 7 peças', desc: 'Separe roupas e acessórios em bolsas dentro da mala.', preco: 'R$ 36,00', link: 'https://meli.la/1Lai5vf', img: 'img/achados/5.webp' },
+        { ativo: true, cat: 'Viagem', loja: 'Mercado Livre', titulo: 'Almofada de pescoço', desc: 'Apoio para o pescoço em viagens de avião, ônibus ou carro.', preco: 'R$ 43,89', link: 'https://meli.la/2wNHYEe', img: 'img/achados/6.webp' },
+        { ativo: true, cat: 'Viagem', loja: 'Real Seguro Viagem', titulo: 'Real Seguro Viagem', desc: 'Consulte opções de seguro para as datas e o destino da sua viagem.', preco: '', link: 'https://www.seguroviagem.srv.br/?ag=Us59wEJXEu', img: 'img/achados/7.webp' }
+      ],
       // galerias em loop (ícones pequenos; ao tocar abre a ficha com o botão Jogar)
       jogos: [
         { ativo: true, titulo: 'Flashcards', icone: '🃏', img: '', sub: 'Vocabulário · A1–B1', sinopse: 'Cartas de vocabulário com repetição espaçada: o que você erra volta mais vezes, o que você já sabe espaça.', comoJogar: '', link: '', botao: 'Jogar' },
