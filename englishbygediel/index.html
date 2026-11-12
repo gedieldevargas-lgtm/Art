@@ -621,7 +621,7 @@ body.entrando .mara{bottom:96px}
       meta: String(c.meta || '').split(',').map(x => x.trim()).filter(Boolean),
       gratis: c.tipo === 'gratis', pago: c.tipo === 'pago', aluno: c.tipo === 'aluno', membros: c.tipo === 'membros', extra: c.tipo === 'extra',
       nome: c.nome, video: c.video, preco: c.preco || '',
-      cta: c.tipo === 'aluno' ? null : c.tipo === 'membros' ? { rotulo: (H.membros || {}).cardBotao || 'Já sou aluno, entrar', acao: 'login' } : link ? { rotulo: c.botao || 'Abrir', acao: 'link', href: link }
+      cta: c.tipo === 'aluno' || (c.tipo === 'pago' && !link) ? null : c.tipo === 'membros' ? { rotulo: (H.membros || {}).cardBotao || 'Já sou aluno, entrar', acao: 'login' } : link ? { rotulo: c.botao || 'Abrir', acao: 'link', href: link }
         : { rotulo: c.botao || 'Quero saber mais', acao: 'whatsapp', texto: `Oi Gediel! Quero o ${c.titulo}.` },
       cta2: link2 ? { rotulo: c.botao2 || 'Saber mais', acao: 'link', href: link2 } : c.tipo === 'membros' ? { rotulo: (H.mentoria || {}).botaoAplicar || 'Quero entrar no programa', acao: 'aplicar' } : null };
   });
@@ -783,6 +783,7 @@ body.entrando .mara{bottom:96px}
         <p>${esc(m.sinopse)}</p>
         ${m.inclui ? `<ul>${m.inclui.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
         ${preco}
+        ${m.pago && !m.cta ? '<p class="preco"><small>Link de compra em breve.</small></p>' : ''}
         <div class="botoes">${botao(m.cta, 'b1')}${botao(m.cta2, 'b2')}${m.aluno ? `<button class="b1" data-ir="#aplicar" data-fechar>${esc(H.secoes.botaoAluno || 'Quero esse resultado')}</button>` : ''}</div>
       </div>`;
     document.body.classList.add('aberta'); document.body.style.overflow = 'hidden';

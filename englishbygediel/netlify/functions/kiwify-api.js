@@ -31,6 +31,18 @@ async function kiwify(token, caminho) {
 }
 const lista = d => (Array.isArray(d) ? d : d.data || d.items || d.products || d.sales || []);
 
+// procura, em qualquer lugar do produto, um link de checkout da Kiwify (pay.kiwify.com.br/...)
+function acharLink(o) {
+  let achou = '';
+  (function ande(v) {
+    if (achou || v == null) return;
+    if (typeof v === 'string') { const m = v.match(/https:\/\/pay\.kiwify\.com\.br\/[\w-]+/); if (m) achou = m[0]; return; }
+    if (Array.isArray(v)) return v.forEach(ande);
+    if (typeof v === 'object') Object.values(v).forEach(ande);
+  })(o);
+  return achou;
+}
+
 async function produtos(t) {
   const out = [];
   for (let p = 1; p <= 20; p++) {
@@ -38,11 +50,16 @@ async function produtos(t) {
     const l = lista(d); out.push(...l);
     if (l.length < 100) break;
   }
+  // quem veio sem link na lista: tenta o detalhe do produto
+  for (const p of out) {
+    if (acharLink(p) || pega(p, 'checkout_url')) continue;
+    try { const d = await kiwify(t, `/products/${encodeURIComponent(pega(p, 'id', 'product_id'))}`); p.__detalhe = d; } catch (e) {}
+  }
   return out.map(p => ({
     id: String(pega(p, 'id', 'product_id') || ''), nome: pega(p, 'name', 'product_name') || '',
     preco: pega(p, 'price', 'offers.0.price', 'payment_options.0.price'), status: pega(p, 'status') || '',
     tipo: pega(p, 'type', 'product_type') || '', criado: pega(p, 'created_at') || '',
-    link: pega(p, 'checkout_url', 'url', 'links.0.url', 'sales_page_url') || '', capa: pega(p, 'cover_image', 'image', 'thumbnail') || ''
+    link: pega(p, 'checkout_url') || acharLink(p) || '', capa: pega(p, 'cover_image', 'image', 'thumbnail') || ''
   }));
 }
 

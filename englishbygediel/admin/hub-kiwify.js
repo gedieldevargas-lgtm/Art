@@ -9,7 +9,7 @@
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const real = v => Number(v || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   const norm = t => String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
-  let produtos = [], vendas = [], noHub = new Set();
+  let produtos = [], vendas = [], noHub = new Set(), linkHub = new Map(), digitados = {};
 
   async function api(acao, extra = {}) {
     const { data } = await sb.auth.getSession();
@@ -35,6 +35,7 @@
     const { data } = await sb.from('site_config').select('dados').eq('id', 'hub').maybeSingle();
     const cards = (data && data.dados && data.dados.cards) || [];
     noHub = new Set(cards.map(c => c.id).concat(cards.map(c => norm(c.titulo))));
+    linkHub = new Map(); cards.forEach(c => { linkHub.set(c.id, c.link || ''); linkHub.set(norm(c.titulo), c.link || ''); });
   }
 
   function desenhar() {
@@ -54,11 +55,12 @@
     }).sort((a, b) => b.receita - a.receita);
     const total = linhas.reduce((a, l) => a + l.receita, 0);
     box.innerHTML = `<div class="kpis kiwify-kpis"><div class="kpi"><b>${lista.length}</b><span>produtos</span></div><div class="kpi"><b>${linhas.reduce((a, l) => a + l.qtd, 0)}</b><span>vendas pagas</span></div><div class="kpi"><b>${real(total)}</b><span>faturado</span></div></div>
-      <div class="tabela-wrap"><table class="tabela"><thead><tr><th>Produto</th><th>Preço</th><th>Status</th><th>Vendas</th><th>Faturado</th><th>Reemb.</th><th>No Hub</th></tr></thead><tbody>
+      <div class="tabela-wrap"><table class="tabela"><thead><tr><th>Produto</th><th>Preço</th><th>Status</th><th>Vendas</th><th>Faturado</th><th>Reemb.</th><th>Link de compra</th><th>No Hub</th></tr></thead><tbody>
       ${linhas.map(({ p, qtd, receita, reemb }) => {
         const ja = noHub.has('k-' + p.id) || noHub.has(norm(p.nome));
         return `<tr><td><strong>${esc(p.nome)}</strong>${p.tipo ? `<small>${esc(p.tipo)}</small>` : ''}</td><td>${p.preco != null ? real(p.preco > 1000 ? p.preco / 100 : p.preco) : '—'}</td>
           <td>${esc(p.status || '')}</td><td>${qtd}</td><td>${real(receita)}</td><td>${reemb || ''}</td>
+          <td><input class="link-compra" data-chave="${esc(p.id || p.nome)}" value="${esc(digitados[p.id || p.nome] ?? (linkHub.get('k-' + p.id) || linkHub.get(norm(p.nome)) || p.link || ''))}" placeholder="https://pay.kiwify.com.br/…" style="min-width:210px"></td>
           <td>${ja ? '<span class="selo">já está</span>' : `<button class="botao" type="button" data-por-hub="${esc(p.id || p.nome)}">Colocar no Hub</button>`}</td></tr>`;
       }).join('')}</tbody></table></div>`;
   }
@@ -92,12 +94,28 @@
     const H = window.HUB_DADOS.juntar(base, data && data.dados);
     const preco = p.preco != null ? Number(p.preco > 1000 ? p.preco / 100 : p.preco).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '';
     H.cards.push({ id: 'k-' + (p.id || Date.now().toString(36)), tipo: 'pago', ativo: true, titulo: p.nome, linha: '', nome: '', setor: 'Kiwify',
-      img: p.capa || '', preco, link: p.link || '', botao: 'Quero o ' + p.nome, link2: '', botao2: '', video: '', sinopse: '', meta: '', modos: [] });
+      img: p.capa || '', preco, link: digitados[p.id || p.nome] || p.link || '', botao: 'Comprar', link2: '', botao2: '', video: '', sinopse: '', meta: '', modos: [] });
     const { error } = await sb.from('site_config').upsert({ id: 'hub', dados: H, updated_at: new Date().toISOString() });
     if (error) { aviso('Não deu pra salvar no Hub.'); return; }
     aviso(`"${p.nome}" entrou no Hub. Abra a aba Hub → Cards pra pôr capa, link e descrição.`);
     await carregarHub(); desenhar();
   }
+
+  // cola o link de checkout: grava no card do Hub (se o produto já estiver lá) ou guarda pro "Colocar no Hub"
+  async function salvarLink(chave, valor) {
+    valor = String(valor || '').trim();
+    if (valor && !/^https:\/\//i.test(valor)) { aviso('O link precisa começar com https://'); return; }
+    digitados[chave] = valor;
+    const p = produtos.find(x => x.id === chave) || produtos.find(x => x.nome === chave) || { id: '', nome: chave };
+    const { data } = await sb.from('site_config').select('dados').eq('id', 'hub').maybeSingle();
+    const H = data && data.dados; if (!H || !(H.cards || []).length) { aviso('Link guardado. Ele vai pro card quando você clicar em "Colocar no Hub".'); return; }
+    let n = 0; H.cards.forEach(c => { if (c.id === 'k-' + p.id || norm(c.titulo) === norm(p.nome)) { c.link = valor; n++; } });
+    if (!n) { aviso('Link guardado. Ele vai pro card quando você clicar em "Colocar no Hub".'); return; }
+    const { error } = await sb.from('site_config').upsert({ id: 'hub', dados: H, updated_at: new Date().toISOString() });
+    aviso(error ? 'Não deu pra salvar o link.' : `Link salvo em ${n} card${n > 1 ? 's' : ''} do Hub.`);
+    await carregarHub();
+  }
+  document.addEventListener('change', e => { const i = e.target.closest && e.target.closest('.link-compra'); if (i) salvarLink(i.dataset.chave, i.value); });
 
   document.addEventListener('click', e => {
     if (e.target.closest('#kiwifyBuscar')) buscar();
