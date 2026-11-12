@@ -162,7 +162,7 @@
   document.head.appendChild(css);
 
   /* ───────────────────────── estado do aluno (sequência, aulas vistas, última aula) ───────────────────────── */
-  var U=null, ST={dias:[],vistas:[],ultima:null,bv:false}, CFG={}, salvarT=null;
+  var U=null, ST={dias:[],vistas:[],ultima:null,bv:false,tour:[]}, CFG={}, salvarT=null;
   function chave(){return 'mi_estado_'+(U?U.id:'anon');}
   function carregarEstado(user){
     U=user;
@@ -172,13 +172,14 @@
     ST.vistas=uni(m.vistas,l.vistas);
     var um=m.ultima,ul=l.ultima;ST.ultima=(um&&ul)?((um.ts||0)>=(ul.ts||0)?um:ul):(um||ul||null);
     ST.bv=!!(m.bv||l.bv);
+    ST.tour=uni(m.tour,l.tour);
   }
   function salvar(){
     LS.set(chave(),ST);
     clearTimeout(salvarT);
     salvarT=setTimeout(function(){
       if(!U)return;
-      window._sb.auth.updateUser({data:{mi:{dias:ST.dias.slice(-150),vistas:ST.vistas.slice(-400),ultima:ST.ultima,bv:ST.bv}}}).catch(function(){});
+      window._sb.auth.updateUser({data:{mi:{dias:ST.dias.slice(-150),vistas:ST.vistas.slice(-400),ultima:ST.ultima,bv:ST.bv,tour:ST.tour}}}).catch(function(){});
     },1500);
   }
   function marcarDia(){
@@ -378,8 +379,10 @@
       +'<div><b>🎬</b><span><strong>Sua aula</strong>: 2 aulas novas por semana. Use ◀ ▶ pra voltar ou avançar. Toda aula tem quiz e comentários.</span></div>'
       +'<div><b>📺</b><span><strong>Lives e dúvidas</strong>: entre ao vivo na sua turma e mande dúvidas no botão 🙋 a qualquer hora.</span></div>'
       +'</div>'
-      +'<button class="mi-cta" data-ent="bv-ok">'+(rever?'Fechar':'Entendi, bora começar →')+'</button>');
+      +(rever?'<button class="mi-cta" data-ent="tour" style="margin-bottom:10px;background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff">🧭 Fazer o tour pelos menus</button>':'')
+      +'<button class="mi-cta" data-ent="bv-ok"'+(rever?' style="position:static;box-shadow:none;background:rgba(255,255,255,.12);color:#fff"':'')+'>'+(rever?'Fechar':'Entendi, bora começar →')+'</button>');
     ent.onclick=function(e){
+      if(e.target.closest('[data-ent="tour"]')){fecharEntrada(function(){go('home');setTimeout(function(){tour('todos');},500);});return;}
       if(!e.target.closest('[data-ent="bv-ok"]'))return;
       if(rever){fecharEntrada();return;}
       ST.bv=true;salvar();perguntarContexto();
@@ -395,7 +398,7 @@
       var b=e.target.closest('[data-ent="ctx"]');if(!b)return;
       var k=b.dataset.k;
       if(k){LS.set('mi_ctx',{d:dia(),k:k});escolherCtxNaMaratona(k);}
-      fecharEntrada(function(){go('home');renderHome();pintarRail();if(k)toast('✅ Checklist pronto: '+(CTX.filter(function(x){return x.k===k;})[0].lb),'#10b981');});
+      fecharEntrada(function(){go('home');renderHome();pintarRail();setTimeout(tourAuto,700);if(k)toast('✅ Checklist pronto: '+(CTX.filter(function(x){return x.k===k;})[0].lb),'#10b981');});
     };
   }
   var entrou=false;
@@ -793,11 +796,152 @@
 
   /* configurações: rever boas-vindas */
   (function(){var s=document.querySelector('#settings-overlay .modal-body');if(!s)return;
-    var b=document.createElement('button');b.className='set-btn set-btn-ghost';b.textContent='▶ Rever o vídeo de como usar o app';b.onclick=function(){if(window.closeSettings)closeSettings();mostrarBoasVindas(true);};s.appendChild(b);})();
+    var b=document.createElement('button');b.className='set-btn set-btn-ghost';b.textContent='▶ Rever o vídeo de como usar o app';var b2=document.createElement('button');b2.className='set-btn set-btn-ghost';b2.textContent='🧭 Fazer o tour pelos menus';b2.onclick=function(){if(window.closeSettings)closeSettings();go('home');setTimeout(function(){tour('todos');},500);};s.appendChild(b2);b.onclick=function(){if(window.closeSettings)closeSettings();mostrarBoasVindas(true);};s.appendChild(b);})();
 
   /* instalar como app */
   if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(function(){});
 
-  window.MI_APP={aulaAberta:aulaAberta,marcarDia:marcarDia,abrirAula:abrirAula,renderHome:renderHome,
+
+  /* ───────────────────────── TOUR DOS MENUS ─────────────────────────
+     Lê os menus que existem na lateral NA HORA. Menu novo entra sozinho no tour,
+     e quem já fez o tour vê só a novidade. Os textos são editáveis no admin (Universos → Tutorial dos menus). */
+  var TOUR_TXT={
+    home:'Sua tela do dia: o checklist, as lives e a aula da vez. Comece sempre por aqui.',
+    maratona:'O checklist de hoje, montado pro lugar onde você está. Toque em cada tarefa: tem o passo a passo, o conteúdo pra usar e uma provinha rápida.',
+    lives:'A agenda das aulas ao vivo. Quando uma estiver no ar, aparece "AO VIVO" e é só tocar pra entrar.',
+    modulos:'As aulas gravadas do Programa, liberadas 2 por semana. Cada aula tem quiz e comentários. Nas que ainda vão sair, vote em "estou esperando".',
+    jogos:'Treine vocabulário e frases jogando. Os que têm o selo JOGAR já funcionam; os outros estão chegando.',
+    materiais:'Seus PDFs e e-books: o que é gratuito e o que você já comprou ficam aqui.',
+    prompts:'Prompts prontos pra praticar inglês com ChatGPT ou Claude. Personalize, copie e cole.',
+    devocionais:'Os devocionais gravados do English On Mission.',
+    eom:'English On Mission: inglês com a Bíblia. Devocionais, a playlist de inglês bíblico, materiais e o grupo.',
+    culture:'Culture English: inglês com séries, filmes e música. Mini cursos, e-books e o grupo.',
+    viagens:'Viagens e intercâmbio: Toronto, e-book de viagem, seguro, vlogs e um botão pra eu te ajudar a planejar sua viagem.',
+    bussola:'Descubra seu nível de inglês, do A1 ao C2.',
+    prisma:'Descubra como você aprende melhor. Isso deixa seu estudo do seu jeito.',
+    config:'Seu nome e foto. Aqui também dá pra rever o vídeo de boas-vindas e este tour.',
+    '#check':'O seu checklist de hoje. A barra mostra quanto falta pra fechar o dia.',
+    '#lives':'A próxima live. Quando estiver acontecendo, fica vermelho com AO VIVO.',
+    '#aula':'A sua aula da vez. Use ◀ ▶ pra voltar ou avançar entre as aulas.',
+    '#duvida':'Ficou com dúvida? Toque aqui e mande pro professor a qualquer hora. A resposta chega aqui mesmo.',
+    '#bnav':'Os atalhos do dia a dia ficam aqui embaixo. Em "Menu" estão todas as outras áreas.'
+  };
+  function tourTexto(k,lb){var t=(CFG.tour||{})[k];return t||TOUR_TXT[k]||('Uma área nova do app: '+lb+'. Toque pra conhecer.');}
+  function menusAtuais(){
+    var out=[];
+    [].forEach.call(document.querySelectorAll('.sidebar .nav-pill'),function(n){
+      if(n.id==='admin-nav'||getComputedStyle(n).display==='none')return;
+      var oc=n.getAttribute('onclick')||'',m=oc.match(/goTo\('(\w+)'/),k=m?m[1]:(/openSettings/.test(oc)?'config':null);if(!k)return;
+      var sp=n.querySelectorAll('span'),lb=(sp[1]||sp[0]||n).textContent.trim();
+      out.push({k:k,lb:lb,el:n});
+    });
+    return out;
+  }
+  var tv=document.createElement('div');tv.id='mi-tour';document.body.appendChild(tv);
+  var tcss=document.createElement('style');
+  tcss.textContent='#mi-tour{position:fixed;inset:0;z-index:9500;display:none}#mi-tour.on{display:block}'
+    +'#mi-tour .spot{position:fixed;border-radius:14px;box-shadow:0 0 0 9999px rgba(6,9,22,.72);transition:all .3s cubic-bezier(.22,1,.36,1);pointer-events:none;outline:3px solid #fff;outline-offset:2px}'
+    +'#mi-tour .tip{position:fixed;width:310px;max-width:calc(100vw - 24px);background:var(--surface);color:var(--fg);border-radius:18px;padding:16px;box-shadow:0 24px 60px rgba(0,0,0,.4);transition:top .3s,left .3s}'
+    +'#mi-tour .tip .k{font-size:10px;font-weight:800;letter-spacing:1.2px;color:var(--accent);text-transform:uppercase}'
+    +'#mi-tour .tip .t{font-size:17px;font-weight:800;margin:4px 0 6px}#mi-tour .tip .d{font-size:13px;line-height:1.55;color:var(--fg2)}'
+    +'#mi-tour .tip .b{display:flex;gap:8px;align-items:center;margin-top:14px}#mi-tour .tip .b button{border:none;border-radius:11px;padding:10px 14px;font-size:13px;font-weight:800;cursor:pointer}'
+    +'#mi-tour .tip .pular{background:none!important;color:var(--fg3);padding:10px 4px!important;margin-right:auto}'
+    +'#mi-tour .tip .vol{background:var(--surface2);color:var(--fg)}#mi-tour .tip .prx{background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff}'
+    +'#mi-tour .dots{display:flex;gap:4px;margin-top:12px;flex-wrap:wrap}#mi-tour .dots i{width:6px;height:6px;border-radius:50%;background:var(--border)}#mi-tour .dots i.on{background:var(--accent);width:16px;border-radius:4px}';
+  document.head.appendChild(tcss);
+  var T=null;
+  function celular(){return window.matchMedia('(max-width:680px)').matches;}
+  function passosTour(modo){
+    var menus=menusAtuais(),p=[];
+    if(modo==='novos'){
+      menus.filter(function(m){return ST.tour.indexOf(m.k)<0;}).forEach(function(m){p.push({k:m.k,t:m.lb,d:tourTexto(m.k,m.lb),el:m.el,menu:true,kick:'Novidade no app ✨'});});
+      return p;
+    }
+    var home=[['#check','.hm-check','Checklist de hoje'],['#lives','.hm-live','Lives'],['#aula','#hm-aula','Sua aula'],['#duvida','#ai-fab','Dúvidas com o professor']];
+    home.forEach(function(h){var el=document.querySelector(h[1]);if(el&&el.offsetParent!==null||(el&&h[0]==='#duvida'))p.push({k:h[0],t:h[2],d:tourTexto(h[0],h[2]),el:el,kick:'Tela inicial'});});
+    if(celular()&&$('mi-bnav'))p.push({k:'#bnav',t:'Barra de atalhos',d:tourTexto('#bnav','Barra de atalhos'),el:$('mi-bnav'),kick:'Navegação'});
+    menus.forEach(function(m){p.push({k:m.k,t:m.lb,d:tourTexto(m.k,m.lb),el:m.el,menu:true,kick:'Menu'});});
+    return p;
+  }
+  function tour(modo){
+    var p=passosTour(modo);if(!p.length)return;
+    T={p:p,i:0,modo:modo};tv.classList.add('on');
+    tv.innerHTML='<div class="spot"></div><div class="tip"></div>';
+    tourPasso();
+  }
+  function tourPasso(){
+    var s=T.p[T.i],el=s.el;
+    gaveta(!!(s.menu&&celular()));
+    setTimeout(function(){
+      if(!T)return;
+      if(el&&el.scrollIntoView)el.scrollIntoView({block:'nearest',behavior:'smooth'});
+      setTimeout(function(){if(T)tourPos();},s.menu&&celular()?260:180);
+    },s.menu&&celular()?120:0);
+    var tip=tv.querySelector('.tip'),fim=T.i===T.p.length-1;
+    tip.innerHTML='<div class="k">'+E(s.kick)+' · '+(T.i+1)+' de '+T.p.length+'</div><div class="t">'+E(s.t)+'</div><div class="d">'+E(s.d)+'</div>'
+      +'<div class="b"><button class="pular" data-tr="pular">'+(fim?'':'Pular tour')+'</button>'+(T.i?'<button class="vol" data-tr="vol">Voltar</button>':'')+'<button class="prx" data-tr="prx">'+(fim?'Bora! 🚀':'Próximo →')+'</button></div>'
+      +(T.p.length>1&&T.p.length<=20?'<div class="dots">'+T.p.map(function(x,i){return '<i class="'+(i===T.i?'on':'')+'"></i>';}).join('')+'</div>':'');
+  }
+  function tourPos(){
+    var s=T.p[T.i],el=s.el,spot=tv.querySelector('.spot'),tip=tv.querySelector('.tip');
+    var W=innerWidth,H=innerHeight,tw=Math.min(310,W-24),th=tip.offsetHeight||170;
+    if(!el){spot.style.cssText='left:50%;top:50%;width:0;height:0';tip.style.left=(W-tw)/2+'px';tip.style.top=(H-th)/2+'px';return;}
+    var r=el.getBoundingClientRect(),pd=6;
+    spot.style.left=(r.left-pd)+'px';spot.style.top=(r.top-pd)+'px';spot.style.width=(r.width+pd*2)+'px';spot.style.height=(r.height+pd*2)+'px';
+    var x,y;
+    if(s.menu&&!celular()){x=r.right+18;y=Math.max(12,Math.min(H-th-12,r.top+r.height/2-th/2));}
+    else if(s.menu&&celular()){x=Math.min(W-tw-12,Math.max(12,r.right-tw*0.35));y=r.bottom+14+th>H-12?r.top-th-14:r.bottom+14;if(x<r.right-40&&x+tw>r.left&&y<r.bottom&&y+th>r.top)y=r.bottom+14;}
+    else{x=Math.max(12,Math.min(W-tw-12,r.left+r.width/2-tw/2));y=r.bottom+14+th<=H-12?r.bottom+14:Math.max(12,r.top-th-14);}
+    if(x+tw>W-12)x=W-tw-12;
+    tip.style.left=x+'px';tip.style.top=Math.max(12,Math.min(H-th-12,y))+'px';
+  }
+  function tourFim(){
+    if(!T)return;
+    menusAtuais().forEach(function(m){if(ST.tour.indexOf(m.k)<0)ST.tour.push(m.k);});salvar();
+    T=null;tv.classList.remove('on');tv.innerHTML='';gaveta(false);
+  }
+  tv.addEventListener('click',function(e){
+    var b=e.target.closest('[data-tr]');if(!b||!T)return;
+    if(b.dataset.tr==='pular')return tourFim();
+    if(b.dataset.tr==='vol'&&T.i>0){T.i--;return tourPasso();}
+    if(b.dataset.tr==='prx'){if(T.i>=T.p.length-1)return tourFim();T.i++;tourPasso();}
+  });
+  window.addEventListener('resize',function(){if(T)tourPos();});
+  document.addEventListener('keydown',function(e){if(!T)return;if(e.key==='Escape')tourFim();if(e.key==='ArrowRight'){if(T.i>=T.p.length-1)tourFim();else{T.i++;tourPasso();}}if(e.key==='ArrowLeft'&&T.i>0){T.i--;tourPasso();}});
+  async function tourAuto(){
+    if(T||!U)return;
+    await lerCfg();
+    if(!ST.tour.length){tour('todos');return;}
+    var novos=menusAtuais().filter(function(m){return ST.tour.indexOf(m.k)<0;});
+    if(novos.length)tour('novos');
+  }
+
+  /* admin: textos do tour */
+  function montarAdminTour(){
+    var p=$('adm-universos');if(!p||$('adm-tour-box'))return;
+    var box=document.createElement('div');box.className='admin-form';box.id='adm-tour-box';
+    box.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:6px"><div class="admin-form-title" style="margin:0">🧭 Tutorial dos menus</div><div style="display:flex;gap:8px"><button class="admin-btn admin-btn-ghost admin-btn-sm" data-ua="tour-testar">▶ Testar tour</button><button class="admin-btn admin-btn-primary admin-btn-sm" data-ua="tour-salvar">💾 Salvar textos</button></div></div>'
+      +'<div style="font-size:12px;color:var(--fg2);margin-bottom:12px;line-height:1.6">O tour aparece sozinho na primeira entrada do aluno. Quando você cria um menu novo, quem já fez o tour vê só a novidade. Deixe em branco pra usar o texto padrão.</div><div id="adm-tour-list"></div>';
+    p.insertBefore(box,p.children[1]||null);
+  }
+  function pintarAdminTour(){
+    var l=$('adm-tour-list');if(!l)return;
+    var itens=menusAtuais().map(function(m){return {k:m.k,lb:m.lb};}).concat([{k:'#check',lb:'Início · botão Checklist'},{k:'#lives',lb:'Início · botão Lives'},{k:'#aula',lb:'Início · Sua aula'},{k:'#duvida',lb:'Botão de dúvidas 🙋'},{k:'#bnav',lb:'Celular · barra de baixo'}]);
+    l.innerHTML=itens.map(function(m){return '<div style="margin-bottom:10px"><div class="adm-section" style="margin:0 0 4px">'+E(m.lb)+'</div><textarea class="admin-inp" rows="2" data-tourk="'+E(m.k)+'" placeholder="'+E(TOUR_TXT[m.k]||'Uma área nova do app: '+m.lb+'.')+'">'+E((CFG.tour||{})[m.k]||'')+'</textarea></div>';}).join('');
+  }
+  var luAnt=loadAdminUni;
+  loadAdminUni=async function(){await luAnt();montarAdminTour();pintarAdminTour();};
+  document.addEventListener('click',async function(e){
+    var b=e.target.closest('[data-ua="tour-salvar"],[data-ua="tour-testar"]');if(!b)return;
+    if(b.dataset.ua==='tour-testar'){go('home');setTimeout(function(){tour('todos');},500);return;}
+    var t={};[].forEach.call(document.querySelectorAll('[data-tourk]'),function(x){var v=x.value.trim();if(v)t[x.dataset.tourk]=v;});
+    var cur=await window._sb.from('acesso').select('dados').eq('id','cfg').maybeSingle();
+    var dados=Object.assign({},(cur.data&&cur.data.dados)||{},{tour:t});
+    var r=await window._sb.from('acesso').upsert({id:'cfg',dados:dados});
+    if(!r.error)CFG.tour=t;
+    toast(r.error?'Não salvou: '+r.error.message:'✅ Textos do tour salvos',r.error?'#ef4444':'#10b981');
+  });
+
+  window.MI_APP={tour:tour,aulaAberta:aulaAberta,marcarDia:marcarDia,abrirAula:abrirAula,renderHome:renderHome,
     compartilharQuiz:function(sc,tot){var t=(window._stCurLes&&_stCurLes.title)||'aula';wa('Acertei '+sc+'/'+tot+' no quiz da aula "'+t+'" do Método Inteligente 🔥 Bora treinar comigo? Faz o teste de nível grátis: '+linkIndicacao(),false);}};
 })();
