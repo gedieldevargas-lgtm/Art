@@ -34,13 +34,13 @@ const entra = t => PALAVRAS.test(t) && !(((t.match(/aula\s*0*(\d+)/i) || [])[1] 
 async function sincronizar(KEY) {
   const sk = { apikey: KEY, Authorization: `Bearer ${KEY}`, 'Content-Type': 'application/json' };
   const ids = await idsDaPlaylist();
-  const ja = await fetch(`${URL_MEMBROS}/rest/v1/devocionais?select=video_id`, { headers: sk });
-  if (!ja.ok) throw new Error('Tabela devocionais não encontrada (rode o devocionais.sql). ' + ja.status);
-  const tem = new Set((await ja.json()).map(x => x.video_id));
+  const ja = await fetch(`${URL_MEMBROS}/rest/v1/devocionais?select=video_id,titulo,capa`, { headers: sk });
+  if (!ja.ok) throw new Error(ja.status === 404 ? 'Tabela devocionais não encontrada (rode o devocionais.sql).' : `Supabase recusou a leitura (${ja.status}). Confira a MEMBROS_SERVICE_KEY no Netlify.`);
+  const tem = new Map((await ja.json()).map(x => [x.video_id, x]));
   const novos = [], ordens = [];
   for (let i = 0; i < ids.length; i++) {
     const id = ids[i];
-    if (tem.has(id)) { ordens.push({ video_id: id, ordem: i + 1 }); continue; }
+    if (tem.has(id)) { const x = tem.get(id); ordens.push({ video_id: id, titulo: x.titulo, capa: x.capa || '', ordem: i + 1 }); continue; }   // o banco exige o título mesmo ao só atualizar a posição
     const t = await titulo(id);
     if (t && entra(t)) novos.push({ video_id: id, titulo: t, capa: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`, ordem: i + 1 });
   }
