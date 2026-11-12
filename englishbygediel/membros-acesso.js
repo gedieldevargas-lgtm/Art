@@ -2,7 +2,7 @@
    Precisa do supabase/membros.sql rodado no projeto dos membros. Sem ele, tudo fica como antes (sem cadeado). */
 (function(){
   var sb=window._sb||_sb, PANES_PROGRAMA=['maratona','lives','modulos'];
-  var S={pronto:false,ok:false,admin:false,programa:false,cfg:{programa:[],jogosGratis:[],checkout:''},mats:[],compras:[],meta:''};
+  var S={pronto:false,ok:false,admin:false,programa:false,cfg:{programa:[],jogosGratis:[],checkout:'',eom:[],checkoutEom:''},mats:[],compras:[],meta:''};
   var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
   var tem=function(trecho){trecho=(trecho||'').toLowerCase().trim();if(!trecho)return false;
     return S.compras.some(function(c){return (c.produto||'').toLowerCase().indexOf(trecho)>=0;})||S.meta.toLowerCase().indexOf(trecho)>=0;};
@@ -22,11 +22,13 @@
    +'.ger small{color:var(--fg2,#667);font-size:12px;display:block;margin-bottom:8px;line-height:1.45}.ger input,.ger select{border:1.5px solid var(--border,#dde);background:var(--surface2,#f6f7fb);color:inherit;border-radius:10px;padding:9px 10px;font-size:13px;width:100%}'
    +'.ger .chips{display:flex;flex-wrap:wrap;gap:6px}.ger .chip{border:1.5px solid var(--border,#dde);border-radius:99px;padding:6px 12px;font-size:12px;cursor:pointer;user-select:none}.ger .chip.on{background:#10b981;border-color:#10b981;color:#fff;font-weight:700}'
    +'.ger .mrow{border:1.5px solid var(--border,#dde);border-radius:14px;padding:12px;margin-bottom:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px}.ger .mrow .full{grid-column:1/-1}.ger .bt{background:#4f6ef7;color:#fff;border:none;border-radius:10px;padding:10px 14px;font-weight:700;font-size:13px;cursor:pointer}.ger .bt.g{background:var(--surface2,#eef);color:inherit}.ger .bt.r{background:none;color:#ef4444}'
+   +'.dev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}.dev{cursor:pointer;border-radius:14px;overflow:hidden;background:var(--surface);border:1px solid var(--border);transition:transform .15s}.dev:hover{transform:translateY(-3px)}.dev img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}.dev b{display:block;padding:10px 12px;font-size:13px;line-height:1.3}'
+   +'.eom-of{background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff;border-radius:20px;padding:24px 22px;max-width:520px}.eom-of h3{font-size:20px;font-weight:800;margin-bottom:6px}.eom-of ul{list-style:none;margin:14px 0 18px;font-size:14px;line-height:1.9}.eom-of a{display:block;text-align:center;background:#fff;color:#4f6ef7;font-weight:800;padding:14px;border-radius:14px;text-decoration:none}'
    +'@media(max-width:560px){.ger .mrow{grid-template-columns:1fr}}';
   document.head.appendChild(css);
 
   var ov=document.createElement('div');ov.className='pw-ov';ov.id='pw-ov';document.body.appendChild(ov);
-  ov.addEventListener('click',function(e){if(e.target===ov||e.target.closest('[data-fechar]'))ov.classList.remove('open');});
+  ov.addEventListener('click',function(e){if(e.target===ov||e.target.closest('[data-fechar]')){ov.classList.remove('open');ov.innerHTML='';}});
 
   window.paywall=function(oque){
     ov.innerHTML='<div class="pw"><div style="font-size:40px">🔒</div><h3>'+esc(oque||'Isso')+' faz parte do Programa</h3>'
@@ -37,16 +39,50 @@
     ov.classList.add('open');
   };
 
+  // ───── Devocionais (English On Mission): lista de vídeos só pra quem assina
+  var temEom=function(){return livre()||(S.cfg.eom||[]).some(tem);};
+  function criarDev(){
+    if(document.getElementById('pane-devocionais'))return;
+    var ref=[].filter.call(document.querySelectorAll('.nav-pill'),function(n){return (n.getAttribute('onclick')||'').indexOf("'materiais'")>=0;})[0];
+    if(!ref)return;
+    var pill=document.createElement('div');pill.className='nav-pill';pill.setAttribute('onclick',"goTo('devocionais',this)");
+    pill.innerHTML='<span class="nav-icon">🙏</span><span>Devocionais</span>';ref.insertAdjacentElement('afterend',pill);
+    var pane=document.createElement('div');pane.className='pane';pane.id='pane-devocionais';
+    document.getElementById('pane-materiais').insertAdjacentElement('afterend',pane);
+    window.TITLES=window.TITLES||{};window.TITLES.devocionais='Devocionais';
+  }
+  async function desenharDev(){
+    var p=document.getElementById('pane-devocionais');if(!p)return;
+    var cab='<div style="font-size:21px;font-weight:800;margin-bottom:4px">English On Mission</div><div style="font-size:13px;color:var(--fg2);margin-bottom:18px">Aulas e devocionais ao vivo, toda semana</div>';
+    if(!temEom()){
+      p.innerHTML=cab+'<div class="eom-of"><div style="font-size:34px">🙏</div><h3>English on Mission Universo</h3><div style="opacity:.9;font-size:14px">Assinatura de '+esc(S.cfg.precoEom||'R$ 25/mês')+' com tudo incluído:</div>'
+        +'<ul><li>✅ Devocionais ao vivo, toda semana</li><li>✅ Aulas de Inglês com a Bíblia</li><li>✅ E-book de devocionais</li><li>✅ Bíblia linear: 1, 2 e 3 João</li><li>✅ Conteúdos novos que vierem</li></ul>'
+        +'<a target="_blank" rel="noopener" href="'+esc(S.cfg.checkoutEom||'https://pay.kiwify.com.br/oIjfTK8')+'">Assinar English on Mission</a></div>';
+      return;
+    }
+    p.innerHTML=cab+'<div style="color:var(--fg2);font-size:13px">Carregando…</div>';
+    var r=await sb.from('devocionais').select('*').order('ordem');
+    var l=r.data||[];
+    p.innerHTML=cab+(l.length?'<div class="dev-grid">'+l.map(function(v){return '<div class="dev" data-vid="'+esc(v.video_id)+'"><img loading="lazy" alt="" src="'+esc(v.capa||'https://i.ytimg.com/vi/'+v.video_id+'/hqdefault.jpg')+'"><b>'+esc(v.titulo)+'</b></div>';}).join('')+'</div>'
+      :'<div style="color:var(--fg2);font-size:13px">Os vídeos aparecem aqui sozinhos, logo depois de cada live.</div>');
+  }
+  document.addEventListener('click',function(e){
+    var d=e.target.closest('.dev[data-vid]');if(!d)return;
+    ov.innerHTML='<div class="pw" style="max-width:780px;padding:14px"><div style="aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#000"><iframe style="width:100%;height:100%;border:0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen src="https://www.youtube-nocookie.com/embed/'+encodeURIComponent(d.dataset.vid)+'?autoplay=1&rel=0"></iframe></div>'
+      +'<h3 style="font-size:15px;margin:12px 0 0">'+esc(d.querySelector('b').textContent)+'</h3><button class="nao" data-fechar>Fechar</button></div>';
+    ov.classList.add('open');
+  });
+
   // ───── navegação: abas do Programa trancadas
   var goToOrig=window.goTo;
   window.goTo=function(page,el){
     if(PANES_PROGRAMA.indexOf(page)>=0&&!livre()){paywall((window.TITLES&&TITLES[page])||'Essa área');return;}
-    return goToOrig(page,el);
+    var r=goToOrig(page,el);if(page==='devocionais')desenharDev();return r;
   };
   function marcarNav(){
     document.querySelectorAll('.nav-pill').forEach(function(n){
       var m=(n.getAttribute('onclick')||'').match(/goTo\('(\w+)'/);
-      n.classList.toggle('trancado',!!(m&&PANES_PROGRAMA.indexOf(m[1])>=0&&!livre()));
+      n.classList.toggle('trancado',!!(m&&((PANES_PROGRAMA.indexOf(m[1])>=0&&!livre())||(m[1]==='devocionais'&&!temEom()))));
     });
   }
 
@@ -103,7 +139,7 @@
     var r=await Promise.all([sb.from('acesso').select('dados').eq('id','cfg').maybeSingle(),sb.from('compras').select('produto,produto_id,pedido,email,created_at'),
       sb.from('materiais').select('*').order('ordem').order('created_at'),sb.rpc('sou_admin')]);
     S.ok=!r[0].error&&!!r[0].data;                       // sem as tabelas: nada trancado
-    if(S.ok){S.cfg=Object.assign({programa:[],jogosGratis:[],checkout:''},r[0].data.dados||{});}
+    if(S.ok){S.cfg=Object.assign({programa:[],jogosGratis:[],checkout:'',eom:[],checkoutEom:''},r[0].data.dados||{});}
     S.admin=r[3].data===true;
     S.todasCompras=r[1].data||[];
     S.compras=S.todasCompras.filter(function(c){return (c.email||'').toLowerCase()===(u.email||'').toLowerCase();});
@@ -112,7 +148,7 @@
     S.pronto=true;pintar();
   }
   function pintar(){
-    marcarNav();renderGames();renderMat();
+    criarDev();marcarNav();renderGames();renderMat();
     var b=document.getElementById('btn-gerenciar');
     if(S.admin&&!b){
       var s=document.querySelector('#settings-overlay .modal-body');
@@ -132,6 +168,9 @@
       +'<h4>Jogos gratuitos</h4><small>Verde = liberado pra qualquer aluno. O resto aparece com cadeado pra quem não tem o Programa.</small><div class="chips">'
       +GAMES.map(function(g){return '<span class="chip'+((S.cfg.jogosGratis||[]).indexOf(g.name)>=0?' on':'')+'" data-jogo="'+esc(g.name)+'">'+g.emoji+' '+esc(g.name)+'</span>';}).join('')+'</div>'
       +'<h4>Produtos que liberam TUDO</h4><small>Um trecho do nome do produto na Kiwify, separados por vírgula.</small><input id="g-prog" value="'+esc((S.cfg.programa||[]).join(', '))+'">'
+      +'<h4>Produtos que liberam os Devocionais</h4><small>Um trecho do nome na Kiwify (ex.: English on Mission), separado por vírgula. Quem tem o Programa também vê.</small><input id="g-eom" value="'+esc((S.cfg.eom||[]).join(', '))+'">'
+      +'<h4>Link de assinatura dos Devocionais</h4><input id="g-check-eom" value="'+esc(S.cfg.checkoutEom||'')+'">'
+      +'<div style="margin-top:10px"><button class="bt g" data-sync-dev>Buscar devocionais do YouTube agora</button></div><small>Isso também acontece sozinho, de hora em hora.</small>'
       +'<h4>Link do botão "Quero liberar tudo"</h4><input id="g-check" value="'+esc(S.cfg.checkout||'')+'">'
       +'<div style="margin-top:10px"><button class="bt" data-salvar-cfg>Salvar acima</button></div>'
       +'<h4>Materiais</h4><small>Cada material tem o link de download (Drive). "Produto" libera pra quem comprou um produto da Kiwify cujo nome contém o trecho informado.</small><div id="g-mats"></div><button class="bt g" data-novo>+ Novo material</button>'
@@ -146,7 +185,14 @@
         S.cfg.jogosGratis=[].map.call(go.querySelectorAll('.chip.on'),function(c){return c.dataset.jogo;});
         S.cfg.programa=document.getElementById('g-prog').value.split(',').map(function(x){return x.trim();}).filter(Boolean);
         S.cfg.checkout=document.getElementById('g-check').value.trim();
+        S.cfg.eom=document.getElementById('g-eom').value.split(',').map(function(x){return x.trim();}).filter(Boolean);
+        S.cfg.checkoutEom=document.getElementById('g-check-eom').value.trim();
         var r=await sb.from('acesso').upsert({id:'cfg',dados:S.cfg});toast(r.error?'Não salvou 😕':'✅ Salvo','#10b981');pintar();return;
+      }
+      if(t.closest('[data-sync-dev]')){
+        toast('Buscando no YouTube…');var ses=(await sb.auth.getSession()).data.session;
+        var rr=await fetch('/.netlify/functions/devocionais-sync',{method:'POST',headers:{Authorization:'Bearer '+(ses?ses.access_token:'')}});var j=await rr.json().catch(function(){return {};});
+        toast(rr.ok?'✅ '+(j.novos||[]).length+' novos (de '+j.naPlaylist+' na playlist)':(j.erro||'Não deu certo 😕'),rr.ok?'#10b981':'#ef4444');return;
       }
       if(t.closest('[data-novo]')){var n=await sb.from('materiais').insert({nome:'Novo material',ordem:S.mats.length}).select().single();if(n.data){S.mats.push(n.data);desenharMats(tipos);}else toast('Não criou 😕');return;}
       var sv=t.closest('[data-salvar-mat]'),ap=t.closest('[data-apagar-mat]');
