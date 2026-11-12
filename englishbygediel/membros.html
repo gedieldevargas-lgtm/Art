@@ -302,6 +302,122 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
 .admin-metric-lbl{font-size:11px;color:var(--fg2);font-weight:600}
 .admin-loading{text-align:center;padding:32px;color:var(--fg3);font-size:13px}
 .admin-mod-row{display:flex;align-items:center;gap:14px;padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:14px;margin-bottom:8px}
+/* ── Editor de aulas (admin) ── */
+.adm-mod-item{background:var(--surface);border:1px solid var(--border);border-radius:14px;margin-bottom:10px;overflow:hidden}
+.adm-mod-head{display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer}
+.adm-mod-head:hover{background:var(--surface2)}
+.adm-cover-sm{width:64px;height:36px;border-radius:8px;object-fit:cover;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;overflow:hidden}
+.adm-cover-sm img{width:100%;height:100%;object-fit:cover}
+.adm-mod-body{display:none;padding:0 14px 14px;border-top:1px solid var(--border)}
+.adm-mod-item.open .adm-mod-body{display:block}
+.adm-lesson-row{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;cursor:pointer;font-size:12px}
+.adm-lesson-row:hover{background:var(--surface2)}
+.adm-lesson-row .num{width:22px;height:22px;border-radius:7px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:var(--fg3);flex-shrink:0}
+.adm-pill{font-size:9px;font-weight:800;padding:2px 7px;border-radius:6px;letter-spacing:.3px;white-space:nowrap}
+.adm-pill-on{background:rgba(16,185,129,.12);color:var(--green)}
+.adm-pill-off{background:rgba(245,158,11,.12);color:var(--gold)}
+.adm-stat{font-size:10px;color:var(--fg3);white-space:nowrap}
+.adm-cover-drop{border:1.5px dashed var(--border);border-radius:12px;padding:12px;display:flex;gap:12px;align-items:center;cursor:pointer;transition:.15s}
+.adm-cover-drop:hover{border-color:var(--accent);background:rgba(79,110,247,.04)}
+.adm-cover-prev{width:160px;aspect-ratio:16/9;border-radius:10px;background:var(--surface2);object-fit:cover;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:24px;overflow:hidden}
+.adm-cover-prev img{width:100%;height:100%;object-fit:cover}
+.adm-quiz-q{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:10px}
+.adm-quiz-q .qn{font-size:10px;font-weight:800;color:var(--accent);letter-spacing:.5px;margin-bottom:6px}
+.adm-alt{display:flex;align-items:center;gap:8px;margin-top:6px}
+.adm-alt input[type=radio]{accent-color:var(--green);width:16px;height:16px;cursor:pointer}
+.adm-alt .admin-inp{padding:6px 10px;font-size:12px}
+.adm-modal-box{width:760px;max-width:calc(100vw - 32px);max-height:calc(100vh - 40px);display:flex;flex-direction:column}
+.adm-modal-box .modal-body{overflow-y:auto}
+.adm-section{font-size:11px;font-weight:800;color:var(--fg3);letter-spacing:.6px;text-transform:uppercase;margin:18px 0 8px}
+.adm-section:first-child{margin-top:0}
+/* ── Módulos e aulas (aluno) ── */
+.module-card.ready{opacity:1;cursor:pointer}
+.module-card.ready:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.mod-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.mod-thumb.cover{aspect-ratio:16/9;height:auto}
+.mod-tag-ok{display:inline-block;background:rgba(16,185,129,.12);color:var(--green);font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;margin-top:6px;letter-spacing:.4px}
+.back-btn{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:6px 12px;font-size:12px;font-weight:700;color:var(--fg2);cursor:pointer;display:inline-flex;align-items:center;gap:6px;margin-bottom:14px}
+.back-btn:hover{color:var(--fg);border-color:var(--accent)}
+.lesson-list{display:flex;flex-direction:column;gap:8px}
+.lesson-item{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:10px 12px;cursor:pointer;transition:.12s}
+.lesson-item:hover{border-color:var(--accent);transform:translateX(2px)}
+.lesson-item .lthumb{width:96px;aspect-ratio:16/9;border-radius:9px;background:var(--surface2);overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:20px;position:relative}
+.lesson-item .lthumb img{width:100%;height:100%;object-fit:cover}
+.lesson-item .lt{font-size:13px;font-weight:700}
+.lesson-item .ls{font-size:11px;color:var(--fg3);margin-top:2px;display:flex;gap:10px;flex-wrap:wrap}
+.lesson-item.locked{opacity:.75}
+.player-wrap{position:relative;width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#000;box-shadow:var(--shadow)}
+.player-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.waiting-box{width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 18% 22%, #d2e6ff 0%, #6fa5ff 22%, #3060d0 46%, #0c1a60 70%, #040b28 100%)}
+.waiting-box img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35}
+.waiting-inner{position:relative;text-align:center;color:#fff;padding:20px}
+.waiting-inner .big{font-size:34px;margin-bottom:6px}
+.waiting-inner .t{font-size:16px;font-weight:800}
+.waiting-inner .s{font-size:12px;opacity:.85;margin-top:4px}
+.vote-btn{margin-top:14px;background:#fff;color:#1a2a6c;border:none;border-radius:12px;padding:10px 18px;font-size:13px;font-weight:800;cursor:pointer;transition:.12s}
+.vote-btn.on{background:var(--green);color:#fff}
+.vote-btn:active{transform:scale(.95)}
+.react-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.react-btn{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:7px 12px;font-size:15px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:.12s}
+.react-btn .cnt{font-size:11px;font-weight:800;color:var(--fg2)}
+.react-btn:hover{border-color:var(--accent);transform:translateY(-1px)}
+.react-btn.on{border-color:var(--accent);background:rgba(79,110,247,.1)}
+.lesson-tabs{display:flex;gap:6px;margin:18px 0 12px;border-bottom:1px solid var(--border)}
+.lesson-tab{background:none;border:none;border-bottom:2px solid transparent;padding:8px 14px 10px;font-size:12px;font-weight:700;color:var(--fg2);cursor:pointer;margin-bottom:-1px}
+.lesson-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.lesson-panel{display:none}.lesson-panel.active{display:block}
+.lesson-desc{font-size:13px;line-height:1.75;color:var(--fg);white-space:pre-wrap}
+.quiz-q{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:10px}
+.quiz-q .qt{font-size:13px;font-weight:700;margin-bottom:10px}
+.quiz-opt{display:flex;align-items:center;gap:10px;padding:9px 12px;border:1.5px solid var(--border);border-radius:10px;margin-top:6px;cursor:pointer;font-size:12px;transition:.12s}
+.quiz-opt:hover{border-color:var(--accent)}
+.quiz-opt.sel{border-color:var(--accent);background:rgba(79,110,247,.08)}
+.quiz-opt.ok{border-color:var(--green);background:rgba(16,185,129,.1)}
+.quiz-opt.bad{border-color:var(--red);background:rgba(239,68,68,.08)}
+.quiz-opt .letter{width:22px;height:22px;border-radius:7px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0}
+.quiz-result{background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff;border-radius:14px;padding:16px;text-align:center;font-weight:800;font-size:15px;margin-top:12px}
+.comment{display:flex;gap:10px;padding:12px 0;border-bottom:1px solid var(--border)}
+.comment .cava{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0}
+.comment .cname{font-size:12px;font-weight:700}
+.comment .cdate{font-size:10px;color:var(--fg3);margin-left:6px}
+.comment .cbody{font-size:12px;line-height:1.6;margin-top:3px;white-space:pre-wrap}
+.comment .cdel{background:none;border:none;color:var(--fg3);font-size:11px;cursor:pointer;margin-left:auto;align-self:flex-start}
+.comment .cdel:hover{color:var(--red)}
+.comment-box{display:flex;gap:8px;margin-top:12px;align-items:flex-end}
+.comment-box textarea{flex:1;min-height:60px;resize:vertical;font-family:inherit}
+.prof-badge{background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff;font-size:8px;font-weight:800;letter-spacing:.5px;padding:2px 6px;border-radius:5px;margin-left:6px;vertical-align:1px}
+.comment.prof{background:rgba(79,110,247,.05);border-radius:12px;padding:12px;border-bottom:none;margin-bottom:4px}
+.comment.prof .cava{background:linear-gradient(135deg,#f59e0b,#ef4444)}
+/* ── admin comentários ── */
+.adm-com{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:12px 14px;margin-bottom:10px}
+.adm-com .where{font-size:10px;font-weight:800;color:var(--accent);letter-spacing:.3px;margin-bottom:6px;cursor:pointer}
+.adm-com .reply-box{display:none;margin-top:10px;gap:8px}
+.adm-com.replying .reply-box{display:flex}
+/* ── maratona tarefa clicável ── */
+.mar-task{cursor:pointer;transition:.12s}
+.mar-task:hover{border-color:var(--accent);transform:translateX(2px)}
+.mar-task .open-hint{margin-left:auto;font-size:10px;color:var(--fg3);font-weight:700;white-space:nowrap;display:flex;align-items:center;gap:4px}
+.task-link{display:inline-flex;align-items:center;gap:8px;background:var(--surface2);border:1.5px solid var(--border);border-radius:12px;padding:9px 14px;font-size:12px;font-weight:700;color:var(--fg);text-decoration:none;margin:4px 6px 4px 0;transition:.12s}
+.task-link:hover{border-color:var(--accent);color:var(--accent)}
+.task-ex{background:var(--surface2);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:8px 12px;font-size:12px;margin-top:6px;line-height:1.6}
+.task-ex b{color:var(--accent)}
+/* ── tutor IA ── */
+.ai-fab{position:fixed;right:20px;bottom:20px;z-index:950;width:56px;height:56px;border-radius:50%;border:none;background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff;font-size:24px;cursor:pointer;box-shadow:0 10px 30px rgba(79,110,247,.45);transition:.15s;display:none;align-items:center;justify-content:center}
+.ai-fab:hover{transform:scale(1.08)}
+.ai-fab.show{display:flex}
+.ai-panel{position:fixed;right:20px;bottom:88px;z-index:951;width:360px;max-width:calc(100vw - 32px);height:480px;max-height:calc(100vh - 120px);background:var(--surface);border:1px solid var(--border);border-radius:20px;box-shadow:0 24px 70px rgba(0,0,0,.3);display:none;flex-direction:column;overflow:hidden}
+.ai-panel.open{display:flex}
+.ai-head{background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff;padding:14px 16px;display:flex;align-items:center;gap:10px}
+.ai-head .t{font-size:14px;font-weight:800}
+.ai-head .s{font-size:10px;opacity:.85}
+.ai-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.ai-msg{max-width:85%;padding:10px 13px;border-radius:14px;font-size:12.5px;line-height:1.6;white-space:pre-wrap}
+.ai-msg.me{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:4px}
+.ai-msg.bot{align-self:flex-start;background:var(--surface2);border-bottom-left-radius:4px}
+.ai-input{display:flex;gap:8px;padding:10px;border-top:1px solid var(--border)}
+.ai-input input{flex:1;border:1.5px solid var(--border);border-radius:12px;padding:10px 12px;font-size:13px;background:var(--surface2);color:var(--fg);outline:none}
+.ai-input button{background:var(--accent);color:#fff;border:none;border-radius:12px;padding:0 16px;font-weight:800;cursor:pointer}
+@media(max-width:600px){.ai-fab{bottom:76px}.ai-panel{bottom:140px}}
 .admin-mod-preview{width:48px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;cursor:pointer;transition:.15s}
 .admin-mod-preview:hover{transform:scale(1.1)}
 .admin-mod-name{flex:1;font-size:13px;font-weight:700;color:var(--fg)}
@@ -475,9 +591,13 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
 
       <!-- MÓDULOS -->
       <div class="pane" id="pane-modulos">
-        <div style="font-size:21px;font-weight:800;margin-bottom:4px">Módulos</div>
-        <div style="font-size:13px;color:var(--fg2);margin-bottom:18px">Conteúdo em gravação — em breve disponível</div>
-        <div class="module-grid stagger" id="modules-grid"></div>
+        <div id="mod-view-grid">
+          <div style="font-size:21px;font-weight:800;margin-bottom:4px">Módulos</div>
+          <div style="font-size:13px;color:var(--fg2);margin-bottom:18px" id="modules-sub">Escolha um módulo pra ver as aulas</div>
+          <div class="module-grid stagger" id="modules-grid"></div>
+        </div>
+        <div id="mod-view-lessons" style="display:none"></div>
+        <div id="mod-view-lesson" style="display:none"></div>
       </div>
 
       <!-- JOGOS -->
@@ -595,6 +715,7 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
           <button class="admin-tab active" onclick="adminTab('usuarios',this)">👥 Alunos</button>
           <button class="admin-tab" onclick="adminTab('criar',this)">➕ Criar Acesso</button>
           <button class="admin-tab" onclick="adminTab('metricas',this)">📊 Métricas</button>
+          <button class="admin-tab" onclick="adminTab('comentarios',this)">💬 Comentários</button>
           <button class="admin-tab" onclick="adminTab('modulos',this)">📚 Módulos</button>
         </div>
 
@@ -661,14 +782,41 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
           </div>
         </div>
 
-        <!-- MÓDULOS -->
+        <!-- COMENTÁRIOS -->
+        <div class="admin-panel" id="adm-comentarios">
+          <div class="admin-form">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:6px">
+              <div class="admin-form-title" style="margin:0">💬 Comentários dos alunos</div>
+              <button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="loadAdminComments()">🔄 Atualizar</button>
+            </div>
+            <div style="font-size:12px;color:var(--fg2);margin-bottom:14px">Responda daqui mesmo — sua resposta aparece na aula com o selo <span class="prof-badge">PROFESSOR</span></div>
+            <div id="adm-com-list"><div class="admin-loading">Carregando...</div></div>
+          </div>
+        </div>
+
+        <!-- MÓDULOS E AULAS -->
         <div class="admin-panel" id="adm-modulos">
           <div class="admin-form">
-            <div class="admin-form-title">📚 Editar capas e títulos dos módulos</div>
-            <div style="font-size:12px;color:var(--fg2);margin-bottom:14px">Clique no emoji/capa para trocar. Edite o nome e clique em Salvar.</div>
-            <div id="adm-mod-list"></div>
-            <button class="admin-btn admin-btn-primary" style="margin-top:14px" onclick="saveModules()">💾 Salvar todas as alterações</button>
-            <div id="adm-mod-status" style="font-size:12px;margin-top:8px;color:var(--green)"></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:6px">
+              <div class="admin-form-title" style="margin:0">📚 Módulos e aulas</div>
+              <div style="display:flex;gap:8px">
+                <button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="loadAdminModules(true)">🔄 Atualizar</button>
+                <button class="admin-btn admin-btn-primary admin-btn-sm" onclick="addModule()">➕ Novo módulo</button>
+              </div>
+            </div>
+            <div style="font-size:12px;color:var(--fg2);margin-bottom:14px;line-height:1.7">
+              Clique no módulo pra abrir as aulas. Em cada aula você cadastra o link do YouTube, a capa, a descrição e o quiz de 5 perguntas.<br>
+              <strong>Medida da capa:</strong> 1280 × 720 px (16:9), JPG ou PNG, até 2 MB — a mesma medida da thumbnail do YouTube.
+            </div>
+            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:rgba(79,110,247,.06);border:1px solid rgba(79,110,247,.18);border-radius:12px;padding:10px 12px;margin-bottom:14px">
+              <div style="font-size:12px;font-weight:800">📅 Cronograma automático</div>
+              <div style="font-size:11px;color:var(--fg2)">2 aulas por semana (seg + qui), na ordem dos módulos, a partir de</div>
+              <input class="admin-inp" id="adm-sched-start" type="date" value="2026-11-16" style="width:150px;padding:6px 10px;font-size:12px">
+              <label style="font-size:11px;color:var(--fg2);display:flex;align-items:center;gap:5px"><input type="checkbox" id="adm-sched-over"> sobrescrever datas já definidas</label>
+              <button class="admin-btn admin-btn-primary admin-btn-sm" onclick="scheduleAll()">Aplicar cronograma</button>
+              <span id="adm-sched-status" style="font-size:11px"></span>
+            </div>
+            <div id="adm-mod-list"><div class="admin-loading">Carregando módulos...</div></div>
           </div>
         </div>
 
@@ -751,6 +899,94 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
 </div>
 
 <!-- ADMIN RESET PASSWORD MODAL -->
+<!-- TUTOR IA -->
+<button class="ai-fab" id="ai-fab" onclick="aiToggle()" title="Tutor IA">🤖</button>
+<div class="ai-panel" id="ai-panel">
+  <div class="ai-head"><div style="font-size:22px">🤖</div><div style="flex:1"><div class="t">Tutor IA</div><div class="s">Dúvidas de inglês e da plataforma · 24h</div></div><button class="modal-close" style="color:#fff" onclick="aiToggle()">✕</button></div>
+  <div class="ai-msgs" id="ai-msgs"><div class="ai-msg bot">Hey! 👋 Sou o tutor do Método Inteligente. Pode perguntar qualquer dúvida de inglês — gramática, tradução, pronúncia — ou sobre a plataforma. What can I help you with?</div></div>
+  <div class="ai-input"><input id="ai-txt" placeholder="Escreve sua dúvida..." onkeydown="if(event.key==='Enter')aiSend()"><button onclick="aiSend()">➤</button></div>
+</div>
+
+<!-- MODAL: detalhe da tarefa -->
+<div class="modal-overlay" id="task-modal">
+  <div class="modal-box adm-modal-box" style="width:560px">
+    <div class="modal-header"><h2 id="task-modal-title">Tarefa</h2><button class="modal-close" onclick="closeTaskModal()">✕</button></div>
+    <div class="modal-body" id="task-modal-body"></div>
+  </div>
+</div>
+
+<!-- MODAL: editor de módulo -->
+<div class="modal-overlay" id="adm-mod-modal">
+  <div class="modal-box adm-modal-box" style="width:520px">
+    <div class="modal-header"><h2 id="adm-mod-modal-title">📚 Módulo</h2><button class="modal-close" onclick="closeModModal()">✕</button></div>
+    <div class="modal-body">
+      <div class="adm-section">Capa do módulo · 1280 × 720 px</div>
+      <div class="adm-cover-drop" onclick="document.getElementById('adm-mod-cover-file').click()">
+        <div class="adm-cover-prev" id="adm-mod-cover-prev">🖼️</div>
+        <div style="font-size:12px;color:var(--fg2);line-height:1.6"><strong>Clique pra enviar a capa</strong><br>JPG/PNG · 16:9 · até 2 MB<div id="adm-mod-cover-info" style="font-size:11px;margin-top:4px"></div></div>
+        <input type="file" id="adm-mod-cover-file" accept="image/*" style="display:none" onchange="pickCover(this,'mod')">
+      </div>
+      <div class="adm-section">Nome</div>
+      <input class="admin-inp" id="adm-mod-name" placeholder="Ex: Gramática A1">
+      <div class="adm-section">Subtítulo (nível / quantidade)</div>
+      <input class="admin-inp" id="adm-mod-sub" placeholder="Ex: 8 aulas · A1">
+      <div class="adm-section">Emoji (usado quando não tem capa)</div>
+      <input class="admin-inp" id="adm-mod-emoji" placeholder="📘" style="width:90px;font-size:18px;text-align:center">
+      <div id="adm-mod-modal-status" style="font-size:12px;min-height:18px;margin-top:14px"></div>
+      <div style="display:flex;gap:8px;justify-content:space-between;margin-top:6px">
+        <button class="admin-btn admin-btn-danger admin-btn-sm" id="adm-mod-del" onclick="deleteModule()">🗑️ Apagar módulo</button>
+        <div style="display:flex;gap:8px"><button class="admin-btn admin-btn-ghost" onclick="closeModModal()">Cancelar</button><button class="admin-btn admin-btn-primary" onclick="saveModule()">💾 Salvar</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: editor de aula -->
+<div class="modal-overlay" id="adm-les-modal">
+  <div class="modal-box adm-modal-box">
+    <div class="modal-header"><h2 id="adm-les-modal-title">🎬 Aula</h2><button class="modal-close" onclick="closeLesModal()">✕</button></div>
+    <div class="modal-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px" class="grid-2">
+        <div>
+          <div class="adm-section">Título da aula</div>
+          <input class="admin-inp" id="adm-les-title" placeholder="Ex: Aula 1 — Verbo to be">
+          <div class="adm-section">Link do YouTube (não listado)</div>
+          <input class="admin-inp" id="adm-les-yt" placeholder="https://youtu.be/..." oninput="previewYt(this.value)">
+          <div id="adm-les-yt-info" style="font-size:11px;margin-top:5px;min-height:16px"></div>
+          <div class="adm-section">Status</div>
+          <select class="admin-inp" id="adm-les-pub">
+            <option value="false">⏳ Em breve — alunos podem votar "esperando"</option>
+            <option value="true">✅ Publicada — alunos assistem</option>
+          </select>
+          <div class="adm-section">Data de liberação</div>
+          <input class="admin-inp" id="adm-les-rel" type="date">
+          <div style="font-size:11px;color:var(--fg3);margin-top:5px">Libera às 9h desse dia. Vazio = libera assim que tiver link e estiver publicada.</div>
+        </div>
+        <div>
+          <div class="adm-section">Capa da aula · 1280 × 720 px</div>
+          <div class="adm-cover-drop" onclick="document.getElementById('adm-les-cover-file').click()">
+            <div class="adm-cover-prev" id="adm-les-cover-prev">🖼️</div>
+            <div style="font-size:12px;color:var(--fg2);line-height:1.6"><strong>Clique pra enviar</strong><br>16:9 · até 2 MB<div id="adm-les-cover-info" style="font-size:11px;margin-top:4px"></div></div>
+            <input type="file" id="adm-les-cover-file" accept="image/*" style="display:none" onchange="pickCover(this,'les')">
+          </div>
+          <div style="font-size:11px;color:var(--fg3);margin-top:6px">Sem capa? Uso a thumbnail do YouTube automaticamente.</div>
+          <div class="adm-section">Estatísticas</div>
+          <div id="adm-les-stats" style="font-size:12px;color:var(--fg2);line-height:1.8">—</div>
+        </div>
+      </div>
+      <div class="adm-section">Descrição da aula</div>
+      <textarea class="admin-inp" id="adm-les-desc" rows="4" placeholder="O que o aluno vai aprender, o que praticar depois, links úteis..."></textarea>
+      <div class="adm-section">Quiz · 5 perguntas · marque a alternativa correta</div>
+      <div id="adm-quiz-builder"></div>
+      <div id="adm-les-modal-status" style="font-size:12px;min-height:18px;margin-top:10px"></div>
+      <div style="display:flex;gap:8px;justify-content:space-between;margin-top:6px;flex-wrap:wrap">
+        <button class="admin-btn admin-btn-danger admin-btn-sm" onclick="deleteLesson()">🗑️ Apagar aula</button>
+        <div style="display:flex;gap:8px"><button class="admin-btn admin-btn-ghost" onclick="closeLesModal()">Cancelar</button><button class="admin-btn admin-btn-primary" onclick="saveLesson()">💾 Salvar aula</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="admin-pass-modal" id="adm-pass-modal">
   <div class="admin-pass-box">
     <div style="font-size:16px;font-weight:800;margin-bottom:4px">🔑 Resetar Senha</div>
@@ -853,10 +1089,7 @@ renderLives();setInterval(renderLives,30000);
 // ═══════════════════════════ MÓDULOS ═══════════════════════════
 var MODULES=['Orientação','Diagnóstico & Personalização','Sons & Pronúncia','Vocabulário Essencial','Gramática A1','Gramática A2–B1','Conversação A1–A2','Conversação B1','Listening & Compreensão','Phrasal Verbs','Idioms & Expressões','Inglês pela Música','Inglês por Séries','Business English','Escrita em Inglês'];
 var MODSUB=['3 aulas','3 aulas','8 aulas · A1–B1','8 aulas · A1–A2','8 aulas · A1','8 aulas · A2–B1','5 aulas','4 aulas · B1','5 aulas · A2–B1','6 aulas · B1','5 aulas · B1–B2','4 aulas · Todos','4 aulas · A2–B2','5 aulas · B1–B2','3 aulas · A2–B2'];
-(function(){
-  var g=document.getElementById('modules-grid');g.innerHTML='';
-  MODULES.forEach(function(name,i){g.innerHTML+='<div class="module-card"><div class="mod-thumb"><div class="mod-thumb-lock">🔒</div></div><div class="mod-body"><div class="mod-name">'+name+'</div><div class="mod-sub">'+MODSUB[i]+'</div><div class="mod-lock-tag">EM BREVE</div></div></div>';});
-})();
+renderStaticModules();
 
 // ═══════════════════════════ JOGOS — APPLE ICONS ═══════════════════════════
 var GAMES=[
@@ -1001,7 +1234,159 @@ function showPane(page,el){
   var pane=document.getElementById('pane-'+page);
   pane.classList.add('active','pane-enter');
   pane.style.opacity='1';
+  if(page==='modulos'&&typeof loadStudentModules==='function')loadStudentModules();
 }
+
+// ═══════════ CONTEÚDO DAS TAREFAS (guia + links + exemplos + mini-quiz) ═══════════
+var YTS=function(q){return 'https://www.youtube.com/results?search_query='+encodeURIComponent(q);};
+var TASK_INFO={
+'Em Casa':[
+ {why:'Ouvido treinado = boca destravada. Podcast é o jeito mais fácil de pôr inglês no dia.',
+  steps:['Escolhe UM episódio curto (5–15 min) e ouve até o fim','Não pausa pra traduzir — deixa o cérebro se acostumar com o ritmo','Anota 1 expressão que você entendeu e gostou'],
+  links:[{t:'🎧 6 Minute English (BBC)',u:'https://www.bbc.co.uk/learningenglish/english/features/6-minute-english'},{t:'▶️ EnglishPod no YouTube',u:YTS('EnglishPod lesson')},{t:'🟢 Buscar no Spotify',u:'https://open.spotify.com/search/learn%20english%20podcast'}],
+  ex:['<b>Anota assim:</b> "at the end of the day" = no fim das contas','<b>Meta:</b> entender a ideia geral, não cada palavra'],
+  quiz:[{q:'Qual é o jeito certo de ouvir o podcast?',a:['Pausando a cada frase pra traduzir','Até o fim, captando a ideia geral','Só a introdução','Em 2x sem atenção'],c:1},
+        {q:'O que anotar no fim?',a:['O episódio inteiro','1 expressão que você entendeu e gostou','Todas as palavras novas','Nada'],c:1}]},
+ {why:'Legenda em inglês liga o som à escrita — seu listening dá um salto.',
+  steps:['Escolhe UMA cena (2–5 min) de série que você já conhece','Assiste com legenda em INGLÊS (nunca português)','Reassiste a mesma cena e repete 1 fala em voz alta'],
+  links:[{t:'▶️ Cenas com legenda EN',u:YTS('friends scene english subtitles')},{t:'🎬 Netflix',u:'https://www.netflix.com'},{t:'▶️ Learn English with TV',u:YTS('Learn English with TV Series')}],
+  ex:['<b>Dica:</b> série que você JÁ viu dublada é perfeita — você já sabe a história','<b>Repete assim:</b> pausa a fala → fala igual → compara'],
+  quiz:[{q:'Qual legenda usar?',a:['Português','Inglês','Nenhuma no começo','Duas ao mesmo tempo'],c:1},
+        {q:'Por que rever a MESMA cena?',a:['Pra decorar a série','O cérebro fixa som + escrita + contexto na repetição','Porque é mais rápido','Não precisa rever'],c:1}]},
+ {why:'Revisão espaçada é o que faz a palavra ficar — sem revisar, 80% some em uma semana.',
+  steps:['Pega 10 palavras/frases que você viu essa semana','Fala cada uma EM VOZ ALTA com uma frase sua','Separa as que errou pra revisar amanhã'],
+  links:[{t:'🃏 Anki',u:'https://apps.ankiweb.net'},{t:'🃏 Quizlet',u:'https://quizlet.com'}],
+  ex:['<b>Card bom:</b> frente "I\'m running late" → verso "estou atrasado" + sua frase','<b>Em voz alta</b> — ler em silêncio não treina a boca'],
+  quiz:[{q:'Como revisar o flashcard?',a:['Lendo em silêncio','Em voz alta, com uma frase sua','Só olhando a tradução','Copiando 10 vezes'],c:1},
+        {q:'O que fazer com as palavras que errou?',a:['Desistir delas','Revisar de novo amanhã','Apagar','Trocar por outras'],c:1}]},
+ {why:'Shadowing com música treina pronúncia, ritmo e connected speech de uma vez — e é o seu perfil (auditivo-musical).',
+  steps:['Escolhe uma música que você AMA, com letra na tela','Primeiro só ouve lendo a letra','Depois canta JUNTO imitando o som exato — não a leitura da palavra'],
+  links:[{t:'▶️ Lyrics no YouTube',u:YTS('lyrics english song')},{t:'📝 Letras no Genius',u:'https://genius.com'}],
+  ex:['<b>Repara:</b> "want to" vira <b>wanna</b>, "going to" vira <b>gonna</b>','<b>1 música por semana</b> até sair natural vale mais que 10 picadas'],
+  quiz:[{q:'Shadowing é:',a:['Traduzir a letra','Cantar/falar junto imitando o som exato','Ouvir em silêncio','Decorar a letra escrita'],c:1},
+        {q:'"Gonna" é a forma falada de:',a:['want to','going to','got to','gone'],c:1}]},
+ {why:'Escrever 3 frases por dia constrói o músculo de PRODUZIR inglês, não só consumir.',
+  steps:['Escreve 3 frases sobre o SEU dia (papel ou notas do celular)','Usa 1 palavra nova que você aprendeu essa semana','Lê as 3 em voz alta no final'],
+  links:[],
+  ex:['<b>Modelo:</b> "Today I felt tired, but I finished my tasks." (hoje me senti cansado, mas terminei minhas tarefas)','<b>Modelo:</b> "I\'m grateful for my family." (sou grato pela minha família)','<b>Modelo:</b> "Tomorrow I want to wake up earlier." (amanhã quero acordar mais cedo)'],
+  quiz:[{q:'Sobre o que escrever?',a:['Textos acadêmicos','O seu dia, sentimentos e planos','Frases copiadas do Google','Só gramática'],c:1},
+        {q:'O que fazer depois de escrever?',a:['Guardar e nunca mais ver','Ler as 3 frases em voz alta','Apagar','Traduzir pro português'],c:1}]},
+ {why:'Ler a Bíblia em inglês une fé e fluência — você já conhece o contexto, então o cérebro foca no idioma.',
+  steps:['Abre um capítulo que você já conhece em português (João 1, Salmo 23)','Lê 5 minutos em NIV ou NLT (inglês mais atual)','Sublinha 1 versículo e lê em voz alta como oração'],
+  links:[{t:'📖 João 1 (NIV)',u:'https://www.bible.com/bible/111/JHN.1.NIV'},{t:'📱 YouVersion',u:'https://www.bible.com'}],
+  ex:['<b>Salmo 23:</b> "The Lord is my shepherd, I lack nothing." — o Senhor é meu pastor, nada me faltará','<b>Dica:</b> NIV e NLT são mais fáceis; KJV é inglês antigo (thou, thee) — deixa pra depois'],
+  quiz:[{q:'Qual versão é melhor pra estudar inglês atual?',a:['KJV (King James)','NIV ou NLT','Qualquer uma em latim','Só em português'],c:1},
+        {q:'Por que ler um capítulo que você JÁ conhece?',a:['Porque é mais curto','O contexto conhecido deixa o cérebro focar no idioma','Porque é obrigatório','Não faz diferença'],c:1}]}
+],
+'No Transporte':[
+ {why:'Tempo de deslocamento é a maior mina de ouro escondida da sua rotina.',
+  steps:['Dá play ANTES de sair — decisão tomada, sem desculpa','Só ouve, sem pausar: imersão passiva','Chegando, repete mentalmente 1 frase que ficou'],
+  links:[{t:'🎧 6 Minute English',u:'https://www.bbc.co.uk/learningenglish/english/features/6-minute-english'},{t:'🎧 The English We Speak',u:'https://www.bbc.co.uk/learningenglish/english/features/the-english-we-speak'},{t:'🟢 Spotify',u:'https://open.spotify.com/search/english%20podcast'}],
+  ex:['<b>Regra:</b> fone no ouvido = inglês tocando. Sem negociação.','<b>Não entendeu tudo?</b> Normal e esperado. Exposição conta.'],
+  quiz:[{q:'O modo no transporte é:',a:['Ativo, pausando sempre','Passivo — só ouvir e absorver','Com caderno aberto','Traduzindo tudo'],c:1},
+        {q:'Quando dar o play?',a:['Quando lembrar','Antes de sair de casa','Na metade do caminho','Só na volta'],c:1}]},
+ {why:'Música repetida = expressão gravada pra sempre. Você aprende sem esforço.',
+  steps:['Toca sua playlist em inglês','Escolhe UMA música e presta atenção na letra','Guarda 1 expressão e repete mentalmente 3 vezes'],
+  links:[{t:'🟢 Playlist no Spotify',u:'https://open.spotify.com/search/english%20hits'},{t:'📝 Confere a letra',u:'https://genius.com'}],
+  ex:['<b>Exemplo:</b> ouviu "I can\'t help falling in love"? → "can\'t help + ing" = não consigo evitar','<b>1 expressão por viagem</b> = 10 por semana sem abrir livro'],
+  quiz:[{q:'Quantas expressões memorizar por viagem?',a:['Todas da música','1','20','Nenhuma'],c:1},
+        {q:'"I can\'t help falling in love" — "can\'t help" significa:',a:['Não posso ajudar','Não consigo evitar','Não quero','Preciso de ajuda'],c:1}]},
+ {why:'5 cards no celular cabem em qualquer fila ou banco de ônibus.',
+  steps:['Abre o app de flashcards','Revisa 5 cards falando baixinho (ou mentalmente)','Marca os que errou'],
+  links:[{t:'🃏 Anki',u:'https://apps.ankiweb.net'},{t:'🃏 Quizlet',u:'https://quizlet.com'}],
+  ex:['<b>Micro-hábito:</b> 5 cards por dia = 150 palavras revisadas no mês'],
+  quiz:[{q:'Quantos cards no transporte?',a:['50','5 — rápido e prático','Nenhum','Todos do deck'],c:1},
+        {q:'Errou um card. E aí?',a:['Ignora','Marca pra rever','Apaga','Desiste'],c:1}]},
+ {why:'Shadowing discreto treina a boca mesmo em público — ninguém percebe.',
+  steps:['Ouvindo o podcast/música, escolhe frases curtas','Repete sussurrando ou só mexendo a boca','Foca no RITMO da frase, não na perfeição'],
+  links:[{t:'🎧 The English We Speak (frases curtas)',u:'https://www.bbc.co.uk/learningenglish/english/features/the-english-we-speak'}],
+  ex:['<b>Treina o ritmo:</b> "I WANT to GO to the STORE" — força nas palavras de conteúdo'],
+  quiz:[{q:'Shadowing no ônibus se faz:',a:['Gritando','Sussurrando ou mentalmente','Só em casa','Escrevendo'],c:1},
+        {q:'O foco é:',a:['Perfeição de cada som','Ritmo e melodia da frase','Velocidade','Gramática'],c:1}]},
+ {why:'5 minutos de vídeo = 1 dose de inglês real com imagem ajudando a entender.',
+  steps:['Abre o YouTube e escolhe 1 vídeo curto EM inglês','Assiste com legenda em inglês se precisar','Guarda 1 palavra nova'],
+  links:[{t:'▶️ TED-Ed',u:'https://www.youtube.com/@TEDEd'},{t:'▶️ BBC Learning English',u:'https://www.youtube.com/@bbclearningenglish'},{t:'▶️ Easy English (ruas)',u:YTS('Easy English street interviews')}],
+  ex:['<b>Easy English</b> entrevista gente na rua — inglês de verdade, várias vozes e sotaques'],
+  quiz:[{q:'Qual legenda se precisar?',a:['Português','Inglês','Espanhol','Nenhuma nunca'],c:1},
+        {q:'Vídeo curto bom tem:',a:['2 horas','Até 5 minutos','30 segundos só','1 hora'],c:1}]},
+ {why:'Rever a aula da semana no deslocamento fixa o conteúdo sem gastar tempo novo.',
+  steps:['Abre a última aula liberada nos Módulos','Ouve como se fosse podcast (nem precisa olhar a tela)','Chegando, faz o quiz da aula se ainda não fez'],
+  links:[{t:'📚 Abrir meus Módulos',u:'#modulos'}],
+  ex:['<b>Repetição espaçada:</b> ouvir a aula 2 dias depois dobra a retenção'],
+  quiz:[{q:'Onde estão suas aulas?',a:['No e-mail','Na aba Módulos da plataforma','No Instagram','Em DVD'],c:1},
+        {q:'Rever a aula dias depois:',a:['É perda de tempo','Dobra a retenção (repetição espaçada)','Só serve pra iniciante','Atrapalha'],c:1}]}
+],
+'No Trabalho':[
+ {why:'Celular em inglês = centenas de micro-leituras por dia, de graça.',
+  steps:['Configurações → Idioma → English','Deixa pelo menos 1 dia inteiro','Anota 2 palavras que você aprendeu só navegando'],
+  links:[],
+  ex:['<b>Você vai ver:</b> Settings, Battery, Storage, Notifications, Clear, Undo...','<b>Medo de se perder?</b> Os ícones continuam nos mesmos lugares 😉'],
+  quiz:[{q:'Por quanto tempo deixar em inglês?',a:['5 minutos','Pelo menos 1 dia','Nunca','Só no fim de semana'],c:1},
+        {q:'"Settings" é:',a:['Mensagens','Configurações','Galeria','Câmera'],c:1}]},
+ {why:'Escrever e-mail profissional é das habilidades mais valorizadas — e dá pra treinar fictício.',
+  steps:['Escreve 1 e-mail curto em inglês (real ou inventado)','Usa a estrutura: saudação → objetivo → fechamento','Revê procurando 1 erro antes de "enviar"'],
+  links:[],
+  ex:['<b>Modelo:</b> "Hi John, I\'m writing to confirm our meeting on Friday at 2pm. Please let me know if that works for you. Best regards, Gediel"','<b>Fechos úteis:</b> Best regards · Kind regards · Thanks in advance'],
+  quiz:[{q:'Estrutura básica do e-mail:',a:['Piada → assunto → tchau','Saudação → objetivo → fechamento','Só o objetivo','Texto gigante'],c:1},
+        {q:'"Thanks in advance" significa:',a:['Obrigado pela visita','Desde já agradeço','Até logo','Com licença'],c:1}]},
+ {why:'Música de fundo mantém seu ouvido imerso enquanto você produz.',
+  steps:['Playlist em inglês no fone enquanto trabalha','Em pausa mental, presta atenção em 1 trecho','Não precisa anotar nada — exposição conta'],
+  links:[{t:'🟢 Spotify',u:'https://open.spotify.com/search/english%20acoustic'}],
+  ex:['<b>Dica:</b> trabalho que exige concentração → instrumental; tarefa mecânica → com letra'],
+  quiz:[{q:'Em tarefa que exige foco total, melhor:',a:['Música com letra alta','Instrumental ou volume baixo','Podcast de debate','Silêncio obrigatório'],c:1},
+        {q:'Exposição passiva:',a:['Não serve pra nada','Soma na imersão diária','Substitui o estudo ativo','Só funciona dormindo'],c:1}]},
+ {why:'O intervalo do café é o encaixe perfeito pros 5 cards do dia.',
+  steps:['Café na mão, app aberto','5 cards falando baixinho','Errou? Marca pra noite'],
+  links:[{t:'🃏 Anki',u:'https://apps.ankiweb.net'},{t:'🃏 Quizlet',u:'https://quizlet.com'}],
+  ex:['<b>3 minutos.</b> É menos tempo que escolher o que ver no Instagram.'],
+  quiz:[{q:'Quanto tempo leva?',a:['1 hora','~3 minutos','30 minutos','A tarde toda'],c:1},
+        {q:'O melhor momento no trabalho:',a:['Durante reunião','Pausa do café/almoço','Nunca','Só sexta'],c:1}]},
+ {why:'Pensar em inglês é o estágio final da fluência — e começa com 5 min por dia.',
+  steps:['Olha ao redor e nomeia mentalmente: desk, screen, keyboard, meeting...','Descreve 1 ação sua: "I\'m sending an email"','Termina com 1 frase sobre o dia: "Today is busy"'],
+  links:[],
+  ex:['<b>Nível 1:</b> objetos (chair, coffee, window)','<b>Nível 2:</b> ações ("She\'s talking on the phone")','<b>Nível 3:</b> opiniões ("This meeting could be an email" 😄)'],
+  quiz:[{q:'O exercício é:',a:['Falar alto na sala','Nomear e descrever mentalmente em inglês','Escrever relatório','Traduzir documentos'],c:1},
+        {q:'"I\'m sending an email" descreve:',a:['Rotina','Ação acontecendo agora','Passado','Futuro distante'],c:1}]},
+ {why:'Business English no almoço prepara você pra oportunidade que ainda vai chegar.',
+  steps:['5 min de vídeo de inglês profissional','Anota 1 expressão de trabalho','Usa ela mentalmente numa situação sua'],
+  links:[{t:'▶️ BBC Learning English',u:'https://www.youtube.com/@bbclearningenglish'},{t:'▶️ Business English',u:YTS('Business English phrases meeting')}],
+  ex:['<b>Expressões de ouro:</b> "Let\'s circle back" (retomamos depois) · "I\'ll keep you posted" (te mantenho informado)'],
+  quiz:[{q:'"I\'ll keep you posted" significa:',a:['Vou postar no feed','Te mantenho informado','Enviei pelo correio','Estou ocupado'],c:1},
+        {q:'"Let\'s circle back" é:',a:['Vamos desenhar círculos','Retomamos esse assunto depois','Vamos embora','Reunião cancelada'],c:1}]}
+],
+'Na Academia':[
+ {why:'Treino + podcast = corpo e inglês evoluindo na mesma hora.',
+  steps:['Play no podcast antes da primeira série','Deixa rolar o treino todo','No alongamento, lembra 1 coisa que você entendeu'],
+  links:[{t:'🎧 6 Minute English',u:'https://www.bbc.co.uk/learningenglish/english/features/6-minute-english'},{t:'🟢 Spotify',u:'https://open.spotify.com/search/english%20podcast'}],
+  ex:['<b>Treino de 50 min = 50 min de inglês.</b> 5x por semana vira 4h de imersão.'],
+  quiz:[{q:'Quando dar play?',a:['No fim do treino','Antes da primeira série','Só no cardio','Em casa'],c:1},
+        {q:'50 min de treino com podcast 5x/semana =',a:['Nada','~4h de imersão semanal','1h por mês','Só cansaço'],c:1}]},
+ {why:'Entre séries você descansa o músculo — e trabalha o ouvido.',
+  steps:['Playlist em inglês no treino','No descanso entre séries, foca na letra','Fim do treino: repete a expressão que ficou'],
+  links:[{t:'🟢 Workout playlist',u:'https://open.spotify.com/search/workout%20english'},{t:'📝 Letra no Genius',u:'https://genius.com'}],
+  ex:['<b>Música de treino é cheia de imperativo:</b> "push it", "don\'t stop", "run!" — gramática na prática'],
+  quiz:[{q:'Quando focar na letra?',a:['Durante a série pesada','No descanso entre séries','Nunca','Só em casa'],c:1},
+        {q:'"Don\'t stop" é:',a:['Pergunta','Imperativo negativo (não pare)','Passado','Condicional'],c:1}]},
+ {why:'30 segundos de descanso = 1 flashcard. O treino vira revisão espaçada.',
+  steps:['App de cards aberto no celular do treino','1 card por descanso','Errou? Repete no próximo descanso'],
+  links:[{t:'🃏 Anki',u:'https://apps.ankiweb.net'},{t:'🃏 Quizlet',u:'https://quizlet.com'}],
+  ex:['<b>10 séries = 10 cards.</b> Sem gastar 1 minuto a mais do seu dia.'],
+  quiz:[{q:'Quantos cards por descanso?',a:['10','1','Nenhum','O deck todo'],c:1},
+        {q:'Errou o card na academia:',a:['Desiste','Repete no próximo descanso','Apaga o app','Para o treino'],c:1}]},
+ {why:'Shadowing mental sincroniza ouvido e "voz interna" — sem precisar falar nada.',
+  steps:['Ouvindo o áudio, repete internamente a frase','Imita o ritmo e a entonação na mente','Se a frase for boa, guarda ela pro diário de hoje'],
+  links:[],
+  ex:['<b>Funciona porque:</b> o cérebro ativa as mesmas áreas motoras da fala quando você repete mentalmente'],
+  quiz:[{q:'Shadowing mental ativa:',a:['Só a audição','As áreas motoras da fala no cérebro','Nada','Só a memória visual'],c:1},
+        {q:'O que imitar na mente?',a:['Só as palavras','Ritmo e entonação','A tradução','O volume'],c:1}]},
+ {why:'Escuta ativa da aula = revisão oficial da semana feita no treino.',
+  steps:['Abre a última aula nos Módulos e dá play','Escuta ativa: caça 3 palavras novas','Depois do treino, faz o quiz da aula'],
+  links:[{t:'📚 Abrir meus Módulos',u:'#modulos'}],
+  ex:['<b>Escuta ativa ≠ passiva:</b> aqui você está CAÇANDO vocabulário, não só deixando tocar'],
+  quiz:[{q:'Escuta ativa é:',a:['Deixar tocando de fundo','Prestar atenção caçando vocabulário','Dormir ouvindo','Pular partes'],c:1},
+        {q:'Depois de ouvir a aula:',a:['Nada','Fazer o quiz dela na plataforma','Apagar','Reclamar'],c:1}]}
+]};
+
 var CTX_TASKS={
   'Em Casa':[
     {icon:'🎙️',title:'Ouvir 15 min de podcast em inglês',sub:'EnglishPod, 6 Minute English ou seu favorito'},
@@ -1039,7 +1424,7 @@ var _ctxChecked={};
 function selCtx(el){
   document.querySelectorAll('.ctx-chip').forEach(function(c){c.classList.remove('active');});
   el.classList.add('active');
-  var label=el.textContent.trim();
+  var label=el.textContent.replace(/[^A-Za-zÀ-ÿ ]/g,'').trim();
   document.getElementById('mar-ctx-title').textContent='Tarefas de hoje · '+label;
   renderMarTasks(label);
 }
@@ -1050,10 +1435,11 @@ function renderMarTasks(label){
   var html='';
   tasks.forEach(function(t,i){
     var chk=_ctxChecked[key][i];
-    html+='<div class="mar-task" style="animation:fadeUp .22s '+(i*.05)+'s cubic-bezier(.22,1,.36,1) both">'
-      +'<div class="mar-chk'+(chk?' chk':'')+ '" onclick="chkMarTask(this,\''+key+'\','+i+')">'+(chk?'✓':'')+'</div>'
-      +'<div><div class="mar-task-title">'+t.icon+' '+t.title+'</div>'
+    html+='<div class="mar-task" style="animation:fadeUp .22s '+(i*.05)+'s cubic-bezier(.22,1,.36,1) both" onclick="openTask(\''+key+'\','+i+')">'
+      +'<div class="mar-chk'+(chk?' chk':'')+ '" onclick="event.stopPropagation();chkMarTask(this,\''+key+'\','+i+')">'+(chk?'✓':'')+'</div>'
+      +'<div style="min-width:0"><div class="mar-task-title">'+t.icon+' '+t.title+'</div>'
       +'<div style="font-size:11px;color:var(--fg3);margin-top:2px">'+t.sub+'</div></div>'
+      +'<div class="open-hint">ver como fazer ›</div>'
       +'</div>';
   });
   document.getElementById('mar-tasks-list').innerHTML=html;
@@ -1065,6 +1451,53 @@ function chkMarTask(el,key,i){
   el.textContent=el.classList.contains('chk')?'✓':'';
 }
 function chkTask(el){el.classList.toggle('chk');el.textContent=el.classList.contains('chk')?'✓':'';}
+var _curTask=null;
+function openTask(key,i){
+  var t=(CTX_TASKS[key]||[])[i];var inf=(TASK_INFO[key]||[])[i];if(!t)return;
+  _curTask={key:key,i:i};
+  document.getElementById('task-modal-title').textContent=t.icon+' '+t.title;
+  var h='<div style="font-size:12px;color:var(--fg2);line-height:1.7;background:rgba(79,110,247,.06);border:1px solid rgba(79,110,247,.15);border-radius:12px;padding:10px 12px">💡 '+(inf?inf.why:t.sub)+'</div>';
+  if(inf){
+    h+='<div class="adm-section">Como fazer</div><ol style="font-size:12.5px;line-height:1.9;padding-left:20px;margin:0">';
+    inf.steps.forEach(function(st){h+='<li>'+st+'</li>';});h+='</ol>';
+    if(inf.links&&inf.links.length){
+      h+='<div class="adm-section">Conteúdo pra usar agora</div><div>';
+      inf.links.forEach(function(l){
+        if(l.u==='#modulos')h+='<a class="task-link" href="javascript:void(0)" onclick="closeTaskModal();goTo(\'modulos\')">'+l.t+'</a>';
+        else h+='<a class="task-link" href="'+l.u+'" target="_blank" rel="noopener">'+l.t+' ↗</a>';
+      });
+      h+='</div><div style="font-size:10px;color:var(--fg3);margin-top:4px">Links do YouTube abrem direto no app do YouTube no celular.</div>';
+    }
+    if(inf.ex&&inf.ex.length){h+='<div class="adm-section">Exemplos</div>';inf.ex.forEach(function(e){h+='<div class="task-ex">'+e+'</div>';});}
+    if(inf.quiz&&inf.quiz.length){
+      h+='<div class="adm-section">Entendeu? Prova rápida 👇</div>';
+      inf.quiz.forEach(function(q,qi){
+        h+='<div class="quiz-q"><div class="qt">'+esc(q.q)+'</div>';
+        q.a.forEach(function(alt,ai){h+='<div class="quiz-opt" onclick="taskQuizPick(this,'+qi+','+ai+','+q.c+')"><span class="letter">'+'ABCD'[ai]+'</span><span>'+esc(alt)+'</span></div>';});
+        h+='</div>';
+      });
+    }
+  }
+  h+='<button class="admin-btn admin-btn-primary" style="width:100%;margin-top:14px" onclick="taskDone()">✅ Fiz essa tarefa!</button>';
+  document.getElementById('task-modal-body').innerHTML=h;
+  document.getElementById('task-modal').classList.add('open');
+}
+function closeTaskModal(){document.getElementById('task-modal').classList.remove('open');}
+function taskQuizPick(el,qi,ai,c){
+  var box=el.parentElement;
+  if(box.dataset.done)return;box.dataset.done='1';
+  var opts=box.querySelectorAll('.quiz-opt');
+  opts[c].classList.add('ok');
+  if(ai!==c)el.classList.add('bad');
+}
+function taskDone(){
+  if(_curTask){
+    _ctxChecked[_curTask.key]=_ctxChecked[_curTask.key]||[];
+    if(!_ctxChecked[_curTask.key][_curTask.i]){_ctxChecked[_curTask.key][_curTask.i]=true;renderMarTasks(_curTask.key);}
+    toast('🔥 Tarefa concluída! Constância é o segredo.','#10b981');
+  }
+  closeTaskModal();
+}
 // init maratona tasks
 (function(){renderMarTasks('Em Casa');})();
 
@@ -1119,6 +1552,7 @@ var _sb=supabase.createClient(
 );
 
 function showLogin(){
+  var f=document.getElementById('ai-fab');if(f)f.classList.remove('show');
   var s=document.getElementById('login-screen');
   s.style.display='flex';s.classList.remove('hiding');
   document.getElementById('login-email').value='';
@@ -1131,6 +1565,7 @@ function hideLogin(){
   var s=document.getElementById('login-screen');
   s.classList.add('hiding');
   setTimeout(function(){s.style.display='none';s.classList.remove('hiding');},300);
+  var f=document.getElementById('ai-fab');if(f)f.classList.add('show');
 }
 
 function setUserUI(user){
@@ -1203,6 +1638,7 @@ function adminTab(tab,btn){
   document.getElementById('adm-'+tab).classList.add('active');
   if(tab==='usuarios')loadUsers();
   if(tab==='metricas')loadMetrics();
+  if(tab==='comentarios')loadAdminComments();
   if(tab==='modulos')loadAdminModules();
 }
 
@@ -1315,60 +1751,6 @@ async function loadMetrics(){
   }catch(e){tiles.innerHTML='<div class="admin-loading" style="color:var(--red);grid-column:1/-1">Erro: '+e.message+'</div>';}
 }
 
-// ─── Módulos editor ───
-var EMOJI_OPTIONS=['🌟','🎯','📗','📘','📙','🎵','🎬','💼','📢','🧩','🎙️','✏️','🔊','📖','🧠','🗣️','💡','🔥','⚡','🌍'];
-var _editMods=null;
-
-function loadAdminModules(){
-  if(!_editMods){
-    _editMods=MODULES.map(function(name,i){
-      return {name:name,sub:MODSUB[i],emoji:'🔒',bg:'radial-gradient(ellipse at 18% 22%, #d2e6ff 0%, #6fa5ff 22%, #3060d0 46%, #0c1a60 70%, #040b28 100%)'};
-    });
-    // try to load saved from localStorage
-    try{
-      var saved=localStorage.getItem('adminMods');
-      if(saved){_editMods=JSON.parse(saved);}
-    }catch(e){}
-  }
-  renderAdminModules();
-}
-
-function renderAdminModules(){
-  var container=document.getElementById('adm-mod-list');
-  var html='';
-  _editMods.forEach(function(m,i){
-    html+='<div class="admin-mod-row">'
-      +'<div class="admin-mod-preview" style="background:'+m.bg+'" title="Clique para trocar emoji" onclick="cycleEmoji('+i+')">'+m.emoji+'</div>'
-      +'<div style="flex:1">'
-      +'<input class="admin-inp" style="margin-bottom:4px;font-size:12px;padding:6px 10px" value="'+esc(m.name)+'" onchange="_editMods['+i+'].name=this.value">'
-      +'<input class="admin-inp" style="font-size:11px;padding:5px 10px;color:var(--fg3)" value="'+esc(m.sub)+'" onchange="_editMods['+i+'].sub=this.value">'
-      +'</div>'
-      +'</div>';
-  });
-  container.innerHTML=html;
-}
-
-function cycleEmoji(idx){
-  var cur=_editMods[idx].emoji;
-  var pos=EMOJI_OPTIONS.indexOf(cur);
-  _editMods[idx].emoji=EMOJI_OPTIONS[(pos+1)%EMOJI_OPTIONS.length];
-  renderAdminModules();
-}
-
-function saveModules(){
-  // Atualiza MODULES e MODSUB globais e salva no localStorage
-  _editMods.forEach(function(m,i){MODULES[i]=m.name;MODSUB[i]=m.sub;});
-  try{localStorage.setItem('adminMods',JSON.stringify(_editMods));}catch(e){}
-  // Re-renderiza os módulos na aba de alunos
-  var g=document.getElementById('modules-grid');g.innerHTML='';
-  _editMods.forEach(function(m,i){
-    g.innerHTML+='<div class="module-card"><div class="mod-thumb" style="background:'+m.bg+';display:flex;align-items:center;justify-content:center;font-size:28px">'+m.emoji+'</div><div class="mod-body"><div class="mod-name">'+esc(m.name)+'</div><div class="mod-sub">'+esc(m.sub)+'</div><div class="mod-lock-tag">EM BREVE</div></div></div>';
-  });
-  document.getElementById('adm-mod-status').textContent='✅ Módulos atualizados!';
-  setTimeout(function(){document.getElementById('adm-mod-status').textContent='';},2500);
-  toast('✅ Módulos salvos!','#10b981');
-}
-
 // ─── Reset senha modal ───
 function openResetModal(uid,email){
   _resetUserId=uid;
@@ -1439,21 +1821,574 @@ function setManualLevel(lvl){
   try{var saved=localStorage.getItem('userLevel');if(saved&&LEVEL_INFO[saved]){setManualLevel(saved);}}catch(e){}
 })();
 
-// ─── Carregar módulos salvos ao iniciar ───
-(function(){
+
+// ═══════════════════════════ MÓDULOS & AULAS — helpers ═══════════════════════════
+var REACT_EMOJIS=['🔥','❤️','🤯','😂','👏','🙏'];
+var DEFAULT_BG='radial-gradient(ellipse at 18% 22%, #d2e6ff 0%, #6fa5ff 22%, #3060d0 46%, #0c1a60 70%, #040b28 100%)';
+
+function ytId(url){
+  if(!url)return null;
+  var m=String(url).match(/(?:youtu\.be\/|v=|\/shorts\/|\/embed\/|\/live\/)([A-Za-z0-9_-]{11})/);
+  return m?m[1]:null;
+}
+function ytThumb(url){var id=ytId(url);return id?'https://i.ytimg.com/vi/'+id+'/hqdefault.jpg':null;}
+function lessonCover(l){return l.cover_url||ytThumb(l.youtube_url)||null;}
+function relDate(l){return l.release_at?new Date(l.release_at):null;}
+function relFuture(l){var d=relDate(l);return d&&d>new Date();}
+function isOpen(l){return !!(l.published&&ytId(l.youtube_url)&&!relFuture(l));}
+function fmtRel(l){var d=relDate(l);if(!d)return '';return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'}).replace('.','');}
+function daysUntil(l){var d=relDate(l);if(!d)return 0;return Math.ceil((d-new Date())/86400000);}
+function fmtDate(d){var x=new Date(d);return x.toLocaleDateString('pt-BR')+' '+x.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});}
+function nl2br(s){return esc(s||'').replace(/\n/g,'<br>');}
+function countBy(rows,key){var o={};(rows||[]).forEach(function(r){var k=r[key];o[k]=(o[k]||0)+1;});return o;}
+
+// fallback quando o Supabase ainda não tem módulos
+function renderStaticModules(){
+  var g=document.getElementById('modules-grid');if(!g)return;g.innerHTML='';
+  MODULES.forEach(function(name,i){g.innerHTML+='<div class="module-card"><div class="mod-thumb"><div class="mod-thumb-lock">🔒</div></div><div class="mod-body"><div class="mod-name">'+esc(name)+'</div><div class="mod-sub">'+esc(MODSUB[i])+'</div><div class="mod-lock-tag">EM BREVE</div></div></div>';});
+}
+
+// ═══════════════════════════ ALUNO — módulos → aulas → aula ═══════════════════════════
+var _stMods=null,_stLessons={},_stCurMod=null,_stCurLes=null,_stQuizSel={},_stLesTab='desc';
+
+function modShow(view){
+  ['grid','lessons','lesson'].forEach(function(v){document.getElementById('mod-view-'+v).style.display=v===view?'block':'none';});
+}
+
+async function loadStudentModules(force){
+  if(_stMods&&!force){return;}
   try{
-    var saved=localStorage.getItem('adminMods');
-    if(saved){
-      var mods=JSON.parse(saved);
-      mods.forEach(function(m,i){if(MODULES[i]!==undefined){MODULES[i]=m.name;MODSUB[i]=m.sub;}});
-      // Re-render modules grid
-      var g=document.getElementById('modules-grid');g.innerHTML='';
-      mods.forEach(function(m,i){
-        g.innerHTML+='<div class="module-card"><div class="mod-thumb" style="background:'+m.bg+';display:flex;align-items:center;justify-content:center;font-size:28px">'+m.emoji+'</div><div class="mod-body"><div class="mod-name">'+m.name+'</div><div class="mod-sub">'+m.sub+'</div><div class="mod-lock-tag">EM BREVE</div></div></div>';
-      });
-    }
-  }catch(e){}
-})();
+    var r=await _sb.from('mi_modules').select('*').order('ord').order('created_at');
+    if(r.error)throw r.error;
+    var mods=r.data||[];
+    if(!mods.length){renderStaticModules();return;}
+    var l=await _sb.from('mi_lessons').select('id,module_id,published,youtube_url,release_at').order('ord');
+    var byMod={};(l.data||[]).forEach(function(x){byMod[x.module_id]=byMod[x.module_id]||{t:0,p:0};byMod[x.module_id].t++;if(isOpen(x))byMod[x.module_id].p++;});
+    _stMods=mods;
+    var g=document.getElementById('modules-grid');g.innerHTML='';
+    mods.forEach(function(m){
+      var c=byMod[m.id]||{t:0,p:0};
+      var ready=c.p>0;
+      var thumb=m.cover_url?'<div class="mod-thumb cover"><img src="'+esc(m.cover_url)+'" alt=""></div>'
+        :'<div class="mod-thumb" style="background:'+DEFAULT_BG+';display:flex;align-items:center;justify-content:center;font-size:28px">'+(ready?esc(m.emoji||'📘'):'<div class="mod-thumb-lock">🔒</div>')+'</div>';
+      var tag=ready?'<div class="mod-tag-ok">'+c.p+' AULA'+(c.p>1?'S':'')+' DISPONÍVE'+(c.p>1?'IS':'L')+'</div>':'<div class="mod-lock-tag">EM BREVE'+(c.t?' · '+c.t+' aula'+(c.t>1?'s':''):'')+'</div>';
+      g.innerHTML+='<div class="module-card '+(c.t?'ready':'')+'" '+(c.t?'onclick="openModule(\''+m.id+'\')"':'')+'>'+thumb+'<div class="mod-body"><div class="mod-name">'+esc(m.name)+'</div><div class="mod-sub">'+esc(m.sub||'')+'</div>'+tag+'</div></div>';
+    });
+    modShow('grid');
+  }catch(e){console.warn('modulos',e);renderStaticModules();}
+}
+
+async function openModule(modId){
+  var m=(_stMods||[]).filter(function(x){return x.id===modId;})[0];if(!m)return;
+  _stCurMod=m;
+  var v=document.getElementById('mod-view-lessons');
+  v.innerHTML='<button class="back-btn" onclick="modShow(\'grid\')">← Módulos</button><div class="admin-loading">Carregando aulas...</div>';
+  modShow('lessons');
+  var r=await _sb.from('mi_lessons').select('*').eq('module_id',modId).order('ord').order('created_at');
+  var ls=r.data||[];_stLessons[modId]=ls;
+  var ids=ls.map(function(x){return x.id;});
+  var votes={},reacts={},mine={};
+  if(ids.length){
+    var vr=await _sb.from('mi_lesson_votes').select('lesson_id').in('lesson_id',ids);votes=countBy(vr.data,'lesson_id');
+    var rr=await _sb.from('mi_lesson_reactions').select('lesson_id').in('lesson_id',ids);reacts=countBy(rr.data,'lesson_id');
+    var qr=await _sb.from('mi_quiz_results').select('lesson_id,score,total').in('lesson_id',ids);(qr.data||[]).forEach(function(q){mine[q.lesson_id]=q;});
+  }
+  var head='<button class="back-btn" onclick="modShow(\'grid\')">← Módulos</button>'
+    +'<div style="display:flex;gap:14px;align-items:center;margin-bottom:18px">'
+    +(m.cover_url?'<img src="'+esc(m.cover_url)+'" style="width:120px;aspect-ratio:16/9;object-fit:cover;border-radius:12px">':'<div style="width:120px;aspect-ratio:16/9;border-radius:12px;background:'+DEFAULT_BG+';display:flex;align-items:center;justify-content:center;font-size:28px">'+esc(m.emoji||'📘')+'</div>')
+    +'<div><div style="font-size:21px;font-weight:800">'+esc(m.name)+'</div><div style="font-size:13px;color:var(--fg2)">'+esc(m.sub||'')+' · '+ls.length+' aula'+(ls.length!==1?'s':'')+'</div></div></div>';
+  if(!ls.length){v.innerHTML=head+'<div class="admin-loading">Nenhuma aula cadastrada ainda.</div>';return;}
+  var html='<div class="lesson-list">';
+  ls.forEach(function(l,i){
+    var cov=lessonCover(l);
+    var q=mine[l.id];
+    var op=isOpen(l);
+    html+='<div class="lesson-item '+(op?'':'locked')+'" onclick="openLesson(\''+l.id+'\')">'
+      +'<div class="lthumb">'+(cov?'<img src="'+esc(cov)+'" alt="">':'🎬')+(op?'':'<div class="mod-thumb-lock">'+(relFuture(l)?'📅':'⏳')+'</div>')+'</div>'
+      +'<div style="flex:1;min-width:0"><div class="lt">'+(i+1)+'. '+esc(l.title)+'</div><div class="ls">'
+      +(op?'<span style="color:var(--green);font-weight:700">▶ Disponível</span>':relFuture(l)?'<span style="color:var(--accent);font-weight:700">📅 Libera '+fmtRel(l)+'</span>':'<span style="color:var(--gold);font-weight:700">⏳ Em breve</span>')
+      +(!op&&votes[l.id]?'<span>🙋 '+votes[l.id]+' esperando</span>':'')
+      +(reacts[l.id]?'<span>'+reacts[l.id]+' reaç'+(reacts[l.id]>1?'ões':'ão')+'</span>':'')
+      +(q?'<span>🧩 Quiz '+q.score+'/'+q.total+'</span>':(l.quiz&&l.quiz.length?'<span>🧩 Quiz</span>':''))
+      +'</div></div><div style="color:var(--fg3)">›</div></div>';
+  });
+  v.innerHTML=head+html+'</div>';
+}
+
+async function openLesson(lesId){
+  var ls=_stLessons[_stCurMod.id]||[];
+  var l=ls.filter(function(x){return x.id===lesId;})[0];if(!l)return;
+  _stCurLes=l;_stQuizSel={};_stLesTab=isOpen(l)?'desc':'coment';
+  var v=document.getElementById('mod-view-lesson');
+  v.innerHTML='<button class="back-btn" onclick="openModule(\''+_stCurMod.id+'\')">← '+esc(_stCurMod.name)+'</button><div class="admin-loading">Carregando...</div>';
+  modShow('lesson');
+  await renderLesson();
+}
+
+async function renderLesson(){
+  var l=_stCurLes;var v=document.getElementById('mod-view-lesson');
+  var uid=(await _sb.auth.getUser()).data.user;uid=uid?uid.id:null;
+  var vr=await _sb.from('mi_lesson_votes').select('user_id').eq('lesson_id',l.id);
+  var rr=await _sb.from('mi_lesson_reactions').select('user_id,emoji').eq('lesson_id',l.id);
+  var votes=vr.data||[],reacts=rr.data||[];
+  var myVote=votes.some(function(x){return x.user_id===uid;});
+  var myReact=(reacts.filter(function(x){return x.user_id===uid;})[0]||{}).emoji;
+  var rc=countBy(reacts,'emoji');
+  var idx=ls_index(l);
+  var html='<button class="back-btn" onclick="openModule(\''+_stCurMod.id+'\')">← '+esc(_stCurMod.name)+'</button>';
+  html+='<div style="font-size:11px;color:var(--fg3);font-weight:700;letter-spacing:.5px;margin-bottom:4px">AULA '+idx+' · '+esc(_stCurMod.name).toUpperCase()+'</div>';
+  html+='<div style="font-size:21px;font-weight:800;margin-bottom:14px">'+esc(l.title)+'</div>';
+  var id=ytId(l.youtube_url);
+  if(isOpen(l)){
+    html+='<div class="player-wrap"><iframe src="https://www.youtube-nocookie.com/embed/'+id+'?rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>';
+  }else{
+    var cov=lessonCover(l);
+    var fut=relFuture(l),dn=daysUntil(l);
+    html+='<div class="waiting-box">'+(cov?'<img src="'+esc(cov)+'" alt="">':'')+'<div class="waiting-inner"><div class="big">'+(fut?'📅':'⏳')+'</div><div class="t">'+(fut?'Essa aula libera em '+relDate(l).toLocaleDateString('pt-BR',{day:'numeric',month:'long'})+(dn===1?' — amanhã!':dn>1?' — faltam '+dn+' dias':''):'Essa aula ainda está sendo gravada')+'</div>'
+      +'<div class="s">'+(votes.length?'<strong>'+votes.length+'</strong> '+(votes.length===1?'pessoa está esperando':'pessoas estão esperando')+' por ela':'Seja o primeiro a pedir essa aula')+'</div>'
+      +'<button class="vote-btn '+(myVote?'on':'')+'" onclick="toggleVote()">'+(myVote?'✅ Você está esperando':'🙋 Estou esperando por essa aula')+'</button></div></div>';
+  }
+  // reações
+  html+='<div class="react-row">';
+  REACT_EMOJIS.forEach(function(e){html+='<button class="react-btn '+(myReact===e?'on':'')+'" onclick="toggleReact(\''+e+'\')">'+e+(rc[e]?'<span class="cnt">'+rc[e]+'</span>':'')+'</button>';});
+  html+='<span style="font-size:11px;color:var(--fg3);align-self:center;margin-left:4px">'+(reacts.length?reacts.length+' aluno'+(reacts.length>1?'s avaliaram':' avaliou'):'Como foi essa aula pra você?')+'</span></div>';
+  // abas
+  var hasQuiz=l.quiz&&l.quiz.length>0;
+  html+='<div class="lesson-tabs">'
+    +'<button class="lesson-tab '+(_stLesTab==='desc'?'active':'')+'" data-t="desc" onclick="lesTab(\'desc\')">📝 Descrição</button>'
+    +(hasQuiz?'<button class="lesson-tab '+(_stLesTab==='quiz'?'active':'')+'" data-t="quiz" onclick="lesTab(\'quiz\')">🧩 Quiz</button>':'')
+    +'<button class="lesson-tab '+(_stLesTab==='coment'?'active':'')+'" data-t="coment" onclick="lesTab(\'coment\')">💬 Comentários</button></div>';
+  html+='<div class="lesson-panel '+(_stLesTab==='desc'?'active':'')+'" id="les-p-desc"><div class="lesson-desc">'+(l.description?esc(l.description):'<span style="color:var(--fg3)">Sem descrição ainda.</span>')+'</div></div>';
+  html+='<div class="lesson-panel '+(_stLesTab==='quiz'?'active':'')+'" id="les-p-quiz">'+(hasQuiz?renderQuiz(l):'')+'</div>';
+  html+='<div class="lesson-panel '+(_stLesTab==='coment'?'active':'')+'" id="les-p-coment"><div id="les-comments"><div class="admin-loading">Carregando comentários...</div></div>'
+    +'<div class="comment-box"><textarea class="admin-inp" id="les-comment-txt" placeholder="Deixa sua dúvida ou comentário sobre a aula..."></textarea><button class="admin-btn admin-btn-primary" onclick="postComment()">Comentar</button></div></div>';
+  v.innerHTML=html;
+  loadComments();
+}
+function ls_index(l){var ls=_stLessons[_stCurMod.id]||[];return ls.indexOf(l)+1;}
+function lesTab(t){_stLesTab=t;
+  document.querySelectorAll('.lesson-tab').forEach(function(b){b.classList.toggle('active',b.dataset.t===t);});
+  document.querySelectorAll('.lesson-panel').forEach(function(p){p.classList.remove('active');});
+  document.getElementById('les-p-'+t).classList.add('active');}
+
+async function toggleVote(){
+  var l=_stCurLes;var u=(await _sb.auth.getUser()).data.user;if(!u)return;
+  var ex=await _sb.from('mi_lesson_votes').select('lesson_id').eq('lesson_id',l.id).eq('user_id',u.id);
+  if(ex.data&&ex.data.length){await _sb.from('mi_lesson_votes').delete().eq('lesson_id',l.id).eq('user_id',u.id);toast('Voto removido','#6b7280');}
+  else{var r=await _sb.from('mi_lesson_votes').insert({lesson_id:l.id,user_id:u.id});if(r.error){toast('Erro: '+r.error.message,'#ef4444');return;}toast('🙋 Anotado! Vou priorizar essa aula','#10b981');}
+  renderLesson();
+}
+async function toggleReact(emoji){
+  var l=_stCurLes;var u=(await _sb.auth.getUser()).data.user;if(!u)return;
+  var ex=await _sb.from('mi_lesson_reactions').select('emoji').eq('lesson_id',l.id).eq('user_id',u.id);
+  if(ex.data&&ex.data.length){
+    if(ex.data[0].emoji===emoji){await _sb.from('mi_lesson_reactions').delete().eq('lesson_id',l.id).eq('user_id',u.id);}
+    else{await _sb.from('mi_lesson_reactions').update({emoji:emoji}).eq('lesson_id',l.id).eq('user_id',u.id);}
+  }else{var r=await _sb.from('mi_lesson_reactions').insert({lesson_id:l.id,user_id:u.id,emoji:emoji});if(r.error){toast('Erro: '+r.error.message,'#ef4444');return;}}
+  renderLesson();
+}
+
+function renderQuiz(l){
+  var html='';
+  l.quiz.forEach(function(q,qi){
+    html+='<div class="quiz-q" id="qq-'+qi+'"><div class="qt">'+(qi+1)+'. '+esc(q.q)+'</div>';
+    (q.a||[]).forEach(function(alt,ai){if(!alt)return;html+='<div class="quiz-opt" id="qo-'+qi+'-'+ai+'" onclick="quizPick('+qi+','+ai+')"><span class="letter">'+'ABCD'[ai]+'</span><span>'+esc(alt)+'</span></div>';});
+    html+='</div>';
+  });
+  html+='<button class="admin-btn admin-btn-primary" id="quiz-submit" onclick="quizSubmit()">✅ Ver resultado</button><div id="quiz-result"></div>';
+  return html;
+}
+function quizPick(qi,ai){
+  if(document.getElementById('quiz-submit').disabled)return;
+  _stQuizSel[qi]=ai;
+  document.querySelectorAll('#qq-'+qi+' .quiz-opt').forEach(function(o){o.classList.remove('sel');});
+  document.getElementById('qo-'+qi+'-'+ai).classList.add('sel');
+}
+async function quizSubmit(){
+  var l=_stCurLes;var total=l.quiz.length;
+  if(Object.keys(_stQuizSel).length<total){toast('Responde todas as '+total+' perguntas antes 😉','#f59e0b');return;}
+  var score=0;
+  l.quiz.forEach(function(q,qi){
+    var sel=_stQuizSel[qi];var ok=sel===q.c;if(ok)score++;
+    document.getElementById('qo-'+qi+'-'+q.c).classList.add('ok');
+    if(!ok)document.getElementById('qo-'+qi+'-'+sel).classList.add('bad');
+  });
+  document.getElementById('quiz-submit').disabled=true;
+  var msg=score===total?'🏆 Perfeito! '+score+'/'+total:score>=total*0.6?'👏 Mandou bem! '+score+'/'+total:'💪 '+score+'/'+total+' — revê a aula e tenta de novo';
+  document.getElementById('quiz-result').innerHTML='<div class="quiz-result">'+msg+'<br><button class="admin-btn admin-btn-ghost admin-btn-sm" style="margin-top:10px;background:rgba(255,255,255,.2);color:#fff;border-color:transparent" onclick="_stQuizSel={};document.getElementById(\'les-p-quiz\').innerHTML=renderQuiz(_stCurLes)">🔁 Tentar de novo</button></div>';
+  var u=(await _sb.auth.getUser()).data.user;
+  if(u){await _sb.from('mi_quiz_results').upsert({lesson_id:l.id,user_id:u.id,score:score,total:total,created_at:new Date().toISOString()});}
+}
+
+async function loadComments(){
+  var el=document.getElementById('les-comments');if(!el)return;
+  var r=await _sb.from('mi_lesson_comments').select('*').eq('lesson_id',_stCurLes.id).order('created_at',{ascending:false});
+  var u=(await _sb.auth.getUser()).data.user;var uid=u?u.id:null;
+  var rows=r.data||[];
+  if(!rows.length){el.innerHTML='<div class="admin-loading">Nenhum comentário ainda. Seja o primeiro!</div>';return;}
+  var html='';
+  rows.forEach(function(c){
+    html+='<div class="comment'+(c.is_admin?' prof':'')+'"><div class="cava">'+(c.is_admin?'👨‍🏫':esc((c.user_name||'?')[0].toUpperCase()))+'</div><div style="flex:1;min-width:0"><span class="cname">'+esc(c.user_name)+'</span>'+(c.is_admin?'<span class="prof-badge">PROFESSOR</span>':'')+'<span class="cdate">'+fmtDate(c.created_at)+'</span><div class="cbody">'+esc(c.body)+'</div></div>'
+      +((c.user_id===uid||window._isAdmin)?'<button class="cdel" onclick="delComment('+c.id+')">apagar</button>':'')+'</div>';
+  });
+  el.innerHTML=html;
+}
+async function postComment(){
+  var t=document.getElementById('les-comment-txt');var body=t.value.trim();if(!body)return;
+  var u=(await _sb.auth.getUser()).data.user;if(!u)return;
+  var meta=u.user_metadata||{};var name=meta.full_name||meta.name||u.email.split('@')[0];
+  if(window._isAdmin)name='Professor Gediel';
+  var r=await _sb.from('mi_lesson_comments').insert({lesson_id:_stCurLes.id,user_id:u.id,user_name:name,body:body,is_admin:!!window._isAdmin});
+  if(r.error){toast('Erro: '+r.error.message,'#ef4444');return;}
+  t.value='';toast('💬 Comentário enviado!','#10b981');loadComments();
+}
+async function delComment(id){
+  await _sb.from('mi_lesson_comments').delete().eq('id',id);loadComments();
+}
+
+// ═══════════════════════════ ADMIN — editor de módulos e aulas ═══════════════════════════
+var _admMods=[],_admLessons={},_admOpen={},_editMod=null,_editLes=null,_pendingCover={mod:null,les:null};
+
+async function loadAdminModules(force){
+  var el=document.getElementById('adm-mod-list');
+  el.innerHTML='<div class="admin-loading">Carregando módulos...</div>';
+  var r=await _sb.from('mi_modules').select('*').order('ord').order('created_at');
+  if(r.error){el.innerHTML='<div class="admin-loading" style="color:var(--red)">Erro: '+esc(r.error.message)+'<br><span style="font-size:11px;color:var(--fg2)">Você já rodou o arquivo <strong>supabase/aulas.sql</strong> no SQL Editor do Supabase?</span></div>';return;}
+  _admMods=r.data||[];
+  var l=await _sb.from('mi_lessons').select('*').order('ord').order('created_at');
+  _admLessons={};(l.data||[]).forEach(function(x){(_admLessons[x.module_id]=_admLessons[x.module_id]||[]).push(x);});
+  var ids=(l.data||[]).map(function(x){return x.id;});
+  _admStats={votes:{},reacts:{},comments:{},quiz:{}};
+  if(ids.length){
+    var vr=await _sb.from('mi_lesson_votes').select('lesson_id').in('lesson_id',ids);_admStats.votes=countBy(vr.data,'lesson_id');
+    var rr=await _sb.from('mi_lesson_reactions').select('lesson_id,emoji').in('lesson_id',ids);
+    (rr.data||[]).forEach(function(x){var o=_admStats.reacts[x.lesson_id]=_admStats.reacts[x.lesson_id]||{};o[x.emoji]=(o[x.emoji]||0)+1;});
+    var cr=await _sb.from('mi_lesson_comments').select('lesson_id').in('lesson_id',ids);_admStats.comments=countBy(cr.data,'lesson_id');
+    var qr=await _sb.from('mi_quiz_results').select('lesson_id,score,total').in('lesson_id',ids);
+    (qr.data||[]).forEach(function(x){var o=_admStats.quiz[x.lesson_id]=_admStats.quiz[x.lesson_id]||{n:0,s:0,t:0};o.n++;o.s+=x.score;o.t+=x.total;});
+  }
+  if(!_admMods.length){
+    el.innerHTML='<div class="admin-loading">Nenhum módulo ainda.<br><button class="admin-btn admin-btn-primary" style="margin-top:12px" onclick="seedModules()">✨ Criar os '+MODULES.length+' módulos padrão</button></div>';return;
+  }
+  renderAdminModules();
+}
+var _admStats={votes:{},reacts:{},comments:{},quiz:{}};
+
+async function seedModules(){
+  var rows=MODULES.map(function(n,i){return {ord:i+1,name:n,sub:MODSUB[i],emoji:EMOJI_OPTIONS[i%EMOJI_OPTIONS.length]};});
+  var r=await _sb.from('mi_modules').insert(rows);
+  if(r.error){toast('Erro: '+r.error.message,'#ef4444');return;}
+  toast('✅ Módulos criados!','#10b981');loadAdminModules(true);_stMods=null;
+}
+var EMOJI_OPTIONS=['🌟','🎯','📗','📘','📙','🎵','🎬','💼','📢','🧩','🎙️','✏️','🔊','📖','🧠','🗣️','💡','🔥','⚡','🌍'];
+
+function renderAdminModules(){
+  var el=document.getElementById('adm-mod-list');var html='';
+  _admMods.forEach(function(m,i){
+    var ls=_admLessons[m.id]||[];var pub=ls.filter(function(x){return x.published;}).length;
+    html+='<div class="adm-mod-item '+(_admOpen[m.id]?'open':'')+'" id="admmod-'+m.id+'">'
+      +'<div class="adm-mod-head" onclick="toggleAdmMod(\''+m.id+'\')">'
+      +'<div class="adm-cover-sm">'+(m.cover_url?'<img src="'+esc(m.cover_url)+'">':esc(m.emoji||'📘'))+'</div>'
+      +'<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:800">'+(i+1)+'. '+esc(m.name)+'</div><div style="font-size:11px;color:var(--fg3)">'+esc(m.sub||'')+' · '+ls.length+' aula'+(ls.length!==1?'s':'')+' · '+pub+' publicada'+(pub!==1?'s':'')+'</div></div>'
+      +'<div style="display:flex;gap:6px">'
+      +'<button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="event.stopPropagation();moveModule('+i+',-1)" title="Subir">↑</button>'
+      +'<button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="event.stopPropagation();moveModule('+i+',1)" title="Descer">↓</button>'
+      +'<button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="event.stopPropagation();openModModal(\''+m.id+'\')">✏️ Editar</button></div>'
+      +'<div style="color:var(--fg3);font-size:14px">'+(_admOpen[m.id]?'▾':'▸')+'</div></div>'
+      +'<div class="adm-mod-body">';
+    if(!ls.length)html+='<div style="font-size:12px;color:var(--fg3);padding:12px 10px 4px">Nenhuma aula ainda.</div>';
+    ls.forEach(function(l,li){
+      var cov=lessonCover(l);var st=_admStats;var rc=st.reacts[l.id]||{};var rtot=0;var rtxt='';
+      Object.keys(rc).sort(function(a,b){return rc[b]-rc[a];}).forEach(function(e){rtot+=rc[e];rtxt+=e+rc[e]+' ';});
+      var q=st.quiz[l.id];
+      html+='<div class="adm-lesson-row" onclick="openLesModal(\''+m.id+'\',\''+l.id+'\')">'
+        +'<div class="num">'+(li+1)+'</div>'
+        +'<div class="adm-cover-sm">'+(cov?'<img src="'+esc(cov)+'">':'🎬')+'</div>'
+        +'<div style="flex:1;min-width:0"><div style="font-weight:700">'+esc(l.title)+'</div>'
+        +'<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:3px">'
+        +'<span class="adm-pill '+(isOpen(l)?'adm-pill-on':'adm-pill-off')+'">'+(isOpen(l)?'NO AR':relFuture(l)?'LIBERA '+fmtRel(l).toUpperCase():'EM BREVE')+'</span>'
+        +(ytId(l.youtube_url)?'':'<span class="adm-stat" style="color:var(--red)">sem vídeo</span>')
+        +(l.release_at?'<span class="adm-stat">📅 '+new Date(l.release_at).toLocaleDateString('pt-BR')+'</span>':'<span class="adm-stat" style="color:var(--gold)">sem data</span>')
+        +'<span class="adm-stat">🙋 '+(st.votes[l.id]||0)+' esperando</span>'
+        +'<span class="adm-stat">'+(rtot?rtxt.trim():'sem reações')+'</span>'
+        +'<span class="adm-stat">💬 '+(st.comments[l.id]||0)+'</span>'
+        +'<span class="adm-stat">🧩 '+((l.quiz||[]).length)+' perg.'+(q?' · média '+(q.s/q.n).toFixed(1)+'/'+(q.t/q.n).toFixed(0)+' ('+q.n+')':'')+'</span>'
+        +'</div></div>'
+        +'<button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="event.stopPropagation();moveLesson(\''+m.id+'\','+li+',-1)">↑</button>'
+        +'<button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="event.stopPropagation();moveLesson(\''+m.id+'\','+li+',1)">↓</button>'
+        +'</div>';
+    });
+    html+='<button class="admin-btn admin-btn-primary admin-btn-sm" style="margin:10px 0 0 10px" onclick="openLesModal(\''+m.id+'\',null)">➕ Nova aula</button>';
+    html+='</div></div>';
+  });
+  el.innerHTML=html;
+}
+function toggleAdmMod(id){_admOpen[id]=!_admOpen[id];var el=document.getElementById('admmod-'+id);if(el)el.classList.toggle('open',_admOpen[id]);var arrow=el.querySelector('.adm-mod-head > div:last-child');if(arrow)arrow.textContent=_admOpen[id]?'▾':'▸';}
+
+async function moveModule(i,dir){
+  var j=i+dir;if(j<0||j>=_admMods.length)return;
+  var a=_admMods[i],b=_admMods[j];
+  await _sb.from('mi_modules').update({ord:j+1}).eq('id',a.id);
+  await _sb.from('mi_modules').update({ord:i+1}).eq('id',b.id);
+  _stMods=null;loadAdminModules(true);
+}
+async function moveLesson(modId,i,dir){
+  var ls=_admLessons[modId];var j=i+dir;if(j<0||j>=ls.length)return;
+  await _sb.from('mi_lessons').update({ord:j+1}).eq('id',ls[i].id);
+  await _sb.from('mi_lessons').update({ord:i+1}).eq('id',ls[j].id);
+  // reordena todos pra garantir consistência
+  var order=ls.slice();var t=order[i];order[i]=order[j];order[j]=t;
+  for(var k=0;k<order.length;k++){if(order[k].ord!==k+1)await _sb.from('mi_lessons').update({ord:k+1}).eq('id',order[k].id);}
+  _stLessons={};loadAdminModules(true);
+}
+
+// ─── Cronograma: 2 aulas/semana (segunda e quinta) ───
+async function scheduleAll(){
+  var st=document.getElementById('adm-sched-status');
+  var start=document.getElementById('adm-sched-start').value;if(!start){st.innerHTML='<span style="color:var(--red)">Escolhe a data de início.</span>';return;}
+  var over=document.getElementById('adm-sched-over').checked;
+  var all=[];_admMods.forEach(function(m){(_admLessons[m.id]||[]).forEach(function(l){all.push(l);});});
+  if(!all.length){st.innerHTML='<span style="color:var(--red)">Nenhuma aula cadastrada.</span>';return;}
+  var base=new Date(start+'T09:00:00-03:00');
+  // alinha o início numa segunda-feira
+  var dow=base.getDay();if(dow!==1){base.setDate(base.getDate()+((8-dow)%7));}
+  var k=0,n=0,upd=[];
+  for(var i=0;i<all.length;i++){
+    var l=all[i];
+    if(l.release_at&&!over){continue;}
+    var d=new Date(base);d.setDate(d.getDate()+Math.floor(k/2)*7+(k%2?3:0));k++;
+    upd.push({id:l.id,release_at:d.toISOString()});
+  }
+  if(!upd.length){st.innerHTML='<span style="color:var(--gold)">Todas já têm data. Marca "sobrescrever" pra refazer.</span>';return;}
+  st.innerHTML='⏳ Agendando '+upd.length+' aulas...';
+  for(var j=0;j<upd.length;j++){var r=await _sb.from('mi_lessons').update({release_at:upd[j].release_at}).eq('id',upd[j].id);if(r.error){st.innerHTML='<span style="color:var(--red)">Erro: '+esc(r.error.message)+'</span>';return;}n++;}
+  var last=new Date(upd[upd.length-1].release_at);
+  st.innerHTML='<span style="color:var(--green)">✅ '+n+' aulas agendadas · última libera em '+last.toLocaleDateString('pt-BR')+'</span>';
+  toast('📅 Cronograma aplicado!','#10b981');_stMods=null;_stLessons={};loadAdminModules(true);
+}
+
+// ─── Capa: leitura, medida e upload ───
+function pickCover(input,kind){
+  var f=input.files&&input.files[0];if(!f)return;
+  var info=document.getElementById('adm-'+kind+'-cover-info');
+  if(f.size>2*1024*1024){info.innerHTML='<span style="color:var(--red)">Arquivo com '+(f.size/1024/1024).toFixed(1)+' MB — máximo 2 MB. Comprime em tinypng.com</span>';input.value='';return;}
+  var url=URL.createObjectURL(f);var img=new Image();
+  img.onload=function(){
+    var w=img.naturalWidth,h=img.naturalHeight,ratio=w/h;
+    var okRatio=Math.abs(ratio-16/9)<0.06;
+    var msg='<strong>'+w+' × '+h+' px</strong> · '+(f.size/1024).toFixed(0)+' KB';
+    if(okRatio&&w>=1280)msg+=' <span style="color:var(--green)">✓ perfeita</span>';
+    else if(okRatio)msg+=' <span style="color:var(--gold)">⚠ 16:9 ok, mas abaixo de 1280px — pode ficar borrada</span>';
+    else msg+=' <span style="color:var(--gold)">⚠ não é 16:9 — vou cortar o centro. Ideal: 1280×720</span>';
+    info.innerHTML=msg;
+    document.getElementById('adm-'+kind+'-cover-prev').innerHTML='<img src="'+url+'">';
+    _pendingCover[kind]=f;
+  };
+  img.src=url;
+}
+async function uploadCover(kind,id){
+  var f=_pendingCover[kind];if(!f)return null;
+  var ext=(f.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'')||'jpg';
+  var path=(kind==='mod'?'modulos/':'aulas/')+id+'-'+Date.now()+'.'+ext;
+  var r=await _sb.storage.from('capas').upload(path,f,{upsert:true,contentType:f.type||'image/jpeg'});
+  if(r.error)throw new Error('Capa: '+r.error.message);
+  _pendingCover[kind]=null;
+  return _sb.storage.from('capas').getPublicUrl(path).data.publicUrl;
+}
+
+// ─── Modal de módulo ───
+function addModule(){openModModal(null);}
+function openModModal(id){
+  _editMod=id?_admMods.filter(function(m){return m.id===id;})[0]:{name:'',sub:'',emoji:'📘',cover_url:null};
+  _pendingCover.mod=null;
+  document.getElementById('adm-mod-modal-title').textContent=id?'📚 Editar módulo':'📚 Novo módulo';
+  document.getElementById('adm-mod-name').value=_editMod.name||'';
+  document.getElementById('adm-mod-sub').value=_editMod.sub||'';
+  document.getElementById('adm-mod-emoji').value=_editMod.emoji||'📘';
+  document.getElementById('adm-mod-cover-prev').innerHTML=_editMod.cover_url?'<img src="'+esc(_editMod.cover_url)+'">':'🖼️';
+  document.getElementById('adm-mod-cover-info').innerHTML='';
+  document.getElementById('adm-mod-cover-file').value='';
+  document.getElementById('adm-mod-modal-status').innerHTML='';
+  document.getElementById('adm-mod-del').style.display=id?'inline-flex':'none';
+  document.getElementById('adm-mod-modal').classList.add('open');
+}
+function closeModModal(){document.getElementById('adm-mod-modal').classList.remove('open');}
+async function saveModule(){
+  var st=document.getElementById('adm-mod-modal-status');
+  var name=document.getElementById('adm-mod-name').value.trim();if(!name){st.innerHTML='<span style="color:var(--red)">Dá um nome pro módulo.</span>';return;}
+  st.innerHTML='⏳ Salvando...';
+  try{
+    var row={name:name,sub:document.getElementById('adm-mod-sub').value.trim(),emoji:document.getElementById('adm-mod-emoji').value.trim()||'📘'};
+    var id=_editMod.id;
+    if(!id){row.ord=_admMods.length+1;var ins=await _sb.from('mi_modules').insert(row).select().single();if(ins.error)throw ins.error;id=ins.data.id;}
+    var cov=await uploadCover('mod',id);if(cov)row.cover_url=cov;
+    var up=await _sb.from('mi_modules').update(row).eq('id',id);if(up.error)throw up.error;
+    closeModModal();toast('✅ Módulo salvo!','#10b981');_stMods=null;loadAdminModules(true);
+  }catch(e){st.innerHTML='<span style="color:var(--red)">Erro: '+esc(e.message)+'</span>';}
+}
+async function deleteModule(){
+  if(!_editMod.id)return;
+  var st=document.getElementById('adm-mod-modal-status');
+  if(st.dataset.confirm!=='1'){st.dataset.confirm='1';st.innerHTML='<span style="color:var(--red)">Isso apaga o módulo E todas as aulas, comentários e votos dele. Clique em "Apagar módulo" de novo pra confirmar.</span>';return;}
+  st.dataset.confirm='';
+  var r=await _sb.from('mi_modules').delete().eq('id',_editMod.id);
+  if(r.error){st.innerHTML='<span style="color:var(--red)">Erro: '+esc(r.error.message)+'</span>';return;}
+  closeModModal();toast('🗑️ Módulo apagado','#6b7280');_stMods=null;loadAdminModules(true);
+}
+
+// ─── Modal de aula ───
+function emptyQuiz(){var q=[];for(var i=0;i<5;i++)q.push({q:'',a:['','','',''],c:0});return q;}
+function openLesModal(modId,lesId){
+  var ls=_admLessons[modId]||[];
+  _editLes=lesId?ls.filter(function(l){return l.id===lesId;})[0]:{module_id:modId,title:'',description:'',youtube_url:'',cover_url:null,published:false,quiz:[]};
+  _editLes.module_id=modId;_pendingCover.les=null;
+  var mod=_admMods.filter(function(m){return m.id===modId;})[0]||{};
+  document.getElementById('adm-les-modal-title').textContent=(lesId?'🎬 Editar aula':'🎬 Nova aula')+' · '+(mod.name||'');
+  document.getElementById('adm-les-title').value=_editLes.title||'';
+  document.getElementById('adm-les-yt').value=_editLes.youtube_url||'';
+  document.getElementById('adm-les-pub').value=_editLes.published?'true':'false';
+  document.getElementById('adm-les-rel').value=_editLes.release_at?new Date(_editLes.release_at).toISOString().slice(0,10):'';
+  document.getElementById('adm-les-desc').value=_editLes.description||'';
+  var cov=lessonCover(_editLes);
+  document.getElementById('adm-les-cover-prev').innerHTML=cov?'<img src="'+esc(cov)+'">':'🖼️';
+  document.getElementById('adm-les-cover-info').innerHTML=_editLes.cover_url?'':(cov?'<span style="color:var(--fg3)">Usando thumbnail do YouTube</span>':'');
+  document.getElementById('adm-les-cover-file').value='';
+  document.getElementById('adm-les-modal-status').innerHTML='';
+  previewYt(_editLes.youtube_url||'');
+  // stats
+  var s=document.getElementById('adm-les-stats');
+  if(lesId){
+    var rc=_admStats.reacts[lesId]||{};var rt='';Object.keys(rc).sort(function(a,b){return rc[b]-rc[a];}).forEach(function(e){rt+=e+' '+rc[e]+'  ';});
+    var q=_admStats.quiz[lesId];
+    s.innerHTML='🙋 <strong>'+(_admStats.votes[lesId]||0)+'</strong> esperando por essa aula<br>'
+      +(rt?rt:'Sem reações ainda')+'<br>💬 <strong>'+(_admStats.comments[lesId]||0)+'</strong> comentários<br>'
+      +'🧩 '+(q?'<strong>'+q.n+'</strong> fizeram o quiz · média <strong>'+(q.s/q.n).toFixed(1)+'/'+(q.t/q.n).toFixed(0)+'</strong>':'ninguém fez o quiz ainda');
+  }else s.innerHTML='Aparecem depois que a aula for criada.';
+  // quiz builder
+  var quiz=(_editLes.quiz&&_editLes.quiz.length)?JSON.parse(JSON.stringify(_editLes.quiz)):emptyQuiz();
+  while(quiz.length<5)quiz.push({q:'',a:['','','',''],c:0});
+  var qb=document.getElementById('adm-quiz-builder');var html='';
+  quiz.forEach(function(q,qi){
+    html+='<div class="adm-quiz-q"><div class="qn">PERGUNTA '+(qi+1)+'</div><input class="admin-inp" id="qz-q-'+qi+'" placeholder="Escreva a pergunta..." value="'+esc(q.q||'')+'">';
+    for(var ai=0;ai<4;ai++){html+='<div class="adm-alt"><input type="radio" name="qz-c-'+qi+'" value="'+ai+'" '+(q.c===ai?'checked':'')+' title="Correta"><span style="font-size:10px;font-weight:800;color:var(--fg3);width:14px">'+'ABCD'[ai]+'</span><input class="admin-inp" id="qz-a-'+qi+'-'+ai+'" placeholder="Alternativa '+'ABCD'[ai]+'" value="'+esc((q.a||[])[ai]||'')+'"></div>';}
+    html+='</div>';
+  });
+  qb.innerHTML=html;
+  document.getElementById('adm-les-modal').classList.add('open');
+}
+function closeLesModal(){document.getElementById('adm-les-modal').classList.remove('open');}
+function previewYt(url){
+  var info=document.getElementById('adm-les-yt-info');var id=ytId(url);
+  if(!url.trim()){info.innerHTML='';return;}
+  info.innerHTML=id?'<span style="color:var(--green)">✓ Vídeo reconhecido · ID '+id+'</span>':'<span style="color:var(--red)">Não reconheci o link. Cola o link do vídeo (youtu.be/... ou youtube.com/watch?v=...)</span>';
+  if(id&&!_pendingCover.les&&!(_editLes&&_editLes.cover_url)){document.getElementById('adm-les-cover-prev').innerHTML='<img src="https://i.ytimg.com/vi/'+id+'/hqdefault.jpg">';document.getElementById('adm-les-cover-info').innerHTML='<span style="color:var(--fg3)">Usando thumbnail do YouTube</span>';}
+}
+function readQuiz(){
+  var quiz=[];
+  for(var qi=0;qi<5;qi++){
+    var q=document.getElementById('qz-q-'+qi).value.trim();
+    var a=[];for(var ai=0;ai<4;ai++)a.push(document.getElementById('qz-a-'+qi+'-'+ai).value.trim());
+    var c=document.querySelector('input[name="qz-c-'+qi+'"]:checked');c=c?parseInt(c.value):0;
+    if(!q&&!a.join(''))continue; // pergunta vazia → ignora
+    if(!q)throw new Error('Pergunta '+(qi+1)+' está sem texto.');
+    if(a.filter(Boolean).length<2)throw new Error('Pergunta '+(qi+1)+' precisa de pelo menos 2 alternativas.');
+    if(!a[c])throw new Error('Pergunta '+(qi+1)+': a alternativa marcada como correta está vazia.');
+    quiz.push({q:q,a:a,c:c});
+  }
+  return quiz;
+}
+async function saveLesson(){
+  var st=document.getElementById('adm-les-modal-status');
+  var title=document.getElementById('adm-les-title').value.trim();if(!title){st.innerHTML='<span style="color:var(--red)">Dá um título pra aula.</span>';return;}
+  var yt=document.getElementById('adm-les-yt').value.trim();
+  var pub=document.getElementById('adm-les-pub').value==='true';
+    var quiz;try{quiz=readQuiz();}catch(e){st.innerHTML='<span style="color:var(--red)">'+esc(e.message)+'</span>';return;}
+  st.innerHTML='⏳ Salvando...';
+  try{
+    var relv=document.getElementById('adm-les-rel').value;
+    var row={module_id:_editLes.module_id,title:title,youtube_url:yt||null,published:pub,release_at:relv?new Date(relv+'T09:00:00-03:00').toISOString():null,description:document.getElementById('adm-les-desc').value.trim()||null,quiz:quiz};
+    var id=_editLes.id;
+    if(!id){row.ord=(_admLessons[_editLes.module_id]||[]).length+1;var ins=await _sb.from('mi_lessons').insert(row).select().single();if(ins.error)throw ins.error;id=ins.data.id;}
+    var cov=await uploadCover('les',id);if(cov)row.cover_url=cov;
+    var up=await _sb.from('mi_lessons').update(row).eq('id',id);if(up.error)throw up.error;
+    closeLesModal();toast('✅ Aula salva!','#10b981');_stMods=null;_stLessons={};loadAdminModules(true);
+  }catch(e){st.innerHTML='<span style="color:var(--red)">Erro: '+esc(e.message)+'</span>';}
+}
+async function deleteLesson(){
+  if(!_editLes.id){closeLesModal();return;}
+  var st=document.getElementById('adm-les-modal-status');
+  if(st.dataset.confirm!=='1'){st.dataset.confirm='1';st.innerHTML='<span style="color:var(--red)">Apaga a aula, comentários, reações e votos. Clique em "Apagar aula" de novo pra confirmar.</span>';return;}
+  st.dataset.confirm='';
+  var r=await _sb.from('mi_lessons').delete().eq('id',_editLes.id);
+  if(r.error){st.innerHTML='<span style="color:var(--red)">Erro: '+esc(r.error.message)+'</span>';return;}
+  closeLesModal();toast('🗑️ Aula apagada','#6b7280');_stMods=null;_stLessons={};loadAdminModules(true);
+}
+// ─── ADMIN: comentários dos alunos ───
+async function loadAdminComments(){
+  var el=document.getElementById('adm-com-list');
+  el.innerHTML='<div class="admin-loading">Carregando...</div>';
+  var r=await _sb.from('mi_lesson_comments').select('*').order('created_at',{ascending:false}).limit(60);
+  if(r.error){el.innerHTML='<div class="admin-loading" style="color:var(--red)">Erro: '+esc(r.error.message)+'</div>';return;}
+  var rows=r.data||[];
+  if(!rows.length){el.innerHTML='<div class="admin-loading">Nenhum comentário ainda. Quando os alunos comentarem nas aulas, aparece tudo aqui.</div>';return;}
+  var lr=await _sb.from('mi_lessons').select('id,title,module_id');var lmap={};(lr.data||[]).forEach(function(x){lmap[x.id]=x;});
+  var mr=await _sb.from('mi_modules').select('id,name');var mmap={};(mr.data||[]).forEach(function(x){mmap[x.id]=x.name;});
+  var html='';
+  rows.forEach(function(c){
+    var l=lmap[c.lesson_id]||{};var modn=mmap[l.module_id]||'';
+    html+='<div class="adm-com" id="admcom-'+c.id+'">'
+      +'<div class="where">'+esc(modn)+(modn?' › ':'')+esc(l.title||'aula removida')+'</div>'
+      +'<div style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap"><span style="font-size:12px;font-weight:800">'+esc(c.user_name)+(c.is_admin?' <span class=\'prof-badge\'>PROFESSOR</span>':'')+'</span><span style="font-size:10px;color:var(--fg3)">'+fmtDate(c.created_at)+'</span></div>'
+      +'<div style="font-size:12px;line-height:1.6;margin-top:4px;white-space:pre-wrap">'+esc(c.body)+'</div>'
+      +'<div style="display:flex;gap:8px;margin-top:8px">'
+      +(c.is_admin?'':'<button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="admReplyBox('+c.id+')">💬 Responder</button>')
+      +'<button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="admDelCom('+c.id+')" style="color:var(--red)">🗑️</button></div>'
+      +'<div class="reply-box"><textarea class="admin-inp" id="admrep-'+c.id+'" rows="2" placeholder="Sua resposta como professor..."></textarea><button class="admin-btn admin-btn-primary admin-btn-sm" onclick="admReply('+c.id+',\''+c.lesson_id+'\')">Enviar</button></div>'
+      +'</div>';
+  });
+  el.innerHTML=html;
+}
+function admReplyBox(id){document.getElementById('admcom-'+id).classList.toggle('replying');var t=document.getElementById('admrep-'+id);if(t)t.focus();}
+async function admReply(id,lessonId){
+  var t=document.getElementById('admrep-'+id);var body=t.value.trim();if(!body)return;
+  var u=(await _sb.auth.getUser()).data.user;if(!u)return;
+  var r=await _sb.from('mi_lesson_comments').insert({lesson_id:lessonId,user_id:u.id,user_name:'Professor Gediel',body:body,is_admin:true});
+  if(r.error){toast('Erro: '+r.error.message,'#ef4444');return;}
+  toast('✅ Resposta publicada na aula!','#10b981');loadAdminComments();
+}
+async function admDelCom(id){
+  await _sb.from('mi_lesson_comments').delete().eq('id',id);
+  toast('🗑️ Comentário apagado','#6b7280');loadAdminComments();
+}
+
+// ─── TUTOR IA ───
+var _aiHist=[],_aiBusy=false;
+function aiToggle(){document.getElementById('ai-panel').classList.toggle('open');var t=document.getElementById('ai-txt');if(document.getElementById('ai-panel').classList.contains('open'))t.focus();}
+function aiAdd(role,text){
+  var m=document.getElementById('ai-msgs');
+  var d=document.createElement('div');d.className='ai-msg '+(role==='user'?'me':'bot');d.textContent=text;
+  m.appendChild(d);m.scrollTop=m.scrollHeight;return d;
+}
+async function aiSend(){
+  if(_aiBusy)return;
+  var t=document.getElementById('ai-txt');var q=t.value.trim();if(!q)return;
+  t.value='';aiAdd('user',q);_aiHist.push({role:'user',content:q});
+  _aiBusy=true;var wait=aiAdd('bot','digitando...');
+  try{
+    var ses=(await _sb.auth.getSession()).data.session;
+    var nivel='';try{nivel=localStorage.getItem('userLevel')||'';}catch(e){}
+    var r=await fetch('/.netlify/functions/ai-tutor',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+(ses?ses.access_token:'')},body:JSON.stringify({messages:_aiHist,nivel:nivel})});
+    var d=await r.json();
+    if(!r.ok)throw new Error(d.erro||'erro');
+    wait.textContent=d.texto;_aiHist.push({role:'assistant',content:d.texto});
+    if(_aiHist.length>16)_aiHist=_aiHist.slice(-16);
+  }catch(e){wait.textContent='⚠️ '+(e.message==='Failed to fetch'?'Sem conexão. Tenta de novo.':e.message);}
+  _aiBusy=false;
+}
+document.getElementById('task-modal').addEventListener('click',function(e){if(e.target===this)closeTaskModal();});
+document.getElementById('adm-mod-modal').addEventListener('click',function(e){if(e.target===this)closeModModal();});
+document.getElementById('adm-les-modal').addEventListener('click',function(e){if(e.target===this)closeLesModal();});
+
 </script>
 <script src="membros-acesso.js"></script>
 </body>
