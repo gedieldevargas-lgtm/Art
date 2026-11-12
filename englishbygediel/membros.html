@@ -311,6 +311,11 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
 .adm-cover-sm img{width:100%;height:100%;object-fit:cover}
 .adm-mod-body{display:none;padding:0 14px 14px;border-top:1px solid var(--border)}
 .adm-mod-item.open .adm-mod-body{display:block}
+.drag-handle{cursor:grab;color:var(--fg3);font-size:16px;padding:4px 2px;user-select:none;flex-shrink:0;line-height:1}
+.drag-handle:active{cursor:grabbing}
+.dragging{opacity:.35}
+.drop-before{box-shadow:0 -3px 0 0 var(--accent)}
+.drop-after{box-shadow:0 3px 0 0 var(--accent)}
 .adm-lesson-row{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;cursor:pointer;font-size:12px}
 .adm-lesson-row:hover{background:var(--surface2)}
 .adm-lesson-row .num{width:22px;height:22px;border-radius:7px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:var(--fg3);flex-shrink:0}
@@ -717,6 +722,7 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
           <button class="admin-tab" onclick="adminTab('criar',this)">➕ Criar Acesso</button>
           <button class="admin-tab" onclick="adminTab('metricas',this)">📊 Métricas</button>
           <button class="admin-tab" onclick="adminTab('comentarios',this)">💬 Comentários</button>
+          <button class="admin-tab" onclick="adminTab('duvidas',this)">🙋 Dúvidas</button>
           <button class="admin-tab" onclick="adminTab('modulos',this)">📚 Módulos</button>
         </div>
 
@@ -795,6 +801,18 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
           </div>
         </div>
 
+        <!-- DÚVIDAS -->
+        <div class="admin-panel" id="adm-duvidas">
+          <div class="admin-form">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:6px">
+              <div class="admin-form-title" style="margin:0">🙋 Dúvidas dos alunos</div>
+              <button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="loadAdminQuestions()">🔄 Atualizar</button>
+            </div>
+            <div style="font-size:12px;color:var(--fg2);margin-bottom:14px">O aluno envia pelo botão 🙋 e recebe sua resposta no mesmo lugar.</div>
+            <div id="adm-duv-list"><div class="admin-loading">Carregando...</div></div>
+          </div>
+        </div>
+
         <!-- MÓDULOS E AULAS -->
         <div class="admin-panel" id="adm-modulos">
           <div class="admin-form">
@@ -806,7 +824,7 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
               </div>
             </div>
             <div style="font-size:12px;color:var(--fg2);margin-bottom:14px;line-height:1.7">
-              Clique no módulo pra abrir as aulas. Em cada aula você cadastra o link do YouTube, a capa, a descrição e o quiz de 5 perguntas.<br>
+              Clique no módulo pra abrir as aulas. Pra mudar a ordem, <strong>arraste pela alça ⠿</strong> (módulos e aulas). Em cada aula: link do YouTube, capa, descrição, quiz e comentários.<br>
               <strong>Medida da capa:</strong> 1280 × 720 px (16:9), JPG ou PNG, até 2 MB — a mesma medida da thumbnail do YouTube.
             </div>
             <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:rgba(79,110,247,.06);border:1px solid rgba(79,110,247,.18);border-radius:12px;padding:10px 12px;margin-bottom:14px">
@@ -901,11 +919,11 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
 
 <!-- ADMIN RESET PASSWORD MODAL -->
 <!-- TUTOR IA -->
-<button class="ai-fab" id="ai-fab" onclick="aiToggle()" title="Tutor IA">🤖</button>
+<button class="ai-fab" id="ai-fab" onclick="aiToggle()" title="Dúvidas com o professor">🙋</button>
 <div class="ai-panel" id="ai-panel">
-  <div class="ai-head"><div style="font-size:22px">🤖</div><div style="flex:1"><div class="t">Tutor IA</div><div class="s">Dúvidas de inglês e da plataforma · 24h</div></div><button class="modal-close" style="color:#fff" onclick="aiToggle()">✕</button></div>
-  <div class="ai-msgs" id="ai-msgs"><div class="ai-msg bot">Hey! 👋 Sou o tutor do Método Inteligente. Pode perguntar qualquer dúvida de inglês — gramática, tradução, pronúncia — ou sobre a plataforma. What can I help you with?</div></div>
-  <div class="ai-input"><input id="ai-txt" placeholder="Escreve sua dúvida..." onkeydown="if(event.key==='Enter')aiSend()"><button onclick="aiSend()">➤</button></div>
+  <div class="ai-head"><div style="font-size:22px">🙋</div><div style="flex:1"><div class="t">Fale com o professor</div><div class="s">Sua dúvida vai direto pro painel do Gediel</div></div><button class="modal-close" style="color:#fff" onclick="aiToggle()">✕</button></div>
+  <div class="ai-msgs" id="ai-msgs"></div>
+  <div class="ai-input"><input id="ai-txt" placeholder="Escreve sua dúvida..." onkeydown="if(event.key==='Enter')duvSend()"><button onclick="duvSend()">➤</button></div>
 </div>
 
 <!-- MODAL: detalhe da tarefa -->
@@ -979,6 +997,9 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
       <textarea class="admin-inp" id="adm-les-desc" rows="4" placeholder="O que o aluno vai aprender, o que praticar depois, links úteis..."></textarea>
       <div class="adm-section">Quiz · 5 perguntas · marque a alternativa correta</div>
       <div id="adm-quiz-builder"></div>
+      <div class="adm-section">💬 Comentários desta aula</div>
+      <div id="adm-les-comments" style="max-height:260px;overflow-y:auto"><div class="admin-loading">—</div></div>
+      <div class="comment-box" style="margin-top:8px"><textarea class="admin-inp" id="adm-les-com-txt" rows="2" placeholder="Comentar nesta aula como professor..."></textarea><button class="admin-btn admin-btn-primary admin-btn-sm" onclick="admLesComment()">Publicar</button></div>
       <div id="adm-les-modal-status" style="font-size:12px;min-height:18px;margin-top:10px"></div>
       <div style="display:flex;gap:8px;justify-content:space-between;margin-top:6px;flex-wrap:wrap">
         <button class="admin-btn admin-btn-danger admin-btn-sm" onclick="deleteLesson()">🗑️ Apagar aula</button>
@@ -1640,6 +1661,7 @@ function adminTab(tab,btn){
   if(tab==='usuarios')loadUsers();
   if(tab==='metricas')loadMetrics();
   if(tab==='comentarios')loadAdminComments();
+  if(tab==='duvidas')loadAdminQuestions();
   if(tab==='modulos')loadAdminModules();
 }
 
@@ -2087,13 +2109,12 @@ function renderAdminModules(){
   var el=document.getElementById('adm-mod-list');var html='';
   _admMods.forEach(function(m,i){
     var ls=_admLessons[m.id]||[];var pub=ls.filter(function(x){return x.published;}).length;
-    html+='<div class="adm-mod-item '+(_admOpen[m.id]?'open':'')+'" id="admmod-'+m.id+'">'
+    html+='<div class="adm-mod-item '+(_admOpen[m.id]?'open':'')+'" id="admmod-'+m.id+'" draggable="true" data-kind="mod" data-idx="'+i+'">'
       +'<div class="adm-mod-head" onclick="toggleAdmMod(\''+m.id+'\')">'
+      +'<div class="drag-handle" title="Arraste pra reordenar">⠿</div>'
       +'<div class="adm-cover-sm">'+(m.cover_url?'<img src="'+esc(m.cover_url)+'">':esc(m.emoji||'📘'))+'</div>'
-      +'<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:800">'+(i+1)+'. '+esc(m.name)+'</div><div style="font-size:11px;color:var(--fg3)">'+esc(m.sub||'')+' · '+ls.length+' aula'+(ls.length!==1?'s':'')+' · '+pub+' publicada'+(pub!==1?'s':'')+'</div></div>'
+      +'<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:800">'+(i+1)+'. '+esc(m.name)+'</div><div style="font-size:11px;color:var(--fg3)">'+esc(m.sub||'')+' · '+ls.length+' cadastrada'+(ls.length!==1?'s':'')+' · '+ls.filter(isOpen).length+' no ar</div></div>'
       +'<div style="display:flex;gap:6px">'
-      +'<button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="event.stopPropagation();moveModule('+i+',-1)" title="Subir">↑</button>'
-      +'<button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="event.stopPropagation();moveModule('+i+',1)" title="Descer">↓</button>'
       +'<button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="event.stopPropagation();openModModal(\''+m.id+'\')">✏️ Editar</button></div>'
       +'<div style="color:var(--fg3);font-size:14px">'+(_admOpen[m.id]?'▾':'▸')+'</div></div>'
       +'<div class="adm-mod-body">';
@@ -2102,7 +2123,8 @@ function renderAdminModules(){
       var cov=lessonCover(l);var st=_admStats;var rc=st.reacts[l.id]||{};var rtot=0;var rtxt='';
       Object.keys(rc).sort(function(a,b){return rc[b]-rc[a];}).forEach(function(e){rtot+=rc[e];rtxt+=e+rc[e]+' ';});
       var q=st.quiz[l.id];
-      html+='<div class="adm-lesson-row" onclick="openLesModal(\''+m.id+'\',\''+l.id+'\')">'
+      html+='<div class="adm-lesson-row" draggable="true" data-kind="les" data-mod="'+m.id+'" data-idx="'+li+'" onclick="openLesModal(\''+m.id+'\',\''+l.id+'\')">'
+        +'<div class="drag-handle" title="Arraste pra reordenar">⠿</div>'
         +'<div class="num">'+(li+1)+'</div>'
         +'<div class="adm-cover-sm">'+(cov?'<img src="'+esc(cov)+'">':'🎬')+'</div>'
         +'<div style="flex:1;min-width:0"><div style="font-weight:700">'+esc(l.title)+'</div>'
@@ -2115,8 +2137,6 @@ function renderAdminModules(){
         +'<span class="adm-stat">💬 '+(st.comments[l.id]||0)+'</span>'
         +'<span class="adm-stat">🧩 '+((l.quiz||[]).length)+' perg.'+(q?' · média '+(q.s/q.n).toFixed(1)+'/'+(q.t/q.n).toFixed(0)+' ('+q.n+')':'')+'</span>'
         +'</div></div>'
-        +'<button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="event.stopPropagation();moveLesson(\''+m.id+'\','+li+',-1)">↑</button>'
-        +'<button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="event.stopPropagation();moveLesson(\''+m.id+'\','+li+',1)">↓</button>'
         +'</div>';
     });
     html+='<button class="admin-btn admin-btn-primary admin-btn-sm" style="margin:10px 0 0 10px" onclick="openLesModal(\''+m.id+'\',null)">➕ Nova aula</button>';
@@ -2126,21 +2146,50 @@ function renderAdminModules(){
 }
 function toggleAdmMod(id){_admOpen[id]=!_admOpen[id];var el=document.getElementById('admmod-'+id);if(el)el.classList.toggle('open',_admOpen[id]);var arrow=el.querySelector('.adm-mod-head > div:last-child');if(arrow)arrow.textContent=_admOpen[id]?'▾':'▸';}
 
-async function moveModule(i,dir){
-  var j=i+dir;if(j<0||j>=_admMods.length)return;
-  var a=_admMods[i],b=_admMods[j];
-  await _sb.from('mi_modules').update({ord:j+1}).eq('id',a.id);
-  await _sb.from('mi_modules').update({ord:i+1}).eq('id',b.id);
-  _stMods=null;loadAdminModules(true);
-}
-async function moveLesson(modId,i,dir){
-  var ls=_admLessons[modId];var j=i+dir;if(j<0||j>=ls.length)return;
-  await _sb.from('mi_lessons').update({ord:j+1}).eq('id',ls[i].id);
-  await _sb.from('mi_lessons').update({ord:i+1}).eq('id',ls[j].id);
-  // reordena todos pra garantir consistência
-  var order=ls.slice();var t=order[i];order[i]=order[j];order[j]=t;
-  for(var k=0;k<order.length;k++){if(order[k].ord!==k+1)await _sb.from('mi_lessons').update({ord:k+1}).eq('id',order[k].id);}
-  _stLessons={};loadAdminModules(true);
+// ─── Arrastar pra reordenar (módulos e aulas) ───
+var _drag=null;
+(function(){
+  var list=document.getElementById('adm-mod-list');
+  function clearMarks(){list.querySelectorAll('.drop-before,.drop-after,.dragging').forEach(function(x){x.classList.remove('drop-before','drop-after');});}
+  list.addEventListener('dragstart',function(e){
+    var el=e.target.closest('[draggable="true"]');if(!el)return;
+    _drag={kind:el.dataset.kind,mod:el.dataset.mod||null,idx:parseInt(el.dataset.idx),el:el};
+    el.classList.add('dragging');e.dataTransfer.effectAllowed='move';
+    try{e.dataTransfer.setData('text/plain','x');}catch(_){}
+    e.stopPropagation();
+  });
+  list.addEventListener('dragover',function(e){
+    if(!_drag)return;
+    var sel=_drag.kind==='mod'?'.adm-mod-item':'.adm-lesson-row';
+    var t=e.target.closest(sel);if(!t||t===_drag.el)return;
+    if(_drag.kind==='les'&&t.dataset.mod!==_drag.mod)return;
+    e.preventDefault();clearMarks();
+    var r=t.getBoundingClientRect();
+    t.classList.add((e.clientY-r.top)<r.height/2?'drop-before':'drop-after');
+  });
+  list.addEventListener('drop',function(e){
+    if(!_drag)return;
+    var sel=_drag.kind==='mod'?'.adm-mod-item':'.adm-lesson-row';
+    var t=e.target.closest(sel);if(!t||t===_drag.el){clearMarks();return;}
+    if(_drag.kind==='les'&&t.dataset.mod!==_drag.mod){clearMarks();return;}
+    e.preventDefault();
+    var r=t.getBoundingClientRect();var after=(e.clientY-r.top)>=r.height/2;
+    var from=_drag.idx,to=parseInt(t.dataset.idx)+(after?1:0);
+    if(from<to)to--;
+    var d=_drag;_drag=null;clearMarks();
+    if(from!==to)reorderSave(d.kind,d.mod,from,to);
+  });
+  list.addEventListener('dragend',function(){if(_drag&&_drag.el)_drag.el.classList.remove('dragging');_drag=null;clearMarks();list.querySelectorAll('.dragging').forEach(function(x){x.classList.remove('dragging');});});
+})();
+async function reorderSave(kind,modId,from,to){
+  var arr=kind==='mod'?_admMods:_admLessons[modId];
+  var it=arr.splice(from,1)[0];arr.splice(to,0,it);
+  renderAdminModules(); // mostra na hora
+  var table=kind==='mod'?'mi_modules':'mi_lessons';
+  for(var k=0;k<arr.length;k++){
+    if(arr[k].ord!==k+1){arr[k].ord=k+1;var r=await _sb.from(table).update({ord:k+1}).eq('id',arr[k].id);if(r.error){toast('Erro ao salvar ordem: '+r.error.message,'#ef4444');loadAdminModules(true);return;}}
+  }
+  _stMods=null;_stLessons={};toast('↕️ Ordem salva','#10b981');
 }
 
 // ─── Cronograma: 2 aulas/semana (segunda e quinta) ───
@@ -2276,7 +2325,30 @@ function openLesModal(modId,lesId){
   });
   qb.innerHTML=html;
   document.getElementById('adm-les-modal').classList.add('open');
+  loadAdmLesComments();
 }
+async function loadAdmLesComments(){
+  var el=document.getElementById('adm-les-comments');
+  if(!_editLes.id){el.innerHTML='<div style="font-size:11px;color:var(--fg3)">Salva a aula primeiro pra ver e fazer comentários.</div>';return;}
+  el.innerHTML='<div class="admin-loading">Carregando...</div>';
+  var r=await _sb.from('mi_lesson_comments').select('*').eq('lesson_id',_editLes.id).order('created_at',{ascending:false}).limit(40);
+  var rows=(r.data||[]);
+  if(!rows.length){el.innerHTML='<div style="font-size:11px;color:var(--fg3)">Nenhum comentário ainda. Deixa uma pergunta provocativa pra puxar conversa 👇</div>';return;}
+  var html='';
+  rows.forEach(function(c){
+    html+='<div class="comment'+(c.is_admin?' prof':'')+'" style="padding:8px 0"><div class="cava" style="width:26px;height:26px;font-size:10px">'+(c.is_admin?'👨‍🏫':esc((c.user_name||'?')[0].toUpperCase()))+'</div><div style="flex:1;min-width:0"><span class="cname" style="font-size:11px">'+esc(c.user_name)+'</span>'+(c.is_admin?'<span class="prof-badge">PROF</span>':'')+'<span class="cdate">'+fmtDate(c.created_at)+'</span><div class="cbody" style="font-size:11.5px">'+esc(c.body)+'</div></div><button class="cdel" onclick="admLesDelCom('+c.id+')">apagar</button></div>';
+  });
+  el.innerHTML=html;
+}
+async function admLesComment(){
+  if(!_editLes.id){toast('Salva a aula primeiro','#f59e0b');return;}
+  var t=document.getElementById('adm-les-com-txt');var body=t.value.trim();if(!body)return;
+  var u=(await _sb.auth.getUser()).data.user;if(!u)return;
+  var r=await _sb.from('mi_lesson_comments').insert({lesson_id:_editLes.id,user_id:u.id,user_name:'Professor Gediel',body:body,is_admin:true});
+  if(r.error){toast('Erro: '+r.error.message,'#ef4444');return;}
+  t.value='';toast('💬 Publicado na aula!','#10b981');loadAdmLesComments();
+}
+async function admLesDelCom(id){await _sb.from('mi_lesson_comments').delete().eq('id',id);loadAdmLesComments();}
 function closeLesModal(){document.getElementById('adm-les-modal').classList.remove('open');}
 function previewYt(url){
   var info=document.getElementById('adm-les-yt-info');var id=ytId(url);
@@ -2362,29 +2434,72 @@ async function admDelCom(id){
   toast('🗑️ Comentário apagado','#6b7280');loadAdminComments();
 }
 
-// ─── TUTOR IA ───
-var _aiHist=[],_aiBusy=false;
-function aiToggle(){document.getElementById('ai-panel').classList.toggle('open');var t=document.getElementById('ai-txt');if(document.getElementById('ai-panel').classList.contains('open'))t.focus();}
-function aiAdd(role,text){
+// ─── ADMIN: dúvidas dos alunos ───
+async function loadAdminQuestions(){
+  var el=document.getElementById('adm-duv-list');
+  el.innerHTML='<div class="admin-loading">Carregando...</div>';
+  var r=await _sb.from('mi_questions').select('*').order('created_at',{ascending:false}).limit(80);
+  if(r.error){el.innerHTML='<div class="admin-loading" style="color:var(--red)">Erro: '+esc(r.error.message)+'<br><span style="font-size:11px">Rodou o aulas.sql atualizado no Supabase?</span></div>';return;}
+  var rows=r.data||[];
+  if(!rows.length){el.innerHTML='<div class="admin-loading">Nenhuma dúvida ainda.</div>';return;}
+  rows.sort(function(a,b){return (a.answer?1:0)-(b.answer?1:0)||new Date(b.created_at)-new Date(a.created_at);});
+  var html='';
+  rows.forEach(function(q){
+    html+='<div class="adm-com'+(q.answer?'':' replying')+'" id="admduv-'+q.id+'">'
+      +'<div style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap"><span style="font-size:12px;font-weight:800">'+esc(q.user_name)+'</span><span style="font-size:10px;color:var(--fg3)">'+esc(q.user_email||'')+' · '+fmtDate(q.created_at)+'</span>'
+      +(q.answer?'<span class="adm-pill adm-pill-on">RESPONDIDA</span>':'<span class="adm-pill adm-pill-off">AGUARDANDO</span>')+'</div>'
+      +'<div style="font-size:12.5px;line-height:1.6;margin-top:4px;white-space:pre-wrap">'+esc(q.body)+'</div>'
+      +(q.answer?'<div class="task-ex" style="margin-top:8px"><b>Sua resposta:</b> '+esc(q.answer)+'</div>':'')
+      +'<div class="reply-box" style="margin-top:10px"><textarea class="admin-inp" id="admduvrep-'+q.id+'" rows="2" placeholder="Responder pro aluno...">'+esc(q.answer||'')+'</textarea><button class="admin-btn admin-btn-primary admin-btn-sm" onclick="admAnswer('+q.id+')">Enviar</button></div>'
+      +'<div style="display:flex;gap:8px;margin-top:8px">'
+      +(q.answer?'<button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="document.getElementById(\'admduv-'+q.id+'\').classList.toggle(\'replying\')">✏️ Editar resposta</button>':'')
+      +'<button class="admin-btn admin-btn-ghost admin-btn-sm" style="color:var(--red)" onclick="admDelQuestion('+q.id+')">🗑️</button></div>'
+      +'</div>';
+  });
+  el.innerHTML=html;
+}
+async function admAnswer(id){
+  var t=document.getElementById('admduvrep-'+id);var a=t.value.trim();if(!a)return;
+  var r=await _sb.from('mi_questions').update({answer:a,answered_at:new Date().toISOString()}).eq('id',id);
+  if(r.error){toast('Erro: '+r.error.message,'#ef4444');return;}
+  toast('✅ Resposta enviada pro aluno!','#10b981');loadAdminQuestions();
+}
+async function admDelQuestion(id){
+  await _sb.from('mi_questions').delete().eq('id',id);loadAdminQuestions();
+}
+
+// ─── DÚVIDAS COM O PROFESSOR ───
+var _duvLoaded=false;
+function aiToggle(){
+  var pn=document.getElementById('ai-panel');pn.classList.toggle('open');
+  if(pn.classList.contains('open')){duvLoad();document.getElementById('ai-txt').focus();}
+}
+function duvMsg(role,text,extra){
   var m=document.getElementById('ai-msgs');
   var d=document.createElement('div');d.className='ai-msg '+(role==='user'?'me':'bot');d.textContent=text;
+  if(extra)d.innerHTML=extra;
   m.appendChild(d);m.scrollTop=m.scrollHeight;return d;
 }
-async function aiSend(){
-  if(_aiBusy)return;
-  var t=document.getElementById('ai-txt');var q=t.value.trim();if(!q)return;
-  t.value='';aiAdd('user',q);_aiHist.push({role:'user',content:q});
-  _aiBusy=true;var wait=aiAdd('bot','digitando...');
+async function duvLoad(){
+  var m=document.getElementById('ai-msgs');m.innerHTML='';
+  duvMsg('bot','Hey! 👋 Manda sua dúvida de inglês ou da plataforma. Eu respondo aqui mesmo e você recebe assim que eu ver.');
   try{
-    var ses=(await _sb.auth.getSession()).data.session;
-    var nivel='';try{nivel=localStorage.getItem('userLevel')||'';}catch(e){}
-    var r=await fetch('/.netlify/functions/ai-tutor',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+(ses?ses.access_token:'')},body:JSON.stringify({messages:_aiHist,nivel:nivel})});
-    var d=await r.json();
-    if(!r.ok)throw new Error(d.erro||'erro');
-    wait.textContent=d.texto;_aiHist.push({role:'assistant',content:d.texto});
-    if(_aiHist.length>16)_aiHist=_aiHist.slice(-16);
-  }catch(e){wait.textContent='⚠️ '+(e.message==='Failed to fetch'?'Sem conexão. Tenta de novo.':e.message);}
-  _aiBusy=false;
+    var r=await _sb.from('mi_questions').select('*').order('created_at');
+    (r.data||[]).forEach(function(q){
+      duvMsg('user',q.body);
+      if(q.answer)duvMsg('bot','',"<b style='font-size:10px;letter-spacing:.4px;opacity:.7'>PROFESSOR GEDIEL</b><br>"+esc(q.answer).replace(/\n/g,'<br>'));
+      else duvMsg('bot','⏳ Enviada! O professor responde em breve.');
+    });
+  }catch(e){}
+}
+async function duvSend(){
+  var t=document.getElementById('ai-txt');var q=t.value.trim();if(!q)return;
+  var u=(await _sb.auth.getUser()).data.user;if(!u)return;
+  var meta=u.user_metadata||{};var name=meta.full_name||meta.name||u.email.split('@')[0];
+  t.value='';duvMsg('user',q);
+  var r=await _sb.from('mi_questions').insert({user_id:u.id,user_name:name,user_email:u.email,body:q});
+  if(r.error){duvMsg('bot','⚠️ Não consegui enviar: '+r.error.message);return;}
+  duvMsg('bot','⏳ Enviada! O professor responde em breve — volta aqui depois pra ver.');
 }
 document.getElementById('task-modal').addEventListener('click',function(e){if(e.target===this)closeTaskModal();});
 document.getElementById('adm-mod-modal').addEventListener('click',function(e){if(e.target===this)closeModModal();});

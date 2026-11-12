@@ -124,6 +124,27 @@ create policy "aluno salva resultado" on public.mi_quiz_results for insert to au
 drop policy if exists "aluno atualiza resultado" on public.mi_quiz_results;
 create policy "aluno atualiza resultado" on public.mi_quiz_results for update to authenticated using (user_id = auth.uid()) with check (user_id = auth.uid());
 
+-- 8b. Dúvidas dos alunos para o professor --------------------------------------
+create table if not exists public.mi_questions (
+  id          bigint generated always as identity primary key,
+  user_id     uuid not null default auth.uid(),
+  user_name   text not null check (char_length(user_name) <= 80),
+  user_email  text check (user_email is null or char_length(user_email) <= 160),
+  body        text not null check (char_length(body) between 1 and 2000),
+  answer      text check (answer is null or char_length(answer) <= 4000),
+  answered_at timestamptz,
+  created_at  timestamptz not null default now()
+);
+alter table public.mi_questions enable row level security;
+drop policy if exists "aluno le proprias duvidas" on public.mi_questions;
+create policy "aluno le proprias duvidas" on public.mi_questions for select to authenticated using (user_id = auth.uid() or public.is_admin());
+drop policy if exists "aluno envia duvida" on public.mi_questions;
+create policy "aluno envia duvida" on public.mi_questions for insert to authenticated with check (user_id = auth.uid());
+drop policy if exists "admin responde duvida" on public.mi_questions;
+create policy "admin responde duvida" on public.mi_questions for update to authenticated using (public.is_admin()) with check (public.is_admin());
+drop policy if exists "admin apaga duvida" on public.mi_questions;
+create policy "admin apaga duvida" on public.mi_questions for delete to authenticated using (public.is_admin());
+
 -- 8. Pasta de capas (imagens públicas, só o admin envia) ----------------------
 insert into storage.buckets (id, name, public) values ('capas', 'capas', true) on conflict (id) do nothing;
 drop policy if exists "capas publicas" on storage.objects;
