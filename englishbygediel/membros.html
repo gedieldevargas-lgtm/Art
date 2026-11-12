@@ -8,11 +8,12 @@
 <link rel="apple-touch-icon" href="img/app-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Inteligente">
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <style>
+@font-face{font-family:'Advercase';src:url('fonts/advercase.woff2') format('woff2'),url('fonts/advercase.otf') format('opentype');font-display:swap}
 :root{
   --bg:#f0f2f8;--sidebar:#ffffff;--surface:#ffffff;--surface2:#f5f6fb;
   --border:#e8eaf2;--fg:#111827;--fg2:#6b7280;--fg3:#9ca3af;
@@ -360,6 +361,9 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
 .lesson-list{display:flex;flex-direction:column;gap:8px}
 .lesson-item{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:10px 12px;cursor:pointer;transition:.12s}
 .lesson-item:hover{border-color:var(--accent);transform:translateX(2px)}
+.capa-auto{position:absolute;inset:0;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;container-type:size;overflow:hidden}
+.capa-auto:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,9,22,.12),rgba(6,9,22,.5))}
+.capa-auto span{position:relative;font-family:'Advercase','Archivo Black','Arial Black',sans-serif;font-weight:400;color:#fff;text-transform:uppercase;text-align:center;line-height:1.04;font-size:clamp(8px,9.5cqw,68px);padding:0 8cqw;text-wrap:balance;text-shadow:0 2px 16px rgba(0,0,0,.5);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;letter-spacing:.01em}
 .lesson-item .lthumb{width:96px;aspect-ratio:16/9;border-radius:9px;background:var(--surface2);overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:20px;position:relative}
 .lesson-item .lthumb img{width:100%;height:100%;object-fit:cover}
 .lesson-item .lt{font-size:13px;font-weight:700}
@@ -538,7 +542,7 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
   </div>
   <div class="sidebar-level">
     <div class="level-lbl" style="font-size:9px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--fg3);margin-bottom:7px">Seu Perfil</div>
-    <div class="level-row"><span class="level-tag">B1</span><span class="level-lbl">Auditivo-Musical</span></div>
+    <div class="level-row"><span class="level-tag">?</span><span class="level-lbl">Faça seu diagnóstico</span></div>
   </div>
   <div class="sidebar-footer">
     <div class="user-chip" onclick="openSettings()">
@@ -1933,10 +1937,7 @@ function setManualLevel(lvl){
   try{localStorage.setItem('userLevel',lvl);}catch(e){}
   toast('✅ Nível atualizado para '+lvl,'#4f6ef7');
 }
-// Restaurar nível salvo
-(function(){
-  try{var saved=localStorage.getItem('userLevel');if(saved&&LEVEL_INFO[saved]){setManualLevel(saved);}}catch(e){}
-})();
+// o nível salvo é restaurado pelo membros-app.js, junto com o perfil do aluno
 
 
 // ═══════════════════════════ MÓDULOS & AULAS — helpers ═══════════════════════════
@@ -1950,6 +1951,13 @@ function ytId(url){
 }
 function ytThumb(url){var id=ytId(url);return id?'https://i.ytimg.com/vi/'+id+'/hqdefault.jpg':null;}
 function lessonCover(l){return l.cover_url||ytThumb(l.youtube_url)||null;}
+// capa automática (até ter a capa de verdade): gradiente revezando cores + título grande
+var CAPA_CORES=['azul','verde','roxo','ciano','ambar','rosa'];
+function capaAuto(titulo,idx){
+  var t=String(titulo||'').split(/ [—–-] /)[0];
+  if(idx==null){idx=0;for(var i=0;i<t.length;i++)idx=(idx*31+t.charCodeAt(i))>>>0;}
+  return '<div class="capa-auto" style="background-image:url(img/capas/base-'+CAPA_CORES[idx%CAPA_CORES.length]+'.webp)"><span>'+esc(t)+'</span></div>';
+}
 function relDate(l){return l.release_at?new Date(l.release_at):null;}
 function relFuture(l){var d=relDate(l);return d&&d>new Date();}
 function isOpen(l){return !!(l.published&&ytId(l.youtube_url)&&!relFuture(l));}
@@ -1983,11 +1991,11 @@ async function loadStudentModules(force){
     var byMod={};(l.data||[]).forEach(function(x){byMod[x.module_id]=byMod[x.module_id]||{t:0,p:0};byMod[x.module_id].t++;if(isOpen(x))byMod[x.module_id].p++;});
     _stMods=mods;
     var g=document.getElementById('modules-grid');g.innerHTML='';
-    mods.filter(function(m){return (m.trilha||'programa')==='programa';}).forEach(function(m){
+    mods.filter(function(m){return (m.trilha||'programa')==='programa';}).forEach(function(m,mi){
       var c=byMod[m.id]||{t:0,p:0};
       var ready=c.p>0;
       var thumb=m.cover_url?'<div class="mod-thumb cover"><img src="'+esc(m.cover_url)+'" alt=""></div>'
-        :'<div class="mod-thumb" style="background:'+DEFAULT_BG+';display:flex;align-items:center;justify-content:center;font-size:28px">'+(ready?esc(m.emoji||'📘'):'<div class="mod-thumb-lock">🔒</div>')+'</div>';
+        :'<div class="mod-thumb cover" style="position:relative">'+capaAuto(m.name,mi)+'</div>';
       var tag=ready?'<div class="mod-tag-ok">'+c.p+' AULA'+(c.p>1?'S':'')+' DISPONÍVE'+(c.p>1?'IS':'L')+'</div>':'<div class="mod-lock-tag">EM BREVE'+(c.t?' · '+c.t+' aula'+(c.t>1?'s':''):'')+'</div>';
       g.innerHTML+='<div class="module-card '+(c.t?'ready':'')+'" '+(c.t?'onclick="openModule(\''+m.id+'\')"':'')+'>'+thumb+'<div class="mod-body"><div class="mod-name">'+esc(m.name)+'</div><div class="mod-sub">'+esc(m.sub||'')+'</div>'+tag+'</div></div>';
     });
@@ -2013,7 +2021,7 @@ async function openModule(modId){
   var back=window._miniBack?'<button class="back-btn" onclick="goTo(\''+window._miniBack.uni+'\',window._miniBack.pill)">← '+esc(window._miniBack.nome)+'</button>':'<button class="back-btn" onclick="modShow(\'grid\')">← Módulos</button>';
   var head=back
     +'<div style="display:flex;gap:14px;align-items:center;margin-bottom:18px">'
-    +(m.cover_url?'<img src="'+esc(m.cover_url)+'" style="width:120px;aspect-ratio:16/9;object-fit:cover;border-radius:12px">':'<div style="width:120px;aspect-ratio:16/9;border-radius:12px;background:'+DEFAULT_BG+';display:flex;align-items:center;justify-content:center;font-size:28px">'+esc(m.emoji||'📘')+'</div>')
+    +(m.cover_url?'<img src="'+esc(m.cover_url)+'" style="width:120px;aspect-ratio:16/9;object-fit:cover;border-radius:12px">':'<div style="width:120px;aspect-ratio:16/9;border-radius:12px;position:relative;overflow:hidden;flex-shrink:0">'+capaAuto(m.name,(_stMods||[]).filter(function(x){return (x.trilha||'programa')==='programa';}).indexOf(m))+'</div>')
     +'<div><div style="font-size:21px;font-weight:800">'+esc(m.name)+'</div><div style="font-size:13px;color:var(--fg2)">'+esc(m.sub||'')+' · '+ls.length+' aula'+(ls.length!==1?'s':'')+'</div></div></div>';
   if(!ls.length){v.innerHTML=head+'<div class="admin-loading">Nenhuma aula cadastrada ainda.</div>';return;}
   var html='<div class="lesson-list">';
@@ -2022,7 +2030,7 @@ async function openModule(modId){
     var q=mine[l.id];
     var op=isOpen(l);
     html+='<div class="lesson-item '+(op?'':'locked')+'" onclick="openLesson(\''+l.id+'\')">'
-      +'<div class="lthumb">'+(cov?'<img src="'+esc(cov)+'" alt="">':'🎬')+(op?'':'<div class="mod-thumb-lock">'+(relFuture(l)?'📅':'⏳')+'</div>')+'</div>'
+      +'<div class="lthumb">'+(cov?'<img src="'+esc(cov)+'" alt="">':capaAuto(l.title,i))+(op?'':'<div class="mod-thumb-lock">'+(relFuture(l)?'📅':'⏳')+'</div>')+'</div>'
       +'<div style="flex:1;min-width:0"><div class="lt">'+(i+1)+'. '+esc(l.title)+'</div><div class="ls">'
       +(op?'<span style="color:var(--green);font-weight:700">▶ Disponível</span>':relFuture(l)?'<span style="color:var(--accent);font-weight:700">📅 Libera '+fmtRel(l)+'</span>':'<span style="color:var(--gold);font-weight:700">⏳ Em breve</span>')
       +(!op&&votes[l.id]?'<span>🙋 '+votes[l.id]+' esperando</span>':'')
@@ -2063,7 +2071,7 @@ async function renderLesson(){
   }else{
     var cov=lessonCover(l);
     var fut=relFuture(l),dn=daysUntil(l);
-    html+='<div class="waiting-box">'+(cov?'<img src="'+esc(cov)+'" alt="">':'')+'<div class="waiting-inner"><div class="big">'+(fut?'📅':'⏳')+'</div><div class="t">'+(fut?'Essa aula libera em '+relDate(l).toLocaleDateString('pt-BR',{day:'numeric',month:'long'})+(dn===1?' — amanhã!':dn>1?' — faltam '+dn+' dias':''):'Essa aula ainda está sendo gravada')+'</div>'
+    html+='<div class="waiting-box"'+(cov?'':' style="background:url(img/capas/base-'+CAPA_CORES[Math.max(0,idx-1)%CAPA_CORES.length]+'.webp) center/cover"')+'>'+(cov?'<img src="'+esc(cov)+'" alt="">':'')+'<div class="waiting-inner"><div class="big">'+(fut?'📅':'⏳')+'</div><div class="t">'+(fut?'Essa aula libera em '+relDate(l).toLocaleDateString('pt-BR',{day:'numeric',month:'long'})+(dn===1?' — amanhã!':dn>1?' — faltam '+dn+' dias':''):'Essa aula ainda está sendo gravada')+'</div>'
       +'<div class="s">'+(votes.length?'<strong>'+votes.length+'</strong> '+(votes.length===1?'pessoa está esperando':'pessoas estão esperando')+' por ela':'Seja o primeiro a pedir essa aula')+'</div>'
       +'<button class="vote-btn '+(myVote?'on':'')+'" onclick="toggleVote()">'+(myVote?'✅ Você está esperando':'🙋 Estou esperando por essa aula')+'</button></div></div>';
   }

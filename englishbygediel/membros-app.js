@@ -135,6 +135,14 @@
   '.mg-end{text-align:center}.mg-end .big{font-size:60px}.mg-end .t{font-size:24px;font-weight:800;margin:6px 0}.mg-end .s{font-size:14px;color:var(--fg2);margin-bottom:20px}',
   /* menu prompts */
   '.mi-frame{width:100%;height:calc(100vh - 170px);min-height:480px;border:1px solid var(--border);border-radius:18px;background:var(--surface)}',
+  /* respiro e áreas seguras (iPad, app instalado, telas com borda arredondada) */
+  '.sidebar{padding-top:env(safe-area-inset-top);padding-left:env(safe-area-inset-left)}',
+  '.topbar{padding-top:env(safe-area-inset-top)!important;height:calc(52px + env(safe-area-inset-top))!important;padding-right:max(22px,env(safe-area-inset-right))!important}',
+  '.right-rail{padding-right:max(14px,env(safe-area-inset-right))!important;padding-bottom:max(18px,env(safe-area-inset-bottom))!important}',
+  '.sidebar-footer{padding-bottom:max(10px,env(safe-area-inset-bottom))!important}',
+  '@media(min-width:681px){.content{padding:28px clamp(22px,3.2vw,44px) max(40px,env(safe-area-inset-bottom))!important}.content>.pane{max-width:1000px;margin-left:auto;margin-right:auto}}',
+  '@media(min-width:681px) and (max-width:1100px){.hm-row{gap:14px}.uni-grid{grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}}',
+  '.hm-aula .cv .capa-auto{align-items:flex-end;padding-bottom:7%}.hm-aula .cv .capa-auto span{font-size:clamp(14px,6.2cqw,52px)}',
   /* celular: menu de baixo + gaveta */
   '#mi-bnav,#mi-shade{display:none}',
   '@media(max-width:680px){',
@@ -151,8 +159,8 @@
   ' #mi-bnav button{background:none;border:none;color:var(--fg3);display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;font-weight:700;padding:4px 0;cursor:pointer}',
   ' #mi-bnav button span{font-size:21px;line-height:1.1}',
   ' #mi-bnav button.on{color:var(--accent)}',
-  ' .content{padding:16px 14px 96px!important}',
-  ' .topbar{padding:0 14px!important}',
+  ' .content{padding:16px max(16px,env(safe-area-inset-right)) calc(96px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))!important}',
+  ' .topbar{padding-left:max(16px,env(safe-area-inset-left))!important;padding-right:max(16px,env(safe-area-inset-right))!important}',
   ' body:has(.modal-overlay.open) .ai-fab,body:has(.sheet-overlay.open) .ai-fab,body:has(#mi-game.on) .ai-fab,body:has(#mi-entry.on) .ai-fab,body:has(.modal-overlay.open) #mi-bnav,body:has(.sheet-overlay.open) #mi-bnav,body:has(#mi-game.on) #mi-bnav,body:has(.pw-ov.open) #mi-bnav,body:has(.ai-panel.open) .ai-fab{display:none}',
   ' .ai-fab{bottom:calc(78px + env(safe-area-inset-bottom))!important;right:14px!important;width:50px!important;height:50px!important}',
   ' .ai-panel{bottom:calc(136px + env(safe-area-inset-bottom))!important;right:12px!important}',
@@ -162,7 +170,7 @@
   document.head.appendChild(css);
 
   /* ───────────────────────── estado do aluno (sequência, aulas vistas, última aula) ───────────────────────── */
-  var U=null, ST={dias:[],vistas:[],ultima:null,bv:false,tour:[]}, CFG={}, salvarT=null;
+  var U=null, ST={dias:[],vistas:[],ultima:null,bv:false,tour:[],nivel:null,prisma:null}, CFG={}, salvarT=null;
   function chave(){return 'mi_estado_'+(U?U.id:'anon');}
   function carregarEstado(user){
     U=user;
@@ -173,13 +181,16 @@
     var um=m.ultima,ul=l.ultima;ST.ultima=(um&&ul)?((um.ts||0)>=(ul.ts||0)?um:ul):(um||ul||null);
     ST.bv=!!(m.bv||l.bv);
     ST.tour=uni(m.tour,l.tour);
+    var lvLocal=null;try{lvLocal=localStorage.getItem('userLevel');}catch(e){}
+    ST.nivel=m.nivel||l.nivel||lvLocal||null;
+    ST.prisma=m.prisma||l.prisma||null;
   }
   function salvar(){
     LS.set(chave(),ST);
     clearTimeout(salvarT);
     salvarT=setTimeout(function(){
       if(!U)return;
-      window._sb.auth.updateUser({data:{mi:{dias:ST.dias.slice(-150),vistas:ST.vistas.slice(-400),ultima:ST.ultima,bv:ST.bv,tour:ST.tour}}}).catch(function(){});
+      window._sb.auth.updateUser({data:{mi:{dias:ST.dias.slice(-150),vistas:ST.vistas.slice(-400),ultima:ST.ultima,bv:ST.bv,tour:ST.tour,nivel:ST.nivel,prisma:ST.prisma}}}).catch(function(){});
     },1500);
   }
   function marcarDia(){
@@ -313,7 +324,7 @@
     var cont=ST.ultima&&ST.ultima.les===l.id;
     var kick=cont?'CONTINUE DE ONDE PAROU':(hmIdx===0&&!ST.vistas.length?'COMECE POR AQUI':ST.vistas.indexOf(l.id)>=0?'JÁ ASSISTIDA':'PRÓXIMA AULA');
     var status=op?'▶ Disponível'+(ST.vistas.indexOf(l.id)>=0?' · ✓ você já viu':''):fut?'📅 Libera '+relDate(l).toLocaleDateString('pt-BR',{day:'numeric',month:'long'}):'⏳ Em gravação';
-    box.innerHTML='<div class="cv" data-hm="abrir">'+(cov?'<img src="'+E(cov)+'" alt="">':'<span style="position:relative">'+E(it.m.emoji||'📘')+'</span>')
+    box.innerHTML='<div class="cv" data-hm="abrir">'+(cov?'<img src="'+E(cov)+'" alt="" data-capa-t="'+E(l.title)+'" data-capa-i="'+hmIdx+'">':(window.capaAuto?capaAuto(l.title,hmIdx):''))
       +'<span class="kick">'+kick+'</span>'+(op?'<span class="play">▶</span>':'<span class="lock">'+(fut?'📅 Em breve':'⏳ Em gravação')+'</span>')+'</div>'
       +'<div class="bd"><div class="md">'+E(it.m.name)+' · AULA '+it.n+' DE '+it.de+'</div><div class="tt">'+E(l.title)+'</div><div class="st">'+status+'</div>'
       +'<div class="hm-nav"><button data-hm="ant" '+(hmIdx<=0?'disabled':'')+' aria-label="Aula anterior">◀</button>'
@@ -404,7 +415,7 @@
   var entrou=false;
   function entrar(user){
     if(entrou||!user)return;entrou=true;
-    carregarEstado(user);restaurarChecks();
+    carregarEstado(user);restaurarChecks();pintarPerfil();
     pintarRail();renderHome();
     if(!ST.bv)mostrarBoasVindas(false);else perguntarContexto();
   }
@@ -452,10 +463,10 @@
     if(c.acao==='whatsapp')return 'Chamar no WhatsApp ›';
     return /^R\$/.test(c.tag||'')?'Comprar ›':'Acessar ↗';
   }
-  function cardHtml(c){
+  function cardHtml(c,i){
     var buy=/^R\$/.test(c.tag||'');
     return '<div class="uni-card'+(cardSoon(c)?' soon':'')+(buy?' buy':'')+(cardLock(c)?' lock':'')+'" data-unicard="'+c.id+'">'
-      +'<div class="th">'+(c.capa_url?'<img loading="lazy" alt="" src="'+E(c.capa_url)+'">':E(c.emoji||'✨'))+(c.tag?'<span class="tg">'+E(c.tag)+'</span>':'')+'</div>'
+      +'<div class="th">'+(c.capa_url?'<img loading="lazy" alt="" src="'+E(c.capa_url)+'">':(window.capaAuto?capaAuto(c.titulo,i):E(c.emoji||'✨')))+(c.tag?'<span class="tg">'+E(c.tag)+'</span>':'')+'</div>'
       +'<div class="bd"><div class="tt">'+E(c.titulo)+'</div><div class="ss">'+E(c.descricao||'')+'</div><div class="ac">'+acaoTxt(c)+'</div></div></div>';
   }
   async function desenharUni(k){
@@ -470,7 +481,7 @@
     });
     var resto=lista.filter(function(c){return !c.destaque;}),secs=[],por={};
     resto.forEach(function(c){var s=c.secao||'';if(!por[s]){por[s]=[];secs.push(s);}por[s].push(c);});
-    secs.forEach(function(s){h+=(s?'<div class="uni-sec">'+E(s)+'</div>':'')+'<div class="uni-grid">'+por[s].map(cardHtml).join('')+'</div>';});
+    var n=0;secs.forEach(function(s){h+=(s?'<div class="uni-sec">'+E(s)+'</div>':'')+'<div class="uni-grid">'+por[s].map(function(c){return cardHtml(c,n++);}).join('')+'</div>';});
     if(!lista.length)h+='<div class="admin-loading">Nenhum card ainda.'+(souAdmin()?' Crie no Painel Admin → Universos.':'')+'</div>';
     if(lista.some(function(c){return /indica/i.test(c.tag||'');}))h+='<div style="font-size:10.5px;color:var(--fg3);margin-top:16px">Indicação = link de afiliado. Você paga o mesmo preço e eu posso receber uma comissão.</div>';
     p.innerHTML=h;
@@ -541,6 +552,8 @@
     if(UNIV[page])desenharUni(page);
     if(page==='prompts'){var f=document.querySelector('#pane-prompts iframe');if(f&&!f.src)f.src=f.dataset.src;}
     if(page==='home')setTimeout(renderHome,160);
+    if(page==='bussola')renderBussola();
+    if(page==='prisma')renderPrisma();
     var r=goAnt(page,el);
     marcarBnav(page);
     return r;
@@ -802,6 +815,80 @@
   if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(function(){});
 
 
+
+  /* ───────────────────────── BÚSSOLA (nível) e PRISMA (inteligências) ─────────────────────────
+     Os testes são os sites de verdade; o aluno faz dentro do app e marca o resultado que apareceu. */
+  var URL_BUSSOLA='https://nivelamentogediel.netlify.app/',URL_PRISMA='https://testedeinteligencia1.netlify.app/';
+  var NIVEIS=['A1','A2','B1','B2','C1','C2'];
+  var NIVEL_CAN={A1:'Se apresentar, perguntar e responder o básico do dia a dia.',A2:'Se virar em situações simples: compras, rotina, direções, família.',B1:'Conversar sobre o dia a dia e o trabalho, viajar sem travar.',B2:'Discutir ideias com fluência e entender séries e reuniões.',C1:'Usar o inglês com flexibilidade no trabalho e nos estudos.',C2:'Dominar o idioma com precisão, como um nativo culto.'};
+  var INTEL={
+    musical:{ic:'🎵',nome:'Auditivo-Musical',desc:'Você aprende melhor com ritmo, melodia e sons.',est:['Estude com músicas: leia a letra, cante, imite','Shadowing todo dia (10 min)','Podcasts no transporte','Imite sotaques de séries e cantores']},
+    linguistica:{ic:'📝',nome:'Linguístico-Verbal',desc:'Você aprende melhor com palavras: lendo, escrevendo e explicando.',est:['Leia em voz alta todo dia','Escreva 3 frases no diário em inglês','Anote frases inteiras, não palavras soltas','Explique pra alguém o que aprendeu']},
+    logica:{ic:'🧮',nome:'Lógico-Matemático',desc:'Você aprende melhor entendendo regras, padrões e o porquê.',est:['Entenda a regra e teste com exemplos seus','Monte tabelas de verbos e padrões','Faça os quizzes até gabaritar','Acompanhe seu progresso em números']},
+    corporal:{ic:'🏃',nome:'Corporal-Cinestésico',desc:'Você aprende melhor em movimento, fazendo e praticando.',est:['Faça shadowing andando','Use gestos enquanto fala','Encene diálogos das aulas','Estude no transporte e na academia']},
+    visual:{ic:'🎨',nome:'Visual-Espacial',desc:'Você aprende melhor com imagens, cores e o que consegue ver.',est:['Séries com legenda em inglês','Mapas mentais de vocabulário','Flashcards com imagem','Cores diferentes pra cada tempo verbal']},
+    interpessoal:{ic:'🤝',nome:'Interpessoal',desc:'Você aprende melhor com outras pessoas, conversando e trocando.',est:['Entre nas lives e fale','Estude em dupla','Comente nas aulas e responda colegas','Ensine o que aprendeu pra alguém']},
+    intrapessoal:{ic:'🧘',nome:'Intrapessoal',desc:'Você aprende melhor refletindo, no seu ritmo e com objetivos claros.',est:['Diário de metas em inglês','Autoavaliação toda semana','Estude sozinho no seu horário fixo','Ligue cada aula ao seu objetivo de vida']},
+    naturalista:{ic:'🌿',nome:'Naturalista',desc:'Você aprende melhor observando, classificando e organizando.',est:['Organize o vocabulário por categorias','Estude ao ar livre','Descreva em inglês o que você vê','Assista documentários em inglês']}
+  };
+  function pintarPerfil(){
+    var t=document.querySelector('.sidebar .level-tag'),l=document.querySelectorAll('.sidebar .level-row .level-lbl')[0],box=document.querySelector('.sidebar-level');
+    if(t)t.textContent=ST.nivel||'?';
+    if(l)l.textContent=ST.prisma&&INTEL[ST.prisma]?INTEL[ST.prisma].nome:(ST.nivel?'Faça o Prisma':'Faça seu diagnóstico');
+    if(box&&!box.dataset.mi){box.dataset.mi='1';box.style.cursor='pointer';box.addEventListener('click',function(){go(ST.nivel?'prisma':'bussola');});}
+    var sub=document.querySelector('#pane-maratona > div:nth-child(2)');if(sub)sub.textContent=(ST.nivel?'Sessão do nível '+ST.nivel+' · ':'')+'Escolha onde você está';
+  }
+  window.setManualLevel=function(lvl){if(NIVEIS.indexOf(lvl)<0)return;ST.nivel=lvl;try{localStorage.setItem('userLevel',lvl);}catch(e){}salvar();pintarPerfil();renderBussola();toast('✅ Seu nível agora é '+lvl,'#4f6ef7');};
+  function setPrisma(k){if(!INTEL[k])return;ST.prisma=k;salvar();pintarPerfil();renderPrisma();toast('✅ '+INTEL[k].nome+' salvo no seu perfil','#8b5cf6');}
+  function renderBussola(){
+    var p=$('pane-bussola');if(!p)return;var lv=ST.nivel,info=lv&&window.LEVEL_INFO?LEVEL_INFO[lv]:null;
+    p.innerHTML='<div style="font-size:21px;font-weight:800;margin-bottom:16px">Bússola CEFR</div>'
+      +'<div class="intel-banner"><div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:56px;height:56px;border-radius:16px;background:'+(info?info.bg:'var(--surface2)')+';display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:'+(info?'#fff':'var(--fg3)')+';flex-shrink:0">'+(lv||'?')+'</div>'
+      +'<div><div style="font-size:16px;font-weight:800">'+(info?E(info.title):'Você ainda não fez o teste de nível')+'</div><div style="font-size:12px;color:var(--fg2);margin-top:2px">Bússola CEFR · do A1 ao C2</div></div></div>'
+      +'<div style="font-size:12.5px;color:var(--fg2);line-height:1.7;margin-bottom:14px">'+(info?E(info.desc):'O teste se adapta às suas respostas e mostra onde você está. Leva uns 10 minutos. No fim, é só marcar aqui o nível que apareceu.')+'</div>'
+      +'<button class="set-btn set-btn-primary" style="margin:0" data-dg="bussola">'+(lv?'🔁 Refazer o teste de nível':'🧭 Fazer o teste de nível')+'</button></div>'
+      +'<div class="card" style="margin:16px 0"><div class="sec-hd" style="margin-bottom:10px">🎯 '+(lv?'Seu nível':'Já sabe seu nível? Marque aqui')+'</div><div style="display:flex;flex-wrap:wrap;gap:8px">'
+      +NIVEIS.map(function(n){return '<button class="gf-btn'+(n===lv?' active':'')+'" onclick="setManualLevel(\''+n+'\')">'+n+'</button>';}).join('')+'</div></div>'
+      +'<div class="sec-hd">O que cada nível consegue fazer</div><div class="card">'+NIVEIS.map(function(n){return '<div style="display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--border)'+(n===lv?';font-weight:700':'')+'"><span class="level-tag" style="flex-shrink:0;'+(n===lv?'':'background:var(--surface2);color:var(--fg2)')+'">'+n+'</span><span style="font-size:12.5px;line-height:1.5;color:'+(n===lv?'var(--fg)':'var(--fg2)')+'">'+E(NIVEL_CAN[n])+'</span></div>';}).join('')+'</div>';
+  }
+  function renderPrisma(){
+    var p=$('pane-prisma');if(!p)return;var k=ST.prisma,it=k&&INTEL[k];
+    p.innerHTML='<div style="font-size:21px;font-weight:800;margin-bottom:16px">Prisma de Talentos</div>'
+      +'<div class="intel-banner"><div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:56px;height:56px;border-radius:16px;background:'+(it?'linear-gradient(135deg,#8b5cf6,#ec4899)':'var(--surface2)')+';display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0">'+(it?it.ic:'🔷')+'</div>'
+      +'<div><div style="font-size:16px;font-weight:800">'+(it?'Inteligência '+E(it.nome):'Descubra como você aprende melhor')+'</div><div style="font-size:12px;color:var(--fg2);margin-top:2px">'+(it?'Sua inteligência mais forte · Howard Gardner':'Teste das Inteligências Múltiplas · Howard Gardner')+'</div></div></div>'
+      +'<div style="font-size:12.5px;color:var(--fg2);line-height:1.7;margin-bottom:14px">'+(it?E(it.desc):'O teste mostra quais das suas inteligências mais aparecem quando você aprende. Com isso, o seu estudo fica do seu jeito. No fim, é só marcar aqui a que deu mais forte.')+'</div>'
+      +'<button class="set-btn set-btn-primary" style="margin:0" data-dg="prisma">'+(it?'🔁 Refazer o Prisma':'🔷 Fazer o Prisma')+'</button></div>'
+      +(it?'<div class="card" style="margin-top:16px"><div style="font-size:12px;font-weight:800;margin-bottom:10px">Estratégias pra você</div><div style="font-size:12.5px;color:var(--fg2);line-height:1.9">'+it.est.map(function(x){return '• '+E(x);}).join('<br>')+'</div></div>':'')
+      +'<div class="card" style="margin:16px 0"><div class="sec-hd" style="margin-bottom:10px">'+(it?'Mudou o resultado? Marque a sua':'Qual deu como sua inteligência mais forte?')+'</div><div style="display:flex;flex-wrap:wrap;gap:8px">'
+      +Object.keys(INTEL).map(function(x){return '<button class="gf-btn'+(x===k?' active':'')+'" data-dg-int="'+x+'">'+INTEL[x].ic+' '+E(INTEL[x].nome)+'</button>';}).join('')+'</div></div>';
+  }
+  // o teste roda dentro do app
+  var tq=document.createElement('div');tq.id='mi-teste';document.body.appendChild(tq);
+  var tqc=document.createElement('style');
+  tqc.textContent='#mi-teste{position:fixed;inset:0;z-index:8500;background:var(--bg);display:none;flex-direction:column}#mi-teste.on{display:flex}'
+    +'#mi-teste .tt{display:flex;align-items:center;gap:10px;padding:12px max(16px,env(safe-area-inset-right)) 12px max(16px,env(safe-area-inset-left));padding-top:max(12px,env(safe-area-inset-top));border-bottom:1px solid var(--border);background:var(--sidebar)}'
+    +'#mi-teste .tt b{flex:1;font-size:14px}#mi-teste iframe{flex:1;width:100%;border:0;background:#fff}'
+    +'#mi-teste .fim{border-top:1px solid var(--border);background:var(--sidebar);padding:12px max(16px,env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}'
+    +'#mi-teste .fim .q{font-size:12px;font-weight:800;margin-bottom:8px}#mi-teste .fim .ch{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}#mi-teste .fim .ch button{flex-shrink:0}';
+  document.head.appendChild(tqc);
+  function abrirTeste(qual){
+    var b=qual==='bussola';
+    tq.innerHTML='<div class="tt"><button class="tb-btn" data-dg="fechar">✕</button><b>'+(b?'🧭 Teste de nível':'🔷 Prisma de Talentos')+'</b><a class="tb-btn" style="text-decoration:none" href="'+(b?URL_BUSSOLA:URL_PRISMA)+'" target="_blank" rel="noopener">Abrir fora ↗</a></div>'
+      +'<iframe src="'+(b?URL_BUSSOLA:URL_PRISMA)+'" title="'+(b?'Teste de nível':'Prisma de Talentos')+'" allow="autoplay; microphone"></iframe>'
+      +'<div class="fim"><div class="q">Terminou? Toque no resultado que apareceu:</div><div class="ch">'
+      +(b?NIVEIS.map(function(n){return '<button class="gf-btn" data-dg-fim="'+n+'">'+n+'</button>';}).join(''):Object.keys(INTEL).map(function(x){return '<button class="gf-btn" data-dg-fim="'+x+'">'+INTEL[x].ic+' '+E(INTEL[x].nome)+'</button>';}).join(''))
+      +'</div></div>';
+    tq.dataset.qual=qual;tq.classList.add('on');document.body.style.overflow='hidden';
+  }
+  function fecharTeste(){tq.classList.remove('on');tq.innerHTML='';document.body.style.overflow='';}
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-dg]');
+    if(b){var a=b.dataset.dg;if(a==='fechar')fecharTeste();else abrirTeste(a);return;}
+    var f=e.target.closest('[data-dg-fim]');
+    if(f){var v=f.dataset.dgFim;if(tq.dataset.qual==='bussola')window.setManualLevel(v);else setPrisma(v);fecharTeste();return;}
+    var i=e.target.closest('[data-dg-int]');if(i)setPrisma(i.dataset.dgInt);
+  });
+
   /* ───────────────────────── TOUR DOS MENUS ─────────────────────────
      Lê os menus que existem na lateral NA HORA. Menu novo entra sozinho no tour,
      e quem já fez o tour vê só a novidade. Os textos são editáveis no admin (Universos → Tutorial dos menus). */
@@ -942,6 +1029,7 @@
     toast(r.error?'Não salvou: '+r.error.message:'✅ Textos do tour salvos',r.error?'#ef4444':'#10b981');
   });
 
+  document.addEventListener('error',function(e){var im=e.target;if(!im||im.tagName!=='IMG'||!im.hasAttribute('data-capa-t')||!window.capaAuto)return;var d=document.createElement('div');d.innerHTML=capaAuto(im.getAttribute('data-capa-t'),+im.getAttribute('data-capa-i')||0);im.replaceWith(d.firstChild);},true);
   window.MI_APP={tour:tour,aulaAberta:aulaAberta,marcarDia:marcarDia,abrirAula:abrirAula,renderHome:renderHome,
     compartilharQuiz:function(sc,tot){var t=(window._stCurLes&&_stCurLes.title)||'aula';wa('Acertei '+sc+'/'+tot+' no quiz da aula "'+t+'" do Método Inteligente 🔥 Bora treinar comigo? Faz o teste de nível grátis: '+linkIndicacao(),false);}};
 })();
