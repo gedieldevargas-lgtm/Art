@@ -385,6 +385,39 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
 .comment .cdel:hover{color:var(--red)}
 .comment-box{display:flex;gap:8px;margin-top:12px;align-items:flex-end}
 .comment-box textarea{flex:1;min-height:60px;resize:vertical;font-family:inherit}
+.prof-badge{background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff;font-size:8px;font-weight:800;letter-spacing:.5px;padding:2px 6px;border-radius:5px;margin-left:6px;vertical-align:1px}
+.comment.prof{background:rgba(79,110,247,.05);border-radius:12px;padding:12px;border-bottom:none;margin-bottom:4px}
+.comment.prof .cava{background:linear-gradient(135deg,#f59e0b,#ef4444)}
+/* ── admin comentários ── */
+.adm-com{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:12px 14px;margin-bottom:10px}
+.adm-com .where{font-size:10px;font-weight:800;color:var(--accent);letter-spacing:.3px;margin-bottom:6px;cursor:pointer}
+.adm-com .reply-box{display:none;margin-top:10px;gap:8px}
+.adm-com.replying .reply-box{display:flex}
+/* ── maratona tarefa clicável ── */
+.mar-task{cursor:pointer;transition:.12s}
+.mar-task:hover{border-color:var(--accent);transform:translateX(2px)}
+.mar-task .open-hint{margin-left:auto;font-size:10px;color:var(--fg3);font-weight:700;white-space:nowrap;display:flex;align-items:center;gap:4px}
+.task-link{display:inline-flex;align-items:center;gap:8px;background:var(--surface2);border:1.5px solid var(--border);border-radius:12px;padding:9px 14px;font-size:12px;font-weight:700;color:var(--fg);text-decoration:none;margin:4px 6px 4px 0;transition:.12s}
+.task-link:hover{border-color:var(--accent);color:var(--accent)}
+.task-ex{background:var(--surface2);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:8px 12px;font-size:12px;margin-top:6px;line-height:1.6}
+.task-ex b{color:var(--accent)}
+/* ── tutor IA ── */
+.ai-fab{position:fixed;right:20px;bottom:20px;z-index:950;width:56px;height:56px;border-radius:50%;border:none;background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff;font-size:24px;cursor:pointer;box-shadow:0 10px 30px rgba(79,110,247,.45);transition:.15s;display:none;align-items:center;justify-content:center}
+.ai-fab:hover{transform:scale(1.08)}
+.ai-fab.show{display:flex}
+.ai-panel{position:fixed;right:20px;bottom:88px;z-index:951;width:360px;max-width:calc(100vw - 32px);height:480px;max-height:calc(100vh - 120px);background:var(--surface);border:1px solid var(--border);border-radius:20px;box-shadow:0 24px 70px rgba(0,0,0,.3);display:none;flex-direction:column;overflow:hidden}
+.ai-panel.open{display:flex}
+.ai-head{background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff;padding:14px 16px;display:flex;align-items:center;gap:10px}
+.ai-head .t{font-size:14px;font-weight:800}
+.ai-head .s{font-size:10px;opacity:.85}
+.ai-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.ai-msg{max-width:85%;padding:10px 13px;border-radius:14px;font-size:12.5px;line-height:1.6;white-space:pre-wrap}
+.ai-msg.me{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:4px}
+.ai-msg.bot{align-self:flex-start;background:var(--surface2);border-bottom-left-radius:4px}
+.ai-input{display:flex;gap:8px;padding:10px;border-top:1px solid var(--border)}
+.ai-input input{flex:1;border:1.5px solid var(--border);border-radius:12px;padding:10px 12px;font-size:13px;background:var(--surface2);color:var(--fg);outline:none}
+.ai-input button{background:var(--accent);color:#fff;border:none;border-radius:12px;padding:0 16px;font-weight:800;cursor:pointer}
+@media(max-width:600px){.ai-fab{bottom:76px}.ai-panel{bottom:140px}}
 .admin-mod-preview{width:48px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;cursor:pointer;transition:.15s}
 .admin-mod-preview:hover{transform:scale(1.1)}
 .admin-mod-name{flex:1;font-size:13px;font-weight:700;color:var(--fg)}
@@ -682,6 +715,7 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
           <button class="admin-tab active" onclick="adminTab('usuarios',this)">👥 Alunos</button>
           <button class="admin-tab" onclick="adminTab('criar',this)">➕ Criar Acesso</button>
           <button class="admin-tab" onclick="adminTab('metricas',this)">📊 Métricas</button>
+          <button class="admin-tab" onclick="adminTab('comentarios',this)">💬 Comentários</button>
           <button class="admin-tab" onclick="adminTab('modulos',this)">📚 Módulos</button>
         </div>
 
@@ -745,6 +779,18 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
           <div class="admin-form">
             <div class="admin-form-title">📋 Cadastros recentes</div>
             <div id="adm-recent-list"><div class="admin-loading">...</div></div>
+          </div>
+        </div>
+
+        <!-- COMENTÁRIOS -->
+        <div class="admin-panel" id="adm-comentarios">
+          <div class="admin-form">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:6px">
+              <div class="admin-form-title" style="margin:0">💬 Comentários dos alunos</div>
+              <button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="loadAdminComments()">🔄 Atualizar</button>
+            </div>
+            <div style="font-size:12px;color:var(--fg2);margin-bottom:14px">Responda daqui mesmo — sua resposta aparece na aula com o selo <span class="prof-badge">PROFESSOR</span></div>
+            <div id="adm-com-list"><div class="admin-loading">Carregando...</div></div>
           </div>
         </div>
 
@@ -853,6 +899,22 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
 </div>
 
 <!-- ADMIN RESET PASSWORD MODAL -->
+<!-- TUTOR IA -->
+<button class="ai-fab" id="ai-fab" onclick="aiToggle()" title="Tutor IA">🤖</button>
+<div class="ai-panel" id="ai-panel">
+  <div class="ai-head"><div style="font-size:22px">🤖</div><div style="flex:1"><div class="t">Tutor IA</div><div class="s">Dúvidas de inglês e da plataforma · 24h</div></div><button class="modal-close" style="color:#fff" onclick="aiToggle()">✕</button></div>
+  <div class="ai-msgs" id="ai-msgs"><div class="ai-msg bot">Hey! 👋 Sou o tutor do Método Inteligente. Pode perguntar qualquer dúvida de inglês — gramática, tradução, pronúncia — ou sobre a plataforma. What can I help you with?</div></div>
+  <div class="ai-input"><input id="ai-txt" placeholder="Escreve sua dúvida..." onkeydown="if(event.key==='Enter')aiSend()"><button onclick="aiSend()">➤</button></div>
+</div>
+
+<!-- MODAL: detalhe da tarefa -->
+<div class="modal-overlay" id="task-modal">
+  <div class="modal-box adm-modal-box" style="width:560px">
+    <div class="modal-header"><h2 id="task-modal-title">Tarefa</h2><button class="modal-close" onclick="closeTaskModal()">✕</button></div>
+    <div class="modal-body" id="task-modal-body"></div>
+  </div>
+</div>
+
 <!-- MODAL: editor de módulo -->
 <div class="modal-overlay" id="adm-mod-modal">
   <div class="modal-box adm-modal-box" style="width:520px">
@@ -1174,6 +1236,157 @@ function showPane(page,el){
   pane.style.opacity='1';
   if(page==='modulos'&&typeof loadStudentModules==='function')loadStudentModules();
 }
+
+// ═══════════ CONTEÚDO DAS TAREFAS (guia + links + exemplos + mini-quiz) ═══════════
+var YTS=function(q){return 'https://www.youtube.com/results?search_query='+encodeURIComponent(q);};
+var TASK_INFO={
+'Em Casa':[
+ {why:'Ouvido treinado = boca destravada. Podcast é o jeito mais fácil de pôr inglês no dia.',
+  steps:['Escolhe UM episódio curto (5–15 min) e ouve até o fim','Não pausa pra traduzir — deixa o cérebro se acostumar com o ritmo','Anota 1 expressão que você entendeu e gostou'],
+  links:[{t:'🎧 6 Minute English (BBC)',u:'https://www.bbc.co.uk/learningenglish/english/features/6-minute-english'},{t:'▶️ EnglishPod no YouTube',u:YTS('EnglishPod lesson')},{t:'🟢 Buscar no Spotify',u:'https://open.spotify.com/search/learn%20english%20podcast'}],
+  ex:['<b>Anota assim:</b> "at the end of the day" = no fim das contas','<b>Meta:</b> entender a ideia geral, não cada palavra'],
+  quiz:[{q:'Qual é o jeito certo de ouvir o podcast?',a:['Pausando a cada frase pra traduzir','Até o fim, captando a ideia geral','Só a introdução','Em 2x sem atenção'],c:1},
+        {q:'O que anotar no fim?',a:['O episódio inteiro','1 expressão que você entendeu e gostou','Todas as palavras novas','Nada'],c:1}]},
+ {why:'Legenda em inglês liga o som à escrita — seu listening dá um salto.',
+  steps:['Escolhe UMA cena (2–5 min) de série que você já conhece','Assiste com legenda em INGLÊS (nunca português)','Reassiste a mesma cena e repete 1 fala em voz alta'],
+  links:[{t:'▶️ Cenas com legenda EN',u:YTS('friends scene english subtitles')},{t:'🎬 Netflix',u:'https://www.netflix.com'},{t:'▶️ Learn English with TV',u:YTS('Learn English with TV Series')}],
+  ex:['<b>Dica:</b> série que você JÁ viu dublada é perfeita — você já sabe a história','<b>Repete assim:</b> pausa a fala → fala igual → compara'],
+  quiz:[{q:'Qual legenda usar?',a:['Português','Inglês','Nenhuma no começo','Duas ao mesmo tempo'],c:1},
+        {q:'Por que rever a MESMA cena?',a:['Pra decorar a série','O cérebro fixa som + escrita + contexto na repetição','Porque é mais rápido','Não precisa rever'],c:1}]},
+ {why:'Revisão espaçada é o que faz a palavra ficar — sem revisar, 80% some em uma semana.',
+  steps:['Pega 10 palavras/frases que você viu essa semana','Fala cada uma EM VOZ ALTA com uma frase sua','Separa as que errou pra revisar amanhã'],
+  links:[{t:'🃏 Anki',u:'https://apps.ankiweb.net'},{t:'🃏 Quizlet',u:'https://quizlet.com'}],
+  ex:['<b>Card bom:</b> frente "I\'m running late" → verso "estou atrasado" + sua frase','<b>Em voz alta</b> — ler em silêncio não treina a boca'],
+  quiz:[{q:'Como revisar o flashcard?',a:['Lendo em silêncio','Em voz alta, com uma frase sua','Só olhando a tradução','Copiando 10 vezes'],c:1},
+        {q:'O que fazer com as palavras que errou?',a:['Desistir delas','Revisar de novo amanhã','Apagar','Trocar por outras'],c:1}]},
+ {why:'Shadowing com música treina pronúncia, ritmo e connected speech de uma vez — e é o seu perfil (auditivo-musical).',
+  steps:['Escolhe uma música que você AMA, com letra na tela','Primeiro só ouve lendo a letra','Depois canta JUNTO imitando o som exato — não a leitura da palavra'],
+  links:[{t:'▶️ Lyrics no YouTube',u:YTS('lyrics english song')},{t:'📝 Letras no Genius',u:'https://genius.com'}],
+  ex:['<b>Repara:</b> "want to" vira <b>wanna</b>, "going to" vira <b>gonna</b>','<b>1 música por semana</b> até sair natural vale mais que 10 picadas'],
+  quiz:[{q:'Shadowing é:',a:['Traduzir a letra','Cantar/falar junto imitando o som exato','Ouvir em silêncio','Decorar a letra escrita'],c:1},
+        {q:'"Gonna" é a forma falada de:',a:['want to','going to','got to','gone'],c:1}]},
+ {why:'Escrever 3 frases por dia constrói o músculo de PRODUZIR inglês, não só consumir.',
+  steps:['Escreve 3 frases sobre o SEU dia (papel ou notas do celular)','Usa 1 palavra nova que você aprendeu essa semana','Lê as 3 em voz alta no final'],
+  links:[],
+  ex:['<b>Modelo:</b> "Today I felt tired, but I finished my tasks." (hoje me senti cansado, mas terminei minhas tarefas)','<b>Modelo:</b> "I\'m grateful for my family." (sou grato pela minha família)','<b>Modelo:</b> "Tomorrow I want to wake up earlier." (amanhã quero acordar mais cedo)'],
+  quiz:[{q:'Sobre o que escrever?',a:['Textos acadêmicos','O seu dia, sentimentos e planos','Frases copiadas do Google','Só gramática'],c:1},
+        {q:'O que fazer depois de escrever?',a:['Guardar e nunca mais ver','Ler as 3 frases em voz alta','Apagar','Traduzir pro português'],c:1}]},
+ {why:'Ler a Bíblia em inglês une fé e fluência — você já conhece o contexto, então o cérebro foca no idioma.',
+  steps:['Abre um capítulo que você já conhece em português (João 1, Salmo 23)','Lê 5 minutos em NIV ou NLT (inglês mais atual)','Sublinha 1 versículo e lê em voz alta como oração'],
+  links:[{t:'📖 João 1 (NIV)',u:'https://www.bible.com/bible/111/JHN.1.NIV'},{t:'📱 YouVersion',u:'https://www.bible.com'}],
+  ex:['<b>Salmo 23:</b> "The Lord is my shepherd, I lack nothing." — o Senhor é meu pastor, nada me faltará','<b>Dica:</b> NIV e NLT são mais fáceis; KJV é inglês antigo (thou, thee) — deixa pra depois'],
+  quiz:[{q:'Qual versão é melhor pra estudar inglês atual?',a:['KJV (King James)','NIV ou NLT','Qualquer uma em latim','Só em português'],c:1},
+        {q:'Por que ler um capítulo que você JÁ conhece?',a:['Porque é mais curto','O contexto conhecido deixa o cérebro focar no idioma','Porque é obrigatório','Não faz diferença'],c:1}]}
+],
+'No Transporte':[
+ {why:'Tempo de deslocamento é a maior mina de ouro escondida da sua rotina.',
+  steps:['Dá play ANTES de sair — decisão tomada, sem desculpa','Só ouve, sem pausar: imersão passiva','Chegando, repete mentalmente 1 frase que ficou'],
+  links:[{t:'🎧 6 Minute English',u:'https://www.bbc.co.uk/learningenglish/english/features/6-minute-english'},{t:'🎧 The English We Speak',u:'https://www.bbc.co.uk/learningenglish/english/features/the-english-we-speak'},{t:'🟢 Spotify',u:'https://open.spotify.com/search/english%20podcast'}],
+  ex:['<b>Regra:</b> fone no ouvido = inglês tocando. Sem negociação.','<b>Não entendeu tudo?</b> Normal e esperado. Exposição conta.'],
+  quiz:[{q:'O modo no transporte é:',a:['Ativo, pausando sempre','Passivo — só ouvir e absorver','Com caderno aberto','Traduzindo tudo'],c:1},
+        {q:'Quando dar o play?',a:['Quando lembrar','Antes de sair de casa','Na metade do caminho','Só na volta'],c:1}]},
+ {why:'Música repetida = expressão gravada pra sempre. Você aprende sem esforço.',
+  steps:['Toca sua playlist em inglês','Escolhe UMA música e presta atenção na letra','Guarda 1 expressão e repete mentalmente 3 vezes'],
+  links:[{t:'🟢 Playlist no Spotify',u:'https://open.spotify.com/search/english%20hits'},{t:'📝 Confere a letra',u:'https://genius.com'}],
+  ex:['<b>Exemplo:</b> ouviu "I can\'t help falling in love"? → "can\'t help + ing" = não consigo evitar','<b>1 expressão por viagem</b> = 10 por semana sem abrir livro'],
+  quiz:[{q:'Quantas expressões memorizar por viagem?',a:['Todas da música','1','20','Nenhuma'],c:1},
+        {q:'"I can\'t help falling in love" — "can\'t help" significa:',a:['Não posso ajudar','Não consigo evitar','Não quero','Preciso de ajuda'],c:1}]},
+ {why:'5 cards no celular cabem em qualquer fila ou banco de ônibus.',
+  steps:['Abre o app de flashcards','Revisa 5 cards falando baixinho (ou mentalmente)','Marca os que errou'],
+  links:[{t:'🃏 Anki',u:'https://apps.ankiweb.net'},{t:'🃏 Quizlet',u:'https://quizlet.com'}],
+  ex:['<b>Micro-hábito:</b> 5 cards por dia = 150 palavras revisadas no mês'],
+  quiz:[{q:'Quantos cards no transporte?',a:['50','5 — rápido e prático','Nenhum','Todos do deck'],c:1},
+        {q:'Errou um card. E aí?',a:['Ignora','Marca pra rever','Apaga','Desiste'],c:1}]},
+ {why:'Shadowing discreto treina a boca mesmo em público — ninguém percebe.',
+  steps:['Ouvindo o podcast/música, escolhe frases curtas','Repete sussurrando ou só mexendo a boca','Foca no RITMO da frase, não na perfeição'],
+  links:[{t:'🎧 The English We Speak (frases curtas)',u:'https://www.bbc.co.uk/learningenglish/english/features/the-english-we-speak'}],
+  ex:['<b>Treina o ritmo:</b> "I WANT to GO to the STORE" — força nas palavras de conteúdo'],
+  quiz:[{q:'Shadowing no ônibus se faz:',a:['Gritando','Sussurrando ou mentalmente','Só em casa','Escrevendo'],c:1},
+        {q:'O foco é:',a:['Perfeição de cada som','Ritmo e melodia da frase','Velocidade','Gramática'],c:1}]},
+ {why:'5 minutos de vídeo = 1 dose de inglês real com imagem ajudando a entender.',
+  steps:['Abre o YouTube e escolhe 1 vídeo curto EM inglês','Assiste com legenda em inglês se precisar','Guarda 1 palavra nova'],
+  links:[{t:'▶️ TED-Ed',u:'https://www.youtube.com/@TEDEd'},{t:'▶️ BBC Learning English',u:'https://www.youtube.com/@bbclearningenglish'},{t:'▶️ Easy English (ruas)',u:YTS('Easy English street interviews')}],
+  ex:['<b>Easy English</b> entrevista gente na rua — inglês de verdade, várias vozes e sotaques'],
+  quiz:[{q:'Qual legenda se precisar?',a:['Português','Inglês','Espanhol','Nenhuma nunca'],c:1},
+        {q:'Vídeo curto bom tem:',a:['2 horas','Até 5 minutos','30 segundos só','1 hora'],c:1}]},
+ {why:'Rever a aula da semana no deslocamento fixa o conteúdo sem gastar tempo novo.',
+  steps:['Abre a última aula liberada nos Módulos','Ouve como se fosse podcast (nem precisa olhar a tela)','Chegando, faz o quiz da aula se ainda não fez'],
+  links:[{t:'📚 Abrir meus Módulos',u:'#modulos'}],
+  ex:['<b>Repetição espaçada:</b> ouvir a aula 2 dias depois dobra a retenção'],
+  quiz:[{q:'Onde estão suas aulas?',a:['No e-mail','Na aba Módulos da plataforma','No Instagram','Em DVD'],c:1},
+        {q:'Rever a aula dias depois:',a:['É perda de tempo','Dobra a retenção (repetição espaçada)','Só serve pra iniciante','Atrapalha'],c:1}]}
+],
+'No Trabalho':[
+ {why:'Celular em inglês = centenas de micro-leituras por dia, de graça.',
+  steps:['Configurações → Idioma → English','Deixa pelo menos 1 dia inteiro','Anota 2 palavras que você aprendeu só navegando'],
+  links:[],
+  ex:['<b>Você vai ver:</b> Settings, Battery, Storage, Notifications, Clear, Undo...','<b>Medo de se perder?</b> Os ícones continuam nos mesmos lugares 😉'],
+  quiz:[{q:'Por quanto tempo deixar em inglês?',a:['5 minutos','Pelo menos 1 dia','Nunca','Só no fim de semana'],c:1},
+        {q:'"Settings" é:',a:['Mensagens','Configurações','Galeria','Câmera'],c:1}]},
+ {why:'Escrever e-mail profissional é das habilidades mais valorizadas — e dá pra treinar fictício.',
+  steps:['Escreve 1 e-mail curto em inglês (real ou inventado)','Usa a estrutura: saudação → objetivo → fechamento','Revê procurando 1 erro antes de "enviar"'],
+  links:[],
+  ex:['<b>Modelo:</b> "Hi John, I\'m writing to confirm our meeting on Friday at 2pm. Please let me know if that works for you. Best regards, Gediel"','<b>Fechos úteis:</b> Best regards · Kind regards · Thanks in advance'],
+  quiz:[{q:'Estrutura básica do e-mail:',a:['Piada → assunto → tchau','Saudação → objetivo → fechamento','Só o objetivo','Texto gigante'],c:1},
+        {q:'"Thanks in advance" significa:',a:['Obrigado pela visita','Desde já agradeço','Até logo','Com licença'],c:1}]},
+ {why:'Música de fundo mantém seu ouvido imerso enquanto você produz.',
+  steps:['Playlist em inglês no fone enquanto trabalha','Em pausa mental, presta atenção em 1 trecho','Não precisa anotar nada — exposição conta'],
+  links:[{t:'🟢 Spotify',u:'https://open.spotify.com/search/english%20acoustic'}],
+  ex:['<b>Dica:</b> trabalho que exige concentração → instrumental; tarefa mecânica → com letra'],
+  quiz:[{q:'Em tarefa que exige foco total, melhor:',a:['Música com letra alta','Instrumental ou volume baixo','Podcast de debate','Silêncio obrigatório'],c:1},
+        {q:'Exposição passiva:',a:['Não serve pra nada','Soma na imersão diária','Substitui o estudo ativo','Só funciona dormindo'],c:1}]},
+ {why:'O intervalo do café é o encaixe perfeito pros 5 cards do dia.',
+  steps:['Café na mão, app aberto','5 cards falando baixinho','Errou? Marca pra noite'],
+  links:[{t:'🃏 Anki',u:'https://apps.ankiweb.net'},{t:'🃏 Quizlet',u:'https://quizlet.com'}],
+  ex:['<b>3 minutos.</b> É menos tempo que escolher o que ver no Instagram.'],
+  quiz:[{q:'Quanto tempo leva?',a:['1 hora','~3 minutos','30 minutos','A tarde toda'],c:1},
+        {q:'O melhor momento no trabalho:',a:['Durante reunião','Pausa do café/almoço','Nunca','Só sexta'],c:1}]},
+ {why:'Pensar em inglês é o estágio final da fluência — e começa com 5 min por dia.',
+  steps:['Olha ao redor e nomeia mentalmente: desk, screen, keyboard, meeting...','Descreve 1 ação sua: "I\'m sending an email"','Termina com 1 frase sobre o dia: "Today is busy"'],
+  links:[],
+  ex:['<b>Nível 1:</b> objetos (chair, coffee, window)','<b>Nível 2:</b> ações ("She\'s talking on the phone")','<b>Nível 3:</b> opiniões ("This meeting could be an email" 😄)'],
+  quiz:[{q:'O exercício é:',a:['Falar alto na sala','Nomear e descrever mentalmente em inglês','Escrever relatório','Traduzir documentos'],c:1},
+        {q:'"I\'m sending an email" descreve:',a:['Rotina','Ação acontecendo agora','Passado','Futuro distante'],c:1}]},
+ {why:'Business English no almoço prepara você pra oportunidade que ainda vai chegar.',
+  steps:['5 min de vídeo de inglês profissional','Anota 1 expressão de trabalho','Usa ela mentalmente numa situação sua'],
+  links:[{t:'▶️ BBC Learning English',u:'https://www.youtube.com/@bbclearningenglish'},{t:'▶️ Business English',u:YTS('Business English phrases meeting')}],
+  ex:['<b>Expressões de ouro:</b> "Let\'s circle back" (retomamos depois) · "I\'ll keep you posted" (te mantenho informado)'],
+  quiz:[{q:'"I\'ll keep you posted" significa:',a:['Vou postar no feed','Te mantenho informado','Enviei pelo correio','Estou ocupado'],c:1},
+        {q:'"Let\'s circle back" é:',a:['Vamos desenhar círculos','Retomamos esse assunto depois','Vamos embora','Reunião cancelada'],c:1}]}
+],
+'Na Academia':[
+ {why:'Treino + podcast = corpo e inglês evoluindo na mesma hora.',
+  steps:['Play no podcast antes da primeira série','Deixa rolar o treino todo','No alongamento, lembra 1 coisa que você entendeu'],
+  links:[{t:'🎧 6 Minute English',u:'https://www.bbc.co.uk/learningenglish/english/features/6-minute-english'},{t:'🟢 Spotify',u:'https://open.spotify.com/search/english%20podcast'}],
+  ex:['<b>Treino de 50 min = 50 min de inglês.</b> 5x por semana vira 4h de imersão.'],
+  quiz:[{q:'Quando dar play?',a:['No fim do treino','Antes da primeira série','Só no cardio','Em casa'],c:1},
+        {q:'50 min de treino com podcast 5x/semana =',a:['Nada','~4h de imersão semanal','1h por mês','Só cansaço'],c:1}]},
+ {why:'Entre séries você descansa o músculo — e trabalha o ouvido.',
+  steps:['Playlist em inglês no treino','No descanso entre séries, foca na letra','Fim do treino: repete a expressão que ficou'],
+  links:[{t:'🟢 Workout playlist',u:'https://open.spotify.com/search/workout%20english'},{t:'📝 Letra no Genius',u:'https://genius.com'}],
+  ex:['<b>Música de treino é cheia de imperativo:</b> "push it", "don\'t stop", "run!" — gramática na prática'],
+  quiz:[{q:'Quando focar na letra?',a:['Durante a série pesada','No descanso entre séries','Nunca','Só em casa'],c:1},
+        {q:'"Don\'t stop" é:',a:['Pergunta','Imperativo negativo (não pare)','Passado','Condicional'],c:1}]},
+ {why:'30 segundos de descanso = 1 flashcard. O treino vira revisão espaçada.',
+  steps:['App de cards aberto no celular do treino','1 card por descanso','Errou? Repete no próximo descanso'],
+  links:[{t:'🃏 Anki',u:'https://apps.ankiweb.net'},{t:'🃏 Quizlet',u:'https://quizlet.com'}],
+  ex:['<b>10 séries = 10 cards.</b> Sem gastar 1 minuto a mais do seu dia.'],
+  quiz:[{q:'Quantos cards por descanso?',a:['10','1','Nenhum','O deck todo'],c:1},
+        {q:'Errou o card na academia:',a:['Desiste','Repete no próximo descanso','Apaga o app','Para o treino'],c:1}]},
+ {why:'Shadowing mental sincroniza ouvido e "voz interna" — sem precisar falar nada.',
+  steps:['Ouvindo o áudio, repete internamente a frase','Imita o ritmo e a entonação na mente','Se a frase for boa, guarda ela pro diário de hoje'],
+  links:[],
+  ex:['<b>Funciona porque:</b> o cérebro ativa as mesmas áreas motoras da fala quando você repete mentalmente'],
+  quiz:[{q:'Shadowing mental ativa:',a:['Só a audição','As áreas motoras da fala no cérebro','Nada','Só a memória visual'],c:1},
+        {q:'O que imitar na mente?',a:['Só as palavras','Ritmo e entonação','A tradução','O volume'],c:1}]},
+ {why:'Escuta ativa da aula = revisão oficial da semana feita no treino.',
+  steps:['Abre a última aula nos Módulos e dá play','Escuta ativa: caça 3 palavras novas','Depois do treino, faz o quiz da aula'],
+  links:[{t:'📚 Abrir meus Módulos',u:'#modulos'}],
+  ex:['<b>Escuta ativa ≠ passiva:</b> aqui você está CAÇANDO vocabulário, não só deixando tocar'],
+  quiz:[{q:'Escuta ativa é:',a:['Deixar tocando de fundo','Prestar atenção caçando vocabulário','Dormir ouvindo','Pular partes'],c:1},
+        {q:'Depois de ouvir a aula:',a:['Nada','Fazer o quiz dela na plataforma','Apagar','Reclamar'],c:1}]}
+]};
+
 var CTX_TASKS={
   'Em Casa':[
     {icon:'🎙️',title:'Ouvir 15 min de podcast em inglês',sub:'EnglishPod, 6 Minute English ou seu favorito'},
@@ -1211,7 +1424,7 @@ var _ctxChecked={};
 function selCtx(el){
   document.querySelectorAll('.ctx-chip').forEach(function(c){c.classList.remove('active');});
   el.classList.add('active');
-  var label=el.textContent.trim();
+  var label=el.textContent.replace(/[^A-Za-zÀ-ÿ ]/g,'').trim();
   document.getElementById('mar-ctx-title').textContent='Tarefas de hoje · '+label;
   renderMarTasks(label);
 }
@@ -1222,10 +1435,11 @@ function renderMarTasks(label){
   var html='';
   tasks.forEach(function(t,i){
     var chk=_ctxChecked[key][i];
-    html+='<div class="mar-task" style="animation:fadeUp .22s '+(i*.05)+'s cubic-bezier(.22,1,.36,1) both">'
-      +'<div class="mar-chk'+(chk?' chk':'')+ '" onclick="chkMarTask(this,\''+key+'\','+i+')">'+(chk?'✓':'')+'</div>'
-      +'<div><div class="mar-task-title">'+t.icon+' '+t.title+'</div>'
+    html+='<div class="mar-task" style="animation:fadeUp .22s '+(i*.05)+'s cubic-bezier(.22,1,.36,1) both" onclick="openTask(\''+key+'\','+i+')">'
+      +'<div class="mar-chk'+(chk?' chk':'')+ '" onclick="event.stopPropagation();chkMarTask(this,\''+key+'\','+i+')">'+(chk?'✓':'')+'</div>'
+      +'<div style="min-width:0"><div class="mar-task-title">'+t.icon+' '+t.title+'</div>'
       +'<div style="font-size:11px;color:var(--fg3);margin-top:2px">'+t.sub+'</div></div>'
+      +'<div class="open-hint">ver como fazer ›</div>'
       +'</div>';
   });
   document.getElementById('mar-tasks-list').innerHTML=html;
@@ -1237,6 +1451,53 @@ function chkMarTask(el,key,i){
   el.textContent=el.classList.contains('chk')?'✓':'';
 }
 function chkTask(el){el.classList.toggle('chk');el.textContent=el.classList.contains('chk')?'✓':'';}
+var _curTask=null;
+function openTask(key,i){
+  var t=(CTX_TASKS[key]||[])[i];var inf=(TASK_INFO[key]||[])[i];if(!t)return;
+  _curTask={key:key,i:i};
+  document.getElementById('task-modal-title').textContent=t.icon+' '+t.title;
+  var h='<div style="font-size:12px;color:var(--fg2);line-height:1.7;background:rgba(79,110,247,.06);border:1px solid rgba(79,110,247,.15);border-radius:12px;padding:10px 12px">💡 '+(inf?inf.why:t.sub)+'</div>';
+  if(inf){
+    h+='<div class="adm-section">Como fazer</div><ol style="font-size:12.5px;line-height:1.9;padding-left:20px;margin:0">';
+    inf.steps.forEach(function(st){h+='<li>'+st+'</li>';});h+='</ol>';
+    if(inf.links&&inf.links.length){
+      h+='<div class="adm-section">Conteúdo pra usar agora</div><div>';
+      inf.links.forEach(function(l){
+        if(l.u==='#modulos')h+='<a class="task-link" href="javascript:void(0)" onclick="closeTaskModal();goTo(\'modulos\')">'+l.t+'</a>';
+        else h+='<a class="task-link" href="'+l.u+'" target="_blank" rel="noopener">'+l.t+' ↗</a>';
+      });
+      h+='</div><div style="font-size:10px;color:var(--fg3);margin-top:4px">Links do YouTube abrem direto no app do YouTube no celular.</div>';
+    }
+    if(inf.ex&&inf.ex.length){h+='<div class="adm-section">Exemplos</div>';inf.ex.forEach(function(e){h+='<div class="task-ex">'+e+'</div>';});}
+    if(inf.quiz&&inf.quiz.length){
+      h+='<div class="adm-section">Entendeu? Prova rápida 👇</div>';
+      inf.quiz.forEach(function(q,qi){
+        h+='<div class="quiz-q"><div class="qt">'+esc(q.q)+'</div>';
+        q.a.forEach(function(alt,ai){h+='<div class="quiz-opt" onclick="taskQuizPick(this,'+qi+','+ai+','+q.c+')"><span class="letter">'+'ABCD'[ai]+'</span><span>'+esc(alt)+'</span></div>';});
+        h+='</div>';
+      });
+    }
+  }
+  h+='<button class="admin-btn admin-btn-primary" style="width:100%;margin-top:14px" onclick="taskDone()">✅ Fiz essa tarefa!</button>';
+  document.getElementById('task-modal-body').innerHTML=h;
+  document.getElementById('task-modal').classList.add('open');
+}
+function closeTaskModal(){document.getElementById('task-modal').classList.remove('open');}
+function taskQuizPick(el,qi,ai,c){
+  var box=el.parentElement;
+  if(box.dataset.done)return;box.dataset.done='1';
+  var opts=box.querySelectorAll('.quiz-opt');
+  opts[c].classList.add('ok');
+  if(ai!==c)el.classList.add('bad');
+}
+function taskDone(){
+  if(_curTask){
+    _ctxChecked[_curTask.key]=_ctxChecked[_curTask.key]||[];
+    if(!_ctxChecked[_curTask.key][_curTask.i]){_ctxChecked[_curTask.key][_curTask.i]=true;renderMarTasks(_curTask.key);}
+    toast('🔥 Tarefa concluída! Constância é o segredo.','#10b981');
+  }
+  closeTaskModal();
+}
 // init maratona tasks
 (function(){renderMarTasks('Em Casa');})();
 
@@ -1291,6 +1552,7 @@ var _sb=supabase.createClient(
 );
 
 function showLogin(){
+  var f=document.getElementById('ai-fab');if(f)f.classList.remove('show');
   var s=document.getElementById('login-screen');
   s.style.display='flex';s.classList.remove('hiding');
   document.getElementById('login-email').value='';
@@ -1303,6 +1565,7 @@ function hideLogin(){
   var s=document.getElementById('login-screen');
   s.classList.add('hiding');
   setTimeout(function(){s.style.display='none';s.classList.remove('hiding');},300);
+  var f=document.getElementById('ai-fab');if(f)f.classList.add('show');
 }
 
 function setUserUI(user){
@@ -1375,6 +1638,7 @@ function adminTab(tab,btn){
   document.getElementById('adm-'+tab).classList.add('active');
   if(tab==='usuarios')loadUsers();
   if(tab==='metricas')loadMetrics();
+  if(tab==='comentarios')loadAdminComments();
   if(tab==='modulos')loadAdminModules();
 }
 
@@ -1764,7 +2028,7 @@ async function loadComments(){
   if(!rows.length){el.innerHTML='<div class="admin-loading">Nenhum comentário ainda. Seja o primeiro!</div>';return;}
   var html='';
   rows.forEach(function(c){
-    html+='<div class="comment"><div class="cava">'+esc((c.user_name||'?')[0].toUpperCase())+'</div><div style="flex:1;min-width:0"><span class="cname">'+esc(c.user_name)+'</span><span class="cdate">'+fmtDate(c.created_at)+'</span><div class="cbody">'+esc(c.body)+'</div></div>'
+    html+='<div class="comment'+(c.is_admin?' prof':'')+'"><div class="cava">'+(c.is_admin?'👨‍🏫':esc((c.user_name||'?')[0].toUpperCase()))+'</div><div style="flex:1;min-width:0"><span class="cname">'+esc(c.user_name)+'</span>'+(c.is_admin?'<span class="prof-badge">PROFESSOR</span>':'')+'<span class="cdate">'+fmtDate(c.created_at)+'</span><div class="cbody">'+esc(c.body)+'</div></div>'
       +((c.user_id===uid||window._isAdmin)?'<button class="cdel" onclick="delComment('+c.id+')">apagar</button>':'')+'</div>';
   });
   el.innerHTML=html;
@@ -1773,7 +2037,8 @@ async function postComment(){
   var t=document.getElementById('les-comment-txt');var body=t.value.trim();if(!body)return;
   var u=(await _sb.auth.getUser()).data.user;if(!u)return;
   var meta=u.user_metadata||{};var name=meta.full_name||meta.name||u.email.split('@')[0];
-  var r=await _sb.from('mi_lesson_comments').insert({lesson_id:_stCurLes.id,user_id:u.id,user_name:name,body:body});
+  if(window._isAdmin)name='Professor Gediel';
+  var r=await _sb.from('mi_lesson_comments').insert({lesson_id:_stCurLes.id,user_id:u.id,user_name:name,body:body,is_admin:!!window._isAdmin});
   if(r.error){toast('Erro: '+r.error.message,'#ef4444');return;}
   t.value='';toast('💬 Comentário enviado!','#10b981');loadComments();
 }
@@ -2058,6 +2323,69 @@ async function deleteLesson(){
   if(r.error){st.innerHTML='<span style="color:var(--red)">Erro: '+esc(r.error.message)+'</span>';return;}
   closeLesModal();toast('🗑️ Aula apagada','#6b7280');_stMods=null;_stLessons={};loadAdminModules(true);
 }
+// ─── ADMIN: comentários dos alunos ───
+async function loadAdminComments(){
+  var el=document.getElementById('adm-com-list');
+  el.innerHTML='<div class="admin-loading">Carregando...</div>';
+  var r=await _sb.from('mi_lesson_comments').select('*').order('created_at',{ascending:false}).limit(60);
+  if(r.error){el.innerHTML='<div class="admin-loading" style="color:var(--red)">Erro: '+esc(r.error.message)+'</div>';return;}
+  var rows=r.data||[];
+  if(!rows.length){el.innerHTML='<div class="admin-loading">Nenhum comentário ainda. Quando os alunos comentarem nas aulas, aparece tudo aqui.</div>';return;}
+  var lr=await _sb.from('mi_lessons').select('id,title,module_id');var lmap={};(lr.data||[]).forEach(function(x){lmap[x.id]=x;});
+  var mr=await _sb.from('mi_modules').select('id,name');var mmap={};(mr.data||[]).forEach(function(x){mmap[x.id]=x.name;});
+  var html='';
+  rows.forEach(function(c){
+    var l=lmap[c.lesson_id]||{};var modn=mmap[l.module_id]||'';
+    html+='<div class="adm-com" id="admcom-'+c.id+'">'
+      +'<div class="where">'+esc(modn)+(modn?' › ':'')+esc(l.title||'aula removida')+'</div>'
+      +'<div style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap"><span style="font-size:12px;font-weight:800">'+esc(c.user_name)+(c.is_admin?' <span class=\'prof-badge\'>PROFESSOR</span>':'')+'</span><span style="font-size:10px;color:var(--fg3)">'+fmtDate(c.created_at)+'</span></div>'
+      +'<div style="font-size:12px;line-height:1.6;margin-top:4px;white-space:pre-wrap">'+esc(c.body)+'</div>'
+      +'<div style="display:flex;gap:8px;margin-top:8px">'
+      +(c.is_admin?'':'<button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="admReplyBox('+c.id+')">💬 Responder</button>')
+      +'<button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="admDelCom('+c.id+')" style="color:var(--red)">🗑️</button></div>'
+      +'<div class="reply-box"><textarea class="admin-inp" id="admrep-'+c.id+'" rows="2" placeholder="Sua resposta como professor..."></textarea><button class="admin-btn admin-btn-primary admin-btn-sm" onclick="admReply('+c.id+',\''+c.lesson_id+'\')">Enviar</button></div>'
+      +'</div>';
+  });
+  el.innerHTML=html;
+}
+function admReplyBox(id){document.getElementById('admcom-'+id).classList.toggle('replying');var t=document.getElementById('admrep-'+id);if(t)t.focus();}
+async function admReply(id,lessonId){
+  var t=document.getElementById('admrep-'+id);var body=t.value.trim();if(!body)return;
+  var u=(await _sb.auth.getUser()).data.user;if(!u)return;
+  var r=await _sb.from('mi_lesson_comments').insert({lesson_id:lessonId,user_id:u.id,user_name:'Professor Gediel',body:body,is_admin:true});
+  if(r.error){toast('Erro: '+r.error.message,'#ef4444');return;}
+  toast('✅ Resposta publicada na aula!','#10b981');loadAdminComments();
+}
+async function admDelCom(id){
+  await _sb.from('mi_lesson_comments').delete().eq('id',id);
+  toast('🗑️ Comentário apagado','#6b7280');loadAdminComments();
+}
+
+// ─── TUTOR IA ───
+var _aiHist=[],_aiBusy=false;
+function aiToggle(){document.getElementById('ai-panel').classList.toggle('open');var t=document.getElementById('ai-txt');if(document.getElementById('ai-panel').classList.contains('open'))t.focus();}
+function aiAdd(role,text){
+  var m=document.getElementById('ai-msgs');
+  var d=document.createElement('div');d.className='ai-msg '+(role==='user'?'me':'bot');d.textContent=text;
+  m.appendChild(d);m.scrollTop=m.scrollHeight;return d;
+}
+async function aiSend(){
+  if(_aiBusy)return;
+  var t=document.getElementById('ai-txt');var q=t.value.trim();if(!q)return;
+  t.value='';aiAdd('user',q);_aiHist.push({role:'user',content:q});
+  _aiBusy=true;var wait=aiAdd('bot','digitando...');
+  try{
+    var ses=(await _sb.auth.getSession()).data.session;
+    var nivel='';try{nivel=localStorage.getItem('userLevel')||'';}catch(e){}
+    var r=await fetch('/.netlify/functions/ai-tutor',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+(ses?ses.access_token:'')},body:JSON.stringify({messages:_aiHist,nivel:nivel})});
+    var d=await r.json();
+    if(!r.ok)throw new Error(d.erro||'erro');
+    wait.textContent=d.texto;_aiHist.push({role:'assistant',content:d.texto});
+    if(_aiHist.length>16)_aiHist=_aiHist.slice(-16);
+  }catch(e){wait.textContent='⚠️ '+(e.message==='Failed to fetch'?'Sem conexão. Tenta de novo.':e.message);}
+  _aiBusy=false;
+}
+document.getElementById('task-modal').addEventListener('click',function(e){if(e.target===this)closeTaskModal();});
 document.getElementById('adm-mod-modal').addEventListener('click',function(e){if(e.target===this)closeModModal();});
 document.getElementById('adm-les-modal').addEventListener('click',function(e){if(e.target===this)closeLesModal();});
 

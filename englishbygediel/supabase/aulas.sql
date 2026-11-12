@@ -97,11 +97,13 @@ create table if not exists public.mi_lesson_comments (
   created_at timestamptz not null default now()
 );
 create index if not exists mi_comments_lesson_idx on public.mi_lesson_comments (lesson_id, created_at);
+-- selo de professor: só quem é admin consegue gravar true
+alter table public.mi_lesson_comments add column if not exists is_admin boolean not null default false;
 alter table public.mi_lesson_comments enable row level security;
 drop policy if exists "todos leem comentarios" on public.mi_lesson_comments;
 create policy "todos leem comentarios" on public.mi_lesson_comments for select to authenticated using (true);
 drop policy if exists "aluno comenta" on public.mi_lesson_comments;
-create policy "aluno comenta" on public.mi_lesson_comments for insert to authenticated with check (user_id = auth.uid());
+create policy "aluno comenta" on public.mi_lesson_comments for insert to authenticated with check (user_id = auth.uid() and (is_admin = false or public.is_admin()));
 drop policy if exists "aluno ou admin apaga comentario" on public.mi_lesson_comments;
 create policy "aluno ou admin apaga comentario" on public.mi_lesson_comments for delete to authenticated using (user_id = auth.uid() or public.is_admin());
 
