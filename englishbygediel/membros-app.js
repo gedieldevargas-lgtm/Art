@@ -143,6 +143,24 @@
   '@media(min-width:681px){.content{padding:28px clamp(22px,3.2vw,44px) max(40px,env(safe-area-inset-bottom))!important}.content>.pane{max-width:1000px;margin-left:auto;margin-right:auto}}',
   '@media(min-width:681px) and (max-width:1100px){.hm-row{gap:14px}.uni-grid{grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}}',
   '.hm-aula .cv .capa-auto{align-items:flex-end;padding-bottom:7%}.hm-aula .cv .capa-auto span{font-size:clamp(14px,6.2cqw,52px)}',
+  /* marcar aula */
+  '.ag-wrap{max-width:760px}.ag-h1{font-size:24px;font-weight:800;letter-spacing:-.4px}.ag-sub{font-size:14px;color:var(--fg2);margin:4px 0 18px;line-height:1.5}',
+  '.ag-box{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:18px;margin-bottom:14px;box-shadow:var(--shadow)}',
+  '.ag-t{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:800;margin-bottom:14px}.ag-n{width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;display:grid;place-items:center;flex:none}',
+  '.ag-tipos{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}',
+  '.ag-tipo{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;background:var(--bg2,rgba(127,127,127,.06));border:2px solid transparent;border-radius:16px;padding:14px;cursor:pointer;color:var(--fg);font:inherit}',
+  '.ag-tipo .ic{font-size:26px}.ag-tipo b{font-size:15px}.ag-tipo small{font-size:12px;color:var(--fg2);line-height:1.4}.ag-tipo.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent)}',
+  '.ag-lb{font-size:13px;font-weight:700;margin:14px 0 8px}.ag-chips,.ag-dias,.ag-horas{display:flex;flex-wrap:wrap;gap:8px}',
+  '.ag-chip,.ag-dia,.ag-hora{border:1.5px solid var(--border);background:var(--surface);color:var(--fg);border-radius:999px;padding:9px 14px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}',
+  '.ag-chip.on,.ag-dia.on,.ag-hora.on{background:var(--accent);border-color:var(--accent);color:#fff}.ag-dias{overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px;margin-bottom:12px}.ag-dia{flex:none}.ag-hora{min-width:72px}',
+  '.ag-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.ag-box label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700}.ag-box label span{font-weight:500;color:var(--fg3)}.ag-full{margin-top:14px}',
+  '.ag-box input,.ag-box textarea{border:1.5px solid var(--border);background:var(--surface);color:var(--fg);border-radius:12px;padding:11px 12px;font:inherit;font-size:16px;font-weight:500;width:100%;box-sizing:border-box;resize:vertical}',
+  '.ag-nota{font-size:12px;color:var(--fg3);margin-top:12px}.ag-vazio{font-size:14px;color:var(--fg2);margin-bottom:12px;line-height:1.5}',
+  '.ag-btn{width:100%;border:none;border-radius:16px;padding:16px;font:inherit;font-size:15px;font-weight:800;color:#fff;background:linear-gradient(135deg,#4f6ef7,#8b5cf6);cursor:pointer;margin-top:4px}.ag-btn:disabled{opacity:.5;cursor:default}',
+  '.ag-btn2{border:1.5px solid var(--border);background:var(--surface);color:var(--fg);border-radius:14px;padding:12px 16px;font:inherit;font-size:14px;font-weight:700;cursor:pointer;margin-top:10px}',
+  '.ag-ped-l{display:flex;gap:8px;flex-wrap:wrap;font-size:14px;padding:6px 0;border-top:1px solid var(--border)}.ag-ped-l span{color:var(--fg2)}',
+  '.ag-feito{text-align:center;padding:30px 20px}.ag-feito .ag-btn2{width:100%}.ag-ok-ic{font-size:44px}',
+  '@media(max-width:560px){.ag-grid{grid-template-columns:1fr}.ag-tipos{grid-template-columns:1fr 1fr}}',
   /* celular: menu de baixo + gaveta */
   '#mi-bnav,#mi-shade{display:none}',
   '@media(max-width:680px){',
@@ -522,6 +540,9 @@
     var pr=document.createElement('div');pr.className='pane';pr.id='pane-prompts';
     pr.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px"><div><div style="font-size:21px;font-weight:800">Central de Prompts</div><div style="font-size:13px;color:var(--fg2)">Escolha, personalize, copie e cole no ChatGPT ou no Claude.</div></div><a class="back-btn" style="margin:0;text-decoration:none" href="central-prompts.html" target="_blank" rel="noopener">Abrir em tela cheia ↗</a></div><iframe class="mi-frame" title="Central de Prompts" loading="lazy" data-src="central-prompts.html"></iframe>';
     matPane.insertAdjacentElement('afterend',pr);
+    var pa=document.createElement('div');pa.className='nav-pill';pa.setAttribute('onclick',"goTo('agendar',this)");pa.innerHTML='<span class="nav-icon">📅</span><span>Marcar aula</span>';
+    pp.insertAdjacentElement('afterend',pa);
+    var pag=document.createElement('div');pag.className='pane';pag.id='pane-agendar';pr.insertAdjacentElement('afterend',pag);
     var sec=document.createElement('div');sec.className='nav-section';sec.textContent='Universos';
     perfil.insertAdjacentElement('beforebegin',sec);
     var ant=sec,antPane=pr;
@@ -530,9 +551,135 @@
       p.innerHTML='<span class="nav-icon">'+u.icon+'</span><span>'+E(u.nav)+'</span>';ant.insertAdjacentElement('afterend',p);ant=p;
       var pane=document.createElement('div');pane.className='pane';pane.id='pane-'+k;antPane.insertAdjacentElement('afterend',pane);antPane=pane;
     });
-    if(window.TITLES){TITLES.prompts='Prompts';Object.keys(UNIV).forEach(function(k){TITLES[k]=UNIV[k].title;});TITLES.home='Início';}
+    if(window.TITLES){TITLES.prompts='Prompts';TITLES.agendar='Marcar aula';Object.keys(UNIV).forEach(function(k){TITLES[k]=UNIV[k].title;});TITLES.home='Início';}
   }
   montarMenu();
+
+  /* ───────────────────────── MARCAR AULA ─────────────────────────
+     Os horários vêm da mesma agenda que o Gediel abre no painel do site (Supabase do hub, tabela horarios).
+     Reservar usa a função reservar_horario: o horário some pra todo mundo e aparece no painel como "🎓 Aluno · tipo". */
+  var HUB_URL='https://iwivldvubmsqyzkkdxoy.supabase.co',HUB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3aXZsZHZ1Ym1zcXl6a2tkeG95Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1OTE1MDgsImV4cCI6MjEwODE2NzUwOH0.eyoyRBBp4NAfLhG-ops6cj2-xck61Oalsj3d7h3h360';
+  var TIPOS=[
+    {k:'conversa',ic:'💬',nm:'Conversação',d:'Você e eu, 1 a 1, pra soltar o inglês falando.'},
+    {k:'grupo',ic:'👥',nm:'Grupo',d:'Você + amigos, família ou colegas de trabalho.'},
+    {k:'casal',ic:'💑',nm:'Casal',d:'Os dois juntos, no mesmo ritmo.'},
+    {k:'intensivo',ic:'🔥',nm:'Intensivo',d:'Imersão de vários dias seguidos, com prazo.'},
+    {k:'prep',ic:'🎯',nm:'Preparação',d:'Pra um momento específico que está chegando.'}
+  ];
+  var PREPS=['Entrevista de emprego','Viagem','Intercâmbio','Prova ou certificado','Apresentação ou reunião','Casamento ou evento','Outro'];
+  var AG={tipo:null,prep:null,formato:'Online',pessoas:'2',horarios:[],dia:null,h:null,carregou:false,enviando:false};
+  var fmtD=function(d){var x=d.toLocaleDateString('pt-BR',{weekday:'short',day:'numeric',month:'short'}).replace(/\./g,'');return x.charAt(0).toUpperCase()+x.slice(1);};
+  var fmtH=function(d){return d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});};
+  var kD=function(d){return d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate();};
+  function meusPedidos(){return LS.get('mi_pedidos_'+(U&&U.id||'x'),[]).filter(function(p){return new Date(p.inicio)>new Date(Date.now()-864e5);});}
+  async function carregarHorariosHub(){
+    try{
+      var desde=new Date(Date.now()+3*36e5).toISOString();
+      var r=await fetch(HUB_URL+'/rest/v1/horarios?select=id,inicio,duracao_min&reservado=eq.false&inicio=gt.'+encodeURIComponent(desde)+'&order=inicio.asc&limit=300',{headers:{apikey:HUB_KEY,Authorization:'Bearer '+HUB_KEY}});
+      AG.horarios=r.ok?(await r.json()).map(function(h){h.data=new Date(h.inicio);return h;}):[];
+      AG.erro=!r.ok;
+    }catch(e){AG.horarios=[];AG.erro=true;}
+    AG.carregou=true;
+  }
+  function tipoNome(){var t=TIPOS.filter(function(x){return x.k===AG.tipo;})[0];if(!t)return '';return t.k==='prep'?('Preparação'+(AG.prep?' · '+AG.prep:'')):t.nm;}
+  async function renderAgendar(recarregar){
+    var p=$('pane-agendar');if(!p)return;
+    if(!AG.carregou||recarregar){p.innerHTML='<div class="ag-wrap"><div class="ag-h1">Marcar aula</div><div class="ag-sub">Carregando meus horários livres…</div></div>';await carregarHorariosHub();}
+    pintarAgendar();
+  }
+  function pintarAgendar(){
+    var p=$('pane-agendar');if(!p)return;
+    var meta=(U&&U.user_metadata)||{},nome=meta.full_name||meta.name||meta.nome||'',whats=LS.get('mi_whats_'+(U&&U.id||'x'),meta.whatsapp||'');
+    var ped=meusPedidos();
+    var h='<div class="ag-wrap"><div class="ag-h1">Marcar aula</div><div class="ag-sub">Escolha o tipo, o dia e o horário. Eu recebo na hora e te confirmo valor e link pelo WhatsApp.</div>';
+    if(ped.length)h+='<div class="ag-box ag-ped"><div class="ag-t">📌 Seus pedidos</div>'+ped.map(function(x){var d=new Date(x.inicio);return '<div class="ag-ped-l"><b>'+E(fmtD(d))+' · '+E(fmtH(d))+'</b> <span>'+E(x.tipo)+'</span></div>';}).join('')+'</div>';
+    // 1. tipo
+    h+='<div class="ag-box"><div class="ag-t"><span class="ag-n">1</span>Que aula você quer?</div><div class="ag-tipos">'
+      +TIPOS.map(function(t){return '<button type="button" class="ag-tipo'+(AG.tipo===t.k?' on':'')+'" data-ag-tipo="'+t.k+'"><span class="ic">'+t.ic+'</span><b>'+t.nm+'</b><small>'+t.d+'</small></button>';}).join('')+'</div>';
+    if(AG.tipo==='prep')h+='<div class="ag-lb">Preparação pra quê?</div><div class="ag-chips">'+PREPS.map(function(x){return '<button type="button" class="ag-chip'+(AG.prep===x?' on':'')+'" data-ag-prep="'+E(x)+'">'+E(x)+'</button>';}).join('')+'</div>';
+    if(AG.tipo==='grupo')h+='<div class="ag-lb">Quantas pessoas, contando você?</div><div class="ag-chips">'+['2','3','4','5','6+'].map(function(x){return '<button type="button" class="ag-chip'+(AG.pessoas===x?' on':'')+'" data-ag-pes="'+x+'">'+x+'</button>';}).join('')+'</div>';
+    h+='</div>';
+    // 2. detalhes
+    h+='<div class="ag-box"><div class="ag-t"><span class="ag-n">2</span>Seus dados</div>'
+      +'<div class="ag-grid"><label>Nome<input id="ag-nome" value="'+E(nome)+'" maxlength="120" placeholder="Seu nome"></label>'
+      +'<label>WhatsApp<input id="ag-whats" value="'+E(whats)+'" inputmode="tel" maxlength="25" placeholder="(11) 99999-9999"></label></div>'
+      +'<div class="ag-lb">Formato</div><div class="ag-chips">'+['Online','Presencial (Vinhedo/SP)'].map(function(x){return '<button type="button" class="ag-chip'+(AG.formato===x?' on':'')+'" data-ag-fmt="'+E(x)+'">'+E(x)+'</button>';}).join('')+'</div>'
+      +'<label class="ag-full">O que você quer trabalhar? <span>(opcional)</span><textarea id="ag-obj" rows="3" maxlength="600" placeholder="Ex.: tenho entrevista em inglês dia 30, quero treinar perguntas de RH">'+E(AG.obj||'')+'</textarea></label></div>';
+    // 3. horário
+    h+='<div class="ag-box"><div class="ag-t"><span class="ag-n">3</span>Dia e horário</div>';
+    if(!AG.horarios.length){
+      h+='<div class="ag-vazio">'+(AG.erro?'Não consegui carregar a agenda agora.':'Estou sem horários abertos no momento.')+' Me chama no WhatsApp que a gente encaixa.</div>'
+        +'<button type="button" class="ag-btn2" data-ag-zap>💬 Combinar pelo WhatsApp</button>'+(AG.erro?' <button type="button" class="ag-btn2" data-ag-reload>↻ Tentar de novo</button>':'');
+    }else{
+      var dias=[];AG.horarios.forEach(function(x){var k=kD(x.data);if(!dias.some(function(d){return d.k===k;}))dias.push({k:k,data:x.data});});
+      if(!dias.some(function(d){return d.k===AG.dia;})){AG.dia=dias[0].k;AG.h=null;}
+      h+='<div class="ag-dias">'+dias.map(function(d){return '<button type="button" class="ag-dia'+(d.k===AG.dia?' on':'')+'" data-ag-dia="'+d.k+'">'+E(fmtD(d.data))+'</button>';}).join('')+'</div>'
+        +'<div class="ag-horas">'+AG.horarios.filter(function(x){return kD(x.data)===AG.dia;}).map(function(x){return '<button type="button" class="ag-hora'+(x.id===AG.h?' on':'')+'" data-ag-h="'+x.id+'">'+E(fmtH(x.data))+'</button>';}).join('')+'</div>'
+        +'<div class="ag-nota">O horário marca o começo da aula. Duração e valor eu confirmo com você no WhatsApp.</div>';
+    }
+    h+='</div>';
+    if(AG.horarios.length){
+      var hs=AG.horarios.filter(function(x){return x.id===AG.h;})[0];
+      var falta=!AG.tipo?'Escolha o tipo de aula':(AG.tipo==='prep'&&!AG.prep)?'Escolha a preparação':!hs?'Escolha um horário':'';
+      h+='<button type="button" class="ag-btn" data-ag-ok'+(falta||AG.enviando?' disabled':'')+'>'+(AG.enviando?'Reservando…':falta||('📅 Pedir aula · '+fmtD(hs.data)+' às '+fmtH(hs.data)))+'</button>';
+    }
+    h+='</div>';
+    p.innerHTML=h;
+  }
+  function msgZap(hs){
+    var nome=($('ag-nome')||{}).value||'';
+    return 'Oi Gediel! Sou '+(nome||'aluno(a) da Plataforma')+' e '+(hs?'acabei de pedir uma aula pela plataforma.':'quero marcar uma aula.')
+      +'\n\n• Tipo: '+(tipoNome()||'a definir')+(AG.tipo==='grupo'?' ('+AG.pessoas+' pessoas)':'')
+      +'\n• Formato: '+AG.formato
+      +(hs?'\n• Quando: '+fmtD(hs.data)+' às '+fmtH(hs.data):'')
+      +(AG.obj?'\n• Objetivo: '+AG.obj:'');
+  }
+  async function pedirAula(){
+    var hs=AG.horarios.filter(function(x){return x.id===AG.h;})[0];if(!hs||AG.enviando)return;
+    var nome=$('ag-nome').value.trim(),whats=$('ag-whats').value.trim();
+    AG.obj=$('ag-obj').value.trim();
+    if(!nome){toast('Coloca seu nome','#ef4444');$('ag-nome').focus();return;}
+    if(whats.replace(/\D/g,'').length<10){toast('Coloca seu WhatsApp com DDD','#ef4444');$('ag-whats').focus();return;}
+    LS.set('mi_whats_'+(U&&U.id||'x'),whats);
+    var modo=('Aluno · '+(AG.tipo==='prep'?'Prep. '+(AG.prep||''):tipoNome())+(AG.tipo==='grupo'?' ('+AG.pessoas+')':'')+(/Presencial/.test(AG.formato)?' · pres.':'')).slice(0,40);
+    AG.enviando=true;pintarAgendar();
+    var ok=false;
+    try{
+      var r=await fetch(HUB_URL+'/rest/v1/rpc/reservar_horario',{method:'POST',headers:{apikey:HUB_KEY,Authorization:'Bearer '+HUB_KEY,'Content-Type':'application/json'},
+        body:JSON.stringify({p_horario:hs.id,p_nome:nome.slice(0,120),p_whatsapp:whats.slice(0,25),p_email:(U&&U.email)||null,p_instagram:null,p_modo:modo,p_lead:null})});
+      ok=r.ok&&(await r.json())===true;
+    }catch(e){ok=false;}
+    AG.enviando=false;
+    if(!ok){toast('Esse horário acabou de ser pego. Escolha outro 🙏','#ef4444');AG.h=null;return renderAgendar(true);}
+    var ped=LS.get('mi_pedidos_'+(U&&U.id||'x'),[]);ped.push({inicio:hs.inicio,tipo:tipoNome()});LS.set('mi_pedidos_'+(U&&U.id||'x'),ped);
+    var zap=msgZap(hs);
+    $('pane-agendar').innerHTML='<div class="ag-wrap"><div class="ag-box ag-feito"><div class="ag-ok-ic">✅</div><div class="ag-h1">Pedido enviado!</div>'
+      +'<p><b>'+E(tipoNome())+'</b> · '+E(fmtD(hs.data))+' às '+E(fmtH(hs.data))+' · '+E(AG.formato)+'</p>'
+      +'<p class="ag-sub">O horário já ficou guardado pra você. Me manda a mensagem abaixo pra eu te confirmar valor e o link.</p>'
+      +'<button type="button" class="ag-btn" data-ag-zapok>💬 Mandar no WhatsApp</button><button type="button" class="ag-btn2" data-ag-novo>Marcar outra aula</button></div></div>';
+    $('pane-agendar').querySelector('[data-ag-zapok]').onclick=function(){wa(zap);};
+    AG.h=null;
+  }
+  document.addEventListener('click',function(e){
+    var p=$('pane-agendar');if(!p||!p.contains(e.target))return;
+    var b=e.target.closest('button');if(!b)return;
+    var ob=$('ag-obj');if(ob)AG.obj=ob.value;
+    if(b.dataset.agTipo){AG.tipo=b.dataset.agTipo;if(AG.tipo!=='prep')AG.prep=null;}
+    else if(b.dataset.agPrep)AG.prep=b.dataset.agPrep;
+    else if(b.dataset.agPes)AG.pessoas=b.dataset.agPes;
+    else if(b.dataset.agFmt)AG.formato=b.dataset.agFmt;
+    else if(b.dataset.agDia){AG.dia=b.dataset.agDia;AG.h=null;}
+    else if(b.dataset.agH)AG.h=b.dataset.agH;
+    else if(b.hasAttribute('data-ag-ok'))return pedirAula();
+    else if(b.hasAttribute('data-ag-zap'))return wa(msgZap(null));
+    else if(b.hasAttribute('data-ag-reload'))return renderAgendar(true);
+    else if(b.hasAttribute('data-ag-novo'))return renderAgendar(true);
+    else return;
+    // guarda o que já foi digitado antes de redesenhar
+    var n=$('ag-nome'),w=$('ag-whats'),nv=n&&n.value,wv=w&&w.value;
+    pintarAgendar();
+    if(nv!=null)$('ag-nome').value=nv;if(wv!=null)$('ag-whats').value=wv;
+  });
 
   /* ───────────────────────── celular: menu de baixo + gaveta ───────────────────────── */
   var sb=document.querySelector('.sidebar'),shade=document.createElement('div');shade.id='mi-shade';document.body.appendChild(shade);
@@ -552,6 +699,7 @@
     if(UNIV[page])desenharUni(page);
     if(page==='prompts'){var f=document.querySelector('#pane-prompts iframe');if(f&&!f.src)f.src=f.dataset.src;}
     if(page==='home')setTimeout(renderHome,160);
+    if(page==='agendar')renderAgendar();
     if(page==='bussola')renderBussola();
     if(page==='prisma')renderPrisma();
     var r=goAnt(page,el);
@@ -899,6 +1047,7 @@
     modulos:'As aulas gravadas do Programa, liberadas 2 por semana. Cada aula tem quiz e comentários. Nas que ainda vão sair, vote em "estou esperando".',
     jogos:'Treine vocabulário e frases jogando. Os que têm o selo JOGAR já funcionam; os outros estão chegando.',
     materiais:'Seus PDFs e e-books: o que é gratuito e o que você já comprou ficam aqui.',
+    agendar:'Marque aula comigo: conversação, grupo, casal, intensivo ou preparação pra entrevista, viagem, prova. Escolha o tipo, o dia e o horário que eu deixei livre.',
     prompts:'Prompts prontos pra praticar inglês com ChatGPT ou Claude. Personalize, copie e cole.',
     devocionais:'Os devocionais gravados do English On Mission.',
     eom:'English On Mission: inglês com a Bíblia. Devocionais, a playlist de inglês bíblico, materiais e o grupo.',

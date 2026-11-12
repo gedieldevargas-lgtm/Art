@@ -412,8 +412,12 @@
         const r = reservas[h.id];
         if (!r) return `<span class="slot livre">${hora}<button type="button" data-tirar="${h.id}" aria-label="Fechar o horário das ${hora}">×</button></span>`;
         const nome = String(r.nome || '').split(/\s+/)[0];
-        const msg = `Oi ${nome}! Aqui é o Gediel. Confirmando nossa consultoria gratuita ${d.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' })}, às ${hora}. Te mando o link da chamada por aqui, combinado?`;
-        return `<span class="slot reservado"><b>${hora}</b> ${esc(r.nome)}${r.modo ? ` <small>· ${esc(nomeModo(r.modo))}</small>` : ''}
+        const ehAluno = /^Aluno · /.test(r.modo || '');
+        const quando = `${d.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' })}, às ${hora}`;
+        const msg = ehAluno
+          ? `Oi ${nome}! Aqui é o Gediel. Recebi seu pedido de aula (${r.modo.replace('Aluno · ', '')}) pra ${quando}. Vou te confirmar valor e o link por aqui, combinado?`
+          : `Oi ${nome}! Aqui é o Gediel. Confirmando nossa consultoria gratuita ${quando}. Te mando o link da chamada por aqui, combinado?`;
+        return `<span class="slot reservado${ehAluno ? ' aluno' : ''}"><b>${hora}</b> ${ehAluno ? '🎓 ' : ''}${esc(r.nome)}${r.modo ? ` <small>· ${esc(ehAluno ? r.modo : nomeModo(r.modo))}</small>` : ''}
           <a class="whats" href="https://wa.me/${esc(String(r.whatsapp).replace(/\D/g, ''))}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">${ICONES.whats}Confirmar</a>
           <button type="button" data-cancelar="${r.id}">Cancelar</button></span>`;
       }).join('')}</div></div>`;
