@@ -30,7 +30,13 @@
   var ov=document.createElement('div');ov.className='pw-ov';ov.id='pw-ov';document.body.appendChild(ov);
   ov.addEventListener('click',function(e){if(e.target===ov||e.target.closest('[data-fechar]')){ov.classList.remove('open');ov.innerHTML='';}});
 
-  window.paywall=function(oque){
+  window.irCheckout=function(url,oque){
+    var u=url||S.cfg.checkout||'https://pay.kiwify.com.br/CohRPDI';
+    toast('🔒 '+(oque||'Isso')+' é pra assinantes. Abrindo o checkout…');
+    window.open(u,'_blank','noopener');
+  };
+  window.paywall=function(oque){ return irCheckout(S.cfg.checkout,oque); };
+  window.paywallAntigo=function(oque){
     ov.innerHTML='<div class="pw"><div style="font-size:40px">🔒</div><h3>'+esc(oque||'Isso')+' faz parte do Programa</h3>'
       +'<p>Você já tem acesso aos seus materiais e às ferramentas gratuitas. Com o Programa de Acompanhamento você libera o app inteiro:</p>'
       +'<ul><li>✅ Maratona diária com tarefas guiadas</li><li>✅ Lives e módulos completos</li><li>✅ Todos os jogos e materiais</li><li>✅ Acompanhamento de perto</li></ul>'
@@ -76,7 +82,8 @@
   // ───── navegação: abas do Programa trancadas
   var goToOrig=window.goTo;
   window.goTo=function(page,el){
-    if(PANES_PROGRAMA.indexOf(page)>=0&&!livre()){paywall((window.TITLES&&TITLES[page])||'Essa área');return;}
+    if(PANES_PROGRAMA.indexOf(page)>=0&&!livre()){irCheckout(S.cfg.checkout,(window.TITLES&&TITLES[page])||'Essa área');return;}
+    if(page==='devocionais'&&!temEom()){irCheckout(S.cfg.checkoutEom||'https://pay.kiwify.com.br/oIjfTK8','Os Devocionais');return;}
     var r=goToOrig(page,el);if(page==='devocionais')desenharDev();return r;
   };
   function marcarNav(){
@@ -128,7 +135,7 @@
     }
     if(c){
       var m=S.mats.filter(function(x){return x.id===c.dataset.comprar;})[0];if(!m)return;
-      if(m.tipo==='programa'||!m.checkout)paywall('"'+m.nome+'"');else window.open(m.checkout,'_blank','noopener');
+      irCheckout(m.tipo==='programa'?S.cfg.checkout:(m.checkout||S.cfg.checkout),'"'+m.nome+'"');
     }
   });
 
