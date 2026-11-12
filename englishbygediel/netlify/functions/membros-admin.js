@@ -1,6 +1,8 @@
 // Painel Admin da área de membros: listar/criar/apagar alunos e trocar senha.
 // A chave secreta do Supabase dos membros fica SÓ aqui (variável MEMBROS_SERVICE_KEY no Netlify), nunca na página.
 const URL_MEMBROS = process.env.MEMBROS_URL || 'https://jzdxcefnlwjgimymgsux.supabase.co';
+// cenário do Make "Painel Admin → E-mail de acesso do aluno": ele mesmo confere, pelo login, que quem pede é admin
+const MAKE_EMAIL_ACESSO = process.env.MAKE_EMAIL_ACESSO || 'https://hook.us2.make.com/gjjwo9y8mizizhh2t2h2l1ncvsmxnqbn';
 const resp = (status, obj) => ({ statusCode: status, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(obj) });
 
 exports.handler = async (event) => {
@@ -20,6 +22,19 @@ exports.handler = async (event) => {
   if (!email || !lista.length) return resp(403, { erro: 'Só o admin pode usar isto.' });
 
   let p; try { p = JSON.parse(event.body || '{}'); } catch (e) { return resp(400, { erro: 'pedido inválido' }); }
+
+  // enviar o e-mail de acesso pro aluno (pelo Gmail do Gediel, via Make)
+  if (p.acao === 'enviar-acesso') {
+    const nome = String(p.nome || '').slice(0, 80), para = String(p.email || '').trim().slice(0, 160), senha = String(p.senha || '').slice(0, 80);
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(para) || !senha) return resp(400, { erro: 'Faltou e-mail ou senha.' });
+    try {
+      const m = await fetch(MAKE_EMAIL_ACESSO, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ nome: nome || para.split('@')[0], email: para, senha, token }) });
+      const txt = await m.text();
+      if (m.ok && /enviado/.test(txt)) return resp(200, { enviado: true });
+      return resp(502, { erro: 'O Make não confirmou o envio (' + m.status + '). Confira o cenário no Make.' });
+    } catch (e) { return resp(502, { erro: 'Não consegui falar com o Make agora.' }); }
+  }
+
   const path = String(p.path || ''), method = String(p.method || 'GET').toUpperCase();
   if (!/^\/auth\/v1\/admin\/users(\/[0-9a-f-]{36})?(\?[\w=&]*)?$/.test(path) || !['GET', 'POST', 'PUT', 'DELETE'].includes(method)) return resp(400, { erro: 'ação não permitida' });
   if (method === 'DELETE') {
