@@ -161,6 +161,17 @@
   '.ag-ped-l{display:flex;gap:8px;flex-wrap:wrap;font-size:14px;padding:6px 0;border-top:1px solid var(--border)}.ag-ped-l span{color:var(--fg2)}',
   '.ag-feito{text-align:center;padding:30px 20px}.ag-feito .ag-btn2{width:100%}.ag-ok-ic{font-size:44px}',
   '@media(max-width:560px){.ag-grid{grid-template-columns:1fr}.ag-tipos{grid-template-columns:1fr 1fr}}',
+  /* altura real da tela (Safari do iPad esconde a parte de baixo com 100vh) */
+  'html,body{height:100%;height:100dvh}.sidebar{height:100%!important;height:100dvh!important}',
+  /* iPad e tablets com toque: cabeçalho mais alto e rodapé com atalhos */
+  '@media(min-width:681px) and (max-width:1366px) and (pointer:coarse){'
+   +'.topbar{height:calc(64px + env(safe-area-inset-top))!important}.topbar-title{font-size:17px!important}.tb-btn{min-width:44px;min-height:44px}'
+   +'.nav-pill{padding:12px 12px!important;font-size:14px!important}'
+   +'#mi-bnav{display:grid!important;grid-template-columns:repeat(4,1fr);position:fixed;left:230px;right:0;bottom:0;z-index:150;background:var(--sidebar);border-top:1px solid var(--border);padding:8px max(10px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) 10px;box-shadow:0 -8px 24px rgba(0,0,0,.05)}'
+   +'#mi-bnav button{background:none;border:none;color:var(--fg3);display:flex;flex-direction:column;align-items:center;gap:3px;font-size:12px;font-weight:700;padding:6px 0;min-height:48px;cursor:pointer;font-family:inherit}#mi-bnav button span{font-size:24px;line-height:1.1}#mi-bnav button.on{color:var(--accent)}#mi-bnav button[data-bn="menu"]{display:none}'
+   +'.content{padding-bottom:calc(120px + env(safe-area-inset-bottom))!important}.right-rail{padding-bottom:calc(100px + env(safe-area-inset-bottom))!important}'
+   +'.ai-fab{bottom:calc(92px + env(safe-area-inset-bottom))!important;right:max(18px,env(safe-area-inset-right))!important}.ai-panel{bottom:calc(158px + env(safe-area-inset-bottom))!important;max-height:calc(100dvh - 240px)!important}'
+  +'}',
   /* celular: menu de baixo + gaveta */
   '#mi-bnav,#mi-shade{display:none}',
   '@media(max-width:680px){',
@@ -202,13 +213,14 @@
     var lvLocal=null;try{lvLocal=localStorage.getItem('userLevel');}catch(e){}
     ST.nivel=m.nivel||l.nivel||lvLocal||null;
     ST.prisma=m.prisma||l.prisma||null;
+    ST.onb=m.onb||l.onb||null;
   }
   function salvar(){
     LS.set(chave(),ST);
     clearTimeout(salvarT);
     salvarT=setTimeout(function(){
       if(!U)return;
-      window._sb.auth.updateUser({data:{mi:{dias:ST.dias.slice(-150),vistas:ST.vistas.slice(-400),ultima:ST.ultima,bv:ST.bv,tour:ST.tour,nivel:ST.nivel,prisma:ST.prisma}}}).catch(function(){});
+      window._sb.auth.updateUser({data:{mi:{dias:ST.dias.slice(-150),vistas:ST.vistas.slice(-400),ultima:ST.ultima,bv:ST.bv,tour:ST.tour,nivel:ST.nivel,prisma:ST.prisma,onb:ST.onb}}}).catch(function(){});
     },1500);
   }
   function marcarDia(){
@@ -435,7 +447,8 @@
     if(entrou||!user)return;entrou=true;
     carregarEstado(user);restaurarChecks();pintarPerfil();
     pintarRail();renderHome();
-    if(!ST.bv)mostrarBoasVindas(false);else perguntarContexto();
+    var seguir=function(){if(!ST.bv)mostrarBoasVindas(false);else perguntarContexto();};
+    if(!ST.onb)setTimeout(function(){conhecer(seguir);},60);else seguir();
   }
   var setUIOrig=window.setUserUI,pend=null;
   window.setUserUI=function(user){setUIOrig(user);pend=user;};
@@ -1028,7 +1041,7 @@
       +'</div></div>';
     tq.dataset.qual=qual;tq.classList.add('on');document.body.style.overflow='hidden';
   }
-  function fecharTeste(){tq.classList.remove('on');tq.innerHTML='';document.body.style.overflow='';}
+  function fecharTeste(){tq.classList.remove('on');tq.innerHTML='';document.body.style.overflow='';if(window._aposTeste){var f=window._aposTeste;window._aposTeste=null;setTimeout(f,250);}}
   document.addEventListener('click',function(e){
     var b=e.target.closest('[data-dg]');
     if(b){var a=b.dataset.dg;if(a==='fechar')fecharTeste();else abrirTeste(a);return;}
@@ -1179,6 +1192,231 @@
   });
 
   document.addEventListener('error',function(e){var im=e.target;if(!im||im.tagName!=='IMG'||!im.hasAttribute('data-capa-t')||!window.capaAuto)return;var d=document.createElement('div');d.innerHTML=capaAuto(im.getAttribute('data-capa-t'),+im.getAttribute('data-capa-i')||0);im.replaceWith(d.firstChild);},true);
-  window.MI_APP={tour:tour,aulaAberta:aulaAberta,marcarDia:marcarDia,abrirAula:abrirAula,renderHome:renderHome,
+
+  /* ───────────────────────── PRIMEIRO ACESSO: "ME DEIXA TE CONHECER" ─────────────────────────
+     Jornada curta de perguntas: por que nunca funcionou, mini teste de inteligências com resultado,
+     objetivo, nível que a pessoa sente que tem, dados extras, tempo por dia e maratona.
+     Tudo vai pro perfil do aluno (user_metadata.mi.onb) e aparece no admin em "📋 Perfil". */
+  var OB_TRAVAS=[
+    {k:'vergonha',ic:'😳',t:'Vergonha de falar',c:'Você nunca teve um lugar seguro pra errar falando.'},
+    {k:'tempo',ic:'⏰',t:'Falta de tempo',c:'Os métodos pediam 1 hora que você não tinha.'},
+    {k:'gramatica',ic:'📐',t:'Aulas chatas, só gramática',c:'Começaram pela regra, e não pelo uso.'},
+    {k:'esqueco',ic:'🫥',t:'Aprendo e esqueço',c:'Faltou revisar na hora certa.'},
+    {k:'ouvido',ic:'👂',t:'Não entendo quando falam',c:'Pouco contato com inglês de verdade, falado rápido.'},
+    {k:'para',ic:'🔁',t:'Começo e paro',c:'Faltou rotina e alguém acompanhando.'}
+  ];
+  var OB_QUIZ=[
+    {q:'Num fim de semana livre, você prefere…',o:[['🎵','Ouvir ou tocar música','musical'],['📚','Ler ou ouvir um podcast','linguistica'],['🧩','Um jogo de estratégia','logica'],['⚽','Esporte ou dança','corporal']]},
+    {q:'Pra lembrar de uma coisa importante, você…',o:[['🎶','Transforma em ritmo ou música','musical'],['✍️','Escreve','linguistica'],['🖼️','Imagina a cena','visual'],['🗣️','Conta pra alguém','interpessoal']]},
+    {q:'Num trabalho em grupo, você é quem…',o:[['🤝','Puxa a conversa','interpessoal'],['📊','Organiza as etapas','logica'],['🛠️','Põe a mão na massa','corporal'],['🎨','Cuida do visual','visual']]},
+    {q:'O que mais te recarrega?',o:[['🧘','Um tempo sozinho, pensando','intrapessoal'],['🌿','Natureza, bichos, ar livre','naturalista'],['👥','Encontrar gente','interpessoal'],['🎧','Uma playlist boa','musical']]},
+    {q:'Aprender algo novo funciona melhor…',o:[['🎬','Vendo imagens ou vídeo','visual'],['🏃','Fazendo na prática','corporal'],['📝','Lendo e anotando','linguistica'],['⏳','No meu ritmo, refletindo','intrapessoal']]},
+    {q:'Num lugar novo, o que te chama atenção?',o:[['🌳','Plantas, clima, paisagem','naturalista'],['⚙️','Como as coisas funcionam','logica'],['🗺️','Cores e formas','visual'],['💭','Como você se sente ali','intrapessoal']]}
+  ];
+  var OB_OBJ=[['💼','Trabalho'],['✈️','Viagem'],['🙏','Igreja e missões'],['🌎','Morar fora'],['🎓','Prova ou faculdade'],['💬','Conversar com gente de fora'],['🌱','Por mim mesmo(a)']];
+  var OB_NIV=[['🌱','Do zero','Não sei quase nada','A1'],['🙂','Entendo pouca coisa','Palavras e frases soltas','A1'],['🚶','Me viro no básico','Me apresento, peço comida','A2'],['🗣️','Converso com dificuldade','Travo, mas saio do lugar','B1'],['🚀','Converso bem','Quero lapidar e soltar mais','B2']];
+  var OB_MIN=[10,15,20,30,45,60];
+  var obEl=document.createElement('div');obEl.id='mi-onb';document.body.appendChild(obEl);
+  var obc=document.createElement('style');
+  obc.textContent=[
+    '#mi-onb{position:fixed;inset:0;z-index:9100;background:radial-gradient(ellipse at 15% 0%,#3b4fd8 0%,#1b1f4b 42%,#0b0d1c 100%);color:#fff;display:none;flex-direction:column;opacity:0;transition:opacity .35s}',
+    '#mi-onb.on{display:flex}#mi-onb.vis{opacity:1}',
+    '#mi-onb .ob-top{flex:none;display:flex;align-items:center;gap:12px;padding:calc(14px + env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) 10px max(20px,env(safe-area-inset-left))}',
+    '#mi-onb .ob-bar{flex:1;height:6px;border-radius:9px;background:rgba(255,255,255,.14);overflow:hidden}#mi-onb .ob-bar i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,#7dd3fc,#a78bfa);transition:width .5s cubic-bezier(.22,1,.36,1)}',
+    '#mi-onb .ob-voltar,#mi-onb .ob-pular{background:none;border:none;color:rgba(255,255,255,.65);font:inherit;font-size:14px;font-weight:700;cursor:pointer;padding:8px 4px;min-width:44px}',
+    '#mi-onb .ob-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px max(20px,env(safe-area-inset-right)) calc(28px + env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left))}',
+    '#mi-onb .ob-in{max-width:620px;margin:0 auto;animation:obIn .45s cubic-bezier(.22,1,.36,1) both}',
+    '@keyframes obIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}@keyframes obPop{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}',
+    '#mi-onb .k{font-size:11px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:#a5b4fc;margin:10px 0 8px}',
+    '#mi-onb h2{font-size:clamp(24px,5.4vw,34px);line-height:1.15;font-weight:800;letter-spacing:-.6px;margin:0 0 10px;text-wrap:balance}',
+    '#mi-onb .s{font-size:15px;line-height:1.55;color:rgba(255,255,255,.75);margin:0 0 20px}',
+    '#mi-onb .ops{display:grid;gap:10px}#mi-onb .ops.g2{grid-template-columns:1fr 1fr}',
+    '#mi-onb .op{display:flex;align-items:center;gap:12px;text-align:left;width:100%;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.14);color:#fff;border-radius:16px;padding:14px 16px;font:inherit;font-size:15px;font-weight:700;cursor:pointer;animation:obPop .4s cubic-bezier(.22,1,.36,1) both;transition:background .15s,border-color .15s,transform .1s}',
+    '#mi-onb .op:active{transform:scale(.98)}#mi-onb .op .e{font-size:24px;flex:none}#mi-onb .op small{display:block;font-size:12px;font-weight:500;color:rgba(255,255,255,.6);margin-top:2px}',
+    '#mi-onb .op.on{background:rgba(125,211,252,.18);border-color:#7dd3fc}#mi-onb .op.on::after{content:"✓";margin-left:auto;font-weight:900;color:#7dd3fc}',
+    '#mi-onb .cta{width:100%;border:none;border-radius:16px;padding:17px;font:inherit;font-size:16px;font-weight:800;background:#fff;color:#1b1f4b;cursor:pointer;margin-top:18px;box-shadow:0 14px 40px rgba(0,0,0,.35)}#mi-onb .cta:disabled{opacity:.35}',
+    '#mi-onb .cta2{width:100%;border:1.5px solid rgba(255,255,255,.25);border-radius:16px;padding:14px;font:inherit;font-size:15px;font-weight:700;background:none;color:#fff;cursor:pointer;margin-top:10px}',
+    '#mi-onb .card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:16px;margin-bottom:12px;animation:obPop .45s both}',
+    '#mi-onb .causa{display:flex;gap:10px;font-size:14px;line-height:1.45;padding:8px 0;border-top:1px solid rgba(255,255,255,.08)}#mi-onb .causa:first-child{border:none}#mi-onb .causa b{display:block}',
+    '#mi-onb .bars{display:grid;gap:7px}#mi-onb .br{display:grid;grid-template-columns:118px 1fr;gap:10px;align-items:center;font-size:12px;font-weight:700}',
+    '#mi-onb .br .t{height:12px;border-radius:9px;background:rgba(255,255,255,.08);overflow:hidden}#mi-onb .br .t i{display:block;height:100%;border-radius:9px;width:0;transition:width 1s cubic-bezier(.22,1,.36,1)}',
+    '#mi-onb .leg{font-size:12px;color:rgba(255,255,255,.55);margin-top:10px;line-height:1.5}',
+    '#mi-onb svg{width:100%;height:auto;display:block}',
+    '#mi-onb .big{display:flex;align-items:center;gap:14px}#mi-onb .big .ic{font-size:46px;width:72px;height:72px;border-radius:20px;background:rgba(255,255,255,.1);display:grid;place-items:center;flex:none}',
+    '#mi-onb .chips{display:flex;flex-wrap:wrap;gap:8px}#mi-onb .chip{background:rgba(255,255,255,.1);border-radius:99px;padding:7px 12px;font-size:13px;font-weight:700}',
+    '#mi-onb input{width:100%;box-sizing:border-box;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.18);color:#fff;border-radius:14px;padding:14px;font:inherit;font-size:16px;margin-bottom:12px}#mi-onb input::placeholder{color:rgba(255,255,255,.4)}',
+    '#mi-onb label.lb{display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:rgba(255,255,255,.8)}',
+    '#mi-onb .num{font-size:clamp(34px,8vw,46px);font-weight:800;letter-spacing:-1px;line-height:1}#mi-onb .proj{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center}#mi-onb .proj small{display:block;font-size:12px;color:rgba(255,255,255,.6);margin-top:6px}',
+    '#mi-onb .spin{width:56px;height:56px;border-radius:50%;border:5px solid rgba(255,255,255,.15);border-top-color:#7dd3fc;animation:obSp 1s linear infinite;margin:40px auto 20px}@keyframes obSp{to{transform:rotate(360deg)}}',
+    '#mi-onb .resumo{display:grid;grid-template-columns:1fr 1fr;gap:10px}#mi-onb .resumo .card{margin:0}#mi-onb .resumo .card small{display:block;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#a5b4fc;margin-bottom:6px}#mi-onb .resumo .card b{font-size:15px}',
+    '@media(max-width:520px){#mi-onb .ops.g2{grid-template-columns:1fr}#mi-onb .br{grid-template-columns:96px 1fr}#mi-onb .resumo{grid-template-columns:1fr}}'
+  ].join('');
+  document.head.appendChild(obc);
+
+  var OB=null,obFim=null;
+  var OB_PASSOS=['intro','tempo','travas','porque','curva','qintro','q0','q1','q2','q3','q4','q5','analisa','resultado','objetivo','nivel','dados','minutos','maratona','fim'];
+  function conhecer(cb){
+    obFim=cb||function(){};
+    OB={i:0,r:{travas:[],obj:[],quiz:[]},testes:{}};
+    obEl.classList.add('on');requestAnimationFrame(function(){obEl.classList.add('vis');});
+    document.body.style.overflow='hidden';
+    obPintar();
+  }
+  function obResultado(){
+    var pts={},vezes={};
+    OB_QUIZ.forEach(function(q,i){q.o.forEach(function(o){vezes[o[2]]=(vezes[o[2]]||0)+1;});var a=OB.r.quiz[i];if(a!=null){var k=q.o[a][2];pts[k]=(pts[k]||0)+1;}});
+    var lista=Object.keys(INTEL).map(function(k){return {k:k,v:vezes[k]?(pts[k]||0)/vezes[k]:0};}).sort(function(a,b){return b.v-a.v;});
+    var max=lista[0].v||1;lista.forEach(function(x){x.p=Math.round(x.v/max*100);});
+    return lista;
+  }
+  function obHoras(m){return {mes:Math.round(m*30/60),ano:Math.round(m*365/60)};}
+  function obBtn(lb,attr,dis){return '<button class="cta" '+attr+(dis?' disabled':'')+'>'+lb+'</button>';}
+  function obPintar(){
+    var passo=OB_PASSOS[OB.i],r=OB.r,h='',nome=nomeCurto();
+    var pct=Math.round(OB.i/(OB_PASSOS.length-1)*100);
+    if(passo==='intro'){
+      h='<div class="k">Primeiro acesso</div><h2>'+(nome?E(nome)+', antes':'Antes')+' de começar, me deixa te conhecer</h2>'
+        +'<p class="s">São perguntas curtinhas, uns 2 minutos. No fim eu te mostro <b>como o seu cérebro gosta de aprender</b> e deixo o app do seu jeito.</p>'
+        +'<div class="card" style="font-size:14px;line-height:1.6">🧠 Mini teste de inteligências com resultado<br>📈 Por que o inglês nunca engrenou (e não é culpa sua)<br>⏱️ Sua meta por dia e o que ela vira no ano</div>'
+        +obBtn('Bora →','data-ob="prox"');
+    }else if(passo==='tempo'){
+      h='<div class="k">1 de 4 · Sua história</div><h2>Há quanto tempo você tenta aprender inglês?</h2><div class="ops">'
+        +[['🐣','Nunca tentei de verdade'],['🌱','Menos de 1 ano'],['📆','De 1 a 3 anos'],['⌛','De 3 a 5 anos'],['🏔️','Mais de 5 anos']].map(function(o,i){return '<button class="op'+(r.tempo===o[1]?' on':'')+'" data-ob-one="tempo" data-v="'+E(o[1])+'" style="animation-delay:'+(i*0.05)+'s"><span class="e">'+o[0]+'</span>'+E(o[1])+'</button>';}).join('')+'</div>';
+    }else if(passo==='travas'){
+      h='<div class="k">1 de 4 · Sua história</div><h2>O que mais te travou até hoje?</h2><p class="s">Pode marcar mais de uma.</p><div class="ops g2">'
+        +OB_TRAVAS.map(function(o,i){return '<button class="op'+(r.travas.indexOf(o.k)>=0?' on':'')+'" data-ob-multi="travas" data-v="'+o.k+'" style="animation-delay:'+(i*0.05)+'s"><span class="e">'+o.ic+'</span>'+E(o.t)+'</button>';}).join('')+'</div>'
+        +obBtn('Continuar →','data-ob="prox"',!r.travas.length);
+    }else if(passo==='porque'){
+      var esc=OB_TRAVAS.filter(function(o){return r.travas.indexOf(o.k)>=0;});
+      h='<div class="k">O que ninguém te contou</div><h2>Não é falta de capacidade. É método.</h2>'
+        +'<div class="card">'+esc.map(function(o){return '<div class="causa"><span style="font-size:20px">'+o.ic+'</span><div><b>'+E(o.t)+'</b>'+E(o.c)+'</div></div>';}).join('')+'</div>'
+        +'<div class="card"><div style="font-weight:800;margin-bottom:12px">Existem pelo menos 8 jeitos de ser inteligente</div><div class="bars">'
+        +Object.keys(INTEL).map(function(k){var esc2=(k==='linguistica'||k==='logica');return '<div class="br"><span>'+INTEL[k].ic+' '+E(INTEL[k].nome.split('-')[0])+'</span><span class="t"><i data-w="'+(esc2?100:22)+'" style="background:'+(esc2?'linear-gradient(90deg,#7dd3fc,#a78bfa)':'rgba(255,255,255,.25)')+'"></i></span></div>';}).join('')
+        +'</div><div class="leg">Howard Gardner, de Harvard, descreveu as inteligências múltiplas. A escola e a maioria dos cursos treinam quase só 2 delas (as destacadas). Se o seu forte é outra, o método não conversa com você.</div></div>'
+        +obBtn('Faz sentido →','data-ob="prox"');
+    }else if(passo==='curva'){
+      h='<div class="k">Por que a gente esquece</div><h2>Sem revisão, o cérebro apaga rápido</h2>'
+        +'<div class="card"><svg viewBox="0 0 320 170" aria-label="Curva do esquecimento"><g stroke="rgba(255,255,255,.12)"><line x1="34" y1="20" x2="34" y2="140"/><line x1="34" y1="140" x2="310" y2="140"/></g>'
+        +'<path d="M34 24 C 70 95, 120 125, 310 132" fill="none" stroke="#f87171" stroke-width="3" stroke-dasharray="400" stroke-dashoffset="400"><animate attributeName="stroke-dashoffset" to="0" dur="1.2s" fill="freeze"/></path>'
+        +'<path d="M34 24 C 50 50,62 56,80 58 L80 30 C 100 46,118 50,140 50 L140 30 C 170 40,200 42,230 42 L230 30 C 260 36,285 37,310 37" fill="none" stroke="#7dd3fc" stroke-width="3" stroke-dasharray="600" stroke-dashoffset="600"><animate attributeName="stroke-dashoffset" to="0" dur="1.6s" begin=".5s" fill="freeze"/></path>'
+        +'<text x="8" y="28" fill="rgba(255,255,255,.6)" font-size="10">lembra</text><text x="250" y="156" fill="rgba(255,255,255,.6)" font-size="10">dias →</text>'
+        +'<text x="190" y="124" fill="#f87171" font-size="11" font-weight="700">sem revisar</text><text x="186" y="28" fill="#7dd3fc" font-size="11" font-weight="700">revisando um pouco</text></svg>'
+        +'<div class="leg">É a curva do esquecimento, estudada por Ebbinghaus: cada revisão curta "segura" o que você aprendeu. (Desenho ilustrativo.) Por isso o app tem um checklist rápido todo dia, em vez de uma aula enorme por semana.</div></div>'
+        +obBtn('Entendi →','data-ob="prox"');
+    }else if(passo==='qintro'){
+      h='<div class="k">2 de 4 · Mini teste</div><h2>Agora vamos descobrir o seu jeito de aprender</h2><p class="s">6 perguntas rápidas. Não tem certo nem errado: escolha o que é <b>mais você</b>.</p>'
+        +'<div class="card" style="text-align:center;font-size:44px;letter-spacing:6px">🎵📝🧮🏃🎨🤝🧘🌿</div>'+obBtn('Começar o mini teste →','data-ob="prox"');
+    }else if(/^q\d$/.test(passo)){
+      var qi=+passo.slice(1),q=OB_QUIZ[qi];
+      h='<div class="k">Mini teste · '+(qi+1)+' de '+OB_QUIZ.length+'</div><h2>'+E(q.q)+'</h2><div class="ops g2">'
+        +q.o.map(function(o,i){return '<button class="op'+(r.quiz[qi]===i?' on':'')+'" data-ob-q="'+qi+'" data-v="'+i+'" style="animation-delay:'+(i*0.06)+'s"><span class="e">'+o[0]+'</span>'+E(o[1])+'</button>';}).join('')+'</div>';
+    }else if(passo==='analisa'){
+      h='<div style="text-align:center"><div class="spin"></div><h2>Cruzando suas respostas…</h2><p class="s">Montando o seu perfil de aprendizagem.</p></div>';
+      setTimeout(function(){if(OB&&OB_PASSOS[OB.i]==='analisa'){OB.i++;obPintar();}},1700);
+    }else if(passo==='resultado'){
+      var res=obResultado(),top=INTEL[res[0].k];r.intel=res[0].k;r.ranking=res.slice(0,3).map(function(x){return x.k;});
+      h='<div class="k">Seu resultado</div><div class="card big"><span class="ic">'+top.ic+'</span><div><div style="font-size:12px;color:#a5b4fc;font-weight:800;letter-spacing:1px;text-transform:uppercase">Seu forte</div><h2 style="margin:4px 0">'+E(top.nome)+'</h2><div style="font-size:14px;color:rgba(255,255,255,.75)">'+E(top.desc)+'</div></div></div>'
+        +'<div class="card"><div class="bars">'+res.slice(0,5).map(function(x){return '<div class="br"><span>'+INTEL[x.k].ic+' '+E(INTEL[x.k].nome.split('-')[0])+'</span><span class="t"><i data-w="'+Math.max(x.p,6)+'" style="background:linear-gradient(90deg,#7dd3fc,#a78bfa)"></i></span></div>';}).join('')+'</div></div>'
+        +'<div class="card"><div style="font-weight:800;margin-bottom:8px">Como estudar inglês do seu jeito</div>'+top.est.slice(0,3).map(function(t){return '<div class="causa"><span>✅</span><div>'+E(t)+'</div></div>';}).join('')+'</div>'
+        +'<p class="leg" style="margin:0 0 4px">Isso é uma prévia de 6 perguntas. O Prisma de Talentos completo é bem mais preciso: no fim eu te chamo pra fazer.</p>'
+        +obBtn('Continuar →','data-ob="prox"');
+    }else if(passo==='objetivo'){
+      h='<div class="k">3 de 4 · Seu objetivo</div><h2>Pra que você quer o inglês?</h2><p class="s">Pode marcar mais de uma.</p><div class="ops g2">'
+        +OB_OBJ.map(function(o,i){return '<button class="op'+(r.obj.indexOf(o[1])>=0?' on':'')+'" data-ob-multi="obj" data-v="'+E(o[1])+'" style="animation-delay:'+(i*0.05)+'s"><span class="e">'+o[0]+'</span>'+E(o[1])+'</button>';}).join('')+'</div>'
+        +obBtn('Continuar →','data-ob="prox"',!r.obj.length);
+    }else if(passo==='nivel'){
+      h='<div class="k">3 de 4 · Seu momento</div><h2>Hoje, como você se sente no inglês?</h2><div class="ops">'
+        +OB_NIV.map(function(o,i){return '<button class="op'+(r.nivel===o[1]?' on':'')+'" data-ob-one="nivel" data-v="'+E(o[1])+'" style="animation-delay:'+(i*0.05)+'s"><span class="e">'+o[0]+'</span><span>'+E(o[1])+'<small>'+E(o[2])+'</small></span></button>';}).join('')+'</div>';
+    }else if(passo==='dados'){
+      var meta=(U&&U.user_metadata)||{};
+      h='<div class="k">3 de 4 · Pra eu te acompanhar</div><h2>Me conta um pouco de você</h2><p class="s">Só eu vejo isso. Serve pra eu montar aulas e exemplos que têm a ver com a sua vida.</p>'
+        +'<label class="lb">Seu WhatsApp</label><input id="ob-whats" inputmode="tel" maxlength="25" placeholder="(11) 99999-9999" value="'+E(r.whats||LS.get('mi_whats_'+(U&&U.id||'x'),meta.whatsapp||''))+'">'
+        +'<label class="lb">Profissão ou área</label><input id="ob-prof" maxlength="80" placeholder="Ex.: enfermeira, vendas, estudante" value="'+E(r.prof||'')+'">'
+        +'<label class="lb">Cidade</label><input id="ob-cid" maxlength="60" placeholder="Ex.: Campinas/SP" value="'+E(r.cidade||'')+'">'
+        +'<label class="lb">Data de nascimento <span style="font-weight:500;color:rgba(255,255,255,.5)">(opcional)</span></label><input id="ob-nasc" type="date" value="'+E(r.nasc||'')+'">'
+        +obBtn('Continuar →','data-ob="dados"');
+    }else if(passo==='minutos'){
+      var m=r.minutos||null,hh=m?obHoras(m):null;
+      h='<div class="k">4 de 4 · Sua rotina</div><h2>Quanto tempo por dia você quer praticar?</h2><p class="s">Seja honesto(a): o que cabe de verdade no seu dia. Pouco todo dia vence muito de vez em quando.</p><div class="ops g2" style="grid-template-columns:repeat(3,1fr)">'
+        +OB_MIN.map(function(x,i){return '<button class="op'+(m===x?' on':'')+'" data-ob-min="'+x+'" style="justify-content:center;animation-delay:'+(i*0.04)+'s">'+x+' min</button>';}).join('')+'</div>'
+        +(hh?'<div class="card" style="margin-top:16px"><div style="font-weight:800;margin-bottom:14px">Com '+m+' min por dia, você soma:</div><div class="proj"><div><div class="num" data-cnt="'+hh.mes+'">0</div><small>horas por mês</small></div><div><div class="num" data-cnt="'+hh.ano+'">0</div><small>horas no ano</small></div><div><div class="num" data-cnt="'+Math.round(hh.ano/1.5)+'">0</div><small>aulas de 1h30 no ano</small></div></div></div>':'')
+        +obBtn('Continuar →','data-ob="prox"',!m);
+    }else if(passo==='maratona'){
+      h='<div class="k">4 de 4 · Quase lá</div><h2>Você está entrando por alguma maratona ou desafio?</h2><div class="ops">'
+        +[['🏁','Sim, uma maratona do Gediel'],['🎯','Sim, outro desafio'],['🙅','Não, vim pelo programa']].map(function(o,i){return '<button class="op'+(r.maratona===o[1]?' on':'')+'" data-ob-mar="'+E(o[1])+'" style="animation-delay:'+(i*0.05)+'s"><span class="e">'+o[0]+'</span>'+E(o[1])+'</button>';}).join('')+'</div>'
+        +(r.maratona&&/^Sim/.test(r.maratona)?'<div style="margin-top:14px"><label class="lb">Qual?</label><input id="ob-marq" maxlength="80" placeholder="Ex.: Maratona 7 dias de conversação" value="'+E(r.maratonaQual||'')+'"></div>':'')
+        +obBtn('Continuar →','data-ob="mar"',!r.maratona);
+    }else if(passo==='fim'){
+      var top2=INTEL[r.intel]||{ic:'🧠',nome:'—'};
+      h='<div class="k">Pronto'+(nome?', '+E(nome):'')+'!</div><h2>Seu plano está montado 🎉</h2>'
+        +'<div class="resumo"><div class="card"><small>Seu forte</small><b>'+top2.ic+' '+E(top2.nome)+'</b></div><div class="card"><small>Meta por dia</small><b>⏱️ '+(r.minutos||'—')+' min</b></div>'
+        +'<div class="card"><small>Objetivo</small><b>'+E(r.obj.join(', ')||'—')+'</b></div><div class="card"><small>Como se sente</small><b>'+E(r.nivel||'—')+'</b></div></div>'
+        +'<div class="card" style="margin-top:12px"><div style="font-weight:800;margin-bottom:4px">Quer fazer os testes completos agora?</div><div class="leg" style="margin:0 0 12px">Leva uns 10 minutos cada. Dá pra fazer depois pelo menu Perfil.</div><div class="ops">'
+        +'<button class="op'+(OB.testes.prisma?' on':'')+'" data-ob-teste="prisma"><span class="e">🔷</span><span>Prisma de Talentos completo<small>Confirma seu jeito de aprender</small></span></button>'
+        +'<button class="op'+(OB.testes.bussola?' on':'')+'" data-ob-teste="bussola"><span class="e">🧭</span><span>Bússola: teste de nível<small>Mostra seu nível real, do A1 ao C2</small></span></button></div></div>'
+        +obBtn((OB.testes.prisma||OB.testes.bussola)?'Começar pelos testes →':'Entrar no app →','data-ob="fim"');
+    }
+    obEl.innerHTML='<div class="ob-top">'+(OB.i>0&&passo!=='analisa'?'<button class="ob-voltar" data-ob="voltar" aria-label="Voltar">←</button>':'<span style="min-width:44px"></span>')
+      +'<div class="ob-bar"><i style="width:'+pct+'%"></i></div>'+(passo==='intro'?'<button class="ob-pular" data-ob="pular">Pular</button>':'<span style="min-width:44px"></span>')+'</div>'
+      +'<div class="ob-body"><div class="ob-in">'+h+'</div></div>';
+    obEl.querySelector('.ob-body').scrollTop=0;
+    setTimeout(function(){
+      [].forEach.call(obEl.querySelectorAll('[data-w]'),function(i,n){setTimeout(function(){i.style.width=i.dataset.w+'%';},n*70);});
+      [].forEach.call(obEl.querySelectorAll('[data-cnt]'),function(el){var alvo=+el.dataset.cnt,t0=performance.now();(function an(t){var p=Math.min(1,(t-t0)/900);el.textContent=Math.round(alvo*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(an);})(t0);});
+    },80);
+  }
+  function obAvancar(ms){setTimeout(function(){if(!OB)return;OB.i=Math.min(OB.i+1,OB_PASSOS.length-1);obPintar();},ms||0);}
+  function obConcluir(pulou){
+    var r=OB?OB.r:{},testes=OB?OB.testes:{};
+    ST.onb=pulou?{pulou:true,em:new Date().toISOString()}:{em:new Date().toISOString(),tempo:r.tempo,travas:r.travas,intel:r.intel,ranking:r.ranking,obj:r.obj,nivel:r.nivel,prof:r.prof,cidade:r.cidade,nasc:r.nasc,whats:r.whats,minutos:r.minutos,maratona:r.maratona,maratonaQual:r.maratonaQual};
+    if(r.whats)LS.set('mi_whats_'+(U&&U.id||'x'),r.whats);
+    salvar();
+    if(window._sb&&!pulou)window._sb.auth.updateUser({data:{whatsapp:r.whats||undefined}}).catch(function(){});
+    obEl.classList.remove('vis');
+    setTimeout(function(){
+      obEl.classList.remove('on');obEl.innerHTML='';document.body.style.overflow='';OB=null;
+      var fila=['prisma','bussola'].filter(function(k){return testes[k];}),fim=obFim;
+      (function prox(){if(fila.length){window._aposTeste=prox;abrirTeste(fila.shift());}else fim();})();
+    },330);
+  }
+  obEl.addEventListener('click',function(e){
+    if(!OB)return;var r=OB.r,b=e.target.closest('button');if(!b)return;
+    var a=b.dataset.ob;
+    if(a==='prox')return obAvancar();
+    if(a==='voltar'){OB.i=Math.max(0,OB.i-1);if(OB_PASSOS[OB.i]==='analisa')OB.i--;return obPintar();}
+    if(a==='pular')return obConcluir(true);
+    if(a==='dados'){
+      var w=$('ob-whats').value.trim();
+      if(w&&w.replace(/\D/g,'').length<10){toast('Coloca o WhatsApp com DDD 🙏','#ef4444');return;}
+      r.whats=w;r.prof=$('ob-prof').value.trim();r.cidade=$('ob-cid').value.trim();r.nasc=$('ob-nasc').value;return obAvancar();
+    }
+    if(a==='mar'){var q=$('ob-marq');if(q)r.maratonaQual=q.value.trim();return obAvancar();}
+    if(a==='fim')return obConcluir(false);
+    if(b.dataset.obOne){r[b.dataset.obOne]=b.dataset.v;obPintar();return obAvancar(260);}
+    if(b.dataset.obMulti){var arr=r[b.dataset.obMulti],v=b.dataset.v,ix=arr.indexOf(v);if(ix>=0)arr.splice(ix,1);else arr.push(v);return obPintar();}
+    if(b.dataset.obQ!=null){r.quiz[+b.dataset.obQ]=+b.dataset.v;obPintar();return obAvancar(240);}
+    if(b.dataset.obMin){r.minutos=+b.dataset.obMin;return obPintar();}
+    if(b.dataset.obMar){var q2=$('ob-marq');if(q2)r.maratonaQual=q2.value.trim();r.maratona=b.dataset.obMar;return obPintar();}
+    if(b.dataset.obTeste){OB.testes[b.dataset.obTeste]=!OB.testes[b.dataset.obTeste];return obPintar();}
+  });
+
+  /* admin: ver o que o aluno respondeu no primeiro acesso */
+  window.admPerfil=function(id){
+    var u=(window._admUsers||{})[id];if(!u)return;
+    var o=((u.user_metadata||{}).mi||{}).onb,meta=u.user_metadata||{},nm=meta.full_name||meta.name||u.email;
+    var linha=function(k,v){return v&&(v.length!==0)?'<div style="display:grid;grid-template-columns:150px 1fr;gap:10px;padding:8px 0;border-top:1px solid var(--border);font-size:13px"><b>'+k+'</b><span>'+E(Array.isArray(v)?v.join(', '):v)+'</span></div>':'';};
+    var corpo=!o?'<p style="color:var(--fg2)">Ainda não respondeu o primeiro acesso.</p>':o.pulou?'<p style="color:var(--fg2)">Pulou as perguntas do primeiro acesso.</p>'
+      :linha('Respondeu em',new Date(o.em).toLocaleString('pt-BR'))+linha('Tenta inglês há',o.tempo)+linha('O que travou',(o.travas||[]).map(function(k){return (OB_TRAVAS.filter(function(x){return x.k===k;})[0]||{t:k}).t;}))
+       +linha('Inteligência (prévia)',o.intel&&INTEL[o.intel]?INTEL[o.intel].ic+' '+INTEL[o.intel].nome:'')+linha('Top 3',(o.ranking||[]).map(function(k){return INTEL[k]?INTEL[k].nome:k;}))
+       +linha('Objetivo',o.obj)+linha('Como se sente',o.nivel)+linha('WhatsApp',o.whats)+linha('Profissão',o.prof)+linha('Cidade',o.cidade)+linha('Nascimento',o.nasc?o.nasc.split('-').reverse().join('/'):'')
+       +linha('Meta por dia',o.minutos?o.minutos+' min':'')+linha('Maratona',o.maratona?(o.maratona+(o.maratonaQual?' · '+o.maratonaQual:'')):'')
+       +linha('Prisma completo',(((u.user_metadata||{}).mi||{}).prisma&&INTEL[u.user_metadata.mi.prisma])?INTEL[u.user_metadata.mi.prisma].nome:'')+linha('Nível (Bússola)',((u.user_metadata||{}).mi||{}).nivel||'');
+    var ov=document.createElement('div');ov.className='mi-pf-ov';ov.style.cssText='position:fixed;inset:0;z-index:9600;background:rgba(6,9,22,.6);display:flex;align-items:center;justify-content:center;padding:16px';
+    ov.innerHTML='<div style="background:var(--surface);color:var(--fg);border-radius:20px;padding:20px;width:560px;max-width:100%;max-height:calc(100dvh - 40px);overflow:auto;box-shadow:0 24px 60px rgba(0,0,0,.4)"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px"><div><div style="font-size:11px;font-weight:800;letter-spacing:1px;color:var(--accent);text-transform:uppercase">Perfil do aluno</div><div style="font-size:18px;font-weight:800">'+E(nm)+'</div></div><button class="admin-btn admin-btn-ghost admin-btn-sm" data-x>Fechar</button></div>'
+      +corpo+(o&&o.whats?'<a class="admin-btn admin-btn-sm" style="margin-top:14px;display:inline-block;text-decoration:none" target="_blank" rel="noopener" href="https://wa.me/'+(String(o.whats).replace(/\D/g,'').length<=11?'55':'')+String(o.whats).replace(/\D/g,'')+'">💬 Chamar no WhatsApp</a>':'')+'</div>';
+    ov.addEventListener('click',function(e){if(e.target===ov||e.target.closest('[data-x]'))ov.remove();});
+    document.body.appendChild(ov);
+  };
+  window.MI_APP={conhecer:conhecer,tour:tour,aulaAberta:aulaAberta,marcarDia:marcarDia,abrirAula:abrirAula,renderHome:renderHome,
     compartilharQuiz:function(sc,tot){var t=(window._stCurLes&&_stCurLes.title)||'aula';wa('Acertei '+sc+'/'+tot+' no quiz da aula "'+t+'" do Método Inteligente 🔥 Bora treinar comigo? Faz o teste de nível grátis: '+linkIndicacao(),false);}};
 })();

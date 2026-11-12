@@ -1721,7 +1721,7 @@ async function loadUsers(){
         +'<td>'+((porEmail[(u.email||'').toLowerCase()]||[]).map(function(c){return '<span class="adm-acc">'+esc(c.produto||'produto')+'<button title="Tirar esse acesso" onclick="admTirarAcesso(\''+esc(c.pedido)+'\')">✕</button></span>';}).join('')||'<span style="font-size:11px;color:var(--fg3)">Nenhum</span>')+'</td>'
         +'<td><span class="admin-status '+(confirmed?'admin-status-ok':'admin-status-pend')+'">'+(confirmed?'Confirmado':'Pendente')+'</span></td>'
         +'<td style="font-size:11px;color:var(--fg2)">'+dateStr+'</td>'
-        +'<td style="white-space:nowrap"><button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="admReenviar(\''+u.id+'\')">📧 Enviar acesso</button> <button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="openResetModal(\''+u.id+'\',\''+esc(u.email)+'\')">🔑 Senha</button> <button class="admin-btn admin-btn-danger admin-btn-sm" onclick="admApagarAluno(\''+u.id+'\')">🗑️ Apagar</button></td>'
+        +'<td style="white-space:nowrap"><button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="admPerfil(\''+u.id+'\')">📋 Perfil'+((meta.mi&&meta.mi.onb&&!meta.mi.onb.pulou)?' ✓':'')+'</button> <button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="admReenviar(\''+u.id+'\')">📧 Enviar acesso</button> <button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="openResetModal(\''+u.id+'\',\''+esc(u.email)+'\')">🔑 Senha</button> <button class="admin-btn admin-btn-danger admin-btn-sm" onclick="admApagarAluno(\''+u.id+'\')">🗑️ Apagar</button></td>'
         +'</tr>';
     });
     html+='</tbody></table></div>';
