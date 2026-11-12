@@ -56,7 +56,8 @@ exports.handler = async (event) => {
   const KEY = process.env.MEMBROS_SERVICE_KEY;
   if (!KEY) return resp(500, { erro: 'Falta a variável MEMBROS_SERVICE_KEY no Netlify.' });
   const token = ((event.headers || {}).authorization || '').replace(/^Bearer\s+/i, '');
-  if (token) {                                   // pedido manual: só o admin
+  if (!token) return resp(401, { erro: 'Entre na área de membros primeiro.' });
+  {                                              // só o admin
     const u = await fetch(`${URL_MEMBROS}/auth/v1/user`, { headers: { apikey: KEY, Authorization: `Bearer ${token}` } });
     if (!u.ok) return resp(401, { erro: 'Sessão expirada. Entre de novo.' });
     const email = String((await u.json()).email || '').toLowerCase();
