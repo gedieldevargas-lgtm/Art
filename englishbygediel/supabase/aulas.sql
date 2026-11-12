@@ -145,6 +145,75 @@ create policy "admin responde duvida" on public.mi_questions for update to authe
 drop policy if exists "admin apaga duvida" on public.mi_questions;
 create policy "admin apaga duvida" on public.mi_questions for delete to authenticated using (public.is_admin());
 
+-- 9. Mini cursos avulsos: módulo fora do Programa, liberado por produto -------
+alter table public.mi_modules add column if not exists trilha   text not null default 'programa';
+alter table public.mi_modules add column if not exists produto  text;   -- trecho do nome do produto na Kiwify que libera
+alter table public.mi_modules add column if not exists checkout text;   -- link de compra pra quem não tem
+
+-- 10. Universos (English On Mission, Culture, Viagens): cards editáveis no admin
+-- acao: link | whatsapp | area (abre uma área do app: jogos, materiais, devocionais...) | curso (abre um mini curso = módulo)
+create table if not exists public.mi_uni_cards (
+  id         uuid primary key default gen_random_uuid(),
+  universo   text not null check (universo in ('eom','culture','viagens')),
+  ord        int  not null default 0,
+  secao      text check (secao is null or char_length(secao) <= 60),
+  titulo     text not null check (char_length(titulo) <= 120),
+  descricao  text check (descricao is null or char_length(descricao) <= 400),
+  tag        text check (tag is null or char_length(tag) <= 40),
+  capa_url   text check (capa_url is null or char_length(capa_url) <= 500),
+  emoji      text check (emoji is null or char_length(emoji) <= 8),
+  acao       text not null default 'link' check (acao in ('link','whatsapp','area','curso')),
+  valor      text check (valor is null or char_length(valor) <= 1000),
+  destaque   boolean not null default false,  -- vira o banner grande do topo
+  em_breve   boolean not null default false,
+  ativo      boolean not null default true,
+  created_at timestamptz not null default now()
+);
+create index if not exists mi_uni_cards_idx on public.mi_uni_cards (universo, ord);
+alter table public.mi_uni_cards enable row level security;
+drop policy if exists "alunos leem universos" on public.mi_uni_cards;
+create policy "alunos leem universos" on public.mi_uni_cards for select to authenticated using (true);
+drop policy if exists "admin edita universos" on public.mi_uni_cards;
+create policy "admin edita universos" on public.mi_uni_cards for all to authenticated using (public.is_admin()) with check (public.is_admin());
+
+-- cards iniciais (só entram se a tabela estiver vazia; depois disso tudo é pelo admin)
+insert into public.mi_uni_cards (universo,ord,secao,titulo,descricao,tag,capa_url,emoji,acao,valor,destaque,em_breve)
+select * from (values
+ ('eom',1,null,$t$Devocional ao vivo todo sábado, 9h$t$,$t$Um versículo e um ponto do inglês de cada vez, com gente do Brasil inteiro na tela.$t$,null,null,'🙏','link','https://youtube.com/live/QmDQciTioJI?feature=share',true,false),
+ ('eom',2,'Assistir',$t$Devocionais$t$,$t$Todos os devocionais gravados, pra ver e rever.$t$,'Assinatura','img/card-devocionais.webp',null,'area','devocionais',false,false),
+ ('eom',3,'Assistir',$t$Inglês bíblico na prática$t$,$t$A playlist do YouTube com o inglês da Bíblia aplicado no dia a dia.$t$,'YouTube','img/card-eom-lives.webp',null,'link','',false,false),
+ ('eom',4,'Assistir',$t$Aulas · Inglês com a Bíblia$t$,$t$Inglês estudando as cartas da Bíblia, do verb to be às cartas de João.$t$,'Em breve','img/card-aulas.webp',null,'curso','',false,true),
+ ('eom',5,'Bíblias, livros e materiais',$t$Bíblia bilíngue NVI/NIV$t$,$t$Leia em português e inglês e compare as duas traduções.$t$,'Indicação','img/achados/2.webp',null,'link','https://meli.la/28NzfyU',false,false),
+ ('eom',6,'Bíblias, livros e materiais',$t$The Five Minute Journal$t$,$t$Diário guiado pra praticar a escrita em inglês em poucos minutos.$t$,'Indicação','img/achados/1.webp',null,'link','https://link.amazon/B0cYbg3Hr',false,false),
+ ('eom',7,'Bíblias, livros e materiais',$t$Meus materiais$t$,$t$Os PDFs e e-books que você já tem liberados.$t$,'No app',null,'📦','area','materiais',false,false),
+ ('eom',8,'Comunidade',$t$Grupo do WhatsApp$t$,$t$O grupo gratuito do English On Mission, pra praticar e caminhar junto.$t$,'Grátis','img/logo-eom.webp',null,'whatsapp',$t$Oi Gediel! Quero entrar no grupo gratuito do English On Mission.$t$,false,false),
+ ('eom',9,'Comunidade',$t$Jogos$t$,$t$Treine vocabulário e frases jogando.$t$,'No app',null,'🎮','area','jogos',false,false),
+ ('eom',10,'Comunidade',$t$Assinar o English On Mission$t$,$t$Devocionais ao vivo, aulas com a Bíblia, e-book e Bíblia linear de 1, 2 e 3 João.$t$,'R$ 25/mês',null,'✨','link','https://pay.kiwify.com.br/oIjfTK8',false,false),
+
+ ('culture',1,null,$t$Lives do Culture English$t$,$t$Inglês real a partir de séries, filmes e música, ao vivo com o Gediel.$t$,null,null,'🎬','whatsapp',$t$Oi Gediel! Quero receber o link das lives do Culture English.$t$,true,false),
+ ('culture',2,'Mini cursos',$t$Inglês com Séries$t$,$t$Aprender com o que você já gosta de assistir, entendendo como as pessoas falam de verdade.$t$,'Mini curso','img/card-series.webp',null,'curso','',false,true),
+ ('culture',3,'Mini cursos',$t$Inglês com Filmes$t$,$t$Cenas de filme como aula: expressões, sotaques e o inglês que não está no livro.$t$,'Mini curso','img/card-filmes.webp',null,'curso','',false,true),
+ ('culture',4,'Mini cursos',$t$Inglês com Música$t$,$t$Letra, pronúncia e ritmo: o ouvido treina enquanto você canta.$t$,'Mini curso','img/card-musica.webp',null,'curso','',false,true),
+ ('culture',5,'E-books e templates',$t$Guia A1 até B2$t$,$t$Um mapa claro do A1 ao B2, com planos semanais de 30 a 60 minutos.$t$,'R$ 27','img/capa-guia.webp',null,'link','https://guia-a1-b2.netlify.app/',false,false),
+ ('culture',6,'E-books e templates',$t$Kit Frases$t$,$t$As frases das situações essenciais do dia a dia, prontas pra usar.$t$,'Em breve','img/capa-frases.webp',null,'link','',false,true),
+ ('culture',7,'E-books e templates',$t$Central de Prompts$t$,$t$50 prompts grátis pra conversar, simular entrevistas e praticar com IA.$t$,'Grátis','img/capa-prompts.webp',null,'area','prompts',false,false),
+ ('culture',8,'Comunidade',$t$Grupo do WhatsApp$t$,$t$Dicas de séries, filmes e músicas pra praticar o inglês de verdade.$t$,'Grátis',null,'💬','whatsapp',$t$Oi Gediel! Quero entrar no grupo gratuito do Culture English.$t$,false,false),
+ ('culture',9,'Comunidade',$t$Jogos$t$,$t$Treine vocabulário e frases jogando.$t$,'No app',null,'🎮','area','jogos',false,false),
+ ('culture',10,'Comunidade',$t$English for Everyone: Grammar Guide$t$,$t$Guia visual de gramática pra consultar enquanto estuda.$t$,'Indicação','img/achados/0.webp',null,'link','https://amzn.to/4iyoaQO',false,false),
+
+ ('viagens',1,null,$t$Me ajude a planejar minha viagem$t$,$t$Me conta o destino e a data. Eu te digo por onde começar e o que estudar antes de embarcar.$t$,null,null,'✈️','whatsapp',$t$Oi Gediel! Quero ajuda pra planejar minha viagem. Destino: ___ · Quando: ___ · Meu nível de inglês: ___$t$,true,false),
+ ('viagens',2,'Intercâmbio',$t$Toronto 2027$t$,$t$O próximo intercâmbio da Infly. Garanta seu lugar no formulário.$t$,'Inscrições abertas','img/card-toronto.webp',null,'link','https://forms.gle/V2dDVBXotN1XUmS1A',false,false),
+ ('viagens',3,'Intercâmbio',$t$Grupo de Toronto$t$,$t$O grupo de quem vai (ou quer ir) no intercâmbio de 2027.$t$,'WhatsApp',null,'🍁','whatsapp',$t$Oi Gediel! Quero entrar no grupo de Toronto 2027.$t$,false,false),
+ ('viagens',4,'Pra se preparar',$t$Mini curso Inglês para Viagens$t$,$t$Aeroporto, hotel, restaurante e imprevisto: as situações que toda viagem traz.$t$,'Em breve','img/card-viagem-ingles.webp',null,'curso','',false,true),
+ ('viagens',5,'Pra se preparar',$t$E-book Passaporte do Inglês$t$,$t$9 capítulos na ordem da viagem + Kit de Sobrevivência com as 20 frases que salvam.$t$,'R$ 27','img/capa-viagens.webp',null,'link','https://ebookviagens.netlify.app/',false,false),
+ ('viagens',6,'Pra se preparar',$t$Seguro viagem$t$,$t$Consulte opções de seguro pras datas e o destino da sua viagem.$t$,'Indicação','img/achados/7.webp',null,'link','https://www.seguroviagem.srv.br/?ag=Us59wEJXEu',false,false),
+ ('viagens',7,'Pra se preparar',$t$Organizador de mala de 7 peças$t$,$t$Separe roupas e acessórios em bolsas dentro da mala.$t$,'Indicação','img/achados/5.webp',null,'link','https://meli.la/1Lai5vf',false,false),
+ ('viagens',8,'Assistir',$t$Vlogs Londres, Paris e Bruxelas$t$,$t$Três cidades, três sotaques e o caderno de viagem de 2024.$t$,'YouTube','img/card-europa.webp',null,'link','https://www.youtube.com/@oficialinfly/videos',false,false),
+ ('viagens',9,'Assistir',$t$Vlogs New York 2025$t$,$t$Os bastidores da viagem a Nova York, com o inglês de rua ao vivo.$t$,'Em breve','img/card-vlog-ny.webp',null,'link','',false,true),
+ ('viagens',10,'Assistir',$t$Jogos$t$,$t$Treine o inglês de viagem jogando.$t$,'No app',null,'🎮','area','jogos',false,false)
+) as v(universo,ord,secao,titulo,descricao,tag,capa_url,emoji,acao,valor,destaque,em_breve)
+where not exists (select 1 from public.mi_uni_cards);
+
 -- 8. Pasta de capas (imagens públicas, só o admin envia) ----------------------
 insert into storage.buckets (id, name, public) values ('capas', 'capas', true) on conflict (id) do nothing;
 drop policy if exists "capas publicas" on storage.objects;

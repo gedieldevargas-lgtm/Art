@@ -1,5 +1,15 @@
+<!doctype html>
+<html lang="pt-BR">
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Plataforma Inteligente</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#4f6ef7">
+<link rel="apple-touch-icon" href="img/app-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Inteligente">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <style>
@@ -530,7 +540,7 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
   <div class="sidebar-footer">
     <div class="user-chip" onclick="openSettings()">
       <div class="user-ava" id="sidebar-ava">A</div>
-      <div style="flex:1;min-width:0"><div class="user-name" id="sidebar-name">Ana Lima</div><div class="user-sub">Membro ativo</div></div>
+      <div style="flex:1;min-width:0"><div class="user-name" id="sidebar-name"></div><div class="user-sub">Membro ativo</div></div>
       <span style="font-size:13px;color:var(--fg3)">⚙️</span>
     </div>
   </div>
@@ -548,25 +558,7 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
 
       <!-- HOME -->
       <div class="pane active pane-enter stagger" id="pane-home">
-        <div style="font-size:21px;font-weight:800;margin-bottom:4px">Bom dia, Ana! ☀️</div>
-        <div style="font-size:13px;color:var(--fg2);margin-bottom:20px">Quinta-feira, 5 de novembro · Sequência de <strong style="color:var(--gold)">7 dias 🔥</strong></div>
-        <div class="live-hero" onclick="goTo('lives',document.querySelectorAll('.nav-pill')[2])">
-          <div style="font-size:10px;font-weight:800;letter-spacing:1.4px;color:rgba(255,255,255,.7);margin-bottom:4px">📺 PRÓXIMAS LIVES</div>
-          <div style="font-size:17px;font-weight:800;color:#fff;margin-bottom:3px">Interação A1/A2 · hoje às 18h30</div>
-          <div style="font-size:12px;color:rgba(255,255,255,.7)">Conversação B1/B2 · hoje às 19h30 · Meet</div>
-          <div class="live-pill">Ver todas as lives →</div>
-        </div>
-        <div class="sec-hd">Seus números</div>
-        <div class="grid-2">
-          <div class="stat-tile"><div class="stat-icon" style="background:rgba(245,158,11,.12)">🔥</div><div class="stat-val" style="color:var(--gold)">7</div><div class="stat-label">Dias em sequência</div></div>
-          <div class="stat-tile"><div class="stat-icon" style="background:rgba(79,110,247,.1)">📖</div><div class="stat-val" style="color:var(--accent)">23</div><div class="stat-label">Aulas concluídas</div></div>
-        </div>
-        <div class="sec-hd">Continue de onde parou <span class="sec-link" onclick="goTo('modulos',document.querySelectorAll('.nav-pill')[3])">Ver módulos →</span></div>
-        <div class="module-grid">
-          <div class="module-card"><div class="mod-thumb"><div class="mod-thumb-lock">🔒</div></div><div class="mod-body"><div class="mod-name">Conversação A1–A2</div><div class="mod-sub">Módulo 6</div><div class="mod-lock-tag">EM BREVE</div></div></div>
-          <div class="module-card"><div class="mod-thumb"><div class="mod-thumb-lock">🔒</div></div><div class="mod-body"><div class="mod-name">Gramática A1</div><div class="mod-sub">Módulo 4</div><div class="mod-lock-tag">EM BREVE</div></div></div>
-          <div class="module-card"><div class="mod-thumb"><div class="mod-thumb-lock">🔒</div></div><div class="mod-body"><div class="mod-name">Inglês pela Música</div><div class="mod-sub">Módulo 11</div><div class="mod-lock-tag">EM BREVE</div></div></div>
-        </div>
+        <div class="admin-loading">Carregando…</div>
       </div>
 
       <!-- MARATONA -->
@@ -609,7 +601,7 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
       <!-- JOGOS -->
       <div class="pane" id="pane-jogos">
         <div style="font-size:21px;font-weight:800;margin-bottom:4px">Jogos</div>
-        <div style="font-size:13px;color:var(--fg2);margin-bottom:18px">Toque para ver as instruções e configurar</div>
+        <div style="font-size:13px;color:var(--fg2);margin-bottom:18px">Toque no jogo pra ver como jogar</div>
         <div class="game-filters" id="game-filters">
           <button class="gf-btn active" onclick="filterGames('all',this)">Todos</button>
           <button class="gf-btn" onclick="filterGames('vocab',this)">Vocabulário</button>
@@ -901,17 +893,6 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
         <div class="sheet-instr-title">Como jogar</div>
         <div class="sheet-instr-list" id="sh-instr"></div>
       </div>
-      <div class="sheet-config-title">Configurar partida</div>
-      <div class="sheet-config-grid">
-        <div class="sheet-fld"><label>Nível</label>
-          <select class="sheet-inp" id="sh-level"><option>A1</option><option>A2</option><option selected>B1</option><option>B2</option></select></div>
-        <div class="sheet-fld"><label>Tempo por rodada</label>
-          <select class="sheet-inp" id="sh-time"><option>30 seg</option><option selected>60 seg</option><option>90 seg</option><option>Sem limite</option></select></div>
-        <div class="sheet-fld"><label>Nome do jogador</label>
-          <input class="sheet-inp" id="sh-player" type="text" placeholder="Ana Lima" value="Ana Lima"></div>
-        <div class="sheet-fld"><label>Nº de jogadores</label>
-          <select class="sheet-inp" id="sh-players"><option selected>1</option><option>2</option><option>3</option><option>4+</option></select></div>
-      </div>
       <button class="sheet-play-btn" onclick="toast('Jogo em desenvolvimento! Em breve você vai jogar aqui 🎮','#4f6ef7');closeSheet()">▶ Jogar agora</button>
     </div>
   </div>
@@ -951,6 +932,18 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
       <input class="admin-inp" id="adm-mod-sub" placeholder="Ex: 8 aulas · A1">
       <div class="adm-section">Emoji (usado quando não tem capa)</div>
       <input class="admin-inp" id="adm-mod-emoji" placeholder="📘" style="width:90px;font-size:18px;text-align:center">
+      <div class="adm-section">Onde esse módulo aparece</div>
+      <select class="admin-inp" id="adm-mod-trilha" onchange="document.getElementById('adm-mod-mini').style.display=this.value==='mini'?'block':'none'">
+        <option value="programa">📚 Módulos do Programa (todo aluno do Programa vê)</option>
+        <option value="mini">🛒 Mini curso avulso (só quem comprou · aparece num Universo)</option>
+      </select>
+      <div id="adm-mod-mini" style="display:none">
+        <div class="adm-section">Produto que libera (trecho do nome na Kiwify)</div>
+        <input class="admin-inp" id="adm-mod-produto" placeholder="Ex.: Inglês com Séries">
+        <div class="adm-section">Link de compra (pra quem ainda não tem)</div>
+        <input class="admin-inp" id="adm-mod-checkout" placeholder="https://pay.kiwify.com.br/...">
+        <div style="font-size:11px;color:var(--fg3);margin-top:6px">Depois, no Admin → Universos, crie um card com ação "Mini curso" apontando pra este módulo.</div>
+      </div>
       <div id="adm-mod-modal-status" style="font-size:12px;min-height:18px;margin-top:14px"></div>
       <div style="display:flex;gap:8px;justify-content:space-between;margin-top:6px">
         <button class="admin-btn admin-btn-danger admin-btn-sm" id="adm-mod-del" onclick="deleteModule()">🗑️ Apagar módulo</button>
@@ -1528,7 +1521,7 @@ var dark=false;
 function toggleTheme(){dark=!dark;document.documentElement.setAttribute('data-theme',dark?'dark':'light');document.getElementById('theme-toggle').textContent=dark?'🌙':'☀️';}
 
 // ═══════════════════════════ SETTINGS ═══════════════════════════
-var profile={name:'Ana Lima',email:'ana@email.com',photoUrl:''};
+var profile={name:'',email:'',photoUrl:''};
 function openSettings(){document.getElementById('set-name').value=profile.name;document.getElementById('set-email').value=profile.email;updateAva();document.getElementById('settings-overlay').classList.add('open');}
 function closeSettings(){document.getElementById('settings-overlay').classList.remove('open');}
 document.getElementById('settings-overlay').addEventListener('click',function(e){if(e.target===this)closeSettings();});
@@ -1889,7 +1882,7 @@ async function loadStudentModules(force){
     var byMod={};(l.data||[]).forEach(function(x){byMod[x.module_id]=byMod[x.module_id]||{t:0,p:0};byMod[x.module_id].t++;if(isOpen(x))byMod[x.module_id].p++;});
     _stMods=mods;
     var g=document.getElementById('modules-grid');g.innerHTML='';
-    mods.forEach(function(m){
+    mods.filter(function(m){return (m.trilha||'programa')==='programa';}).forEach(function(m){
       var c=byMod[m.id]||{t:0,p:0};
       var ready=c.p>0;
       var thumb=m.cover_url?'<div class="mod-thumb cover"><img src="'+esc(m.cover_url)+'" alt=""></div>'
@@ -1905,7 +1898,7 @@ async function openModule(modId){
   var m=(_stMods||[]).filter(function(x){return x.id===modId;})[0];if(!m)return;
   _stCurMod=m;
   var v=document.getElementById('mod-view-lessons');
-  v.innerHTML='<button class="back-btn" onclick="modShow(\'grid\')">← Módulos</button><div class="admin-loading">Carregando aulas...</div>';
+  v.innerHTML='<div class="admin-loading">Carregando aulas...</div>';
   modShow('lessons');
   var r=await _sb.from('mi_lessons').select('*').eq('module_id',modId).order('ord').order('created_at');
   var ls=r.data||[];_stLessons[modId]=ls;
@@ -1916,7 +1909,8 @@ async function openModule(modId){
     var rr=await _sb.from('mi_lesson_reactions').select('lesson_id').in('lesson_id',ids);reacts=countBy(rr.data,'lesson_id');
     var qr=await _sb.from('mi_quiz_results').select('lesson_id,score,total').in('lesson_id',ids);(qr.data||[]).forEach(function(q){mine[q.lesson_id]=q;});
   }
-  var head='<button class="back-btn" onclick="modShow(\'grid\')">← Módulos</button>'
+  var back=window._miniBack?'<button class="back-btn" onclick="goTo(\''+window._miniBack.uni+'\',window._miniBack.pill)">← '+esc(window._miniBack.nome)+'</button>':'<button class="back-btn" onclick="modShow(\'grid\')">← Módulos</button>';
+  var head=back
     +'<div style="display:flex;gap:14px;align-items:center;margin-bottom:18px">'
     +(m.cover_url?'<img src="'+esc(m.cover_url)+'" style="width:120px;aspect-ratio:16/9;object-fit:cover;border-radius:12px">':'<div style="width:120px;aspect-ratio:16/9;border-radius:12px;background:'+DEFAULT_BG+';display:flex;align-items:center;justify-content:center;font-size:28px">'+esc(m.emoji||'📘')+'</div>')
     +'<div><div style="font-size:21px;font-weight:800">'+esc(m.name)+'</div><div style="font-size:13px;color:var(--fg2)">'+esc(m.sub||'')+' · '+ls.length+' aula'+(ls.length!==1?'s':'')+'</div></div></div>';
@@ -1942,6 +1936,7 @@ async function openLesson(lesId){
   var ls=_stLessons[_stCurMod.id]||[];
   var l=ls.filter(function(x){return x.id===lesId;})[0];if(!l)return;
   _stCurLes=l;_stQuizSel={};_stLesTab=isOpen(l)?'desc':'coment';
+  if(window.MI_APP)MI_APP.aulaAberta(_stCurMod,l);
   var v=document.getElementById('mod-view-lesson');
   v.innerHTML='<button class="back-btn" onclick="openModule(\''+_stCurMod.id+'\')">← '+esc(_stCurMod.name)+'</button><div class="admin-loading">Carregando...</div>';
   modShow('lesson');
@@ -2038,7 +2033,8 @@ async function quizSubmit(){
   });
   document.getElementById('quiz-submit').disabled=true;
   var msg=score===total?'🏆 Perfeito! '+score+'/'+total:score>=total*0.6?'👏 Mandou bem! '+score+'/'+total:'💪 '+score+'/'+total+' — revê a aula e tenta de novo';
-  document.getElementById('quiz-result').innerHTML='<div class="quiz-result">'+msg+'<br><button class="admin-btn admin-btn-ghost admin-btn-sm" style="margin-top:10px;background:rgba(255,255,255,.2);color:#fff;border-color:transparent" onclick="_stQuizSel={};document.getElementById(\'les-p-quiz\').innerHTML=renderQuiz(_stCurLes)">🔁 Tentar de novo</button></div>';
+  document.getElementById('quiz-result').innerHTML='<div class="quiz-result">'+msg+'<br><button class="admin-btn admin-btn-ghost admin-btn-sm" style="margin-top:10px;background:rgba(255,255,255,.2);color:#fff;border-color:transparent" onclick="_stQuizSel={};document.getElementById(\'les-p-quiz\').innerHTML=renderQuiz(_stCurLes)">🔁 Tentar de novo</button>'+(window.MI_APP?' <button class="admin-btn admin-btn-ghost admin-btn-sm" style="margin-top:10px;background:#fff;color:#4f6ef7;border-color:transparent" onclick="MI_APP.compartilharQuiz('+score+','+total+')">📤 Compartilhar</button>':'')+'</div>';
+  if(window.MI_APP)MI_APP.marcarDia();
   var u=(await _sb.auth.getUser()).data.user;
   if(u){await _sb.from('mi_quiz_results').upsert({lesson_id:l.id,user_id:u.id,score:score,total:total,created_at:new Date().toISOString()});}
 }
@@ -2113,7 +2109,7 @@ function renderAdminModules(){
       +'<div class="adm-mod-head" onclick="toggleAdmMod(\''+m.id+'\')">'
       +'<div class="drag-handle" title="Arraste pra reordenar">⠿</div>'
       +'<div class="adm-cover-sm">'+(m.cover_url?'<img src="'+esc(m.cover_url)+'">':esc(m.emoji||'📘'))+'</div>'
-      +'<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:800">'+(i+1)+'. '+esc(m.name)+'</div><div style="font-size:11px;color:var(--fg3)">'+esc(m.sub||'')+' · '+ls.length+' cadastrada'+(ls.length!==1?'s':'')+' · '+ls.filter(isOpen).length+' no ar</div></div>'
+      +'<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:800">'+(i+1)+'. '+esc(m.name)+(m.trilha==='mini'?' <span class="adm-pill adm-pill-off">MINI CURSO</span>':'')+'</div><div style="font-size:11px;color:var(--fg3)">'+esc(m.sub||'')+' · '+ls.length+' cadastrada'+(ls.length!==1?'s':'')+' · '+ls.filter(isOpen).length+' no ar</div></div>'
       +'<div style="display:flex;gap:6px">'
       +'<button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="event.stopPropagation();openModModal(\''+m.id+'\')">✏️ Editar</button></div>'
       +'<div style="color:var(--fg3);font-size:14px">'+(_admOpen[m.id]?'▾':'▸')+'</div></div>'
@@ -2255,6 +2251,10 @@ function openModModal(id){
   document.getElementById('adm-mod-name').value=_editMod.name||'';
   document.getElementById('adm-mod-sub').value=_editMod.sub||'';
   document.getElementById('adm-mod-emoji').value=_editMod.emoji||'📘';
+  document.getElementById('adm-mod-trilha').value=_editMod.trilha||'programa';
+  document.getElementById('adm-mod-produto').value=_editMod.produto||'';
+  document.getElementById('adm-mod-checkout').value=_editMod.checkout||'';
+  document.getElementById('adm-mod-mini').style.display=(_editMod.trilha==='mini')?'block':'none';
   document.getElementById('adm-mod-cover-prev').innerHTML=_editMod.cover_url?'<img src="'+esc(_editMod.cover_url)+'">':'🖼️';
   document.getElementById('adm-mod-cover-info').innerHTML='';
   document.getElementById('adm-mod-cover-file').value='';
@@ -2268,7 +2268,8 @@ async function saveModule(){
   var name=document.getElementById('adm-mod-name').value.trim();if(!name){st.innerHTML='<span style="color:var(--red)">Dá um nome pro módulo.</span>';return;}
   st.innerHTML='⏳ Salvando...';
   try{
-    var row={name:name,sub:document.getElementById('adm-mod-sub').value.trim(),emoji:document.getElementById('adm-mod-emoji').value.trim()||'📘'};
+    var row={name:name,sub:document.getElementById('adm-mod-sub').value.trim(),emoji:document.getElementById('adm-mod-emoji').value.trim()||'📘',
+      trilha:document.getElementById('adm-mod-trilha').value,produto:document.getElementById('adm-mod-produto').value.trim()||null,checkout:document.getElementById('adm-mod-checkout').value.trim()||null};
     var id=_editMod.id;
     if(!id){row.ord=_admMods.length+1;var ins=await _sb.from('mi_modules').insert(row).select().single();if(ins.error)throw ins.error;id=ins.data.id;}
     var cov=await uploadCover('mod',id);if(cov)row.cover_url=cov;
@@ -2507,6 +2508,6 @@ document.getElementById('adm-les-modal').addEventListener('click',function(e){if
 
 </script>
 <script src="membros-acesso.js"></script>
-<script src="membros-universos.js"></script>
+<script src="membros-app.js"></script>
 </body>
 </html>
