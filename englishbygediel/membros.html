@@ -754,7 +754,7 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
               <div class="admin-fld">
                 <label>Enviar credenciais por e-mail?</label>
                 <select class="admin-inp" id="adm-new-sendmail">
-                  <option value="sim">Sim — enviar acesso por e-mail</option>
+                  <option value="sim">Sim — me dar a mensagem de acesso pronta pra enviar</option>
                   <option value="nao">Não — só criar o acesso</option>
                 </select>
               </div>
@@ -1761,13 +1761,14 @@ async function createUser(){
     if(data.id){
       status.innerHTML='<span style="color:var(--green)">✅ Acesso criado! Login: '+esc(email)+' · Senha: '+esc(pass)+'</span>';
       if(sendMail){
-        // Envia via Make.com webhook (reutiliza o webhook existente)
-        await fetch('https://hook.us2.make.com/bvvrsxod694ojcdjlf7lawue7xvfqyc2',{
-          method:'POST',
-          headers:{'Content-Type':'application/json'},
-          body:JSON.stringify({buyer:{email:email,name:name},password:pass,source:'admin_panel'})
-        }).catch(function(){});
-        status.innerHTML+='<br><span style="color:var(--accent)">📧 E-mail de boas-vindas enviado!</span>';
+        // o envio automático pelo Make ainda não existe pro painel: entrega o e-mail pronto pra mandar em 1 clique
+        var msg='Olá, '+name+'! 🎉\n\nSeu acesso à Plataforma Inteligente está liberado.\n\n🔗 Entre aqui: https://englishbygediel.netlify.app/membros.html\n📧 Login: '+email+'\n🔑 Senha: '+pass+'\n\nDepois de entrar, dá pra trocar a senha em Configurações.\n\n— Gediel';
+        window._admMsgAcesso=msg;
+        status.innerHTML+='<div style="margin-top:10px;padding:12px;border:1px dashed var(--accent);border-radius:12px;font-size:12px;line-height:1.6">📧 <b>Mande o acesso pro aluno:</b><br>'
+          +'<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">'
+          +'<a class="admin-btn admin-btn-primary admin-btn-sm" style="text-decoration:none" href="mailto:'+encodeURIComponent(email)+'?subject='+encodeURIComponent('🎓 Seu acesso está liberado!')+'&body='+encodeURIComponent(msg)+'">Abrir e-mail pronto</a>'
+          +'<a class="admin-btn admin-btn-ghost admin-btn-sm" style="text-decoration:none" target="_blank" rel="noopener" href="https://wa.me/?text='+encodeURIComponent(msg)+'">Mandar no WhatsApp</a>'
+          +'<button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="navigator.clipboard.writeText(window._admMsgAcesso).then(function(){toast(\'📋 Mensagem copiada\',\'#10b981\')})">Copiar mensagem</button></div></div>';
       }
       document.getElementById('adm-new-name').value='';
       document.getElementById('adm-new-email').value='';
