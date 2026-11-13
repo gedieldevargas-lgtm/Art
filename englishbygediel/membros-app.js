@@ -1851,6 +1851,100 @@
     var t=0;(function esp(){var S=AS();if(S.pronto){botaoEdicao();aplicarMenus();if(window.currentPage==='materiais')renderMat();}else if(t++<240)setTimeout(esp,500);})();
   }
   window.MI_EDIT={ligar:modoEdicao,aplicarMenus:aplicarMenus};
+  /* ───────────────────────── STORY DE CONQUISTA (compartilhar no status / Instagram) ─────────────────────────
+     Gera uma imagem 1080×1920 com o resultado do quiz, as tarefas feitas hoje, os dias seguidos e uma frase
+     (meta, versículo ou filosofia). Cada toque em "Outra frase" sorteia outra. */
+  var FRASES=[
+    ['Disciplina é escolher o que você quer mais em vez do que você quer agora.','Meta'],
+    ['Pequeno todo dia vence grande de vez em quando.','Meta'],
+    ['Você não precisa estar pronto. Precisa estar em movimento.','Meta'],
+    ['Fluência não é talento. É repetição com propósito.','Método Inteligente'],
+    ['O resultado que você quer está do outro lado da constância.','Performance'],
+    ['Hoje eu fiz o que o meu eu de daqui a 6 meses vai agradecer.','Performance'],
+    ['Errar falando é melhor do que acertar calado.','Método Inteligente'],
+    ['Quem treina no silêncio, fala com confiança no palco.','Performance'],
+    ['Consagre ao Senhor tudo o que você faz, e os seus planos serão bem-sucedidos.','Provérbios 16:3'],
+    ['Tudo posso naquele que me fortalece.','Filipenses 4:13'],
+    ['Não nos cansemos de fazer o bem, pois no tempo próprio colheremos, se não desanimarmos.','Gálatas 6:9'],
+    ['Tudo o que fizerem, façam de todo o coração, como para o Senhor.','Colossenses 3:23'],
+    ['O que vale a pena fazer, faça com todas as suas forças.','Eclesiastes 9:10'],
+    ['Os planos do diligente conduzem à fartura.','Provérbios 21:5'],
+    ['Uma jornada de mil quilômetros começa com um único passo.','Lao-Tsé'],
+    ['Não importa o quão devagar você vá, desde que não pare.','Atribuída a Confúcio'],
+    ['Os limites da minha linguagem são os limites do meu mundo.','Ludwig Wittgenstein'],
+    ['Não é porque as coisas são difíceis que não ousamos; é porque não ousamos que elas são difíceis.','Sêneca'],
+    ['Primeiro diga a si mesmo o que você quer ser; depois faça o que precisa fazer.','Epicteto'],
+    ['A excelência é um hábito, não um ato isolado.','Inspirada em Aristóteles']
+  ];
+  var STY={i:Math.floor(Math.random()*FRASES.length),cor:0,quiz:null};
+  function tarefasHoje(){
+    var out=[],ch=window._ctxChecked||{};
+    Object.keys(ch).forEach(function(k){(ch[k]||[]).forEach(function(v,i){var t=v&&window.CTX_TASKS&&CTX_TASKS[k]&&CTX_TASKS[k][i];if(t&&out.indexOf(t.title)<0)out.push(t.title);});});
+    return out;
+  }
+  function carregarImg(src){return new Promise(function(ok){var i=new Image();i.onload=function(){ok(i);};i.onerror=function(){ok(null);};i.src=src;});}
+  function quebrar(ctx,txt,larg){var p=String(txt).split(' '),l=[],a='';p.forEach(function(w){var t=a?a+' '+w:w;if(ctx.measureText(t).width>larg&&a){l.push(a);a=w;}else a=t;});if(a)l.push(a);return l;}
+  function rr(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+  async function desenharStory(){
+    var W=1080,H=1920,cv=document.createElement('canvas');cv.width=W;cv.height=H;var c=cv.getContext('2d');
+    try{await Promise.all([document.fonts.load('700 120px Advercase'),document.fonts.load('800 40px "Plus Jakarta Sans"'),document.fonts.load('500 40px "Plus Jakarta Sans"')]);}catch(e){}
+    var cores=['azul','verde','roxo','ciano','ambar','rosa'],bg=await carregarImg('img/capas/base-'+cores[STY.cor%6]+'.webp');
+    if(bg){var s=Math.max(W/bg.width,H/bg.height),bw=bg.width*s,bh=bg.height*s;c.drawImage(bg,(W-bw)/2,(H-bh)/2,bw,bh);}else{var g0=c.createLinearGradient(0,0,W,H);g0.addColorStop(0,'#1b2a6b');g0.addColorStop(1,'#4f2ab0');c.fillStyle=g0;c.fillRect(0,0,W,H);}
+    var g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,'rgba(8,10,28,.55)');g.addColorStop(.45,'rgba(8,10,28,.35)');g.addColorStop(1,'rgba(8,10,28,.85)');c.fillStyle=g;c.fillRect(0,0,W,H);
+    var F='"Plus Jakarta Sans",system-ui,sans-serif',T="Advercase,'Archivo Black','Arial Black',sans-serif",X=90,L=W-180,y=170;
+    c.fillStyle='rgba(255,255,255,.75)';c.font='800 30px '+F;c.textBaseline='alphabetic';
+    c.fillText('PLATAFORMA INTELIGENTE  ·  @ENGLISHBYGEDIEL',X,y);
+    var seq=sequencia(),diasUso=(ST.dias||[]).length||1;
+    y+=170;c.fillStyle='#fff';c.font='700 150px '+T;c.fillText('DAY '+diasUso,X,y);
+    y+=70;c.font='800 44px '+F;c.fillStyle='#ffd166';c.fillText('🔥 '+seq.n+(seq.n===1?' dia seguido':' dias seguidos')+' de inglês',X,y);
+    // quiz
+    if(STY.quiz){
+      y+=60;rr(c,X,y,L,190,36);c.fillStyle='rgba(255,255,255,.14)';c.fill();
+      c.fillStyle='#fff';c.font='700 76px '+T;c.fillText('🏆 '+STY.quiz.sc+'/'+STY.quiz.tot,X+40,y+95);
+      c.font='600 34px '+F;c.fillStyle='rgba(255,255,255,.85)';var tq=quebrar(c,'no quiz: '+STY.quiz.t,L-80);c.fillText(tq[0]+(tq.length>1?'…':''),X+40,y+150);
+      y+=190;
+    }
+    // tarefas
+    var tf=tarefasHoje();
+    y+=90;c.fillStyle='#fff';c.font='800 40px '+F;c.fillText('TODAY I PRACTICED ENGLISH ✓',X,y);
+    y+=20;var lst=tf.length?tf.slice(0,5):['Abri o app e mantive a sequência 💪'];
+    c.font='600 36px '+F;
+    lst.forEach(function(t){var ls=quebrar(c,t,L-90).slice(0,2);var h=30+ls.length*46;y+=18;rr(c,X,y,L,h+10,26);c.fillStyle='rgba(255,255,255,.12)';c.fill();
+      c.fillStyle='#7ee2a8';c.font='800 38px '+F;c.fillText('✓',X+30,y+56);c.fillStyle='#fff';c.font='600 36px '+F;ls.forEach(function(l,i){c.fillText(l,X+84,y+56+i*46);});y+=h+10;});
+    if(tf.length>5){y+=50;c.fillStyle='rgba(255,255,255,.7)';c.font='600 32px '+F;c.fillText('+ '+(tf.length-5)+' tarefas',X,y);}
+    // frase
+    var fr=FRASES[STY.i%FRASES.length],fy=Math.max(y+80,H-560);
+    c.font='italic 600 46px '+F;var lf=quebrar(c,'“'+fr[0]+'”',L).slice(0,5);
+    c.fillStyle='#fff';lf.forEach(function(l,i){c.fillText(l,X,fy+i*62);});
+    c.font='800 30px '+F;c.fillStyle='#a5b4fc';c.fillText('— '+fr[1].toUpperCase(),X,fy+lf.length*62+20);
+    // rodapé
+    rr(c,X,H-200,L,110,55);c.fillStyle='#fff';c.fill();c.fillStyle='#1b1f4b';c.font='800 36px '+F;c.textAlign='center';
+    c.fillText('Bora comigo? englishbygediel.netlify.app',W/2,H-133);c.textAlign='left';
+    return cv;
+  }
+  var stEl=document.createElement('div');stEl.id='mi-story';stEl.className='modal-overlay';document.body.appendChild(stEl);
+  var stc=document.createElement('style');stc.textContent='#mi-story .sb{background:var(--surface);border-radius:22px;padding:16px;width:min(420px,calc(100vw - 32px));max-height:calc(100dvh - 32px);display:flex;flex-direction:column;gap:12px;box-shadow:0 24px 60px rgba(0,0,0,.45)}#mi-story img{width:100%;max-height:62dvh;object-fit:contain;border-radius:14px;background:#0b0d1c}#mi-story .bt{display:grid;grid-template-columns:1fr 1fr;gap:8px}#mi-story button{border:none;border-radius:14px;padding:13px;font:inherit;font-size:14px;font-weight:800;cursor:pointer}#mi-story .p{background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff;grid-column:1/-1}#mi-story .g{background:var(--bg2,rgba(127,127,127,.12));color:var(--fg)}#mi-story .t{font-size:13px;color:var(--fg2);text-align:center;line-height:1.5}';document.head.appendChild(stc);
+  var stBlob=null;
+  async function pintarStory(){
+    stEl.innerHTML='<div class="sb"><div class="t">Gerando sua imagem…</div></div>';stEl.classList.add('open');
+    var cv=await desenharStory();
+    stBlob=await new Promise(function(ok){cv.toBlob(ok,'image/png');});
+    var url=URL.createObjectURL(stBlob);
+    stEl.innerHTML='<div class="sb"><img alt="Sua conquista de hoje" src="'+url+'"><div class="t">Posta no status do WhatsApp ou no story do Instagram e marca <b>@englishbygediel</b> 🔥</div>'
+      +'<div class="bt"><button class="p" data-st="share">📤 Compartilhar</button><button class="g" data-st="frase">🎲 Outra frase</button><button class="g" data-st="cor">🎨 Outra cor</button><button class="g" data-st="baixar">⬇️ Baixar</button><button class="g" data-st="fechar">Fechar</button></div></div>';
+  }
+  stEl.addEventListener('click',async function(e){
+    if(e.target===stEl){stEl.classList.remove('open');return;}
+    var b=e.target.closest('[data-st]');if(!b)return;var a=b.dataset.st;
+    if(a==='fechar')return stEl.classList.remove('open');
+    if(a==='frase'){STY.i++;return pintarStory();}
+    if(a==='cor'){STY.cor++;return pintarStory();}
+    var f=new File([stBlob],'minha-conquista-ingles.png',{type:'image/png'});
+    if(a==='share'&&navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],text:'Hoje eu treinei meu inglês 🔥 @englishbygediel'});}catch(err){}return;}
+    var u=URL.createObjectURL(stBlob),l=document.createElement('a');l.href=u;l.download='minha-conquista-ingles.png';document.body.appendChild(l);l.click();l.remove();
+    toast(a==='share'?'Imagem baixada: posta ela no seu status 📲':'Imagem baixada ✅');
+  });
+  function compartilharConquista(sc,tot){STY.quiz=sc!=null?{sc:sc,tot:tot,t:(window._stCurLes&&_stCurLes.title)||'aula'}:null;STY.i++;pintarStory();}
   window.MI_APP={conhecer:conhecer,tour:tour,aulaAberta:aulaAberta,marcarDia:marcarDia,abrirAula:abrirAula,renderHome:renderHome,
-    compartilharQuiz:function(sc,tot){var t=(window._stCurLes&&_stCurLes.title)||'aula';wa('Acertei '+sc+'/'+tot+' no quiz da aula "'+t+'" do Método Inteligente 🔥 Bora treinar comigo? Faz o teste de nível grátis: '+linkIndicacao(),false);}};
+    compartilharQuiz:compartilharConquista,compartilharDia:function(){compartilharConquista(null);}};
 })();
