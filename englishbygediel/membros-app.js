@@ -287,6 +287,16 @@
   '#mi-bnav button span .ic3d{width:28px;height:28px}#ai-fab .ic3d{width:40px;height:40px;vertical-align:middle}',
   '.right-rail a .ic3d,.right-rail button .ic3d{width:24px;height:24px;vertical-align:middle}#theme-toggle .ic3d,.topbar .tb-btn .ic3d{width:24px;height:24px;vertical-align:middle}#mi-ed-btn .ic3d{width:20px;height:20px;vertical-align:-5px}',
   '.mi-ctx .ic .ic3d{width:44px;height:44px}.ctx-chip .ce .ic3d{width:30px;height:30px;display:block;margin:0 auto 4px}#mi-festa .sb .ic3d{width:22px;height:22px}',
+  /* lives: sub-abas */
+  '.lv-abas{display:inline-flex;gap:4px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:4px;margin-bottom:16px;flex-wrap:wrap}',
+  '.lv-abas button{border:none;background:none;color:var(--fg2);font:inherit;font-size:13.5px;font-weight:800;padding:9px 14px;border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:7px}.lv-abas button .ic3d{width:22px;height:22px}.lv-abas button.on{background:var(--accent);color:#fff}',
+  '.lv-intro{display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,rgba(239,68,68,.1),rgba(139,92,246,.1));border:1px solid var(--border);border-radius:18px;padding:16px;margin-bottom:18px}.lv-intro b{display:block;font-size:15px}.lv-intro span{display:block;font-size:12.5px;color:var(--fg2);line-height:1.5;margin-top:3px}',
+  '.lv-mod{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--fg3);margin:18px 0 8px}.lv-lista{display:grid;gap:8px}',
+  '.lv-aula{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:12px 14px}.lv-n{width:32px;height:32px;border-radius:10px;background:rgba(239,68,68,.12);color:#ef4444;font-weight:800;display:grid;place-items:center;flex:none}',
+  '.lv-tx{flex:1;min-width:0}.lv-tx b{display:block;font-size:14px}.lv-tx span{display:block;font-size:12px;color:var(--fg2);margin-top:2px}',
+  '.lv-bt{flex:none;border:1.5px solid var(--border);background:var(--surface);color:var(--fg);border-radius:10px;padding:8px 12px;font:inherit;font-size:12.5px;font-weight:800;cursor:pointer}.lv-bt.on{background:rgba(16,185,129,.12);border-color:#10b981;color:#10b981}',
+  '.hm-uni span .ic3d{width:40px;height:40px}',
+  '@media(max-width:560px){.lv-aula{flex-wrap:wrap}.lv-bt{width:100%}}',
   /* celular: menu de baixo + gaveta */
   '#mi-bnav,#mi-shade{display:none}',
   '@media(max-width:680px){',
@@ -464,9 +474,9 @@
       +'<button data-hm="video"><span>'+IC('youtube')+'</span>Como usar</button>'
       +'</div>';
     h+='<div class="sec-hd">Universos</div><div class="hm-unis">'
-      +'<button class="hm-uni" style="background:linear-gradient(135deg,#15281f,#2f6b4f)" data-hm="eom"><span>🙏</span><b>English On Mission</b></button>'
-      +'<button class="hm-uni" style="background:linear-gradient(135deg,#1b2a6b,#4f6ef7)" data-hm="culture"><span>🎬</span><b>Culture English</b></button>'
-      +'<button class="hm-uni" style="background:linear-gradient(135deg,#0c4a6e,#0ea5e9)" data-hm="viagens"><span>✈️</span><b>Viagens</b></button>'
+      +'<button class="hm-uni" style="background:linear-gradient(135deg,#15281f,#2f6b4f)" data-hm="eom"><span>'+IC('eom')+'</span><b>English On Mission</b></button>'
+      +'<button class="hm-uni" style="background:linear-gradient(135deg,#1b2a6b,#4f6ef7)" data-hm="culture"><span>'+IC('culture')+'</span><b>Culture English</b></button>'
+      +'<button class="hm-uni" style="background:linear-gradient(135deg,#0c4a6e,#0ea5e9)" data-hm="viagens"><span>'+IC('viagens')+'</span><b>Viagens</b></button>'
       +'</div>';
     h+='<div class="hm-ref"><div>'+IC('indicar','xl')+'</div><div><div class="t">Conhece alguém que trava no inglês?</div><div class="s">Manda o convite: a pessoa faz o teste de nível grátis e descobre por onde começar. Leva 10 segundos.</div></div>'
       +'<div class="bts"><button data-hm="indicar" style="background:#25d366;color:#fff">Convidar no WhatsApp</button><button data-hm="copiar" style="background:var(--surface2);color:var(--fg)">Copiar link</button></div></div>';
@@ -2051,6 +2061,47 @@
     for(var i=0;i<ks.length;i++){var pc=progCtx(ks[i]),flag='mi_festa_'+dia()+'_'+ks[i];
       if(pc.tot&&pc.feitos===pc.tot&&!LS.get(flag,false)){LS.set(flag,true);setTimeout(function(kk){return function(){festa(kk);};}(ks[i]),450);return;}}
   }
+
+  /* ───────────────────────── LIVES: sub-aba "Aulas ao vivo" ─────────────────────────
+     Toda aula do Programa que ainda não tem vídeo vai ser gravada ao vivo. Aparece aqui sem data;
+     o aluno pode pedir pra ser avisado (usa os votos "esperando" de cada aula). */
+  var LV_ABA='semana';
+  function montarAbasLives(){
+    var p=$('pane-lives');if(!p||$('lv-abas'))return;
+    var cont=$('live-cards-container');
+    var ab=document.createElement('div');ab.id='lv-abas';ab.className='lv-abas';
+    ab.innerHTML='<button data-lv="semana" class="on">'+IC('lives')+' Lives da semana</button><button data-lv="aulas">'+IC('culture')+' Aulas ao vivo</button>';
+    cont.parentNode.insertBefore(ab,cont);
+    var box=document.createElement('div');box.id='lv-aulas';box.hidden=true;cont.parentNode.insertBefore(box,cont.nextSibling);
+    ab.addEventListener('click',function(e){var b=e.target.closest('[data-lv]');if(!b)return;LV_ABA=b.dataset.lv;
+      [].forEach.call(ab.children,function(x){x.classList.toggle('on',x===b);});
+      cont.hidden=LV_ABA!=='semana';box.hidden=LV_ABA!=='aulas';if(LV_ABA==='aulas')pintarAulasAoVivo();});
+  }
+  async function pintarAulasAoVivo(){
+    var box=$('lv-aulas');if(!box)return;box.innerHTML='<div class="admin-loading">Carregando…</div>';
+    var fl=await carregarFlat(true);
+    var futuras=fl.filter(function(x){return !x.l.youtube_url;});
+    var ids=futuras.map(function(x){return x.l.id;}),meus={},tot={};
+    if(ids.length){try{var v=await window._sb.from('mi_lesson_votes').select('lesson_id,user_id').in('lesson_id',ids);(v.data||[]).forEach(function(r){tot[r.lesson_id]=(tot[r.lesson_id]||0)+1;if(U&&r.user_id===U.id)meus[r.lesson_id]=1;});}catch(e){}}
+    var h='<div class="lv-intro">'+IC('lives','xl')+'<div><b>Todas as aulas novas são gravadas ao vivo</b><span>Você pode assistir na hora, comentar e tirar dúvida com o Gediel. Depois a gravação fica na aula. Toque em 🔔 pra ser avisado quando cada uma for ao ar.</span></div></div>';
+    if(!futuras.length)h+='<div class="admin-loading">Todas as aulas já estão gravadas 🎉</div>';
+    var ult=null;
+    futuras.forEach(function(x,i){
+      if(x.m.id!==ult){if(ult)h+='</div>';ult=x.m.id;h+='<div class="lv-mod">'+E((x.m.emoji?x.m.emoji+' ':'')+x.m.name)+'</div><div class="lv-lista">';}
+      var on=!!meus[x.l.id],n=tot[x.l.id]||0;
+      h+='<div class="lv-aula"><div class="lv-n">'+x.n+'</div><div class="lv-tx"><b>'+E(x.l.title)+'</b><span>🔴 Ao vivo · data a definir'+(n?' · '+n+(n===1?' pessoa esperando':' pessoas esperando'):'')+'</span></div>'
+        +'<button class="lv-bt'+(on?' on':'')+'" data-lvv="'+x.l.id+'">'+(on?'✓ Vou ser avisado':'🔔 Me avise')+'</button></div>';
+    });
+    if(ult)h+='</div>';
+    box.innerHTML=h;
+  }
+  document.addEventListener('click',async function(e){
+    var b=e.target.closest('[data-lvv]');if(!b||!U)return;var id=b.dataset.lvv;b.disabled=true;
+    if(b.classList.contains('on')){await window._sb.from('mi_lesson_votes').delete().eq('lesson_id',id).eq('user_id',U.id);}
+    else{var r=await window._sb.from('mi_lesson_votes').insert({lesson_id:id,user_id:U.id});if(r.error){toast('Não deu: '+r.error.message,'#ef4444');b.disabled=false;return;}toast('🔔 Anotado! Te aviso quando for ao vivo','#10b981');}
+    pintarAulasAoVivo();
+  });
+  setTimeout(montarAbasLives,0);
   window.MI_APP={conhecer:conhecer,tour:tour,aulaAberta:aulaAberta,marcarDia:marcarDia,abrirAula:abrirAula,renderHome:renderHome,
     compartilharQuiz:compartilharConquista,compartilharDia:function(){compartilharConquista(null);},festa:festa};
 })();
