@@ -1877,6 +1877,13 @@
     ['A excelência é um hábito, não um ato isolado.','Inspirada em Aristóteles']
   ];
   var STY={i:Math.floor(Math.random()*FRASES.length),cor:0,quiz:null};
+  /* maratona de 10 meses (300 dias), contando a partir do primeiro dia em que a pessoa usou o app */
+  var MESES=10,TOTAL=MESES*30;
+  function jornada(){
+    var ds=(ST.dias||[]).slice().sort(),ini=ds[0]?new Date(ds[0]+'T12:00:00'):new Date(),hoje=new Date();hoje.setHours(12,0,0,0);
+    var d=Math.max(1,Math.min(TOTAL,Math.round((hoje-ini)/864e5)+1));
+    return {dia:d,total:TOTAL,meses:MESES,mes:Math.min(MESES,Math.ceil(d/30)),pct:Math.max(1,Math.round(d*100/TOTAL))};
+  }
   function tarefasHoje(){
     var out=[],ch=window._ctxChecked||{};
     Object.keys(ch).forEach(function(k){(ch[k]||[]).forEach(function(v,i){var t=v&&window.CTX_TASKS&&CTX_TASKS[k]&&CTX_TASKS[k][i];if(t&&out.indexOf(t.title)<0)out.push(t.title);});});
@@ -1889,17 +1896,23 @@
     var W=1080,H=1920,cv=document.createElement('canvas');cv.width=W;cv.height=H;var c=cv.getContext('2d');
     try{await Promise.all([document.fonts.load('700 120px Advercase'),document.fonts.load('800 40px "Plus Jakarta Sans"'),document.fonts.load('500 40px "Plus Jakarta Sans"')]);}catch(e){}
     var cores=['azul','verde','roxo','ciano','ambar','rosa'],bg=await carregarImg('img/capas/base-'+cores[STY.cor%6]+'.webp');
-    if(bg){var s=Math.max(W/bg.width,H/bg.height),bw=bg.width*s,bh=bg.height*s;c.drawImage(bg,(W-bw)/2,(H-bh)/2,bw,bh);}else{var g0=c.createLinearGradient(0,0,W,H);g0.addColorStop(0,'#1b2a6b');g0.addColorStop(1,'#4f2ab0');c.fillStyle=g0;c.fillRect(0,0,W,H);}
-    var g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,'rgba(8,10,28,.55)');g.addColorStop(.45,'rgba(8,10,28,.35)');g.addColorStop(1,'rgba(8,10,28,.85)');c.fillStyle=g;c.fillRect(0,0,W,H);
+    var TR=!!STY.transp;
+    if(TR){c.shadowColor='rgba(0,0,0,.55)';c.shadowBlur=18;c.shadowOffsetY=3;}
+    else if(bg){var s=Math.max(W/bg.width,H/bg.height),bw=bg.width*s,bh=bg.height*s;c.drawImage(bg,(W-bw)/2,(H-bh)/2,bw,bh);}else{var g0=c.createLinearGradient(0,0,W,H);g0.addColorStop(0,'#1b2a6b');g0.addColorStop(1,'#4f2ab0');c.fillStyle=g0;c.fillRect(0,0,W,H);}
+    if(!TR){var g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,'rgba(8,10,28,.55)');g.addColorStop(.45,'rgba(8,10,28,.35)');g.addColorStop(1,'rgba(8,10,28,.85)');c.fillStyle=g;c.fillRect(0,0,W,H);}
+    var CX=TR?'rgba(0,0,0,.38)':'rgba(255,255,255,.13)';
     var F='"Plus Jakarta Sans",system-ui,sans-serif',T="Advercase,'Archivo Black','Arial Black',sans-serif",X=90,L=W-180,y=170;
     c.fillStyle='rgba(255,255,255,.75)';c.font='800 30px '+F;c.textBaseline='alphabetic';
     c.fillText('PLATAFORMA INTELIGENTE  ·  @ENGLISHBYGEDIEL',X,y);
-    var seq=sequencia(),diasUso=(ST.dias||[]).length||1;
-    y+=170;c.fillStyle='#fff';c.font='700 150px '+T;c.fillText('DAY '+diasUso,X,y);
-    y+=70;c.font='800 44px '+F;c.fillStyle='#ffd166';c.fillText('🔥 '+seq.n+(seq.n===1?' dia seguido':' dias seguidos')+' de inglês',X,y);
+    var seq=sequencia(),jd=jornada();
+    y+=150;c.fillStyle='#fff';c.font='700 130px '+T;c.fillText('MÊS '+jd.mes+'/'+jd.meses,X,y);
+    y+=50;rr(c,X,y,L,34,17);c.fillStyle=TR?'rgba(0,0,0,.4)':'rgba(255,255,255,.18)';c.fill();
+    var sh=c.shadowBlur;c.shadowBlur=0;rr(c,X,y,Math.max(34,L*jd.pct/100),34,17);var gb=c.createLinearGradient(X,0,X+L,0);gb.addColorStop(0,'#7ee2a8');gb.addColorStop(1,'#ffd166');c.fillStyle=gb;c.fill();c.shadowBlur=sh;
+    y+=84;c.font='800 38px '+F;c.fillStyle='#fff';c.fillText('Dia '+jd.dia+' de '+jd.total+' da maratona · '+jd.pct+'%',X,y);
+    y+=60;c.fillStyle='#ffd166';c.fillText('🔥 '+seq.n+(seq.n===1?' dia seguido':' dias seguidos')+' de inglês',X,y);
     // quiz
     if(STY.quiz){
-      y+=60;rr(c,X,y,L,190,36);c.fillStyle='rgba(255,255,255,.14)';c.fill();
+      y+=60;rr(c,X,y,L,190,36);c.fillStyle=CX;c.fill();
       c.fillStyle='#fff';c.font='700 76px '+T;c.fillText('🏆 '+STY.quiz.sc+'/'+STY.quiz.tot,X+40,y+95);
       c.font='600 34px '+F;c.fillStyle='rgba(255,255,255,.85)';var tq=quebrar(c,'no quiz: '+STY.quiz.t,L-80);c.fillText(tq[0]+(tq.length>1?'…':''),X+40,y+150);
       y+=190;
@@ -1909,7 +1922,7 @@
     y+=90;c.fillStyle='#fff';c.font='800 40px '+F;c.fillText('TODAY I PRACTICED ENGLISH ✓',X,y);
     y+=20;var lst=tf.length?tf.slice(0,5):['Abri o app e mantive a sequência 💪'];
     c.font='600 36px '+F;
-    lst.forEach(function(t){var ls=quebrar(c,t,L-90).slice(0,2);var h=30+ls.length*46;y+=18;rr(c,X,y,L,h+10,26);c.fillStyle='rgba(255,255,255,.12)';c.fill();
+    lst.forEach(function(t){var ls=quebrar(c,t,L-90).slice(0,2);var h=30+ls.length*46;y+=18;rr(c,X,y,L,h+10,26);c.fillStyle=CX;c.fill();
       c.fillStyle='#7ee2a8';c.font='800 38px '+F;c.fillText('✓',X+30,y+56);c.fillStyle='#fff';c.font='600 36px '+F;ls.forEach(function(l,i){c.fillText(l,X+84,y+56+i*46);});y+=h+10;});
     if(tf.length>5){y+=50;c.fillStyle='rgba(255,255,255,.7)';c.font='600 32px '+F;c.fillText('+ '+(tf.length-5)+' tarefas',X,y);}
     // frase
@@ -1918,27 +1931,28 @@
     c.fillStyle='#fff';lf.forEach(function(l,i){c.fillText(l,X,fy+i*62);});
     c.font='800 30px '+F;c.fillStyle='#a5b4fc';c.fillText('— '+fr[1].toUpperCase(),X,fy+lf.length*62+20);
     // rodapé
-    rr(c,X,H-200,L,110,55);c.fillStyle='#fff';c.fill();c.fillStyle='#1b1f4b';c.font='800 36px '+F;c.textAlign='center';
+    if(TR){c.fillStyle='#fff';}else{rr(c,X,H-200,L,110,55);c.fillStyle='#fff';c.fill();c.fillStyle='#1b1f4b';}c.font='800 36px '+F;c.textAlign='center';
     c.fillText('Bora comigo? englishbygediel.netlify.app',W/2,H-133);c.textAlign='left';
     return cv;
   }
   var stEl=document.createElement('div');stEl.id='mi-story';stEl.className='modal-overlay';document.body.appendChild(stEl);
-  var stc=document.createElement('style');stc.textContent='#mi-story .sb{background:var(--surface);border-radius:22px;padding:16px;width:min(420px,calc(100vw - 32px));max-height:calc(100dvh - 32px);display:flex;flex-direction:column;gap:12px;box-shadow:0 24px 60px rgba(0,0,0,.45)}#mi-story img{width:100%;max-height:62dvh;object-fit:contain;border-radius:14px;background:#0b0d1c}#mi-story .bt{display:grid;grid-template-columns:1fr 1fr;gap:8px}#mi-story button{border:none;border-radius:14px;padding:13px;font:inherit;font-size:14px;font-weight:800;cursor:pointer}#mi-story .p{background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff;grid-column:1/-1}#mi-story .g{background:var(--bg2,rgba(127,127,127,.12));color:var(--fg)}#mi-story .t{font-size:13px;color:var(--fg2);text-align:center;line-height:1.5}';document.head.appendChild(stc);
+  var stc=document.createElement('style');stc.textContent='#mi-story .sb{background:var(--surface);border-radius:22px;padding:16px;width:min(420px,calc(100vw - 32px));max-height:calc(100dvh - 32px);display:flex;flex-direction:column;gap:12px;box-shadow:0 24px 60px rgba(0,0,0,.45)}#mi-story img{width:100%;max-height:62dvh;object-fit:contain;border-radius:14px;background:#0b0d1c}#mi-story img.tr{background:repeating-conic-gradient(#9aa0b4 0 25%,#d7dbe6 0 50%) 0 0/24px 24px}#mi-story .bt{display:grid;grid-template-columns:1fr 1fr;gap:8px}#mi-story button{border:none;border-radius:14px;padding:13px;font:inherit;font-size:14px;font-weight:800;cursor:pointer}#mi-story .p{background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff;grid-column:1/-1}#mi-story .g{background:var(--bg2,rgba(127,127,127,.12));color:var(--fg)}#mi-story .t{font-size:13px;color:var(--fg2);text-align:center;line-height:1.5}';document.head.appendChild(stc);
   var stBlob=null;
   async function pintarStory(){
     stEl.innerHTML='<div class="sb"><div class="t">Gerando sua imagem…</div></div>';stEl.classList.add('open');
     var cv=await desenharStory();
     stBlob=await new Promise(function(ok){cv.toBlob(ok,'image/png');});
     var url=URL.createObjectURL(stBlob);
-    stEl.innerHTML='<div class="sb"><img alt="Sua conquista de hoje" src="'+url+'"><div class="t">Posta no status do WhatsApp ou no story do Instagram e marca <b>@englishbygediel</b> 🔥</div>'
-      +'<div class="bt"><button class="p" data-st="share">📤 Compartilhar</button><button class="g" data-st="frase">🎲 Outra frase</button><button class="g" data-st="cor">🎨 Outra cor</button><button class="g" data-st="baixar">⬇️ Baixar</button><button class="g" data-st="fechar">Fechar</button></div></div>';
+    stEl.innerHTML='<div class="sb"><img alt="Sua conquista de hoje" class="'+(STY.transp?'tr':'')+'" src="'+url+'"><div class="t">'+(STY.transp?'PNG sem fundo: tira a foto no story do Instagram e cola essa imagem por cima 📸':'Posta no status do WhatsApp ou no story do Instagram e marca <b>@englishbygediel</b> 🔥')+'</div>'
+      +'<div class="bt"><button class="p" data-st="share">📤 Compartilhar</button><button class="g" data-st="frase">🎲 Outra frase</button><button class="g" data-st="cor">'+(STY.transp?'🎨 Com fundo':'🎨 Outra cor')+'</button><button class="g" data-st="transp">'+(STY.transp?'🖼️ Trocar cor':'🫥 Sem fundo')+'</button><button class="g" data-st="baixar">⬇️ Baixar</button><button class="g" data-st="fechar">Fechar</button></div></div>';
   }
   stEl.addEventListener('click',async function(e){
     if(e.target===stEl){stEl.classList.remove('open');return;}
     var b=e.target.closest('[data-st]');if(!b)return;var a=b.dataset.st;
     if(a==='fechar')return stEl.classList.remove('open');
     if(a==='frase'){STY.i++;return pintarStory();}
-    if(a==='cor'){STY.cor++;return pintarStory();}
+    if(a==='cor'){if(STY.transp)STY.transp=false;else STY.cor++;return pintarStory();}
+    if(a==='transp'){if(STY.transp){STY.transp=false;STY.cor++;}else STY.transp=true;return pintarStory();}
     var f=new File([stBlob],'minha-conquista-ingles.png',{type:'image/png'});
     if(a==='share'&&navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],text:'Hoje eu treinei meu inglês 🔥 @englishbygediel'});}catch(err){}return;}
     var u=URL.createObjectURL(stBlob),l=document.createElement('a');l.href=u;l.download='minha-conquista-ingles.png';document.body.appendChild(l);l.click();l.remove();
