@@ -24,6 +24,11 @@
   var IC_CTX={'Em Casa':'home','Acabei de acordar':'ctx-acordar','Vou pro banho':'ctx-banho','Prestes a dormir':'ctx-dormir','No carro':'ctx-carro','No Transporte':'ctx-transporte','No Trabalho':'ctx-trabalho','Intervalo do almoço':'ctx-almoco','Lavando a louça':'ctx-louca','Limpando a casa':'ctx-limpeza','Cozinhando':'ctx-cozinha','Caminhando':'ctx-caminhada','Na Academia':'ctx-academia','Na fila':'ctx-fila','No sofá':'ctx-sofa','Só 5 minutos':'ctx-5min','Focado pra estudar':'ctx-foco','Viajando':'viagens','No mercado':'ctx-mercado','Na igreja':'ctx-igreja','Com a família':'ctx-familia'};
   function icCtx(c,cls){return IC_CTX[c.k]?IC(IC_CTX[c.k],cls):c.ic;}
   function iconesMenu(){
+    [].forEach.call(document.querySelectorAll('.sidebar .nav-pill'),function(n){var t=n.querySelectorAll('span')[1];if(t&&!n.title)n.title=t.textContent;});
+    var lg=document.querySelector('.sidebar-logo');
+    if(lg&&!document.getElementById('mi-recolher')){var b=document.createElement('button');b.id='mi-recolher';b.title='Recolher ou abrir o menu';b.setAttribute('aria-label','Recolher ou abrir o menu');b.innerHTML='<span>‹</span>';lg.appendChild(b);
+      b.addEventListener('click',function(){var on=!document.body.classList.contains('mi-mini');document.body.classList.toggle('mi-mini',on);LS.set('mi_mini',on);});
+      if(LS.get('mi_mini',false))document.body.classList.add('mi-mini');}
     [].forEach.call(document.querySelectorAll('.sidebar .nav-pill'),function(n){
       var sp=n.querySelector('.nav-icon');if(!sp||sp.dataset.ic3d)return;
       var m=(n.getAttribute('onclick')||'').match(/goTo\('([\w-]+)'/),k=m?m[1]:/openSettings/.test(n.getAttribute('onclick')||'')?'config':n.id==='admin-nav'?'admin':null;
@@ -305,6 +310,29 @@
   '.mi-lg-rail{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:22px;font-size:11px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--fg3);opacity:.55}.mi-lg-rail .mi-logo{font-size:16px}',
   '.mi-lg-festa{position:absolute;right:-26px;bottom:-30px;font-size:150px;color:#fff;opacity:.09;pointer-events:none}#mi-festa .fb{overflow:hidden}',
   '@media(max-width:680px){.mi-lg-badge{font-size:20px}#pane-home>.mi-lg-marca{font-size:84px;right:-6px;top:-4px}}',
+  /* cards Checklist e Lives como ícones gigantes */
+  '.hm-big{min-height:176px!important;padding:22px!important;justify-content:flex-end}.hm-big .ic{position:absolute;right:-6px;top:50%;transform:translateY(-50%);margin:0!important}',
+  '.hm-big .ic .ic3d{width:168px!important;height:168px!important;mix-blend-mode:multiply;filter:none!important}.hm-big .lb{font-size:22px!important;letter-spacing:-.3px;position:relative}.hm-big .pg{font-size:13px!important;opacity:1!important;position:relative;max-width:60%}',
+  '.hm-check{background:linear-gradient(160deg,#f2fbf0,#d3f0d0)!important;color:#14532d!important;box-shadow:0 18px 42px rgba(34,197,94,.28),inset 0 0 0 2px rgba(255,255,255,.85)!important}',
+  '.hm-check .bar{background:rgba(22,101,52,.15)!important;max-width:58%;position:relative}.hm-check .bar i{background:#16a34a!important}',
+  '.hm-live,.hm-live.off{background:linear-gradient(160deg,#eef5ff,#d4e4fb)!important;color:#1e3a8a!important;box-shadow:0 18px 42px rgba(37,99,235,.25),inset 0 0 0 2px rgba(255,255,255,.85)!important}',
+  '.hm-live .dot{z-index:2;background:#ef4444!important;color:#fff!important}',
+  '.hm-big:hover{transform:translateY(-3px) scale(1.01)}.hm-big:active{transform:scale(.98)}',
+  '@media(max-width:560px){.hm-big{min-height:150px!important;padding:16px!important}.hm-big .ic .ic3d{width:112px!important;height:112px!important}.hm-big .lb{font-size:17px!important}.hm-big .pg{max-width:100%;font-size:11.5px!important}.hm-big .ic{top:34%;right:-10px}}',
+  /* ícones maiores: atalhos, universos, contextos e redes */
+  '.hm-quick button span .ic3d{width:54px!important;height:54px!important}.hm-uni span .ic3d{width:58px!important;height:58px!important}',
+  '.ctx-chip .ce .ic3d{width:46px!important;height:46px!important}#pane-maratona .ctx-chip{min-width:112px;max-width:124px}',
+  '.right-rail a .ic3d,.right-rail button .ic3d{width:34px!important;height:34px!important}.right-rail a,.right-rail button[data-hm]{padding-top:11px!important;padding-bottom:11px!important;font-size:13px!important}',
+  '.mar-task .mt-title,.mar-task-t{font-size:15px}',
+  '.hm-ref .bts .ic3d{width:22px;height:22px}#mi-story .rd .ic3d{width:26px;height:26px}',
+  /* menu lateral recolhível (computador e iPad) */
+  '#mi-recolher{margin-left:auto;width:28px;height:28px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--fg2);cursor:pointer;display:grid;place-items:center;font-size:18px;font-weight:800;flex:none;transition:transform .2s}',
+  '.sidebar{transition:width .22s,min-width .22s}',
+  '@media(min-width:681px){body.mi-mini .sidebar{width:84px!important;min-width:84px!important}body.mi-mini .logo-text,body.mi-mini .logo-sub,body.mi-mini .nav-pill>span:not(.nav-icon),body.mi-mini .nav-badge,body.mi-mini .sidebar-level,body.mi-mini .user-name,body.mi-mini .user-sub,body.mi-mini .mi-mctl,body.mi-mini .mi-unovo{display:none!important}'
+   +'body.mi-mini .sidebar-logo{flex-direction:column;gap:8px;padding:16px 8px 10px}body.mi-mini #mi-recolher{margin:0}body.mi-mini #mi-recolher span{transform:rotate(180deg)}'
+   +'body.mi-mini .nav-section{font-size:0;height:1px;background:var(--border);margin:10px 16px;padding:0}body.mi-mini .nav-pill{justify-content:center;padding:9px 0!important;margin:2px 10px}body.mi-mini .nav-icon,body.mi-mini .nav-icon .ic3d{width:36px!important;height:36px!important}'
+   +'body.mi-mini .sidebar-footer{justify-content:center}body.mi-mini #mi-bnav{left:84px!important}}',
+  '@media(max-width:680px){#mi-recolher{display:none}}',
   /* celular: menu de baixo + gaveta */
   '#mi-bnav,#mi-shade{display:none}',
   '@media(max-width:680px){',
@@ -487,7 +515,7 @@
       +'<button class="hm-uni" style="background:linear-gradient(135deg,#0c4a6e,#0ea5e9)" data-hm="viagens"><span>'+IC('viagens')+'</span><b>Viagens</b></button>'
       +'</div>';
     h+='<div class="hm-ref"><div>'+IC('indicar','xl')+'</div><div><div class="t">Conhece alguém que trava no inglês?</div><div class="s">Manda o convite: a pessoa faz o teste de nível grátis e descobre por onde começar. Leva 10 segundos.</div></div>'
-      +'<div class="bts"><button data-hm="indicar" style="background:#25d366;color:#fff">Convidar no WhatsApp</button><button data-hm="copiar" style="background:var(--surface2);color:var(--fg)">Copiar link</button></div></div>';
+      +'<div class="bts"><button data-hm="indicar" style="background:#25d366;color:#fff;display:inline-flex;align-items:center;gap:8px">'+IC('wa-real')+' Convidar no WhatsApp</button><button data-hm="copiar" style="background:var(--surface2);color:var(--fg)">Copiar link</button></div></div>';
     p.innerHTML=h;
     pintarAula();
   }
@@ -540,8 +568,8 @@
       +'<div><div class="rail-hd">Próximas lives</div>'+lv.map(function(x){
         return '<div class="upcoming-item" style="cursor:pointer" data-hm="lives"><div class="upc-date"><span class="day">'+x.st.getDate()+'</span>'+x.st.toLocaleDateString('pt-BR',{month:'short'}).replace('.','').toUpperCase()+'</div><div><div class="upc-title">'+E(x.lv.title)+(x.aoVivo?' <span style="color:#ef4444;font-weight:800">● AO VIVO</span>':'')+'</div><div class="upc-time">'+E(quando(x))+'</div></div></div>';}).join('')+'</div>'
       +'<div><div class="rail-hd">Atalhos</div><div style="display:flex;flex-direction:column;gap:7px">'
-      +'<a href="https://www.youtube.com/@teachergediel" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:11px;padding:9px 12px;text-decoration:none;font-size:12px;font-weight:700;color:#ef4444">'+IC('youtube')+' Canal no YouTube</a>'
-      +'<a href="https://instagram.com/englishbygediel" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.18);border-radius:11px;padding:9px 12px;text-decoration:none;font-size:12px;font-weight:700;color:#8b5cf6">'+IC('instagram')+' @englishbygediel</a>'
+      +'<a href="https://www.youtube.com/@teachergediel" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:11px;padding:9px 12px;text-decoration:none;font-size:12px;font-weight:700;color:#ef4444">'+IC('yt-real')+' Canal no YouTube</a>'
+      +'<a href="https://instagram.com/englishbygediel" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.18);border-radius:11px;padding:9px 12px;text-decoration:none;font-size:12px;font-weight:700;color:#8b5cf6">'+IC('ig-real')+' @englishbygediel</a>'
       +'<button data-hm="indicar" style="display:flex;align-items:center;gap:8px;background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.25);border-radius:11px;padding:9px 12px;font-size:12px;font-weight:700;color:#16a34a;cursor:pointer;text-align:left">'+IC('indicar')+' Indicar um amigo</button>'
       +'</div><div class="mi-lg-rail"><span class="mi-logo"></span>Método Inteligente</div></div>';
   }
@@ -1993,7 +2021,7 @@
     stBlob=await new Promise(function(ok){cv.toBlob(ok,'image/png');});
     var url=URL.createObjectURL(stBlob);
     stEl.innerHTML='<div class="sb"><div class="hd"><span>Sua conquista de hoje</span><button data-st="fechar" aria-label="Fechar">✕</button></div><img alt="Sua conquista de hoje" class="'+(STY.transp?'tr':'')+'" src="'+url+'"><div class="t">'+(STY.transp?'PNG sem fundo: tira a foto no story do Instagram e cola essa imagem por cima 📸':'Posta no status do WhatsApp ou no story do Instagram e marca <b>@englishbygediel</b> 🔥')+'</div>'
-      +'<div class="rd"><button class="ig" data-st="ig"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Story no Instagram</button><button class="wa" data-st="wa"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.7-1.2s.2-1.1.2-1.2-.2-.2-.5-.3z"/></svg>Status do WhatsApp</button></div>'
+      +'<div class="rd"><button class="ig" data-st="ig">'+IC('ig-real')+'Story no Instagram</button><button class="wa" data-st="wa">'+IC('wa-real')+'Status do WhatsApp</button></div>'
       +'<div class="ic4"><button class="g" data-st="frase"><b>🎲</b>Outra frase</button><button class="g" data-st="cor"><b>🎨</b>'+(STY.transp?'Com fundo':'Outra cor')+'</button><button class="g" data-st="transp"><b>'+(STY.transp?'🖼️':'🫥')+'</b>'+(STY.transp?'Trocar cor':'Sem fundo')+'</button><button class="g" data-st="baixar"><b>⬇️</b>Baixar</button></div></div>';
   }
   stEl.addEventListener('click',async function(e){
