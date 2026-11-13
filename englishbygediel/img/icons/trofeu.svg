@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><defs>
+<linearGradient id="btrofeu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdf7e6"/><stop offset="1" stop-color="#fbf0ce"/></linearGradient>
+<linearGradient id="gtrofeu" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0" stop-color="#f0c84d"/><stop offset=".55" stop-color="#eab308"/><stop offset="1" stop-color="#d0a00c"/></linearGradient>
+<filter id="strofeu" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="11"/></filter>
+<filter id="dtrofeu" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#d0a00c" flood-opacity=".28"/></filter></defs>
+<rect x="6" y="6" width="244" height="244" rx="62" fill="url(#btrofeu)"/>
+<rect x="7.5" y="7.5" width="241" height="241" rx="60.5" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="3"/>
+<ellipse cx="128" cy="204" rx="62" ry="13" fill="#eab308" opacity=".45" filter="url(#strofeu)"/>
+<g transform="translate(128 120) scale(.66) translate(-128 -128)" fill="url(#gtrofeu)" filter="url(#dtrofeu)"><path d="M232,64H208V48a8,8,0,0,0-8-8H56a8,8,0,0,0-8,8V64H24A16,16,0,0,0,8,80V96a40,40,0,0,0,40,40h3.65A80.13,80.13,0,0,0,120,191.61V216H96a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16H136V191.58c31.94-3.23,58.44-25.64,68.08-55.58H208a40,40,0,0,0,40-40V80A16,16,0,0,0,232,64ZM48,120A24,24,0,0,1,24,96V80H48v32q0,4,.39,8ZM232,96a24,24,0,0,1-24,24h-.5a81.81,81.81,0,0,0,.5-8.9V80h24Z"/></g></svg>

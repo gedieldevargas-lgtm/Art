@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><defs>
+<linearGradient id="beditar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fef5e7"/><stop offset="1" stop-color="#fdecce"/></linearGradient>
+<linearGradient id="geditar" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0" stop-color="#f8b94f"/><stop offset=".55" stop-color="#f59e0b"/><stop offset="1" stop-color="#da8d0e"/></linearGradient>
+<filter id="seditar" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="11"/></filter>
+<filter id="deditar" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#da8d0e" flood-opacity=".28"/></filter></defs>
+<rect x="6" y="6" width="244" height="244" rx="62" fill="url(#beditar)"/>
+<rect x="7.5" y="7.5" width="241" height="241" rx="60.5" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="3"/>
+<ellipse cx="128" cy="204" rx="62" ry="13" fill="#f59e0b" opacity=".45" filter="url(#seditar)"/>
+<g transform="translate(128 120) scale(.66) translate(-128 -128)" fill="url(#geditar)" filter="url(#deditar)"><path d="M227.31,73.37,182.63,28.68a16,16,0,0,0-22.63,0L36.69,152A15.86,15.86,0,0,0,32,163.31V208a16,16,0,0,0,16,16H92.69A15.86,15.86,0,0,0,104,219.31L227.31,96a16,16,0,0,0,0-22.63ZM192,108.68,147.31,64l24-24L216,84.68Z"/></g></svg>

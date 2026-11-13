@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><defs>
+<linearGradient id="bjogowyr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fef1e8"/><stop offset="1" stop-color="#fee3d0"/></linearGradient>
+<linearGradient id="gjogowyr" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0" stop-color="#fb9a57"/><stop offset=".55" stop-color="#f97316"/><stop offset="1" stop-color="#de6818"/></linearGradient>
+<filter id="sjogowyr" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="11"/></filter>
+<filter id="djogowyr" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#de6818" flood-opacity=".28"/></filter></defs>
+<rect x="6" y="6" width="244" height="244" rx="62" fill="url(#bjogowyr)"/>
+<rect x="7.5" y="7.5" width="241" height="241" rx="60.5" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="3"/>
+<ellipse cx="128" cy="204" rx="62" ry="13" fill="#f97316" opacity=".45" filter="url(#sjogowyr)"/>
+<g transform="translate(128 120) scale(.66) translate(-128 -128)" fill="url(#gjogowyr)" filter="url(#djogowyr)"><path d="M229.66,189.66l-32,32a8,8,0,0,1-11.32,0l-32-32A8,8,0,0,1,160,176h24V139.31l-56-56-56,56V176H96a8,8,0,0,1,5.66,13.66l-32,32a8,8,0,0,1-11.32,0l-32-32A8,8,0,0,1,32,176H56V136a8,8,0,0,1,2.34-5.66L120,68.69V24a8,8,0,0,1,16,0V68.69l61.66,61.65A8,8,0,0,1,200,136v40h24a8,8,0,0,1,5.66,13.66Z"/></g></svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><defs>
+<linearGradient id="bjogospeak" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdedf5"/><stop offset="1" stop-color="#fbdaeb"/></linearGradient>
+<linearGradient id="gjogospeak" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0" stop-color="#f17bb6"/><stop offset=".55" stop-color="#ec4899"/><stop offset="1" stop-color="#d2428b"/></linearGradient>
+<filter id="sjogospeak" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="11"/></filter>
+<filter id="djogospeak" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#d2428b" flood-opacity=".28"/></filter></defs>
+<rect x="6" y="6" width="244" height="244" rx="62" fill="url(#bjogospeak)"/>
+<rect x="7.5" y="7.5" width="241" height="241" rx="60.5" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="3"/>
+<ellipse cx="128" cy="204" rx="62" ry="13" fill="#ec4899" opacity=".45" filter="url(#sjogospeak)"/>
+<g transform="translate(128 120) scale(.66) translate(-128 -128)" fill="url(#gjogospeak)" filter="url(#djogospeak)"><path d="M80,128V64a48,48,0,0,1,96,0v64a48,48,0,0,1-96,0Zm128,0a8,8,0,0,0-16,0,64,64,0,0,1-128,0,8,8,0,0,0-16,0,80.11,80.11,0,0,0,72,79.6V240a8,8,0,0,0,16,0V207.6A80.11,80.11,0,0,0,208,128Z"/></g></svg>

@@ -16,6 +16,27 @@
   var wa=function(txt,num){window.open('https://wa.me/'+(num===false?'':WA)+'?text='+encodeURIComponent(txt),'_blank','noopener');};
   var pill=function(p){return [].filter.call(document.querySelectorAll('.nav-pill'),function(n){return (n.getAttribute('onclick')||'').indexOf("'"+p+"'")>=0;})[0]||null;};
   var go=function(p){window.goTo(p,pill(p));};
+  /* ── ícones 3D (img/icons): os 20 do Gediel em .webp e os do mesmo estilo em .svg ── */
+  var IC_BASE='home maratona lives modulos jogos materiais prompts agendar check fogo eom culture viagens bussola prisma youtube instagram indicar sino suporte'.split(' ');
+  function IC(n,cls){if(!n)return '';return '<img class="ic3d'+(cls?' '+cls:'')+'" src="img/icons/'+n+'.'+(IC_BASE.indexOf(n)>=0?'webp':'svg')+'" alt="" draggable="false">';}
+  window.IC=IC;
+  var IC_MENU={home:'home',maratona:'maratona',lives:'lives',modulos:'modulos',jogos:'jogos',materiais:'materiais',prompts:'prompts',agendar:'agendar',eom:'eom',culture:'culture',viagens:'viagens',bussola:'bussola',prisma:'prisma',admin:'admin'};
+  var IC_CTX={'Em Casa':'home','Acabei de acordar':'ctx-acordar','Vou pro banho':'ctx-banho','Prestes a dormir':'ctx-dormir','No carro':'ctx-carro','No Transporte':'ctx-transporte','No Trabalho':'ctx-trabalho','Intervalo do almoço':'ctx-almoco','Lavando a louça':'ctx-louca','Limpando a casa':'ctx-limpeza','Cozinhando':'ctx-cozinha','Caminhando':'ctx-caminhada','Na Academia':'ctx-academia','Na fila':'ctx-fila','No sofá':'ctx-sofa','Só 5 minutos':'ctx-5min','Focado pra estudar':'ctx-foco','Viajando':'viagens','No mercado':'ctx-mercado','Na igreja':'ctx-igreja','Com a família':'ctx-familia'};
+  function icCtx(c,cls){return IC_CTX[c.k]?IC(IC_CTX[c.k],cls):c.ic;}
+  function iconesMenu(){
+    [].forEach.call(document.querySelectorAll('.sidebar .nav-pill'),function(n){
+      var sp=n.querySelector('.nav-icon');if(!sp||sp.dataset.ic3d)return;
+      var m=(n.getAttribute('onclick')||'').match(/goTo\('([\w-]+)'/),k=m?m[1]:/openSettings/.test(n.getAttribute('onclick')||'')?'config':n.id==='admin-nav'?'admin':null;
+      var nome=k&&(IC_MENU[k]||(k==='config'?'config':null));if(!nome)return;
+      sp.innerHTML=IC(nome);sp.dataset.ic3d='1';
+    });
+  }
+  function iconesTopo(){
+    var th=document.getElementById('theme-toggle');if(th)th.innerHTML=IC(document.documentElement.getAttribute('data-theme')==='light'?'tema-claro':'tema-escuro');
+    var bell=[].filter.call(document.querySelectorAll('.topbar .tb-btn'),function(b){return /🔔/.test(b.textContent);})[0];if(bell)bell.innerHTML=IC('sino')+'<span class="notif-dot"></span>';
+    var fab=document.getElementById('ai-fab');if(fab)fab.innerHTML=IC('suporte');
+  }
+  var ttOrig=window.toggleTheme;if(ttOrig)window.toggleTheme=function(){ttOrig();iconesTopo();};
   var CTX=[
     {k:'Em Casa',ic:'🏠',lb:'Em casa',hint:'Tempo pra estudar com calma'},
     {k:'Acabei de acordar',ic:'🥱',lb:'Acabei de acordar',hint:'Olho meio aberto, cérebro ligando'},
@@ -258,6 +279,14 @@
   '.mi-mctl{margin-left:auto;display:flex;gap:2px}.mi-mctl button{width:26px;height:26px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--fg);font-size:11px;cursor:pointer;padding:0}body.mi-edit .nav-pill .nav-badge{display:none}',
   '.mi-unovo{margin:4px 10px;width:calc(100% - 20px);border:1.5px dashed var(--accent);background:none;color:var(--accent);border-radius:12px;padding:9px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}',
   '#mi-ed-btn{font-weight:800}#mi-ed-btn.on{background:var(--accent);color:#fff;border-color:var(--accent)}body.mi-edit .topbar{box-shadow:inset 0 -3px 0 var(--accent)}',
+  /* ícones 3D */
+  '.ic3d{width:1.3em;height:1.3em;object-fit:contain;vertical-align:-.3em;display:inline-block;user-select:none;-webkit-user-drag:none}',
+  '.nav-icon{width:26px!important;font-size:16px}.nav-icon .ic3d{width:26px;height:26px;vertical-align:middle}',
+  '.hm-big .ic .ic3d{width:64px;height:64px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.18))}.hm-quick button span .ic3d{width:34px;height:34px}',
+  '.ic3d.xl{width:52px;height:52px}.ic3d.lg{width:.9em;height:.9em;vertical-align:-.05em;margin-left:4px}.ic3d.fe{width:84px;height:84px}',
+  '#mi-bnav button span .ic3d{width:28px;height:28px}#ai-fab .ic3d{width:40px;height:40px;vertical-align:middle}',
+  '.right-rail a .ic3d,.right-rail button .ic3d{width:24px;height:24px;vertical-align:middle}#theme-toggle .ic3d,.topbar .tb-btn .ic3d{width:24px;height:24px;vertical-align:middle}#mi-ed-btn .ic3d{width:20px;height:20px;vertical-align:-5px}',
+  '.mi-ctx .ic .ic3d{width:44px;height:44px}.ctx-chip .ce .ic3d{width:30px;height:30px;display:block;margin:0 auto 4px}#mi-festa .sb .ic3d{width:22px;height:22px}',
   /* celular: menu de baixo + gaveta */
   '#mi-bnav,#mi-shade{display:none}',
   '@media(max-width:680px){',
@@ -337,7 +366,7 @@
   if(doneOrig)window.taskDone=function(){doneOrig();salvarChecks();marcarDia();verCompleto();};
   function chipsCtx(){
     var g=document.querySelector('#pane-maratona .ctx-grid');if(!g||g.dataset.mi)return;g.dataset.mi='1';g.classList.remove('stagger');
-    g.innerHTML=CTX.map(function(c){return '<div class="ctx-chip'+(c.k==='Em Casa'?' active':'')+'" data-k="'+E(c.k)+'" onclick="selCtx(this)"><span class="ce">'+c.ic+'</span>'+E(c.lb)+'</div>';}).join('');
+    g.innerHTML=CTX.map(function(c){return '<div class="ctx-chip'+(c.k==='Em Casa'?' active':'')+'" data-k="'+E(c.k)+'" onclick="selCtx(this)"><span class="ce">'+icCtx(c)+'</span>'+E(c.lb)+'</div>';}).join('');
   }
   window.selCtx=function(el){
     var k=el.dataset.k;if(!k)return;
@@ -424,22 +453,22 @@
         +(deferredInstall?'<button data-hm="instalar">Instalar</button>':'<button data-hm="instalar-x" style="background:var(--surface2);color:var(--fg2)">Ok</button>')+'</div>';
     }
     h+='<div class="hm-row">'
-      +'<button class="hm-big hm-check" data-hm="check" aria-label="Checklist de hoje"><div class="ic">✅</div><div class="lb">Checklist de hoje</div><div class="pg">'+(faltaDiagnostico()?'🔒 Faça os 2 testes pra liberar':c.ic+' '+E(c.lb)+' · '+pc.feitos+' de '+pc.tot+' feitas')+'</div><div class="bar"><i style="width:'+pc.pct+'%"></i></div></button>'
-      +'<button class="hm-big hm-live'+(lv&&lv.aoVivo?'':' off')+'" data-hm="lives" aria-label="Lives">'+(lv&&lv.aoVivo?'<span class="dot">● AO VIVO</span>':'')+'<div class="ic">📺</div><div class="lb">Lives</div><div class="pg">'+(lv?E(lv.lv.title)+'<br>'+E(quando(lv)):'Ver agenda')+'</div></button>'
+      +'<button class="hm-big hm-check" data-hm="check" aria-label="Checklist de hoje"><div class="ic">'+IC('check')+'</div><div class="lb">Checklist de hoje</div><div class="pg">'+(faltaDiagnostico()?'🔒 Faça os 2 testes pra liberar':c.ic+' '+E(c.lb)+' · '+pc.feitos+' de '+pc.tot+' feitas')+'</div><div class="bar"><i style="width:'+pc.pct+'%"></i></div></button>'
+      +'<button class="hm-big hm-live'+(lv&&lv.aoVivo?'':' off')+'" data-hm="lives" aria-label="Lives">'+(lv&&lv.aoVivo?'<span class="dot">● AO VIVO</span>':'')+'<div class="ic">'+IC('lives')+'</div><div class="lb">Lives</div><div class="pg">'+(lv?E(lv.lv.title)+'<br>'+E(quando(lv)):'Ver agenda')+'</div></button>'
       +'</div>';
     h+='<div class="sec-hd">Sua aula</div><div class="hm-aula" id="hm-aula"><div class="cv"><div class="lock">Carregando…</div></div><div class="bd"><div class="st">&nbsp;</div></div></div>';
     h+='<div class="hm-quick">'
-      +'<button data-hm="duvida"><span>🙋</span>Dúvida</button>'
-      +'<button data-hm="jogos"><span>🎮</span>Jogos</button>'
-      +'<button data-hm="prompts"><span>🤖</span>Prompts</button>'
-      +'<button data-hm="video"><span>▶️</span>Como usar</button>'
+      +'<button data-hm="duvida"><span>'+IC('suporte')+'</span>Dúvida</button>'
+      +'<button data-hm="jogos"><span>'+IC('jogos')+'</span>Jogos</button>'
+      +'<button data-hm="prompts"><span>'+IC('prompts')+'</span>Prompts</button>'
+      +'<button data-hm="video"><span>'+IC('youtube')+'</span>Como usar</button>'
       +'</div>';
     h+='<div class="sec-hd">Universos</div><div class="hm-unis">'
       +'<button class="hm-uni" style="background:linear-gradient(135deg,#15281f,#2f6b4f)" data-hm="eom"><span>🙏</span><b>English On Mission</b></button>'
       +'<button class="hm-uni" style="background:linear-gradient(135deg,#1b2a6b,#4f6ef7)" data-hm="culture"><span>🎬</span><b>Culture English</b></button>'
       +'<button class="hm-uni" style="background:linear-gradient(135deg,#0c4a6e,#0ea5e9)" data-hm="viagens"><span>✈️</span><b>Viagens</b></button>'
       +'</div>';
-    h+='<div class="hm-ref"><div style="font-size:30px">🎁</div><div><div class="t">Conhece alguém que trava no inglês?</div><div class="s">Manda o convite: a pessoa faz o teste de nível grátis e descobre por onde começar. Leva 10 segundos.</div></div>'
+    h+='<div class="hm-ref"><div>'+IC('indicar','xl')+'</div><div><div class="t">Conhece alguém que trava no inglês?</div><div class="s">Manda o convite: a pessoa faz o teste de nível grátis e descobre por onde começar. Leva 10 segundos.</div></div>'
       +'<div class="bts"><button data-hm="indicar" style="background:#25d366;color:#fff">Convidar no WhatsApp</button><button data-hm="copiar" style="background:var(--surface2);color:var(--fg)">Copiar link</button></div></div>';
     p.innerHTML=h;
     pintarAula();
@@ -487,15 +516,15 @@
     var sq=sequencia(),pc=progCtx(),off=138.2*(1-pc.pct/100);
     var lv=proxLives().slice(0,3);
     r.innerHTML='<div><div class="rail-hd">Progresso</div>'
-      +'<div class="streak-card" style="margin-bottom:12px"><div class="streak-val">'+sq.n+'🔥</div><div><div style="font-size:13px;font-weight:700;margin-bottom:2px">'+(sq.n===1?'Dia seguido':'Dias seguidos')+'</div><div style="font-size:11px;color:var(--fg2)">'+(sq.hoje?'Hoje já conta. Volte amanhã!':'Faça 1 tarefa hoje pra '+(sq.n?'manter':'começar'))+'</div></div></div>'
+      +'<div class="streak-card" style="margin-bottom:12px"><div class="streak-val">'+sq.n+IC('fogo','lg')+'</div><div><div style="font-size:13px;font-weight:700;margin-bottom:2px">'+(sq.n===1?'Dia seguido':'Dias seguidos')+'</div><div style="font-size:11px;color:var(--fg2)">'+(sq.hoje?'Hoje já conta. Volte amanhã!':'Faça 1 tarefa hoje pra '+(sq.n?'manter':'começar'))+'</div></div></div>'
       +'<div class="card-sm" style="cursor:pointer" data-hm="check"><div style="display:flex;align-items:center;gap:12px"><svg width="52" height="52" viewBox="0 0 52 52"><circle cx="26" cy="26" r="22" fill="none" stroke="var(--border)" stroke-width="5"/><circle cx="26" cy="26" r="22" fill="none" stroke="#10b981" stroke-width="5" stroke-dasharray="138.2" stroke-dashoffset="'+off.toFixed(1)+'" stroke-linecap="round" transform="rotate(-90 26 26)"/><text x="26" y="31" text-anchor="middle" font-size="11" font-weight="800" fill="var(--fg)" font-family="inherit">'+pc.pct+'%</text></svg>'
       +'<div><div style="font-size:13px;font-weight:700;margin-bottom:3px">Checklist de hoje</div><div style="font-size:11px;color:var(--fg2)">'+pc.feitos+' de '+pc.tot+' · '+E((CTX.filter(function(x){return x.k===pc.k;})[0]||CTX[0]).lb)+'</div></div></div></div></div>'
       +'<div><div class="rail-hd">Próximas lives</div>'+lv.map(function(x){
         return '<div class="upcoming-item" style="cursor:pointer" data-hm="lives"><div class="upc-date"><span class="day">'+x.st.getDate()+'</span>'+x.st.toLocaleDateString('pt-BR',{month:'short'}).replace('.','').toUpperCase()+'</div><div><div class="upc-title">'+E(x.lv.title)+(x.aoVivo?' <span style="color:#ef4444;font-weight:800">● AO VIVO</span>':'')+'</div><div class="upc-time">'+E(quando(x))+'</div></div></div>';}).join('')+'</div>'
       +'<div><div class="rail-hd">Atalhos</div><div style="display:flex;flex-direction:column;gap:7px">'
-      +'<a href="https://www.youtube.com/@teachergediel" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:11px;padding:9px 12px;text-decoration:none;font-size:12px;font-weight:700;color:#ef4444">▶ Canal no YouTube</a>'
-      +'<a href="https://instagram.com/englishbygediel" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.18);border-radius:11px;padding:9px 12px;text-decoration:none;font-size:12px;font-weight:700;color:#8b5cf6">📸 @englishbygediel</a>'
-      +'<button data-hm="indicar" style="display:flex;align-items:center;gap:8px;background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.25);border-radius:11px;padding:9px 12px;font-size:12px;font-weight:700;color:#16a34a;cursor:pointer;text-align:left">🎁 Indicar um amigo</button>'
+      +'<a href="https://www.youtube.com/@teachergediel" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:11px;padding:9px 12px;text-decoration:none;font-size:12px;font-weight:700;color:#ef4444">'+IC('youtube')+' Canal no YouTube</a>'
+      +'<a href="https://instagram.com/englishbygediel" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.18);border-radius:11px;padding:9px 12px;text-decoration:none;font-size:12px;font-weight:700;color:#8b5cf6">'+IC('instagram')+' @englishbygediel</a>'
+      +'<button data-hm="indicar" style="display:flex;align-items:center;gap:8px;background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.25);border-radius:11px;padding:9px 12px;font-size:12px;font-weight:700;color:#16a34a;cursor:pointer;text-align:left">'+IC('indicar')+' Indicar um amigo</button>'
       +'</div></div>';
   }
 
@@ -533,7 +562,7 @@
     abrirEntrada('<div class="mi-ent-kicker">'+E(saudacao())+(nomeCurto()?', '+E(nomeCurto()):'')+'</div>'
       +'<div class="mi-ent-q">Onde você está agora?</div>'
       +'<div class="mi-ent-s">Escolha o mais parecido com onde você está ou o que está fazendo. Eu monto o checklist de hoje pra esse momento.</div>'
-      +'<div class="mi-ctx">'+CTX.map(function(c,i){return '<button data-ent="ctx" data-k="'+E(c.k)+'" style="animation-delay:'+(0.08+i*0.07)+'s"><span class="ic">'+c.ic+'</span><span class="lb">'+E(c.lb)+'</span><span class="ht">'+E(c.hint)+'</span></button>';}).join('')+'</div>'
+      +'<div class="mi-ctx">'+CTX.map(function(c,i){return '<button data-ent="ctx" data-k="'+E(c.k)+'" style="animation-delay:'+(0.08+i*0.07)+'s"><span class="ic">'+icCtx(c)+'</span><span class="lb">'+E(c.lb)+'</span><span class="ht">'+E(c.hint)+'</span></button>';}).join('')+'</div>'
       +'<button class="mi-ctx-skip" data-ent="ctx" data-k="">Só vim dar uma olhada</button>');
     ent.onclick=function(e){
       var b=e.target.closest('[data-ent="ctx"]');if(!b)return;
@@ -667,7 +696,7 @@
     });
     if(window.TITLES){TITLES.prompts='Prompts';TITLES.agendar='Marcar aula';Object.keys(UNIV).forEach(function(k){TITLES[k]=UNIV[k].title;});TITLES.home='Início';}
   }
-  montarMenu();
+  montarMenu();iconesMenu();iconesTopo();
 
   /* ───────────────────────── MARCAR AULA ─────────────────────────
      Os horários vêm da mesma agenda que o Gediel abre no painel do site (Supabase do hub, tabela horarios).
@@ -798,7 +827,7 @@
   /* ───────────────────────── celular: menu de baixo + gaveta ───────────────────────── */
   var sb=document.querySelector('.sidebar'),shade=document.createElement('div');shade.id='mi-shade';document.body.appendChild(shade);
   var bnav=document.createElement('nav');bnav.id='mi-bnav';bnav.setAttribute('aria-label','Navegação');
-  bnav.innerHTML=[['home','🏠','Início'],['maratona','✅','Checklist'],['modulos','📚','Aulas'],['lives','📺','Lives'],['menu','☰','Menu']].map(function(x){return '<button data-bn="'+x[0]+'"><span>'+x[1]+'</span>'+x[2]+'</button>';}).join('');
+  bnav.innerHTML=[['home','home','Início'],['maratona','check','Checklist'],['modulos','modulos','Aulas'],['lives','lives','Lives'],['menu','menu','Menu']].map(function(x){return '<button data-bn="'+x[0]+'"><span>'+IC(x[1])+'</span>'+x[2]+'</button>';}).join('');
   document.body.appendChild(bnav);
   function gaveta(on){if(!sb)return;sb.classList.toggle('mi-open',on);shade.classList.toggle('on',on);}
   bnav.addEventListener('click',function(e){var b=e.target.closest('[data-bn]');if(!b)return;var k=b.dataset.bn;if(k==='menu'){gaveta(!sb.classList.contains('mi-open'));return;}gaveta(false);go(k);});
@@ -1577,13 +1606,14 @@
     if(window.TITLES)TITLES[x.k]=x.nome;
   }
   function aplicarMenus(){
+    iconesMenu();
     var M=(CFG&&CFG.menus)||{};
     ((CFG&&CFG.unisExtra)||[]).forEach(criarUniExtra);
     var pais=[];
     [].forEach.call(document.querySelectorAll('.sidebar .nav-pill'),function(n){
       var k=chaveDe(n);if(!k)return;var m=M[k]||{};
-      if(!n.dataset.nomeOrig){var sp=n.querySelectorAll('span');n.dataset.nomeOrig=sp[1]?sp[1].textContent:'';n.dataset.icOrig=sp[0]?sp[0].textContent:'';}
-      var s=n.querySelectorAll('span');if(s[1])s[1].textContent=m.nome||n.dataset.nomeOrig;if(s[0])s[0].textContent=m.icone||n.dataset.icOrig;
+      if(!n.dataset.nomeOrig){var sp=n.querySelectorAll('span');n.dataset.nomeOrig=sp[1]?sp[1].textContent:'';n.dataset.icOrig=sp[0]?sp[0].innerHTML:'';}
+      var s=n.querySelectorAll('span');if(s[1])s[1].textContent=m.nome||n.dataset.nomeOrig;if(s[0]){if(m.icone)s[0].textContent=m.icone;else s[0].innerHTML=n.dataset.icOrig;}
       if(UNIV[k]){if(m.nome)UNIV[k].nav=UNIV[k].title=m.nome;if(m.sub)UNIV[k].sub=m.sub;if(m.icone)UNIV[k].icon=m.icone;}
       if(m.nome&&window.TITLES)TITLES[k]=m.nome;
       n.classList.toggle('mi-oculto',!!m.oculto);
@@ -1835,7 +1865,7 @@
   }
   function modoEdicao(on){
     EDIT=!!on&&souAdmin();document.body.classList.toggle('mi-edit',EDIT);
-    var t=$('mi-ed-btn');if(t){t.textContent=EDIT?'✅ Concluir':'✏️ Editar';t.classList.toggle('on',EDIT);}
+    var t=$('mi-ed-btn');if(t){t.innerHTML=EDIT?IC('check')+' Concluir':IC('editar')+' Editar';t.classList.toggle('on',EDIT);}
     pintarEdicaoMenu();pintarEdModulos();
     var pg=window.currentPage;if(UNIV[pg]){CARDS=null;desenharUni(pg);}if(pg==='materiais')renderMat();
     if(EDIT)toast('✏️ Modo edição: toque em qualquer card, material ou menu pra editar','#4f6ef7');
@@ -1843,7 +1873,7 @@
   function botaoEdicao(){
     if($('mi-ed-btn')||!souAdmin())return;
     var tb=document.querySelector('.topbar'),th=$('theme-toggle');if(!tb)return;
-    var b=document.createElement('button');b.id='mi-ed-btn';b.className='tb-btn';b.dataset.ed='toggle';b.textContent='✏️ Editar';
+    var b=document.createElement('button');b.id='mi-ed-btn';b.className='tb-btn';b.dataset.ed='toggle';b.innerHTML=IC('editar')+' Editar';
     tb.insertBefore(b,th||null);
   }
   async function iniciarEdicao(){
@@ -2006,7 +2036,7 @@
     var pr=(IRONIA[k]&&Math.random()<.8)?IRONIA[k]:lista,fr=pr[Math.floor(Math.random()*pr.length)],seq=sequencia();
     var cores=['#ffd166','#7ee2a8','#7dd3fc','#f472b6','#a78bfa','#fff'],conf='';
     for(var i=0;i<70;i++)conf+='<i class="cf" style="left:'+(Math.random()*100)+'vw;background:'+cores[i%6]+';animation-duration:'+(2.2+Math.random()*2.2)+'s;animation-delay:'+(Math.random()*.8)+'s;transform:rotate('+(Math.random()*360)+'deg)"></i>';
-    feEl.innerHTML=conf+'<div class="fb"><div class="tr">🏆</div><h3>Checklist concluído!</h3><div class="sb">'+c.ic+' '+E(c.lb)+' · 🔥 '+seq.n+(seq.n===1?' dia seguido':' dias seguidos')+'</div>'
+    feEl.innerHTML=conf+'<div class="fb"><div class="tr">'+IC('trofeu','fe')+'</div><h3>Checklist concluído!</h3><div class="sb">'+icCtx(c)+' '+E(c.lb)+' · 🔥 '+seq.n+(seq.n===1?' dia seguido':' dias seguidos')+'</div>'
       +'<div class="fr">'+E(fr)+'</div><button class="p" data-fe="share">📤 Compartilhar meu dia</button><button class="g" data-fe="fechar">Fechar</button></div>';
     feEl.classList.add('on');
     try{if(navigator.vibrate)navigator.vibrate([60,40,120]);}catch(e){}

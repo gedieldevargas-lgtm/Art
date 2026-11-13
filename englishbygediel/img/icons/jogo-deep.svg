@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><defs>
+<linearGradient id="bjogodeep" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f2ebfd"/><stop offset="1" stop-color="#e5d8fb"/></linearGradient>
+<linearGradient id="gjogodeep" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0" stop-color="#a171f2"/><stop offset=".55" stop-color="#7c3aed"/><stop offset="1" stop-color="#7035d5"/></linearGradient>
+<filter id="sjogodeep" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="11"/></filter>
+<filter id="djogodeep" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#7035d5" flood-opacity=".28"/></filter></defs>
+<rect x="6" y="6" width="244" height="244" rx="62" fill="url(#bjogodeep)"/>
+<rect x="7.5" y="7.5" width="241" height="241" rx="60.5" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="3"/>
+<ellipse cx="128" cy="204" rx="62" ry="13" fill="#7c3aed" opacity=".45" filter="url(#sjogodeep)"/>
+<g transform="translate(128 120) scale(.66) translate(-128 -128)" fill="url(#gjogodeep)" filter="url(#djogodeep)"><path d="M216.57,39.43A80,80,0,0,0,83.91,120.78L28.69,176A15.86,15.86,0,0,0,24,187.31V216a16,16,0,0,0,16,16H72a8,8,0,0,0,8-8V208H96a8,8,0,0,0,8-8V184h16a8,8,0,0,0,5.66-2.34l9.56-9.57A79.73,79.73,0,0,0,160,176h.1A80,80,0,0,0,216.57,39.43ZM180,92a16,16,0,1,1,16-16A16,16,0,0,1,180,92Z"/></g></svg>

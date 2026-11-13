@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><defs>
+<linearGradient id="bctxsofa" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3effe"/><stop offset="1" stop-color="#e8defd"/></linearGradient>
+<linearGradient id="gctxsofa" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0" stop-color="#ab8af9"/><stop offset=".55" stop-color="#8b5cf6"/><stop offset="1" stop-color="#7d53dd"/></linearGradient>
+<filter id="sctxsofa" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="11"/></filter>
+<filter id="dctxsofa" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#7d53dd" flood-opacity=".28"/></filter></defs>
+<rect x="6" y="6" width="244" height="244" rx="62" fill="url(#bctxsofa)"/>
+<rect x="7.5" y="7.5" width="241" height="241" rx="60.5" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="3"/>
+<ellipse cx="128" cy="204" rx="62" ry="13" fill="#8b5cf6" opacity=".45" filter="url(#sctxsofa)"/>
+<g transform="translate(128 120) scale(.66) translate(-128 -128)" fill="url(#gctxsofa)" filter="url(#dctxsofa)"><path d="M16,100V72A16,16,0,0,1,32,56h84a4,4,0,0,1,4,4v76H64a32,32,0,0,0-32-32H20A4,4,0,0,1,16,100Zm208,4h12a4,4,0,0,0,4-4V72a16,16,0,0,0-16-16H140a4,4,0,0,0-4,4v76h56A32,32,0,0,1,224,104Zm8,16h-8a16,16,0,0,0-16,16v8a8,8,0,0,1-8,8H56a8,8,0,0,1-8-8v-8a16,16,0,0,0-16-16H24A16,16,0,0,0,8,136v32a16,16,0,0,0,16,16h8v15.73A8.18,8.18,0,0,0,39.47,208,8,8,0,0,0,48,200V184H208v15.73a8.17,8.17,0,0,0,7.47,8.25,8,8,0,0,0,8.53-8V184h8a16,16,0,0,0,16-16V136A16,16,0,0,0,232,120Z"/></g></svg>

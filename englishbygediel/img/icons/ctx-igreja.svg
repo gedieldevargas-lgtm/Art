@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><defs>
+<linearGradient id="bctxigreja" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbf1e6"/><stop offset="1" stop-color="#f7e4cd"/></linearGradient>
+<linearGradient id="gctxigreja" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0" stop-color="#e49d4c"/><stop offset=".55" stop-color="#d97706"/><stop offset="1" stop-color="#c16b0a"/></linearGradient>
+<filter id="sctxigreja" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="11"/></filter>
+<filter id="dctxigreja" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#c16b0a" flood-opacity=".28"/></filter></defs>
+<rect x="6" y="6" width="244" height="244" rx="62" fill="url(#bctxigreja)"/>
+<rect x="7.5" y="7.5" width="241" height="241" rx="60.5" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="3"/>
+<ellipse cx="128" cy="204" rx="62" ry="13" fill="#d97706" opacity=".45" filter="url(#sctxigreja)"/>
+<g transform="translate(128 120) scale(.66) translate(-128 -128)" fill="url(#gctxigreja)" filter="url(#dctxigreja)"><path d="M228.12,145.14,192,123.47V104a8,8,0,0,0-4-7L136,67.36V48h16a8,8,0,0,0,0-16H136V16a8,8,0,0,0-16,0V32H104a8,8,0,0,0,0,16h16V67.36L68,97.05a8,8,0,0,0-4,7v19.47L27.88,145.14A8,8,0,0,0,24,152v64a8,8,0,0,0,8,8h72a8,8,0,0,0,8-8V168a16,16,0,0,1,32,0v48a8,8,0,0,0,8,8h72a8,8,0,0,0,8-8V152A8,8,0,0,0,228.12,145.14ZM64,208H40V156.53l24-14.4Zm152,0H192V142.13l24,14.4Z"/></g></svg>

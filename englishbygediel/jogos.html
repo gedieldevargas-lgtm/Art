@@ -219,7 +219,9 @@ body.fh-on{overflow:hidden}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media(max-width:520px){.covers{grid-template-columns:1fr 1fr;gap:10px}.cv .ce{font-size:52px}.cv .tt b{font-size:16px}.cv .tt small{display:none}
 .opts{grid-template-columns:1fr}h1{font-size:24px}}
-</style></head><body><script>if(self!==top)document.documentElement.classList.add('emb')</script><div id="app"></div>
+.ce .ic3d{width:1.15em;height:1.15em;object-fit:contain;filter:drop-shadow(0 8px 16px rgba(0,0,0,.25))}
+</style></head><body><script>
+const GIC='quiz scr hang build dict speak taboo heads wyr ice couple story pro pitch verse faith drop sudo draw stop five mem dice snake show deep duel gq who ws cw visa border student job remote hotel'.split(' ');if(self!==top)document.documentElement.classList.add('emb')</script><div id="app"></div>
 <script>
 /* ================= DADOS ================= */
 const VOC=[
@@ -342,12 +344,12 @@ function endScreen(g,score,unit,msg,missed){stopT();played(g.id);addXP(Math.max(
 function cln(){if(window.CLEAN){try{window.CLEAN()}catch(e){}window.CLEAN=null}}
 function cover(g,k){const L=(g.l||g.n.replace(/[^A-Za-z]/g,'')).toUpperCase().split('');
  const fl=Array.from({length:9},(_,i)=>{const h=(k*7+i*13)%100,x=(i*37+k*11)%92,y=(i*23+k*17)%70,sz=18+((i*29+k)%5)*9;return `<span style="left:${x}%;top:${y}%;font-size:${sz}px;animation-delay:-${(h%6)}s">${L[i%L.length]}</span>`}).join('');
- return `<button class="cv" style="--c1:${g.c[0]};--c2:${g.c[1]}" onclick="location.hash='g/${g.id}'" title="${esc(g.d)}"><div class="fl">${fl}</div><div class="sh"></div><div class="ce">${g.e}</div>${g.nw?'<span class="nw">NOVO</span>':''}${ST.best[g.id]?`<span class="rec">🏆 ${ST.best[g.id]}</span>`:''}<div class="tt"><b>${esc(g.n)}</b><small>${esc(g.d)}</small><i>${g.t.join(' · ')}</i></div></button>`}
+ return `<button class="cv" style="--c1:${g.c[0]};--c2:${g.c[1]}" onclick="location.hash='g/${g.id}'" title="${esc(g.d)}"><div class="fl">${fl}</div><div class="sh"></div><div class="ce">${GIC.includes(g.id)?`<img class="ic3d" src="img/icons/jogo-${g.id}.svg" alt="">`:g.e}</div>${g.nw?'<span class="nw">NOVO</span>':''}${ST.best[g.id]?`<span class="rec">🏆 ${ST.best[g.id]}</span>`:''}<div class="tt"><b>${esc(g.n)}</b><small>${esc(g.d)}</small><i>${g.t.join(' · ')}</i></div></button>`}
 let FIL='todos';try{FIL=localStorage.getItem('jogos:fil')||'todos'}catch(e){}
 function menu(){stopT();cln();const list=G.filter(g=>FIL==='todos'||g.t.includes(FIL));
  A().innerHTML=`<div class="row sp" style="margin-bottom:6px"><a class="btn sm backlnk" href="membros.html" style="text-decoration:none;color:inherit">← Área de membros</a><span class="mono">grátis · sem login · funciona offline</span></div>
  <h1 class="ttl">Jogos de Inglês</h1><p class="mut" style="margin:4px 0 14px">Jogos que você já conhece, agora em inglês. Pra jogar sozinho, a dois, com a turma ou pro trabalho.</p>
- <div class="kpis"><div class="card kpi"><span class="mono">XP</span><b>${ST.xp}</b></div><div class="card kpi"><span class="mono">sequência</span><b>${streak()} 🔥</b></div><div class="card kpi"><span class="mono">partidas</span><b>${Object.values(ST.plays).reduce((a,b)=>a+b,0)}</b></div></div>
+ <div class="kpis"><div class="card kpi"><span class="mono">XP</span><b>${ST.xp}</b></div><div class="card kpi"><span class="mono">sequência</span><b>${streak()} <img class="ic3d" src="img/icons/fogo.webp" alt="" style="width:22px;height:22px;vertical-align:-3px"></b></div><div class="card kpi"><span class="mono">partidas</span><b>${Object.values(ST.plays).reduce((a,b)=>a+b,0)}</b></div></div>
  <div class="chips">${FILTERS.map(f=>`<button class="chip ${f===FIL?'on':''}" data-f="${f}">${f}</button>`).join('')}</div>
  <div class="covers">${list.map((g,k)=>cover(g,k)).join('')}</div>`;
  A().querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{FIL=b.dataset.f;try{localStorage.setItem('jogos:fil',FIL)}catch(e){}menu()});
@@ -1229,7 +1231,7 @@ function simRun(s){let mode='treino';const rate=[.8,.92,1][ST.lvl-1];
   $('#ag').onclick=intro;if(ok)celebrate(true);else sfx('bad')};
  window.CLEAN=()=>{if(REC)REC.stop()};intro()}
 function openSim(id){const s=SIMS.find(x=>x.id===id);if(!s){location.hash='';return}stopT();cln();if('speechSynthesis' in window)speechSynthesis.cancel();scrollTo(0,0);simRun(s)}
-const tabsHTML=()=>`<div class="tabs"><button class="${ST.tab!=='sim'?'on':''}" data-tab="jogos">🎮 Jogos</button><button class="${ST.tab==='sim'?'on':''}" data-tab="sim">🎙️ Simulações</button></div>`;
+const tabsHTML=()=>`<div class="tabs"><button class="${ST.tab!=='sim'?'on':''}" data-tab="jogos"><img class="ic3d" src="img/icons/jogos.webp" alt="" style="width:20px;height:20px;vertical-align:-4px"> Jogos</button><button class="${ST.tab==='sim'?'on':''}" data-tab="sim"><img class="ic3d" src="img/icons/jogo-speak.svg" alt="" style="width:20px;height:20px;vertical-align:-4px"> Simulações</button></div>`;
 function bindTabs(){A().querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{ST.tab=b.dataset.tab;save();sfx('pop');menu()})}
 function simMenu(){A().innerHTML=`<div class="row sp" style="margin-bottom:6px"><a class="btn sm backlnk" href="membros.html" style="text-decoration:none;color:inherit">← Área de membros</a><span class="mono">fale ou digite · feedback na hora</span></div><h1 class="ttl">Simulações</h1>${tabsHTML()}
  <p class="mut" style="margin:4px 0 14px">Ensaie as conversas que mais dão frio na barriga: o entrevistador fala em inglês, você responde, e recebe nota, pontos fortes e a resposta modelo.</p>

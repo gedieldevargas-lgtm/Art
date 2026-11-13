@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><defs>
+<linearGradient id="bctxfoco" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9effd"/><stop offset="1" stop-color="#d3e0fb"/></linearGradient>
+<linearGradient id="gctxfoco" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0" stop-color="#628ff1"/><stop offset=".55" stop-color="#2563eb"/><stop offset="1" stop-color="#235ad4"/></linearGradient>
+<filter id="sctxfoco" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="11"/></filter>
+<filter id="dctxfoco" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#235ad4" flood-opacity=".28"/></filter></defs>
+<rect x="6" y="6" width="244" height="244" rx="62" fill="url(#bctxfoco)"/>
+<rect x="7.5" y="7.5" width="241" height="241" rx="60.5" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="3"/>
+<ellipse cx="128" cy="204" rx="62" ry="13" fill="#2563eb" opacity=".45" filter="url(#sctxfoco)"/>
+<g transform="translate(128 120) scale(.66) translate(-128 -128)" fill="url(#gctxfoco)" filter="url(#dctxfoco)"><path d="M221.87,83.16A104.1,104.1,0,1,1,195.67,49l22.67-22.68a8,8,0,0,1,11.32,11.32L167.6,99.71h0l-37.71,37.71-23.95,23.95a40,40,0,0,0,62-35.67,8,8,0,1,1,16-.9,56,56,0,0,1-95.5,42.79h0a56,56,0,0,1,73.13-84.43L184.3,60.39a87.88,87.88,0,1,0,23.13,29.67,8,8,0,0,1,14.44-6.9Z"/></g></svg>

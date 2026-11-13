@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><defs>
+<linearGradient id="bjogomem" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3effe"/><stop offset="1" stop-color="#e8defd"/></linearGradient>
+<linearGradient id="gjogomem" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0" stop-color="#ab8af9"/><stop offset=".55" stop-color="#8b5cf6"/><stop offset="1" stop-color="#7d53dd"/></linearGradient>
+<filter id="sjogomem" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="11"/></filter>
+<filter id="djogomem" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#7d53dd" flood-opacity=".28"/></filter></defs>
+<rect x="6" y="6" width="244" height="244" rx="62" fill="url(#bjogomem)"/>
+<rect x="7.5" y="7.5" width="241" height="241" rx="60.5" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="3"/>
+<ellipse cx="128" cy="204" rx="62" ry="13" fill="#8b5cf6" opacity=".45" filter="url(#sjogomem)"/>
+<g transform="translate(128 120) scale(.66) translate(-128 -128)" fill="url(#gjogomem)" filter="url(#djogomem)"><path d="M200,88V200a16,16,0,0,1-16,16H40a16,16,0,0,1-16-16V88A16,16,0,0,1,40,72H184A16,16,0,0,1,200,88Zm16-48H64a8,8,0,0,0,0,16H216V176a8,8,0,0,0,16,0V56A16,16,0,0,0,216,40Z"/></g></svg>

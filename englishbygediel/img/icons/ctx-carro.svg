@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><defs>
+<linearGradient id="bctxcarro" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdecec"/><stop offset="1" stop-color="#fcdada"/></linearGradient>
+<linearGradient id="gctxcarro" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0" stop-color="#f37878"/><stop offset=".55" stop-color="#ef4444"/><stop offset="1" stop-color="#d53e41"/></linearGradient>
+<filter id="sctxcarro" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="11"/></filter>
+<filter id="dctxcarro" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#d53e41" flood-opacity=".28"/></filter></defs>
+<rect x="6" y="6" width="244" height="244" rx="62" fill="url(#bctxcarro)"/>
+<rect x="7.5" y="7.5" width="241" height="241" rx="60.5" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="3"/>
+<ellipse cx="128" cy="204" rx="62" ry="13" fill="#ef4444" opacity=".45" filter="url(#sctxcarro)"/>
+<g transform="translate(128 120) scale(.66) translate(-128 -128)" fill="url(#gctxcarro)" filter="url(#dctxcarro)"><path d="M240,104H229.2L201.42,41.5A16,16,0,0,0,186.8,32H69.2a16,16,0,0,0-14.62,9.5L26.8,104H16a8,8,0,0,0,0,16h8v80a16,16,0,0,0,16,16H64a16,16,0,0,0,16-16v-8h96v8a16,16,0,0,0,16,16h24a16,16,0,0,0,16-16V120h8a8,8,0,0,0,0-16ZM80,152H56a8,8,0,0,1,0-16H80a8,8,0,0,1,0,16Zm120,0H176a8,8,0,0,1,0-16h24a8,8,0,0,1,0,16ZM44.31,104,69.2,48H186.8l24.89,56Z"/></g></svg>

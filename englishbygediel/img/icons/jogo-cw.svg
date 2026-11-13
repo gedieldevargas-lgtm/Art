@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><defs>
+<linearGradient id="bjogocw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0f1f3"/><stop offset="1" stop-color="#e0e3e8"/></linearGradient>
+<linearGradient id="gjogocw" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0" stop-color="#8f9bab"/><stop offset=".55" stop-color="#64748b"/><stop offset="1" stop-color="#5a687f"/></linearGradient>
+<filter id="sjogocw" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="11"/></filter>
+<filter id="djogocw" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#5a687f" flood-opacity=".28"/></filter></defs>
+<rect x="6" y="6" width="244" height="244" rx="62" fill="url(#bjogocw)"/>
+<rect x="7.5" y="7.5" width="241" height="241" rx="60.5" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="3"/>
+<ellipse cx="128" cy="204" rx="62" ry="13" fill="#64748b" opacity=".45" filter="url(#sjogocw)"/>
+<g transform="translate(128 120) scale(.66) translate(-128 -128)" fill="url(#gjogocw)" filter="url(#djogocw)"><path d="M227.32,73.37,182.63,28.69a16,16,0,0,0-22.63,0L36.69,152A15.86,15.86,0,0,0,32,163.31V208a16,16,0,0,0,16,16H216a8,8,0,0,0,0-16H115.32l112-112A16,16,0,0,0,227.32,73.37ZM79.32,188l90.34-90.34,16.69,16.68L96,204.69Zm79-101.66h0L68,176.69,51.31,160l90.35-90.34ZM48,179.31,76.69,208H48Z"/></g></svg>
