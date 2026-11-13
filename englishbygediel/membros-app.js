@@ -1936,15 +1936,16 @@
     return cv;
   }
   var stEl=document.createElement('div');stEl.id='mi-story';stEl.className='modal-overlay';document.body.appendChild(stEl);
-  var stc=document.createElement('style');stc.textContent='#mi-story .sb{background:var(--surface);border-radius:22px;padding:16px;width:min(420px,calc(100vw - 32px));max-height:calc(100dvh - 32px);display:flex;flex-direction:column;gap:12px;box-shadow:0 24px 60px rgba(0,0,0,.45)}#mi-story img{width:100%;max-height:62dvh;object-fit:contain;border-radius:14px;background:#0b0d1c}#mi-story img.tr{background:repeating-conic-gradient(#9aa0b4 0 25%,#d7dbe6 0 50%) 0 0/24px 24px}#mi-story .bt{display:grid;grid-template-columns:1fr 1fr;gap:8px}#mi-story button{border:none;border-radius:14px;padding:13px;font:inherit;font-size:14px;font-weight:800;cursor:pointer}#mi-story .p{background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff;grid-column:1/-1}#mi-story .g{background:var(--bg2,rgba(127,127,127,.12));color:var(--fg)}#mi-story .t{font-size:13px;color:var(--fg2);text-align:center;line-height:1.5}';document.head.appendChild(stc);
+  var stc=document.createElement('style');stc.textContent='#mi-story .sb{background:var(--surface);border-radius:22px;padding:14px 16px 16px;width:min(420px,calc(100vw - 32px));max-height:calc(100dvh - 32px);overflow-y:auto;display:flex;flex-direction:column;gap:12px;box-shadow:0 24px 60px rgba(0,0,0,.45)}#mi-story .hd{display:flex;align-items:center;justify-content:space-between;font-weight:800;font-size:15px}#mi-story .hd button{width:36px;height:36px;padding:0;border-radius:50%;background:var(--bg2,rgba(127,127,127,.12));color:var(--fg)}#mi-story .rd{display:grid;grid-template-columns:1fr 1fr;gap:8px}#mi-story .rd button{display:flex;align-items:center;justify-content:center;gap:8px;color:#fff;padding:14px 8px;font-size:14px}#mi-story .ig{background:linear-gradient(45deg,#f9a825,#e1306c 45%,#833ab4)}#mi-story .wa{background:#25d366}#mi-story .ic4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}#mi-story .ic4 button{display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 4px;font-size:11px;font-weight:700}#mi-story .ic4 b{font-size:20px;line-height:1}#mi-story img{width:100%;max-height:52dvh;object-fit:contain;border-radius:14px;background:#0b0d1c}#mi-story img.tr{background:repeating-conic-gradient(#9aa0b4 0 25%,#d7dbe6 0 50%) 0 0/24px 24px}#mi-story .bt{display:grid;grid-template-columns:1fr 1fr;gap:8px}#mi-story button{border:none;border-radius:14px;padding:13px;font:inherit;font-size:14px;font-weight:800;cursor:pointer}#mi-story .p{background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff;grid-column:1/-1}#mi-story .g{background:var(--bg2,rgba(127,127,127,.12));color:var(--fg)}#mi-story .t{font-size:13px;color:var(--fg2);text-align:center;line-height:1.5}';document.head.appendChild(stc);
   var stBlob=null;
   async function pintarStory(){
     stEl.innerHTML='<div class="sb"><div class="t">Gerando sua imagem…</div></div>';stEl.classList.add('open');
     var cv=await desenharStory();
     stBlob=await new Promise(function(ok){cv.toBlob(ok,'image/png');});
     var url=URL.createObjectURL(stBlob);
-    stEl.innerHTML='<div class="sb"><img alt="Sua conquista de hoje" class="'+(STY.transp?'tr':'')+'" src="'+url+'"><div class="t">'+(STY.transp?'PNG sem fundo: tira a foto no story do Instagram e cola essa imagem por cima 📸':'Posta no status do WhatsApp ou no story do Instagram e marca <b>@englishbygediel</b> 🔥')+'</div>'
-      +'<div class="bt"><button class="p" data-st="share">📤 Compartilhar</button><button class="g" data-st="frase">🎲 Outra frase</button><button class="g" data-st="cor">'+(STY.transp?'🎨 Com fundo':'🎨 Outra cor')+'</button><button class="g" data-st="transp">'+(STY.transp?'🖼️ Trocar cor':'🫥 Sem fundo')+'</button><button class="g" data-st="baixar">⬇️ Baixar</button><button class="g" data-st="fechar">Fechar</button></div></div>';
+    stEl.innerHTML='<div class="sb"><div class="hd"><span>Sua conquista de hoje</span><button data-st="fechar" aria-label="Fechar">✕</button></div><img alt="Sua conquista de hoje" class="'+(STY.transp?'tr':'')+'" src="'+url+'"><div class="t">'+(STY.transp?'PNG sem fundo: tira a foto no story do Instagram e cola essa imagem por cima 📸':'Posta no status do WhatsApp ou no story do Instagram e marca <b>@englishbygediel</b> 🔥')+'</div>'
+      +'<div class="rd"><button class="ig" data-st="ig"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Story no Instagram</button><button class="wa" data-st="wa"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.7-1.2s.2-1.1.2-1.2-.2-.2-.5-.3z"/></svg>Status do WhatsApp</button></div>'
+      +'<div class="ic4"><button class="g" data-st="frase"><b>🎲</b>Outra frase</button><button class="g" data-st="cor"><b>🎨</b>'+(STY.transp?'Com fundo':'Outra cor')+'</button><button class="g" data-st="transp"><b>'+(STY.transp?'🖼️':'🫥')+'</b>'+(STY.transp?'Trocar cor':'Sem fundo')+'</button><button class="g" data-st="baixar"><b>⬇️</b>Baixar</button></div></div>';
   }
   stEl.addEventListener('click',async function(e){
     if(e.target===stEl){stEl.classList.remove('open');return;}
@@ -1954,9 +1955,14 @@
     if(a==='cor'){if(STY.transp)STY.transp=false;else STY.cor++;return pintarStory();}
     if(a==='transp'){if(STY.transp){STY.transp=false;STY.cor++;}else STY.transp=true;return pintarStory();}
     var f=new File([stBlob],'minha-conquista-ingles.png',{type:'image/png'});
-    if(a==='share'&&navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],text:'Hoje eu treinei meu inglês 🔥 @englishbygediel'});}catch(err){}return;}
+    var social=a==='ig'||a==='wa';
+    if(social&&navigator.canShare&&navigator.canShare({files:[f]})){
+      toast(a==='ig'?'Escolha Instagram → Story 📸':'Escolha WhatsApp → Meu status 💬',a==='ig'?'#e1306c':'#25d366');
+      try{await navigator.share(a==='wa'?{files:[f],text:'Hoje eu treinei meu inglês 🔥'}:{files:[f]});}catch(err){}
+      return;
+    }
     var u=URL.createObjectURL(stBlob),l=document.createElement('a');l.href=u;l.download='minha-conquista-ingles.png';document.body.appendChild(l);l.click();l.remove();
-    toast(a==='share'?'Imagem baixada: posta ela no seu status 📲':'Imagem baixada ✅');
+    toast(social?'Imagem baixada. Pra postar direto, abra a plataforma no celular 📲':'Imagem baixada ✅');
   });
   function compartilharConquista(sc,tot){STY.quiz=sc!=null?{sc:sc,tot:tot,t:(window._stCurLes&&_stCurLes.title)||'aula'}:null;STY.i++;pintarStory();}
   /* ───────────────────────── FESTA: checklist do dia concluído ───────────────────────── */
