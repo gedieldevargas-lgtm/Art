@@ -333,6 +333,8 @@
    +'body.mi-mini .nav-section{font-size:0;height:1px;background:var(--border);margin:10px 16px;padding:0}body.mi-mini .nav-pill{justify-content:center;padding:9px 0!important;margin:2px 10px}body.mi-mini .nav-icon,body.mi-mini .nav-icon .ic3d{width:36px!important;height:36px!important}'
    +'body.mi-mini .sidebar-footer{justify-content:center}body.mi-mini #mi-bnav{left:84px!important}}',
   '@media(max-width:680px){#mi-recolher{display:none}}',
+  '.ag-tipo .ic .ic3d{width:54px;height:54px}.ag-t .ic3d{width:30px;height:30px}',
+  '#mi-onb .teste .ic .ic3d{width:48px;height:48px}.mi-gate-it>span .ic3d{width:34px;height:34px}.ag-btn .ic3d,.ag-btn2 .ic3d,.set-btn .ic3d{width:22px;height:22px;vertical-align:-5px}',
   /* celular: menu de baixo + gaveta */
   '#mi-bnav,#mi-shade{display:none}',
   '@media(max-width:680px){',
@@ -749,11 +751,11 @@
      Reservar usa a função reservar_horario: o horário some pra todo mundo e aparece no painel como "🎓 Aluno · tipo". */
   var HUB_URL='https://iwivldvubmsqyzkkdxoy.supabase.co',HUB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3aXZsZHZ1Ym1zcXl6a2tkeG95Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1OTE1MDgsImV4cCI6MjEwODE2NzUwOH0.eyoyRBBp4NAfLhG-ops6cj2-xck61Oalsj3d7h3h360';
   var TIPOS=[
-    {k:'conversa',ic:'💬',nm:'Conversação',d:'Você e eu, 1 a 1, pra soltar o inglês falando.'},
-    {k:'grupo',ic:'👥',nm:'Grupo',d:'Você + amigos, família ou colegas de trabalho.'},
-    {k:'casal',ic:'💑',nm:'Casal',d:'Os dois juntos, no mesmo ritmo.'},
-    {k:'intensivo',ic:'🔥',nm:'Intensivo',d:'Imersão de vários dias seguidos, com prazo.'},
-    {k:'prep',ic:'🎯',nm:'Preparação',d:'Pra um momento específico que está chegando.'}
+    {k:'conversa',ic:'💬',icn:'aula-conversa',nm:'Conversação',d:'Você e eu, 1 a 1, pra soltar o inglês falando.'},
+    {k:'grupo',ic:'👥',icn:'aula-grupo',nm:'Grupo',d:'Você + amigos, família ou colegas de trabalho.'},
+    {k:'casal',ic:'💑',icn:'jogo-couple',nm:'Casal',d:'Os dois juntos, no mesmo ritmo.'},
+    {k:'intensivo',ic:'🔥',icn:'fogo',nm:'Intensivo',d:'Imersão de vários dias seguidos, com prazo.'},
+    {k:'prep',ic:'🎯',icn:'ctx-foco',nm:'Preparação',d:'Pra um momento específico que está chegando.'}
   ];
   var PREPS=['Entrevista de emprego','Viagem','Intercâmbio','Prova ou certificado','Apresentação ou reunião','Casamento ou evento','Outro'];
   var AG={tipo:null,prep:null,formato:'Online',pessoas:'2',horarios:[],dia:null,h:null,carregou:false,enviando:false};
@@ -781,10 +783,10 @@
     var meta=(U&&U.user_metadata)||{},nome=meta.full_name||meta.name||meta.nome||'',whats=LS.get('mi_whats_'+(U&&U.id||'x'),meta.whatsapp||'');
     var ped=meusPedidos();
     var h='<div class="ag-wrap"><div class="ag-h1">Marcar aula</div><div class="ag-sub">Escolha o tipo, o dia e o horário. Eu recebo na hora e te confirmo valor e link pelo WhatsApp.</div>';
-    if(ped.length)h+='<div class="ag-box ag-ped"><div class="ag-t">📌 Seus pedidos</div>'+ped.map(function(x){var d=new Date(x.inicio);return '<div class="ag-ped-l"><b>'+E(fmtD(d))+' · '+E(fmtH(d))+'</b> <span>'+E(x.tipo)+'</span></div>';}).join('')+'</div>';
+    if(ped.length)h+='<div class="ag-box ag-ped"><div class="ag-t">'+IC('pin')+' Seus pedidos</div>'+ped.map(function(x){var d=new Date(x.inicio);return '<div class="ag-ped-l"><b>'+E(fmtD(d))+' · '+E(fmtH(d))+'</b> <span>'+E(x.tipo)+'</span></div>';}).join('')+'</div>';
     // 1. tipo
     h+='<div class="ag-box"><div class="ag-t"><span class="ag-n">1</span>Que aula você quer?</div><div class="ag-tipos">'
-      +TIPOS.map(function(t){return '<button type="button" class="ag-tipo'+(AG.tipo===t.k?' on':'')+'" data-ag-tipo="'+t.k+'"><span class="ic">'+t.ic+'</span><b>'+t.nm+'</b><small>'+t.d+'</small></button>';}).join('')+'</div>';
+      +TIPOS.map(function(t){return '<button type="button" class="ag-tipo'+(AG.tipo===t.k?' on':'')+'" data-ag-tipo="'+t.k+'"><span class="ic">'+(t.icn?IC(t.icn):t.ic)+'</span><b>'+t.nm+'</b><small>'+t.d+'</small></button>';}).join('')+'</div>';
     if(AG.tipo==='prep')h+='<div class="ag-lb">Preparação pra quê?</div><div class="ag-chips">'+PREPS.map(function(x){return '<button type="button" class="ag-chip'+(AG.prep===x?' on':'')+'" data-ag-prep="'+E(x)+'">'+E(x)+'</button>';}).join('')+'</div>';
     if(AG.tipo==='grupo')h+='<div class="ag-lb">Quantas pessoas, contando você?</div><div class="ag-chips">'+['2','3','4','5','6+'].map(function(x){return '<button type="button" class="ag-chip'+(AG.pessoas===x?' on':'')+'" data-ag-pes="'+x+'">'+x+'</button>';}).join('')+'</div>';
     h+='</div>';
@@ -798,7 +800,7 @@
     h+='<div class="ag-box"><div class="ag-t"><span class="ag-n">3</span>Dia e horário</div>';
     if(!AG.horarios.length){
       h+='<div class="ag-vazio">'+(AG.erro?'Não consegui carregar a agenda agora.':'Estou sem horários abertos no momento.')+' Me chama no WhatsApp que a gente encaixa.</div>'
-        +'<button type="button" class="ag-btn2" data-ag-zap>💬 Combinar pelo WhatsApp</button>'+(AG.erro?' <button type="button" class="ag-btn2" data-ag-reload>↻ Tentar de novo</button>':'');
+        +'<button type="button" class="ag-btn2" data-ag-zap>'+IC('wa-real')+' Combinar pelo WhatsApp</button>'+(AG.erro?' <button type="button" class="ag-btn2" data-ag-reload>↻ Tentar de novo</button>':'');
     }else{
       var dias=[];AG.horarios.forEach(function(x){var k=kD(x.data);if(!dias.some(function(d){return d.k===k;}))dias.push({k:k,data:x.data});});
       if(!dias.some(function(d){return d.k===AG.dia;})){AG.dia=dias[0].k;AG.h=null;}
@@ -810,7 +812,7 @@
     if(AG.horarios.length){
       var hs=AG.horarios.filter(function(x){return x.id===AG.h;})[0];
       var falta=!AG.tipo?'Escolha o tipo de aula':(AG.tipo==='prep'&&!AG.prep)?'Escolha a preparação':!hs?'Escolha um horário':'';
-      h+='<button type="button" class="ag-btn" data-ag-ok'+(falta||AG.enviando?' disabled':'')+'>'+(AG.enviando?'Reservando…':falta||('📅 Pedir aula · '+fmtD(hs.data)+' às '+fmtH(hs.data)))+'</button>';
+      h+='<button type="button" class="ag-btn" data-ag-ok'+(falta||AG.enviando?' disabled':'')+'>'+(AG.enviando?'Reservando…':falta||(IC('agendar')+' Pedir aula · '+fmtD(hs.data)+' às '+fmtH(hs.data)))+'</button>';
     }
     h+='</div>';
     p.innerHTML=h;
@@ -845,7 +847,7 @@
     $('pane-agendar').innerHTML='<div class="ag-wrap"><div class="ag-box ag-feito"><div class="ag-ok-ic">✅</div><div class="ag-h1">Pedido enviado!</div>'
       +'<p><b>'+E(tipoNome())+'</b> · '+E(fmtD(hs.data))+' às '+E(fmtH(hs.data))+' · '+E(AG.formato)+'</p>'
       +'<p class="ag-sub">O horário já ficou guardado pra você. Me manda a mensagem abaixo pra eu te confirmar valor e o link.</p>'
-      +'<button type="button" class="ag-btn" data-ag-zapok>💬 Mandar no WhatsApp</button><button type="button" class="ag-btn2" data-ag-novo>Marcar outra aula</button></div></div>';
+      +'<button type="button" class="ag-btn" data-ag-zapok>'+IC('wa-real')+' Mandar no WhatsApp</button><button type="button" class="ag-btn2" data-ag-novo>Marcar outra aula</button></div></div>';
     $('pane-agendar').querySelector('[data-ag-zapok]').onclick=function(){wa(zap);};
     AG.h=null;
   }
@@ -1183,7 +1185,7 @@
       +'<div class="intel-banner"><div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:56px;height:56px;border-radius:16px;background:'+(info?info.bg:'var(--surface2)')+';display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:'+(info?'#fff':'var(--fg3)')+';flex-shrink:0">'+(lv||'?')+'</div>'
       +'<div><div style="font-size:16px;font-weight:800">'+(info?E(info.title):'Você ainda não fez o teste de nível')+'</div><div style="font-size:12px;color:var(--fg2);margin-top:2px">Bússola CEFR · do A1 ao C2</div></div></div>'
       +'<div style="font-size:12.5px;color:var(--fg2);line-height:1.7;margin-bottom:14px">'+(info?E(info.desc):'O teste se adapta às suas respostas e mostra onde você está. Leva uns 10 minutos. No fim, é só marcar aqui o nível que apareceu.')+'</div>'
-      +'<button class="set-btn set-btn-primary" style="margin:0" data-dg="bussola">'+(lv?'🔁 Refazer o teste de nível':'🧭 Fazer o teste de nível')+'</button></div>'
+      +'<button class="set-btn set-btn-primary" style="margin:0" data-dg="bussola">'+(lv?'🔁 Refazer o teste de nível':IC('bussola')+' Fazer o teste de nível')+'</button></div>'
       +'<div class="card" style="margin:16px 0"><div class="sec-hd" style="margin-bottom:10px">🎯 '+(lv?'Seu nível':'Já sabe seu nível? Marque aqui')+'</div><div style="display:flex;flex-wrap:wrap;gap:8px">'
       +NIVEIS.map(function(n){return '<button class="gf-btn'+(n===lv?' active':'')+'" onclick="setManualLevel(\''+n+'\')">'+n+'</button>';}).join('')+'</div></div>'
       +'<div class="sec-hd">O que cada nível consegue fazer</div><div class="card">'+NIVEIS.map(function(n){return '<div style="display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--border)'+(n===lv?';font-weight:700':'')+'"><span class="level-tag" style="flex-shrink:0;'+(n===lv?'':'background:var(--surface2);color:var(--fg2)')+'">'+n+'</span><span style="font-size:12.5px;line-height:1.5;color:'+(n===lv?'var(--fg)':'var(--fg2)')+'">'+E(NIVEL_CAN[n])+'</span></div>';}).join('')+'</div>';
@@ -1194,7 +1196,7 @@
       +'<div class="intel-banner"><div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:56px;height:56px;border-radius:16px;background:'+(it?'linear-gradient(135deg,#8b5cf6,#ec4899)':'var(--surface2)')+';display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0">'+(it?it.ic:'🔷')+'</div>'
       +'<div><div style="font-size:16px;font-weight:800">'+(it?'Inteligência '+E(it.nome):'Descubra como você aprende melhor')+'</div><div style="font-size:12px;color:var(--fg2);margin-top:2px">'+(it?'Sua inteligência mais forte · Howard Gardner':'Teste das Inteligências Múltiplas · Howard Gardner')+'</div></div></div>'
       +'<div style="font-size:12.5px;color:var(--fg2);line-height:1.7;margin-bottom:14px">'+(it?E(it.desc):'O teste mostra quais das suas inteligências mais aparecem quando você aprende. Com isso, o seu estudo fica do seu jeito. No fim, é só marcar aqui a que deu mais forte.')+'</div>'
-      +'<button class="set-btn set-btn-primary" style="margin:0" data-dg="prisma">'+(it?'🔁 Refazer o Prisma':'🔷 Fazer o Prisma')+'</button></div>'
+      +'<button class="set-btn set-btn-primary" style="margin:0" data-dg="prisma">'+(it?'🔁 Refazer o Prisma':IC('prisma')+' Fazer o Prisma')+'</button></div>'
       +(it?'<div class="card" style="margin-top:16px"><div style="font-size:12px;font-weight:800;margin-bottom:10px">Estratégias pra você</div><div style="font-size:12.5px;color:var(--fg2);line-height:1.9">'+it.est.map(function(x){return '• '+E(x);}).join('<br>')+'</div></div>':'')
       +'<div class="card" style="margin:16px 0"><div class="sec-hd" style="margin-bottom:10px">'+(it?'Mudou o resultado? Marque a sua':'Qual deu como sua inteligência mais forte?')+'</div><div style="display:flex;flex-wrap:wrap;gap:8px">'
       +Object.keys(INTEL).map(function(x){return '<button class="gf-btn'+(x===k?' active':'')+'" data-dg-int="'+x+'">'+INTEL[x].ic+' '+E(INTEL[x].nome)+'</button>';}).join('')+'</div></div>';
@@ -1210,7 +1212,7 @@
   document.head.appendChild(tqc);
   function abrirTeste(qual){
     var b=qual==='bussola';
-    tq.innerHTML='<div class="tt"><button class="tb-btn" data-dg="fechar">✕</button><b>'+(b?'🧭 Teste de nível':'🔷 Prisma de Talentos')+'</b><a class="tb-btn" style="text-decoration:none" href="'+(b?URL_BUSSOLA:URL_PRISMA)+'" target="_blank" rel="noopener">Abrir fora ↗</a></div>'
+    tq.innerHTML='<div class="tt"><button class="tb-btn" data-dg="fechar">✕</button><b>'+(b?IC('bussola')+' Teste de nível':IC('prisma')+' Prisma de Talentos')+'</b><a class="tb-btn" style="text-decoration:none" href="'+(b?URL_BUSSOLA:URL_PRISMA)+'" target="_blank" rel="noopener">Abrir fora ↗</a></div>'
       +'<iframe src="'+(b?URL_BUSSOLA:URL_PRISMA)+'" title="'+(b?'Teste de nível':'Prisma de Talentos')+'" allow="autoplay; microphone"></iframe>'
       +'<div class="fim"><div class="q">Terminou? Toque no resultado que apareceu:</div><div class="ch">'
       +(b?NIVEIS.map(function(n){return '<button class="gf-btn" data-dg-fim="'+n+'">'+n+'</button>';}).join(''):Object.keys(INTEL).map(function(x){return '<button class="gf-btn" data-dg-fim="'+x+'">'+INTEL[x].ic+' '+E(INTEL[x].nome)+'</button>';}).join(''))
@@ -1493,8 +1495,8 @@
     }else if(passo==='testes'){
       h='<div class="k">O passo mais importante</div><h2>Agora, o seu diagnóstico 🧭</h2>'
         +'<p class="s">O <b>checklist de hoje</b> e as <b>aulas</b> são montados pra você a partir de 2 testes. Por isso eles só liberam depois que você fizer os dois:</p>'
-        +'<div class="card teste"><span class="ic">🔷</span><div><b>Prisma de Talentos</b><div class="leg" style="margin:2px 0 0">Descobre por qual porta o inglês entra em você.</div></div><span class="min">± '+MIN_PRISMA+' min</span></div>'
-        +'<div class="card teste"><span class="ic">🧭</span><div><b>Bússola</b><div class="leg" style="margin:2px 0 0">Mostra seu nível real, do A1 ao C2.</div></div><span class="min">± '+MIN_BUSSOLA+' min</span></div>'
+        +'<div class="card teste"><span class="ic">'+IC('prisma')+'</span><div><b>Prisma de Talentos</b><div class="leg" style="margin:2px 0 0">Descobre por qual porta o inglês entra em você.</div></div><span class="min">± '+MIN_PRISMA+' min</span></div>'
+        +'<div class="card teste"><span class="ic">'+IC('bussola')+'</span><div><b>Bússola</b><div class="leg" style="margin:2px 0 0">Mostra seu nível real, do A1 ao C2.</div></div><span class="min">± '+MIN_BUSSOLA+' min</span></div>'
         +'<p class="leg">Ao todo, uns '+(MIN_PRISMA+MIN_BUSSOLA)+' minutos. Faça num lugar tranquilo, com fone.</p>'
         +obBtn('Fazer os 2 testes agora →','data-ob="t-agora"')
         +'<button class="cta2" data-ob="t-manual">Já sei meu nível e meu jeito: escolher manualmente</button>'
@@ -1567,10 +1569,10 @@
   function portao(oque){
     var ov=$('pw-ov');if(!ov)return;
     var feitoN=!!ST.nivel,feitoP=!!ST.prisma;
-    ov.innerHTML='<div class="pw" style="text-align:left"><div style="font-size:40px;text-align:center">🧭</div><h3 style="text-align:center">Falta pouco pra liberar '+E(oque)+'</h3>'
+    ov.innerHTML='<div class="pw" style="text-align:left"><div style="text-align:center">'+IC('bussola','xl')+'</div><h3 style="text-align:center">Falta pouco pra liberar '+E(oque)+'</h3>'
       +'<p style="text-align:center">O checklist e as aulas são montados a partir do seu nível e do seu jeito de aprender.</p>'
-      +'<div class="mi-gate-it'+(feitoP?' ok':'')+'"><span>🔷</span><div><b>Prisma de Talentos</b><small>'+(feitoP?'Feito: '+E(INTEL[ST.prisma].nome):'± '+MIN_PRISMA+' minutos')+'</small></div>'+(feitoP?'<i>✓</i>':'<button data-gate="prisma">Fazer</button>')+'</div>'
-      +'<div class="mi-gate-it'+(feitoN?' ok':'')+'"><span>🧭</span><div><b>Bússola de nível</b><small>'+(feitoN?'Feito: '+E(ST.nivel):'± '+MIN_BUSSOLA+' minutos')+'</small></div>'+(feitoN?'<i>✓</i>':'<button data-gate="bussola">Fazer</button>')+'</div>'
+      +'<div class="mi-gate-it'+(feitoP?' ok':'')+'"><span>'+IC('prisma')+'</span><div><b>Prisma de Talentos</b><small>'+(feitoP?'Feito: '+E(INTEL[ST.prisma].nome):'± '+MIN_PRISMA+' minutos')+'</small></div>'+(feitoP?'<i>✓</i>':'<button data-gate="prisma">Fazer</button>')+'</div>'
+      +'<div class="mi-gate-it'+(feitoN?' ok':'')+'"><span>'+IC('bussola')+'</span><div><b>Bússola de nível</b><small>'+(feitoN?'Feito: '+E(ST.nivel):'± '+MIN_BUSSOLA+' minutos')+'</small></div>'+(feitoN?'<i>✓</i>':'<button data-gate="bussola">Fazer</button>')+'</div>'
       +'<button class="nao" data-gate="manual" style="display:block;width:100%;margin-top:14px;font-weight:700;color:var(--accent)">Já sei: escolher manualmente</button>'
       +'<button class="nao" data-fechar style="display:block;width:100%">Deixar pra depois</button></div>';
     ov.classList.add('open');
