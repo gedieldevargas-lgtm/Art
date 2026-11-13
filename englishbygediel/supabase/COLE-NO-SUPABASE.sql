@@ -795,3 +795,18 @@ O fluxo certo: você escreve → pede correção COM explicação → reescreve 
 ✅ Pratique: escreva 5 frases, peça correção explicada e reescreva.$t$,$q$[{"q": "O fluxo certo é:", "a": ["IA escreve tudo", "Você escreve → IA corrige explicando → você reescreve", "Copiar e colar", "Não usar nunca"], "c": 1}, {"q": "Pedir 'explique cada correção' serve pra:", "a": ["Gastar tempo", "Aprender o porquê do erro", "Nada", "Enfeitar"], "c": 1}, {"q": "O risco de a IA escrever por você:", "a": ["Nenhum", "Você não desenvolve a habilidade", "Fica caro", "Fica lento"], "c": 1}, {"q": "Reescrever sem olhar a correção:", "a": ["Inútil", "Fixa o aprendizado", "Proibido", "Demora demais"], "c": 1}, {"q": "IA como revisor é:", "a": ["Muleta", "Ferramenta — quem escreve é você", "Professor substituto total", "Golpe"], "c": 1}]$q$::jsonb,'2027-08-16 12:00:00+00',true);
   end if;
 end $blk$;
+-- Modo edição dentro da plataforma (rodar depois do COLE-NO-SUPABASE.sql e do membros.sql)
+-- 1) cards de qualquer menu (não só eom/culture/viagens) e regra de acesso por card
+alter table public.mi_uni_cards drop constraint if exists mi_uni_cards_universo_check;
+alter table public.mi_uni_cards add constraint mi_uni_cards_universo_check check (universo ~ '^[a-z0-9_-]{1,30}$');
+alter table public.mi_uni_cards add column if not exists acesso text not null default 'todos';
+alter table public.mi_uni_cards drop constraint if exists mi_uni_cards_acesso_check;
+alter table public.mi_uni_cards add constraint mi_uni_cards_acesso_check check (acesso in ('todos','programa','produto'));
+alter table public.mi_uni_cards add column if not exists produto text;
+alter table public.mi_uni_cards add column if not exists checkout text;
+
+-- 2) materiais com capa, seção, preço e visível/oculto
+alter table public.materiais add column if not exists capa_url text;
+alter table public.materiais add column if not exists secao text default '';
+alter table public.materiais add column if not exists preco text default '';
+alter table public.materiais add column if not exists ativo boolean not null default true;

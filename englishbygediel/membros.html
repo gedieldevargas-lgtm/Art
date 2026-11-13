@@ -13,7 +13,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <style>
-@font-face{font-family:'Advercase';src:url('fonts/advercase.woff2') format('woff2'),url('fonts/advercase.otf') format('opentype');font-display:swap}
+@font-face{font-family:'Advercase';src:url('fonts/advercase.woff2') format('woff2');font-weight:400;font-display:swap}@font-face{font-family:'Advercase';src:url('fonts/advercase-bold.woff2') format('woff2');font-weight:700 900;font-display:swap}
 :root{
   --bg:#f0f2f8;--sidebar:#ffffff;--surface:#ffffff;--surface2:#f5f6fb;
   --border:#e8eaf2;--fg:#111827;--fg2:#6b7280;--fg3:#9ca3af;
@@ -365,7 +365,7 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
 .lesson-item:hover{border-color:var(--accent);transform:translateX(2px)}
 .capa-auto{position:absolute;inset:0;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;container-type:size;overflow:hidden}
 .capa-auto:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,9,22,.12),rgba(6,9,22,.5))}
-.capa-auto span{position:relative;font-family:'Advercase','Archivo Black','Arial Black',sans-serif;font-weight:400;color:#fff;text-transform:uppercase;text-align:center;line-height:1.04;font-size:clamp(8px,9.5cqw,68px);padding:0 8cqw;text-wrap:balance;text-shadow:0 2px 16px rgba(0,0,0,.5);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;letter-spacing:.01em}
+.capa-auto span{position:relative;font-family:'Advercase','Archivo Black','Arial Black',sans-serif;font-weight:700;color:#fff;text-transform:uppercase;text-align:center;line-height:1.04;font-size:clamp(8px,9.5cqw,68px);padding:0 8cqw;text-wrap:balance;text-shadow:0 2px 16px rgba(0,0,0,.5);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;letter-spacing:.01em}
 .lesson-item .lthumb{width:96px;aspect-ratio:16/9;border-radius:9px;background:var(--surface2);overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:20px;position:relative}
 .lesson-item .lthumb img{width:100%;height:100%;object-fit:cover}
 .lesson-item .lt{font-size:13px;font-weight:700}
@@ -1502,7 +1502,7 @@ function chkMarTask(el,key,i){
 function chkTask(el){el.classList.toggle('chk');el.textContent=el.classList.contains('chk')?'✓':'';}
 var _curTask=null;
 function openTask(key,i){
-  var t=(CTX_TASKS[key]||[])[i];var inf=(TASK_INFO[key]||[])[i];if(!t)return;
+  var t=(CTX_TASKS[key]||[])[i];if(!t)return;var inf=t.info||(t.ref?(TASK_INFO[t.ref[0]]||[])[t.ref[1]]:(TASK_INFO[key]||[])[i]);
   _curTask={key:key,i:i};
   document.getElementById('task-modal-title').textContent=t.icon+' '+t.title;
   var h='<div style="font-size:12px;color:var(--fg2);line-height:1.7;background:rgba(79,110,247,.06);border:1px solid rgba(79,110,247,.15);border-radius:12px;padding:10px 12px">💡 '+(inf?inf.why:t.sub)+'</div>';
@@ -1512,7 +1512,8 @@ function openTask(key,i){
     if(inf.links&&inf.links.length){
       h+='<div class="adm-section">Conteúdo pra usar agora</div><div>';
       inf.links.forEach(function(l){
-        if(l.u==='#modulos')h+='<a class="task-link" href="javascript:void(0)" onclick="closeTaskModal();goTo(\'modulos\')">'+l.t+'</a>';
+        if(l.u==='#jogos')h+='<a class="task-link" href="javascript:void(0)" onclick="closeTaskModal();goTo(\'jogos\')">'+l.t+'</a>';
+        else if(l.u==='#modulos')h+='<a class="task-link" href="javascript:void(0)" onclick="closeTaskModal();goTo(\'modulos\')">'+l.t+'</a>';
         else h+='<a class="task-link" href="'+l.u+'" target="_blank" rel="noopener">'+l.t+' ↗</a>';
       });
       h+='</div><div style="font-size:10px;color:var(--fg3);margin-top:4px">Links do YouTube abrem direto no app do YouTube no celular.</div>';
