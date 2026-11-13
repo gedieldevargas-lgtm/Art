@@ -332,9 +332,9 @@
     return {k:k,tot:tot,feitos:feitos,pct:tot?Math.round(feitos*100/tot):0};
   }
   var chkOrig=window.chkMarTask;
-  window.chkMarTask=function(el,key,i){chkOrig(el,key,i);salvarChecks();if(((_ctxChecked[key]||[])[i]))marcarDia();else pintarRail();};
+  window.chkMarTask=function(el,key,i){chkOrig(el,key,i);salvarChecks();if(((_ctxChecked[key]||[])[i])){marcarDia();verCompleto(key);}else pintarRail();};
   var doneOrig=window.taskDone;
-  if(doneOrig)window.taskDone=function(){doneOrig();salvarChecks();marcarDia();};
+  if(doneOrig)window.taskDone=function(){doneOrig();salvarChecks();marcarDia();verCompleto();};
   function chipsCtx(){
     var g=document.querySelector('#pane-maratona .ctx-grid');if(!g||g.dataset.mi)return;g.dataset.mi='1';g.classList.remove('stagger');
     g.innerHTML=CTX.map(function(c){return '<div class="ctx-chip'+(c.k==='Em Casa'?' active':'')+'" data-k="'+E(c.k)+'" onclick="selCtx(this)"><span class="ce">'+c.ic+'</span>'+E(c.lb)+'</div>';}).join('');
@@ -1945,6 +1945,62 @@
     toast(a==='share'?'Imagem baixada: posta ela no seu status 📲':'Imagem baixada ✅');
   });
   function compartilharConquista(sc,tot){STY.quiz=sc!=null?{sc:sc,tot:tot,t:(window._stCurLes&&_stCurLes.title)||'aula'}:null;STY.i++;pintarStory();}
+  /* ───────────────────────── FESTA: checklist do dia concluído ───────────────────────── */
+  var IRONIA={
+    'Em Casa':['Em casa, de pijama, e mesmo assim mais produtivo que muita reunião por aí.','O sofá tentou te segurar. Perdeu.'],
+    'Acabei de acordar':['Nem tomou café e já falou mais inglês que muita gente na semana inteira.','O despertador tocou e o inglês atendeu. Lenda.'],
+    'Vou pro banho':['O chuveiro agora é bilíngue. Os vizinhos que lutem.','Saiu do banho mais limpo e mais fluente. Combo raro.'],
+    'Prestes a dormir':['Vai sonhar em inglês hoje. Se aparecer legenda, é normal.','Dormir cedo? Não. Dormir fluente.'],
+    'No carro':['Trânsito parado, inglês andando. Quem diria.','Seu carro agora tem GPS da fluência. Recalculando rota: sucesso.'],
+    'No Transporte':['Enquanto uns rolavam o feed, você rolou o vocabulário.','Ônibus lotado, cabeça vazia? Não a sua.'],
+    'No Trabalho':['Trabalhou e ainda estudou. O RH precisa saber disso.','Produtividade nível: chefe vai pedir pra você dar treinamento.'],
+    'Intervalo do almoço':['Almoço com sobremesa de inglês. Nutricionista aprovaria.','Comeu, estudou e ainda sobrou tempo pro cafezinho. Gestão de tempo de CEO.'],
+    'Lavando a louça':['A louça tá limpa e o inglês tá brilhando. Detergente bilíngue.','Quem lava louça falando inglês merece um aumento de mesada.'],
+    'Limpando a casa':['Casa limpa, mente afiada. A vassoura agora fala "sweep".','Faxina concluída com trilha sonora internacional. Marie Kondo ficaria orgulhosa.'],
+    'Cozinhando':['Masterchef bilíngue. Hoje o tempero foi o vocabulário.','Queimou o arroz? Tudo bem. O inglês saiu no ponto.'],
+    'Caminhando':['Passos contados: muitos. Palavras novas: também.','Caminhou pra frente na vida e no inglês. Literalmente.'],
+    'Na Academia':['Treino de perna e de pronúncia. Ninguém pula esse dia.','Hipertrofia de vocabulário confirmada.'],
+    'Na fila':['A fila andou devagar, você não.','Transformou o tempo mais inútil do dia em aula. Gênio.'],
+    'No sofá':['Do sofá pro sucesso sem levantar. Isso é eficiência.','Netflix chorou de ciúmes, mas você escolheu crescer.'],
+    'Só 5 minutos':['5 minutos que valeram por 50. Quem disse que não dava?','Pouco tempo, zero desculpa. Respeita.'],
+    'Focado pra estudar':['Modo foco ativado e missão cumprida. Que disciplina.','Hoje você estudou como quem tem prova amanhã. Só que é pra vida.'],
+    'Viajando':['Turista? Não. Treinando pra ser local.','Mala pronta, inglês também.'],
+    'No mercado':['Fez compras e ainda levou vocabulário de brinde.','O carrinho ficou cheio e a cabeça também.'],
+    'Na igreja':['Fé e fluência na mesma oração. Amém em dois idiomas.','Deus abençoou e você praticou. Parceria perfeita.'],
+    'Com a família':['Agora a família toda sabe dizer "good night". Missionário do inglês.','Ensinou em casa e aprendeu em dobro. Professor nato.']
+  };
+  var GERAL=['Checklist zerado. Desculpas também.','Hoje você foi a pessoa que você disse que ia ser.','Mais um dia na conta. Constância é o novo talento.'];
+  var feEl=document.createElement('div');feEl.id='mi-festa';document.body.appendChild(feEl);
+  var fec=document.createElement('style');fec.textContent=[
+    '#mi-festa{position:fixed;inset:0;z-index:9300;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(8,10,28,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}#mi-festa.on{display:flex}',
+    '#mi-festa .fb{position:relative;z-index:2;width:min(420px,100%);background:linear-gradient(160deg,#4f6ef7,#8b5cf6 60%,#ec4899);color:#fff;border-radius:28px;padding:30px 24px 22px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.45);animation:feIn .6s cubic-bezier(.2,1.4,.4,1) both}',
+    '@keyframes feIn{from{opacity:0;transform:scale(.6) rotate(-6deg)}to{opacity:1;transform:none}}',
+    '#mi-festa .tr{font-size:76px;line-height:1;animation:feTr 1.2s ease-in-out infinite alternate}@keyframes feTr{from{transform:translateY(0) rotate(-8deg)}to{transform:translateY(-10px) rotate(8deg)}}',
+    '#mi-festa h3{font-family:Advercase,"Archivo Black",sans-serif;font-weight:700;font-size:34px;letter-spacing:.5px;margin:14px 0 4px;text-transform:uppercase}',
+    '#mi-festa .sb{font-size:14px;opacity:.85;margin-bottom:14px}#mi-festa .fr{font-size:17px;font-weight:700;line-height:1.45;background:rgba(255,255,255,.15);border-radius:18px;padding:14px 16px;margin-bottom:16px}',
+    '#mi-festa button{width:100%;border:none;border-radius:16px;padding:15px;font:inherit;font-size:15px;font-weight:800;cursor:pointer;margin-top:8px}#mi-festa .p{background:#fff;color:#4f2ab0}#mi-festa .g{background:rgba(255,255,255,.18);color:#fff}',
+    '#mi-festa i.cf{position:absolute;top:-20px;width:10px;height:16px;border-radius:3px;z-index:1;animation:feCai linear forwards}@keyframes feCai{to{transform:translateY(110vh) rotate(720deg)}}'
+  ].join('');document.head.appendChild(fec);
+  function festa(k){
+    var c=CTX.filter(function(x){return x.k===k;})[0]||{ic:'✅',lb:k},lista=(IRONIA[k]||[]).concat(GERAL);
+    var pr=(IRONIA[k]&&Math.random()<.8)?IRONIA[k]:lista,fr=pr[Math.floor(Math.random()*pr.length)],seq=sequencia();
+    var cores=['#ffd166','#7ee2a8','#7dd3fc','#f472b6','#a78bfa','#fff'],conf='';
+    for(var i=0;i<70;i++)conf+='<i class="cf" style="left:'+(Math.random()*100)+'vw;background:'+cores[i%6]+';animation-duration:'+(2.2+Math.random()*2.2)+'s;animation-delay:'+(Math.random()*.8)+'s;transform:rotate('+(Math.random()*360)+'deg)"></i>';
+    feEl.innerHTML=conf+'<div class="fb"><div class="tr">🏆</div><h3>Checklist concluído!</h3><div class="sb">'+c.ic+' '+E(c.lb)+' · 🔥 '+seq.n+(seq.n===1?' dia seguido':' dias seguidos')+'</div>'
+      +'<div class="fr">'+E(fr)+'</div><button class="p" data-fe="share">📤 Compartilhar meu dia</button><button class="g" data-fe="fechar">Fechar</button></div>';
+    feEl.classList.add('on');
+    try{if(navigator.vibrate)navigator.vibrate([60,40,120]);}catch(e){}
+  }
+  feEl.addEventListener('click',function(e){
+    var b=e.target.closest('[data-fe]');if(!b&&e.target!==feEl)return;
+    feEl.classList.remove('on');feEl.innerHTML='';
+    if(b&&b.dataset.fe==='share')compartilharConquista(null);
+  });
+  function verCompleto(k){
+    var ks=k?[k]:Object.keys(window._ctxChecked||{});
+    for(var i=0;i<ks.length;i++){var pc=progCtx(ks[i]),flag='mi_festa_'+dia()+'_'+ks[i];
+      if(pc.tot&&pc.feitos===pc.tot&&!LS.get(flag,false)){LS.set(flag,true);setTimeout(function(kk){return function(){festa(kk);};}(ks[i]),450);return;}}
+  }
   window.MI_APP={conhecer:conhecer,tour:tour,aulaAberta:aulaAberta,marcarDia:marcarDia,abrirAula:abrirAula,renderHome:renderHome,
-    compartilharQuiz:compartilharConquista,compartilharDia:function(){compartilharConquista(null);}};
+    compartilharQuiz:compartilharConquista,compartilharDia:function(){compartilharConquista(null);},festa:festa};
 })();
