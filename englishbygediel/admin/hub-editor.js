@@ -48,7 +48,7 @@
       novo: () => ({ id: 'c' + Date.now().toString(36), tipo: 'gratis', ativo: true, titulo: 'Novo material', linha: '', nome: '', setor: '', img: '', preco: '', link: '', botao: '', link2: '', botao2: '', video: '', sinopse: '', meta: '', modos: [] }),
       campos: [['tipo', 'Tipo', 'sel', OPC.tipoCard], ['ativo', 'Visível', 'bool'], ['titulo', 'Título (no depoimento, a frase)'], ['linha', 'Linha embaixo do título'],
         ['nome', 'Nome do aluno (só depoimento)'], ['setor', 'Setor (vira filtro na fileira grátis: Prompts, E-books, Guias…)'], ['img', 'Capa', 'img'],
-        ['preco', 'Preço (à venda)'], ['link', 'Link do botão (landing, checkout, PDF…)', 'url'], ['botao', 'Texto do botão'],
+        ['preco', 'Preço (à venda)'], ['parcelas', 'Parcelas (ex.: 6 mostra "6x de…"; 1 mostra só o valor cheio; vazio = 6x a partir de R$ 300)'], ['link', 'Link do botão (landing, checkout, PDF…)', 'url'], ['botao', 'Texto do botão'],
         ['link2', 'Segundo link (opcional)', 'url'], ['botao2', 'Texto do segundo botão'], ['video', 'Vídeo do YouTube (link ou código)', 'video'],
         ['sinopse', 'Descrição (aparece ao tocar)', 'area'], ['meta', 'Etiquetas (separe por vírgula)'], ['modos', 'Aparece primeiro nos modos', 'modos']] },
     { k: 'lojinha', t: 'Lojinha (coluna lateral)', d: 'A coluna fina com os produtos andando na vertical, no canto direito. Ao tocar, abre a lojinha com os achados de afiliado, os seus e-books à venda (cards "À venda") e os grátis (cards grátis com link).', campos: [

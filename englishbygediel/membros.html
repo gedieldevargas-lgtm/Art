@@ -168,6 +168,8 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
 .mar-chk.chk{background:var(--green);border-color:var(--green);color:#fff;animation:popIn .25s cubic-bezier(.22,1,.36,1)}
 .mar-task-title{font-size:12px;font-weight:600;flex:1}
 
+.games-frame-wrap{border-radius:18px;overflow:hidden;border:1px solid var(--border);background:#07070f;height:calc(100dvh - 170px);min-height:560px}
+#games-frame{width:100%;height:100%;border:0;display:block}
 /* ── JOGOS — APPLE ICON GRID ─────────── */
 .game-filters{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:22px}
 .gf-btn{background:var(--surface2);border:1.5px solid var(--border);border-radius:99px;padding:6px 14px;font-size:11px;font-weight:700;color:var(--fg2);cursor:pointer;transition:.15s}
@@ -605,20 +607,15 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
         <div id="mod-view-lesson" style="display:none"></div>
       </div>
 
-      <!-- JOGOS -->
+      <!-- JOGOS: todos os jogos e simulações (jogos.html), liberados pra aluno -->
       <div class="pane" id="pane-jogos">
-        <div style="font-size:21px;font-weight:800;margin-bottom:4px">Jogos</div>
-        <div style="font-size:13px;color:var(--fg2);margin-bottom:18px">Toque no jogo pra ver como jogar</div>
-        <div class="game-filters" id="game-filters">
-          <button class="gf-btn active" onclick="filterGames('all',this)">Todos</button>
-          <button class="gf-btn" onclick="filterGames('vocab',this)">Vocabulário</button>
-          <button class="gf-btn" onclick="filterGames('grammar',this)">Gramática</button>
-          <button class="gf-btn" onclick="filterGames('listening',this)">Listening</button>
-          <button class="gf-btn" onclick="filterGames('pronunciation',this)">Pronúncia</button>
-          <button class="gf-btn" onclick="filterGames('a1a2',this)">A1–A2</button>
-          <button class="gf-btn" onclick="filterGames('b1b2',this)">B1–B2</button>
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+          <div><div style="font-size:21px;font-weight:800;margin-bottom:4px">Jogos</div>
+          <div style="font-size:13px;color:var(--fg2)">30 jogos e 6 simulações de entrevista, no seu nível. Tudo liberado pra você.</div></div>
+          <a href="jogos.html" target="_blank" rel="noopener" class="gf-btn" style="text-decoration:none">⤢ Abrir em tela cheia</a>
         </div>
-        <div class="game-apple-grid stagger" id="game-grid"></div>
+        <div class="games-frame-wrap"><iframe id="games-frame" title="Jogos de Inglês" data-src="jogos.html" allow="microphone; autoplay; fullscreen; screen-wake-lock" loading="lazy"></iframe></div>
+        <div id="game-grid" hidden></div>
       </div>
 
       <!-- MATERIAIS -->
@@ -1264,6 +1261,7 @@ renderMat.__antigo=renderMat;renderMat();
 var TITLES={home:'Início',maratona:'Maratona de Hoje',lives:'Lives',modulos:'Módulos',jogos:'Jogos',materiais:'Materiais',bussola:'Bússola CEFR',prisma:'Prisma de Talentos',admin:'🛡️ Painel Admin'};
 var currentPage='home';
 function goTo(page,el){
+  if(page==='jogos'){var gf=document.getElementById('games-frame');if(gf&&!gf.src)gf.src=gf.getAttribute('data-src');}
   if(page===currentPage)return;
   var prev=document.getElementById('pane-'+currentPage);
   if(prev){
