@@ -297,6 +297,14 @@
   '.lv-bt{flex:none;border:1.5px solid var(--border);background:var(--surface);color:var(--fg);border-radius:10px;padding:8px 12px;font:inherit;font-size:12.5px;font-weight:800;cursor:pointer}.lv-bt.on{background:rgba(16,185,129,.12);border-color:#10b981;color:#10b981}',
   '.hm-uni span .ic3d{width:40px;height:40px}',
   '@media(max-width:560px){.lv-aula{flex-wrap:wrap}.lv-bt{width:100%}}',
+  /* logo do Método Inteligente */
+  '.mi-logo{display:inline-block;width:1em;height:1em;background:currentColor;-webkit-mask:url(img/logo-mi.svg) center/contain no-repeat;mask:url(img/logo-mi.svg) center/contain no-repeat}',
+  '.mi-lg-badge{background:#000817!important;color:#fbf7ee;font-size:24px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}',
+  '.mi-lg-ent{font-size:34px;color:#fbf7ee;opacity:.9;display:block;margin:0 auto 10px}#mi-onb .mi-lg-ent{margin-left:0}',
+  '#pane-home{position:relative}#pane-home>.mi-lg-marca{position:absolute;top:-6px;right:4px;font-size:118px;color:var(--fg);opacity:.06!important;animation:none!important;pointer-events:none;transform:rotate(-12deg);z-index:0}',
+  '.mi-lg-rail{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:22px;font-size:11px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--fg3);opacity:.55}.mi-lg-rail .mi-logo{font-size:16px}',
+  '.mi-lg-festa{position:absolute;right:-26px;bottom:-30px;font-size:150px;color:#fff;opacity:.09;pointer-events:none}#mi-festa .fb{overflow:hidden}',
+  '@media(max-width:680px){.mi-lg-badge{font-size:20px}#pane-home>.mi-lg-marca{font-size:84px;right:-6px;top:-4px}}',
   /* celular: menu de baixo + gaveta */
   '#mi-bnav,#mi-shade{display:none}',
   '@media(max-width:680px){',
@@ -455,7 +463,7 @@
     var standalone=window.matchMedia&&matchMedia('(display-mode: standalone)').matches||navigator.standalone;
     var mobile=/iphone|ipad|android/i.test(navigator.userAgent);
     var ios=/iphone|ipad/i.test(navigator.userAgent);
-    var h='<div class="hm-greet">'+saudacao()+(nomeCurto()?', '+E(nomeCurto()):'')+' 👋</div>'
+    var h='<span class="mi-logo mi-lg-marca" aria-hidden="true"></span><div class="hm-greet">'+saudacao()+(nomeCurto()?', '+E(nomeCurto()):'')+' 👋</div>'
       +'<div class="hm-sub">'+E(dataHoje())+' · '+(sq.n?'<strong style="color:var(--gold)">🔥 '+sq.n+' dia'+(sq.n>1?'s':'')+' seguido'+(sq.n>1?'s':'')+'</strong>'+(sq.hoje?'':' · estude hoje pra manter'):'Comece sua sequência hoje 🔥')+'</div>';
     if(mobile&&!standalone&&!LS.get('mi_install_x',false)){
       h+='<div class="hm-install"><span style="font-size:24px">📲</span><div><b>Instale o app no celular</b><br>'
@@ -535,7 +543,7 @@
       +'<a href="https://www.youtube.com/@teachergediel" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:11px;padding:9px 12px;text-decoration:none;font-size:12px;font-weight:700;color:#ef4444">'+IC('youtube')+' Canal no YouTube</a>'
       +'<a href="https://instagram.com/englishbygediel" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.18);border-radius:11px;padding:9px 12px;text-decoration:none;font-size:12px;font-weight:700;color:#8b5cf6">'+IC('instagram')+' @englishbygediel</a>'
       +'<button data-hm="indicar" style="display:flex;align-items:center;gap:8px;background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.25);border-radius:11px;padding:9px 12px;font-size:12px;font-weight:700;color:#16a34a;cursor:pointer;text-align:left">'+IC('indicar')+' Indicar um amigo</button>'
-      +'</div></div>';
+      +'</div><div class="mi-lg-rail"><span class="mi-logo"></span>Método Inteligente</div></div>';
   }
 
   /* ───────────────────────── ENTRADA: boas-vindas + onde você está ───────────────────────── */
@@ -549,7 +557,7 @@
   async function mostrarBoasVindas(rever){
     await lerCfg();
     var id=window.ytId?ytId(CFG.videoBoasVindas||''):null;
-    abrirEntrada('<div class="mi-ent-kicker">'+(rever?'Como usar o app':'Primeiro acesso')+'</div>'
+    abrirEntrada('<span class="mi-logo mi-lg-ent"></span><div class="mi-ent-kicker">'+(rever?'Como usar o app':'Primeiro acesso')+'</div>'
       +'<div class="mi-ent-q">'+(rever?'Seu inglês, todo dia, em 4 passos':'Bem-vindo(a)'+(nomeCurto()?', '+E(nomeCurto()):'')+'! 🎉')+'</div>'
       +'<div class="mi-ent-s">Assista esse vídeo rapidinho: ele mostra tudo o que tem aqui dentro e como usar o app no seu dia.</div>'
       +'<div class="mi-video">'+(id?'<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?rel=0&modestbranding=1" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>':'<div class="ph"><div style="font-size:40px">🎬</div>O vídeo de boas-vindas do Gediel entra aqui<div style="font-size:12px;font-weight:600;opacity:.85">Enquanto isso, o resumo está logo abaixo 👇</div></div>')+'</div>'
@@ -569,7 +577,7 @@
     };
   }
   function perguntarContexto(){
-    abrirEntrada('<div class="mi-ent-kicker">'+E(saudacao())+(nomeCurto()?', '+E(nomeCurto()):'')+'</div>'
+    abrirEntrada('<span class="mi-logo mi-lg-ent"></span><div class="mi-ent-kicker">'+E(saudacao())+(nomeCurto()?', '+E(nomeCurto()):'')+'</div>'
       +'<div class="mi-ent-q">Onde você está agora?</div>'
       +'<div class="mi-ent-s">Escolha o mais parecido com onde você está ou o que está fazendo. Eu monto o checklist de hoje pra esse momento.</div>'
       +'<div class="mi-ctx">'+CTX.map(function(c,i){return '<button data-ent="ctx" data-k="'+E(c.k)+'" style="animation-delay:'+(0.08+i*0.07)+'s"><span class="ic">'+icCtx(c)+'</span><span class="lb">'+E(c.lb)+'</span><span class="ht">'+E(c.hint)+'</span></button>';}).join('')+'</div>'
@@ -1403,7 +1411,7 @@
     var passo=OB_PASSOS[OB.i],r=OB.r,h='',nome=nomeCurto();
     var pct=Math.round(OB.i/(OB_PASSOS.length-1)*100);
     if(passo==='intro'){
-      h='<div class="k">Primeiro acesso</div><h2>'+(nome?E(nome)+', bem-vindo(a)':'Bem-vindo(a)')+'! Me deixa te conhecer 😊</h2>'
+      h='<span class="mi-logo mi-lg-ent" style="margin:6px 0 4px"></span><div class="k">Primeiro acesso</div><h2>'+(nome?E(nome)+', bem-vindo(a)':'Bem-vindo(a)')+'! Me deixa te conhecer 😊</h2>'
         +'<p class="s">Umas perguntas rápidas, 2 minutinhos. Assim eu monto o app com a sua cara: seus interesses, seu objetivo e o tempo que cabe no seu dia.</p>'
         +'<div class="card" style="font-size:14px;line-height:1.7">💬 Perguntas curtas, só tocar<br>🎯 No fim você vê o seu plano<br>🧭 E eu te mostro o próximo passo pra liberar o checklist e as aulas</div>'
         +obBtn('Bora →','data-ob="prox"');
@@ -1943,7 +1951,8 @@
     var CX=TR?'rgba(0,0,0,.38)':'rgba(255,255,255,.13)';
     var F='"Plus Jakarta Sans",system-ui,sans-serif',T="Advercase,'Archivo Black','Arial Black',sans-serif",X=90,L=W-180,y=170;
     c.fillStyle='rgba(255,255,255,.75)';c.font='800 30px '+F;c.textBaseline='alphabetic';
-    c.fillText('PLATAFORMA INTELIGENTE  ·  @ENGLISHBYGEDIEL',X,y);
+    var lg=await carregarImg('img/logo-mi.svg');if(lg){c.save();c.shadowBlur=0;c.globalAlpha=.92;c.drawImage(lg,X-6,y-40,52,52);c.restore();}
+    c.fillText('MÉTODO INTELIGENTE  ·  @ENGLISHBYGEDIEL',X+(lg?56:0),y);
     var seq=sequencia(),jd=jornada();
     y+=150;c.fillStyle='#fff';c.font='700 130px '+T;c.fillText('MÊS '+jd.mes+'/'+jd.meses,X,y);
     y+=50;rr(c,X,y,L,34,17);c.fillStyle=TR?'rgba(0,0,0,.4)':'rgba(255,255,255,.18)';c.fill();
@@ -2046,7 +2055,7 @@
     var pr=(IRONIA[k]&&Math.random()<.8)?IRONIA[k]:lista,fr=pr[Math.floor(Math.random()*pr.length)],seq=sequencia();
     var cores=['#ffd166','#7ee2a8','#7dd3fc','#f472b6','#a78bfa','#fff'],conf='';
     for(var i=0;i<70;i++)conf+='<i class="cf" style="left:'+(Math.random()*100)+'vw;background:'+cores[i%6]+';animation-duration:'+(2.2+Math.random()*2.2)+'s;animation-delay:'+(Math.random()*.8)+'s;transform:rotate('+(Math.random()*360)+'deg)"></i>';
-    feEl.innerHTML=conf+'<div class="fb"><div class="tr">'+IC('trofeu','fe')+'</div><h3>Checklist concluído!</h3><div class="sb">'+icCtx(c)+' '+E(c.lb)+' · 🔥 '+seq.n+(seq.n===1?' dia seguido':' dias seguidos')+'</div>'
+    feEl.innerHTML=conf+'<div class="fb"><span class="mi-logo mi-lg-festa" aria-hidden="true"></span><div class="tr">'+IC('trofeu','fe')+'</div><h3>Checklist concluído!</h3><div class="sb">'+icCtx(c)+' '+E(c.lb)+' · 🔥 '+seq.n+(seq.n===1?' dia seguido':' dias seguidos')+'</div>'
       +'<div class="fr">'+E(fr)+'</div><button class="p" data-fe="share">📤 Compartilhar meu dia</button><button class="g" data-fe="fechar">Fechar</button></div>';
     feEl.classList.add('on');
     try{if(navigator.vibrate)navigator.vibrate([60,40,120]);}catch(e){}
