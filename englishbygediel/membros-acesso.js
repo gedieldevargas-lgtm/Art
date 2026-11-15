@@ -46,7 +46,7 @@
   };
 
   // ───── Devocionais (English On Mission): lista de vídeos só pra quem assina
-  var temEom=function(){return livre()||(S.cfg.eom||[]).some(tem);};
+  var temEom=function(){return livre()||S.tudo||(S.cfg.eom||[]).some(tem);};
   function criarDev(){
     if(document.getElementById('pane-devocionais'))return;
     var ref=[].filter.call(document.querySelectorAll('.nav-pill'),function(n){return (n.getAttribute('onclick')||'').indexOf("'materiais'")>=0;})[0];

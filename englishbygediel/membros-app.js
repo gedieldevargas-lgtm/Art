@@ -20,7 +20,7 @@
   var IC_BASE='home maratona lives modulos jogos materiais prompts agendar check fogo eom culture viagens bussola prisma youtube instagram indicar sino suporte'.split(' ');
   function IC(n,cls){if(!n)return '';return '<img class="ic3d'+(cls?' '+cls:'')+'" src="img/icons/'+n+'.'+(IC_BASE.indexOf(n)>=0?'webp':'svg')+'" alt="" draggable="false">';}
   window.IC=IC;
-  var IC_MENU={home:'home',maratona:'maratona',lives:'lives',modulos:'modulos',jogos:'jogos',materiais:'materiais',prompts:'prompts',agendar:'agendar',eom:'eom',culture:'culture',viagens:'viagens',bussola:'bussola',prisma:'prisma',admin:'admin'};
+  var IC_MENU={home:'home',maratona:'maratona',lives:'lives',modulos:'modulos',jogos:'jogos',materiais:'materiais',prompts:'prompts',agendar:'agendar',planos:'planos',eom:'eom',culture:'culture',viagens:'viagens',bussola:'bussola',prisma:'prisma',admin:'admin'};
   var IC_CTX={'Em Casa':'home','Acabei de acordar':'ctx-acordar','Vou pro banho':'ctx-banho','Prestes a dormir':'ctx-dormir','No carro':'ctx-carro','No Transporte':'ctx-transporte','No Trabalho':'ctx-trabalho','Intervalo do almoço':'ctx-almoco','Lavando a louça':'ctx-louca','Limpando a casa':'ctx-limpeza','Cozinhando':'ctx-cozinha','Caminhando':'ctx-caminhada','Na Academia':'ctx-academia','Na fila':'ctx-fila','No sofá':'ctx-sofa','Só 5 minutos':'ctx-5min','Focado pra estudar':'ctx-foco','Viajando':'viagens','No mercado':'ctx-mercado','Na igreja':'ctx-igreja','Com a família':'ctx-familia'};
   function icCtx(c,cls){return IC_CTX[c.k]?IC(IC_CTX[c.k],cls):c.ic;}
   function iconesMenu(){
@@ -88,6 +88,15 @@
     nomear:{why:'Dar nome às coisas em inglês cria o hábito de pensar em inglês, sem precisar de livro.',
       steps:['Olhe em volta e nomeie 10 coisas em inglês','As que você não souber, anote e procure depois','Junte 2 numa frase: "The ___ is next to the ___."'],
       ex:['"The cart is next to the milk."','"I need apples and bread."']},
+    idioma:{why:'É a tarefa mais preguiçosa e uma das mais poderosas: você passa a ler inglês dezenas de vezes por dia sem abrir livro. Os botões você já sabe onde ficam, então o cérebro liga a palavra ao significado sozinho.',
+      steps:['iPhone: Ajustes → Geral → Idioma e Região → Idioma do iPhone → English','Android: Configurações → Sistema → Idiomas → Adicionar idioma → English → arraste pro topo','Faça o mesmo no Instagram, no YouTube e na Netflix (Configurações → Idioma)','Se travar, volta pro português, sem culpa. Mas tente aguentar 7 dias'],
+      ex:['Settings = Configurações','Search = Pesquisar','Share = Compartilhar','Save = Salvar']},
+    cognatos:{why:'Você já sabe centenas de palavras em inglês e não sabe que sabe. Reconhecer as parecidas com o português dá confiança e treina o ouvido pra achar padrões.',
+      steps:['Abra qualquer texto, embalagem ou legenda em inglês','Ache 10 palavras que parecem português','Fale cada uma em voz alta, do jeito inglês','Bônus: repare no padrão -tion = -ção (nation, information, situation)'],
+      ex:['hospital, chocolate, internet, music','family = família · important = importante','information = informação · possible = possível']},
+    ouvir:{why:'No começo, o objetivo não é entender tudo: é acostumar o ouvido com o som do inglês. Reconhecer 2 ou 3 palavras já é vitória.',
+      steps:['Escolha um vídeo bem simples (pra iniciantes)','Assista 3 minutos sem pausar e sem legenda em português','Anote as palavras que você reconheceu, mesmo poucas','Assista de novo com legenda em inglês e veja quantas você pegou'],
+      links:[{t:'▶️ Vídeos pra quem está começando',u:'https://www.youtube.com/results?search_query=comprehensible+input+english+absolute+beginner'}]},
     jogo:{why:'Jogar fixa vocabulário sem parecer estudo. Perfeito pra quando a energia está baixa.',
       steps:['Abra o menu Jogos','Escolha 1 jogo do seu nível','Jogue 1 rodada inteira'],
       links:[{t:'🎮 Abrir os jogos',u:'#jogos'}]},
@@ -120,6 +129,11 @@
     'Com a família':[T('👨‍👩‍👧','Ensinar 3 palavras pra alguém de casa','Ensinar é aprender 2 vezes','familia'),T('🎵','Música em inglês com todo mundo','Karaokê em casa',R('Em Casa',3)),T('🎮','Jogar 1 jogo de inglês juntos','Quem acertar mais escolhe a sobremesa','jogo')]
   };
   if(window.CTX_TASKS)Object.keys(CTX_NOVOS).forEach(function(k){CTX_TASKS[k]=CTX_NOVOS[k];});
+  /* quem está começando do zero recebe um checklist só de base até ver 3 aulas; trocar o idioma é pra todo mundo */
+  if(window.CTX_TASKS){
+    CTX_TASKS['Primeiros passos']=[T('📚','Assistir a próxima aula do Programa','Comece pela aula 1, com caderno do lado','aula'),T('🔎','Caçar 10 palavras que você já conhece','Inglês parecido com português (cognatos)','cognatos'),T('👂','Ouvir 3 minutos de inglês bem simples','Não é pra entender tudo: é acostumar o ouvido','ouvir'),T('🎮','Jogar 1 jogo fácil','Fixar sem parecer estudo','jogo')];
+    CTX_TASKS['_idioma']=[T('📱','Trocar o idioma dos aparelhos pra inglês','Celular, Instagram, YouTube e Netflix','idioma')];
+  }
 
   /* ───────────────────────── estilo ───────────────────────── */
   var css=document.createElement('style');
@@ -335,6 +349,58 @@
   '@media(max-width:680px){#mi-recolher{display:none}}',
   '.ag-tipo .ic .ic3d{width:54px;height:54px}.ag-t .ic3d{width:30px;height:30px}',
   '#mi-onb .teste .ic .ic3d{width:48px;height:48px}.mi-gate-it>span .ic3d{width:34px;height:34px}.ag-btn .ic3d,.ag-btn2 .ic3d,.set-btn .ic3d{width:22px;height:22px;vertical-align:-5px}',
+  '.mi-ini-ent{display:flex;flex-direction:column;gap:8px;max-width:460px;margin:0 auto 18px;text-align:left}.mi-ini-ent .it{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:11px 13px}',
+  '.mi-ini-ent .it>span{font-size:22px;width:34px;text-align:center;flex:none}.mi-ini-ent .it .ic3d{width:34px;height:34px}.mi-ini-ent b{display:block;font-size:13.5px}.mi-ini-ent small{font-size:12px;opacity:.75}.mi-ini-ent .it.idi{background:rgba(14,165,233,.18);border-color:rgba(14,165,233,.45)}',
+  '.mi-ini-ent .pr{height:6px;border-radius:9px;background:rgba(255,255,255,.12);overflow:hidden;margin-top:6px}.mi-ini-ent .pr i{display:block;height:100%;background:#10b981}.mi-ini-ent .prt{font-size:11.5px;opacity:.7;text-align:center}',
+  '#mi-inicio{display:flex;flex-direction:column;gap:10px;margin:4px 0 14px}.mi-ini{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-radius:18px;padding:14px 16px;border:1px solid var(--border)}',
+  '.mi-ini .tx{flex:1;min-width:200px;display:flex;flex-direction:column;gap:3px}.mi-ini b{font-size:14px}.mi-ini span{font-size:12.5px;color:var(--fg2);line-height:1.5}.mi-ini .ic .ic3d{width:52px;height:52px}',
+  '.mi-ini.idi{background:linear-gradient(135deg,rgba(14,165,233,.12),rgba(79,110,247,.08));border-color:rgba(14,165,233,.35)}.mi-ini .bt{display:flex;gap:8px}',
+  '.mi-ini .bt button{border:1px solid var(--border);background:var(--bg2,transparent);color:var(--fg);border-radius:12px;padding:9px 13px;font:inherit;font-size:12.5px;font-weight:800;cursor:pointer}.mi-ini .bt .ok{background:#0ea5e9;border-color:#0ea5e9;color:#fff}',
+  '.mi-ini.beg{background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.3)}.mi-ini .bar{flex-basis:100%;height:6px;border-radius:9px;background:rgba(16,185,129,.15);overflow:hidden}.mi-ini .bar i{display:block;height:100%;background:#10b981;border-radius:9px}',
+  'body.mi-beg #pane-maratona .mar-hero,body.mi-beg #pane-maratona .ctx-grid{display:none!important}',
+  '.pl-top{text-align:center;max-width:620px;margin:6px auto 22px}.pl-k{font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:#d4a017}.pl-top h1{font-family:Advercase,"Archivo Black",sans-serif;font-size:clamp(26px,4vw,38px);margin:8px 0;text-wrap:balance}.pl-top p{font-size:14px;color:var(--fg2);line-height:1.6;margin:0 0 12px}',
+  '.pl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;align-items:stretch}',
+  '.pl-card{position:relative;display:flex;flex-direction:column;gap:6px;border-radius:22px;padding:22px 18px 18px;background:var(--card,var(--bg2));border:1px solid var(--border);border-top:4px solid var(--pc)}',
+  '.pl-card.dest{background:linear-gradient(180deg,rgba(212,160,23,.12),transparent 60%),var(--card,var(--bg2));border-color:rgba(212,160,23,.55);box-shadow:0 16px 40px rgba(212,160,23,.18)}.pl-card.atual{outline:2px solid var(--pc);outline-offset:2px}',
+  '.pl-rib{position:absolute;top:-11px;right:16px;background:#d4a017;color:#1a1405;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:99px}',
+  '.pl-nm{font-size:17px;font-weight:800;display:flex;align-items:center;gap:6px}.pl-nm .ic3d{width:26px;height:26px}.pl-sub{font-size:12.5px;color:var(--fg2)}.pl-pr{font-size:24px;font-weight:800;color:var(--pc);margin:6px 0 4px}',
+  '.pl-card ul{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-direction:column;gap:7px;flex:1}.pl-card li{font-size:13px;line-height:1.4;padding-left:22px;position:relative}.pl-card li:before{content:"✓";position:absolute;left:0;color:var(--pc);font-weight:800}',
+  '.pl-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:none;border-radius:14px;padding:12px;font:inherit;font-size:13.5px;font-weight:800;cursor:pointer;background:var(--pc);color:#fff;text-decoration:none}.pl-btn .ic3d{width:20px;height:20px}',
+  '.pl-ok{text-align:center;font-weight:800;font-size:13px;color:var(--pc);padding:11px;border-radius:14px;background:rgba(127,127,127,.08)}.pl-ok.sub{color:var(--fg3);font-weight:700}',
+  '.pl-inst{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:12.5px}.pl-inst input{width:80px;border:1px solid var(--border);border-radius:10px;padding:7px 9px;background:transparent;color:var(--fg);font:inherit}',
+  '.pl-pr.vazio{font-size:15px;opacity:.8}.pl-foot{text-align:center;font-size:12px;color:var(--fg3);margin-top:18px}',
+  '.pl-ed{border:1px solid var(--border);border-radius:14px;padding:12px;margin-bottom:10px;display:flex;flex-direction:column;gap:7px}.pl-ed label{display:flex;flex-direction:column;gap:3px;font-size:11.5px;color:var(--fg2)}.pl-ed label.ck{flex-direction:row;align-items:center;gap:6px}',
+  '.pl-ed input:not([type=checkbox]),.pl-ed textarea{border:1px solid var(--border);border-radius:9px;padding:7px 9px;background:transparent;color:var(--fg);font:inherit;font-size:13px}',
+  /* ===== tema English on Mission (verde-escuro e dourado) ===== */
+  '#pane-eom{--th-g1:#0b2018;--th-g2:#123629;--th-gold:#d4b25c;--th-gold2:#f3e2a8;background:radial-gradient(ellipse at 80% -10%,rgba(212,178,92,.18),transparent 55%),linear-gradient(180deg,#0e271d,#08160f);border:1px solid rgba(212,178,92,.25);border-radius:26px;padding:22px 22px 30px!important;color:#f5efe0}',
+  '#pane-eom .uni-sec{font-family:"Cormorant Garamond",Georgia,serif;font-size:22px;font-weight:700;letter-spacing:.02em;text-transform:none;color:var(--th-gold2);margin:30px 0 12px;display:flex;align-items:center;gap:12px;scroll-margin-top:80px}#pane-eom .uni-sec:after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(212,178,92,.6),transparent)}',
+  '#pane-eom .uni-card{background:linear-gradient(180deg,#143a2b,#0f2c21);border:1px solid rgba(212,178,92,.22);box-shadow:0 10px 30px rgba(0,0,0,.35)}#pane-eom .uni-card:hover{border-color:var(--th-gold);transform:translateY(-3px)}',
+  '#pane-eom .uni-card .tt{color:#fbf5e4;font-size:14px}#pane-eom .uni-card .ss{color:rgba(245,239,224,.7)}#pane-eom .uni-card .ac{color:var(--th-gold)}#pane-eom .uni-card .th{background:#0b2018}',
+  '#pane-eom .uni-card .tg{background:var(--th-gold);color:#14261c}#pane-eom .uni-card.soon .tg{background:rgba(212,178,92,.25);color:var(--th-gold2)}#pane-eom .uni-hero{background:linear-gradient(135deg,#1b4a36,#0f2c21)!important;border:1px solid rgba(212,178,92,.35)}#pane-eom .admin-loading,#pane-eom div[style*="color:var(--fg3)"]{color:rgba(245,239,224,.6)!important}',
+  '.th-hero{position:relative;overflow:hidden;border-radius:20px;padding:30px 26px 20px;margin-bottom:8px}',
+  '.th-eom{background:linear-gradient(160deg,rgba(212,178,92,.12),rgba(0,0,0,0) 60%);border:1px solid rgba(212,178,92,.3)}',
+  '.th-eom .th-marca{position:absolute;right:-30px;top:-20px;font-size:230px;color:#d4b25c;opacity:.08;transform:rotate(-14deg);pointer-events:none}',
+  '.th-k{font-size:11px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--th-gold,#e11d2e);margin-bottom:10px;position:relative}',
+  '.th-eom h1{font-family:"Cormorant Garamond",Georgia,serif;font-weight:700;font-size:clamp(30px,4.6vw,46px);line-height:1.05;margin:0 0 12px;color:#fbf5e4;position:relative;max-width:640px}.th-eom h1 em{color:var(--th-gold);font-style:italic}',
+  '.th-hero p{font-size:14.5px;line-height:1.6;max-width:560px;margin:0 0 14px;position:relative;opacity:.85}',
+  '.th-ver{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:18px;color:var(--th-gold2);border-left:2px solid var(--th-gold);padding-left:12px;margin:0 0 18px;max-width:560px;position:relative}.th-ver b{display:block;margin:4px 0 0!important;font-style:normal;font-family:"Plus Jakarta Sans",sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--th-gold);margin-left:6px}',
+  '.th-cta{display:flex;gap:10px;flex-wrap:wrap;position:relative}.th-cta .ic3d{width:22px;height:22px;vertical-align:-5px}',
+  '.th-b1,.th-b2{border:none;border-radius:14px;padding:13px 18px;font:inherit;font-size:14px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}',
+  '.th-eom .th-b1{background:linear-gradient(135deg,#f3e2a8,#d4b25c);color:#14261c}.th-eom .th-b2{background:rgba(255,255,255,.08);color:#fbf5e4;border:1px solid rgba(212,178,92,.4)}.th-ok{color:var(--th-gold2);font-weight:800;font-size:14px;padding:12px 0}',
+  '.th-nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;position:relative}.th-nav button{border-radius:99px;padding:8px 14px;font:inherit;font-size:12.5px;font-weight:800;cursor:pointer}',
+  '.th-eom .th-nav button{background:rgba(212,178,92,.12);color:var(--th-gold2);border:1px solid rgba(212,178,92,.35)}',
+  /* ===== tema Culture English (azul e vermelho) ===== */
+  '#pane-culture{--th-red:#e3263a;--th-blue:#2f6bff;background:radial-gradient(ellipse at 0% 0%,rgba(47,107,255,.28),transparent 50%),radial-gradient(ellipse at 100% 10%,rgba(227,38,58,.24),transparent 50%),linear-gradient(180deg,#0b1128,#07091a);border:1px solid rgba(47,107,255,.25);border-radius:26px;padding:22px 22px 30px!important;color:#eef2ff}',
+  '#pane-culture .uni-sec{font-family:Advercase,"Archivo Black",sans-serif;font-weight:700;font-size:20px;letter-spacing:.04em;color:#fff;margin:30px 0 12px;display:flex;align-items:center;gap:12px;scroll-margin-top:80px}#pane-culture .uni-sec:before{content:"";width:10px;height:22px;border-radius:3px;background:linear-gradient(180deg,var(--th-red),var(--th-blue))}',
+  '#pane-culture .uni-card{background:linear-gradient(180deg,#121a3a,#0d1330);border:1px solid rgba(47,107,255,.22);box-shadow:0 10px 30px rgba(0,0,0,.4)}#pane-culture .uni-card:hover{border-color:var(--th-red);transform:translateY(-3px);box-shadow:0 14px 36px rgba(227,38,58,.25)}',
+  '#pane-culture .uni-card .tt{color:#fff;font-size:14px}#pane-culture .uni-card .ss{color:rgba(238,242,255,.7)}#pane-culture .uni-card .ac{color:#ff6b7a}#pane-culture .uni-card .tg{background:var(--th-red);color:#fff}#pane-culture .uni-card.soon .tg{background:var(--th-blue)}',
+  '#pane-culture .uni-hero{background:linear-gradient(135deg,#1d3fb8,#e3263a)!important}#pane-culture .admin-loading,#pane-culture div[style*="color:var(--fg3)"]{color:rgba(238,242,255,.6)!important}',
+  '.th-cult{background:linear-gradient(120deg,rgba(47,107,255,.25),rgba(227,38,58,.22));border:1px solid rgba(255,255,255,.08);padding-top:40px;padding-bottom:40px}',
+  '.th-cult .th-k{color:#ff6b7a}.th-cult h1{font-family:Advercase,"Archivo Black",sans-serif;font-weight:700;font-size:clamp(34px,6vw,64px);line-height:.95;margin:0 0 12px;color:#fff;position:relative;letter-spacing:.01em}.th-cult h1 span{color:var(--th-red);text-shadow:0 0 30px rgba(227,38,58,.55)}',
+  '.th-cult .th-b1{background:var(--th-red);color:#fff;box-shadow:0 10px 26px rgba(227,38,58,.35)}.th-cult .th-b2{background:var(--th-blue);color:#fff}',
+  '.th-cult .th-nav button{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.18)}.th-cult .th-nav button:hover{border-color:var(--th-red)}',
+  '.th-film{position:absolute;left:0;right:0;top:0;height:16px;background:repeating-linear-gradient(90deg,transparent 0 10px,rgba(255,255,255,.18) 10px 22px);opacity:.8}.th-film.b{top:auto;bottom:0}',
+  '@media(max-width:680px){#pane-eom,#pane-culture{padding:14px 12px 24px!important;border-radius:20px}.th-hero{padding:24px 16px 16px}.th-cult{padding-top:30px;padding-bottom:30px}}',
   /* celular: menu de baixo + gaveta */
   '#mi-bnav,#mi-shade{display:none}',
   '@media(max-width:680px){',
@@ -377,13 +443,14 @@
     ST.nivel=m.nivel||l.nivel||lvLocal||null;
     ST.prisma=m.prisma||l.prisma||null;
     ST.onb=m.onb||l.onb||null;
+    ST.idioma=!!(m.idioma||l.idioma);
   }
   function salvar(){
     LS.set(chave(),ST);
     clearTimeout(salvarT);
     salvarT=setTimeout(function(){
       if(!U)return;
-      window._sb.auth.updateUser({data:{mi:{dias:ST.dias.slice(-150),vistas:ST.vistas.slice(-400),ultima:ST.ultima,bv:ST.bv,tour:ST.tour,nivel:ST.nivel,prisma:ST.prisma,onb:ST.onb}}}).catch(function(){});
+      window._sb.auth.updateUser({data:{mi:{dias:ST.dias.slice(-150),vistas:ST.vistas.slice(-400),ultima:ST.ultima,bv:ST.bv,tour:ST.tour,nivel:ST.nivel,prisma:ST.prisma,onb:ST.onb,idioma:ST.idioma}}}).catch(function(){});
     },1500);
   }
   function marcarDia(){
@@ -606,7 +673,24 @@
       ST.bv=true;salvar();perguntarContexto();
     };
   }
+  function entradaIniciante(){
+    var t=(window.CTX_TASKS&&CTX_TASKS['Primeiros passos'])||[],v=Math.min(3,(ST.vistas||[]).length);
+    abrirEntrada('<span class="mi-logo mi-lg-ent"></span><div class="mi-ent-kicker">'+E(saudacao())+(nomeCurto()?', '+E(nomeCurto()):'')+'</div>'
+      +'<div class="mi-ent-q">Seus primeiros passos 🌱</div>'
+      +'<div class="mi-ent-s">Antes de tudo, o básico bem feito. Até você assistir suas 3 primeiras aulas, o checklist é esse aqui, em qualquer lugar que você estiver. Depois eu libero os checklists por lugar.</div>'
+      +'<div class="mi-ini-ent">'+(ST.idioma?'':'<div class="it idi"><span>'+IC('idioma')+'</span><div><b>Missão de início</b><small>Trocar o idioma do celular pra inglês</small></div></div>')
+      +t.map(function(x){return '<div class="it"><span>'+x.icon+'</span><div><b>'+E(x.title)+'</b><small>'+E(x.sub)+'</small></div></div>';}).join('')
+      +'<div class="pr"><i style="width:'+(v/3*100)+'%"></i></div><div class="prt">'+v+' de 3 aulas assistidas</div></div>'
+      +'<button class="mi-cta" data-ent="ini" style="position:static">Bora começar →</button>'
+      +'<button class="mi-ctx-skip" data-ent="olhar">Só vim dar uma olhada</button>');
+    ent.onclick=function(e){
+      var b=e.target.closest('[data-ent]');if(!b)return;var ini=b.dataset.ent==='ini';
+      if(ini)LS.set('mi_ctx',{d:dia(),k:'Primeiros passos'});
+      fecharEntrada(function(){if(ini){go('maratona');window.renderMarTasks('Primeiros passos');}else{go('home');renderHome();}pintarRail();setTimeout(tourAuto,700);});
+    };
+  }
   function perguntarContexto(){
+    if(iniciante())return entradaIniciante();
     abrirEntrada('<span class="mi-logo mi-lg-ent"></span><div class="mi-ent-kicker">'+E(saudacao())+(nomeCurto()?', '+E(nomeCurto()):'')+'</div>'
       +'<div class="mi-ent-q">Onde você está agora?</div>'
       +'<div class="mi-ent-s">Escolha o mais parecido com onde você está ou o que está fazendo. Eu monto o checklist de hoje pra esse momento.</div>'
@@ -683,18 +767,50 @@
     await Promise.all([carregarCards(),carregarModsAll()]);
     var lista=CARDS.filter(function(c){return c.universo===k&&(c.ativo!==false||EDIT);});
     var h='<div style="font-size:21px;font-weight:800;margin-bottom:4px">'+E(u.title)+'</div><div style="font-size:13px;color:var(--fg2);margin-bottom:18px">'+E(u.sub)+'</div>';
+    var HERO=heroUni(k,u,lista);if(HERO)h=HERO;
     if(CARDS._erro){p.innerHTML=h+'<div class="admin-loading">'+(souAdmin()?'Rode o arquivo COLE-NO-SUPABASE.sql no Supabase pra ativar os Universos.':'Em instantes tem conteúdo novo aqui 🙂')+'</div>';return;}
     lista.filter(function(c){return c.destaque;}).forEach(function(c){
       h+='<div class="uni-hero'+(c.ativo===false?' mi-off':'')+'" style="background:'+u.cor+';position:relative" data-unicard="'+c.id+'">'+edCtl('card',c.id)+(c.capa_url?'<img alt="" src="'+E(c.capa_url)+'">':'')+'<div><div class="ht">'+E(c.emoji?c.emoji+' ':'')+E(c.titulo)+'</div><div class="hs">'+E(c.descricao||'')+'</div></div><button>'+E(acaoTxt(c).replace(/ [›↗]$/,''))+'</button></div>';
     });
     var resto=lista.filter(function(c){return !c.destaque;}),secs=[],por={};
     resto.forEach(function(c){var s=c.secao||'';if(!por[s]){por[s]=[];secs.push(s);}por[s].push(c);});
-    var n=0;secs.forEach(function(s){h+=(s?'<div class="uni-sec">'+E(s)+'</div>':'')+'<div class="uni-grid">'+por[s].map(function(c){return cardHtml(c,n++);}).join('')+(EDIT?'<button class="mi-novo" data-ed="card-novo" data-uni="'+k+'" data-sec="'+E(s)+'">＋ Novo card'+(s?' em '+E(s):'')+'</button>':'')+'</div>';});
+    var n=0;secs.forEach(function(s,si){h+=(s?'<div class="uni-sec" id="sec-'+k+'-'+si+'">'+E(s)+'</div>':'')+'<div class="uni-grid">'+por[s].map(function(c){return cardHtml(c,n++);}).join('')+(EDIT?'<button class="mi-novo" data-ed="card-novo" data-uni="'+k+'" data-sec="'+E(s)+'">＋ Novo card'+(s?' em '+E(s):'')+'</button>':'')+'</div>';});
     if(EDIT){h=h.replace('<div style="font-size:21px;font-weight:800;margin-bottom:4px">'+E(u.title)+'</div>','<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px"><div style="font-size:21px;font-weight:800">'+E(u.title)+'</div><button class="admin-btn admin-btn-ghost admin-btn-sm" data-ed="menu-ed" data-k="'+k+'">✏️ Nome, frase e acesso</button></div>');if(!secs.length)h+='<div class="uni-grid"><button class="mi-novo" data-ed="card-novo" data-uni="'+k+'">＋ Novo card</button></div>';}
     if(!lista.length&&!EDIT)h+='<div class="admin-loading">Nenhum card ainda.'+(souAdmin()?' Toque em ✏️ Editar, lá em cima, pra criar.':'')+'</div>';
     if(lista.some(function(c){return /indica/i.test(c.tag||'');}))h+='<div style="font-size:10.5px;color:var(--fg3);margin-top:16px">Indicação = link de afiliado. Você paga o mesmo preço e eu posso receber uma comissão.</div>';
     p.innerHTML=h;
+    if(HERO){var nav=p.querySelector('.th-nav');if(nav)nav.innerHTML=secs.map(function(s,si){return s?'<button data-goto="sec-'+k+'-'+si+'">'+E(s)+'</button>':'';}).join('');}
   }
+  /* universos com cara de site próprio: EOM verde-escuro e dourado, Culture azul e vermelho */
+  function heroUni(k,u,lista){
+    var cf=(AS().cfg||{});
+    if(k==='eom'){
+      var membro=temProduto((cf.eom||['English on Mission'])[0]);
+      return '<div class="th-hero th-eom"><span class="mi-logo th-marca" aria-hidden="true"></span><div class="th-k">English on Mission</div>'
+        +'<h1>Toda língua tem um propósito.<br><em>A sua tem uma missão.</em></h1>'
+        +'<p>Inglês com a Bíblia: devocionais ao vivo, aulas, pregações, livros e uma comunidade que aprende junto.</p>'
+        +'<div class="th-ver">“Ide por todo o mundo e pregai o evangelho a toda criatura.” <b>Marcos 16:15</b></div>'
+        +'<div class="th-cta">'+(membro?'<span class="th-ok">✓ Você é membro do English on Mission</span>':(cf.checkoutEom?'<a class="th-b1" target="_blank" rel="noopener" href="'+E(cf.checkoutEom)+'">Assinar o English on Mission</a>':''))
+        +'<button class="th-b2" data-th="grupo">'+IC('wa-real')+' Grupo no WhatsApp</button></div>'
+        +(EDIT?'<button class="admin-btn admin-btn-ghost admin-btn-sm" style="margin-top:12px" data-ed="menu-ed" data-k="eom">✏️ Nome, frase e acesso do menu</button>':'')
+        +'<div class="th-nav"></div></div>';
+    }
+    if(k==='culture'){
+      return '<div class="th-hero th-cult"><div class="th-film"></div><div class="th-k">Culture English</div>'
+        +'<h1>INGLÊS DE <span>VERDADE</span></h1>'
+        +'<p>'+E(u.sub||'Séries, filmes e música como sala de aula.')+'</p>'
+        +'<div class="th-cta"><button class="th-b1" data-th="live">'+IC('lives')+' Lives do Culture English</button><button class="th-b2" data-th="jogos">'+IC('jogos')+' Jogos</button></div>'
+        +(EDIT?'<button class="admin-btn admin-btn-ghost admin-btn-sm" style="margin-top:12px" data-ed="menu-ed" data-k="culture">✏️ Nome, frase e acesso do menu</button>':'')
+        +'<div class="th-nav"></div><div class="th-film b"></div></div>';
+    }
+    return '';
+  }
+  document.addEventListener('click',function(e){
+    var g=e.target.closest('[data-goto]');if(g){var el=$(g.dataset.goto);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});return;}
+    var t=e.target.closest('[data-th]');if(!t)return;var a=t.dataset.th;
+    if(a==='grupo')wa('Oi Gediel! Quero entrar no grupo gratuito do English On Mission.');
+    else if(a==='live')go('lives');else if(a==='jogos')go('jogos');
+  });
   function ofertaMini(m,c){
     var ov=$('pw-ov');if(!ov){if(m.checkout)window.open(m.checkout,'_blank','noopener');return;}
     ov.innerHTML='<div class="pw"><div style="font-size:40px">'+E(c.emoji||'🎬')+'</div><h3>'+E(c.titulo)+'</h3><p>'+E(c.descricao||'')+'</p>'
@@ -734,6 +850,9 @@
     var pa=document.createElement('div');pa.className='nav-pill';pa.setAttribute('onclick',"goTo('agendar',this)");pa.innerHTML='<span class="nav-icon">📅</span><span>Marcar aula</span>';
     pp.insertAdjacentElement('afterend',pa);
     var pag=document.createElement('div');pag.className='pane';pag.id='pane-agendar';pr.insertAdjacentElement('afterend',pag);
+    var pl=document.createElement('div');pl.className='nav-pill';pl.setAttribute('onclick',"goTo('planos',this)");pl.innerHTML='<span class="nav-icon">👑</span><span>Planos</span>';
+    pa.insertAdjacentElement('afterend',pl);
+    var ppl=document.createElement('div');ppl.className='pane';ppl.id='pane-planos';pag.insertAdjacentElement('afterend',ppl);
     var sec=document.createElement('div');sec.className='nav-section';sec.textContent='Universos';
     perfil.insertAdjacentElement('beforebegin',sec);
     var ant=sec,antPane=pr;
@@ -742,7 +861,7 @@
       p.innerHTML='<span class="nav-icon">'+u.icon+'</span><span>'+E(u.nav)+'</span>';ant.insertAdjacentElement('afterend',p);ant=p;
       var pane=document.createElement('div');pane.className='pane';pane.id='pane-'+k;antPane.insertAdjacentElement('afterend',pane);antPane=pane;
     });
-    if(window.TITLES){TITLES.prompts='Prompts';TITLES.agendar='Marcar aula';Object.keys(UNIV).forEach(function(k){TITLES[k]=UNIV[k].title;});TITLES.home='Início';}
+    if(window.TITLES){TITLES.prompts='Prompts';TITLES.agendar='Marcar aula';TITLES.planos='Planos';Object.keys(UNIV).forEach(function(k){TITLES[k]=UNIV[k].title;});TITLES.home='Início';}
   }
   montarMenu();iconesMenu();iconesTopo();
 
@@ -891,6 +1010,7 @@
     if(page==='prompts'){var f=document.querySelector('#pane-prompts iframe');if(f&&!f.src)f.src=f.dataset.src;}
     if(page==='home')setTimeout(renderHome,160);
     if(page==='agendar')renderAgendar();
+    if(page==='planos')renderPlanos();
     if(page==='bussola')renderBussola();
     if(page==='prisma')renderPrisma();
     var r=goAnt(page,el);
@@ -1062,7 +1182,7 @@
     +'<div class="adm-section">Título</div><input class="admin-inp" id="uc-titulo" maxlength="120">'
     +'<div class="adm-section">Descrição curta</div><textarea class="admin-inp" id="uc-desc" rows="2" maxlength="400"></textarea>'
     +'<div style="display:grid;grid-template-columns:1fr 1fr 90px;gap:10px" class="grid-2"><div><div class="adm-section">Seção (agrupa os cards)</div><input class="admin-inp" id="uc-secao" list="uc-secoes" placeholder="Ex.: Assistir"><datalist id="uc-secoes"></datalist></div><div><div class="adm-section">Etiqueta</div><input class="admin-inp" id="uc-tag" placeholder="Ex.: R$ 27 · Grátis · Em breve" maxlength="40"></div><div><div class="adm-section">Emoji</div><input class="admin-inp" id="uc-emoji" maxlength="8" style="text-align:center;font-size:18px"></div></div>'
-    +'<div class="adm-section">O que acontece ao clicar</div><select class="admin-inp" id="uc-acao"><option value="link">🔗 Abrir um link (YouTube, playlist, checkout, site)</option><option value="whatsapp">💬 Abrir meu WhatsApp com mensagem pronta</option><option value="area">📱 Abrir uma área do app</option><option value="curso">🛒 Abrir um mini curso (com cadeado pra quem não comprou)</option></select>'
+    +'<div class="adm-section">O que acontece ao clicar</div><select class="admin-inp" id="uc-acao"><option value="link">🔗 Abrir um link (YouTube, playlist, checkout, site)</option><option value="whatsapp">💬 Abrir meu WhatsApp com mensagem pronta</option><option value="area">📱 Abrir uma área do app</option><option value="material">📘 Abrir um material / e-book (com cadeado pra quem não comprou)</option><option value="curso">🛒 Abrir um mini curso (com cadeado pra quem não comprou)</option></select>'
     +'<div id="uc-valor-box" style="margin-top:8px"></div>'
     +'<div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;font-size:12.5px"><label style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="uc-destaque"> Banner do topo</label><label style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="uc-breve"> Em breve (vira "me avise")</label><label style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="uc-ativo" checked> Visível pros alunos</label></div>'
     +'<div id="uc-st" style="font-size:12px;min-height:18px;margin-top:12px"></div>'
@@ -1072,7 +1192,9 @@
   function valorBox(acao,valor){
     var b=$('uc-valor-box');
     if(acao==='area')b.innerHTML='<select class="admin-inp" id="uc-valor">'+Object.keys(AREAS).map(function(k){return '<option value="'+k+'"'+(valor===k?' selected':'')+'>'+AREAS[k]+'</option>';}).join('')+'</select>';
-    else if(acao==='curso'){var minis=(MODS_ALL||[]).filter(function(m){return m.trilha==='mini';});
+    else if(acao==='material'){var ms=((window.EBG_ACESSO||{}).estado||{}).mats||[];
+      b.innerHTML='<select class="admin-inp" id="uc-valor"><option value="">— escolha o material —</option>'+ms.map(function(m){return '<option value="'+m.id+'"'+(valor===m.id?' selected':'')+'>'+E(m.nome)+'</option>';}).join('')+'</select>';}
+    else if(acao==='curso'){var minis=(MODS_ALL||[]).filter(function(m){return m.trilha==='mini'||m.id===valor;});
       b.innerHTML='<select class="admin-inp" id="uc-valor"><option value="">— ainda não tem módulo (fica "em breve") —</option>'+minis.map(function(m){return '<option value="'+m.id+'"'+(valor===m.id?' selected':'')+'>'+E(m.name)+(m.produto?' · libera com "'+E(m.produto)+'"':' · ⚠ sem produto')+'</option>';}).join('')+'</select>'+(minis.length?'':'<div style="font-size:11px;color:var(--gold);margin-top:6px">Nenhum mini curso criado ainda. Vá em Módulos → Novo módulo → "Mini curso avulso".</div>');}
     else if(acao==='whatsapp')b.innerHTML='<textarea class="admin-inp" id="uc-valor" rows="2" placeholder="Mensagem que o aluno manda pra você">'+E(valor||'')+'</textarea>';
     else b.innerHTML='<input class="admin-inp" id="uc-valor" placeholder="https://... (vazio = aparece como Em breve)" value="'+E(valor||'')+'">';
@@ -1082,6 +1204,7 @@
     $('uc-h').textContent=(c.id?'Editar card':'Novo card')+' · '+UNIV[c.universo].nav;
     $('uc-titulo').value=c.titulo||'';$('uc-desc').value=c.descricao||'';$('uc-secao').value=c.secao||'';$('uc-tag').value=c.tag||'';$('uc-emoji').value=c.emoji||'';
     $('uc-acao').value=c.acao||'link';valorBox(c.acao||'link',c.valor||'');
+    carregarModsAll(true).then(function(){if($('uc-acao').value===(c.acao||'link')&&(c.acao==='curso'))valorBox('curso',c.valor||'');});
     $('uc-destaque').checked=!!c.destaque;$('uc-breve').checked=!!c.em_breve;$('uc-ativo').checked=c.ativo!==false;
     $('uc-prev').innerHTML=c.capa_url?'<img src="'+E(c.capa_url)+'">':'🖼️';$('uc-info').innerHTML='';$('uc-st').innerHTML='';$('uc-st').dataset.confirm='';
     var secs={};(CARDS||[]).filter(function(x){return x.universo===c.universo&&x.secao;}).forEach(function(x){secs[x.secao]=1;});
@@ -1693,11 +1816,12 @@
 
   /* ── cards: cadeado pela regra de acesso ── */
   var cardLockOrig=cardLock;
-  cardLock=function(c){return cardLockOrig(c)||!temAcesso(c);};
+  cardLock=function(c){if(c.acao==='material'){var mt=(AS().mats||[]).filter(function(x){return x.id===c.valor;})[0];if(mt&&!matLivre(mt))return true;}return cardLockOrig(c)||!temAcesso(c);};
   var abrirCardOrig=abrirCard;
   abrirCard=async function(id,uni){
     var c=(CARDS||[]).filter(function(x){return x.id===id;})[0];if(!c)return;
     if(!temAcesso(c)){irCheckout(checkoutDe(c),'"'+c.titulo+'"');return;}
+    if(c.acao==='material'){var mt=(AS().mats||[]).filter(function(x){return x.id===c.valor;})[0];if(mt)return abrirMaterial(mt);toast('Material ainda não ligado a esse card');return;}
     return abrirCardOrig(id,uni);
   };
 
@@ -1725,10 +1849,24 @@
     var el=e.target.closest('[data-mat]');if(!el||e.target.closest('[data-ed]'))return;
     var m=(AS().mats||[]).filter(function(x){return x.id===el.dataset.mat;})[0];if(!m)return;
     if(EDIT){abrirMat(m);return;}
+    abrirMaterial(m);
+  },true);
+  /* abre o material: sem acesso → checkout; PDF guardado → ver ou baixar (link temporário); senão → link do conteúdo */
+  async function abrirMaterial(m){
     if(!matLivre(m)){irCheckout(m.tipo==='programa'?(AS().cfg||{}).checkout:(m.checkout||(AS().cfg||{}).checkout),'"'+m.nome+'"');return;}
+    if(m.arquivo){
+      var v=await window._sb.storage.from('ebooks').createSignedUrl(m.arquivo,3600),d=await window._sb.storage.from('ebooks').createSignedUrl(m.arquivo,3600,{download:(m.nome||'ebook').replace(/[^\wÀ-ÿ -]/g,'').trim()+'.pdf'});
+      if(v.error||!v.data){toast('Não consegui abrir o PDF agora. Tenta de novo ou avise o Gediel 🙏','#ef4444');return;}
+      var ov=$('pw-ov');if(!ov){window.open(v.data.signedUrl,'_blank','noopener');return;}
+      ov.innerHTML='<div class="pw"><div style="text-align:center">'+IC('materiais','xl')+'</div><h3>'+E(m.nome)+'</h3><p>Seu e-book está liberado. Leia aqui ou baixe pra ter no celular.</p>'
+        +'<a class="sim" href="'+E(v.data.signedUrl)+'" target="_blank" rel="noopener" style="display:block;text-decoration:none;text-align:center">👀 Ler agora</a>'
+        +'<a class="nao" href="'+E(d.data?d.data.signedUrl:v.data.signedUrl)+'" style="display:block;text-decoration:none;text-align:center;margin-top:8px;font-weight:800">⬇️ Baixar o PDF</a>'
+        +'<button class="nao" data-fechar style="display:block;width:100%">Fechar</button></div>';
+      ov.classList.add('open');return;
+    }
     var r=await window._sb.from('material_links').select('link').eq('material_id',m.id).maybeSingle();
     if(r.data&&r.data.link)window.open(r.data.link,'_blank','noopener');else toast('Esse material ainda está sem link. Avise o Gediel 🙏');
-  },true);
+  }
 
   /* modal de material */
   var mm=document.createElement('div');mm.className='modal-overlay';mm.id='mi-mat-modal';
@@ -1737,16 +1875,18 @@
     +'<div class="adm-section">Nome</div><input class="admin-inp" id="mm-nome" maxlength="120">'
     +'<div class="adm-section">Descrição</div><textarea class="admin-inp" id="mm-desc" rows="2" maxlength="600"></textarea>'
     +'<div style="display:grid;grid-template-columns:1fr 1fr 80px;gap:10px" class="grid-2"><div><div class="adm-section">Seção</div><input class="admin-inp" id="mm-secao" list="mm-secoes" placeholder="Ex.: E-books"><datalist id="mm-secoes"></datalist></div><div><div class="adm-section">Preço (aparece no card)</div><input class="admin-inp" id="mm-preco" placeholder="R$ 27" maxlength="40"></div><div><div class="adm-section">Emoji</div><input class="admin-inp" id="mm-icone" maxlength="8" style="text-align:center"></div></div>'
-    +'<div class="adm-section">Link do conteúdo (só quem tem acesso vê)</div><input class="admin-inp" id="mm-link" placeholder="https://... (PDF, Drive, site do e-book)">'
+    +'<div class="adm-section">Arquivo PDF do e-book (só quem tem acesso lê e baixa)</div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><button class="admin-btn admin-btn-ghost admin-btn-sm" data-ed="mm-pdf">📄 Escolher PDF</button><span id="mm-pdf-nome" style="font-size:12px;color:var(--fg2)"></span><input type="file" id="mm-pdf" accept="application/pdf" style="display:none"></div>'
+    +'<div class="adm-section">Ou link do conteúdo (só quem tem acesso vê)</div><input class="admin-inp" id="mm-link" placeholder="https://... (PDF, Drive, site do e-book)">'
     +'<div id="mm-acesso-wrap"></div>'
     +'<label style="display:flex;gap:6px;align-items:center;font-size:12.5px;margin-top:14px"><input type="checkbox" id="mm-ativo"> Visível pros alunos</label>'
     +'<div id="mm-st" style="font-size:12px;min-height:18px;margin-top:12px"></div>'
     +'<div style="display:flex;gap:8px;justify-content:space-between;margin-top:6px"><button class="admin-btn admin-btn-danger admin-btn-sm" data-ed="mm-apagar">🗑️ Apagar</button><div style="display:flex;gap:8px"><button class="admin-btn admin-btn-ghost" data-ed="mm-fechar">Cancelar</button><button class="admin-btn admin-btn-primary" data-ed="mm-salvar">💾 Salvar</button></div></div>'
     +'</div></div>';
   document.body.appendChild(mm);
-  var MM={m:null,capa:null};
+  var MM={m:null,capa:null,pdf:null};
+  $('mm-pdf').addEventListener('change',function(){var f=this.files&&this.files[0];if(!f)return;if(f.size>50*1048576){toast('PDF acima de 50 MB. Comprima antes 🙏','#ef4444');this.value='';return;}MM.pdf=f;$('mm-pdf-nome').textContent='📄 '+f.name+' ('+Math.round(f.size/1048576)+' MB)';});
   async function abrirMat(m,secao){
-    MM.m=m||{tipo:'produto',ativo:true,secao:secao||''};MM.capa=null;m=MM.m;encherProdutos();
+    MM.m=m||{tipo:'produto',ativo:true,secao:secao||''};MM.capa=null;MM.pdf=null;m=MM.m;setTimeout(function(){var pn=$('mm-pdf-nome');if(pn)pn.textContent=m.arquivo?'✅ PDF já enviado (escolha outro pra trocar)':'';},0);encherProdutos();
     $('mm-h').textContent=m.id?'Editar material':'Novo material';
     $('mm-nome').value=m.nome||'';$('mm-desc').value=m.descricao||'';$('mm-secao').value=m.secao||'';$('mm-preco').value=m.preco||'';$('mm-icone').value=m.icone||'';$('mm-ativo').checked=m.ativo!==false;
     $('mm-prev').innerHTML=m.capa_url?'<img src="'+E(m.capa_url)+'">':'🖼️';$('mm-st').innerHTML='';$('mm-st').dataset.confirm='';$('mm-link').value='';
@@ -1773,6 +1913,7 @@
       if(!id){row.ordem=(AS().mats||[]).length+1;var ins=await window._sb.from('materiais').insert(row).select().single();if(ins.error)throw ins.error;id=ins.data.id;}
       if(MM.capa)row.capa_url=await subirCapa(MM.capa,'materiais',id);
       var u=await window._sb.from('materiais').update(row).eq('id',id);if(u.error)throw u.error;
+      if(MM.pdf){st.innerHTML='⏳ Enviando o PDF ('+Math.round(MM.pdf.size/1048576)+' MB)...';var pth='materiais/'+id+'.pdf';var up=await window._sb.storage.from('ebooks').upload(pth,MM.pdf,{upsert:true,contentType:'application/pdf'});if(up.error)throw new Error('PDF: '+up.error.message+(/bucket/i.test(up.error.message)?' (rode o supabase/ebooks.sql no Supabase)':''));var u2=await window._sb.from('materiais').update({arquivo:pth}).eq('id',id);if(u2.error)throw u2.error;}
       var l=await window._sb.from('material_links').upsert({material_id:id,link:$('mm-link').value.trim()});if(l.error)throw l.error;
       mm.classList.remove('open');toast('✅ Material salvo!','#10b981');await recarregarAcesso();
     }catch(err){st.innerHTML='<span style="color:var(--red)">Erro: '+E(err.message)+'</span>';}
@@ -1813,6 +1954,7 @@
     if(a==='mm-capa'){if(e.target.closest('[data-ed="mm-sem-capa"]'))return;return $('mm-file').click();}
     if(a==='mm-sem-capa'){MM.capa=null;MM.m.capa_url=null;$('mm-prev').innerHTML='🖼️';return;}
     if(a==='mm-salvar')return salvarMat();
+    if(a==='mm-pdf')return $('mm-pdf').click();
     if(a==='mm-apagar'){var st=$('mm-st');if(!MM.m.id){mm.classList.remove('open');return;}
       if(st.dataset.confirm!=='1'){st.dataset.confirm='1';st.innerHTML='<span style="color:var(--red)">Toque em Apagar de novo pra confirmar.</span>';return;}
       var r=await window._sb.from('materiais').delete().eq('id',MM.m.id);if(r.error){st.innerHTML='<span style="color:var(--red)">'+E(r.error.message)+'</span>';return;}
@@ -1929,6 +2071,112 @@
     var t=0;(function esp(){var S=AS();if(S.pronto){botaoEdicao();aplicarMenus();if(window.currentPage==='materiais')renderMat();}else if(t++<240)setTimeout(esp,500);})();
   }
   window.MI_EDIT={ligar:modoEdicao,aplicarMenus:aplicarMenus};
+
+  /* ───────────────────────── PRIMEIROS PASSOS (checklist de iniciante) ───────────────────────── */
+  function iniciante(){
+    if(souAdmin()&&!window.__verIniciante)return false;
+    if((ST.vistas||[]).length>=3)return false;
+    if(ST.nivel)return /^A1/i.test(ST.nivel);
+    var o=ST.onb||{};if(o.nivel)return o.nivel==='Do zero'||o.nivel==='Entendo pouca coisa';
+    return true;
+  }
+  function pintarInicio(){
+    var t=$('mar-ctx-title');if(!t)return;var box=$('mi-inicio');
+    if(!box){box=document.createElement('div');box.id='mi-inicio';t.insertAdjacentElement('beforebegin',box);}
+    var h='';
+    if(!ST.idioma)h+='<div class="mi-ini idi"><div class="ic">'+IC('idioma','xl')+'</div><div class="tx"><b>Missão de início: deixe seus aparelhos em inglês</b><span>Celular, Instagram, YouTube e Netflix. Você vai ler inglês o dia inteiro sem perceber.</span></div>'
+      +'<div class="bt"><button data-ini="como">Como fazer</button><button class="ok" data-ini="feito">Já troquei ✓</button></div></div>';
+    if(iniciante()){var v=Math.min(3,(ST.vistas||[]).length);
+      h+='<div class="mi-ini beg"><div class="tx"><b>🌱 Modo primeiros passos · '+v+'/3 aulas</b><span>Enquanto você assiste suas 3 primeiras aulas, o checklist é só de base: aula, reconhecer palavras e acostumar o ouvido. Depois ele muda conforme o lugar que você escolher.</span></div><div class="bar"><i style="width:'+(v/3*100)+'%"></i></div></div>';}
+    box.innerHTML=h;
+    var beg=iniciante();document.body.classList.toggle('mi-beg',beg);
+    if(beg)t.textContent='Tarefas de hoje · Primeiros passos';
+  }
+  var rmtOrig=window.renderMarTasks;
+  if(rmtOrig){window.renderMarTasks=function(label){if(iniciante()&&label!=='_idioma')label='Primeiros passos';var r=rmtOrig(label);pintarInicio();return r;};}
+  var tdOrig=window.taskDone;
+  window.taskDone=function(){
+    var c=window._curTask;
+    if(c&&c.key==='_idioma'){ST.idioma=true;salvar();if(window.closeTaskModal)closeTaskModal();pintarInicio();toast('📱 Missão cumprida! Agora seu celular fala inglês.','#10b981');return;}
+    return tdOrig&&tdOrig.apply(this,arguments);
+  };
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-ini]');if(!b)return;
+    if(b.dataset.ini==='como'&&window.openTask)openTask('_idioma',0);
+    if(b.dataset.ini==='feito'){ST.idioma=true;salvar();pintarInicio();toast('📱 Boa! Aguenta 7 dias que vira hábito.','#10b981');}
+  });
+  setTimeout(function(){try{pintarInicio();if(iniciante()&&window.renderMarTasks)renderMarTasks('Primeiros passos');}catch(e){}},900);
+
+  /* ───────────────────────── PLANOS ─────────────────────────
+     Os planos ficam em acesso/cfg.planos. "tudo" = nomes de produto (Kiwify) que liberam a plataforma inteira. */
+  function planosPadrao(){
+    var cf=AS().cfg||{};
+    return [
+      {k:'gratis',nome:'Grátis',preco:'R$ 0',sub:'Pra conhecer o método',cor:'#64748b',beneficios:['Checklist diário e maratona','Jogos liberados','Materiais gratuitos','Lives abertas','Bússola de nível'],checkout:'',produtos:[]},
+      {k:'mission',nome:'Mission',preco:'',sub:'Inglês com a Bíblia',cor:'#1f6b4a',beneficios:['Tudo do Grátis','Devocionais gravados','Inglês bíblico na prática','Comunidade do English on Mission','Materiais do EOM'],checkout:cf.checkoutEom||'',produtos:(cf.eom&&cf.eom.length?cf.eom:['English on Mission'])},
+      {k:'inteligente',nome:'Inteligente',preco:'',sub:'O Programa completo',cor:'#4f6ef7',beneficios:['Tudo do Grátis','Todas as aulas do Programa','Todos os materiais','Marcar aula com o Gediel','Lives com replay'],checkout:cf.checkout||'',produtos:(cf.programa||[]).slice()},
+      {k:'genio',nome:'Gênio',preco:'',sub:'Tudo liberado',cor:'#d4a017',destaque:true,tudo:true,beneficios:['Tudo do Inteligente + Mission','Todos os e-books e mini-cursos','Tudo que for lançado, sem pagar de novo','Prioridade pra marcar aula'],checkout:'',produtos:['Plano Gênio']},
+      {k:'instituicao',nome:'Instituição',preco:'A combinar',sub:'Igrejas, escolas, empresas e grupos',cor:'#0f172a',tudo:true,beneficios:['Tudo do Gênio pra cada pessoa','Quantidade de colaboradores sob medida','Turmas e lives combinadas com o grupo','Acompanhamento com o Gediel'],checkout:'',produtos:['Plano Instituição']}
+    ];
+  }
+  function planos(){var cf=AS().cfg||{};var l=cf.planos&&cf.planos.lista;return (l&&l.length)?l:planosPadrao();}
+  function comprouMesmo(t){var S=AS();t=(t||'').toLowerCase().trim();return !!t&&((S.compras||[]).some(function(c){return (c.produto||'').toLowerCase().indexOf(t)>=0;})||String(S.meta||'').toLowerCase().indexOf(t)>=0);}
+  function meuPlano(){
+    var l=planos();if(souAdmin())return 'genio';
+    for(var i=l.length-1;i>=0;i--){var p=l[i];if((p.produtos||[]).some(function(x){return x&&comprouMesmo(x);}))return p.k;}
+    return 'gratis';
+  }
+  function renderPlanos(){
+    var p=$('pane-planos');if(!p)return;var l=planos(),meu=meuPlano();
+    var h='<div class="pl-top"><div class="pl-k">Planos</div><h1>Escolha até onde você quer ir</h1><p>Todo mundo começa no Grátis. Cada plano libera um nível a mais da plataforma. Do Gênio pra cima, está tudo liberado.</p>'
+      +(EDIT?'<button class="admin-btn admin-btn-primary admin-btn-sm" data-pl="editar">✏️ Editar planos</button>':'')+'</div><div class="pl-grid">';
+    l.forEach(function(x){
+      var atual=x.k===meu,inst=x.k==='instituicao';
+      h+='<div class="pl-card'+(x.destaque?' dest':'')+(atual?' atual':'')+'" style="--pc:'+E(x.cor||'#4f6ef7')+'">'
+        +(x.destaque?'<div class="pl-rib">Mais completo</div>':'')
+        +'<div class="pl-nm">'+(x.k==='genio'||x.tudo?IC('planos'):'')+'Plano '+E(x.nome)+'</div><div class="pl-sub">'+E(x.sub||'')+'</div>'
+        +'<div class="pl-pr'+(x.preco?'':' vazio')+'">'+E(x.preco||'Valor sob consulta')+'</div><ul>'+(x.beneficios||[]).map(function(b){return '<li>'+E(b)+'</li>';}).join('')+'</ul>';
+      if(atual)h+='<div class="pl-ok">✓ Seu plano atual</div>';
+      else if(inst)h+='<div class="pl-inst"><label>Quantas pessoas?</label><input type="number" min="2" value="10" id="pl-qtd"></div><button class="pl-btn" data-pl="inst">'+IC('wa-real')+' Combinar pelo WhatsApp</button>';
+      else if(x.k==='gratis')h+='<div class="pl-ok sub">Incluído no seu login</div>';
+      else if(x.checkout)h+='<a class="pl-btn" target="_blank" rel="noopener" href="'+E(x.checkout)+'">Quero o '+E(x.nome)+'</a>';
+      else h+='<button class="pl-btn" data-pl="zap" data-n="'+E(x.nome)+'">'+IC('wa-real')+' Quero o '+E(x.nome)+'</button>';
+      h+='</div>';
+    });
+    h+='</div><div class="pl-foot">Já comprou e não liberou? Saia e entre de novo com o e-mail da compra. Se continuar, chama no suporte.</div>';
+    p.innerHTML=h;
+  }
+  function editarPlanos(){
+    var l=planos(),ov=document.createElement('div');ov.className='pw-ov';ov.id='pl-ed';
+    var h='<div class="pw" style="max-width:640px;max-height:86vh;overflow:auto;text-align:left"><div style="font-size:18px;font-weight:800;margin-bottom:4px">Editar planos</div><div style="font-size:12px;color:var(--fg3);margin-bottom:12px">Produtos = parte do nome do produto na Kiwify. Quem comprou cai nesse plano. "Libera tudo" abre a plataforma inteira.</div>';
+    l.forEach(function(x,i){h+='<div class="pl-ed" data-i="'+i+'"><b>Plano '+E(x.nome)+'</b>'
+      +'<label>Preço<input data-f="preco" value="'+E(x.preco||'')+'" placeholder="R$ 47/mês"></label>'
+      +'<label>Frase<input data-f="sub" value="'+E(x.sub||'')+'"></label>'
+      +'<label>Link de checkout<input data-f="checkout" value="'+E(x.checkout||'')+'" placeholder="https://pay.kiwify.com.br/..."></label>'
+      +'<label>Produtos da Kiwify (separe por vírgula)<input data-f="produtos" value="'+E((x.produtos||[]).join(', '))+'"></label>'
+      +'<label>Benefícios (um por linha)<textarea data-f="beneficios" rows="4">'+E((x.beneficios||[]).join('\n'))+'</textarea></label>'
+      +'<label class="ck"><input type="checkbox" data-f="tudo"'+(x.tudo?' checked':'')+'> Libera tudo</label></div>';});
+    h+='<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px"><button class="admin-btn admin-btn-ghost" data-pl="fechar">Cancelar</button><button class="admin-btn admin-btn-primary" data-pl="salvar">Salvar planos</button></div></div>';
+    ov.innerHTML=h;document.body.appendChild(ov);requestAnimationFrame(function(){ov.classList.add('open');});
+  }
+  document.addEventListener('click',async function(e){
+    var b=e.target.closest('[data-pl]');if(!b)return;var a=b.dataset.pl;
+    if(a==='editar')return editarPlanos();
+    if(a==='fechar'){var o=$('pl-ed');if(o)o.remove();return;}
+    if(a==='inst'){var q=($('pl-qtd')||{}).value||'';wa('Oi Gediel! Quero o Plano Instituição da Plataforma Inteligente pra '+q+' pessoas. Como funciona?');return;}
+    if(a==='zap'){wa('Oi Gediel! Quero o Plano '+b.dataset.n+' da Plataforma Inteligente.');return;}
+    if(a==='salvar'){
+      var l=planos().map(function(x){return Object.assign({},x);});
+      [].forEach.call(document.querySelectorAll('#pl-ed .pl-ed'),function(d){var x=l[+d.dataset.i];
+        [].forEach.call(d.querySelectorAll('[data-f]'),function(f){var k=f.dataset.f;
+          if(k==='tudo')x.tudo=f.checked;else if(k==='produtos')x.produtos=f.value.split(',').map(function(s){return s.trim();}).filter(Boolean);
+          else if(k==='beneficios')x.beneficios=f.value.split('\n').map(function(s){return s.trim();}).filter(Boolean);else x[k]=f.value.trim();});});
+      var tudo=[];l.forEach(function(x){if(x.tudo)(x.produtos||[]).forEach(function(p){if(tudo.indexOf(p)<0)tudo.push(p);});});
+      b.disabled=true;b.textContent='Salvando…';
+      try{await salvarCfg({planos:{lista:l,tudo:tudo}});var o2=$('pl-ed');if(o2)o2.remove();renderPlanos();toast('✅ Planos salvos','#10b981');}
+      catch(err){b.disabled=false;b.textContent='Salvar planos';toast('Não salvou 😕 '+(err.message||''),'#ef4444');}
+    }
+  });
   /* ───────────────────────── STORY DE CONQUISTA (compartilhar no status / Instagram) ─────────────────────────
      Gera uma imagem 1080×1920 com o resultado do quiz, as tarefas feitas hoje, os dias seguidos e uma frase
      (meta, versículo ou filosofia). Cada toque em "Outra frase" sorteia outra. */
@@ -2015,7 +2263,7 @@
     return cv;
   }
   var stEl=document.createElement('div');stEl.id='mi-story';stEl.className='modal-overlay';document.body.appendChild(stEl);
-  var stc=document.createElement('style');stc.textContent='#mi-story .sb{background:var(--surface);border-radius:22px;padding:14px 16px 16px;width:min(420px,calc(100vw - 32px));max-height:calc(100dvh - 32px);overflow-y:auto;display:flex;flex-direction:column;gap:12px;box-shadow:0 24px 60px rgba(0,0,0,.45)}#mi-story .hd{display:flex;align-items:center;justify-content:space-between;font-weight:800;font-size:15px}#mi-story .hd button{width:36px;height:36px;padding:0;border-radius:50%;background:var(--bg2,rgba(127,127,127,.12));color:var(--fg)}#mi-story .rd{display:grid;grid-template-columns:1fr 1fr;gap:8px}#mi-story .rd button{display:flex;align-items:center;justify-content:center;gap:8px;color:#fff;padding:14px 8px;font-size:14px}#mi-story .ig{background:linear-gradient(45deg,#f9a825,#e1306c 45%,#833ab4)}#mi-story .wa{background:#25d366}#mi-story .ic4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}#mi-story .ic4 button{display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 4px;font-size:11px;font-weight:700}#mi-story .ic4 b{font-size:20px;line-height:1}#mi-story img{width:100%;max-height:52dvh;object-fit:contain;border-radius:14px;background:#0b0d1c}#mi-story img.tr{background:repeating-conic-gradient(#9aa0b4 0 25%,#d7dbe6 0 50%) 0 0/24px 24px}#mi-story .bt{display:grid;grid-template-columns:1fr 1fr;gap:8px}#mi-story button{border:none;border-radius:14px;padding:13px;font:inherit;font-size:14px;font-weight:800;cursor:pointer}#mi-story .p{background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff;grid-column:1/-1}#mi-story .g{background:var(--bg2,rgba(127,127,127,.12));color:var(--fg)}#mi-story .t{font-size:13px;color:var(--fg2);text-align:center;line-height:1.5}';document.head.appendChild(stc);
+  var stc=document.createElement('style');stc.textContent='#mi-story{z-index:9400}#mi-story:not(.open){display:none!important}#mi-story .sb{background:var(--surface);border-radius:22px;padding:14px 16px 16px;width:min(420px,calc(100vw - 32px));max-height:calc(100dvh - 32px);overflow-y:auto;display:flex;flex-direction:column;gap:12px;box-shadow:0 24px 60px rgba(0,0,0,.45)}#mi-story .hd{display:flex;align-items:center;justify-content:space-between;font-weight:800;font-size:15px}#mi-story .hd button{width:36px;height:36px;padding:0;border-radius:50%;background:var(--bg2,rgba(127,127,127,.12));color:var(--fg)}#mi-story .rd{display:grid;grid-template-columns:1fr 1fr;gap:8px}#mi-story .rd button{display:flex;align-items:center;justify-content:center;gap:8px;color:#fff;padding:14px 8px;font-size:14px}#mi-story .ig{background:linear-gradient(45deg,#f9a825,#e1306c 45%,#833ab4)}#mi-story .wa{background:#25d366}#mi-story .ic4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}#mi-story .ic4 button{display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 4px;font-size:11px;font-weight:700}#mi-story .ic4 b{font-size:20px;line-height:1}#mi-story img{width:100%;max-height:52dvh;object-fit:contain;border-radius:14px;background:#0b0d1c}#mi-story img.tr{background:repeating-conic-gradient(#9aa0b4 0 25%,#d7dbe6 0 50%) 0 0/24px 24px}#mi-story .bt{display:grid;grid-template-columns:1fr 1fr;gap:8px}#mi-story button{border:none;border-radius:14px;padding:13px;font:inherit;font-size:14px;font-weight:800;cursor:pointer}#mi-story .p{background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff;grid-column:1/-1}#mi-story .g{background:var(--bg2,rgba(127,127,127,.12));color:var(--fg)}#mi-story .t{font-size:13px;color:var(--fg2);text-align:center;line-height:1.5}';document.head.appendChild(stc);
   var stBlob=null;
   async function pintarStory(){
     stEl.innerHTML='<div class="sb"><div class="t">Gerando sua imagem…</div></div>';stEl.classList.add('open');
@@ -2027,9 +2275,9 @@
       +'<div class="ic4"><button class="g" data-st="frase"><b>🎲</b>Outra frase</button><button class="g" data-st="cor"><b>🎨</b>'+(STY.transp?'Com fundo':'Outra cor')+'</button><button class="g" data-st="transp"><b>'+(STY.transp?'🖼️':'🫥')+'</b>'+(STY.transp?'Trocar cor':'Sem fundo')+'</button><button class="g" data-st="baixar"><b>⬇️</b>Baixar</button></div></div>';
   }
   stEl.addEventListener('click',async function(e){
-    if(e.target===stEl){stEl.classList.remove('open');return;}
+    if(e.target===stEl){stEl.classList.remove('open');stEl.innerHTML='';return;}
     var b=e.target.closest('[data-st]');if(!b)return;var a=b.dataset.st;
-    if(a==='fechar')return stEl.classList.remove('open');
+    if(a==='fechar'){stEl.classList.remove('open');stEl.innerHTML='';return;}
     if(a==='frase'){STY.i++;return pintarStory();}
     if(a==='cor'){if(STY.transp)STY.transp=false;else STY.cor++;return pintarStory();}
     if(a==='transp'){if(STY.transp){STY.transp=false;STY.cor++;}else STY.transp=true;return pintarStory();}
@@ -2037,8 +2285,7 @@
     var social=a==='ig'||a==='wa';
     if(social&&navigator.canShare&&navigator.canShare({files:[f]})){
       toast(a==='ig'?'Escolha Instagram → Story 📸':'Escolha WhatsApp → Meu status 💬',a==='ig'?'#e1306c':'#25d366');
-      try{await navigator.share(a==='wa'?{files:[f],text:'Hoje eu treinei meu inglês 🔥'}:{files:[f]});}catch(err){}
-      return;
+      try{await navigator.share(a==='wa'?{files:[f],text:'Hoje eu treinei meu inglês 🔥'}:{files:[f]});return;}catch(err){if(err&&err.name==='AbortError')return;}
     }
     var u=URL.createObjectURL(stBlob),l=document.createElement('a');l.href=u;l.download='minha-conquista-ingles.png';document.body.appendChild(l);l.click();l.remove();
     toast(social?'Imagem baixada. Pra postar direto, abra a plataforma no celular 📲':'Imagem baixada ✅');
@@ -2046,6 +2293,7 @@
   function compartilharConquista(sc,tot){STY.quiz=sc!=null?{sc:sc,tot:tot,t:(window._stCurLes&&_stCurLes.title)||'aula'}:null;STY.i++;pintarStory();}
   /* ───────────────────────── FESTA: checklist do dia concluído ───────────────────────── */
   var IRONIA={
+    'Primeiros passos':['Primeiro dia de academia também dói. Mas você voltou, né?','Ontem você não sabia. Hoje você já reconhece. Isso tem nome: progresso.','Começar do zero é melhor do que nunca começar. E você começou.'],
     'Em Casa':['Em casa, de pijama, e mesmo assim mais produtivo que muita reunião por aí.','O sofá tentou te segurar. Perdeu.'],
     'Acabei de acordar':['Nem tomou café e já falou mais inglês que muita gente na semana inteira.','O despertador tocou e o inglês atendeu. Lenda.'],
     'Vou pro banho':['O chuveiro agora é bilíngue. Os vizinhos que lutem.','Saiu do banho mais limpo e mais fluente. Combo raro.'],
