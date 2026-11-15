@@ -4,8 +4,10 @@
   var sb=window._sb||_sb, PANES_PROGRAMA=['maratona','lives','modulos'];
   var S={pronto:false,ok:false,admin:false,programa:false,cfg:{programa:[],jogosGratis:[],checkout:'',eom:[],checkoutEom:''},mats:[],compras:[],meta:''};
   var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
-  var tem=function(trecho){trecho=(trecho||'').toLowerCase().trim();if(!trecho)return false;
-    return S.compras.some(function(c){return (c.produto||'').toLowerCase().indexOf(trecho)>=0;})||S.meta.toLowerCase().indexOf(trecho)>=0;};
+  // o "produto" pode ter vários trechos separados por vírgula (ex.: "Bíblia Linear, English on Mission")
+  var tem=function(trecho){
+    var ts=String(trecho||'').toLowerCase().split(',').map(function(x){return x.trim();}).filter(Boolean);
+    return ts.some(function(t){return S.compras.some(function(c){return (c.produto||'').toLowerCase().indexOf(t)>=0;})||S.meta.toLowerCase().indexOf(t)>=0;});};
   var livre=function(){return !S.ok||S.programa||S.admin;};           // vê tudo
   var jogoLivre=function(n){return livre()||(S.cfg.jogosGratis||[]).indexOf(n)>=0;};
   var matLivre=function(m){return livre()||m.tipo==='gratis'||(m.tipo==='produto'&&tem(m.produto));};

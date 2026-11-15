@@ -742,8 +742,10 @@
     var r=await window._sb.from('mi_modules').select('*').order('ord');MODS_ALL=r.data||[];return MODS_ALL;
   }
   function temProduto(trecho){
-    var S=(window.EBG_ACESSO||{}).estado||{};trecho=(trecho||'').toLowerCase().trim();if(!trecho)return false;
-    return (S.compras||[]).some(function(c){return (c.produto||'').toLowerCase().indexOf(trecho)>=0;})||String(S.meta||'').toLowerCase().indexOf(trecho)>=0;
+    var S=(window.EBG_ACESSO||{}).estado||{};
+    // vários trechos separados por vírgula (ex.: "Bíblia Linear, English on Mission"): vale qualquer um
+    return String(trecho||'').toLowerCase().split(',').map(function(x){return x.trim();}).filter(Boolean).some(function(t){
+      return (S.compras||[]).some(function(c){return (c.produto||'').toLowerCase().indexOf(t)>=0;})||String(S.meta||'').toLowerCase().indexOf(t)>=0;});
   }
   function souAdmin(){var S=(window.EBG_ACESSO||{}).estado||{};return !!(window._isAdmin||S.admin);}
   function cardSoon(c){return c.em_breve||((c.acao==='link'||c.acao==='curso')&&!c.valor);}
