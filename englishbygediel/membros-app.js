@@ -742,7 +742,7 @@
     var r=await window._sb.from('mi_modules').select('*').order('ord');MODS_ALL=r.data||[];return MODS_ALL;
   }
   function temProduto(trecho){
-    var S=(window.EBG_ACESSO||{}).estado||{};
+    var S=(window.EBG_ACESSO||{}).estado||{};if(S.tudo)return true;
     // vários trechos separados por vírgula (ex.: "Bíblia Linear, English on Mission"): vale qualquer um
     return String(trecho||'').toLowerCase().split(',').map(function(x){return x.trim();}).filter(Boolean).some(function(t){
       return (S.compras||[]).some(function(c){return (c.produto||'').toLowerCase().indexOf(t)>=0;})||String(S.meta||'').toLowerCase().indexOf(t)>=0;});
