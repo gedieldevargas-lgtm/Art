@@ -154,6 +154,8 @@
     S.compras=S.todasCompras.filter(function(c){return (c.email||'').toLowerCase()===(u.email||'').toLowerCase();});
     S.mats=r[2].data||[];
     S.programa=(S.cfg.programa||[]).some(tem);
+    S.tudo=((S.cfg.planos&&S.cfg.planos.tudo)||['Plano Gênio','Plano Instituição']).some(tem);   // Gênio / Instituição: libera tudo
+    if(S.tudo)S.programa=true;
     S.pronto=true;pintar();
   }
   function pintar(){

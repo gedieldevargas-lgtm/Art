@@ -1132,7 +1132,7 @@ function renderLives(){
     c.appendChild(el);
   });
 }
-renderLives();setInterval(renderLives,30000);
+renderLives();setInterval(function(){renderLives();},30000);
 
 // ═══════════════════════════ MÓDULOS ═══════════════════════════
 var MODULES=['Orientação','Diagnóstico & Personalização','Sons & Pronúncia','Vocabulário Essencial','Gramática A1','Gramática A2–B1','Conversação A1–A2','Conversação B1','Listening & Compreensão','Phrasal Verbs','Idioms & Expressões','Inglês pela Música','Inglês por Séries','Business English','Escrita em Inglês'];
@@ -1512,8 +1512,7 @@ function openTask(key,i){
     if(inf.links&&inf.links.length){
       h+='<div class="adm-section">Conteúdo pra usar agora</div><div>';
       inf.links.forEach(function(l){
-        if(l.u==='#jogos')h+='<a class="task-link" href="javascript:void(0)" onclick="closeTaskModal();goTo(\'jogos\')">'+l.t+'</a>';
-        else if(l.u==='#modulos')h+='<a class="task-link" href="javascript:void(0)" onclick="closeTaskModal();goTo(\'modulos\')">'+l.t+'</a>';
+        if(l.u.charAt(0)==='#')h+='<a class="task-link" href="javascript:void(0)" onclick="closeTaskModal();window.miLink?miLink(\''+l.u.replace(/'/g,"\\'")+'\'):goTo(\'modulos\')">'+l.t+'</a>';
         else h+='<a class="task-link" href="'+l.u+'" target="_blank" rel="noopener">'+l.t+' ↗</a>';
       });
       h+='</div><div style="font-size:10px;color:var(--fg3);margin-top:4px">Links do YouTube abrem direto no app do YouTube no celular.</div>';

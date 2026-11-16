@@ -1,6 +1,6 @@
 -- Planos: quem comprou um produto listado em cfg.planos.tudo (Gênio, Instituição) acessa tudo
 create or replace function public.tenho_tudo() returns boolean language sql stable security definer set search_path=public as
-$$ select exists(select 1 from acesso a, jsonb_array_elements_text(coalesce(a.dados->'planos'->'tudo','[]'::jsonb)) t
+$$ select exists(select 1 from acesso a, jsonb_array_elements_text(coalesce(a.dados->'planos'->'tudo','["Plano Gênio","Plano Instituição"]'::jsonb)) t
                  where a.id='cfg' and public.comprei(t)) $$;
 drop policy if exists links_ler on public.material_links;
 create policy links_ler on public.material_links for select to authenticated using (
@@ -9,7 +9,7 @@ create policy links_ler on public.material_links for select to authenticated usi
 
 -- Plano Gênio / Instituição também contam como Programa (aulas, materiais, tudo)
 create or replace function public.tenho_programa() returns boolean language sql stable security definer set search_path=public as
-$$ select exists(select 1 from acesso a, jsonb_array_elements_text(coalesce(a.dados->'programa','[]'::jsonb)||coalesce(a.dados->'planos'->'tudo','[]'::jsonb)) t
+$$ select exists(select 1 from acesso a, jsonb_array_elements_text(coalesce(a.dados->'programa','[]'::jsonb)||coalesce(a.dados->'planos'->'tudo','["Plano Gênio","Plano Instituição"]'::jsonb)) t
                  where a.id='cfg' and public.comprei(t)) $$;
 
 -- E-books em PDF guardados no Supabase (bucket privado). Só baixa quem tem acesso ao material.
