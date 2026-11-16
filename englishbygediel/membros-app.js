@@ -2451,11 +2451,12 @@
   function variacoes(label,i,lista){
     var v=aulasVistas(),lim=(label==='Primeiros passos')?-1:(nivelBaixo()&&v<LIB_PRODUZIR?v:99);
     var usados={};lista.forEach(function(t){usados[t.title]=1;});
-    var pool=Object.keys(APR).map(function(k){return APR[k]();});
-    if(lim>=0)pool=pool.concat(todasTarefas().filter(function(t){return exige(t)<=lim;}));
-    pool=pool.filter(function(t){return !usados[t.title];});
+    // primeiro: tarefas do MESMO lugar que não estão na lista; depois: tarefas de aprender (servem em qualquer lugar)
+    var mesmo=lim>=0?(BASE[label]||[]).filter(function(t){return exige(t)<=lim&&!usados[t.title];}):[];
+    var apr=Object.keys(APR).map(function(k){return APR[k]();}).filter(function(t){return !usados[t.title];});
     var seed=hashN(dia()+label+i),out=[];
-    for(var n=0;n<pool.length&&out.length<2;n++){var t=pool[(seed+n*7)%pool.length];if(out.indexOf(t)<0)out.push(t);}
+    mesmo.forEach(function(t,n){var x=mesmo[(seed+n)%mesmo.length];if(out.length<2&&out.indexOf(x)<0)out.push(x);});
+    for(var n=0;n<apr.length&&out.length<2;n++){var t=apr[(seed+n*7)%apr.length];if(out.indexOf(t)<0)out.push(t);}
     return out;
   }
   function trocas(){return LS.get('mi_troca_'+dia(),{});}
