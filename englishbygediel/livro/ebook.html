@@ -98,7 +98,7 @@ p{margin:0 0 8px;font-size:10.5pt;line-height:1.5}
 
   function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   var PG=0,A;
-  function rod(){return '<div class="rod"><span><b>Inglês Inteligente</b> · '+esc(A.nivel)+' · Unit '+A.unidade+' · '+esc(A.titulo)+'</span><span>'+(++PG)+'</span></div>';}
+  function rod(){return '<div class="rod"><span><b>Inglês Inteligente</b> · '+esc(A.rotulo||(A.nivel+' · Unit '+A.unidade))+' · '+esc(A.titulo)+'</span><span>'+(++PG)+'</span></div>';}
   function pagina(html,cls){return '<section class="pg '+(cls||'')+'">'+html+rod()+'</section>';}
 
   // ---------- mapa mental (SVG) ----------
@@ -158,12 +158,12 @@ p{margin:0 0 8px;font-size:10.5pt;line-height:1.5}
   function exPorId(i){return A.exercicios.filter(function(e){return e.id===i;})[0];}
 
   function montar(a){
-    A=a;if(!a)return;document.title='E-book · Unit '+a.unidade+' · '+a.titulo;
+    A=a;if(!a)return;document.title='E-book · '+a.titulo;
     var E=a.ebook,h='';
     // 1. capa
     h+='<section class="pg capa"><div class="orb"></div><div class="orb2"></div>'
       +'<div class="logo"><i>✦</i><div>INGLÊS INTELIGENTE<small>Inglês no seu estilo de inteligência.</small></div></div>'
-      +'<div class="meio"><div class="kick">'+esc(a.nivel).toUpperCase()+' · UNIT '+a.unidade+'</div><div class="tt">'+esc(a.titulo)+'</div><div class="st">'+esc(a.subtitulo)+'</div>'
+      +'<div class="meio"><div class="kick">'+esc(a.rotulo||(a.nivel+' · UNIT '+a.unidade)).toUpperCase()+'</div><div class="tt">'+esc(a.titulo)+'</div><div class="st">'+esc(a.subtitulo)+'</div>'
       +'<div class="tags"><span>🗺️ Mapa mental</span><span>📊 Gráficos</span><span>✍️ Exercícios</span><span>✅ Gabarito</span></div></div>'
       +'<div class="ass">E-book da aula · continuação do vídeo<b>TEACHER GEDIEL</b></div></section>';
     PG=1;
@@ -212,13 +212,14 @@ p{margin:0 0 8px;font-size:10.5pt;line-height:1.5}
     });
     // exercícios do livro interativo também entram no gabarito
     a.exercicios.forEach(function(e){
+      if(e.tipo==='escolha'&&e.itens[0]&&e.itens[0].p)gab.push(['No app · '+e.titulo,e.itens.map(function(x){return x.p+' → '+x.ops[x.c];})]);
       if(e.tipo==='ditado')gab.push(['No app · '+e.titulo,e.itens.map(function(x){return x.resp[0];})]);
       if(e.tipo==='montar')gab.push(['No app · '+e.titulo,e.itens.map(function(x){return x.ouvir+' → '+x.resp;})]);
     });
     // divide os exercícios em 2 páginas: os 4 primeiros e a missão
     var partes=ex.split('<div class="ex">').filter(Boolean).map(function(x){return '<div class="ex">'+x;});
     h+=pagina('<div class="hs">Pratique no papel</div><div class="ht">Exercícios</div><p style="margin-top:8px">Tente sozinho antes de olhar o gabarito. Fale cada resposta em voz alta.</p>'+partes.slice(0,-1).join(''));
-    h+=pagina(partes.slice(-1).join('')+'<div class="dica">🗣️ Responda em voz alta, 2 vezes: <b>'+esc(a.missao.falar)+'</b></div>');
+    h+=pagina(partes.slice(-1).join('')+(a.missao.tarefa?'<div class="dica">✅ '+esc(a.missao.tarefa)+'</div>':'')+(a.missao.falar?'<div class="dica">🗣️ Fale em voz alta, 2 vezes: <b>'+esc(a.missao.falar)+'</b></div>':''));
     h+=pagina('<div class="hs">Confira</div><div class="ht">Gabarito</div><h2>✅ Respostas</h2><div class="gab">'+gab.map(function(g){return '<div class="g"><b>'+esc(g[0])+'</b><ol type="a">'+g[1].map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ol></div>';}).join('')+'</div>');
     document.getElementById('livro').innerHTML=h;
     document.body.dataset.pronto='1';

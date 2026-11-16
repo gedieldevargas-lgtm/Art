@@ -2097,7 +2097,8 @@ async function renderLesson(){
 }
 /* Livro da aula: na descrição da aula, escreva uma linha "livro: unit-01" (ou preencha a coluna "livro", se existir) */
 var LIVRO_RE=/(^|\n)[ \t]*(?:📘)?[ \t]*livro[ \t]*:[ \t]*([\w-]+)[ \t]*(?=\n|$)/i;
-function livroDaAula(l){if(l.livro)return String(l.livro).trim();var m=(l.description||'').match(LIVRO_RE);if(m)return m[2];var u=(l.title||'').match(/\b(?:unit|unidade)\s*0*(\d{1,2})\b/i);return u?'unit-'+('0'+u[1]).slice(-2):null;}
+function livroDaAula(l){if(l.livro)return String(l.livro).trim();var m=(l.description||'').match(LIVRO_RE);if(m)return m[2];var u=(l.title||'').match(/\b(?:unit|unidade)\s*0*(\d{1,2})\b/i);if(u)return 'unit-'+('0'+u[1]).slice(-2);return slugAula(l.title);}
+function slugAula(t){t=String(t||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');return t.slice(0,70).replace(/-+$/,'')||null;}
 function descSemLivro(d){return (d||'').replace(LIVRO_RE,'$1').trim();}
 function abrirLivroAula(id){
   var el=document.getElementById('aula-livro');if(!el)return;

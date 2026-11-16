@@ -54,13 +54,34 @@
       || vs.filter(function (v) { return /^en/i.test(v.lang); })[0] || null;
   }
   if ('speechSynthesis' in window) { acharVoz(); speechSynthesis.onvoiceschanged = acharVoz; }
+  var AUDIOS = {}, tocando = null;
+  function chave(t) { return String(t || '').toLowerCase().replace(/[’']/g, "'").replace(/[^a-z0-9' ]+/g, ' ').replace(/\s+/g, ' ').trim(); }
   function falar(txt, devagar) {
-    if (!('speechSynthesis' in window)) { alert('Seu navegador não tem áudio. Frase: ' + txt); return; }
+    // 1º: áudio gravado (ex.: os áudios do Canva), se a aula tiver
+    var url = AUDIOS[chave(txt)];
+    if (url) {
+      if (tocando) { tocando.pause(); }
+      tocando = new Audio(url); tocando.playbackRate = devagar ? 0.75 : 1;
+      tocando.play().catch(function () { vozNavegador(txt, devagar); });
+      return;
+    }
+    vozNavegador(txt, devagar);
+  }
+  function vozNavegador(txt, devagar) {
+    if (!('speechSynthesis' in window)) { aviso('Este navegador não tem voz. Frase: ' + txt); return; }
+    if (!voz) acharVoz();
     speechSynthesis.cancel();
+    if (speechSynthesis.paused) speechSynthesis.resume();
     var u = new SpeechSynthesisUtterance(txt);
     u.lang = 'en-US'; if (voz) u.voice = voz;
-    u.rate = devagar ? 0.6 : 0.92;
-    speechSynthesis.speak(u);
+    u.rate = devagar ? 0.6 : 0.92; u.volume = 1;
+    u.onerror = function (e) { if (e.error === 'not-allowed' || e.error === 'audio-hardware') aviso('Não consegui tocar o áudio. Confira se o celular não está no silencioso.'); };
+    // alguns iPhones precisam de um pequeno atraso depois do cancel()
+    setTimeout(function () { speechSynthesis.speak(u); }, 60);
+  }
+  function aviso(t) {
+    var d = document.querySelector('.lv-aviso'); if (!d) { d = document.createElement('div'); d.className = 'lv-aviso'; document.body.appendChild(d); }
+    d.textContent = t; d.classList.add('on'); clearTimeout(d._t); d._t = setTimeout(function () { d.classList.remove('on'); }, 3500);
   }
 
   // ---------- progresso ----------
@@ -145,6 +166,14 @@
           '<div class="lv-banco">' + ordem.map(function (j) { return '<button type="button" class="lv-peca' + (usadas.indexOf(j) >= 0 ? ' usada' : '') + '" data-p="' + j + '">' + esc(pecas[j]) + '</button>'; }).join('') + '</div>' +
           '<div class="lv-fb"></div></div>';
       });
+    } else if (ex.tipo === 'pares') {
+      var lados = [], semente = ex.itens.length + 5;
+      ex.itens.forEach(function (it, i) { lados.push(['en', i, it.en]); });
+      var pts = ex.itens.map(function (it, i) { return ['pt', i, it.pt]; });
+      h += '<div class="lv-jogo" data-jogo="' + ex.id + '"><div class="lv-placar"><span>⏱ <b class="lv-tempo">0s</b></span><span>❌ <b class="lv-erros">0</b></span></div><div class="lv-pares">' +
+        '<div class="lv-col">' + embaralhar(lados, semente).map(function (x) { var k = ex.id + '.' + x[1]; return '<button type="button" class="lv-tile' + (f[k] === 'ok' ? ' feito' : '') + '" data-par="' + x[1] + '" data-lado="en" data-k="' + k + '">' + esc(x[2]) + '</button>'; }).join('') + '</div>' +
+        '<div class="lv-col">' + embaralhar(pts, semente + 2).map(function (x) { var k = ex.id + '.' + x[1]; return '<button type="button" class="lv-tile pt' + (f[k] === 'ok' ? ' feito' : '') + '" data-par="' + x[1] + '" data-lado="pt" data-k="' + k + '">' + esc(x[2]) + '</button>'; }).join('') + '</div></div>' +
+        '<div class="lv-fb lv-fim"></div></div>';
     } else if (ex.tipo === 'conversa') {
       ex.linhas.forEach(function (ln, i) {
         var k = ex.id + '.' + i;
@@ -159,7 +188,7 @@
     var st = ler(a.id), tot = totalItens(a), ok = acertos(a, st);
     var aberto = st.aberto || 'revisar';
     var h = '<div class="lv" data-aula="' + esc(a.id) + '">' +
-      '<div class="lv-head"><div><div class="lv-kick">📘 LIVRO DA AULA · ' + esc(a.nivel).toUpperCase() + ' · UNIT ' + a.unidade + '</div>' +
+      '<div class="lv-head"><div><div class="lv-kick">📘 LIVRO DA AULA · ' + esc(a.rotulo || (a.nivel + ' · UNIT ' + a.unidade)).toUpperCase() + '</div>' +
       '<div class="lv-tit">' + esc(a.titulo) + ' <small>' + esc(a.subtitulo || '') + '</small></div></div>' +
       '<a class="lv-baixar" href="' + esc(a.pdf ? a.pdf : BASE + 'ebook.html?u=' + a.id) + '" target="_blank" rel="noopener"' + (a.pdf ? ' download' : '') + '>⬇ Baixar e-book</a></div>' +
       '<div class="lv-prog"><div class="lv-bar"><i style="width:' + Math.round(ok / tot * 100) + '%"></i></div><span>' + ok + '/' + tot + ' acertos</span></div>';
@@ -177,7 +206,8 @@
     if (a.missao) {
       var nf = ((st.frases || '').split('\n').filter(function (x) { return x.trim(); })).length;
       h += '<details class="lv-sec" data-sec="missao"' + (aberto === 'missao' ? ' open' : '') + '><summary>🎯 Missão da aula <em class="lv-cont' + (nf >= a.missao.frases ? ' tudo' : '') + '">' + Math.min(nf, a.missao.frases) + '/' + a.missao.frases + '</em></summary><div class="lv-corpo">' +
-        '<div class="lv-dica">🗣️ Responda em voz alta, 2 vezes: <b>' + esc(a.missao.falar) + '</b> ' + btnSom(a.missao.falar) + '</div>' +
+        (a.missao.tarefa ? '<div class="lv-dica">✅ ' + esc(a.missao.tarefa) + '</div>' : '') +
+        (a.missao.falar ? '<div class="lv-dica">🗣️ Fale em voz alta, 2 vezes: <b>' + esc(a.missao.falar) + '</b> ' + btnSom(a.missao.falar) + '</div>' : '') +
         '<p class="lv-inst">Escreva ' + a.missao.frases + ' frases e perguntas com o que aprendeu (uma por linha). Ex: ' + esc(a.missao.exemplo) + '</p>' +
         '<textarea class="lv-frases" rows="8" placeholder="1 frase por linha…">' + esc(st.frases || '') + '</textarea>' +
         '<div class="lv-mini-info">Fica salvo neste aparelho.</div></div></details>';
@@ -193,6 +223,11 @@
     var st = ler(a.id); st.feito = st.feito || {}; st.txt = st.txt || {};
     var sec = el.querySelector('[data-ex="' + exId + '"]');
     var certos = 0, total = (ex.itens || ex.linhas).length;
+    if (ex.tipo === 'pares') {
+      ex.itens.forEach(function (it, i) { var k = exId + '.' + i; if (mostrar) st.feito[k] = st.feito[k] || 'mostrado'; if (st.feito[k] === 'ok') certos++; });
+      if (mostrar) sec.querySelectorAll('.lv-tile').forEach(function (b) { b.classList.add('feito'); var it = ex.itens[+b.dataset.par]; if (b.dataset.lado === 'en') b.textContent = it.en + ' = ' + it.pt; });
+      gravar(a.id, st); if (!mostrar) atualizarProg(el, a, sec, certos, total); return;
+    }
     (ex.itens || ex.linhas).forEach(function (it, i) {
       var k = exId + '.' + i, box = sec.querySelector('[data-k="' + k + '"]'), fb = box.querySelector('.lv-fb');
       var r, certa;
@@ -230,6 +265,29 @@
     try { window.parent !== window && window.parent.postMessage({ livro: a.id, acertos: ok, total: tot }, '*'); } catch (e) {}
   }
 
+  var JOGO = {};
+  function clicarPar(el, a, t) {
+    if (t.classList.contains('feito')) return;
+    var jogo = t.closest('.lv-jogo'), id = jogo.dataset.jogo, J = JOGO[id] = JOGO[id] || { erros: 0, ini: Date.now() };
+    if (!J.timer) J.timer = setInterval(function () { var e = jogo.querySelector('.lv-tempo'); if (!document.body.contains(jogo)) return clearInterval(J.timer); e.textContent = Math.round((Date.now() - J.ini) / 1000) + 's'; }, 500);
+    if (t.dataset.lado === 'en') falar(t.textContent);
+    var sel = jogo.querySelector('.lv-tile.sel');
+    if (!sel || sel === t) { t.classList.toggle('sel'); return; }
+    if (sel.dataset.lado === t.dataset.lado) { sel.classList.remove('sel'); t.classList.add('sel'); return; }
+    sel.classList.remove('sel');
+    if (sel.dataset.par === t.dataset.par) {
+      sel.classList.add('feito'); t.classList.add('feito');
+      var st = ler(a.id); st.feito = st.feito || {}; st.feito[t.dataset.k] = 'ok'; gravar(a.id, st);
+      var ex = a.exercicios.filter(function (e) { return e.id === id; })[0], sec = jogo.closest('[data-ex]');
+      var feitos = ex.itens.filter(function (_, i) { return st.feito[id + '.' + i] === 'ok'; }).length;
+      atualizarProg(el, a, sec, feitos, ex.itens.length);
+      if (feitos === ex.itens.length) { clearInterval(J.timer); jogo.querySelector('.lv-fim').innerHTML = '<span class="lv-bom">🏆 Completo em ' + Math.round((Date.now() - J.ini) / 1000) + 's com ' + J.erros + ' erro(s)! Toque em "Refazer" e tente bater seu tempo.</span>'; }
+    } else {
+      J.erros++; jogo.querySelector('.lv-erros').textContent = J.erros;
+      [sel, t].forEach(function (b) { b.classList.add('errou'); setTimeout(function () { b.classList.remove('errou'); }, 450); });
+    }
+  }
+
   function festa(el) {
     if (el.querySelector('.lv-festa')) return;
     var d = document.createElement('div'); d.className = 'lv-festa';
@@ -249,8 +307,10 @@
         var st = ler(a.id); Object.keys(st.feito || {}).concat(Object.keys(st.txt || {})).forEach(function (k) {
           if (k.indexOf(t.dataset.limpar + '.') === 0) { delete (st.feito || {})[k]; delete (st.txt || {})[k]; }
         });
+        if (JOGO[t.dataset.limpar]) { clearInterval(JOGO[t.dataset.limpar].timer); delete JOGO[t.dataset.limpar]; }
         st.aberto = t.dataset.limpar; gravar(a.id, st); desenhar(el, a); return;
       }
+      if (t.classList.contains('lv-tile')) return clicarPar(el, a, t);
       var box = t.closest('.lv-item'); if (!box) return;
       var k = box.dataset.k, st2 = ler(a.id); st2.txt = st2.txt || {};
       if (t.classList.contains('lv-op')) {
@@ -308,6 +368,7 @@
       carregar(id, function (a) {
         if (!a) { if (semLivro) { el.innerHTML = ''; semLivro(); } else el.innerHTML = '<div class="lv lv-carregando">Livro da aula ainda não disponível.</div>'; return; }
         if (a.pdf && !/^(https?:|\/)/.test(a.pdf)) a.pdf = BASE.replace(/livro\/$/, '') + a.pdf;
+        AUDIOS = {}; Object.keys(a.audios || {}).forEach(function (k) { var u = a.audios[k]; AUDIOS[chave(k)] = /^(https?:|\/)/.test(u) ? u : BASE + u; });
         desenhar(el, a);
       });
     },

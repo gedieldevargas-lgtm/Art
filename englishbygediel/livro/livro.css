@@ -88,3 +88,17 @@
   .aula-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(340px,1fr);gap:16px;align-items:start}
   .aula-grid .aula-livro{margin-top:0;position:sticky;top:0;max-height:calc(100vh - 40px);overflow:auto;border-radius:16px;scrollbar-width:thin}
 }
+
+/* jogo de pares */
+.lv-placar{display:flex;gap:14px;font-size:12px;color:var(--lv-fg2);margin-bottom:8px}
+.lv-pares{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.lv-col{display:flex;flex-direction:column;gap:6px}
+.lv-tile{all:unset;box-sizing:border-box;cursor:pointer;min-height:44px;padding:9px 11px;border-radius:11px;border:1.5px solid var(--lv-bd);background:var(--lv-bg2);font-weight:700;font-size:13px;display:flex;align-items:center;transition:transform .15s,background .2s,border-color .2s}
+.lv-tile.pt{font-weight:600;color:var(--lv-fg2)}
+.lv-tile.sel{border-color:var(--lv-ac);background:color-mix(in srgb,var(--lv-ac) 14%,transparent);transform:scale(1.02)}
+.lv-tile.feito{border-color:var(--lv-ok);background:color-mix(in srgb,var(--lv-ok) 12%,transparent);color:var(--lv-ok);pointer-events:none}
+.lv-tile.errou{border-color:var(--lv-err);animation:lvTreme .4s}
+@keyframes lvTreme{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.lv-fim{margin-top:8px}
+.lv-aviso{position:fixed;left:50%;bottom:24px;transform:translate(-50%,40px);opacity:0;background:#111827;color:#fff;font:600 13px 'Plus Jakarta Sans',sans-serif;padding:10px 14px;border-radius:12px;z-index:99999;transition:.25s;max-width:90vw;text-align:center}
+.lv-aviso.on{opacity:1;transform:translate(-50%,0)}
