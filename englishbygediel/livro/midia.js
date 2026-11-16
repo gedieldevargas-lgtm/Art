@@ -6,30 +6,42 @@
   var m = function (v, t) { return { v: v, t: t }; };
   var c = function (v, frase, resp) { return { v: v, frase: frase, resp: [].concat(resp) }; };
   var OLA = [g('hi-hello', 'Hello!'), g('200w', 'Hello'), g('200w-1', 'Hiiii!'), g('gif-7446', 'Oh, hello there!'), g('giphy', 'Hey there'), g('whats-up-hey', "What's up?")];
-  var CUMPR = [c('how-are-you-missed-you', "How are you? I've ___ you so much!", 'missed'), c('hey-dad-hows-it-going', "Hey dad, how's it ___?", 'going'),
+  // Cada lacuna é uma palavra ENSINADA na aula em que a cena aparece. Quando a lacuna pede para aplicar
+  // uma regra da aula (ex.: + s da 3ª pessoa, -ING), o verbo base vem entre parênteses.
+  // Aula "Cumprimentos, apresentações e small talk": Hi / Hey / Hello, How are you?, I'm good, thanks.
+  var CUMPR = [c('how-are-you-missed-you', "How ___ you? I've missed you so much!", 'are'), c('hey-dad-hows-it-going', "___ dad, how's it going?", 'Hey'),
+    c('hi-sacha-im-good-thanks', "___ Sacha, how are you? I'm good, thanks.", 'Hi'), c('im-fine-thanks', "I'm fine, ___.", 'thanks')];
+  // Unit 1 (Greetings): ensina I'm fine, very well, How are you doing?, terrific
+  var UNIT1 = [c('how-are-you-missed-you', "How ___ you? I've missed you so much!", 'are'), c('hey-dad-hows-it-going', "Hey dad, how's it ___?", 'going'),
     c('how-are-you-doing-terrific', 'How are you doing? ___!', 'Terrific'), c('hi-sacha-im-good-thanks', "Hi Sacha, how are you? I'm ___, thanks.", 'good'),
     c('im-fine-thanks', "I'm ___, thanks.", 'fine'), c('im-very-well-thank-you', "I'm very ___, thank you.", 'well')];
-  var PRES = [c('dances-with-darnley', 'She ___ with Darnley.', 'dances'), c('studies-karate', 'She ___ karate.', 'studies'),
-    c('he-watches-you', 'He ___ you.', 'watches'), c('has-my-email', 'He ___ my e-mail address.', 'has')];
-  var FREQ = [c('guys-dont-usually', "Because guys don't ___ pay attention to details like that.", 'usually'), c('always-the-monster', 'Why am I ___ the monster?', 'always'),
-    c('rarely-use', 'Yeah, I have an apartment I ___ use.', 'rarely'), c('sometimes-watches-oliver', 'And he ___ watches Oliver.', 'sometimes'),
-    c('hardly-ever-home', "Give me a call here. I'm ___ home.", 'hardly ever'), c('always-testifying', 'He is ___ testifying, he volunteers.', 'always'),
-    c('often-very-strong', "They are ___ very strong, you're right about that.", 'often'), c('usually-at-this-time', 'Now, what do you ___ do at this time, Tom?', 'usually')];
-  var WH = [c('what-time-nurse', 'What time ___ the nurse come?', 'does'), c('when-does-he-get-back', 'Jesus, when ___ he get back? Tuesday?', 'does'),
-    c('how-are-they-doing', 'How ___ they doing?', 'are'), c('where-need-the-bag', 'Where do you ___ the bag?', 'need'),
-    c('never-say-my-name', 'Why do you never ___ my name?', 'say'), c('which-car', 'Alex, ___ car do you have?', 'which')];
-  var DIR = [c('on-the-corner', "Yeah, it's on the ___ of Lincoln and Seco.", 'corner'), c('elevator-turn-left', 'Take the elevator to the fifth floor, then turn ___.', 'left'),
-    c('city-between-the-buildings', 'You see a city ___ the buildings.', 'between'), c('go-past-the-first-station', "You'll go ___ the first station.", 'past')];
-  var CONT = [c('studying-business', "He's ___ business.", 'studying'), c('shes-dancing-with-me', "She's ___ with me.", 'dancing')];
+  var PRES = [c('dances-with-darnley', 'She ___ with Darnley. (dance)', 'dances'), c('studies-karate', 'She ___ karate. (study)', 'studies'),
+    c('he-watches-you', 'He ___ you. (watch)', 'watches'), c('has-my-email', 'He ___ my e-mail address. (have)', 'has')];
+  // Present Simple (área de membros) ensina always, usually, sometimes, never
+  var FREQ4 = [c('guys-dont-usually', "Because guys don't ___ pay attention to details like that.", 'usually'), c('always-the-monster', 'Why am I ___ the monster?', 'always'),
+    c('sometimes-watches-oliver', 'And he ___ watches Oliver.', 'sometimes'), c('usually-at-this-time', 'Now, what do you ___ do at this time, Tom?', 'usually')];
+  // Unit 15 ensina todos os advérbios (always, usually, often, sometimes, rarely, hardly ever, never)
+  var FREQ = FREQ4.concat([c('rarely-use', 'Yeah, I have an apartment I ___ use.', 'rarely'), c('hardly-ever-home', "Give me a call here. I'm ___ home.", 'hardly ever'),
+    c('always-testifying', 'He is ___ testifying, he volunteers.', 'always'), c('often-very-strong', "They are ___ very strong, you're right about that.", 'often')]);
+  // Perguntas com WH (área de membros): what, where, when, who, why, how
+  var WH = [c('what-time-nurse', '___ time does the nurse come?', 'What'), c('when-does-he-get-back', 'Jesus, ___ does he get back? Tuesday?', 'when'),
+    c('how-are-they-doing', '___ are they doing?', 'How'), c('where-need-the-bag', '___ do you need the bag?', 'Where'), c('never-say-my-name', '___ do you never say my name?', 'Why')];
+  var WH17 = [c('what-time-nurse', 'What time ___ the nurse come?', 'does'), c('when-does-he-get-back', 'Jesus, when ___ he get back? Tuesday?', 'does'),
+    c('how-are-they-doing', 'How ___ they doing?', 'are'), c('where-need-the-bag', 'Where ___ you need the bag?', 'do')];
+  // Cidade e direções (área de membros) ensina turn left, go straight, across from, around the corner
+  var DIRM = [c('on-the-corner', "Yeah, it's on the ___ of Lincoln and Seco.", 'corner'), c('elevator-turn-left', 'Take the elevator to the fifth floor, then turn ___.', 'left')];
+  // Unit 21 ensina on the corner, turn left, between, go past
+  var DIR = DIRM.concat([c('city-between-the-buildings', 'You see a city ___ the buildings.', 'between'), c('go-past-the-first-station', "You'll go ___ the first station.", 'past')]);
+  var CONT = [c('studying-business', "He's ___ business. (study)", 'studying'), c('shes-dancing-with-me', "She's ___ with me. (dance)", 'dancing')];
   window.LIVRO_MIDIA = {
     'cumprimentos-apresentacoes-e-small-talk': { galeria: OLA, cenas: CUMPR },
-    'unit-01': { galeria: OLA, cenas: CUMPR },
-    'present-simple-rotinas-e-verdades': { cenas: PRES.concat(FREQ.slice(0, 4)) },
+    'unit-01': { galeria: OLA, cenas: UNIT1 },
+    'present-simple-rotinas-e-verdades': { cenas: PRES.concat(FREQ4) },
     'unit-13': { cenas: PRES },
     'unit-15': { cenas: FREQ },
     'perguntas-com-wh-what-where-when-who-why-how': { cenas: WH },
-    'unit-17': { cenas: WH },
-    'cidade-transporte-e-direcoes': { cenas: DIR },
+    'unit-17': { cenas: WH17 },
+    'cidade-transporte-e-direcoes': { cenas: DIRM },
     'unit-21': { cenas: DIR },
     'present-continuous-o-agora': { cenas: CONT },
     'unit-23': { cenas: CONT },

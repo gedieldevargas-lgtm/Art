@@ -54,7 +54,14 @@
       || vs.filter(function (v) { return /^en/i.test(v.lang); })[0] || null;
   }
   if ('speechSynthesis' in window) { acharVoz(); speechSynthesis.onvoiceschanged = acharVoz; }
-  var AUDIOS = {}, tocando = null;
+  var AUDIOS = {}, tocando = null, vozPT = null;
+  function ehPortugues(t) {
+    t = ' ' + String(t || '').toLowerCase() + ' ';
+    if (/[ãõçáéíóúâêôà]/.test(t)) return true;
+    var pt = (t.match(/ (o|os|as|um|uma|de|do|da|dos|das|que|qual|não|você|para|com|em|no|na|é|ele|ela|eu|isso|mais|como|quando|onde|por|resposta|pergunta|frase|palavra|certa|certo|escolha|significa|temas|aula|seguros)(?= )/g) || []).length * 2;
+    var en = (t.match(/ (the|a|an|is|are|i|you|he|she|it|we|they|to|of|and|do|does|what|how|my|your|in|on|at|this|that)(?= )/g) || []).length;
+    return pt > en;
+  }
   function chave(t) { return String(t || '').toLowerCase().replace(/[’']/g, "'").replace(/[^a-z0-9' ]+/g, ' ').replace(/\s+/g, ' ').trim(); }
   function falar(txt, devagar) {
     // 1º: áudio gravado (ex.: os áudios do Canva), se a aula tiver
@@ -70,10 +77,12 @@
   function vozNavegador(txt, devagar) {
     if (!('speechSynthesis' in window)) { aviso('Este navegador não tem voz. Frase: ' + txt); return; }
     if (!voz) acharVoz();
+    var emPT = ehPortugues(txt);
+    if (emPT && !vozPT) vozPT = speechSynthesis.getVoices().filter(function (v) { return /^pt[-_]BR/i.test(v.lang); })[0] || null;
     speechSynthesis.cancel();
     if (speechSynthesis.paused) speechSynthesis.resume();
     var u = new SpeechSynthesisUtterance(txt);
-    u.lang = 'en-US'; if (voz) u.voice = voz;
+    if (emPT) { u.lang = 'pt-BR'; if (vozPT) u.voice = vozPT; } else { u.lang = 'en-US'; if (voz) u.voice = voz; }
     u.rate = devagar ? 0.6 : 0.92; u.volume = 1;
     u.onerror = function (e) { if (e.error === 'not-allowed' || e.error === 'audio-hardware') aviso('Não consegui tocar o áudio. Confira se o celular não está no silencioso.'); };
     // alguns iPhones precisam de um pequeno atraso depois do cancel()
@@ -105,6 +114,50 @@
   }
 
   // ---------- desenho ----------
+  // envolve cada palavra em inglês para o aluno tocar e ver a tradução
+  function palavras(txt) {
+    return String(txt || '').split(/(\s+)/).map(function (w) {
+      if (!/[A-Za-z]/.test(w)) return esc(w);
+      var m = w.match(/^([^A-Za-z']*)([A-Za-z'’-]+)(.*)$/); if (!m) return esc(w);
+      return esc(m[1]) + '<span class="lv-w" data-w="' + esc(m[2]) + '">' + esc(m[2]) + '</span>' + esc(m[3]);
+    }).join('');
+  }
+  function chaveG(t) { return String(t || '').toLowerCase().replace(/’/g, "'").replace(/[^a-z0-9' ]+/g, ' ').replace(/\s+/g, ' ').trim(); }
+  function traduzir(w, frase) {
+    var G = window.LIVRO_GLOSSARIO || {}, k = chaveG(w), r = { palavra: w, pt: G[k] || null, expr: null };
+    if (!r.pt && /s$/.test(k)) r.pt = G[k.replace(/(ies)$/, 'y').replace(/(es|s)$/, '')] || null;
+    if (!r.pt && /ed$/.test(k)) r.pt = G[k.replace(/ed$/, '')] || G[k.replace(/d$/, '')] || null;
+    if (!r.pt && /ing$/.test(k)) r.pt = G[k.replace(/ing$/, '')] || G[k.replace(/ing$/, 'e')] || null;
+    var ws = chaveG(frase).split(' '), i = ws.indexOf(k);
+    if (i >= 0) for (var n = 6; n >= 2 && !r.expr; n--) for (var a = Math.max(0, i - n + 1); a <= i && a + n <= ws.length; a++) {
+      var e = ws.slice(a, a + n).join(' '); if (G[e]) { r.expr = [e, G[e]]; break; }
+    }
+    return r;
+  }
+  function mostrarTraducao(span) {
+    fecharBalao();
+    var frase = (span.closest('[data-frase]') || span.parentNode).textContent, r = traduzir(span.dataset.w, frase);
+    var b = document.createElement('div'); b.className = 'lv-balao';
+    b.innerHTML = '<div class="lv-b1"><b>' + esc(r.palavra) + '</b> ' + btnSom(r.palavra) + '</div>' +
+      (r.pt ? '<div class="lv-b2">' + esc(r.pt) + '</div>' : '<div class="lv-b2 mut">Essa palavra não está no vocabulário do curso.</div>') +
+      (r.expr ? '<div class="lv-b3">Nesta frase: <b>' + esc(r.expr[0]) + '</b> = ' + esc(r.expr[1]) + '</div>' : '') +
+      '<a class="lv-b4" target="_blank" rel="noopener" href="https://translate.google.com/?sl=en&tl=pt&text=' + encodeURIComponent(r.expr ? r.expr[0] : r.palavra) + '">Ver no Google Tradutor ↗</a>';
+    document.body.appendChild(b);
+    var rc = span.getBoundingClientRect(), bw = b.offsetWidth;
+    b.style.left = Math.max(8, Math.min(window.innerWidth - bw - 8, rc.left + rc.width / 2 - bw / 2)) + 'px';
+    b.style.top = (window.scrollY + rc.bottom + 8) + 'px';
+    span.classList.add('on'); fecharBalao.alvo = span;
+  }
+  function fecharBalao() { var b = document.querySelector('.lv-balao'); if (b) b.remove(); if (fecharBalao.alvo) fecharBalao.alvo.classList.remove('on'); }
+  document.addEventListener('click', function (e) {
+    var w = e.target.closest && e.target.closest('.lv-w');
+    if (w) { e.stopPropagation(); return mostrarTraducao(w); }
+    var bl = e.target.closest && e.target.closest('.lv-balao');
+    if (bl) { var bs = e.target.closest('[data-falar]'); if (bs) falar(bs.dataset.falar); return; }
+    fecharBalao();
+  }, true);
+  window.addEventListener('scroll', function (e) { if (!(e.target.closest && e.target.closest('.lv-balao'))) fecharBalao(); }, true);
+
   function btnSom(txt, devagar) {
     return '<button type="button" class="lv-som' + (devagar ? ' lento' : '') + '" data-falar="' + esc(txt) + '"' + (devagar ? ' data-lento="1"' : '') +
       ' aria-label="' + (devagar ? 'Ouvir devagar' : 'Ouvir') + '">' + (devagar ? '🐢' : '▶') + '</button>';
@@ -123,12 +176,15 @@
       } else if (b.tipo === 'dialogo') {
         h += '<div class="lv-bloco"><div class="lv-bt">' + esc(b.titulo) + ' <button type="button" class="lv-mini" data-falar="' + esc(b.falas.map(function (f) { return f[1]; }).join(' ... ')) + '">▶ ouvir tudo</button></div><div class="lv-dial">';
         b.falas.forEach(function (f, i) {
-          h += '<div class="lv-fala ' + (i % 2 ? 'b' : 'a') + '"><b>' + esc(f[0]) + '</b><div><span class="en">' + esc(f[1]) + '</span> ' + btnSom(f[1]) + '<span class="pt">' + esc(f[2]) + '</span></div></div>';
+          h += '<div class="lv-fala ' + (i % 2 ? 'b' : 'a') + '"><b>' + esc(f[0]) + '</b><div><span class="en" data-frase>' + palavras(f[1]) + '</span> ' + btnSom(f[1]) + '<span class="pt">' + esc(f[2]) + '</span></div></div>';
         });
         h += '</div></div>';
       } else if (b.tipo === 'midia') {
         h += '<div class="lv-bloco"><div class="lv-bt">' + esc(b.titulo) + '</div><div class="lv-midias' + (b.itens.length === 1 ? ' um' : '') + '">';
-        b.itens.forEach(function (it) { h += '<figure class="lv-midia">' + tagMidia(it.v, it.gif) + (it.t ? '<figcaption>' + esc(it.t) + '</figcaption>' : '') + '</figure>'; });
+        b.itens.forEach(function (it) {
+          h += '<figure class="lv-midia' + (it.gif ? ' gif' : '') + '"' + (it.gif ? ' data-falar="' + esc(it.t) + '" role="button"' : '') + '>' + tagMidia(it.v, it.gif) +
+            (it.t ? '<figcaption>' + (it.gif ? '<span class="lv-falar">▶</span> ' : '') + esc(it.t) + '</figcaption>' : '') + '</figure>';
+        });
         h += '</div></div>';
       } else if (b.tipo === 'dica') {
         h += '<div class="lv-dica">💡 ' + esc(b.texto) + '</div>';
@@ -152,7 +208,7 @@
       ex.itens.forEach(function (it, i) {
         var k = ex.id + '.' + i, sel = (st.txt || {})[k];
         h += '<div class="lv-item col' + marca(k) + '" data-k="' + k + '"><div class="lv-perg"><span class="lv-letra">' + 'abcdefghij'[i] + '</span><span class="lv-bigemo">' + it.emoji + '</span>' +
-          '<span>' + esc(it.p) + '</span>' + btnSom(it.p) + '</div><div class="lv-ops">';
+          '<span data-frase>' + (ehPortugues(it.p) ? esc(it.p) : palavras(it.p)) + '</span>' + (it.p && !ehPortugues(it.p) ? btnSom(it.p) : '') + '</div><div class="lv-ops">';
         it.ops.forEach(function (o, j) {
           h += '<button type="button" class="lv-op' + (String(sel) === String(j) ? ' sel' : '') + '" data-op="' + j + '">' + esc(o) + '</button>';
         });
@@ -181,7 +237,7 @@
     } else if (ex.tipo === 'conversa') {
       ex.linhas.forEach(function (ln, i) {
         var k = ex.id + '.' + i;
-        h += '<div class="lv-item col' + marca(k) + '" data-k="' + k + '">' + (ln.midia ? '<div class="lv-cena">' + tagMidia(ln.midia) + '</div>' : '') + '<div class="lv-perg"><b>' + esc(ln.quem) + ':</b> <span class="pt">' + (ln.midia ? '🎬 ' : '🇧🇷 ') + esc(ln.pt) + '</span></div>' +
+        h += '<div class="lv-item col' + marca(k) + '" data-k="' + k + '">' + (ln.midia ? '<div class="lv-cena">' + tagMidia(ln.midia) + '</div>' : '') + '<div class="lv-perg"><b>' + esc(ln.quem) + ':</b> <span class="pt">' + (ln.midia ? '🎬 ' : '🇧🇷 ') + (ln.midia ? '<span data-frase>' + palavras(ln.pt) + '</span>' : esc(ln.pt)) + '</span></div>' +
           '<input class="lv-inp" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="' + (ln.midia ? 'A palavra que falta…' : '🇺🇸 Em inglês…') + '" value="' + esc((st.txt || {})[k] || '') + '"><div class="lv-fb"></div></div>';
       });
     }
@@ -316,7 +372,7 @@
   function ligar(el, a) {
     var raiz = el.querySelector('.lv');
     raiz.addEventListener('click', function (e) {
-      var t = e.target.closest('button,[data-ver]'); if (!t) return;
+      var t = e.target.closest('button,[data-ver],figure[data-falar]'); if (!t) return;
       if (t.dataset.falar) { falar(t.dataset.falar, !!t.dataset.lento); return; }
       if (t.dataset.ver) { t.textContent = '🇺🇸 ' + t.dataset.ver; return; }
       if (t.dataset.corrigir) return corrigir(el, a, t.dataset.corrigir, false);
@@ -371,6 +427,7 @@
   }
 
   function carregar(id, cb) {
+    if (!window.LIVRO_GLOSSARIO && !carregar._g) { carregar._g = 1; var gg = document.createElement('script'); gg.src = BASE + 'glossario.js?v=1'; gg.onload = gg.onerror = function () { carregar(id, cb); }; document.head.appendChild(gg); return; }
     if (!window.LIVRO_MIDIA && !carregar._m) { carregar._m = 1; var m = document.createElement('script'); m.src = BASE + 'midia.js?v=1'; m.onload = m.onerror = function () { carregar(id, cb); }; document.head.appendChild(m); return; }
     if (AULAS[id]) return cb(AULAS[id]);
     var s = document.createElement('script');
