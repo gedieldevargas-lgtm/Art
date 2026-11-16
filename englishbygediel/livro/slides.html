@@ -68,6 +68,10 @@ a.btn small{display:block;font-size:22px;color:var(--mut);font-weight:600;margin
 .c1 h2{font-size:48px;margin-bottom:18px}.c1 .quiz,.c1 .frases,.c1 .sit,.c1 .btns{gap:14px}.c1 .q{padding:14px 22px}.c1 .q b{font-size:27px;margin-bottom:8px}.c1 .q .ops span{font-size:21px;padding:6px 14px}
 .c1 .fr b{font-size:34px}.c1 .fr span{font-size:22px}.c1 .sit .c div{font-size:30px}.c1 .lista li{font-size:30px;padding:14px 22px 14px 64px}.c1 .grande{font-size:42px}
 .c2 .kick{font-size:20px;margin-bottom:6px}.c2 h2{font-size:40px}.c2 .q b{font-size:24px}.c2 .q .ops span{font-size:19px}.c2 .lista li{font-size:26px}.c2 .fr b{font-size:30px}
+.midias{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:24px}
+a.mid{display:block;text-decoration:none;color:#fff;background:var(--card);border:2px solid var(--line);border-radius:22px;overflow:hidden}
+a.mid img{display:block;width:100%;height:330px;object-fit:cover;background:#000}
+a.mid span{display:block;padding:16px 20px;font-size:26px;font-weight:700}
 </style>
 </head>
 <body>
@@ -76,7 +80,7 @@ a.btn small{display:block;font-size:22px;color:var(--mut);font-weight:600;margin
 (function(){
   var q=new URLSearchParams(location.search), id=q.get('u')||'os-sons-do-ingles-que-nao-existem-em-portugues';
   var s=document.createElement('script');s.src='aulas/'+encodeURIComponent(id)+'.js';
-  s.onload=function(){var x=document.createElement('script');x.src='slides-extra.js';x.onload=x.onerror=function(){montar(window.LIVRO_AULAS[id]);};document.head.appendChild(x);};document.head.appendChild(s);
+  s.onload=function(){var x=document.createElement('script');x.src='slides-extra.js';x.onload=x.onerror=function(){var m=document.createElement('script');m.src='midia.js';m.onload=m.onerror=function(){montar(window.LIVRO_AULAS[id]);};document.head.appendChild(m);};document.head.appendChild(x);};document.head.appendChild(s);
   function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   var N=0,A;
   var CAM='<div class="cam">CÂMERA</div>';
@@ -112,6 +116,10 @@ a.btn small{display:block;font-size:22px;color:var(--mut);font-weight:600;margin
       [false,true].forEach(function(resp){
         h+=slide('<div class="kick">🧩 Quiz rápido'+(resp?' · respostas':'')+'</div><h2>'+(resp?'Confira':'Responda em voz alta')+'</h2><div class="quiz">'+quiz.slice(0,4).map(function(x,i){return '<div class="q"><b>'+(i+1)+'. '+esc(x.p)+'</b><div class="ops">'+x.ops.map(function(o,j){return '<span'+(resp&&j===x.c?' class="ok"':'')+'>'+'ABC'[j]+') '+esc(o)+'</span>';}).join('')+'</div></div>';}).join('')+'</div>',null,true);});
     }
+    // cena / meme da aula (miniatura clicável que abre o vídeo no Drive)
+    var MI=(window.LIVRO_MIDIA||{})[a.id], DR=window.LIVRO_MIDIA_DRIVE||{};
+    if(MI){var lista=(MI.galeria||[]).map(function(x){return [x.v,x.t];}).concat((MI.cenas||[]).map(function(x){return [x.v,x.frase.replace('___',x.resp[0].toUpperCase())];})).slice(0,3);
+      h+=slide('<div class="kick">'+(MI.cenas?'🎬 Em cena':'😂 Para descontrair')+'</div><h2>'+(MI.cenas?'Ouça como o nativo fala':'Meme da aula')+'</h2><div class="midias">'+lista.map(function(x){return '<a class="mid" href="https://drive.google.com/file/d/'+(DR[x[0]]||'')+'/view"><img src="midia/'+x[0]+'.jpg"><span>▶ '+esc(x[1])+'</span></a>';}).join('')+'</div>',null,true);}
     // 11 vídeos de reforço
     var vids=(S.videos||[]).slice(0,3).map(function(v){return '<a class="btn drive" href="'+esc(v[1])+'"><i>🎬</i><div>'+esc(v[0])+'<small>Cena do Get By (Drive)</small></div></a>';}).join('');
     var busca=(S.youtube||[a.titulo]).slice(0,4-Math.min(3,(S.videos||[]).length));

@@ -126,6 +126,10 @@
           h += '<div class="lv-fala ' + (i % 2 ? 'b' : 'a') + '"><b>' + esc(f[0]) + '</b><div><span class="en">' + esc(f[1]) + '</span> ' + btnSom(f[1]) + '<span class="pt">' + esc(f[2]) + '</span></div></div>';
         });
         h += '</div></div>';
+      } else if (b.tipo === 'midia') {
+        h += '<div class="lv-bloco"><div class="lv-bt">' + esc(b.titulo) + '</div><div class="lv-midias' + (b.itens.length === 1 ? ' um' : '') + '">';
+        b.itens.forEach(function (it) { h += '<figure class="lv-midia">' + tagMidia(it.v, it.gif) + (it.t ? '<figcaption>' + esc(it.t) + '</figcaption>' : '') + '</figure>'; });
+        h += '</div></div>';
       } else if (b.tipo === 'dica') {
         h += '<div class="lv-dica">💡 ' + esc(b.texto) + '</div>';
       }
@@ -177,14 +181,28 @@
     } else if (ex.tipo === 'conversa') {
       ex.linhas.forEach(function (ln, i) {
         var k = ex.id + '.' + i;
-        h += '<div class="lv-item col' + marca(k) + '" data-k="' + k + '"><div class="lv-perg"><b>' + esc(ln.quem) + ':</b> <span class="pt">🇧🇷 ' + esc(ln.pt) + '</span></div>' +
-          '<input class="lv-inp" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="🇺🇸 Em inglês…" value="' + esc((st.txt || {})[k] || '') + '"><div class="lv-fb"></div></div>';
+        h += '<div class="lv-item col' + marca(k) + '" data-k="' + k + '">' + (ln.midia ? '<div class="lv-cena">' + tagMidia(ln.midia) + '</div>' : '') + '<div class="lv-perg"><b>' + esc(ln.quem) + ':</b> <span class="pt">' + (ln.midia ? '🎬 ' : '🇧🇷 ') + esc(ln.pt) + '</span></div>' +
+          '<input class="lv-inp" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="' + (ln.midia ? 'A palavra que falta…' : '🇺🇸 Em inglês…') + '" value="' + esc((st.txt || {})[k] || '') + '"><div class="lv-fb"></div></div>';
       });
     }
     return h;
   }
 
+  function tagMidia(v, gif) {
+    var src = BASE + 'midia/' + v + '.mp4', poster = BASE + 'midia/' + v + '.jpg';
+    return gif ? '<video src="' + src + '" autoplay loop muted playsinline preload="metadata"></video>'
+               : '<video src="' + src + '" poster="' + poster + '" controls playsinline preload="none"></video>';
+  }
+  function juntarMidia(a) {
+    if (a._midia || !window.LIVRO_MIDIA) return; a._midia = true;
+    var M = window.LIVRO_MIDIA[a.id]; if (!M) return;
+    if (M.galeria && M.galeria.length) a.revisar.unshift({ tipo: 'midia', titulo: M.galeria[0].gif ? '😂 Veja e repita' : '😂 Para descontrair', itens: M.galeria });
+    if (M.cenas && M.cenas.length) a.exercicios.splice(1, 0, { id: 'cenas', tipo: 'conversa', titulo: '🎬 Assista e complete', instrucao: 'Dê play na cena, ouça e escreva a palavra que falta.',
+      linhas: M.cenas.map(function (c) { return { quem: 'Cena', pt: c.frase, resp: c.resp, midia: c.v }; }) });
+  }
+
   function desenhar(el, a) {
+    juntarMidia(a);
     var st = ler(a.id), tot = totalItens(a), ok = acertos(a, st);
     var aberto = st.aberto || 'revisar';
     var h = '<div class="lv" data-aula="' + esc(a.id) + '">' +
@@ -291,7 +309,7 @@
   function festa(el) {
     if (el.querySelector('.lv-festa')) return;
     var d = document.createElement('div'); d.className = 'lv-festa';
-    d.innerHTML = '🏆 <b>Livro da aula completo!</b> Agora baixe o e-book e faça a missão no caderno.';
+    d.innerHTML = (window.LIVRO_MIDIA_FESTA ? '<video src="' + BASE + 'midia/' + window.LIVRO_MIDIA_FESTA + '.mp4" autoplay loop muted playsinline></video>' : '') + '<div>🏆 <b>Livro da aula completo!</b> Agora baixe o e-book e faça a missão no caderno.</div>';
     el.querySelector('.lv').insertBefore(d, el.querySelector('.lv-sec'));
   }
 
@@ -353,6 +371,7 @@
   }
 
   function carregar(id, cb) {
+    if (!window.LIVRO_MIDIA && !carregar._m) { carregar._m = 1; var m = document.createElement('script'); m.src = BASE + 'midia.js?v=1'; m.onload = m.onerror = function () { carregar(id, cb); }; document.head.appendChild(m); return; }
     if (AULAS[id]) return cb(AULAS[id]);
     var s = document.createElement('script');
     s.src = BASE + 'aulas/' + encodeURIComponent(id) + '.js';

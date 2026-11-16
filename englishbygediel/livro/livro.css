@@ -102,3 +102,13 @@
 .lv-fim{margin-top:8px}
 .lv-aviso{position:fixed;left:50%;bottom:24px;transform:translate(-50%,40px);opacity:0;background:#111827;color:#fff;font:600 13px 'Plus Jakarta Sans',sans-serif;padding:10px 14px;border-radius:12px;z-index:99999;transition:.25s;max-width:90vw;text-align:center}
 .lv-aviso.on{opacity:1;transform:translate(-50%,0)}
+
+/* mídia (cenas, GIFs e memes) */
+.lv-midias{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.lv-midias.um{grid-template-columns:minmax(0,320px)}
+.lv-midia{margin:0;border-radius:12px;overflow:hidden;background:#000;border:1px solid var(--lv-bd)}
+.lv-midia video,.lv-cena video{display:block;width:100%;max-height:360px;background:#000}
+.lv-midia figcaption{font-size:11.5px;padding:6px 8px;background:var(--lv-bg2);color:var(--lv-fg2);font-weight:600}
+.lv-cena{border-radius:10px;overflow:hidden;background:#000;max-width:420px}
+.lv-festa{display:flex;gap:10px;align-items:center}
+.lv-festa video{width:90px;border-radius:8px;flex:none}
