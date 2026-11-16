@@ -1627,6 +1627,8 @@
     menus.forEach(function(m){p.push({k:m.k,t:m.lb,d:tourTexto(m.k,m.lb),el:m.el,menu:true,kick:'Menu'});});
     return p;
   }
+  // usados pela largada da maratona (membros-maratonas.js)
+  window.miTour=function(m){tour(m||'todos');};window.miConhecer=function(cb){conhecer(cb);};
   function tour(modo){
     var p=passosTour(modo);if(!p.length)return;
     T={p:p,i:0,modo:modo};tv.classList.add('on');

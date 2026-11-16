@@ -125,6 +125,7 @@
     EU.uid = u.id;
     lerPlataforma(u);
     if (EU.dentro) registrar();
+    if (EU.dentro) talvezLargada();
   }
 
   /* ---------- tela do participante ---------- */
@@ -207,6 +208,7 @@
       + '<div class="mt-barra" title="Tempo da maratona"><i style="width:' + Math.round(dia / totalDias * 100) + '%"></i></div></div>';
     if (EU.admin && !EU.dentro) h += '<div class="mt-aviso">🛡️ Você está vendo como admin. O aluno entra pelo link de cadastro ou quando você marca em <b>Painel Admin → 🏁 Maratona 10m</b>.' + (EU.semTabela ? ' <b>Falta rodar o SQL da maratona no Supabase dos membros.</b>' : '') + '</div>';
 
+    h += '<div style="text-align:right;margin:-6px 0 12px"><button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="mtLargada()" style="border:0;background:none;color:var(--accent);font-weight:800;cursor:pointer">🏁 Rever a largada</button></div>';
     // como funciona
     h += '<details class="mt-box"' + (AD.ok ? '' : ' open') + '><summary style="cursor:pointer;font-weight:800">📖 Como funciona a maratona</summary><div style="margin-top:10px;font-size:13px;line-height:1.6;color:var(--fg2)">'
       + '<p><b style="color:var(--fg)">1. Adaptação.</b> Primeiro você conhece a plataforma: testes, perfil, tutorial e as primeiras aulas. Isso libera o checklist dos ciclos.</p>'
@@ -247,8 +249,8 @@
     if (t.dataset.mtRk) return ranking(+t.dataset.mtRk);
     if (t.dataset.mtIr) {
       var ir = t.dataset.mtIr;
-      if (ir === 'config') { if (window.openSettings) openSettings(); return; }
-      if (ir === 'tour') { var b = document.querySelector('[data-ent="tour"]'); if (b) b.click(); else { goTo('home', document.querySelector('.nav-pill')); if (window.toast) toast('Abra ⚙️ Configurações → rever o tutorial', '#4f6ef7'); } return; }
+      if (ir === 'config') { if (window.miConhecer) window.miConhecer(function () {}); else if (window.openSettings) openSettings(); return; }
+      if (ir === 'tour') { if (window.miTour) { goTo('home', document.querySelector('.sidebar .nav-pill')); setTimeout(function () { window.miTour('todos'); }, 500); } return; }
       var pill = document.querySelector('.sidebar .nav-pill[onclick*="\'' + ir + '\'"]'); goTo(ir, pill); return;
     }
     if (t.hasAttribute('data-mt-post')) {
@@ -269,6 +271,102 @@
     desenhar();
   });
   document.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('details[data-tranca] > summary')) e.preventDefault(); });
+
+  /* ---------- LARGADA: card de boas-vindas do maratonista (1ª vez) e guia dos primeiros passos ---------- */
+  var lgCss = document.createElement('style');
+  lgCss.textContent = ''
+    + '#mt-lg{position:fixed;inset:0;z-index:9500;background:radial-gradient(ellipse at 20% 0%,#3b4fd8 0%,#1b1f4b 45%,#0b0d1c 100%);color:#fff;display:flex;align-items:center;justify-content:center;padding:20px 20px 100px;overflow-y:auto;opacity:0;transition:opacity .4s}'
+    + '#mt-lg.vis{opacity:1}#mt-lg .bx{width:100%;max-width:560px;margin:auto}'
+    + '#mt-lg .sl{animation:lgIn .55s cubic-bezier(.22,1,.36,1) both}@keyframes lgIn{from{opacity:0;transform:translateX(40px)}}'
+    + '#mt-lg .k{font-size:11px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;opacity:.65;text-align:center}'
+    + '#mt-lg .q{font-size:clamp(24px,5vw,32px);font-weight:800;text-align:center;line-height:1.15;margin:10px 0 8px}'
+    + '#mt-lg .q em{font-style:normal;background:linear-gradient(90deg,#fff,#f2c69c);-webkit-background-clip:text;background-clip:text;color:transparent}'
+    + '#mt-lg .s{font-size:14px;opacity:.78;text-align:center;line-height:1.55;max-width:440px;margin:0 auto 20px}'
+    + '#mt-lg .peito{position:relative;margin:0 auto 22px;width:min(300px,88%);aspect-ratio:1.5;border-radius:22px;background:#fff;color:#1b1f4b;padding:18px;box-shadow:0 30px 80px rgba(0,0,0,.5);transform:rotate(-3deg);animation:lgPeito .9s cubic-bezier(.2,1.4,.4,1) both;display:flex;flex-direction:column;justify-content:center;text-align:center}'
+    + '#mt-lg .peito small{font-size:10px;font-weight:800;letter-spacing:2px;color:#8b5cf6}#mt-lg .peito strong{font-size:44px;line-height:1;margin:6px 0;background:linear-gradient(135deg,#4f6ef7,#8b5cf6,#d6965a);-webkit-background-clip:text;background-clip:text;color:transparent}#mt-lg .peito span{font-size:13px;font-weight:800}'
+    + '@keyframes lgPeito{from{opacity:0;transform:rotate(-14deg) scale(.6) translateY(60px)}}'
+    + '#mt-lg .li{display:grid;gap:8px}#mt-lg .li div{display:flex;gap:12px;align-items:center;background:rgba(255,255,255,.08);border-radius:14px;padding:12px 14px;font-size:13.5px;line-height:1.4;opacity:0;animation:lgUp .5s cubic-bezier(.22,1,.36,1) forwards}'
+    + '#mt-lg .li b{width:32px;height:32px;border-radius:10px;background:rgba(255,255,255,.16);display:grid;place-items:center;flex:none;font-size:16px}#mt-lg .li .ok{opacity:.55;text-decoration:line-through}#mt-lg .li i{margin-left:auto;font-style:normal;font-size:11px;font-weight:800;opacity:.7}'
+    + '@keyframes lgUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}'
+    + '#mt-lg .cic{display:flex;gap:6px;justify-content:center;margin:4px 0 16px}#mt-lg .cic span{flex:1;max-width:92px;text-align:center;padding:10px 4px;border-radius:14px;background:rgba(255,255,255,.08);font-size:11px;font-weight:700;opacity:0;animation:lgUp .5s forwards}#mt-lg .cic span b{display:block;font-size:22px;margin-bottom:4px}'
+    + '#mt-lg .pr{display:grid;gap:8px;margin-top:12px}#mt-lg .pr div{padding:12px 14px;border-radius:14px;font-size:13px;font-weight:700;background:linear-gradient(135deg,rgba(214,150,90,.25),rgba(139,92,246,.2))}'
+    + '#mt-lg .dots{display:flex;gap:6px;justify-content:center;margin-top:18px}#mt-lg .dots i{width:7px;height:7px;border-radius:99px;background:rgba(255,255,255,.3);transition:width .3s}#mt-lg .dots i.on{width:22px;background:#fff}'
+    + '#mt-lg .cta{position:fixed;left:50%;transform:translateX(-50%);bottom:max(18px,env(safe-area-inset-bottom));width:calc(100% - 40px);max-width:520px;background:#fff;color:#1b1f4b;border:0;border-radius:18px;padding:17px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 14px 40px rgba(0,0,0,.4)}'
+    + '#mt-lg .dep{position:fixed;top:14px;right:16px;background:rgba(255,255,255,.1);border:0;color:#fff;border-radius:99px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer}'
+    + '.mt-guia{position:fixed;left:50%;transform:translateX(-50%);bottom:84px;z-index:800;background:linear-gradient(135deg,#1b1f4b,#4f6ef7);color:#fff;border-radius:18px;padding:12px 14px;display:flex;align-items:center;gap:12px;box-shadow:0 14px 40px rgba(27,31,75,.4);width:calc(100% - 28px);max-width:520px;animation:lgUp .5s both}'
+    + '.mt-guia b{font-size:13px;display:block}.mt-guia small{font-size:11.5px;opacity:.8}.mt-guia button{margin-left:auto;border:0;border-radius:99px;padding:9px 14px;font-weight:800;font-size:12.5px;background:#fff;color:#1b1f4b;cursor:pointer;white-space:nowrap}.mt-guia .x{background:none;color:#fff;padding:4px;margin-left:0;opacity:.6}';
+  document.head.appendChild(lgCss);
+  var PASSOS = [
+    { k: 'perfil', ic: '📝', t: 'Perguntas do seu perfil', ok: function (P) { return !!(P.onb && !P.onb.pulou); } },
+    { k: 'tour', ic: '🗺️', t: 'Tour pelos menus da plataforma', ok: function (P) { return P.tour.length > 0; } },
+    { k: 'bussola', ic: '🧭', t: 'Teste de nível (Bússola)', ok: function (P) { return !!P.nivel; } },
+    { k: 'prisma', ic: '🔷', t: 'Teste de talentos (Prisma)', ok: function (P) { return !!P.prisma; } },
+    { k: 'modulos', ic: '🎬', t: 'Assistir as 5 primeiras aulas', ok: function (P) { return P.vistas.length >= M10.adapt.aulas; } }
+  ];
+  var vistaK = function () { return 'mt10:largada-vista:' + EU.email; };
+  function ocupado() { return ['mi-entry', 'mi-onb', 'mi-tour', 'login-screen'].some(function (id) { var e = $(id); return e && (e.classList.contains('on') || (id === 'login-screen' && getComputedStyle(e).display !== 'none')); }); }
+  function talvezLargada() {
+    var vista = false; try { vista = !!localStorage.getItem(vistaK()); } catch (e) {}
+    if (!vista) { var t = setInterval(function () { if (!ocupado()) { clearInterval(t); setTimeout(function () { if (!ocupado()) largada(0); else talvezLargada(); }, 700); } }, 800); }
+    else guiaBarra();
+  }
+  function largada(n) {
+    var el = $('mt-lg'); if (!el) { el = document.createElement('div'); el.id = 'mt-lg'; document.body.appendChild(el); requestAnimationFrame(function () { el.classList.add('vis'); }); }
+    var P = EU.pl || { vistas: [], tour: [] }, nome = (EU.nome || '').split(' ')[0], h = '', bt = '';
+    if (n === 0) {
+      h = '<div class="peito"><small>MARATONA 10 MESES</small><strong>🏁</strong><span>' + esc(EU.nome) + '</span><span style="font-size:11px;opacity:.6;font-weight:600">Turma Fundadora</span></div>'
+        + '<div class="k">Largada</div><h1 class="q">Bem-vindo(a) à <em>maratona</em>, ' + esc(nome) + '!</h1>'
+        + '<p class="s">São 10 meses com o Gediel e a Mayandra, com o inglês dentro da sua rotina. Esta área é exclusiva de quem está na maratona.</p>'
+        + '<div class="pr"><div>🏆 ' + esc(M10.premios.concluir) + '</div><div>❓ ' + esc(M10.premios.primeiro) + '</div></div>';
+      bt = 'Como funciona →';
+    } else if (n === 1) {
+      h = '<div class="k">Como funciona</div><h1 class="q">5 ciclos, <em>um passo por dia</em></h1><p class="s">Cada ciclo dura 2 meses, tem 4 marcos e uma entrega. No fim de cada um sai o Top 15 e o placar zera.</p>'
+        + '<div class="cic">' + CIC.map(function (c, j) { return '<span style="animation-delay:' + (j * .08) + 's"><b>' + c.icone + '</b>' + esc(c.nome) + '</span>'; }).join('') + '</div>'
+        + '<div class="li">' + M10.pontos.slice(0, 5).map(function (x, j) { return '<div style="animation-delay:' + (.3 + j * .06) + 's"><b>' + x[0] + '</b>' + esc(x[1]) + '<i>+' + x[2] + '</i></div>'; }).join('') + '</div>'
+        + '<p class="s" style="margin-top:12px">Tem teto por dia: com constância, qualquer um alcança o 1º lugar.</p>';
+      bt = 'Meu roteiro de largada →';
+    } else {
+      h = '<div class="k">Seu roteiro</div><h1 class="q">Antes de correr, <em>conheça a pista</em></h1><p class="s">5 passos, na ordem. Eu te levo em cada um. Quando terminar, o checklist dos ciclos abre.</p>'
+        + '<div class="li">' + PASSOS.map(function (x, j) { var ok = x.ok(P); return '<div style="animation-delay:' + (j * .08) + 's"><b>' + (ok ? '✓' : x.ic) + '</b><span class="' + (ok ? 'ok' : '') + '">' + (j + 1) + '. ' + esc(x.t) + '</span>' + (x.k === 'modulos' ? '<i>' + Math.min(P.vistas.length, M10.adapt.aulas) + '/' + M10.adapt.aulas + '</i>' : '') + '</div>'; }).join('') + '</div>';
+      bt = 'Começar o passo 1 🚀';
+    }
+    el.innerHTML = '<button class="dep" data-lg="depois">Depois</button><div class="bx"><div class="sl">' + h + '</div><div class="dots">' + [0, 1, 2].map(function (j) { return '<i class="' + (j === n ? 'on' : '') + '"></i>'; }).join('') + '</div></div><button class="cta" data-lg="' + (n < 2 ? 'prox:' + (n + 1) : 'ir') + '">' + bt + '</button>';
+    el.scrollTop = 0;
+    if (n === 0) confeteLg();
+  }
+  function fecharLg() { var el = $('mt-lg'); if (!el) return; el.classList.remove('vis'); setTimeout(function () { el.remove(); }, 400); try { localStorage.setItem(vistaK(), '1'); } catch (e) {} }
+  function confeteLg() { var cores = ['#fff', '#f2c69c', '#8b5cf6', '#4f6ef7', '#10b981']; for (var j = 0; j < 60; j++) { var x = document.createElement('i'); x.style.cssText = 'position:fixed;top:-20px;z-index:9600;width:9px;height:14px;border-radius:2px;pointer-events:none;left:' + Math.random() * 100 + '%;background:' + cores[j % 5] + ';transition:transform ' + (2 + Math.random() * 2) + 's linear;'; document.body.appendChild(x); (function (x) { requestAnimationFrame(function () { requestAnimationFrame(function () { x.style.transform = 'translateY(110vh) rotate(720deg)'; }); }); setTimeout(function () { x.remove(); }, 4500); })(x); } }
+  // guia: leva a pessoa no próximo passo que falta
+  function proximo() { var P = EU.pl || { vistas: [], tour: [] }; return PASSOS.filter(function (x) { return !x.ok(P); })[0]; }
+  function guiar() {
+    sb.auth.getUser().then(function (r) {
+      if (r.data && r.data.user) lerPlataforma(r.data.user);
+      var p = proximo(); guiaBarra();
+      if (!p) { goTo('mt10', $('mt10-nav')); if (window.toast) toast('🎉 Adaptação concluída! Seu checklist abriu.', '#10b981'); return; }
+      if (p.k === 'perfil' && window.miConhecer) return window.miConhecer(function () { setTimeout(guiar, 600); });
+      if (p.k === 'tour' && window.miTour) { goTo('home', document.querySelector('.sidebar .nav-pill')); return setTimeout(function () { window.miTour('todos'); }, 500); }
+      var pill = document.querySelector('.sidebar .nav-pill[onclick*="\'' + p.k + '\'"]'); goTo(p.k, pill);
+    });
+  }
+  function guiaBarra() {
+    var g = $('mt-guia'); if (g) g.remove();
+    var p = proximo(); if (!p || !EU.dentro) return;
+    try { if (sessionStorage.getItem('mt-guia-x')) return; } catch (e) {}
+    var feitos = PASSOS.length - PASSOS.filter(function (x) { return !x.ok(EU.pl); }).length;
+    g = document.createElement('div'); g.className = 'mt-guia'; g.id = 'mt-guia';
+    g.innerHTML = '<span style="font-size:24px">' + p.ic + '</span><span><b>Largada · passo ' + (feitos + 1) + ' de 5</b><small>' + esc(p.t) + '</small></span><button data-lg="guiar">Fazer agora</button><button class="x" data-lg="xguia" aria-label="Esconder">✕</button>';
+    document.body.appendChild(g);
+  }
+  window.mtLargada = function () { largada(0); };
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('[data-lg]'); if (!b) return;
+    var a = b.getAttribute('data-lg');
+    if (a.indexOf('prox:') === 0) return largada(+a.split(':')[1]);
+    if (a === 'depois') { fecharLg(); guiaBarra(); return; }
+    if (a === 'ir') { fecharLg(); return guiar(); }
+    if (a === 'guiar') return guiar();
+    if (a === 'xguia') { try { sessionStorage.setItem('mt-guia-x', '1'); } catch (x) {} var g = $('mt-guia'); if (g) g.remove(); }
+  });
 
   /* ---------- Painel Admin: escolher quem entra ---------- */
   var ADM = { users: [], dentro: {}, prog: {}, busca: '' };
