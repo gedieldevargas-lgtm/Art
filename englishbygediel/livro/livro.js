@@ -302,11 +302,11 @@
   }
 
   window.Livro = {
-    abrir: function (el, id) {
+    abrir: function (el, id, semLivro) {
       if (!el) return;
       el.innerHTML = '<div class="lv lv-carregando">Abrindo o livro da aula…</div>';
       carregar(id, function (a) {
-        if (!a) { el.innerHTML = '<div class="lv lv-carregando">Livro da aula ainda não disponível.</div>'; return; }
+        if (!a) { if (semLivro) { el.innerHTML = ''; semLivro(); } else el.innerHTML = '<div class="lv lv-carregando">Livro da aula ainda não disponível.</div>'; return; }
         if (a.pdf && !/^(https?:|\/)/.test(a.pdf)) a.pdf = BASE.replace(/livro\/$/, '') + a.pdf;
         desenhar(el, a);
       });

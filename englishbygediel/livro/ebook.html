@@ -177,12 +177,15 @@ p{margin:0 0 8px;font-size:10.5pt;line-height:1.5}
     });
     var dials=a.revisar.filter(function(b){return b.tipo==='dialogo';});
     var dica=a.revisar.filter(function(b){return b.tipo==='dica';})[0];
-    h+=pagina('<div class="hs">Para consultar</div><div class="ht">Vocabulário</div>'+voc+(dica?'<div class="dica">💡 '+esc(dica.texto)+'</div>':''));
-    // 4. diálogos + gráficos
-    h+=pagina('<div class="hs">Veja na prática</div><div class="ht">Diálogos e gráficos</div>'
-      +'<h2>💬 Formal x Informal</h2><div class="dial">'+dials.map(function(d){return '<div class="bx"><div class="vbt" style="margin-top:0">'+esc(d.titulo)+'</div>'+d.falas.map(function(f){return '<div class="f"><b>'+esc(f[0])+':</b> '+esc(f[1])+'<span>'+esc(f[2])+'</span></div>';}).join('')+'</div>';}).join('')+'</div>'
-      +(E.escala?'<h2>📊 '+esc(E.escala.titulo)+'</h2><div class="fig">'+escala(E.escala)+'</div>':'')
-      +(E.dia?'<h2>🕐 '+esc(E.dia.titulo)+'</h2><div class="fig">'+dia(E.dia)+'<p style="margin:6px 0 0;font-size:10pt;color:#6b6880">'+esc(E.dia.nota||'')+'</p></div>':''));
+    var blocos=voc.split('<div class="vbt">').filter(Boolean).map(function(x){return '<div class="vbt">'+x;}),pgs=[[]],cnt=0;
+    a.revisar.filter(function(b){return b.tipo==='vocab';}).forEach(function(b,i){var peso=2+Math.ceil(b.itens.length/(b.itens.length===3?3:4))*2.2;if(cnt+peso>26&&pgs[pgs.length-1].length){pgs.push([]);cnt=0;}cnt+=peso;pgs[pgs.length-1].push(blocos[i]);});
+    pgs.forEach(function(pg,i){h+=pagina('<div class="hs">Para consultar</div><div class="ht">Vocabulário'+(i?' (cont.)':'')+'</div>'+pg.join('')+(i===pgs.length-1&&dica?'<div class="dica">💡 '+esc(dica.texto)+'</div>':''));});
+    // 4. diálogos + gráficos (só entra se a aula tiver algum)
+    var p4='';
+    if(dials.length)p4+='<h2>💬 Diálogos</h2><div class="dial">'+dials.map(function(d){return '<div class="bx"><div class="vbt" style="margin-top:0">'+esc(d.titulo)+'</div>'+d.falas.map(function(f){return '<div class="f"><b>'+esc(f[0])+':</b> '+esc(f[1])+'<span>'+esc(f[2])+'</span></div>';}).join('')+'</div>';}).join('')+'</div>';
+    if(E.escala)p4+='<h2>📊 '+esc(E.escala.titulo)+'</h2><div class="fig">'+escala(E.escala)+'</div>';
+    if(E.dia)p4+='<h2>🕐 '+esc(E.dia.titulo)+'</h2><div class="fig">'+dia(E.dia)+'<p style="margin:6px 0 0;font-size:10pt;color:#6b6880">'+esc(E.dia.nota||'')+'</p></div>';
+    if(p4)h+=pagina('<div class="hs">Veja na prática</div><div class="ht">'+(dials.length?'Diálogos':'Gráficos')+'</div>'+p4);
     // 5. exercícios para imprimir
     var ex='',n=0,gab=[];
     E.imprimir.forEach(function(it){

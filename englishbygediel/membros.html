@@ -1021,7 +1021,7 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
       </div>
       <div class="adm-section">Descrição da aula</div>
       <textarea class="admin-inp" id="adm-les-desc" rows="4" placeholder="O que o aluno vai aprender, o que praticar depois, links úteis..."></textarea>
-      <div style="font-size:11px;color:var(--fg3);margin:-4px 0 10px">📘 Para colocar o livro interativo ao lado do vídeo, escreva numa linha: <b>livro: unit-01</b> (o aluno não vê essa linha).</div>
+      <div style="font-size:11px;color:var(--fg3);margin:-4px 0 10px">📘 Para colocar o livro interativo ao lado do vídeo, coloque "Unit 1", "Unit 2"… no título da aula: o livro e o PDF aparecem sozinhos. (Ou escreva numa linha da descrição: <b>livro: unit-01</b>.)</div>
       <div class="adm-section">Quiz · 5 perguntas · marque a alternativa correta</div>
       <div id="adm-quiz-builder"></div>
       <div class="adm-section">💬 Comentários desta aula</div>
@@ -2097,13 +2097,14 @@ async function renderLesson(){
 }
 /* Livro da aula: na descrição da aula, escreva uma linha "livro: unit-01" (ou preencha a coluna "livro", se existir) */
 var LIVRO_RE=/(^|\n)[ \t]*(?:📘)?[ \t]*livro[ \t]*:[ \t]*([\w-]+)[ \t]*(?=\n|$)/i;
-function livroDaAula(l){if(l.livro)return String(l.livro).trim();var m=(l.description||'').match(LIVRO_RE);return m?m[2]:null;}
+function livroDaAula(l){if(l.livro)return String(l.livro).trim();var m=(l.description||'').match(LIVRO_RE);if(m)return m[2];var u=(l.title||'').match(/\b(?:unit|unidade)\s*0*(\d{1,2})\b/i);return u?'unit-'+('0'+u[1]).slice(-2):null;}
 function descSemLivro(d){return (d||'').replace(LIVRO_RE,'$1').trim();}
 function abrirLivroAula(id){
   var el=document.getElementById('aula-livro');if(!el)return;
   if(!document.getElementById('livro-css')){var c=document.createElement('link');c.id='livro-css';c.rel='stylesheet';c.href='livro/livro.css?v=1';document.head.appendChild(c);}
-  if(window.Livro)return window.Livro.abrir(el,id);
-  var s=document.createElement('script');s.src='livro/livro.js?v=1';s.onload=function(){window.Livro.abrir(document.getElementById('aula-livro'),id);};document.head.appendChild(s);
+  var semLivro=function(){var g=el.closest('.aula-grid');if(g){var vd=g.querySelector('.aula-video');g.parentNode.replaceChild(vd.firstChild,g);}};
+  if(window.Livro)return window.Livro.abrir(el,id,semLivro);
+  var s=document.createElement('script');s.src='livro/livro.js?v=1';s.onload=function(){window.Livro.abrir(document.getElementById('aula-livro'),id,semLivro);};document.head.appendChild(s);
 }
 function ls_index(l){var ls=_stLessons[_stCurMod.id]||[];return ls.indexOf(l)+1;}
 function lesTab(t){_stLesTab=t;
