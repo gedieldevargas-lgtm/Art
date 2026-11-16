@@ -21,3 +21,7 @@
 --   returning id)
 -- insert into public.material_links (material_id, link)
 -- select id, 'https://englishonmissionbook1.netlify.app/' from m;
+
+-- 3) preço na etiqueta do card (a coluna vem do edicao.sql; se ainda não existir, ela é criada aqui)
+alter table public.materiais add column if not exists preco text default '';
+update public.materiais set preco = 'R$ 37,00' where nome = 'Bíblia Linear — 1, 2 e 3 João';

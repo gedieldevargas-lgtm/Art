@@ -2045,7 +2045,7 @@
       var fr=m.tipo==='gratis';
       return '<div class="uni-card'+(ok?'':' lock')+(fr?' free':'')+(m.ativo===false?' mi-off':'')+'" data-mat="'+m.id+'">'+edCtl('mat',m.id)
         +'<div class="th">'+(m.capa_url?'<img loading="lazy" alt="" src="'+E(m.capa_url)+'">':capaAuto(m.nome,n))+'<span class="tg'+(fr?' free':'')+'">'+(fr?'✓ ':'')+E(tag)+'</span></div>'
-        +'<div class="bd"><div class="tt">'+E((m.icone?m.icone+' ':'')+m.nome)+'</div><div class="ss">'+E(m.descricao||'')+'</div><div class="ac">'+(ok?'Acessar ›':'Quero esse ›')+'</div></div></div>';n++;}).join('')
+        +'<div class="bd"><div class="tt">'+E((m.icone?m.icone+' ':'')+m.nome)+'</div><div class="ss">'+E(m.descricao||'')+'</div><div class="ac">'+(ok?'Acessar ›':'Adquirir ›')+'</div></div></div>';n++;}).join('')
       +(EDIT?'<button class="mi-novo" data-ed="mat-novo" data-sec="'+E(s)+'">＋ Novo material</button>':'')+'</div>';});
     if(!lista.length)h='<div class="admin-loading">Nenhum material ainda.</div>'+(EDIT?'<div class="uni-grid"><button class="mi-novo" data-ed="mat-novo">＋ Novo material</button></div>':'');
     g.innerHTML=h;
