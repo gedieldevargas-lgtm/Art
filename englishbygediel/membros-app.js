@@ -382,6 +382,7 @@
   '.of-img{width:100%;max-height:170px;object-fit:cover;border-radius:14px;margin-bottom:12px}.of-k{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--pc)}.of-t{font-size:20px;font-weight:800;margin:4px 0 2px}.of-s{font-size:13px;color:var(--fg2)}.of-p{font-size:26px;font-weight:900;color:var(--pc);margin:6px 0 2px}',
   '.of-l{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--fg3);margin:14px 0 8px}.of-box ul{list-style:none;padding:0;margin:0 0 16px;display:flex;flex-direction:column;gap:7px}.of-box li{font-size:13.5px;padding-left:22px;position:relative;line-height:1.4}.of-box li:before{content:"✓";position:absolute;left:0;color:var(--pc);font-weight:900}',
   '.of-alt{display:block;width:100%;margin-top:8px;border:1px solid var(--border);background:transparent;color:var(--fg);border-radius:14px;padding:11px;font:inherit;font-weight:700;cursor:pointer}.of-f{font-size:11.5px;color:var(--fg3);text-align:center;margin-top:10px}',
+  '.mi-troca{flex:none;display:flex;flex-direction:column;align-items:center;gap:0;border:1px solid var(--border);background:transparent;color:var(--fg2);border-radius:10px;padding:4px 7px;font-size:15px;cursor:pointer;margin-left:auto;line-height:1.1}.mi-troca small{font-size:9px;font-weight:800;color:var(--fg3)}.mi-troca:active{transform:rotate(-30deg)}',
   '#mi-inicio{display:flex;flex-direction:column;gap:10px;margin:4px 0 14px}.mi-ini{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-radius:18px;padding:14px 16px;border:1px solid var(--border)}',
   '.mi-ini .tx{flex:1;min-width:200px;display:flex;flex-direction:column;gap:3px}.mi-ini b{font-size:14px}.mi-ini span{font-size:12.5px;color:var(--fg2);line-height:1.5}.mi-ini .ic .ic3d{width:52px;height:52px}',
   '.mi-ini.idi{background:linear-gradient(135deg,rgba(14,165,233,.12),rgba(79,110,247,.08));border-color:rgba(14,165,233,.35)}.mi-ini .bt{display:flex;gap:8px}',
@@ -2439,10 +2440,43 @@
     var beg=iniciante();document.body.classList.toggle('mi-beg',beg);
     if(beg)t.textContent='Tarefas de hoje · Primeiros passos';
   }
+  /* trocar tarefa: cada tarefa tem 2 variações do mesmo nível; o botão gira original → variação 1 → variação 2 → original */
+  var ORIG=null;
+  function todasTarefas(){
+    if(!ORIG){ORIG=[];var vis={};Object.keys(window.CTX_TASKS||{}).forEach(function(k){if(k==='Primeiros passos'||k==='_idioma')return;
+      (BASE[k]||CTX_TASKS[k]||[]).forEach(function(t,i){if(vis[t.title])return;vis[t.title]=1;var o=Object.assign({},t);if(!o.info&&!o.ref)o.ref=[k,i];ORIG.push(o);});});}
+    return ORIG;
+  }
+  function hashN(x){var h=0;for(var i=0;i<x.length;i++)h=(h*31+x.charCodeAt(i))|0;return Math.abs(h);}
+  function variacoes(label,i,lista){
+    var v=aulasVistas(),lim=(label==='Primeiros passos')?-1:(nivelBaixo()&&v<LIB_PRODUZIR?v:99);
+    var usados={};lista.forEach(function(t){usados[t.title]=1;});
+    var pool=Object.keys(APR).map(function(k){return APR[k]();});
+    if(lim>=0)pool=pool.concat(todasTarefas().filter(function(t){return exige(t)<=lim;}));
+    pool=pool.filter(function(t){return !usados[t.title];});
+    var seed=hashN(dia()+label+i),out=[];
+    for(var n=0;n<pool.length&&out.length<2;n++){var t=pool[(seed+n*7)%pool.length];if(out.indexOf(t)<0)out.push(t);}
+    return out;
+  }
+  function trocas(){return LS.get('mi_troca_'+dia(),{});}
+  function aplicarTrocas(label){
+    var tr=trocas()[label];if(!tr||!CTX_TASKS[label])return;var base=CTX_TASKS[label].slice();
+    Object.keys(tr).forEach(function(i){var n=tr[i];if(!n)return;var alt=variacoes(label,+i,base)[n-1];if(alt)CTX_TASKS[label][i]=alt;});
+  }
+  window.miTrocar=function(ev,label,i){
+    ev.stopPropagation();var ch=(window._ctxChecked||{})[label]||[];if(ch[i]){toast('Essa você já fez ✓');return;}
+    var all=trocas();all[label]=all[label]||{};all[label][i]=((all[label][i]||0)+1)%3;LS.set('mi_troca_'+dia(),all);
+    window.renderMarTasks(label);
+  };
   var rmtOrig=window.renderMarTasks;
   if(rmtOrig){window.renderMarTasks=function(label){
-    if(label!=='_idioma'){if(iniciante())label='Primeiros passos';tarefasDoDia(label);}
-    var r=rmtOrig(label);pintarInicio();return r;};}
+    if(label!=='_idioma'){if(iniciante())label='Primeiros passos';if(!CTX_TASKS[label])label='Em Casa';tarefasDoDia(label);aplicarTrocas(label);}
+    var r=rmtOrig(label);
+    if(label!=='_idioma'){var tr=(trocas()[label])||{},ch=(window._ctxChecked||{})[label]||[];
+      [].forEach.call(document.querySelectorAll('#mar-tasks-list .mar-task'),function(el,i){if(ch[i])return;
+        var b=document.createElement('button');b.className='mi-troca';b.title='Trocar por outra tarefa';b.innerHTML='🔄<small>'+((tr[i]||0)+1)+'/3</small>';
+        b.setAttribute('onclick',"miTrocar(event,'"+label.replace(/'/g,"\\'")+"',"+i+")");var hint=el.querySelector('.open-hint');el.insertBefore(b,hint);});}
+    pintarInicio();return r;};}
   var tdOrig=window.taskDone;
   window.taskDone=function(){
     var c=window._curTask;
