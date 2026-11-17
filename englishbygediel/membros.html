@@ -2093,6 +2093,8 @@ async function renderLesson(){
       +'<button class="vote-btn '+(myVote?'on':'')+'" onclick="toggleVote()">'+(myVote?'✅ Você está esperando':'🙋 Estou esperando por essa aula')+'</button></div></div>';
   }
   html+=lessonNav();
+  // professor vê o livro mesmo antes da aula liberar
+  if(!isOpen(l)&&livroId&&window._isAdmin)html+='<div style="margin-top:14px"><div style="font-size:12px;font-weight:700;color:var(--fg3);margin-bottom:6px">👁 Só você vê: livro desta aula (o aluno vê quando a aula liberar)</div><aside class="aula-livro" id="aula-livro"></aside></div>';
   // reações
   html+='<div class="react-row">';
   REACT_EMOJIS.forEach(function(e){html+='<button class="react-btn '+(myReact===e?'on':'')+'" onclick="toggleReact(\''+e+'\')">'+e+(rc[e]?'<span class="cnt">'+rc[e]+'</span>':'')+'</button>';});
@@ -2108,7 +2110,7 @@ async function renderLesson(){
   html+='<div class="lesson-panel '+(_stLesTab==='coment'?'active':'')+'" id="les-p-coment"><div id="les-comments"><div class="admin-loading">Carregando comentários...</div></div>'
     +'<div class="comment-box"><textarea class="admin-inp" id="les-comment-txt" placeholder="Deixa sua dúvida ou comentário sobre a aula..."></textarea><button class="admin-btn admin-btn-primary" onclick="postComment()">Comentar</button></div></div>';
   v.innerHTML=html;
-  if(livroId&&isOpen(l))abrirLivroAula(livroId);
+  if(livroId&&(isOpen(l)||window._isAdmin))abrirLivroAula(livroId);
   loadComments();
 }
 /* Livro da aula: na descrição da aula, escreva uma linha "livro: unit-01" (ou preencha a coluna "livro", se existir) */
