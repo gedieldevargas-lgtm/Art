@@ -2402,6 +2402,47 @@
       }
       feitas.push('spotify-eom-1');mudou=true;
     }
+    /* revisão dos quizzes das aulas (erros achados na leitura): troca só as perguntas indicadas */
+    if(feitas.indexOf('quiz-revisao-1')<0){
+      var Q=function(q,a,c){return {q:q,a:a,c:c};};
+      var PT=[
+        {m:'Orientação',t:'Oque é o EOM',novoTitulo:'O que é o EOM',tudo:[
+          Q('Quando acontece a live do Devocional em Inglês?',['Aos sábados, às 9h','Aos domingos','Às segundas, às 14h','Aos sábados, às 21h'],0),
+          Q('O English on Mission é só para cristãos?',['Não, é aberto a todos','Sim, só para cristãos','Só para evangélicos','Só para católicos'],0),
+          Q('Posso assistir às lives sem ter uma Bíblia?',['Não, a Bíblia é obrigatória','Sim, dá pra usar uma Bíblia no celular','Sim, mas só depois de comprar uma','Nunca'],1)]},
+        {m:'Orientação',t:'Oque é o Culture English',novoTitulo:'O que é o Culture English',sePouco:[
+          Q('Com que frequência acontece o encontro Culture English?',['Todo mês','Toda semana','Todo ano','Todo dia'],0),
+          Q('Em qual dia do mês ele acontece?',['Na segunda terça-feira','No primeiro sábado','No último domingo','Toda quinta'],0),
+          Q('Quando será o primeiro encontro?',['8 de dezembro','17 de novembro','5 de novembro','1º de janeiro'],0)]},
+        {m:'Diagnóstico',t:'Bússula',novoTitulo:'Descubra seu Nível com a Bússola',troca:{
+          0:Q('Pra que serve o resultado da Bússola (CEFR)?',['Pra ficar frustrado','Pra saber seu ponto de partida','Pra receber um certificado oficial','Pra ver como é um teste americano'],1),
+          2:Q('Em geral, quem está no nível A2 consegue:',['Dar palestras','Se virar em situações simples e rotineiras','Escrever artigo científico','Traduzir livros'],1)}},
+        {m:'Diagnóstico',t:'Prisma de Intelig',troca:{1:Q('Quantas inteligências o Prisma analisa?',['4','6','8','10'],2)}},
+        {m:'Vocabulário',t:'Números, datas',troca:{4:Q('US$ 2.50 se fala, naturalmente:',['two fifty','two point five money','dollars two five','fifty two'],0)}},
+        {m:'Gramática A1',t:'Artigos',troca:{2:Q('A escolha entre a e an depende:',['Da letra escrita','Do SOM inicial da palavra','Do tamanho da palavra','Do gênero'],1)}},
+        {m:'Escrita',t:'Mensagens e redes',troca:{3:Q('Como dizer "faço aniversário hoje"?',['I make birthday today','Today is my birthday','I do birthday today','Today I birth'],1)}},
+        {m:'Inglês pela Música',t:'Gramática escondida',troca:{
+          0:Q('"I haven\'t finished yet" usa:',['Past simple','Present perfect','Futuro','Imperativo'],1),
+          1:Q('"If I were rich, I would travel" é:',['Condicional hipotético','Passado real','Futuro certo','Pergunta'],0),
+          4:Q('"Yesterday I walked home" está no:',['Presente','Passado','Futuro','Condicional'],1)}},
+        {m:'Listening',t:'séries e filmes',troca:{4:Q('Quando subir de degrau na legenda?',['Nunca','Quando você entende bem o degrau atual','No dia 1','Quando alguém mandar'],1)}}
+      ];
+      try{
+        var mods=await window._sb.from('mi_modules').select('id,name'),less=await window._sb.from('mi_lessons').select('id,module_id,title,quiz');
+        if(mods.error||less.error)throw 0;
+        for(var i=0;i<PT.length;i++){var pt=PT[i];
+          var mo=(mods.data||[]).filter(function(x){return x.name.toLowerCase().indexOf(pt.m.toLowerCase())===0;})[0];if(!mo)continue;
+          var le=(less.data||[]).filter(function(x){return x.module_id===mo.id&&x.title.toLowerCase().indexOf(pt.t.toLowerCase())>=0;})[0];if(!le)continue;
+          var qz=(le.quiz||[]).slice(),row={};
+          if(pt.tudo)row.quiz=pt.tudo;
+          else if(pt.sePouco){if(!qz.length)row.quiz=pt.sePouco;}
+          else if(pt.troca){Object.keys(pt.troca).forEach(function(k){qz[+k]=pt.troca[k];});row.quiz=qz;}
+          if(pt.novoTitulo)row.title=pt.novoTitulo;
+          if(Object.keys(row).length){var up=await window._sb.from('mi_lessons').update(row).eq('id',le.id);if(up.error)throw 0;}
+        }
+        feitas.push('quiz-revisao-1');mudou=true;
+      }catch(e){}
+    }
     var extra={};
     if(feitas.indexOf('programa-plano-inteligente')<0){var pg=(S.cfg.programa||[]).slice();if(pg.indexOf('Plano Inteligente')<0)pg.push('Plano Inteligente');extra.programa=pg;feitas.push('programa-plano-inteligente');mudou=true;}
     if(mudou){try{await salvarCfg(Object.assign({migr:feitas},extra));CARDS=null;}catch(e){}}
