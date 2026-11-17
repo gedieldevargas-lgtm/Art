@@ -918,7 +918,40 @@ function tRecall(){
 }
 
 /* ======================= COFRE (isca → WhatsApp) ======================= */
+/* ===== DENTRO DA ÁREA DE MEMBROS (?membro=1): sem cofre do WhatsApp. Mostra o resultado completo e salva sozinho. ===== */
+const MEMBRO=/[?&]membro=1/.test(location.search), NOME_M=(new URLSearchParams(location.search).get("nome")||"").split(" ")[0];
+const MAPA_MEMBROS={espacial:"visual",existencial:"intrapessoal"};
+function tResultadoMembro(){
+  const R=calcular();
+  const top=R.rank.slice(0,3).map(r=>({k:r.k,v:r.v,i:INTEL[r.k]}));
+  const dom=top[0].i, canal=R.canalVencedor, acertou=RECALL.filter(q=>S.acertos[q.palavra]).length;
+  const chave=MAPA_MEMBROS[top[0].k]||top[0].k;
+  try{ parent.postMessage({tipo:"prisma-resultado",k:chave,original:top[0].k,top:top.map(t=>({k:t.k,v:t.v,nome:t.i.nome})),canal:canal?CANAL_NOME[canal]:null,memoria:acertou},"*"); }catch(e){}
+  const bloco=(tit,txt,cor)=>`<div class="glass" style="padding:18px 18px;margin-top:12px;text-align:left"><div class="olho" style="color:${cor||"var(--fraco)"};margin-bottom:6px">${tit}</div><div class="txt" style="margin:0">${txt}</div></div>`;
+  app.innerHTML=`<div style="min-height:100vh;min-height:var(--vh);padding:40px 22px 120px"><div class="wrap enterFade">
+    <div style="text-align:center">
+      <div style="display:flex;justify-content:center;margin-bottom:12px">${prismaGlass(R.fin,200,false)}</div>
+      <div class="olho" style="color:var(--suave);margin-bottom:8px">${(S.nome||NOME_M)?esc(S.nome||NOME_M)+", este é o seu prisma":"este é o seu prisma"}</div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:12px"><span style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:11px;background:${dom.cor}1c;border:1px solid ${dom.cor}55">${icone(top[0].k,24,dom.cor)}</span>
+      <h1 class="disp" style="font-size:clamp(30px,8.5vw,44px);font-weight:600">${dom.nome}</h1></div>
+      <p class="disp it" style="color:${dom.cor};font-size:clamp(17px,4.6vw,21px);margin-top:4px">${dom.apelido}</p>
+      <div style="display:inline-block;margin-top:14px;padding:8px 14px;border-radius:99px;background:rgba(111,191,115,.15);color:#8fd593;font-size:13px;font-weight:600">✓ Resultado salvo no seu perfil da plataforma</div>
+    </div>
+    <div style="margin-top:22px">${top.map((t,n)=>`<div class="linha"><span style="width:110px;font-size:13px;color:${n?"var(--suave)":t.i.cor};font-weight:600">${n+1}º ${t.i.nome}</span><div class="trilho"><i style="display:block;height:100%;width:${t.v}%;background:${t.i.cor};border-radius:inherit"></i></div><b style="font-size:13px;width:34px;text-align:right">${t.v}</b></div>`).join("")}</div>
+    <div style="display:flex;gap:10px;justify-content:center;margin-top:14px">
+      <div class="glass" style="flex:1;padding:12px;text-align:center"><div class="olho" style="color:var(--fraco)">canal que fixou</div><div class="disp" style="font-size:19px;font-weight:600">${canal?CANAL_NOME[canal]:"—"}</div></div>
+      <div class="glass" style="flex:1;padding:12px;text-align:center"><div class="olho" style="color:var(--fraco)">memória</div><div class="disp" style="font-size:19px;font-weight:600">${acertou}/4</div></div></div>
+    ${bloco("quem você é",dom.essencia,dom.cor)}
+    ${bloco("como o inglês entra em você",dom.aprende,dom.cor)}
+    ${bloco("faça a partir de amanhã","<ul style=\"margin:0;padding-left:18px\">"+(dom.taticas||[]).map(x=>"<li style=\"margin-bottom:6px\">"+x+"</li>").join("")+"</ul>",dom.cor)}
+    ${bloco("cuidado com isto",dom.armadilha,"#D96C6C")}
+    ${bloco("a chave que destrava",dom.despertar,"var(--ouro)")}
+  </div></div>
+  <div style="position:fixed;left:0;right:0;bottom:0;padding:14px 20px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(transparent,rgba(0,0,0,.6) 40%)"><button class="bt" id="voltarPlat" style="display:block;width:100%;max-width:520px;margin:0 auto">Voltar pra plataforma →</button></div>`;
+  document.getElementById("voltarPlat").onclick=()=>{ try{ parent.postMessage({tipo:"prisma-fechar"},"*"); }catch(e){} };
+}
 function tCofre(){
+  if(MEMBRO) return tResultadoMembro();
   const R=calcular();
   const dom=INTEL[R.rank[0].k], d2=INTEL[R.rank[1].k], d3=INTEL[R.rank[2].k];
   const acertou=RECALL.filter(q=>S.acertos[q.palavra]).length;

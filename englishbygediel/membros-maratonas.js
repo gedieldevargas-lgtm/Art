@@ -147,8 +147,7 @@
   function adaptacao() {
     var P = EU.pl || { vistas: [], tour: [] }, n = M10.adapt.aulas, va = Math.min(n, P.vistas.length);
     var it = [
-      { t: 'Fazer o teste de nível (Bússola)', ok: !!P.nivel, ir: 'bussola' },
-      { t: 'Fazer o teste de talentos (Prisma)', ok: !!P.prisma, ir: 'prisma' },
+      { t: 'Fazer um teste: Prisma ou Bússola (você escolhe)', ok: !!(P.prisma || P.nivel), ir: 'prisma' },
       { t: 'Responder as perguntas do seu perfil', ok: !!(P.onb && !P.onb.pulou), ir: 'config' },
       { t: 'Ver o tutorial dos menus', ok: P.tour.length > 0, ir: 'tour' },
       { t: 'Assistir ' + n + ' aulas (' + va + '/' + n + ')', ok: va >= n, ir: 'modulos' }
@@ -219,7 +218,7 @@
       + '<div class="mt-premio"><div>🏆 ' + esc(M10.premios.concluir) + '</div><div>❓ ' + esc(M10.premios.primeiro) + '</div></div></div></details>';
 
     // adaptação
-    h += '<div class="mt-box' + (AD.ok ? '' : ' trava') + '"><h3>' + (AD.ok ? '✅ Adaptação concluída' : '🔓 Adaptação: libere o seu checklist') + '</h3><div class="s">' + (AD.ok ? 'Seu checklist dos ciclos está liberado.' : 'Faça os 5 passos. Assim que terminar, os marcos do ciclo abrem.') + '</div>'
+    h += '<div class="mt-box' + (AD.ok ? '' : ' trava') + '"><h3>' + (AD.ok ? '✅ Adaptação concluída' : '🔓 Adaptação: libere o seu checklist') + '</h3><div class="s">' + (AD.ok ? 'Seu checklist dos ciclos está liberado.' : 'Faça os 4 passos. Assim que terminar, os marcos do ciclo abrem.') + '</div>'
       + AD.itens.map(function (x) { return '<div class="mt-ad' + (x.ok ? ' ok' : '') + '"><span class="ck">' + (x.ok ? '✓' : '') + '</span><span class="t">' + esc(x.t) + '</span>' + (x.ok ? '' : '<button data-mt-ir="' + x.ir + '">Fazer</button>') + '</div>'; }).join('') + '</div>';
 
     if (atual) h += '<div style="font-size:13px;color:var(--fg2);margin:0 2px 10px">Agora: <b style="color:var(--fg)">Ciclo ' + atual.n + ' · ' + esc(atual.nome) + '</b> · faltam ' + falta + ' dias pra fechar o ciclo e sair o Top 15.</div>';
@@ -299,8 +298,7 @@
   var PASSOS = [
     { k: 'perfil', ic: '📝', t: 'Perguntas do seu perfil', ok: function (P) { return !!(P.onb && !P.onb.pulou); } },
     { k: 'tour', ic: '🗺️', t: 'Tour pelos menus da plataforma', ok: function (P) { return P.tour.length > 0; } },
-    { k: 'bussola', ic: '🧭', t: 'Teste de nível (Bússola)', ok: function (P) { return !!P.nivel; } },
-    { k: 'prisma', ic: '🔷', t: 'Teste de talentos (Prisma)', ok: function (P) { return !!P.prisma; } },
+    { k: 'prisma', ic: '🔷', t: 'Um teste: Prisma (talentos) ou Bússola (nível)', ok: function (P) { return !!(P.prisma || P.nivel); } },
     { k: 'modulos', ic: '🎬', t: 'Assistir as 5 primeiras aulas', ok: function (P) { return P.vistas.length >= M10.adapt.aulas; } }
   ];
   var vistaK = function () { return 'mt10:largada-vista:' + EU.email; };
@@ -326,7 +324,7 @@
         + '<p class="s" style="margin-top:12px">Tem teto por dia: com constância, qualquer um alcança o 1º lugar.</p>';
       bt = 'Meu roteiro de largada →';
     } else {
-      h = '<div class="k">Seu roteiro</div><h1 class="q">Antes de correr, <em>conheça a pista</em></h1><p class="s">5 passos, na ordem. Eu te levo em cada um. Quando terminar, o checklist dos ciclos abre.</p>'
+      h = '<div class="k">Seu roteiro</div><h1 class="q">Antes de correr, <em>conheça a pista</em></h1><p class="s">4 passos, na ordem. Eu te levo em cada um. Quando terminar, o checklist dos ciclos abre.</p>'
         + '<div class="li">' + PASSOS.map(function (x, j) { var ok = x.ok(P); return '<div style="animation-delay:' + (j * .08) + 's"><b>' + (ok ? '✓' : x.ic) + '</b><span class="' + (ok ? 'ok' : '') + '">' + (j + 1) + '. ' + esc(x.t) + '</span>' + (x.k === 'modulos' ? '<i>' + Math.min(P.vistas.length, M10.adapt.aulas) + '/' + M10.adapt.aulas + '</i>' : '') + '</div>'; }).join('') + '</div>';
       bt = 'Começar o passo 1 🚀';
     }
@@ -350,11 +348,12 @@
   }
   function guiaBarra() {
     var g = $('mt-guia'); if (g) g.remove();
+    return; // barra flutuante desligada: atrapalhava a navegação (o roteiro fica no menu 🏁 Maratona)
     var p = proximo(); if (!p || !EU.dentro) return;
     try { if (sessionStorage.getItem('mt-guia-x')) return; } catch (e) {}
     var feitos = PASSOS.length - PASSOS.filter(function (x) { return !x.ok(EU.pl); }).length;
     g = document.createElement('div'); g.className = 'mt-guia'; g.id = 'mt-guia';
-    g.innerHTML = '<span style="font-size:24px">' + p.ic + '</span><span><b>Largada · passo ' + (feitos + 1) + ' de 5</b><small>' + esc(p.t) + '</small></span><button data-lg="guiar">Fazer agora</button><button class="x" data-lg="xguia" aria-label="Esconder">✕</button>';
+    g.innerHTML = '<span style="font-size:24px">' + p.ic + '</span><span><b>Largada · passo ' + (feitos + 1) + ' de ' + PASSOS.length + '</b><small>' + esc(p.t) + '</small></span><button data-lg="guiar">Fazer agora</button><button class="x" data-lg="xguia" aria-label="Esconder">✕</button>';
     document.body.appendChild(g);
   }
   window.mtLargada = function () { largada(0); };
@@ -431,6 +430,8 @@
     } else {
       r = await sb.from('maratona_membros').upsert({ email: em, nome: t.getAttribute('data-mt-nome') || null, turma: 'icd-1' });
       if (!r.error) ADM.dentro[em] = { email: em };
+      // incluir na maratona também libera o Programa (1º produto da lista do Programa)
+      if (!r.error) { var cfg = ((window.EBG_ACESSO || {}).estado || {}).cfg || {}; await sb.from('compras').upsert({ pedido: 'maratona-programa-' + em, email: em, produto: (cfg.programa || [])[0] || 'Inglês de Cada Dia' }); }
     }
     if (r.error) { alert('Não consegui salvar: ' + r.error.message); t.disabled = false; return; }
     if (typeof toast === 'function') toast(on ? 'Saiu da maratona' : '🏁 Entrou na Maratona 10 meses', on ? '#6b7280' : '#10b981');

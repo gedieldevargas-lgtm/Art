@@ -867,7 +867,8 @@
     };
   }
   function perguntarContexto(){
-    if(iniciante())return entradaIniciante();
+    // iniciante: sem tela cheia na frente (atrapalhava a navegação). O checklist 'Primeiros passos' já fica valendo.
+    if(iniciante()){LS.set('mi_ctx',{d:dia(),k:'Primeiros passos'});return fecharEntrada(function(){go('home');renderHome();pintarRail();setTimeout(tourAuto,700);});}
     abrirEntrada('<span class="mi-logo mi-lg-ent"></span><div class="mi-ent-kicker">'+E(saudacao())+(nomeCurto()?', '+E(nomeCurto()):'')+'</div>'
       +'<div class="mi-ent-q">Onde você está agora?</div>'
       +'<div class="mi-ent-s">Escolha o mais parecido com onde você está ou o que está fazendo. Eu monto o checklist de hoje pra esse momento.</div>'
@@ -1495,7 +1496,7 @@
 
   /* ───────────────────────── BÚSSOLA (nível) e PRISMA (inteligências) ─────────────────────────
      Os testes são os sites de verdade; o aluno faz dentro do app e marca o resultado que apareceu. */
-  var URL_BUSSOLA='https://nivelamentogediel.netlify.app/',URL_PRISMA='prisma.html';
+  var URL_BUSSOLA='bussola.html?membro=1',URL_PRISMA='prisma.html?membro=1';
   var NIVEIS=['A1','A2','B1','B2','C1','C2'];
   var NIVEL_CAN={A1:'Se apresentar, perguntar e responder o básico do dia a dia.',A2:'Se virar em situações simples: compras, rotina, direções, família.',B1:'Conversar sobre o dia a dia e o trabalho, viajar sem travar.',B2:'Discutir ideias com fluência e entender séries e reuniões.',C1:'Usar o inglês com flexibilidade no trabalho e nos estudos.',C2:'Dominar o idioma com precisão, como um nativo culto.'};
   var INTEL={
@@ -1551,12 +1552,19 @@
   function abrirTeste(qual){
     var b=qual==='bussola';
     tq.innerHTML='<div class="tt"><button class="tb-btn" data-dg="fechar">✕</button><b>'+(b?IC('bussola')+' Teste de nível':IC('prisma')+' Prisma de Talentos')+'</b><a class="tb-btn" style="text-decoration:none" href="'+(b?URL_BUSSOLA:URL_PRISMA)+'" target="_blank" rel="noopener">Abrir fora ↗</a></div>'
-      +'<iframe src="'+(b?URL_BUSSOLA:URL_PRISMA)+'" title="'+(b?'Teste de nível':'Prisma de Talentos')+'" allow="autoplay; microphone"></iframe>'
-      +'<div class="fim"><div class="q">Terminou? Toque no resultado que apareceu:</div><div class="ch">'
+      +'<iframe src="'+(b?URL_BUSSOLA:URL_PRISMA)+'&nome='+encodeURIComponent(((U&&U.user_metadata)||{}).full_name||'')+'" title="'+(b?'Teste de nível':'Prisma de Talentos')+'" allow="autoplay; microphone"></iframe>'
+      +'<div class="fim" hidden><div class="q">Terminou? Toque no resultado que apareceu:</div><div class="ch">'
       +(b?NIVEIS.map(function(n){return '<button class="gf-btn" data-dg-fim="'+n+'">'+n+'</button>';}).join(''):Object.keys(INTEL).map(function(x){return '<button class="gf-btn" data-dg-fim="'+x+'">'+INTEL[x].ic+' '+E(INTEL[x].nome)+'</button>';}).join(''))
       +'</div></div>';
     tq.dataset.qual=qual;tq.classList.add('on');document.body.style.overflow='hidden';
   }
+  // o Prisma avisa sozinho o resultado (prisma.html?membro=1): salva e mostra o retorno, sem a pessoa precisar marcar
+  window.addEventListener('message',function(e){
+    var d=e.data||{};if(e.origin!==location.origin||!tq.classList.contains('on'))return;
+    if(d.tipo==='prisma-resultado'&&INTEL[d.k]){setPrisma(d.k);}
+    if(d.tipo==='bussola-resultado'&&NIVEIS.indexOf(d.nivel)>=0){window.setManualLevel(d.nivel);}
+    if(d.tipo==='prisma-fechar'||d.tipo==='bussola-fechar')fecharTeste();
+  });
   function fecharTeste(){tq.classList.remove('on');tq.innerHTML='';document.body.style.overflow='';if(window._aposTeste){var f=window._aposTeste;window._aposTeste=null;setTimeout(f,250);}}
   document.addEventListener('click',function(e){
     var b=e.target.closest('[data-dg]');
@@ -1838,7 +1846,7 @@
         +'<div class="card teste"><span class="ic">'+IC('prisma')+'</span><div><b>Prisma de Talentos</b><div class="leg" style="margin:2px 0 0">Descobre por qual porta o inglês entra em você.</div></div><span class="min">± '+MIN_PRISMA+' min</span></div>'
         +'<div class="card teste"><span class="ic">'+IC('bussola')+'</span><div><b>Bússola</b><div class="leg" style="margin:2px 0 0">Mostra seu nível real, do A1 ao C2.</div></div><span class="min">± '+MIN_BUSSOLA+' min</span></div>'
         +'<p class="leg">Ao todo, uns '+(MIN_PRISMA+MIN_BUSSOLA)+' minutos. Faça num lugar tranquilo, com fone.</p>'
-        +obBtn('Fazer os 2 testes agora →','data-ob="t-agora"')
+        +obBtn('Fazer os 2 testes agora →','data-ob="t-agora"')+'<button class="cta2" data-ob="t-prisma">Fazer só o Prisma agora</button>'
         +'<button class="cta2" data-ob="t-manual">Já sei meu nível e meu jeito: escolher manualmente</button>'
         +'<button class="cta2" data-ob="t-depois">Deixar pra depois</button>';
     }else if(passo==='manual'){
@@ -1875,7 +1883,7 @@
     obEl.classList.remove('vis');
     setTimeout(function(){
       obEl.classList.remove('on');obEl.innerHTML='';document.body.style.overflow='';OB=null;
-      var fila=testes==='agora'?['prisma','bussola']:[],fim=obFim;
+      var fila=testes==='agora'?['prisma','bussola']:testes==='prisma'?['prisma']:[],fim=obFim;
       (function prox(){if(fila.length){window._aposTeste=prox;abrirTeste(fila.shift());}else fim();})();
     },330);
   }
@@ -1892,6 +1900,7 @@
     }
     if(a==='mar'){var q=$('ob-marq');if(q)r.maratonaQual=q.value.trim();return obAvancar();}
     if(a==='t-agora'){OB.testes='agora';return obIr('fim');}
+    if(a==='t-prisma'){OB.testes='prisma';return obIr('fim');}
     if(a==='t-depois'){OB.testes='depois';return obIr('fim');}
     if(a==='t-manual'){OB.testes='manual';return obIr('manual');}
     if(a==='m-ok'){ST.nivel=r.mNivel;ST.prisma=r.mIntel;try{localStorage.setItem('userLevel',r.mNivel);}catch(x){}salvar();pintarPerfil();return obIr('fim');}
@@ -1905,12 +1914,12 @@
   });
 
   /* ───────────────────────── PORTÃO: checklist e aulas só depois do diagnóstico ───────────────────────── */
-  function faltaDiagnostico(){return !souAdmin()&&ehPrograma()&&!(ST.nivel&&ST.prisma);}
+  function faltaDiagnostico(){return !souAdmin()&&ehPrograma()&&!(ST.nivel||ST.prisma);}
   function portao(oque){
     var ov=$('pw-ov');if(!ov)return;
     var feitoN=!!ST.nivel,feitoP=!!ST.prisma;
     ov.innerHTML='<div class="pw" style="text-align:left"><div style="text-align:center">'+IC('bussola','xl')+'</div><h3 style="text-align:center">Falta pouco pra liberar '+E(oque)+'</h3>'
-      +'<p style="text-align:center">O checklist e as aulas são montados a partir do seu nível e do seu jeito de aprender.</p>'
+      +'<p style="text-align:center">Faça <b>um dos dois</b> testes (ou os dois): o checklist e as aulas se montam a partir do resultado.</p>'
       +'<div class="mi-gate-it'+(feitoP?' ok':'')+'"><span>'+IC('prisma')+'</span><div><b>Prisma de Talentos</b><small>'+(feitoP?'Feito: '+E(INTEL[ST.prisma].nome):'± '+MIN_PRISMA+' minutos')+'</small></div>'+(feitoP?'<i>✓</i>':'<button data-gate="prisma">Fazer</button>')+'</div>'
       +'<div class="mi-gate-it'+(feitoN?' ok':'')+'"><span>'+IC('bussola')+'</span><div><b>Bússola de nível</b><small>'+(feitoN?'Feito: '+E(ST.nivel):'± '+MIN_BUSSOLA+' minutos')+'</small></div>'+(feitoN?'<i>✓</i>':'<button data-gate="bussola">Fazer</button>')+'</div>'
       +'<button class="nao" data-gate="manual" style="display:block;width:100%;margin-top:14px;font-weight:700;color:var(--accent)">Já sei: escolher manualmente</button>'

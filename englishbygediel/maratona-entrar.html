@@ -175,7 +175,7 @@ main{min-height:100%;display:flex;align-items:center;justify-content:center;padd
       h = '<div class="peito"><small>MARATONA 10 MESES</small><strong>' + (RES.numero ? '#' + esc(RES.numero) : '🏁') + '</strong><span>' + esc(R.nome) + '</span><em>Turma Fundadora · largada 16/11/2026</em></div>'
         + '<h1 class="q">Você está na <em>pista</em>, ' + esc(primeiro()) + '!</h1>'
         + '<p class="s">' + (RES.existia ? 'Você já tinha conta: juntei os seus dados e liberei a maratona. Entre com a <b>senha que você já usava</b>.' : 'Seu acesso está pronto. Lá dentro, a sua largada te guia passo a passo:') + '</p>'
-        + '<div class="lista">' + [['🧭', 'Teste de nível e Prisma'], ['📝', 'Perguntas do seu perfil'], ['🗺️', 'Tour pelos menus da plataforma'], ['🎬', '5 primeiras aulas: liberam o seu checklist']].map(function (x, j) { return '<div style="animation-delay:' + (.6 + j * .12) + 's"><b>' + x[0] + '</b>' + x[1] + '</div>'; }).join('') + '</div>';
+        + '<div class="lista">' + [['🧭', 'Um teste: Prisma ou Bússola'], ['📝', 'Perguntas do seu perfil'], ['🗺️', 'Tour pelos menus da plataforma'], ['🎬', '5 primeiras aulas: liberam o seu checklist']].map(function (x, j) { return '<div style="animation-delay:' + (.6 + j * .12) + 's"><b>' + x[0] + '</b>' + x[1] + '</div>'; }).join('') + '</div>';
       cta.textContent = 'Entrar e começar →';
       confete();
     }
