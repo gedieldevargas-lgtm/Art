@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Slides da aula</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+/* Slides 16:9 para gravar no OBS. Canto inferior direito livre para a câmera do professor. */
+@page{size:1920px 1080px;margin:0}
+:root{--ac:#6d4df5;--ac2:#a855f7;--rosa:#ec4899;--ouro:#f59e0b;--ok:#10b981;--ink:#14121f;--mut:#8a86a0;--bg:#0f0d1a;--card:#1b1830;--line:#2c2846}
+*{box-sizing:border-box}
+html,body{margin:0;background:#000;font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.s{width:1920px;height:1080px;position:relative;overflow:hidden;background:radial-gradient(90% 90% at 85% 0%,#2a1f63 0%,#14112a 45%,#0b0914 100%);padding:80px 96px;page-break-after:always;break-after:page}
+.s:last-child{page-break-after:auto}
+/* zona da câmera: canto inferior direito */
+.cam{position:absolute;right:48px;bottom:48px;width:520px;height:340px;border-radius:28px;border:3px dashed rgba(255,255,255,.18);display:grid;place-items:center;color:rgba(255,255,255,.22);font-weight:700;font-size:22px;letter-spacing:2px}
+.area{position:absolute;left:96px;top:80px;right:96px;bottom:430px}          /* acima da câmera, largura toda */
+.area.alta{bottom:96px;right:620px}                                           /* ao lado da câmera, altura toda */
+.rod{position:absolute;left:96px;bottom:44px;font-size:20px;color:var(--mut);font-weight:600}
+.rod b{color:var(--ac2)}
+.kick{font-size:26px;font-weight:800;letter-spacing:4px;color:var(--ac2);text-transform:uppercase;margin-bottom:14px}
+h1{font-family:'Archivo Black',sans-serif;font-size:78px;line-height:1.02;margin:0 0 18px;letter-spacing:-1px}
+h2{font-family:'Archivo Black',sans-serif;font-size:60px;margin:0 0 28px;letter-spacing:-.5px}
+.sub{font-size:34px;color:#cfc9ef;font-weight:500}
+/* capa */
+.capa h1{font-size:104px;max-width:1300px}
+.capa .tag{display:inline-block;margin-top:30px;padding:14px 28px;border-radius:40px;background:rgba(255,255,255,.08);font-size:26px;font-weight:700}
+.logo{position:absolute;left:96px;top:64px;display:flex;align-items:center;gap:14px;font-weight:800;font-size:24px;letter-spacing:1px}
+.logo i{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--ac),var(--ac2));display:grid;place-items:center;font-style:normal}
+/* listas e cartões */
+.lista{list-style:none;margin:0;padding:0;display:grid;gap:18px}
+.lista li{font-size:36px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px 28px 20px 74px;position:relative}
+.lista li::before{content:'✓';position:absolute;left:28px;top:18px;color:var(--ok);font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.voc{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px 24px}
+.voc b{display:block;font-size:38px;line-height:1.15}
+.voc span{display:block;font-size:24px;color:var(--mut);margin-top:6px}
+.ramos{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.ramo{border-radius:22px;padding:22px 26px;background:var(--card);border-top:8px solid var(--c)}
+.ramo b{display:block;font-size:32px;color:var(--c);margin-bottom:10px}
+.ramo div{font-size:27px;color:#e7e3fb;line-height:1.5}
+.frases{display:grid;gap:22px}
+.fr{display:flex;align-items:center;gap:24px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px 30px}
+.fr .n{flex:none;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--ac),var(--ac2));display:grid;place-items:center;font-weight:800;font-size:26px}
+.fr b{display:block;font-size:42px}
+.fr span{display:block;font-size:26px;color:var(--mut)}
+.fr .x{margin-left:auto;font-size:24px;font-weight:800;color:var(--ouro);white-space:nowrap}
+.sit{display:grid;gap:26px}
+.sit .c{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px 30px}
+.sit .c small{display:block;font-size:22px;letter-spacing:2px;font-weight:800;color:var(--rosa);margin-bottom:6px}
+.sit .c div{font-size:36px}
+.sit .ln{margin-top:16px;height:54px;border-bottom:3px dashed rgba(255,255,255,.25)}
+.quiz{display:grid;gap:22px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px 28px}
+.q b{display:block;font-size:32px;margin-bottom:12px}
+.q .ops{display:flex;gap:14px;flex-wrap:wrap}
+.q .ops span{font-size:25px;padding:8px 18px;border-radius:14px;background:rgba(255,255,255,.07);border:1px solid var(--line)}
+.q .ops span.ok{background:rgba(16,185,129,.18);border-color:var(--ok);color:#7ef0c6;font-weight:800}
+.dica{margin-top:26px;font-size:30px;background:rgba(168,85,247,.14);border-left:8px solid var(--ac2);border-radius:14px;padding:18px 26px}
+.btns{display:grid;gap:22px}
+a.btn{display:flex;align-items:center;gap:22px;text-decoration:none;color:#fff;background:var(--card);border:2px solid var(--line);border-radius:24px;padding:24px 30px;font-size:34px;font-weight:700}
+a.btn i{font-style:normal;flex:none;width:76px;height:76px;border-radius:18px;display:grid;place-items:center;font-size:36px;background:#ff0033}
+a.btn.drive i{background:#1a73e8}
+a.btn small{display:block;font-size:22px;color:var(--mut);font-weight:600;margin-top:4px}
+.grande{font-size:52px;line-height:1.3;font-weight:700}
+.badge{display:inline-block;font-size:24px;font-weight:800;padding:8px 18px;border-radius:30px;background:rgba(245,158,11,.15);color:var(--ouro);margin-bottom:22px}
+.c1 h2{font-size:48px;margin-bottom:18px}.c1 .quiz,.c1 .frases,.c1 .sit,.c1 .btns{gap:14px}.c1 .q{padding:14px 22px}.c1 .q b{font-size:27px;margin-bottom:8px}.c1 .q .ops span{font-size:21px;padding:6px 14px}
+.c1 .fr b{font-size:34px}.c1 .fr span{font-size:22px}.c1 .sit .c div{font-size:30px}.c1 .lista li{font-size:30px;padding:14px 22px 14px 64px}.c1 .grande{font-size:42px}
+.c2 .kick{font-size:20px;margin-bottom:6px}.c2 h2{font-size:40px}.c2 .q b{font-size:24px}.c2 .q .ops span{font-size:19px}.c2 .lista li{font-size:26px}.c2 .fr b{font-size:30px}
+.midias{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:24px}
+a.mid{display:block;text-decoration:none;color:#fff;background:var(--card);border:2px solid var(--line);border-radius:22px;overflow:hidden}
+a.mid img{display:block;width:100%;height:330px;object-fit:cover;background:#000}
+a.mid span{display:block;padding:16px 20px;font-size:26px;font-weight:700}
+</style>
+</head>
+<body>
+<main id="slides"></main>
+<script>
+(function(){
+  var q=new URLSearchParams(location.search), id=q.get('u')||'os-sons-do-ingles-que-nao-existem-em-portugues';
+  var s=document.createElement('script');s.src='aulas/'+encodeURIComponent(id)+'.js';
+  s.onload=function(){var x=document.createElement('script');x.src='slides-extra.js';x.onload=x.onerror=function(){var m=document.createElement('script');m.src='midia.js';m.onload=m.onerror=function(){montar(window.LIVRO_AULAS[id]);};document.head.appendChild(m);};document.head.appendChild(x);};document.head.appendChild(s);
+  function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  var N=0,A;
+  var CAM='<div class="cam">CÂMERA</div>';
+  function rod(){return '<div class="rod"><b>Inglês Inteligente</b> · '+esc(A.rotulo||A.nivel)+' · '+(++N)+'</div>';}
+  function slide(html,cls,alta){return '<section class="s '+(cls||'')+'"><div class="area'+(alta?' alta':'')+'">'+html+'</div>'+CAM+rod()+'</section>';}
+  function blocos(tipo){return A.revisar.filter(function(b){return b.tipo===tipo;});}
+  function yt(t){return 'https://www.youtube.com/results?search_query='+encodeURIComponent(t);}
+
+  function montar(a){
+    A=a;document.title='Slides · '+a.titulo;var h='',S=a.slides||(window.SLIDES_EXTRA||{})[a.id]||{};
+    var voc=(blocos('vocab')[0]||{itens:[]}).itens, fr=(blocos('vocab')[1]||{itens:[]}).itens;
+    var quiz=(a.exercicios.filter(function(e){return e.tipo==='escolha';})[0]||{itens:[]}).itens;
+    var cores=['#6d4df5','#a855f7','#ec4899','#f59e0b','#10b981','#0ea5e9'];
+    // 1 capa
+    h+='<section class="s capa"><div class="logo"><i>✦</i>INGLÊS INTELIGENTE</div><div class="area alta" style="top:260px"><div class="kick">'+esc(a.rotulo||a.nivel)+'</div><h1>'+esc(a.titulo)+'</h1><div class="sub">'+esc(a.subtitulo||'')+'</div><div class="tag">🎯 Aprender · 👀 Visualizar · 🔁 Repetir · 🎭 Simular · ✍️ Criar</div></div>'+CAM+'</section>';N=1;
+    // 2 objetivo
+    h+=slide('<div class="kick">Hoje você vai</div><h2>O que você leva desta aula</h2><ul class="lista">'+a.ebook.resumo.map(function(r){return '<li>'+esc(r)+'</li>';}).join('')+'</ul>',null,true);
+    // 3 mapa
+    h+=slide('<div class="kick">👀 Visualizar</div><h2>O mapa da aula</h2><div class="ramos">'+a.ebook.mapa.ramos.map(function(r,i){return '<div class="ramo" style="--c:'+cores[i%cores.length]+'"><b>'+esc(r.t)+'</b><div>'+r.itens.map(esc).join('<br>')+'</div></div>';}).join('')+'</div>');
+    // 4 vocabulário
+    h+=slide('<div class="kick">👀 Visualizar · Vocabulário</div><h2>Palavras-chave</h2><div class="grid">'+voc.slice(0,8).map(function(v){return '<div class="voc"><b>'+esc(v[0])+'</b><span>'+esc(v[1])+'</span></div>';}).join('')+'</div>');
+    // 5–6 repetir
+    [fr.slice(0,4),fr.slice(4,8)].forEach(function(g,k){ if(!g.length)return;
+      h+=slide('<div class="kick">🔁 Repita comigo</div><h2>Fale em voz alta, 2 vezes</h2><div class="frases">'+g.map(function(f,i){return '<div class="fr"><div class="n">'+(i+1+k*4)+'</div><div><b>'+esc(f[0])+'</b><span>'+esc(f[1])+'</span></div><div class="x">🔁 2x</div></div>';}).join('')+'</div>',null,true);});
+    // 7 simular
+    var sits=(S.situacoes||fr.slice(0,3).map(function(f){return ['Situação',f[1]];}));
+    h+=slide('<div class="kick">🎭 Simule</div><h2>Como você diria?</h2><div class="sit">'+sits.slice(0,3).map(function(s){return '<div class="c"><small>'+esc(s[0]).toUpperCase()+'</small><div>🇧🇷 '+esc(s[1])+'</div><div class="ln"></div></div>';}).join('')+'</div>',null,true);
+    // 8 criar
+    var temas=S.criar||['sobre a sua rotina','sobre a sua família ou amigos','sobre o seu trabalho ou estudo'];
+    h+=slide('<div class="kick">✍️ Crie agora</div><h2>Sua vez: 3 frases novas</h2><div class="sit">'+temas.map(function(t,i){return '<div class="c"><small>FRASE '+(i+1)+'</small><div>Use o que aprendeu '+esc(t)+'</div><div class="ln"></div></div>';}).join('')+'</div>',null,true);
+    // 9–10 quiz e respostas
+    if(quiz.length){
+      [false,true].forEach(function(resp){
+        h+=slide('<div class="kick">🧩 Quiz rápido'+(resp?' · respostas':'')+'</div><h2>'+(resp?'Confira':'Responda em voz alta')+'</h2><div class="quiz">'+quiz.slice(0,4).map(function(x,i){return '<div class="q"><b>'+(i+1)+'. '+esc(x.p)+'</b><div class="ops">'+x.ops.map(function(o,j){return '<span'+(resp&&j===x.c?' class="ok"':'')+'>'+'ABC'[j]+') '+esc(o)+'</span>';}).join('')+'</div></div>';}).join('')+'</div>',null,true);});
+    }
+    // cena / meme da aula (miniatura clicável que abre o vídeo no Drive)
+    var MI=(window.LIVRO_MIDIA||{})[a.id], DR=window.LIVRO_MIDIA_DRIVE||{};
+    if(MI){var lista=(MI.galeria||[]).map(function(x){return [x.v,x.t];}).concat((MI.cenas||[]).map(function(x){return [x.v,x.frase.replace('___',x.resp[0].toUpperCase())];})).slice(0,3);
+      h+=slide('<div class="kick">'+(MI.cenas?'🎬 Em cena':'😂 Para descontrair')+'</div><h2>'+(MI.cenas?'Ouça como o nativo fala':'Meme da aula')+'</h2><div class="midias">'+lista.map(function(x){return '<a class="mid" href="https://drive.google.com/file/d/'+(DR[x[0]]||'')+'/view"><img src="midia/'+x[0]+'.jpg"><span>▶ '+esc(x[1])+'</span></a>';}).join('')+'</div>',null,true);}
+    // 11 vídeos de reforço
+    var vids=(S.videos||[]).slice(0,3).map(function(v){return '<a class="btn drive" href="'+esc(v[1])+'"><i>🎬</i><div>'+esc(v[0])+'<small>Cena do Get By (Drive)</small></div></a>';}).join('');
+    var busca=(S.youtube||[a.titulo]).slice(0,4-Math.min(3,(S.videos||[]).length));
+    h+=slide('<div class="kick">▶ Reforço em vídeo</div><h2>Veja exemplos reais</h2><div class="btns">'+vids+busca.map(function(b){return '<a class="btn" href="'+esc(yt(b))+'"><i>▶</i><div>'+esc(b)+'<small>Abrir no YouTube</small></div></a>';}).join('')+'</div>',null,true);
+    // 12 missão
+    h+=slide('<div class="kick">🎯 Missão da aula</div><div class="badge">Antes da próxima aula</div><div class="grande">'+esc((a.missao.tarefa||'').replace(/^Pratique:\s*/,''))+'</div><div class="dica">📘 Faça o livro interativo e baixe o e-book logo abaixo deste vídeo.</div>',null,true);
+    document.getElementById('slides').innerHTML=h;
+    // encaixe automático: se o conteúdo não couber na área (sem invadir a câmera), diminui um pouco
+    // encaixe automático: se não couber acima da câmera, usa a versão compacta
+    (document.fonts?document.fonts.ready:Promise.resolve()).then(function(){
+    document.querySelectorAll('.area').forEach(function(ar){
+      function sobra(){var r=ar.getBoundingClientRect(),m=0;ar.querySelectorAll('*').forEach(function(e){var b=e.getBoundingClientRect();if(b.height)m=Math.max(m,b.bottom);});return r.bottom-m;}
+      if(sobra()<0)ar.classList.add('c1');if(sobra()<0)ar.classList.add('c2');});
+    document.body.dataset.pronto='1';});
+  }
+})();
+</script>
+</body>
+</html>
