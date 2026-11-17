@@ -474,6 +474,7 @@
     var lvLocal=null;try{lvLocal=localStorage.getItem('userLevel');}catch(e){}
     ST.nivel=m.nivel||l.nivel||lvLocal||null;
     ST.prisma=m.prisma||l.prisma||null;
+    ST.prismaRes=m.prismaRes||l.prismaRes||null;
     ST.onb=m.onb||l.onb||null;
     ST.idioma=!!(m.idioma||l.idioma);
   }
@@ -482,7 +483,7 @@
     clearTimeout(salvarT);
     salvarT=setTimeout(function(){
       if(!U)return;
-      window._sb.auth.updateUser({data:{mi:{dias:ST.dias.slice(-150),vistas:ST.vistas.slice(-400),ultima:ST.ultima,bv:ST.bv,tour:ST.tour,nivel:ST.nivel,prisma:ST.prisma,onb:ST.onb,idioma:ST.idioma,prog:podarProg()}}}).catch(function(){});
+      window._sb.auth.updateUser({data:{mi:{dias:ST.dias.slice(-150),vistas:ST.vistas.slice(-400),ultima:ST.ultima,bv:ST.bv,tour:ST.tour,nivel:ST.nivel,prisma:ST.prisma,prismaRes:ST.prismaRes,onb:ST.onb,idioma:ST.idioma,prog:podarProg()}}}).catch(function(){});
     },1500);
   }
   function marcarDia(){
@@ -1529,7 +1530,20 @@
       +NIVEIS.map(function(n){return '<button class="gf-btn'+(n===lv?' active':'')+'" onclick="setManualLevel(\''+n+'\')">'+n+'</button>';}).join('')+'</div></div>'
       +'<div class="sec-hd">O que cada nível consegue fazer</div><div class="card">'+NIVEIS.map(function(n){return '<div style="display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--border)'+(n===lv?';font-weight:700':'')+'"><span class="level-tag" style="flex-shrink:0;'+(n===lv?'':'background:var(--surface2);color:var(--fg2)')+'">'+n+'</span><span style="font-size:12.5px;line-height:1.5;color:'+(n===lv?'var(--fg)':'var(--fg2)')+'">'+E(NIVEL_CAN[n])+'</span></div>';}).join('')+'</div>';
   }
-  function renderPrisma(){
+  function renderPrisma(){renderPrisma0();barrasPrisma();}
+  function barrasPrisma(){
+    var p=$('pane-prisma'),R=ST.prismaRes;if(!p||!R||!R.todas||!R.todas.length)return;
+    var cor={linguistica:'#E6B964',logica:'#5EC5B6',espacial:'#C97BA0',musical:'#7FA6E8',corporal:'#E8875E',interpessoal:'#6FBF73',intrapessoal:'#A98CE0',naturalista:'#8FBF6A',existencial:'#D96C6C'};
+    var mx=Math.max.apply(null,R.todas.map(function(x){return x.v;}))||1;
+    var box=document.createElement('div');box.className='intel-banner';box.style.marginTop='14px';
+    box.innerHTML='<div style="font-size:14px;font-weight:800;margin-bottom:12px">Seu mapa de inteligências</div>'
+      +R.todas.map(function(x,n){var c=cor[x.k]||'#8b5cf6';return '<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12.5px;font-weight:700;margin-bottom:4px"><span>'+(n<3?['🥇','🥈','🥉'][n]+' ':'')+E(x.nome)+'</span><span style="color:'+c+'">'+x.v+'%</span></div><div style="height:9px;border-radius:99px;background:var(--surface2);overflow:hidden"><i data-pw="'+x.v+'" style="display:block;height:100%;width:0;background:'+c+';border-radius:99px;transition:width 1.2s cubic-bezier(.22,1,.36,1) '+(n*.08)+'s"></i></div></div>';}).join('')
+      +(R.taticas&&R.taticas.length?'<div style="font-size:13px;font-weight:800;margin:14px 0 6px">Faça a partir de hoje</div><ul style="margin:0;padding-left:18px;font-size:12.5px;line-height:1.7;color:var(--fg2)">'+R.taticas.map(function(t){return '<li>'+E(t)+'</li>';}).join('')+'</ul>':'')
+      +(R.armadilha?'<div style="font-size:12.5px;margin-top:10px;padding:10px 12px;border-radius:12px;background:rgba(239,68,68,.08)"><b>⚠️ Cuidado:</b> '+E(R.armadilha)+'</div>':'');
+    var ban=p.querySelector('.intel-banner');if(ban)ban.insertAdjacentElement('afterend',box);else p.appendChild(box);
+    setTimeout(function(){[].forEach.call(box.querySelectorAll('[data-pw]'),function(el){el.style.width=el.dataset.pw+'%';});},60);
+  }
+  function renderPrisma0(){
     var p=$('pane-prisma');if(!p)return;var k=ST.prisma,it=k&&INTEL[k];
     p.innerHTML='<div style="font-size:21px;font-weight:800;margin-bottom:16px">Prisma de Talentos</div>'
       +'<div class="intel-banner"><div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:56px;height:56px;border-radius:16px;background:'+(it?'linear-gradient(135deg,#8b5cf6,#ec4899)':'var(--surface2)')+';display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0">'+(it?it.ic:'🔷')+'</div>'
@@ -1561,9 +1575,14 @@
   // o Prisma avisa sozinho o resultado (prisma.html?membro=1): salva e mostra o retorno, sem a pessoa precisar marcar
   window.addEventListener('message',function(e){
     var d=e.data||{};if(e.origin!==location.origin||!tq.classList.contains('on'))return;
-    if(d.tipo==='prisma-resultado'&&INTEL[d.k]){setPrisma(d.k);}
+    if(d.tipo==='prisma-resultado'&&INTEL[d.k]){
+      ST.prismaRes={k:d.k,top:(d.top||[]).slice(0,3),todas:(d.todas||[]).slice(0,9),canal:d.canal||null,taticas:(d.taticas||[]).slice(0,5),aprende:d.aprende||'',armadilha:d.armadilha||'',despertar:d.despertar||'',em:new Date().toISOString()};
+      setPrisma(d.k);
+      // o checklist do dia se refaz já com a tarefa do seu jeito
+      try{var lb=(LS.get('mi_ctx',{})||{}).k;if(lb&&window.renderMarTasks)window.renderMarTasks(lb);}catch(x){}
+    }
     if(d.tipo==='bussola-resultado'&&NIVEIS.indexOf(d.nivel)>=0){window.setManualLevel(d.nivel);}
-    if(d.tipo==='prisma-fechar'||d.tipo==='bussola-fechar')fecharTeste();
+    if(d.tipo==='prisma-fechar'||d.tipo==='bussola-fechar'){fecharTeste();if(d.ir){setTimeout(function(){var pl=document.querySelector('.sidebar .nav-pill[onclick*="\''+d.ir+'\'"]');goTo(d.ir,pl);},350);}}
   });
   function fecharTeste(){tq.classList.remove('on');tq.innerHTML='';document.body.style.overflow='';if(window._aposTeste){var f=window._aposTeste;window._aposTeste=null;setTimeout(f,250);}}
   document.addEventListener('click',function(e){
@@ -2373,7 +2392,7 @@
   (function esperar(n){var S=AS();if(S&&S.pronto&&S.cfg){migrarDados();return;}if(n<40)setTimeout(function(){esperar(n+1);},1000);})(0);
   window.miLink=function(u){
     var t=window._curTask?{key:window._curTask.key,i:window._curTask.i}:null;
-    if(u==='#jogos')return go('jogos');if(u==='#modulos')return go('modulos');if(u==='#planos')return go('planos');
+    if(u==='#jogos')return go('jogos');if(u==='#modulos')return go('modulos');if(u==='#planos')return go('planos');if(u==='#prisma')return go('prisma');
     if(u.indexOf('#aula:')===0){var x=u.split(':');return abrirAula(x[1],x[2]);}
     if(u.indexOf('#jogo:')===0){window.__tarefaJogo=t;if(!jogar(u.slice(6)))go('jogos');return;}
   };
@@ -2420,7 +2439,18 @@
   };
   function diaN(){return Math.floor(Date.now()/864e5);}
   var BASE={};
-  function tarefasDoDia(label){
+  function tarefasDoDia(label){tarefasDoDia0(label);tarefaDoJeito(label);}
+  function tarefaDoJeito(label){
+    if(!window.CTX_TASKS||!CTX_TASKS[label]||!ST.prisma||!INTEL[ST.prisma])return;
+    var it=INTEL[ST.prisma],R=ST.prismaRes||{},lista=(R.taticas&&R.taticas.length?R.taticas:[]).concat(it.est||[]);if(!lista.length)return;
+    var d=diaN(),dica=lista[d%lista.length];
+    var t={_jeito:1,icon:it.ic,title:'Do seu jeito: '+dica.replace(/\.$/,''),sub:'Prisma · '+it.nome,info:{
+      why:(R.aprende||it.desc)+' Por isso esta tarefa entra todo dia no seu checklist: é o caminho mais curto pro inglês ficar.',
+      steps:['Separe 10 a 15 minutos agora','Faça: '+dica,(R.despertar?'Lembre: '+R.despertar:'Repita amanhã: a constância vale mais que a intensidade'),'Marque como feita'],
+      links:[{t:'🔷 Ver meu Prisma',u:'#prisma'}]}};
+    CTX_TASKS[label]=CTX_TASKS[label].filter(function(x){return !x._jeito;}).concat([t]);
+  }
+  function tarefasDoDia0(label){
     if(!window.CTX_TASKS)return;
     if(label!=='Primeiros passos'&&!CTX_TASKS[label]&&!BASE[label])label='Em Casa';
     if(!BASE[label]&&CTX_TASKS[label]&&label!=='Primeiros passos')BASE[label]=CTX_TASKS[label].map(function(t,i){var o=Object.assign({},t);if(!o.info&&!o.ref)o.ref=[label,i];return o;});
