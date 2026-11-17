@@ -213,6 +213,9 @@ a{text-decoration:none}
 .b1.off{opacity:.55;pointer-events:none}
 @media (prefers-reduced-motion:reduce){.loop{overflow-x:auto;-webkit-mask-image:none;mask-image:none}.loop-faixa{animation:none}}
 /* planos: cartões escuros com brilho; o destaque sobe e brilha */
+.sec-texto{font-size:13.5px;color:var(--dim);line-height:1.5;margin:-8px 0 14px;max-width:62ch}
+.faixa-login{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 14px;padding:12px 14px;border-radius:16px;background:rgba(143,166,106,.12);border:1px solid rgba(143,166,106,.35);font-size:13px;line-height:1.4}
+.faixa-login button{flex:0 0 auto;padding:9px 14px;border-radius:99px;background:var(--cobre);color:#fff;font-weight:700;font-size:12.5px}
 .planos-topo{text-align:center;margin-bottom:22px}.planos-topo h2{font-size:clamp(34px,6.5vw,60px);line-height:1;margin:8px 0 12px}.planos-topo p{color:var(--dim);font-size:14px;max-width:54ch;margin:0 auto;line-height:1.5}
 .planos-pista{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:36px 8px 26px;margin:0 -8px;scrollbar-width:none;align-items:stretch}.planos-pista::-webkit-scrollbar{display:none}
 .plano{--pc:#7a8cff;position:relative;flex:0 0 min(78%,290px);scroll-snap-align:center;display:flex;flex-direction:column;padding:22px 20px 20px;border-radius:22px;color:var(--marfim);background:linear-gradient(165deg,rgba(25,42,76,.95),rgba(11,21,41,.95));border:1px solid var(--linha);box-shadow:0 22px 44px -26px #000;transition:transform .3s,box-shadow .3s}
@@ -360,6 +363,7 @@ body.entrando .mara{bottom:96px}
 .entrar-btn:hover{background:rgba(255,255,255,.2)}.entrar-btn:active{transform:scale(.96)}
 .entrar-btn svg{width:16px;height:16px}
 .entrar-btn.fixo{position:fixed;top:14px;left:14px;z-index:15}
+.entrar-btn.fixo.planos-fixo{left:112px;background:linear-gradient(135deg,#8294ff,#5566f0);box-shadow:0 0 18px rgba(104,122,255,.5)}
 .selo.tranca{background:rgba(10,20,38,.75);color:#fff}
 .atalhos{grid-auto-flow:column}
 @media (max-width:520px){.atalhos.muitos{display:flex;overflow-x:auto;scrollbar-width:none;margin-right:-16px;padding-right:16px}.atalhos.muitos::-webkit-scrollbar{display:none}.atalhos.muitos .atalho{flex:0 0 23%}}
@@ -403,6 +407,7 @@ body.entrando .mara{bottom:96px}
   </div>
   <button class="ligar" id="ligar" type="button">Ligar modo</button>
 </section>
+<button class="entrar-btn fixo planos-fixo" id="planosFixo" type="button" data-ir="#planos" hidden><span>Planos</span></button>
 <button class="entrar-btn fixo" id="entrarFixo" type="button" data-login hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg><span class="entrarTxt">Entrar</span></button>
 <button class="trocar" id="trocar" type="button" hidden>Modo <b id="trocarNome"></b> · trocar</button>
 
@@ -443,8 +448,16 @@ body.entrando .mara{bottom:96px}
 
   <section class="secao aparece" id="gratis">
     <div class="cab"><h2 class="serif" id="sGratis">Materiais grátis</h2><small id="contaGratis"></small></div>
+    <p class="sec-texto" id="tGratis"></p>
+    <div class="faixa-login" id="faixaLogin" hidden><span id="faixaTxt"></span><button type="button" data-login>Entrar na área de membros</button></div>
     <div class="filtros" id="filtros"></div>
     <div class="trilho cena" id="trilhoGratis"></div>
+  </section>
+
+  <section class="secao aparece" id="planos" hidden>
+    <div class="planos-topo"><span class="rotulo" id="pRotulo">Planos</span><h2 class="serif" id="pTitulo"></h2><p id="pSub"></p></div>
+    <div class="planos-pista" id="planosPista"></div>
+    <p class="planos-aviso" id="pAviso"></p>
   </section>
 
   <section class="secao aparece" id="jogos" hidden>
@@ -459,28 +472,26 @@ body.entrando .mara{bottom:96px}
 
   <section class="secao aparece" id="pagos">
     <div class="cab"><h2 class="serif" id="sPagos">Pra ir mais fundo</h2><button data-ir="#planos" id="sBotaoPagos">Planos →</button></div>
+    <p class="sec-texto" id="tPagos"></p>
     <div class="trilho cena" id="trilhoPagos"></div>
   </section>
 
   <section class="secao aparece" id="membros">
     <div class="cab"><h2 class="serif" id="sMembros">Dentro da mentoria</h2><button data-login id="sMembrosSub">Só pra alunos</button></div>
+    <p class="sec-texto" id="tMembros"></p>
     <div class="trilho cena" id="trilhoMembros"></div>
   </section>
 
   <section class="secao aparece" id="extras">
     <div class="cab"><h2 class="serif" id="sExtras">Ecossistema</h2></div>
+    <p class="sec-texto" id="tExtras"></p>
     <div class="trilho cena" id="trilhoExtras"></div>
   </section>
 
   <section class="secao aparece" id="alunos">
     <div class="cab"><h2 class="serif" id="sAlunos">Alunos que destravaram</h2></div>
+    <p class="sec-texto" id="tAlunos"></p>
     <div class="trilho cena" id="trilhoAlunos"></div>
-  </section>
-
-  <section class="secao aparece" id="planos" hidden>
-    <div class="planos-topo"><span class="rotulo" id="pRotulo">Planos</span><h2 class="serif" id="pTitulo"></h2><p id="pSub"></p></div>
-    <div class="planos-pista" id="planosPista"></div>
-    <p class="planos-aviso" id="pAviso"></p>
   </section>
 
   <section class="secao aparece chat-wrap" id="aplicar">
@@ -623,6 +634,9 @@ body.entrando .mara{bottom:96px}
   txt('#dRotulo', D.rotulo); txt('#dTitulo', D.titulo); txt('#dTexto', D.texto); txt('#dBotao', D.botao); src('#dImg', D.img);
   const S = H.secoes;
   txt('#sGratis', S.gratis); txt('#sPagos', S.pagos); txt('#sBotaoPagos', S.botaoPagos); txt('#sAlunos', S.alunos); txt('#sMembros', S.membros); txt('#sMembrosSub', S.membrosSub); txt('#sExtras', S.extras);
+  const S3 = H.secoes || {};
+  [['tGratis', 'gratisTexto'], ['tPagos', 'pagosTexto'], ['tMembros', 'membrosTexto'], ['tExtras', 'extrasTexto'], ['tAlunos', 'alunosTexto']].forEach(([id, k]) => { const el = $('#' + id); if (el) { el.textContent = S3[k] || ''; el.hidden = !S3[k]; } });
+  if (S3.gratisFaixa) { $('#faixaTxt').textContent = S3.gratisFaixa; $('#faixaLogin').hidden = false; }
   const MB = H.membros || {};
   document.querySelectorAll('.entrarTxt').forEach(e => { e.textContent = MB.botaoTopo || 'Entrar'; });
   const A = H.aplicacao;
@@ -679,8 +693,15 @@ body.entrando .mara{bottom:96px}
   }
 
   /* cards: tudo vem do Hub editável (hub-dados.js + painel) */
-  const itens = {};
-  (H.cards || []).filter(c => c.ativo !== false).forEach(c => {
+  const itens = {}, vistosId = new Set();
+  // some o que está repetido ou vazio (mesmo id duas vezes, "Novo material", cartão sem texto nem link)
+  const semConteudo = c => {
+    const t = c.tipo, tem = x => !!String(x || '').trim();
+    if (t === 'aluno') return !(tem(c.sinopse) || tem(c.video));
+    if (t === 'membros') return false;
+    return !(tem(c.link) || tem(c.video) || tem(c.sinopse) || (t === 'pago' && tem(c.preco)));
+  };
+  (H.cards || []).filter(c => c.ativo !== false && c.titulo && !semConteudo(c) && !vistosId.has(c.id) && vistosId.add(c.id)).forEach(c => {
     const interno = u => (/^[\w-]+\.html([?#].*)?$/.test(u || '') ? u : '');
     const link = https(c.link) || interno(c.link), link2 = https(c.link2) || interno(c.link2);
     itens[c.id] = { modos: c.modos || [], titulo: c.titulo, img: c.img, cat: c.setor || '', linha: c.linha, sinopse: c.sinopse,
@@ -709,17 +730,18 @@ body.entrando .mara{bottom:96px}
     const v = parseFloat(txt.replace(/[^\d,.]/g, '').replace(/\./g, '').replace(',', '.')); if (!isFinite(v) || v <= 0) return null;
     const n = parseInt(m.parcelas, 10) || (v >= 300 ? 6 : 1); if (n < 2) return null;
     return { n, cada: (v / n).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }), cheio: txt }; };
+  const resumo = t => { const s = String(t || '').replace(/\s+/g, ' ').trim(); if (!s) return ''; const f = (s.match(/^.*?[.!?](?=\s|$)/) || [s])[0]; return f.length > 78 ? f.slice(0, 75).replace(/\s+\S*$/, '') + '…' : f; };
   const cardPost = (k, sub) => { const m = itens[k]; const pc = parcelado(m);
     const foto = m.img && !/logo-/.test(m.img) ? `<img src="${esc(m.img)}" alt="" loading="lazy">` : `<span class="letra grad g${[...k].reduce((a, c) => a + c.charCodeAt(0), 0) % 6}"><span>${esc(m.cat === 'Comunidade' ? 'Grupo' : m.cat)}</span></span>`;
     const selo = m.membros ? '<span class="selo tranca">🔒 No programa</span>' : m.gratis ? '<span class="selo gratis">Grátis</span>' : m.preco && typeof m.preco === 'string' ? `<span class="selo">${esc(pc ? pc.n + 'x ' + pc.cada : m.preco)}</span>` : m.pago ? '<span class="selo">Novo</span>' : '';
     return `<button class="post t3d" data-abrir="${esc(k)}"><span class="brilho"></span>${selo}<span class="foto">${foto}</span>
-      <span class="rodape"><span>${esc(m.aluno ? '“' + m.titulo + '”' : m.titulo)}<small>${esc(m.linha || sub(m))}</small></span><i class="seta">${SETA}</i></span></button>`; };
+      <span class="rodape"><span>${esc(m.aluno ? '“' + m.titulo + '”' : m.titulo)}<small>${esc(m.linha || resumo(m.sinopse) || sub(m))}</small></span><i class="seta">${SETA}</i></span></button>`; };
 
   function desenhar() {
     const gr = ordem().filter(k => itens[k].gratis && (filtro === 'Tudo' || itens[k].cat === filtro));
     $('#trilhoGratis').innerHTML = gr.map(k => cardPost(k, m => m.cat)).join('');
     $('#contaGratis').textContent = gr.length + ' materiais';
-    const cats = ['Tudo', ...new Set(ordem().filter(k => itens[k].gratis).map(k => itens[k].cat))];
+    const cats = ['Tudo', ...new Set(ordem().filter(k => itens[k].gratis).map(k => itens[k].cat).filter(Boolean))];
     $('#filtros').innerHTML = cats.map(c => `<button class="filtro" aria-pressed="${c === filtro}" data-filtro="${esc(c)}">${esc(c)}</button>`).join('');
     // materiais à venda: todos sempre aparecem; os do modo primeiro
     const doMp = k => modo && (itens[k].modos || []).includes(modo.id) ? 0 : 1;
@@ -742,7 +764,9 @@ body.entrando .mara{bottom:96px}
 
   /* galerias em loop (Jogos e Simuladores) */
   function galeria(tipo, idSec, idLoop, idConta, titulo) {
-    const lista = (H[tipo] || []).filter(x => x && x.ativo !== false && x.titulo);
+    // sem link não dá pra jogar: o item (e a galeria inteira, se ficar vazia) só aparece quando tiver o link
+    const jogavel = u => !!(https(u) || /^[\w-]+\.html([?#].*)?$/.test(u || ''));
+    const lista = (H[tipo] || []).filter(x => x && x.ativo !== false && x.titulo && jogavel(x.link));
     $('#' + idSec).hidden = !lista.length; if (!lista.length) return;
     txt('#' + titulo, (H.secoes || {})[tipo]); $('#' + idConta).textContent = lista.length + (tipo === 'jogos' ? ' jogos' : ' simuladores');
     const um = lista.map((x, i) => `<button class="jogo t3d" type="button" data-jogo="${tipo}:${(H[tipo] || []).indexOf(x)}" aria-label="${esc(x.titulo)}"><span class="jogo-ico ${x.img ? '' : 'grad g' + (i % 5 + 1)}">${x.img ? `<img src="${esc(x.img)}" alt="" loading="lazy">` : `<span>${esc(x.icone || '🎮')}</span>`}</span><b>${esc(x.titulo)}</b></button>`).join('');
@@ -1175,7 +1199,7 @@ body.entrando .mara{bottom:96px}
     modo = m;
     try { localStorage.setItem('ebg:hubmodo', m.id); } catch (e) {}
     $('#trocarNome').textContent = m.nome.replace(/^Modo /, '');
-    $('#trocar').hidden = false; $('#entrarFixo').hidden = false;
+    $('#trocar').hidden = false; $('#entrarFixo').hidden = false; $('#planosFixo').hidden = !(H.planos || []).some(p => p && p.ativo !== false && p.nome);
     // site inteiro dentro do modo (ex.: Central de Prompts no Modo Prompts)
     const emb = (H.embutidos || []).find(x => x.ativo !== false && x.modo === m.id);
     const urlEmb = emb && (https(emb.url) || (/^[\w-]+\.html([?#].*)?$/.test(emb.url || '') ? emb.url : ''));
@@ -1194,7 +1218,7 @@ body.entrando .mara{bottom:96px}
     scrollTo(0, 0); setTimeout(mover, 50);
   }
   $('#ligar').addEventListener('click', () => ligarModo(escolhido || modos[0]));
-  $('#trocar').addEventListener('click', () => { document.body.classList.add('entrando'); $('#entrarFixo').hidden = true; $('#entrada').classList.remove('sai'); document.body.style.overflow = 'hidden'; requestAnimationFrame(sozinho); });
+  $('#trocar').addEventListener('click', () => { document.body.classList.add('entrando'); $('#entrarFixo').hidden = true; $('#planosFixo').hidden = true; $('#entrada').classList.remove('sai'); document.body.style.overflow = 'hidden'; requestAnimationFrame(sozinho); });
 
   let salvo = null; try { salvo = localStorage.getItem('ebg:hubmodo'); } catch (e) {}
   escolher((modos.find(m => m.id === salvo) || modos[0]).id);
