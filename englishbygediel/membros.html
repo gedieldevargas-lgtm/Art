@@ -391,6 +391,10 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
 .lesson-tab{background:none;border:none;border-bottom:2px solid transparent;padding:8px 14px 10px;font-size:12px;font-weight:700;color:var(--fg2);cursor:pointer;margin-bottom:-1px}
 .lesson-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
 .lesson-panel{display:none}.lesson-panel.active{display:block}
+.les-nav{display:flex;gap:8px;margin:10px 0 12px}
+.les-nav-b{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:10px 14px;font-size:12px;font-weight:700;color:var(--fg2);cursor:pointer;text-align:left}
+.les-nav-b.next{flex:1;background:var(--accent);border-color:var(--accent);color:#fff;font-size:13px;text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:2px;min-width:0}
+.les-nav-b.next small{font-size:10px;font-weight:600;opacity:.85;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .lesson-desc{font-size:13px;line-height:1.75;color:var(--fg);white-space:pre-wrap}
 .quiz-q{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:10px}
 .quiz-q .qt{font-size:13px;font-weight:700;margin-bottom:10px}
@@ -2073,6 +2077,7 @@ async function renderLesson(){
       +'<div class="s">'+(votes.length?'<strong>'+votes.length+'</strong> '+(votes.length===1?'pessoa está esperando':'pessoas estão esperando')+' por ela':'Seja o primeiro a pedir essa aula')+'</div>'
       +'<button class="vote-btn '+(myVote?'on':'')+'" onclick="toggleVote()">'+(myVote?'✅ Você está esperando':'🙋 Estou esperando por essa aula')+'</button></div></div>';
   }
+  html+=lessonNav();
   // reações
   html+='<div class="react-row">';
   REACT_EMOJIS.forEach(function(e){html+='<button class="react-btn '+(myReact===e?'on':'')+'" onclick="toggleReact(\''+e+'\')">'+e+(rc[e]?'<span class="cnt">'+rc[e]+'</span>':'')+'</button>';});
@@ -2089,6 +2094,15 @@ async function renderLesson(){
     +'<div class="comment-box"><textarea class="admin-inp" id="les-comment-txt" placeholder="Deixa sua dúvida ou comentário sobre a aula..."></textarea><button class="admin-btn admin-btn-primary" onclick="postComment()">Comentar</button></div></div>';
   v.innerHTML=html;
   loadComments();
+}
+function lessonNav(){
+  var ls=_stLessons[_stCurMod.id]||[],i=ls.indexOf(_stCurLes);
+  var pv=i>0?ls[i-1]:null,nx=i>=0&&i<ls.length-1?ls[i+1]:null;
+  var h='<div class="les-nav">';
+  h+=pv?'<button class="les-nav-b" onclick="openLesson(\''+pv.id+'\')">‹ Anterior</button>':'<span></span>';
+  h+=nx?'<button class="les-nav-b next" onclick="openLesson(\''+nx.id+'\')"><span>Próxima aula'+(isOpen(nx)?'':' 🔒')+'</span> ›<small>'+esc(nx.title)+'</small></button>'
+       :'<button class="les-nav-b next" onclick="openModule(\''+_stCurMod.id+'\')"><span>Fim do módulo</span> ✓<small>Voltar para as aulas</small></button>';
+  return h+'</div>';
 }
 function ls_index(l){var ls=_stLessons[_stCurMod.id]||[];return ls.indexOf(l)+1;}
 function lesTab(t){_stLesTab=t;
