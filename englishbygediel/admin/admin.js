@@ -77,6 +77,7 @@
     if (aba === 'hub' && window.EBG_HUBED) window.EBG_HUBED.abrir();
     if (aba === 'dados' && window.EBG_HUBNUM) window.EBG_HUBNUM.abrir();
     if (aba === 'pessoas' && window.EBG_PESSOAS) window.EBG_PESSOAS.abrir();
+    if (aba === 'maratonas' && window.EBG_MARATONAS_ADM) window.EBG_MARATONAS_ADM.abrir();
   }
 
   /* ---------------- números ---------------- */

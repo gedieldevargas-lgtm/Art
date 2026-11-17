@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Largada · Maratona 10 meses</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b0d1c">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:'Plus Jakarta Sans',-apple-system,system-ui,sans-serif;color:#fff;background:#0b0d1c;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+button,input{font:inherit;color:inherit}
+/* fundo vivo, igual à entrada da área de membros */
+.bg{position:fixed;inset:0;background:radial-gradient(ellipse at 20% 0%,#3b4fd8 0%,#1b1f4b 45%,#0b0d1c 100%);z-index:-2}
+.bg i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.45;animation:flut 14s ease-in-out infinite}
+.bg i:nth-child(1){width:340px;height:340px;background:#8b5cf6;top:-80px;right:-60px}
+.bg i:nth-child(2){width:300px;height:300px;background:#d6965a;bottom:-90px;left:-80px;animation-delay:-5s;opacity:.3}
+.bg i:nth-child(3){width:220px;height:220px;background:#4f6ef7;top:45%;left:55%;animation-delay:-9s}
+@keyframes flut{50%{transform:translate(30px,40px) scale(1.12)}}
+.topo{position:fixed;top:0;left:0;right:0;z-index:5;padding:14px 18px 0;display:flex;align-items:center;gap:12px}
+.voltar{width:38px;height:38px;border-radius:12px;border:0;background:rgba(255,255,255,.1);cursor:pointer;font-size:18px;flex:none;transition:opacity .2s}
+.voltar[hidden]{display:block;visibility:hidden}
+.barra{flex:1;height:6px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden}
+.barra i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#fff,#f2c69c);transition:width .5s cubic-bezier(.22,1,.36,1)}
+.conta{font-size:11px;font-weight:800;opacity:.6;min-width:38px;text-align:right}
+main{min-height:100%;display:flex;align-items:center;justify-content:center;padding:76px 20px 120px}
+.tela{width:100%;max-width:560px}
+.tela.entra{animation:entra .55s cubic-bezier(.22,1,.36,1) both}
+.tela.sai{animation:sai .28s ease-in both}
+.tela.volta{animation:volta .5s cubic-bezier(.22,1,.36,1) both}
+@keyframes entra{from{opacity:0;transform:translateX(46px)}}
+@keyframes volta{from{opacity:0;transform:translateX(-46px)}}
+@keyframes sai{to{opacity:0;transform:translateY(-14px) scale(.98)}}
+.k{font-size:11px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;opacity:.65;text-align:center}
+.q{font-size:clamp(25px,5.4vw,34px);font-weight:800;text-align:center;line-height:1.15;margin:10px 0 8px;text-wrap:balance}
+.q em{font-style:normal;background:linear-gradient(90deg,#fff,#f2c69c);-webkit-background-clip:text;background-clip:text;color:transparent}
+.s{font-size:14px;opacity:.75;text-align:center;line-height:1.55;max-width:440px;margin:0 auto 24px}
+.in{width:100%;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.16);border-radius:18px;padding:18px 20px;font-size:19px;font-weight:600;outline:none;text-align:center;transition:border-color .2s,background .2s}
+.in:focus{border-color:#fff;background:rgba(255,255,255,.12)}
+.in::placeholder{color:rgba(255,255,255,.35);font-weight:500}
+.dois{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ops{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ops.uma{grid-template-columns:1fr}
+.op{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.14);border-radius:20px;padding:18px 14px;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:6px;opacity:0;transform:translateY(14px);animation:up .45s cubic-bezier(.22,1,.36,1) forwards;transition:background .15s,border-color .15s,transform .12s}
+.op:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.4)}
+.op:active{transform:scale(.96)}
+.op.on,.op.on:hover{background:#fff;color:#1b1f4b;border-color:#fff}
+.op .ic{font-size:30px;line-height:1}.op .lb{font-size:15px;font-weight:800}.op .ht{font-size:11.5px;opacity:.7;line-height:1.35}
+@keyframes up{to{opacity:1;transform:none}}
+.olho{position:relative}.olho button{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:0;font-size:20px;cursor:pointer;opacity:.7}
+.erro{min-height:20px;text-align:center;color:#fca5a5;font-size:13px;font-weight:600;margin-top:12px}
+.cta{position:fixed;left:50%;transform:translateX(-50%);bottom:max(18px,env(safe-area-inset-bottom));width:calc(100% - 40px);max-width:520px;background:#fff;color:#1b1f4b;border:0;border-radius:18px;padding:17px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 14px 40px rgba(0,0,0,.4);transition:transform .12s,opacity .2s;z-index:5}
+.cta:active{transform:translateX(-50%) scale(.98)}
+.cta:disabled{opacity:.45;cursor:default}
+.cta[hidden]{display:none}
+.pular{display:block;margin:16px auto 0;background:none;border:0;color:rgba(255,255,255,.6);font-size:13px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.dica{font-size:12px;opacity:.55;text-align:center;margin-top:10px}
+/* capa e largada */
+.foto{width:150px;height:150px;border-radius:50%;margin:0 auto 18px;background:url('img/maratona-casal.webp') center/cover;box-shadow:0 0 0 6px rgba(255,255,255,.08),0 0 0 14px rgba(255,255,255,.04),0 20px 60px rgba(0,0,0,.5);animation:pulso 3s ease-in-out infinite}
+@keyframes pulso{50%{box-shadow:0 0 0 10px rgba(255,255,255,.1),0 0 0 22px rgba(255,255,255,.03),0 20px 60px rgba(0,0,0,.5)}}
+.lista{display:grid;gap:8px;margin:4px 0 6px}
+.lista div{display:flex;gap:12px;align-items:center;background:rgba(255,255,255,.07);border-radius:14px;padding:12px 14px;font-size:13.5px;line-height:1.45;opacity:0;animation:up .5s cubic-bezier(.22,1,.36,1) forwards}
+.lista b{width:30px;height:30px;border-radius:10px;background:rgba(255,255,255,.16);display:grid;place-items:center;flex:none;font-size:15px}
+.peito{position:relative;margin:0 auto 22px;width:min(320px,90%);aspect-ratio:1.45;border-radius:22px;background:#fff;color:#1b1f4b;padding:16px 18px;box-shadow:0 30px 80px rgba(0,0,0,.5);transform:rotate(-3deg);animation:peito .9s cubic-bezier(.2,1.4,.4,1) both}
+.peito:before,.peito:after{content:"";position:absolute;top:12px;width:12px;height:12px;border-radius:50%;background:#0b0d1c}
+.peito:before{left:12px}.peito:after{right:12px}
+.peito small{display:block;text-align:center;font-size:10px;font-weight:800;letter-spacing:2px;color:#8b5cf6}
+.peito strong{display:block;text-align:center;font-size:clamp(54px,16vw,76px);line-height:1;font-weight:800;letter-spacing:-2px;margin:6px 0 4px;background:linear-gradient(135deg,#4f6ef7,#8b5cf6,#d6965a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.peito span{display:block;text-align:center;font-size:13px;font-weight:800}
+.peito em{display:block;text-align:center;font-style:normal;font-size:11px;opacity:.6;margin-top:2px}
+@keyframes peito{from{opacity:0;transform:rotate(-14deg) scale(.6) translateY(60px)}}
+.confete{position:fixed;inset:0;pointer-events:none;z-index:9}
+.confete i{position:absolute;top:-20px;width:9px;height:14px;border-radius:2px;animation:cai linear forwards}
+@keyframes cai{to{transform:translateY(110vh) rotate(720deg)}}
+.giro{width:46px;height:46px;border-radius:50%;border:4px solid rgba(255,255,255,.2);border-top-color:#fff;margin:0 auto 18px;animation:gira .8s linear infinite}
+@keyframes gira{to{transform:rotate(360deg)}}
+@media (max-width:420px){.ops{grid-template-columns:1fr}.op{flex-direction:row;align-items:center;gap:12px;padding:15px}.op .ic{font-size:26px}.dois{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="bg"><i></i><i></i><i></i></div>
+<header class="topo" id="topo" hidden><button class="voltar" id="voltar" aria-label="Voltar">←</button><div class="barra"><i id="barra"></i></div><span class="conta" id="conta"></span></header>
+<main><section class="tela entra" id="tela"><div class="giro"></div><p class="s">Preparando a sua largada…</p></section></main>
+<button class="cta" id="cta" hidden></button>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.0/dist/umd/supabase.min.js"></script>
+<script src="maratonas.js"></script>
+<script>
+(function () {
+  var MR = window.EBG_MARATONAS, $ = function (s) { return document.querySelector(s); };
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  var codigo = new URLSearchParams(location.search).get('c') || '';
+  var api = function (corpo) { return fetch('/.netlify/functions/maratona-cadastro', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(corpo) }).then(function (r) { return r.json().then(function (j) { j._ok = r.ok; return j; }); }); };
+  var R = { pais: 'Brasil', objetivo: [], turno: [] };
+  var ICN = { 'Do zero': '🌱', 'Básico (entendo pouco)': '🙂', 'Intermediário (entendo, mas travo)': '😬', 'Avançado': '🚀', 'Não sei': '🤔',
+    'Viagem': '✈️', 'Morar fora': '🏡', 'Trabalho / carreira': '💼', 'Fé / missões': '🙏', 'Estudos / intercâmbio': '🎓', 'Falar com família ou amigos': '💬', 'Realização pessoal': '⭐',
+    'Manhã': '🌅', 'Tarde': '☀️', 'Noite': '🌙', 'Fim de semana': '🛋️' };
+  var C = MR.comuns;
+
+  /* as telas: uma pergunta por vez */
+  var P = [
+    { id: 'capa' },
+    { id: 'nome', k: 'Vamos começar', q: 'Como você <em>se chama</em>?', s: 'Seu nome completo, do jeito que vai aparecer no ranking.', campo: { n: 'nome', ph: 'Seu nome', ac: 'name' },
+      ok: function () { return R.nome && R.nome.trim().length > 1 || 'Escreva o seu nome.'; } },
+    { id: 'email', k: 'Seu login', q: () => 'Prazer, <em>' + esc(primeiro()) + '</em>! Qual é o seu e-mail?', s: 'É com ele que você entra na plataforma.', campo: { n: 'email', ph: 'voce@email.com', t: 'email', ac: 'email', im: 'email' },
+      ok: function () { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((R.email || '').trim()) || 'Confira o e-mail.'; } },
+    { id: 'senha', k: 'Seu login', q: 'Crie uma <em>senha</em>', s: 'Mínimo 6 caracteres. Se você já tem conta, pode digitar a de sempre.', campo: { n: 'senha', ph: '••••••', t: 'password', ac: 'new-password' },
+      ok: function () { return (R.senha || '').length >= 6 || 'A senha precisa ter pelo menos 6 caracteres.'; } },
+    { id: 'whatsapp', k: 'Contato', q: 'Seu <em>WhatsApp</em>', s: 'Com DDD. É por aqui que a gente se fala durante a maratona.', campo: { n: 'whatsapp', ph: '(55) 99999-9999', t: 'tel', ac: 'tel', im: 'tel' },
+      ok: function () { return (R.whatsapp || '').replace(/\D/g, '').length >= 10 || 'Confira o número com DDD.'; } },
+    { id: 'lugar', k: 'Onde você está', q: 'De onde você <em>vai correr</em> essa maratona?', s: 'Cidade e país.', lugar: true,
+      ok: function () { return (R.cidade || '').trim().length > 1 || 'Escreva a sua cidade.'; } },
+    { id: 'nivel', k: 'Seu inglês', q: 'Como está o seu <em>inglês hoje</em>?', s: 'Sem vergonha: é o ponto de partida.', ops: C.nivel, n: 'nivel' },
+    { id: 'objetivo', k: 'Seu porquê', q: 'Pra que você quer o <em>inglês</em>?', s: 'Pode marcar mais de um.', ops: C.objetivo, n: 'objetivo', multi: true },
+    { id: 'turno', k: 'Sua rotina', q: 'Que horas do dia você <em>tem pra você</em>?', s: 'Pode marcar mais de um. Vamos montar o ritmo com isso.', ops: C.turno, n: 'turno', multi: true },
+    { id: 'profissao', k: 'Quase lá', q: 'O que você <em>faz</em> no dia a dia?', s: 'Profissão ou estudo. Ajuda a gente a puxar o inglês pro seu mundo.', campo: { n: 'profissao', ph: 'Ex.: professora, vendedor, estudante' }, opcional: true },
+    { id: 'confere', k: 'Tudo certo?', q: 'Confere os seus <em>dados</em>', confere: true },
+    { id: 'criando' },
+    { id: 'largada' }
+  ];
+  var perguntas = P.filter(function (p) { return p.k; }).length;
+  var i = 0, ultimo = 0, RES = null;
+  function primeiro() { return String(R.nome || '').trim().split(' ')[0] || 'maratonista'; }
+
+  function ir(n) {
+    var t = $('#tela'), volta = n < i;
+    t.classList.remove('entra', 'volta'); t.classList.add('sai');
+    setTimeout(function () { i = n; pintar(volta); }, 240);
+  }
+  function pintar(volta) {
+    var p = P[i], t = $('#tela'), cta = $('#cta');
+    t.className = 'tela ' + (volta ? 'volta' : 'entra');
+    var nQ = P.slice(0, i + 1).filter(function (x) { return x.k; }).length;
+    $('#topo').hidden = !p.k;
+    $('#barra').style.width = Math.round(nQ / perguntas * 100) + '%';
+    $('#conta').textContent = p.k ? nQ + '/' + perguntas : '';
+    $('#voltar').hidden = i <= 1;
+    cta.hidden = false; cta.disabled = false;
+    var h = '';
+    if (p.id === 'capa') {
+      h = '<div class="foto"></div><div class="k">Maratona 10 meses · Turma Fundadora</div><h1 class="q">Sua <em>largada</em> começa aqui</h1>'
+        + '<p class="s">Em 1 minuto você cria o seu acesso à Plataforma Inteligente. Ele já nasce com o seu plano e com a área exclusiva da maratona liberada.</p>'
+        + '<div class="lista">' + [['📝', '9 perguntas rápidas, uma por tela'], ['🔐', 'Seu login e senha na hora'], ['🏁', 'Card de largada e o primeiro passo guiado']].map(function (x, j) { return '<div style="animation-delay:' + (.15 + j * .1) + 's"><b>' + x[0] + '</b>' + x[1] + '</div>'; }).join('') + '</div>';
+      cta.textContent = 'Bora começar →';
+    } else if (p.campo) {
+      var c = p.campo;
+      h = cab(p) + (c.t === 'password' ? '<div class="olho">' : '') + '<input class="in" id="campo" ' + (c.t ? 'type="' + c.t + '"' : '') + ' placeholder="' + esc(c.ph) + '" autocomplete="' + (c.ac || 'off') + '"' + (c.im ? ' inputmode="' + c.im + '"' : '') + ' value="' + esc(R[c.n] || '') + '" maxlength="160">'
+        + (c.t === 'password' ? '<button type="button" id="ver" aria-label="Mostrar senha">👁️</button></div>' : '')
+        + '<p class="erro" id="erro"></p>' + (p.opcional ? '<button class="pular" id="pularQ">Pular esta</button>' : '<p class="dica">Aperte Enter pra seguir</p>');
+      cta.textContent = 'Continuar →';
+    } else if (p.lugar) {
+      h = cab(p) + '<div class="dois"><input class="in" id="cidade" placeholder="Cidade" autocomplete="address-level2" value="' + esc(R.cidade || '') + '" maxlength="120"><input class="in" id="pais" placeholder="País" autocomplete="country-name" value="' + esc(R.pais || '') + '" maxlength="80"></div><p class="erro" id="erro"></p>';
+      cta.textContent = 'Continuar →';
+    } else if (p.ops) {
+      var sel = p.multi ? R[p.n] : [R[p.n]];
+      h = cab(p) + '<div class="ops' + (p.ops.length > 6 ? '' : '') + '">' + p.ops.map(function (o, j) {
+        var m = o.match(/^(.*?)\s*\((.*)\)$/), lb = m ? m[1] : o, ht = m ? m[2] : '';
+        return '<button type="button" class="op' + (sel.indexOf(o) >= 0 ? ' on' : '') + '" data-op="' + esc(o) + '" style="animation-delay:' + (j * .05) + 's"><span class="ic">' + (ICN[o] || '•') + '</span><span><span class="lb">' + esc(lb) + '</span>' + (ht ? '<span class="ht" style="display:block">' + esc(ht) + '</span>' : '') + '</span></button>';
+      }).join('') + '</div><p class="erro" id="erro"></p>';
+      cta.textContent = 'Continuar →';
+      if (!p.multi) cta.hidden = !R[p.n];
+      else cta.disabled = !R[p.n].length;
+    } else if (p.confere) {
+      var L = [['👤', R.nome], ['✉️', R.email], ['📱', R.whatsapp], ['📍', [R.cidade, R.pais].filter(Boolean).join(' · ')], ['🗣️', R.nivel], ['🎯', R.objetivo.join(', ')], ['⏰', R.turno.join(', ')], ['💼', R.profissao || '—']];
+      h = cab(p) + '<div class="lista">' + L.map(function (x, j) { return '<div style="animation-delay:' + (j * .05) + 's"><b>' + x[0] + '</b>' + esc(x[1] || '—') + '</div>'; }).join('') + '</div><p class="erro" id="erro"></p>';
+      cta.textContent = 'Criar meu acesso 🏁';
+    } else if (p.id === 'criando') {
+      h = '<div class="giro"></div><h2 class="q">Montando a sua <em>largada</em>…</h2><p class="s">Criando a conta e liberando a área da maratona.</p>';
+      cta.hidden = true; $('#topo').hidden = true;
+    } else if (p.id === 'largada') {
+      $('#topo').hidden = true;
+      h = '<div class="peito"><small>MARATONA 10 MESES</small><strong>' + (RES.numero ? '#' + esc(RES.numero) : '🏁') + '</strong><span>' + esc(R.nome) + '</span><em>Turma Fundadora · largada 16/11/2026</em></div>'
+        + '<h1 class="q">Você está na <em>pista</em>, ' + esc(primeiro()) + '!</h1>'
+        + '<p class="s">' + (RES.existia ? 'Você já tinha conta: juntei os seus dados e liberei a maratona. Entre com a <b>senha que você já usava</b>.' : 'Seu acesso está pronto. Lá dentro, a sua largada te guia passo a passo:') + '</p>'
+        + '<div class="lista">' + [['🧭', 'Um teste: Prisma ou Bússola'], ['📝', 'Perguntas do seu perfil'], ['🗺️', 'Tour pelos menus da plataforma'], ['🎬', '5 primeiras aulas: liberam o seu checklist']].map(function (x, j) { return '<div style="animation-delay:' + (.6 + j * .12) + 's"><b>' + x[0] + '</b>' + x[1] + '</div>'; }).join('') + '</div>';
+      cta.textContent = 'Entrar e começar →';
+      confete();
+    }
+    t.innerHTML = h;
+    var f = t.querySelector('#campo,#cidade'); if (f) setTimeout(function () { f.focus(); }, 380);
+  }
+  function cab(p) { var q = typeof p.q === 'function' ? p.q() : p.q; return '<div class="k">' + esc(p.k) + '</div><h1 class="q">' + q + '</h1><p class="s">' + esc(p.s || '') + '</p>'; }
+  function erro(m) { var e = $('#erro'); if (e) { e.textContent = m; var t = $('#tela'); t.animate && t.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-8px)' }, { transform: 'translateX(8px)' }, { transform: 'translateX(0)' }], { duration: 260 }); } }
+
+  function seguir() {
+    var p = P[i];
+    if (p.id === 'capa') return ir(1);
+    if (p.campo) { R[p.campo.n] = $('#campo').value; }
+    if (p.lugar) { R.cidade = $('#cidade').value; R.pais = $('#pais').value; }
+    if (p.ok) { var v = p.ok(); if (v !== true) return erro(v); }
+    if (p.confere) return criar();
+    if (p.id === 'largada') return entrar();
+    ir(i + 1);
+  }
+  async function criar() {
+    ir(P.findIndex(function (x) { return x.id === 'criando'; }));
+    var r;
+    try {
+      r = await api({ codigo: codigo, nome: R.nome, email: R.email, senha: R.senha, whatsapp: R.whatsapp.replace(/\D/g, ''), cidade: R.cidade, pais: R.pais,
+        profissao: R.profissao || '', nivel: R.nivel, objetivo: R.objetivo.join(', '), turno: R.turno.join(', ') });
+    } catch (e) { r = { _ok: false, erro: 'Sem conexão. Tente de novo.' }; }
+    if (!r._ok) { setTimeout(function () { i = P.findIndex(function (x) { return x.confere; }); pintar(true); erro(r.erro || 'Algo deu errado.'); }, 500); return; }
+    RES = r;
+    setTimeout(function () { ir(P.length - 1); }, 700);
+  }
+  // entra direto: faz o login aqui mesmo e abre a área de membros já logado
+  async function entrar() {
+    var cta = $('#cta'); cta.disabled = true; cta.textContent = 'Entrando…';
+    try {
+      var sb = supabase.createClient('https://jzdxcefnlwjgimymgsux.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp6ZHhjZWZubHdqZ2lteW1nc3V4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQyMTgzNjMsImV4cCI6MjEwOTc5NDM2M30.Ehq4MCc_0LhgF757ngpimBGzyh0O2o9xSb4Qkr4zybI');
+      await sb.auth.signInWithPassword({ email: R.email.trim().toLowerCase(), password: R.senha });
+    } catch (e) {}
+    try { localStorage.setItem('mt10:largada-pendente', R.email.trim().toLowerCase()); } catch (e) {}
+    location.href = 'membros.html';
+  }
+  function confete() {
+    var c = document.createElement('div'); c.className = 'confete'; var cores = ['#fff', '#f2c69c', '#8b5cf6', '#4f6ef7', '#10b981', '#d6965a'];
+    for (var j = 0; j < 70; j++) { var x = document.createElement('i'); x.style.left = Math.random() * 100 + '%'; x.style.background = cores[j % cores.length]; x.style.animationDuration = 2 + Math.random() * 2.5 + 's'; x.style.animationDelay = Math.random() * .6 + 's'; c.appendChild(x); }
+    document.body.appendChild(c); setTimeout(function () { c.remove(); }, 5500);
+  }
+
+  document.addEventListener('click', function (e) {
+    var o = e.target.closest('[data-op]');
+    if (o) {
+      var p = P[i], v = o.dataset.op;
+      if (p.multi) { var a = R[p.n], k = a.indexOf(v); if (k >= 0) a.splice(k, 1); else a.push(v); o.classList.toggle('on'); $('#cta').disabled = !a.length; }
+      else { R[p.n] = v; document.querySelectorAll('[data-op]').forEach(function (x) { x.classList.toggle('on', x === o); }); setTimeout(function () { ir(i + 1); }, 260); }
+      return;
+    }
+    if (e.target.id === 'cta') return seguir();
+    if (e.target.id === 'voltar') return ir(Math.max(1, i - 1));
+    if (e.target.id === 'pularQ') { R.profissao = ''; return ir(i + 1); }
+    if (e.target.id === 'ver') { var c = $('#campo'); c.type = c.type === 'password' ? 'text' : 'password'; }
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !$('#cta').hidden && !$('#cta').disabled) { e.preventDefault(); seguir(); } });
+
+  function invalido(t) { $('#tela').innerHTML = '<div class="foto" style="filter:grayscale(1)"></div><h1 class="q">Link <em>inválido</em></h1><p class="s">' + esc(t) + '</p>'; }
+  if (!codigo) return invalido('Use o link que o Gediel mandou no grupo da maratona.');
+  api({ codigo: codigo, so_checar: true }).then(function (r) { if (!r._ok) return invalido(r.erro || 'Link inválido.'); pintar(); })
+    .catch(function () { invalido('Sem conexão. Tente de novo.'); });
+})();
+</script>
+</body>
+</html>

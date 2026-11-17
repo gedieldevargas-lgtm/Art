@@ -12,7 +12,7 @@
   const soNum = t => String(t || '').replace(/\D/g, '');
   const tel = t => { let n = soNum(t); if (!n) return ''; if (n.length <= 11) n = '55' + n; return n; };
   const insta = t => { const s = String(t || '').trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i, '').replace(/[/?].*$/, '').replace(/^@/, ''); return s ? '@' + s.toLowerCase() : ''; };
-  const FONTES = { programa: 'Programa (chat)', mentoria: 'Mentoria particular', catalogo: 'Catálogo antigo', compra: 'Comprou' };
+  const FONTES = { programa: 'Programa (chat)', mentoria: 'Mentoria particular', catalogo: 'Catálogo antigo', compra: 'Comprou', maratona: 'Maratona' };
   const NOMES_MODO = Object.fromEntries((window.EBG && window.EBG.modos || []).map(m => [m.id, m.nome]));
   let pessoas = [], eventosPorVisitante = new Map(), marcas = {};
 
@@ -31,10 +31,11 @@
     box.innerHTML = '<p class="sub">Carregando…</p>';
     const mc = await sb.from('crm_marcas').select('chave,chamado,chamado_em').like('chave', 'tel:%').limit(20000);
     marcas = Object.fromEntries(((mc && mc.data) || []).map(m => [m.chave, m]));
-    const [prog, ment, cat, vend, evs] = await Promise.all([
+    const [prog, ment, cat, vend, evs, mara] = await Promise.all([
       ler('leads_programa'), ler('leads_mentoria'), ler('leads', 'id,created_at,nome,whatsapp,instagram,email,objetivo,origem'),
       ler('vendas', 'created_at,pedido,status,produto,valor,nome,email,whatsapp,instagram,utm_source,pago_em'),
-      ler('hub_eventos', 'created_at,visitante,tipo,item,rotulo,modo', 50000)
+      ler('hub_eventos', 'created_at,visitante,tipo,item,rotulo,modo', 50000),
+      ler('maratonas_inscricoes', 'created_at,maratona,nome,whatsapp,email,instagram,nivel,objetivo,visitante')
     ]);
     eventosPorVisitante = new Map();
     evs.linhas.forEach(e => { if (!eventosPorVisitante.has(e.visitante)) eventosPorVisitante.set(e.visitante, []); eventosPorVisitante.get(e.visitante).push(e); });
@@ -63,6 +64,7 @@
     ment.linhas.forEach(r => somar('mentoria', r));
     cat.linhas.forEach(r => somar('catalogo', r, { objetivos: NOMES_MODO[r.objetivo] || r.objetivo }));
     vend.linhas.forEach(r => { const p = somar('compra', r); p.compras.push(r); });
+    mara.linhas.forEach(r => { const mm = window.EBG_MARATONAS && window.EBG_MARATONAS.porId(r.maratona); somar('maratona', r, { objetivos: r.objetivo, maratona: mm ? mm.nome + ' · ' + mm.edicao : r.maratona }); });
 
     // interesses: o que a pessoa ligou, abriu e clicou no Hub
     lista.forEach(p => {
@@ -75,6 +77,7 @@
       }));
       if (p.modo) cont.set(NOMES_MODO[p.modo] || p.modo, (cont.get(NOMES_MODO[p.modo] || p.modo) || 0) + 3);
       p.compras.forEach(c => c.produto && cont.set(c.produto, (cont.get(c.produto) || 0) + 5));
+      p.registros.forEach(r => { if (r.fonte === 'maratona') { const k = 'Maratona: ' + r.maratona; cont.set(k, (cont.get(k) || 0) + 6); } });
       p.interesses = [...cont.entries()].sort((a, b) => b[1] - a[1]).map(x => x[0]).slice(0, 8);
       p.gasto = p.compras.filter(c => c.status === 'paid' || c.status === 'approved').reduce((a, c) => a + Number(c.valor || 0), 0);
     });

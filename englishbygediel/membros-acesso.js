@@ -121,7 +121,7 @@
       var ok=matLivre(m),prog=m.tipo==='programa';
       var selo=m.tipo==='gratis'?'<span class="mat-badge-free">GRATUITO</span>':ok?'<span class="mat-badge-incl">SEU</span>':'<span class="mat-badge-paid">'+(prog?'🔒 PROGRAMA':'PRODUTO')+'</span>';
       var bt=ok?'<button class="mat-btn mat-btn-dl" data-abrir="'+m.id+'">Acessar</button>'
-        :'<button class="mat-btn mat-btn-buy" data-comprar="'+m.id+'">'+(prog?'Liberar com o Programa':'Quero esse')+'</button>';
+        :'<button class="mat-btn mat-btn-buy" data-comprar="'+m.id+'">'+(prog?'Liberar com o Programa':'Adquirir')+'</button>';
       return '<div class="mat-card"><div class="mat-thumb" style="background:linear-gradient(135deg,#4f6ef7,#8b5cf6);'+(ok?'':'filter:grayscale(.6)')+'"><span style="font-size:28px">'+esc(m.icone||'📘')+'</span></div><div class="mat-body"><div class="mat-name">'+esc(m.nome)+'</div><div class="mat-desc">'+esc(m.descricao)+'</div>'+selo+bt+'</div></div>';
     };
     var sec=function(t,l){return l.length?'<div class="mat-sec">'+t+'</div>'+l.map(card).join(''):'';};
@@ -153,7 +153,9 @@
     S.todasCompras=r[1].data||[];
     S.compras=S.todasCompras.filter(function(c){return (c.email||'').toLowerCase()===(u.email||'').toLowerCase();});
     S.mats=r[2].data||[];
-    S.programa=(S.cfg.programa||[]).some(tem);
+    S.programa=(S.cfg.programa||[]).concat(['Plano Inteligente']).some(tem);   // turma da maratona entra com produto "Plano Inteligente"
+    S.tudo=((S.cfg.planos&&S.cfg.planos.tudo)||['Plano Gênio','Plano Instituição']).some(tem);   // Gênio / Instituição: libera tudo
+    if(S.tudo)S.programa=true;
     S.pronto=true;pintar();
   }
   function pintar(){

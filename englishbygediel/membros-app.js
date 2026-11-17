@@ -20,7 +20,7 @@
   var IC_BASE='home maratona lives modulos jogos materiais prompts agendar check fogo eom culture viagens bussola prisma youtube instagram indicar sino suporte'.split(' ');
   function IC(n,cls){if(!n)return '';return '<img class="ic3d'+(cls?' '+cls:'')+'" src="img/icons/'+n+'.'+(IC_BASE.indexOf(n)>=0?'webp':'svg')+'" alt="" draggable="false">';}
   window.IC=IC;
-  var IC_MENU={home:'home',maratona:'maratona',lives:'lives',modulos:'modulos',jogos:'jogos',materiais:'materiais',prompts:'prompts',agendar:'agendar',planos:'planos',eom:'eom',culture:'culture',viagens:'viagens',bussola:'bussola',prisma:'prisma',admin:'admin'};
+  var IC_MENU={home:'home',maratona:'maratona',lives:'lives',modulos:'modulos',jogos:'jogos',materiais:'materiais',prompts:'prompts',agendar:'agendar',planos:'planos',indicar:'indicar',eom:'eom',culture:'culture',viagens:'viagens',bussola:'bussola',prisma:'prisma',admin:'admin'};
   var IC_CTX={'Em Casa':'home','Acabei de acordar':'ctx-acordar','Vou pro banho':'ctx-banho','Prestes a dormir':'ctx-dormir','No carro':'ctx-carro','No Transporte':'ctx-transporte','No Trabalho':'ctx-trabalho','Intervalo do almoço':'ctx-almoco','Lavando a louça':'ctx-louca','Limpando a casa':'ctx-limpeza','Cozinhando':'ctx-cozinha','Caminhando':'ctx-caminhada','Na Academia':'ctx-academia','Na fila':'ctx-fila','No sofá':'ctx-sofa','Só 5 minutos':'ctx-5min','Focado pra estudar':'ctx-foco','Viajando':'viagens','No mercado':'ctx-mercado','Na igreja':'ctx-igreja','Com a família':'ctx-familia'};
   function icCtx(c,cls){return IC_CTX[c.k]?IC(IC_CTX[c.k],cls):c.ic;}
   function iconesMenu(){
@@ -352,6 +352,37 @@
   '.mi-ini-ent{display:flex;flex-direction:column;gap:8px;max-width:460px;margin:0 auto 18px;text-align:left}.mi-ini-ent .it{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:11px 13px}',
   '.mi-ini-ent .it>span{font-size:22px;width:34px;text-align:center;flex:none}.mi-ini-ent .it .ic3d{width:34px;height:34px}.mi-ini-ent b{display:block;font-size:13.5px}.mi-ini-ent small{font-size:12px;opacity:.75}.mi-ini-ent .it.idi{background:rgba(14,165,233,.18);border-color:rgba(14,165,233,.45)}',
   '.mi-ini-ent .pr{height:6px;border-radius:9px;background:rgba(255,255,255,.12);overflow:hidden;margin-top:6px}.mi-ini-ent .pr i{display:block;height:100%;background:#10b981}.mi-ini-ent .prt{font-size:11.5px;opacity:.7;text-align:center}',
+  '.tg.free{background:linear-gradient(135deg,#bef264,#22c55e)!important;color:#052e12!important;font-weight:900!important;box-shadow:0 0 0 2px rgba(190,242,100,.45),0 6px 18px rgba(34,197,94,.5);animation:miFree 2.6s ease-in-out infinite}',
+  '@keyframes miFree{0%,100%{box-shadow:0 0 0 2px rgba(190,242,100,.45),0 6px 18px rgba(34,197,94,.45)}50%{box-shadow:0 0 0 5px rgba(190,242,100,.2),0 6px 26px rgba(34,197,94,.75)}}',
+  '.uni-card.free{border-color:rgba(34,197,94,.6)!important;box-shadow:0 0 0 1px rgba(34,197,94,.35),0 10px 28px rgba(34,197,94,.14)!important}',
+  '.uni-card .th{position:relative}.uni-card .selo{position:absolute;left:8px;bottom:8px;width:30px;height:30px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.3)}.uni-card .selo img{width:22px;height:22px;display:block}',
+  '.lv-cd{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}.lv-cd span{display:flex;flex-direction:column;align-items:center;min-width:46px;padding:6px 4px;border-radius:10px;background:rgba(79,110,247,.1);font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--fg2)}.lv-cd b{font-size:17px;color:var(--fg);letter-spacing:0;font-variant-numeric:tabular-nums}.lv-cd .ag{background:#ef4444;color:#fff;padding:8px 12px;font-size:12px}',
+  '.th-prox{position:relative;margin:0 0 16px}.th-prox>span{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#ff9aa5}.th-cult .lv-cd span{background:rgba(255,255,255,.1);color:rgba(255,255,255,.75)}.th-cult .lv-cd b{color:#fff}',
+  '.mg-img{font-size:96px;text-align:center;margin:6px 0 14px;line-height:1.1}.mg-som{display:block;margin:0 auto 14px;border:none;border-radius:99px;padding:10px 18px;font:inherit;font-weight:800;background:rgba(14,165,233,.15);color:#0ea5e9;cursor:pointer}',
+  '.mg-emos{display:grid;grid-template-columns:1fr 1fr;gap:10px}.mg-opt.mg-emo{font-size:54px;padding:14px 0;text-align:center;margin:0}',
+  '.pl-promo{display:inline-block;align-self:flex-start;background:#111;color:#fde047;font-size:10.5px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:7px;margin-top:6px}.pl-de{font-size:12.5px;color:var(--fg3);text-decoration:line-through;margin-top:4px}.pl-promo+.pl-de+.pl-pr{margin-top:0}',
+  '.pl-aviso{display:flex;gap:12px;align-items:flex-start;margin:18px 0 0;padding:14px 16px;border-radius:16px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.35);font-size:13px;line-height:1.55}.pl-aviso .ic3d{width:30px;height:30px;flex:none}',
+  '.in-hero{text-align:center;max-width:560px;margin:4px auto 18px}.in-k{font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:#16a34a}.in-hero h1{font-family:Advercase,"Archivo Black",sans-serif;font-size:clamp(24px,4vw,34px);line-height:1.15;margin:8px 0;text-wrap:balance}.in-hero h1 span{color:#16a34a}.in-hero p{font-size:14px;color:var(--fg2);margin:0}',
+  '.in-trilha{display:flex;flex-direction:column;gap:0;max-width:520px;margin:0 auto;position:relative}',
+  '.in-passo{display:flex;gap:14px;align-items:flex-start;position:relative;padding-bottom:16px}.in-passo:not(:last-child):before{content:"";position:absolute;left:21px;top:44px;bottom:0;width:3px;border-radius:3px;background:var(--border)}.in-passo.ok:not(:last-child):before{background:#22c55e}',
+  '.in-passo .bola{width:44px;height:44px;flex:none;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;background:var(--surface2,rgba(127,127,127,.12));color:var(--fg2);border:2px solid var(--border)}',
+  '.in-passo.premio .bola{border-color:#f59e0b;color:#b45309;background:rgba(245,158,11,.12)}.in-passo.ok .bola{background:#22c55e;border-color:#22c55e;color:#fff}.in-passo.prox .bola{box-shadow:0 0 0 6px rgba(34,197,94,.18)}',
+  '.in-tx{display:flex;flex-direction:column;gap:2px;padding-top:4px}.in-tx b{font-size:14.5px}.in-tx small{font-size:12.5px;color:var(--fg2)}.in-tx em{font-style:normal;font-size:12px;font-weight:800;color:#16a34a}',
+  '.in-status{max-width:520px;margin:6px auto 14px;text-align:center;font-size:13.5px;color:var(--fg2)}',
+  '.in-cupom{max-width:520px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-radius:16px;border:2px dashed #22c55e;background:rgba(34,197,94,.07)}.in-cupom div{display:flex;flex-direction:column;gap:2px;min-width:0}.in-cupom small{font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#16a34a}.in-cupom b#in-cod{font-size:22px;letter-spacing:.06em;word-break:break-all}.in-cupom span{font-size:12px;color:var(--fg2)}',
+  '.in-cupom button{border:none;border-radius:11px;padding:10px 14px;font:inherit;font-weight:800;background:#16a34a;color:#fff;cursor:pointer;flex:none}',
+  '#pane-indicar>.pl-btn{max-width:520px;margin-left:auto;margin-right:auto}.in-como{max-width:520px;margin:16px auto 0;font-size:13px;line-height:1.6;color:var(--fg2)}.in-como b{color:var(--fg)}.in-como ol{margin:6px 0 0;padding-left:20px}',
+  '.in-adm{max-width:620px;margin:22px auto 0;padding:14px;border-radius:16px;border:1px solid var(--border);display:flex;flex-direction:column;gap:8px}.in-adm small{font-size:12px;color:var(--fg2)}.in-adm-f{display:grid;grid-template-columns:1fr 1fr;gap:8px}.in-adm-f input{border:1px solid var(--border);border-radius:10px;padding:9px;background:transparent;color:var(--fg);font:inherit;font-size:13px;min-width:0}',
+  '.in-adm-f button{border:none;border-radius:10px;background:#16a34a;color:#fff;font:inherit;font-weight:800;cursor:pointer}.in-adm-l{display:flex;flex-direction:column;gap:4px;font-size:12.5px}.in-adm-l div{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:6px 8px;border-radius:8px;background:rgba(127,127,127,.06)}.in-adm-l button{border:none;background:none;color:#ef4444;cursor:pointer;font-weight:800}',
+  '@media(max-width:680px){.in-adm-f{grid-template-columns:1fr}.in-adm-f button{padding:11px}}',
+  '@media(max-width:680px){#modules-grid.module-grid{grid-template-columns:1fr!important;gap:8px}#modules-grid .module-card{display:flex;align-items:center;gap:0;border-radius:14px}#modules-grid .mod-thumb{width:118px!important;flex:none;height:auto!important;aspect-ratio:16/9}#modules-grid .mod-body{padding:8px 12px;min-width:0}#modules-grid .mod-name{font-size:13.5px;margin-bottom:2px}#modules-grid .mod-sub{font-size:11.5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}#modules-grid .mod-tag-ok,#modules-grid .mod-lock-tag{margin-top:4px}}',
+  '.hm-mes{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:2px 0 14px;padding:9px 12px;border-radius:12px;border:1px solid var(--border);opacity:.85}.hm-mes-t{display:flex;flex-direction:column;gap:1px;min-width:150px;flex:1}.hm-mes-t b{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--fg3)}.hm-mes-t span{font-size:11.5px;color:var(--fg2)}',
+  '.hm-mes-b{display:flex;flex-wrap:wrap;gap:4px;max-width:260px}.hm-mes-b i{width:8px;height:8px;border-radius:50%;display:block}.hm-mes-b .g{background:#22c55e}.hm-mes-b .y{background:#f59e0b}.hm-mes-b .r{background:#ef4444;opacity:.75}.hm-mes-b .n{background:transparent;border:1.5px solid var(--fg3)}.hm-mes-b .hj{outline:2px solid rgba(79,110,247,.45);outline-offset:1px}',
+  '.of-box{position:relative;text-align:left;max-width:420px;max-height:88vh;overflow:auto}.of-x{position:absolute;top:10px;right:10px;border:none;background:rgba(127,127,127,.15);width:32px;height:32px;border-radius:50%;cursor:pointer;color:var(--fg)}',
+  '.of-img{width:100%;max-height:170px;object-fit:cover;border-radius:14px;margin-bottom:12px}.of-k{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--pc)}.of-t{font-size:20px;font-weight:800;margin:4px 0 2px}.of-s{font-size:13px;color:var(--fg2)}.of-p{font-size:26px;font-weight:900;color:var(--pc);margin:6px 0 2px}',
+  '.of-l{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--fg3);margin:14px 0 8px}.of-box ul{list-style:none;padding:0;margin:0 0 16px;display:flex;flex-direction:column;gap:7px}.of-box li{font-size:13.5px;padding-left:22px;position:relative;line-height:1.4}.of-box li:before{content:"✓";position:absolute;left:0;color:var(--pc);font-weight:900}',
+  '.of-alt{display:block;width:100%;margin-top:8px;border:1px solid var(--border);background:transparent;color:var(--fg);border-radius:14px;padding:11px;font:inherit;font-weight:700;cursor:pointer}.of-f{font-size:11.5px;color:var(--fg3);text-align:center;margin-top:10px}',
+  '.mi-troca{flex:none;display:flex;flex-direction:column;align-items:center;gap:0;border:1px solid var(--border);background:transparent;color:var(--fg2);border-radius:10px;padding:4px 7px;font-size:15px;cursor:pointer;margin-left:auto;line-height:1.1}.mi-troca small{font-size:9px;font-weight:800;color:var(--fg3)}.mi-troca:active{transform:rotate(-30deg)}',
   '#mi-inicio{display:flex;flex-direction:column;gap:10px;margin:4px 0 14px}.mi-ini{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-radius:18px;padding:14px 16px;border:1px solid var(--border)}',
   '.mi-ini .tx{flex:1;min-width:200px;display:flex;flex-direction:column;gap:3px}.mi-ini b{font-size:14px}.mi-ini span{font-size:12.5px;color:var(--fg2);line-height:1.5}.mi-ini .ic .ic3d{width:52px;height:52px}',
   '.mi-ini.idi{background:linear-gradient(135deg,rgba(14,165,233,.12),rgba(79,110,247,.08));border-color:rgba(14,165,233,.35)}.mi-ini .bt{display:flex;gap:8px}',
@@ -436,12 +467,14 @@
     var uni=function(a,b){var o={};(a||[]).concat(b||[]).forEach(function(x){o[x]=1;});return Object.keys(o).sort();};
     ST.dias=uni(m.dias,l.dias);
     ST.vistas=uni(m.vistas,l.vistas);
+    ST.prog=Object.assign({},m.prog||{},l.prog||{});
     var um=m.ultima,ul=l.ultima;ST.ultima=(um&&ul)?((um.ts||0)>=(ul.ts||0)?um:ul):(um||ul||null);
     ST.bv=!!(m.bv||l.bv);
     ST.tour=uni(m.tour,l.tour);
     var lvLocal=null;try{lvLocal=localStorage.getItem('userLevel');}catch(e){}
     ST.nivel=m.nivel||l.nivel||lvLocal||null;
     ST.prisma=m.prisma||l.prisma||null;
+    ST.prismaRes=m.prismaRes||l.prismaRes||null;
     ST.onb=m.onb||l.onb||null;
     ST.idioma=!!(m.idioma||l.idioma);
   }
@@ -450,7 +483,7 @@
     clearTimeout(salvarT);
     salvarT=setTimeout(function(){
       if(!U)return;
-      window._sb.auth.updateUser({data:{mi:{dias:ST.dias.slice(-150),vistas:ST.vistas.slice(-400),ultima:ST.ultima,bv:ST.bv,tour:ST.tour,nivel:ST.nivel,prisma:ST.prisma,onb:ST.onb,idioma:ST.idioma}}}).catch(function(){});
+      window._sb.auth.updateUser({data:{mi:{dias:ST.dias.slice(-150),vistas:ST.vistas.slice(-400),ultima:ST.ultima,bv:ST.bv,tour:ST.tour,nivel:ST.nivel,prisma:ST.prisma,prismaRes:ST.prismaRes,onb:ST.onb,idioma:ST.idioma,prog:podarProg()}}}).catch(function(){});
     },1500);
   }
   function marcarDia(){
@@ -467,7 +500,13 @@
 
   /* checklist de hoje: guarda as tarefas marcadas no aparelho, por dia */
   function chkKey(){return 'mi_checks_'+dia();}
-  function salvarChecks(){LS.set(chkKey(),window._ctxChecked||{});}
+  function podarProg(){var o={},ks=Object.keys(ST.prog||{}).sort().slice(-120);ks.forEach(function(k){o[k]=ST.prog[k];});return o;}
+  function registrarProg(){
+    var ch=window._ctxChecked||{},best=0;
+    Object.keys(ch).forEach(function(k){if(k==='_idioma')return;var tot=(window.CTX_TASKS&&CTX_TASKS[k]||[]).length;if(!tot)return;var f=(ch[k]||[]).filter(Boolean).length;best=Math.max(best,f/tot);});
+    ST.prog=ST.prog||{};var h=dia();if((ST.prog[h]||0)!==best){ST.prog[h]=Math.round(best*100)/100;salvar();}
+  }
+  function salvarChecks(){LS.set(chkKey(),window._ctxChecked||{});try{registrarProg();}catch(e){}}
   function restaurarChecks(){var c=LS.get(chkKey(),{});Object.keys(c).forEach(function(k){window._ctxChecked[k]=c[k];});}
   function ctxAtual(){var c=LS.get('mi_ctx',{});return c.d===dia()?c.k:null;}
   function progCtx(k){
@@ -498,6 +537,54 @@
   setTimeout(chipsCtx,0);
 
   /* ───────────────────────── lives ───────────────────────── */
+  (function(){
+    var L=window.LIVES||[];
+    L.forEach(function(lv){
+      if(lv.id==='series'){lv.title='Culture English · Séries e Filmes';lv.sub='Toda 2ª terça-feira do mês · começa 8/12 · 1h';lv.nth=2;lv.day=2;lv.startDate=new Date(2026,11,8);}
+      if(lv.id==='devocional'){lv.sub='Todo sábado · o link é revelado no grupo do WhatsApp';lv.type='grupo';}
+    });
+    function nthDia(y,m,dow,n){var d=new Date(y,m,1);while(d.getDay()!==dow)d.setDate(d.getDate()+1);d.setDate(d.getDate()+7*(n-1));return d;}
+    var noOrig=window.nextOccurrence;
+    window.nextOccurrence=function(lv){
+      if(!lv.nth)return noOrig(lv);
+      var now=new Date(),y=now.getFullYear(),m=now.getMonth();
+      for(var k=0;k<15;k++){var d=nthDia(y,m+k,lv.day,lv.nth);d.setHours(lv.startH,lv.startM,0,0);var e=new Date(d);e.setHours(lv.endH,lv.endM,0,0);
+        if(e>now&&(!lv.startDate||d>=new Date(lv.startDate.getFullYear(),lv.startDate.getMonth(),lv.startDate.getDate())))return d;}
+      return noOrig(lv);
+    };
+    window.isLiveNow=function(lv){var s0=nextOccurrence(lv),e=new Date(s0);e.setHours(lv.endH,lv.endM,0,0);var n=new Date();return n>=s0&&n<=e;};
+    var DSN=['SU','MO','TU','WE','TH','FR','SA'];
+    function agendaLink(lv,nx){
+      var f=function(d){return d.toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';},en=new Date(nx);en.setHours(lv.endH,lv.endM,0,0);
+      var rr=lv.nth?'RRULE:FREQ=MONTHLY;BYDAY='+lv.nth+DSN[lv.day]:'RRULE:FREQ=WEEKLY;BYDAY='+DSN[lv.day];
+      return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(lv.title+' · Gediel')+'&dates='+f(nx)+'/'+f(en)+'&recur='+encodeURIComponent(rr)
+        +'&details='+encodeURIComponent(lv.type==='grupo'?'O link é revelado no grupo do WhatsApp do English on Mission.':'Link: '+lv.link);
+    }
+    window.renderLives=function(){
+      var c=document.getElementById('live-cards-container');if(!c)return;
+      c.innerHTML=(window.LIVES||[]).map(function(lv){return {lv:lv,nx:nextOccurrence(lv)};}).sort(function(a,b){return a.nx-b.nx;}).map(function(o){
+        var lv=o.lv,nx=o.nx,now=isLiveNow(lv),hh=String(lv.startH).padStart(2,'0')+'h'+String(lv.startM).padStart(2,'0');
+        var bt=lv.type==='grupo'?'<button class="live-btn live-btn-on" onclick="miGrupoEom()">'+IC('wa-real')+' Pegar o link no grupo</button>'
+          :now?'<a href="'+lv.link+'" target="_blank" rel="noopener" class="live-btn live-btn-on">'+(lv.type==='youtube'?'▶ Assistir no YouTube':'Entrar no Meet')+'</a>'
+          :'<button class="live-btn live-btn-off" disabled>O link abre na hora</button>';
+        return '<div class="live-card'+(now?' is-live':'')+'"><div class="live-top"><div class="live-icon '+lv.iconClass+'">'+lv.icon+'</div><div class="live-info"><div class="live-title">'+lv.title+'</div><div class="live-sub">'+lv.sub+'</div>'
+          +(now?'<span class="live-status-live"><span class="live-dot"></span> AO VIVO AGORA</span>':'<span class="live-status-next">'+dayLabel(nx)+' às '+hh+'</span><div class="lv-cd" data-at="'+nx.getTime()+'"></div>')
+          +'</div></div><div class="live-actions">'+bt+'<a href="'+agendaLink(lv,nx)+'" target="_blank" rel="noopener" class="live-btn live-btn-cal">📅 Pôr na agenda</a></div></div>';
+      }).join('');
+      tickCd();
+    };
+  })();
+  /* contagem regressiva: qualquer elemento .lv-cd[data-at] na tela */
+  function tickCd(){
+    [].forEach.call(document.querySelectorAll('.lv-cd[data-at]'),function(el){
+      var ms=+el.dataset.at-Date.now();
+      if(ms<=0){el.innerHTML='<span class="ag">Começando!</span>';return;}
+      var s0=Math.floor(ms/1000),d=Math.floor(s0/86400),h=Math.floor(s0%86400/3600),m=Math.floor(s0%3600/60),sg=s0%60;
+      el.innerHTML='<span><b>'+d+'</b>dias</span><span><b>'+String(h).padStart(2,'0')+'</b>h</span><span><b>'+String(m).padStart(2,'0')+'</b>min</span><span><b>'+String(sg).padStart(2,'0')+'</b>seg</span>';
+    });
+  }
+  setInterval(tickCd,1000);
+  setTimeout(function(){grupoEom().then(function(){if(window.renderLives)renderLives();});},1500);
   function proxLives(){
     var now=new Date();
     return (window.LIVES||[]).map(function(lv){
@@ -554,6 +641,29 @@
   function nomeCurto(){var m=(U&&U.user_metadata)||{},n=(window.profile&&profile.name&&profile.name!=='Ana Lima'?profile.name:'')||m.full_name||m.name||(U&&U.email?U.email.split('@')[0]:'');return String(n).split(' ')[0]||'';}
   function saudacao(){var h=new Date().getHours();return h<12?'Bom dia':h<18?'Boa tarde':'Boa noite';}
   function dataHoje(){var s=new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'});return s.charAt(0).toUpperCase()+s.slice(1);}
+  /* resumo discreto: bolinha por dia desde que a pessoa entrou (verde completo, amarelo incompleto, vermelho zerado) */
+  function valDia(k){var p=(ST.prog||{})[k];if(p==null)return (ST.dias||[]).indexOf(k)>=0?0.5:0;return p;}
+  function mediaPeriodo(a,b){var n=0,t=0,d=new Date(a);while(d<=b){t+=valDia(dia(d));n++;d.setDate(d.getDate()+1);}return n?t/n:0;}
+  function resumoMes(){
+    var ds=(ST.dias||[]).slice().sort(),hoje=new Date();hoje.setHours(12,0,0,0);
+    var ini=ds[0]?new Date(ds[0]+'T12:00:00'):new Date(hoje);
+    var m0=new Date(hoje.getFullYear(),hoje.getMonth(),1,12);var de=ini>m0?ini:m0;
+    var bol='',d=new Date(de);
+    while(d<=hoje){var k=dia(d),v=valDia(k),hj=k===dia();
+      var cl=v>=1?'g':v>0?'y':(hj?'n':'r');bol+='<i class="'+cl+(hj?' hj':'')+'" title="'+d.getDate()+'"></i>';d.setDate(d.getDate()+1);}
+    // frase: compara com o período anterior do mesmo tamanho (mês, senão semana, senão ontem)
+    var frase='',ndias=Math.round((hoje-de)/864e5)+1,iniTot=Math.round((hoje-ini)/864e5)+1;
+    function comp(nome,a1,b1,a2,b2){var x=mediaPeriodo(a1,b1),y=mediaPeriodo(a2,b2);if(y<=0&&x<=0)return '';
+      if(y<=0)return 'Bom começo: mais tarefas feitas que '+nome+'.';var dif=Math.round((x-y)/y*100);
+      return dif>0?'Você está '+dif+'% mais comprometido que '+nome+'.':dif<0?'Você está '+(-dif)+'% menos comprometido que '+nome+'. Bora recuperar?':'Mesmo ritmo que '+nome+'.';}
+    function menos(dt,n){var r=new Date(dt);r.setDate(r.getDate()-n);return r;}
+    if(iniTot>=ndias+ndias)frase=comp('no mês passado',de,hoje,menos(de,ndias),menos(hoje,ndias));
+    if(!frase&&iniTot>=14)frase=comp('na semana passada',menos(hoje,6),hoje,menos(hoje,13),menos(hoje,7));
+    if(!frase&&iniTot>=2)frase=comp('ontem',hoje,hoje,menos(hoje,1),menos(hoje,1));
+    if(!frase)frase='Cada bolinha é um dia. Verde é checklist completo.';
+    var mes=hoje.toLocaleDateString('pt-BR',{month:'long'});
+    return '<div class="hm-mes"><div class="hm-mes-t"><b>'+E(mes.charAt(0).toUpperCase()+mes.slice(1))+'</b><span>'+E(frase)+'</span></div><div class="hm-mes-b">'+bol+'</div></div>';
+  }
   function renderHome(){
     var p=$('pane-home');if(!p||!U)return;
     var sq=sequencia(),pc=progCtx(),c=CTX.filter(function(x){return x.k===pc.k;})[0]||CTX[0],lv=proxLives()[0];
@@ -571,6 +681,7 @@
       +'<button class="hm-big hm-check" data-hm="check" aria-label="Checklist de hoje"><div class="ic">'+IC('check')+'</div><div class="lb">Checklist de hoje</div><div class="pg">'+(faltaDiagnostico()?'🔒 Faça os 2 testes pra liberar':c.ic+' '+E(c.lb)+' · '+pc.feitos+' de '+pc.tot+' feitas')+'</div><div class="bar"><i style="width:'+pc.pct+'%"></i></div></button>'
       +'<button class="hm-big hm-live'+(lv&&lv.aoVivo?'':' off')+'" data-hm="lives" aria-label="Lives">'+(lv&&lv.aoVivo?'<span class="dot">● AO VIVO</span>':'')+'<div class="ic">'+IC('lives')+'</div><div class="lb">Lives</div><div class="pg">'+(lv?E(lv.lv.title)+'<br>'+E(quando(lv)):'Ver agenda')+'</div></button>'
       +'</div>';
+    h+=resumoMes();
     h+='<div class="sec-hd">Sua aula</div><div class="hm-aula" id="hm-aula"><div class="cv"><div class="lock">Carregando…</div></div><div class="bd"><div class="st">&nbsp;</div></div></div>';
     h+='<div class="hm-quick">'
       +'<button data-hm="duvida"><span>'+IC('suporte')+'</span>Dúvida</button>'
@@ -606,7 +717,74 @@
       +'<button data-hm="prox" '+(hmIdx>=FLAT.length-1?'disabled':'')+' aria-label="Próxima aula">▶</button></div></div>';
   }
   function linkIndicacao(){return SITE+'?ir=teste'+(nomeCurto()?'&ref='+encodeURIComponent(nomeCurto().toLowerCase()):'');}
-  function msgIndicacao(){return 'Tô estudando inglês com o Gediel no Método Inteligente e tá fazendo diferença 🙌 Faz o teste de nível grátis e vê por onde você começaria: '+linkIndicacao();}
+  function msgIndicacao(){var c=meuCupom();return 'Tô estudando inglês com o Gediel no Método Inteligente e tá fazendo diferença 🙌 Faz o teste de nível grátis e vê por onde você começaria: '+linkIndicacao()
+    +'\n\nSe quiser entrar no programa, usa meu cupom *'+c.cod+'* que você ganha '+c.pct+'% de desconto. É só mandar o cupom pro comercial: https://wa.me/'+WA+'?text='+encodeURIComponent('Oi! Vim por indicação. Meu cupom: '+c.cod);}
+  /* ───────────────────────── INDIQUE E GANHE ─────────────────────────
+     Quem fecha pelo convite conta 1 passo. Prêmios: 1 = e-book de viagem · 2 = upgrade pro Gênio · 5 = +3 meses grátis.
+     O cupom do amigo: 5% na 1ª indicação, 10% nas próximas. O comercial registra a venda aqui no modo edição. */
+  var IND={lista:null,erro:false,todas:null};
+  var PREMIOS={1:{t:'E-book de viagem',d:'O Passaporte do Inglês liberado na sua conta',ic:'✈️'},2:{t:'Upgrade pro Plano Gênio',d:'A plataforma inteira liberada',ic:'👑'},5:{t:'+3 meses grátis',d:'Somados ao seu plano do Programa',ic:'🎉'}};
+  function semAcento(x){return String(x||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+  function meuCupom(){
+    var n=semAcento(nomeCurto()||'ALUNO').toUpperCase().replace(/[^A-Z]/g,'').slice(0,8)||'ALUNO';
+    var id=String(U&&U.id||'0000').replace(/[^a-z0-9]/gi,'').slice(-4).toUpperCase();
+    var f=(IND.lista||[]).length;return {cod:n+id,pct:f?10:5};
+  }
+  async function carregarInd(){
+    try{
+      var r=await window._sb.from('mi_indicacoes').select('*').order('created_at');
+      if(r.error)throw r.error;var eu=String(U&&U.email||'').toLowerCase();
+      IND.todas=r.data||[];IND.lista=IND.todas.filter(function(x){return String(x.indicador_email||'').toLowerCase()===eu;});IND.erro=false;
+    }catch(e){IND.lista=[];IND.todas=[];IND.erro=true;}
+  }
+  async function renderIndicar(){
+    var p=$('pane-indicar');if(!p)return;
+    if(IND.lista===null){p.innerHTML='<div class="admin-loading">Carregando…</div>';await carregarInd();}
+    var n=Math.min(5,IND.lista.length),c=meuCupom(),prox=[1,2,5].filter(function(k){return k>n;})[0];
+    var h='<div class="in-hero"><div class="in-k">Indique e ganhe</div><h1>Traga até 5 amigos.<br><span>Cada um que entrar vale um prêmio.</span></h1>'
+      +'<p>Manda o seu convite. Quando o amigo fechar o programa usando o seu cupom, ele conta aqui.</p></div>';
+    h+='<div class="in-trilha">';
+    for(var i=1;i<=5;i++){var pr=PREMIOS[i],ok=i<=n,al=IND.lista[i-1];
+      h+='<div class="in-passo'+(ok?' ok':'')+(pr?' premio':'')+(i===n+1?' prox':'')+'"><div class="bola">'+(ok?(al&&al.indicado_nome?E(al.indicado_nome.charAt(0).toUpperCase()):'✓'):i)+'</div>'
+        +'<div class="in-tx">'+(pr?'<b>'+pr.ic+' '+E(pr.t)+'</b><small>'+E(pr.d)+'</small>':'<b>'+i+'º amigo</b><small>Mais perto dos 3 meses grátis</small>')
+        +(ok&&al?'<em>'+E(al.indicado_nome||'Amigo')+' entrou ✓</em>':'')+'</div></div>';}
+    h+='</div>';
+    h+='<div class="in-status">'+(n>=5?'🏆 Você completou a missão! Fala com o Gediel pra liberar os 3 meses.':n?'Você já trouxe <b>'+n+'</b> '+(n>1?'amigos':'amigo')+'. '+(prox?'Faltam <b>'+(prox-n)+'</b> pro próximo prêmio: '+E(PREMIOS[prox].t)+'.':''):'Nenhum amigo entrou ainda. O primeiro já vale um e-book.')+'</div>';
+    h+='<div class="in-cupom"><div><small>Seu cupom</small><b id="in-cod">'+E(c.cod)+'</b><span>Seu amigo ganha <b>'+c.pct+'%</b> de desconto'+(c.pct===5?' (a partir da 2ª indicação fechada, vira 10%)':'')+'</span></div><button data-in="copiar">Copiar</button></div>';
+    h+='<button class="pl-btn" style="--pc:#25d366;margin-top:12px" data-in="zap">'+IC('wa-real')+' Mandar meu convite no WhatsApp</button>';
+    h+='<div class="in-como"><b>Como funciona</b><ol><li>Você manda o convite com o seu cupom.</li><li>Seu amigo faz o teste de nível e fala com o comercial usando o cupom.</li><li>Quando ele fechar, a indicação aparece aqui e o prêmio é liberado.</li></ol></div>';
+    if(IND.erro&&souAdmin())h+='<div class="pl-aviso">⚠️ A tabela de indicações ainda não existe. Rode o SQL pendente no Supabase.</div>';
+    if(souAdmin())h+=painelIndAdmin();
+    p.innerHTML=h;
+  }
+  function painelIndAdmin(){
+    var t=IND.todas||[];
+    return '<div class="in-adm"><b>Comercial · registrar indicação fechada</b><small>Ao salvar, o prêmio de 1 (e-book) e de 2 (Gênio) é liberado sozinho no e-mail de quem indicou.</small>'
+      +'<div class="in-adm-f"><input id="in-ind" placeholder="E-mail de quem indicou" type="email"><input id="in-nome" placeholder="Nome do aluno que fechou"><input id="in-cup" placeholder="Cupom usado (opcional)"><button data-in="add">Registrar</button></div>'
+      +(t.length?'<div class="in-adm-l">'+t.slice().reverse().map(function(x){return '<div><span>'+E(x.indicador_email)+' → <b>'+E(x.indicado_nome||'')+'</b>'+(x.cupom?' · '+E(x.cupom):'')+'</span><button data-in="del" data-id="'+x.id+'">✕</button></div>';}).join('')+'</div>':'')+'</div>';
+  }
+  async function liberar(email,produto,pedido){
+    try{var r=await window._sb.from('compras').upsert({pedido:pedido,email:email,produto_id:'indicacao',produto:produto});return !r.error;}catch(e){return false;}
+  }
+  document.addEventListener('click',async function(e){
+    var b=e.target.closest('[data-in]');if(!b)return;var a=b.dataset.in;
+    if(a==='zap'){wa(msgIndicacao(),false);return;}
+    if(a==='copiar'){var cod=meuCupom().cod;try{await navigator.clipboard.writeText(cod);toast('Cupom copiado: '+cod,'#10b981');}catch(err){toast('Seu cupom: '+cod);}return;}
+    if(a==='add'){
+      var em=($('in-ind').value||'').trim().toLowerCase(),nm=($('in-nome').value||'').trim(),cp=($('in-cup').value||'').trim().toUpperCase();
+      if(!/@/.test(em)||!nm){toast('Preencha o e-mail de quem indicou e o nome do aluno','#ef4444');return;}
+      b.disabled=true;
+      var r=await window._sb.from('mi_indicacoes').insert({indicador_email:em,indicado_nome:nm,cupom:cp||null});
+      if(r.error){b.disabled=false;toast('Não salvou: '+r.error.message,'#ef4444');return;}
+      await carregarInd();
+      var qt=IND.todas.filter(function(x){return String(x.indicador_email).toLowerCase()===em;}).length,cfgI=(AS().cfg||{}).indicacao||{},msg='✅ Indicação registrada ('+qt+'ª)';
+      if(qt===1&&await liberar(em,cfgI.ebook||'Passaporte do Inglês','IND1-'+em))msg+=' · e-book de viagem liberado';
+      if(qt===2&&await liberar(em,'Plano Gênio','IND2-'+em))msg+=' · Gênio liberado';
+      if(qt===5)msg+=' · lembrete: dar +3 meses grátis';
+      toast(msg,'#10b981');renderIndicar();return;
+    }
+    if(a==='del'){var r2=await window._sb.from('mi_indicacoes').delete().eq('id',b.dataset.id);if(r2.error){toast(r2.error.message,'#ef4444');return;}await carregarInd();renderIndicar();}
+  });
   document.addEventListener('click',async function(e){
     var b=e.target.closest('[data-hm]');if(!b)return;
     var a=b.dataset.hm;
@@ -619,7 +797,7 @@
     else if(a==='duvida'){if(window.aiToggle)aiToggle();}
     else if(a==='jogos'||a==='prompts'||a==='eom'||a==='culture'||a==='viagens')go(a);
     else if(a==='video')mostrarBoasVindas(true);
-    else if(a==='indicar')wa(msgIndicacao(),false);
+    else if(a==='indicar')go('indicar');
     else if(a==='copiar'){try{await navigator.clipboard.writeText(linkIndicacao());toast('🔗 Link copiado!','#10b981');}catch(err){prompt('Copie o link:',linkIndicacao());}}
     else if(a==='instalar'){if(deferredInstall){deferredInstall.prompt();deferredInstall=null;}renderHome();}
     else if(a==='instalar-x'){LS.set('mi_install_x',true);renderHome();}
@@ -674,7 +852,7 @@
     };
   }
   function entradaIniciante(){
-    var t=(window.CTX_TASKS&&CTX_TASKS['Primeiros passos'])||[],v=Math.min(3,(ST.vistas||[]).length);
+    tarefasDoDia('Primeiros passos');var t=(window.CTX_TASKS&&CTX_TASKS['Primeiros passos'])||[],v=Math.min(3,(ST.vistas||[]).length);
     abrirEntrada('<span class="mi-logo mi-lg-ent"></span><div class="mi-ent-kicker">'+E(saudacao())+(nomeCurto()?', '+E(nomeCurto()):'')+'</div>'
       +'<div class="mi-ent-q">Seus primeiros passos 🌱</div>'
       +'<div class="mi-ent-s">Antes de tudo, o básico bem feito. Até você assistir suas 3 primeiras aulas, o checklist é esse aqui, em qualquer lugar que você estiver. Depois eu libero os checklists por lugar.</div>'
@@ -690,7 +868,8 @@
     };
   }
   function perguntarContexto(){
-    if(iniciante())return entradaIniciante();
+    // iniciante: sem tela cheia na frente (atrapalhava a navegação). O checklist 'Primeiros passos' já fica valendo.
+    if(iniciante()){LS.set('mi_ctx',{d:dia(),k:'Primeiros passos'});return fecharEntrada(function(){go('home');renderHome();pintarRail();setTimeout(tourAuto,700);});}
     abrirEntrada('<span class="mi-logo mi-lg-ent"></span><div class="mi-ent-kicker">'+E(saudacao())+(nomeCurto()?', '+E(nomeCurto()):'')+'</div>'
       +'<div class="mi-ent-q">Onde você está agora?</div>'
       +'<div class="mi-ent-s">Escolha o mais parecido com onde você está ou o que está fazendo. Eu monto o checklist de hoje pra esse momento.</div>'
@@ -757,10 +936,15 @@
     if(c.acao==='whatsapp')return 'Chamar no WhatsApp ›';
     return /^R\$/.test(c.tag||'')?'Comprar ›':'Acessar ↗';
   }
+  function seloRede(c){
+    var v=String(c.valor||'');
+    if(/spotify\.com/i.test(v))return 'sp-real';if(/youtu\.?be/i.test(v))return 'yt-real';if(/instagram\.com/i.test(v))return 'ig-real';
+    if(c.acao==='whatsapp'||/chat\.whatsapp|wa\.me/i.test(v))return 'wa-real';return '';
+  }
   function cardHtml(c,i){
-    var buy=/^R\$/.test(c.tag||'');
-    return '<div class="uni-card'+(cardSoon(c)?' soon':'')+(buy?' buy':'')+(cardLock(c)?' lock':'')+(c.ativo===false?' mi-off':'')+'" data-unicard="'+c.id+'">'+edCtl('card',c.id)
-      +'<div class="th">'+(c.capa_url?'<img loading="lazy" alt="" src="'+E(c.capa_url)+'">':(window.capaAuto?capaAuto(c.titulo,i):E(c.emoji||'✨')))+(c.tag?'<span class="tg">'+E(c.tag)+'</span>':'')+'</div>'
+    var buy=/^R\$/.test(c.tag||''),free=/gr[aá]tis/i.test(c.tag||''),sl=seloRede(c);
+    return '<div class="uni-card'+(cardSoon(c)?' soon':'')+(buy?' buy':'')+(free?' free':'')+(cardLock(c)?' lock':'')+(c.ativo===false?' mi-off':'')+'" data-unicard="'+c.id+'">'+edCtl('card',c.id)
+      +'<div class="th">'+(c.capa_url?'<img loading="lazy" alt="" src="'+E(c.capa_url)+'">':(window.capaAuto?capaAuto(c.titulo,i):E(c.emoji||'✨')))+(c.tag?'<span class="tg'+(free?' free':'')+'">'+(free?'✓ ':'')+E(c.tag)+'</span>':'')+(sl?'<span class="selo"><img alt="" src="img/icons/'+sl+'.svg"></span>':'')+'</div>'
       +'<div class="bd"><div class="tt">'+E(c.titulo)+'</div><div class="ss">'+E(c.descricao||'')+'</div><div class="ac">'+acaoTxt(c)+'</div></div></div>';
   }
   async function desenharUni(k){
@@ -781,7 +965,7 @@
     if(!lista.length&&!EDIT)h+='<div class="admin-loading">Nenhum card ainda.'+(souAdmin()?' Toque em ✏️ Editar, lá em cima, pra criar.':'')+'</div>';
     if(lista.some(function(c){return /indica/i.test(c.tag||'');}))h+='<div style="font-size:10.5px;color:var(--fg3);margin-top:16px">Indicação = link de afiliado. Você paga o mesmo preço e eu posso receber uma comissão.</div>';
     p.innerHTML=h;
-    if(HERO){var nav=p.querySelector('.th-nav');if(nav)nav.innerHTML=secs.map(function(s,si){return s?'<button data-goto="sec-'+k+'-'+si+'">'+E(s)+'</button>':'';}).join('');}
+    if(HERO){tickCd();var nav=p.querySelector('.th-nav');if(nav)nav.innerHTML=secs.map(function(s,si){return s?'<button data-goto="sec-'+k+'-'+si+'">'+E(s)+'</button>':'';}).join('');}
   }
   /* universos com cara de site próprio: EOM verde-escuro e dourado, Culture azul e vermelho */
   function heroUni(k,u,lista){
@@ -801,6 +985,8 @@
       return '<div class="th-hero th-cult"><div class="th-film"></div><div class="th-k">Culture English</div>'
         +'<h1>INGLÊS DE <span>VERDADE</span></h1>'
         +'<p>'+E(u.sub||'Séries, filmes e música como sala de aula.')+'</p>'
+        +(function(){var lv=(window.LIVES||[]).filter(function(x){return x.id==='series';})[0];if(!lv||!window.nextOccurrence)return '';var nx=nextOccurrence(lv);
+          return '<div class="th-prox"><span>Próximo encontro · '+E(dayLabel(nx))+' às '+lv.startH+'h</span><div class="lv-cd" data-at="'+nx.getTime()+'"></div></div>';})()
         +'<div class="th-cta"><button class="th-b1" data-th="live">'+IC('lives')+' Lives do Culture English</button><button class="th-b2" data-th="jogos">'+IC('jogos')+' Jogos</button></div>'
         +(EDIT?'<button class="admin-btn admin-btn-ghost admin-btn-sm" style="margin-top:12px" data-ed="menu-ed" data-k="culture">✏️ Nome, frase e acesso do menu</button>':'')
         +'<div class="th-nav"></div><div class="th-film b"></div></div>';
@@ -810,7 +996,7 @@
   document.addEventListener('click',function(e){
     var g=e.target.closest('[data-goto]');if(g){var el=$(g.dataset.goto);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});return;}
     var t=e.target.closest('[data-th]');if(!t)return;var a=t.dataset.th;
-    if(a==='grupo')wa('Oi Gediel! Quero entrar no grupo gratuito do English On Mission.');
+    if(a==='grupo')abrirGrupo();
     else if(a==='live')go('lives');else if(a==='jogos')go('jogos');
   });
   function ofertaMini(m,c){
@@ -855,6 +1041,9 @@
     var pl=document.createElement('div');pl.className='nav-pill';pl.setAttribute('onclick',"goTo('planos',this)");pl.innerHTML='<span class="nav-icon">👑</span><span>Planos</span>';
     pa.insertAdjacentElement('afterend',pl);
     var ppl=document.createElement('div');ppl.className='pane';ppl.id='pane-planos';pag.insertAdjacentElement('afterend',ppl);
+    var pin=document.createElement('div');pin.className='nav-pill';pin.setAttribute('onclick',"goTo('indicar',this)");pin.innerHTML='<span class="nav-icon">🎁</span><span>Indique e ganhe</span>';
+    pl.insertAdjacentElement('afterend',pin);
+    var pind=document.createElement('div');pind.className='pane';pind.id='pane-indicar';ppl.insertAdjacentElement('afterend',pind);
     var sec=document.createElement('div');sec.className='nav-section';sec.textContent='Universos';
     perfil.insertAdjacentElement('beforebegin',sec);
     var ant=sec,antPane=pr;
@@ -863,7 +1052,7 @@
       p.innerHTML='<span class="nav-icon">'+u.icon+'</span><span>'+E(u.nav)+'</span>';ant.insertAdjacentElement('afterend',p);ant=p;
       var pane=document.createElement('div');pane.className='pane';pane.id='pane-'+k;antPane.insertAdjacentElement('afterend',pane);antPane=pane;
     });
-    if(window.TITLES){TITLES.prompts='Prompts';TITLES.agendar='Marcar aula';TITLES.planos='Planos';Object.keys(UNIV).forEach(function(k){TITLES[k]=UNIV[k].title;});TITLES.home='Início';}
+    if(window.TITLES){TITLES.prompts='Prompts';TITLES.agendar='Marcar aula';TITLES.planos='Planos';TITLES.indicar='Indique e ganhe';Object.keys(UNIV).forEach(function(k){TITLES[k]=UNIV[k].title;});TITLES.home='Início';}
   }
   montarMenu();iconesMenu();iconesTopo();
 
@@ -899,11 +1088,16 @@
     if(!AG.carregou||recarregar){p.innerHTML='<div class="ag-wrap"><div class="ag-h1">Marcar aula</div><div class="ag-sub">Carregando meus horários livres…</div></div>';await carregarHorariosHub();}
     pintarAgendar();
   }
+  function podeMarcar(){var S=AS();return souAdmin()||!S.ok||!!S.programa||!!S.tudo;}
   function pintarAgendar(){
     var p=$('pane-agendar');if(!p)return;
+    if(!podeMarcar()){p.innerHTML='<div class="ag-wrap"><div class="ag-h1">Marcar aula</div><div class="ag-box" style="text-align:center;padding:28px 18px">'+IC('agendar','xl')
+      +'<div style="font-size:17px;font-weight:800;margin:10px 0 6px">Disponível a partir do Plano Inteligente</div><div style="font-size:13.5px;color:var(--fg2);line-height:1.6;max-width:420px;margin:0 auto 16px">Quem está no Inteligente ou acima pode pedir aula particular com o Gediel. A aula é paga à parte, com valor combinado direto com ele.</div>'
+      +'<button class="pl-btn" style="--pc:#4f6ef7;max-width:280px;margin:0 auto" onclick="goTo(\'planos\')">Ver os planos</button></div></div>';return;}
     var meta=(U&&U.user_metadata)||{},nome=meta.full_name||meta.name||meta.nome||'',whats=LS.get('mi_whats_'+(U&&U.id||'x'),meta.whatsapp||'');
     var ped=meusPedidos();
-    var h='<div class="ag-wrap"><div class="ag-h1">Marcar aula</div><div class="ag-sub">Escolha o tipo, o dia e o horário. Eu recebo na hora e te confirmo valor e link pelo WhatsApp.</div>';
+    var h='<div class="ag-wrap"><div class="ag-h1">Marcar aula</div><div class="ag-sub">Escolha o tipo, o dia e o horário. Eu recebo na hora e te confirmo valor e link pelo WhatsApp.</div>'
+      +'<div class="pl-aviso" style="margin:0 0 14px">'+IC('agendar')+'<div><b>Aula particular é paga à parte.</b> Ela não faz parte de nenhum plano. Pedir um horário não gera cobrança: eu te mando o valor antes e você decide.</div></div>';
     if(ped.length)h+='<div class="ag-box ag-ped"><div class="ag-t">'+IC('pin')+' Seus pedidos</div>'+ped.map(function(x){var d=new Date(x.inicio);return '<div class="ag-ped-l"><b>'+E(fmtD(d))+' · '+E(fmtH(d))+'</b> <span>'+E(x.tipo)+'</span></div>';}).join('')+'</div>';
     // 1. tipo
     h+='<div class="ag-box"><div class="ag-t"><span class="ag-n">1</span>Que aula você quer?</div><div class="ag-tipos">'
@@ -1013,6 +1207,7 @@
     if(page==='home')setTimeout(renderHome,160);
     if(page==='agendar')renderAgendar();
     if(page==='planos')renderPlanos();
+    if(page==='indicar')renderIndicar();
     if(page==='bussola')renderBussola();
     if(page==='prisma')renderPrisma();
     var r=goAnt(page,el);
@@ -1028,7 +1223,18 @@
     complete:[['I ___ a teacher.',['am','is','are','be'],0],['She ___ in São Paulo.',['live','lives','living','is live'],1],['___ you like pizza?',['Does','Are','Do','Is'],2],['There ___ two cats in the house.',['is','are','be','am'],1],['I\'m ___ engineer.',['a','an','the','—'],1],['Yesterday I ___ to the beach.',['go','goes','went','gone'],2],['He can ___ English very well.',['speaks','speaking','to speak','speak'],3],['This book is ___. (meu)',['my','mine','me','I'],1],['How ___ water do you drink?',['many','much','more','long'],1],['I have lived here ___ 2019.',['for','since','from','at'],1],['If you study, you ___ pass.',['would','will','are','did'],1],['She is ___ than her brother.',['taller','more tall','tallest','tall'],0]],
     phrasal:[['"I gave up smoking."',['Comecei a fumar','Parei de fumar','Fumei muito','Odeio fumar'],1],['"Can you pick me up at 8?"',['Me buscar','Me ligar','Me levantar','Me esperar'],0],['"Let\'s put off the meeting."',['Começar','Adiar','Cancelar pra sempre','Gravar'],1],['"I ran into an old friend."',['Briguei com','Encontrei por acaso','Corri com','Liguei pra'],1],['"She looks after her grandma."',['Procura','Cuida de','Olha pra trás','Visita'],1],['"Turn off the lights."',['Acenda','Apague/desligue','Troque','Olhe'],1],['"I need to figure it out."',['Desenhar','Descobrir/resolver','Esquecer','Apagar'],1],['"We broke up last year."',['Terminamos','Viajamos','Casamos','Brigamos e voltamos'],0],['"Hold on a second."',['Desliga','Espera um pouco','Segura isso','Vai embora'],1],['"I get along with my coworkers."',['Brigo com','Me dou bem com','Trabalho para','Saio com'],1],['"Let\'s catch up tomorrow."',['Pegar algo','Pôr o papo em dia','Correr atrás','Cancelar'],1],['"Find out the answer."',['Esconder','Descobrir','Esquecer','Perguntar'],1]]
   };
-  var JOGOS={'Flashcards':'flash','Monta Frase':'ordem','Complete':'complete','Quiz Phrasal':'phrasal'};
+  var JOGOS={'O que é isso?':'imagem','Ouça e Toque':'ouvir','Flashcards':'flash','Monta Frase':'ordem','Complete':'complete','Quiz Phrasal':'phrasal'};
+  /* primeiras palavras: imagem + inglês + português (pra quem está começando do zero) */
+  var VOCAB=[['🍎','apple','maçã'],['🐶','dog','cachorro'],['🐱','cat','gato'],['🏠','house','casa'],['🚗','car','carro'],['📚','book','livro'],['☕','coffee','café'],['🍞','bread','pão'],['💧','water','água'],['👟','shoes','sapatos'],['☀️','sun','sol'],['🌙','moon','lua'],['🍌','banana','banana'],['📱','phone','celular'],['🔑','key','chave'],['🚪','door','porta'],['🪑','chair','cadeira'],['🛏️','bed','cama'],['🥚','egg','ovo'],['🐟','fish','peixe'],['🌳','tree','árvore'],['⭐','star','estrela'],['🎂','cake','bolo'],['✈️','plane','avião'],['🚌','bus','ônibus'],['👶','baby','bebê'],['❤️','heart','coração'],['🍕','pizza','pizza'],['⚽','ball','bola'],['🌧️','rain','chuva'],['🧀','cheese','queijo'],['🥛','milk','leite'],['🍊','orange','laranja'],['🐦','bird','pássaro'],['👕','shirt','camisa'],['🌹','flower','flor'],['🐴','horse','cavalo'],['🌊','sea','mar'],['⛪','church','igreja'],['🍚','rice','arroz'],['🎁','gift','presente'],['🔥','fire','fogo']];
+  function itensVocab(t){
+    var alvo=shuf(VOCAB).slice(0,10);
+    return alvo.map(function(v){
+      var ops=shuf([v].concat(shuf(VOCAB.filter(function(x){return x!==v;})).slice(0,3)));
+      return t==='imagem'?[v[0],ops.map(function(o){return o[1];}),ops.indexOf(v),v[1],v[2]]:[v[1],ops.map(function(o){return o[0];}),ops.indexOf(v),v[1],v[2]];
+    });
+  }
+  function falar(w){try{var u=new SpeechSynthesisUtterance(w);u.lang='en-US';u.rate=.8;speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}}
+  window.miFalar=falar;
   var G=null,cur=null;
   var gv=document.createElement('div');gv.id='mi-game';document.body.appendChild(gv);
   var shuf=function(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;};
@@ -1038,7 +1244,7 @@
   }
   function jogar(nome){
     var t=JOGOS[nome];if(!t)return false;
-    var itens=t==='flash'?shuf(DATA.flash).slice(0,12).map(function(a){return {w:a[0],p:a[1],x:a[2],errou:false};}):shuf(DATA[t]).slice(0,t==='ordem'?8:10);
+    var itens=(t==='imagem'||t==='ouvir')?itensVocab(t):t==='flash'?shuf(DATA.flash).slice(0,12).map(function(a){return {w:a[0],p:a[1],x:a[2],errou:false};}):shuf(DATA[t]).slice(0,t==='ordem'?8:10);
     G={nome:nome,t:t,itens:itens,i:0,total:itens.length,pts:0,fila:itens.slice(),acertos:0};
     gv.classList.add('on');document.body.style.overflow='hidden';passo();return true;
   }
@@ -1056,6 +1262,8 @@
       desenharOrdem();return;
     }
     var q=it[0],ops=it[1];
+    if(G.t==='imagem'){gTela('<div class="mg-q">What is this?<br><span style="font-size:13px;color:var(--fg2);font-weight:600">O que é isso em inglês?</span></div><div class="mg-img">'+q+'</div>'+ops.map(function(o,i){return '<button class="mg-opt" data-g="op" data-i="'+i+'">'+E(o)+'</button>';}).join('')+'<div class="mg-fb"></div>');return;}
+    if(G.t==='ouvir'){gTela('<div class="mg-q">Ouça e toque na figura certa</div><button class="mg-som" data-g="som">🔊 Ouvir de novo</button><div class="mg-emos">'+ops.map(function(o,i){return '<button class="mg-opt mg-emo" data-g="op" data-i="'+i+'">'+o+'</button>';}).join('')+'</div><div class="mg-fb"></div>');falar(q);return;}
     gTela('<div class="mg-q">'+E(G.t==='phrasal'?'O que significa:':'Complete:')+'<br><span style="color:var(--accent)">'+E(q)+'</span></div>'+ops.map(function(o,i){return '<button class="mg-opt" data-g="op" data-i="'+i+'">'+E(o)+'</button>';}).join('')+'<div class="mg-fb"></div>');
   }
   function desenharOrdem(){
@@ -1064,6 +1272,7 @@
       +'<div class="mg-fb" id="mg-fb"></div>'+(G.resp.length<G.itens[G.i].length?'<button class="mg-btn" style="width:100%;opacity:.45;background:var(--surface2);color:var(--fg2)" disabled>Toque nas palavras</button>':'<button class="mg-btn" style="width:100%;background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff" data-g="conferir">Conferir</button>'));
   }
   function fim(){
+    if(window.__tarefaJogo){var tj=window.__tarefaJogo;window.__tarefaJogo=null;setTimeout(function(){window._curTask=tj;if(window.taskDone)window.taskDone();},300);}
     var tot=G.t==='flash'?G.total:G.total,ac=G.acertos,pct=Math.round(ac*100/tot);
     marcarDia();
     var emo=pct>=90?'🏆':pct>=60?'🔥':'💪';
@@ -1077,6 +1286,7 @@
     var b=e.target.closest('[data-g]');if(!b||!G)return;var a=b.dataset.g;
     if(a==='sair'){gv.classList.remove('on');gv.innerHTML='';document.body.style.overflow='';G=null;return;}
     if(a==='denovo'){jogar(G.nome);return;}
+    if(a==='som'){falar(G.itens[G.i][0]);return;}
     if(a==='share'){wa('Fiz '+G.acertos+'/'+G.total+' no jogo '+G.nome+' do Método Inteligente 🎮 Duvido você bater! Faz o teste de nível grátis: '+linkIndicacao(),false);return;}
     if(G.t==='flash'){
       var c=G.fila[0];
@@ -1103,7 +1313,8 @@
     if(a==='op'&&!G.resp){
       var item=G.itens[G.i],i=+b.dataset.i,certo=item[2];G.resp=true;
       var ops=gv.querySelectorAll('.mg-opt');ops[certo].classList.add('ok');if(i!==certo)b.classList.add('bad');else{G.acertos++;G.pts+=10;}
-      gv.querySelector('.mg-fb').innerHTML=(i===certo?'✅ Isso!':'Resposta: <b>'+E(item[1][certo])+'</b>')+'<br><button class="mg-btn" style="margin-top:12px;width:100%;background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff" data-g="prox">Continuar →</button>';
+      if(G.t==='imagem'||G.t==='ouvir')falar(item[3]);
+      gv.querySelector('.mg-fb').innerHTML=(G.t==='imagem'||G.t==='ouvir'?(i===certo?'✅ Isso! ':'Era essa: ')+'<b>'+E(item[3])+'</b> = '+E(item[4]):(i===certo?'✅ Isso!':'Resposta: <b>'+E(item[1][certo])+'</b>'))+'<br><button class="mg-btn" style="margin-top:12px;width:100%;background:linear-gradient(135deg,#4f6ef7,#8b5cf6);color:#fff" data-g="prox">Continuar →</button>';
       gv.querySelector('.sc').textContent=G.pts+' pts';
       return;
     }
@@ -1126,6 +1337,10 @@
     });
   };
   // jogáveis primeiro
+  if(window.GAMES&&!GAMES.some(function(g){return g.name==='O que é isso?';})){
+    GAMES.unshift({name:'Ouça e Toque',emoji:'🔊',bg:'linear-gradient(145deg,#0ea5e9,#2563eb)',tags:['listening','vocab','a1a2'],sub:'Primeiras palavras · do zero',desc:'Você ouve uma palavra em inglês e toca na figura certa. É assim que criança aprende: som + imagem, sem tradução.',instr:'① Ouça a palavra (pode repetir)\n② Toque na figura que combina\n③ Veja a palavra escrita e o significado\n④ 10 rodadas'});
+    GAMES.unshift({name:'O que é isso?',emoji:'🖼️',bg:'linear-gradient(145deg,#f97316,#e11d48)',tags:['vocab','a1a2'],sub:'Primeiras palavras · do zero',desc:'Aparece uma figura e você escolhe o nome dela em inglês. Ao responder, você ouve a pronúncia.',instr:'① Olhe a figura\n② Escolha a palavra em inglês\n③ Ouça como fala\n④ 10 rodadas'});
+  }
   if(window.GAMES)GAMES.sort(function(a,b){return (JOGOS[b.name]?1:0)-(JOGOS[a.name]?1:0);});
   window.renderGames();
 
@@ -1282,7 +1497,7 @@
 
   /* ───────────────────────── BÚSSOLA (nível) e PRISMA (inteligências) ─────────────────────────
      Os testes são os sites de verdade; o aluno faz dentro do app e marca o resultado que apareceu. */
-  var URL_BUSSOLA='https://nivelamentogediel.netlify.app/',URL_PRISMA='https://testedeinteligencia1.netlify.app/';
+  var URL_BUSSOLA='bussola.html?membro=1',URL_PRISMA='prisma.html?membro=1';
   var NIVEIS=['A1','A2','B1','B2','C1','C2'];
   var NIVEL_CAN={A1:'Se apresentar, perguntar e responder o básico do dia a dia.',A2:'Se virar em situações simples: compras, rotina, direções, família.',B1:'Conversar sobre o dia a dia e o trabalho, viajar sem travar.',B2:'Discutir ideias com fluência e entender séries e reuniões.',C1:'Usar o inglês com flexibilidade no trabalho e nos estudos.',C2:'Dominar o idioma com precisão, como um nativo culto.'};
   var INTEL={
@@ -1315,7 +1530,20 @@
       +NIVEIS.map(function(n){return '<button class="gf-btn'+(n===lv?' active':'')+'" onclick="setManualLevel(\''+n+'\')">'+n+'</button>';}).join('')+'</div></div>'
       +'<div class="sec-hd">O que cada nível consegue fazer</div><div class="card">'+NIVEIS.map(function(n){return '<div style="display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--border)'+(n===lv?';font-weight:700':'')+'"><span class="level-tag" style="flex-shrink:0;'+(n===lv?'':'background:var(--surface2);color:var(--fg2)')+'">'+n+'</span><span style="font-size:12.5px;line-height:1.5;color:'+(n===lv?'var(--fg)':'var(--fg2)')+'">'+E(NIVEL_CAN[n])+'</span></div>';}).join('')+'</div>';
   }
-  function renderPrisma(){
+  function renderPrisma(){renderPrisma0();barrasPrisma();}
+  function barrasPrisma(){
+    var p=$('pane-prisma'),R=ST.prismaRes;if(!p||!R||!R.todas||!R.todas.length)return;
+    var cor={linguistica:'#E6B964',logica:'#5EC5B6',espacial:'#C97BA0',musical:'#7FA6E8',corporal:'#E8875E',interpessoal:'#6FBF73',intrapessoal:'#A98CE0',naturalista:'#8FBF6A',existencial:'#D96C6C'};
+    var mx=Math.max.apply(null,R.todas.map(function(x){return x.v;}))||1;
+    var box=document.createElement('div');box.className='intel-banner';box.style.marginTop='14px';
+    box.innerHTML='<div style="font-size:14px;font-weight:800;margin-bottom:12px">Seu mapa de inteligências</div>'
+      +R.todas.map(function(x,n){var c=cor[x.k]||'#8b5cf6';return '<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12.5px;font-weight:700;margin-bottom:4px"><span>'+(n<3?['🥇','🥈','🥉'][n]+' ':'')+E(x.nome)+'</span><span style="color:'+c+'">'+x.v+'%</span></div><div style="height:9px;border-radius:99px;background:var(--surface2);overflow:hidden"><i data-pw="'+x.v+'" style="display:block;height:100%;width:0;background:'+c+';border-radius:99px;transition:width 1.2s cubic-bezier(.22,1,.36,1) '+(n*.08)+'s"></i></div></div>';}).join('')
+      +(R.taticas&&R.taticas.length?'<div style="font-size:13px;font-weight:800;margin:14px 0 6px">Faça a partir de hoje</div><ul style="margin:0;padding-left:18px;font-size:12.5px;line-height:1.7;color:var(--fg2)">'+R.taticas.map(function(t){return '<li>'+E(t)+'</li>';}).join('')+'</ul>':'')
+      +(R.armadilha?'<div style="font-size:12.5px;margin-top:10px;padding:10px 12px;border-radius:12px;background:rgba(239,68,68,.08)"><b>⚠️ Cuidado:</b> '+E(R.armadilha)+'</div>':'');
+    var ban=p.querySelector('.intel-banner');if(ban)ban.insertAdjacentElement('afterend',box);else p.appendChild(box);
+    setTimeout(function(){[].forEach.call(box.querySelectorAll('[data-pw]'),function(el){el.style.width=el.dataset.pw+'%';});},60);
+  }
+  function renderPrisma0(){
     var p=$('pane-prisma');if(!p)return;var k=ST.prisma,it=k&&INTEL[k];
     p.innerHTML='<div style="font-size:21px;font-weight:800;margin-bottom:16px">Prisma de Talentos</div>'
       +'<div class="intel-banner"><div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:56px;height:56px;border-radius:16px;background:'+(it?'linear-gradient(135deg,#8b5cf6,#ec4899)':'var(--surface2)')+';display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0">'+(it?it.ic:'🔷')+'</div>'
@@ -1338,12 +1566,24 @@
   function abrirTeste(qual){
     var b=qual==='bussola';
     tq.innerHTML='<div class="tt"><button class="tb-btn" data-dg="fechar">✕</button><b>'+(b?IC('bussola')+' Teste de nível':IC('prisma')+' Prisma de Talentos')+'</b><a class="tb-btn" style="text-decoration:none" href="'+(b?URL_BUSSOLA:URL_PRISMA)+'" target="_blank" rel="noopener">Abrir fora ↗</a></div>'
-      +'<iframe src="'+(b?URL_BUSSOLA:URL_PRISMA)+'" title="'+(b?'Teste de nível':'Prisma de Talentos')+'" allow="autoplay; microphone"></iframe>'
-      +'<div class="fim"><div class="q">Terminou? Toque no resultado que apareceu:</div><div class="ch">'
+      +'<iframe src="'+(b?URL_BUSSOLA:URL_PRISMA)+'&nome='+encodeURIComponent(((U&&U.user_metadata)||{}).full_name||'')+'" title="'+(b?'Teste de nível':'Prisma de Talentos')+'" allow="autoplay; microphone"></iframe>'
+      +'<div class="fim" hidden><div class="q">Terminou? Toque no resultado que apareceu:</div><div class="ch">'
       +(b?NIVEIS.map(function(n){return '<button class="gf-btn" data-dg-fim="'+n+'">'+n+'</button>';}).join(''):Object.keys(INTEL).map(function(x){return '<button class="gf-btn" data-dg-fim="'+x+'">'+INTEL[x].ic+' '+E(INTEL[x].nome)+'</button>';}).join(''))
       +'</div></div>';
     tq.dataset.qual=qual;tq.classList.add('on');document.body.style.overflow='hidden';
   }
+  // o Prisma avisa sozinho o resultado (prisma.html?membro=1): salva e mostra o retorno, sem a pessoa precisar marcar
+  window.addEventListener('message',function(e){
+    var d=e.data||{};if(e.origin!==location.origin||!tq.classList.contains('on'))return;
+    if(d.tipo==='prisma-resultado'&&INTEL[d.k]){
+      ST.prismaRes={k:d.k,top:(d.top||[]).slice(0,3),todas:(d.todas||[]).slice(0,9),canal:d.canal||null,taticas:(d.taticas||[]).slice(0,5),aprende:d.aprende||'',armadilha:d.armadilha||'',despertar:d.despertar||'',em:new Date().toISOString()};
+      setPrisma(d.k);
+      // o checklist do dia se refaz já com a tarefa do seu jeito
+      try{var lb=(LS.get('mi_ctx',{})||{}).k;if(lb&&window.renderMarTasks)window.renderMarTasks(lb);}catch(x){}
+    }
+    if(d.tipo==='bussola-resultado'&&NIVEIS.indexOf(d.nivel)>=0){window.setManualLevel(d.nivel);}
+    if(d.tipo==='prisma-fechar'||d.tipo==='bussola-fechar'){fecharTeste();if(d.ir){setTimeout(function(){var pl=document.querySelector('.sidebar .nav-pill[onclick*="\''+d.ir+'\'"]');goTo(d.ir,pl);},350);}}
+  });
   function fecharTeste(){tq.classList.remove('on');tq.innerHTML='';document.body.style.overflow='';if(window._aposTeste){var f=window._aposTeste;window._aposTeste=null;setTimeout(f,250);}}
   document.addEventListener('click',function(e){
     var b=e.target.closest('[data-dg]');
@@ -1415,6 +1655,8 @@
     menus.forEach(function(m){p.push({k:m.k,t:m.lb,d:tourTexto(m.k,m.lb),el:m.el,menu:true,kick:'Menu'});});
     return p;
   }
+  // usados pela largada da maratona (membros-maratonas.js)
+  window.miTour=function(m){tour(m||'todos');};window.miConhecer=function(cb){conhecer(cb);};
   function tour(modo){
     var p=passosTour(modo);if(!p.length)return;
     T={p:p,i:0,modo:modo};tv.classList.add('on');
@@ -1623,7 +1865,7 @@
         +'<div class="card teste"><span class="ic">'+IC('prisma')+'</span><div><b>Prisma de Talentos</b><div class="leg" style="margin:2px 0 0">Descobre por qual porta o inglês entra em você.</div></div><span class="min">± '+MIN_PRISMA+' min</span></div>'
         +'<div class="card teste"><span class="ic">'+IC('bussola')+'</span><div><b>Bússola</b><div class="leg" style="margin:2px 0 0">Mostra seu nível real, do A1 ao C2.</div></div><span class="min">± '+MIN_BUSSOLA+' min</span></div>'
         +'<p class="leg">Ao todo, uns '+(MIN_PRISMA+MIN_BUSSOLA)+' minutos. Faça num lugar tranquilo, com fone.</p>'
-        +obBtn('Fazer os 2 testes agora →','data-ob="t-agora"')
+        +obBtn('Fazer os 2 testes agora →','data-ob="t-agora"')+'<button class="cta2" data-ob="t-prisma">Fazer só o Prisma agora</button>'
         +'<button class="cta2" data-ob="t-manual">Já sei meu nível e meu jeito: escolher manualmente</button>'
         +'<button class="cta2" data-ob="t-depois">Deixar pra depois</button>';
     }else if(passo==='manual'){
@@ -1660,7 +1902,7 @@
     obEl.classList.remove('vis');
     setTimeout(function(){
       obEl.classList.remove('on');obEl.innerHTML='';document.body.style.overflow='';OB=null;
-      var fila=testes==='agora'?['prisma','bussola']:[],fim=obFim;
+      var fila=testes==='agora'?['prisma','bussola']:testes==='prisma'?['prisma']:[],fim=obFim;
       (function prox(){if(fila.length){window._aposTeste=prox;abrirTeste(fila.shift());}else fim();})();
     },330);
   }
@@ -1677,6 +1919,7 @@
     }
     if(a==='mar'){var q=$('ob-marq');if(q)r.maratonaQual=q.value.trim();return obAvancar();}
     if(a==='t-agora'){OB.testes='agora';return obIr('fim');}
+    if(a==='t-prisma'){OB.testes='prisma';return obIr('fim');}
     if(a==='t-depois'){OB.testes='depois';return obIr('fim');}
     if(a==='t-manual'){OB.testes='manual';return obIr('manual');}
     if(a==='m-ok'){ST.nivel=r.mNivel;ST.prisma=r.mIntel;try{localStorage.setItem('userLevel',r.mNivel);}catch(x){}salvar();pintarPerfil();return obIr('fim');}
@@ -1690,12 +1933,12 @@
   });
 
   /* ───────────────────────── PORTÃO: checklist e aulas só depois do diagnóstico ───────────────────────── */
-  function faltaDiagnostico(){return !souAdmin()&&ehPrograma()&&!(ST.nivel&&ST.prisma);}
+  function faltaDiagnostico(){return !souAdmin()&&ehPrograma()&&!(ST.nivel||ST.prisma);}
   function portao(oque){
     var ov=$('pw-ov');if(!ov)return;
     var feitoN=!!ST.nivel,feitoP=!!ST.prisma;
     ov.innerHTML='<div class="pw" style="text-align:left"><div style="text-align:center">'+IC('bussola','xl')+'</div><h3 style="text-align:center">Falta pouco pra liberar '+E(oque)+'</h3>'
-      +'<p style="text-align:center">O checklist e as aulas são montados a partir do seu nível e do seu jeito de aprender.</p>'
+      +'<p style="text-align:center">Faça <b>um dos dois</b> testes (ou os dois): o checklist e as aulas se montam a partir do resultado.</p>'
       +'<div class="mi-gate-it'+(feitoP?' ok':'')+'"><span>'+IC('prisma')+'</span><div><b>Prisma de Talentos</b><small>'+(feitoP?'Feito: '+E(INTEL[ST.prisma].nome):'± '+MIN_PRISMA+' minutos')+'</small></div>'+(feitoP?'<i>✓</i>':'<button data-gate="prisma">Fazer</button>')+'</div>'
       +'<div class="mi-gate-it'+(feitoN?' ok':'')+'"><span>'+IC('bussola')+'</span><div><b>Bússola de nível</b><small>'+(feitoN?'Feito: '+E(ST.nivel):'± '+MIN_BUSSOLA+' minutos')+'</small></div>'+(feitoN?'<i>✓</i>':'<button data-gate="bussola">Fazer</button>')+'</div>'
       +'<button class="nao" data-gate="manual" style="display:block;width:100%;margin-top:14px;font-weight:700;color:var(--accent)">Já sei: escolher manualmente</button>'
@@ -1819,11 +2062,38 @@
   /* ── cards: cadeado pela regra de acesso ── */
   var cardLockOrig=cardLock;
   cardLock=function(c){if(c.acao==='material'){var mt=(AS().mats||[]).filter(function(x){return x.id===c.valor;})[0];if(mt&&!matLivre(mt))return true;}return cardLockOrig(c)||!temAcesso(c);};
+  /* o link da live do devocional muda toda semana e é revelado no grupo do WhatsApp */
+  var GRUPO_EOM=null;
+  async function grupoEom(){
+    if(GRUPO_EOM!==null)return GRUPO_EOM;
+    try{await carregarCards();var g=(CARDS||[]).filter(function(c){return c.universo==='eom'&&/grupo/i.test(c.titulo||'')&&/chat\.whatsapp|wa\.me|whatsapp\.com/i.test(c.valor||'');})[0];GRUPO_EOM=g?g.valor:'';}catch(e){GRUPO_EOM='';}
+    return GRUPO_EOM;
+  }
+  function abrirGrupo(){
+    if(GRUPO_EOM){window.open(GRUPO_EOM,'_blank','noopener');return;}
+    wa('Oi Gediel! Quero entrar no grupo do English on Mission pra receber o link do devocional.');
+  }
+  window.miGrupoEom=abrirGrupo;
+  function ehDevocional(c){return c&&c.universo==='eom'&&/youtu/i.test(c.valor||'')&&/devocional|ao vivo/i.test(c.titulo||'');}
+  function folhaDevocional(){
+    var lv=(window.LIVES||[]).filter(function(x){return x.id==='devocional';})[0],nx=lv&&window.nextOccurrence?nextOccurrence(lv):null;
+    var ov=document.createElement('div');ov.className='pw-ov open';
+    ov.innerHTML='<div class="pw" style="text-align:center"><div style="font-size:40px">🙏</div><div style="font-size:18px;font-weight:800;margin:6px 0">O link é revelado no grupo</div>'
+      +'<div style="font-size:13.5px;color:var(--fg2);line-height:1.6;margin-bottom:14px">O link da live do devocional muda toda semana e sai no grupo do WhatsApp do English on Mission, um pouco antes de começar. Entra no grupo e você recebe o aviso.</div>'
+      +(nx?'<div class="lv-cd" data-at="'+nx.getTime()+'" style="justify-content:center;margin-bottom:14px"></div>':'')
+      +'<button class="pl-btn" style="--pc:#25d366" data-dv="grupo">'+IC('wa-real')+' Entrar no grupo do WhatsApp</button>'
+      +'<button class="admin-btn admin-btn-ghost" style="width:100%;margin-top:8px" data-dv="fechar">Agora não</button></div>';
+    document.body.appendChild(ov);tickCd();
+    ov.addEventListener('click',function(e){var b=e.target.closest('[data-dv]');if(e.target===ov||(b&&b.dataset.dv==='fechar')){ov.remove();return;}if(b&&b.dataset.dv==='grupo'){abrirGrupo();ov.remove();}});
+  }
+  var acaoTxtOrig=acaoTxt;
+  acaoTxt=function(c){return ehDevocional(c)?'Pegar o link no grupo ›':acaoTxtOrig(c);};
   var abrirCardOrig=abrirCard;
   abrirCard=async function(id,uni){
     var c=(CARDS||[]).filter(function(x){return x.id===id;})[0];if(!c)return;
     if(!temAcesso(c)){irCheckout(checkoutDe(c),'"'+c.titulo+'"');return;}
     if(c.acao==='material'){var mt=(AS().mats||[]).filter(function(x){return x.id===c.valor;})[0];if(mt)return abrirMaterial(mt);toast('Material ainda não ligado a esse card');return;}
+    if(ehDevocional(c))return folhaDevocional();
     return abrirCardOrig(id,uni);
   };
 
@@ -1840,9 +2110,10 @@
     var n=0,h='';
     secs.forEach(function(s){h+='<div class="uni-sec">'+E(s)+'</div><div class="uni-grid">'+por[s].map(function(m){
       var ok=matLivre(m),tag=m.tipo==='gratis'?'Grátis':ok?'✓ Seu':m.tipo==='programa'?'🔒 Programa':(m.preco||'🔒');
-      return '<div class="uni-card'+(ok?'':' lock')+(m.ativo===false?' mi-off':'')+'" data-mat="'+m.id+'">'+edCtl('mat',m.id)
-        +'<div class="th">'+(m.capa_url?'<img loading="lazy" alt="" src="'+E(m.capa_url)+'">':capaAuto(m.nome,n))+'<span class="tg">'+E(tag)+'</span></div>'
-        +'<div class="bd"><div class="tt">'+E((m.icone?m.icone+' ':'')+m.nome)+'</div><div class="ss">'+E(m.descricao||'')+'</div><div class="ac">'+(ok?'Acessar ›':'Quero esse ›')+'</div></div></div>';n++;}).join('')
+      var fr=m.tipo==='gratis';
+      return '<div class="uni-card'+(ok?'':' lock')+(fr?' free':'')+(m.ativo===false?' mi-off':'')+'" data-mat="'+m.id+'">'+edCtl('mat',m.id)
+        +'<div class="th">'+(m.capa_url?'<img loading="lazy" alt="" src="'+E(m.capa_url)+'">':capaAuto(m.nome,n))+'<span class="tg'+(fr?' free':'')+'">'+(fr?'✓ ':'')+E(tag)+'</span></div>'
+        +'<div class="bd"><div class="tt">'+E((m.icone?m.icone+' ':'')+m.nome)+'</div><div class="ss">'+E(m.descricao||'')+'</div><div class="ac">'+(ok?'Acessar ›':'Adquirir ›')+'</div></div></div>';n++;}).join('')
       +(EDIT?'<button class="mi-novo" data-ed="mat-novo" data-sec="'+E(s)+'">＋ Novo material</button>':'')+'</div>';});
     if(!lista.length)h='<div class="admin-loading">Nenhum material ainda.</div>'+(EDIT?'<div class="uni-grid"><button class="mi-novo" data-ed="mat-novo">＋ Novo material</button></div>':'');
     g.innerHTML=h;
@@ -2073,29 +2344,183 @@
     var t=0;(function esp(){var S=AS();if(S.pronto){botaoEdicao();aplicarMenus();if(window.currentPage==='materiais')renderMat();}else if(t++<240)setTimeout(esp,500);})();
   }
   window.MI_EDIT={ligar:modoEdicao,aplicarMenus:aplicarMenus};
+  /* ───────── tela de oferta: todo clique em algo pago mostra o que a pessoa leva antes do checkout ───────── */
+  function ofertaDe(url,oque){
+    var cf=AS().cfg||{},nome=String(oque||'').replace(/^"|"$/g,''),pl=planos(),u=String(url||'');
+    var mt=(AS().mats||[]).filter(function(m){return m.nome===nome||(u&&m.checkout&&u.indexOf(m.checkout)>=0);})[0];
+    if(mt)return {t:mt.nome,sub:mt.secao||'Material',img:mt.capa_url,preco:mt.preco,itens:[mt.descricao||'Acesso ao material completo','Ler online e baixar o PDF','Acesso pra sempre na sua conta','Liberado na hora, no mesmo login'].filter(Boolean),url:u};
+    var cd=(CARDS||[]).filter(function(c){return c.titulo===nome;})[0];
+    var md=(MODS_ALL||[]).filter(function(m){return m.name===nome||(u&&m.checkout&&u.indexOf(m.checkout)>=0);})[0];
+    if(md&&md.trilha==='mini')return {t:md.name,sub:'Mini curso',img:md.cover_url||md.capa_url,preco:cd&&/^R\$/.test(cd.tag||'')?cd.tag:'',itens:[md.sub||'Todas as aulas do mini curso','Aulas em vídeo no seu ritmo','Acesso no mesmo login'],url:u};
+    var p=pl.filter(function(x){return x.checkout&&u&&(u===x.checkout||u.indexOf(x.checkout)>=0||x.checkout.indexOf(u)>=0);})[0];
+    if(!p&&((u&&u===cf.checkoutEom)||/devocion/i.test(nome)))p=pl.filter(function(x){return x.k==='mission';})[0];
+    if(!p)p=pl.filter(function(x){return x.k==='inteligente';})[0];
+    if(cd&&cd.acesso==='produto'&&!p)return {t:cd.titulo,sub:'',img:cd.capa_url,preco:cd.tag,itens:[cd.descricao],url:u};
+    var hoje=new Date().toISOString().slice(0,10),pr=p.promo&&p.promoAte&&hoje<=p.promoAte;
+    return {t:'Plano '+p.nome,sub:nome?'Pra liberar '+nome:p.sub,preco:pr?p.promo:p.preco,de:pr?p.preco:'',tag:pr?(p.promoNome||'Promoção'):'',itens:p.beneficios||[],url:u||p.checkout,cor:p.cor,planos:true};
+  }
+  var irOrig=window.irCheckout;
+  window.irCheckout=function(url,oque){
+    var o=ofertaDe(url,oque),ov=document.createElement('div');ov.className='pw-ov open of-ov';
+    ov.innerHTML='<div class="pw of-box" style="--pc:'+E(o.cor||'#4f6ef7')+'"><button class="of-x" data-of="x">✕</button>'
+      +(o.img?'<img class="of-img" alt="" src="'+E(o.img)+'">':'')
+      +'<div class="of-k">🔒 Conteúdo pago</div><div class="of-t">'+E(o.t)+'</div>'+(o.sub?'<div class="of-s">'+E(o.sub)+'</div>':'')
+      +(o.tag?'<div class="pl-promo">'+E(o.tag)+'</div>':'')+(o.de?'<div class="pl-de">de '+E(o.de)+'</div>':'')+(o.preco?'<div class="of-p">'+E(o.preco)+'</div>':'')
+      +'<div class="of-l">O que você leva</div><ul>'+o.itens.filter(Boolean).map(function(i){return '<li>'+E(i)+'</li>';}).join('')+'</ul>'
+      +'<button class="pl-btn" data-of="pagar">Quero liberar agora</button>'
+      +(o.planos?'<button class="of-alt" data-of="planos">Comparar todos os planos</button>':'')
+      +'<div class="of-f">Pagamento seguro pela Kiwify. Liberado no mesmo login logo depois da compra.</div></div>';
+    document.body.appendChild(ov);
+    ov.addEventListener('click',function(e){var b=e.target.closest('[data-of]');if(e.target===ov||(b&&b.dataset.of==='x')){ov.remove();return;}
+      if(!b)return;if(b.dataset.of==='pagar'){ov.remove();window.open(o.url||url||(AS().cfg||{}).checkout,'_blank','noopener');}
+      if(b.dataset.of==='planos'){ov.remove();go('planos');}});
+  };
+  async function migrarDados(){
+    var S=AS();if(!souAdmin()||!S.cfg)return;var feitas=(S.cfg.migr||[]).slice(),mudou=false;
+    if(feitas.indexOf('spotify-eom-1')<0){
+      var ex=await window._sb.from('mi_uni_cards').select('id').ilike('valor','%3hcF84KR80VqykVNeJy4x5%');
+      if(!ex.error&&!(ex.data||[]).length){
+        var ins=await window._sb.from('mi_uni_cards').insert({universo:'eom',ord:2,secao:'Assistir',titulo:'Playlist do EOM no Spotify',descricao:'Louvores em inglês pra treinar o ouvido enquanto você adora.',tag:'Grátis',emoji:'🎧',capa_url:'',acao:'link',valor:'https://open.spotify.com/playlist/3hcF84KR80VqykVNeJy4x5',destaque:false,em_breve:false,ativo:true,acesso:'todos'});
+        if(ins.error)return;
+      }
+      feitas.push('spotify-eom-1');mudou=true;
+    }
+    var extra={};
+    if(feitas.indexOf('programa-plano-inteligente')<0){var pg=(S.cfg.programa||[]).slice();if(pg.indexOf('Plano Inteligente')<0)pg.push('Plano Inteligente');extra.programa=pg;feitas.push('programa-plano-inteligente');mudou=true;}
+    if(mudou){try{await salvarCfg(Object.assign({migr:feitas},extra));CARDS=null;}catch(e){}}
+  }
+  (function esperar(n){var S=AS();if(S&&S.pronto&&S.cfg){migrarDados();return;}if(n<40)setTimeout(function(){esperar(n+1);},1000);})(0);
+  window.miLink=function(u){
+    var t=window._curTask?{key:window._curTask.key,i:window._curTask.i}:null;
+    if(u==='#jogos')return go('jogos');if(u==='#modulos')return go('modulos');if(u==='#planos')return go('planos');if(u==='#prisma')return go('prisma');
+    if(u.indexOf('#aula:')===0){var x=u.split(':');return abrirAula(x[1],x[2]);}
+    if(u.indexOf('#jogo:')===0){window.__tarefaJogo=t;if(!jogar(u.slice(6)))go('jogos');return;}
+  };
 
-  /* ───────────────────────── PRIMEIROS PASSOS (checklist de iniciante) ───────────────────────── */
-  function iniciante(){
-    if(souAdmin()&&!window.__verIniciante)return false;
-    if((ST.vistas||[]).length>=3)return false;
+  /* ───────────────────────── CHECKLIST QUE CRESCE COM A PESSOA ─────────────────────────
+     Nível A1 (ou "do zero"): a pessoa ainda não aprendeu nada, então não faz sentido pedir pra escrever ou revisar palavras.
+     · até 3 aulas assistidas: só tarefas de APRENDER (aula, jogo de figura, jogo de ouvir, música, palavras parecidas)
+     · de 3 a 7 aulas: volta o checklist por lugar, mas revisar já pode; escrever/falar/orar ainda viram tarefas de aprender
+     · 8 aulas ou mais (ou nível acima de A1): checklist completo */
+  var LIB_REVISAR=3,LIB_PRODUZIR=8;
+  function nivelBaixo(){
     if(ST.nivel)return /^A1/i.test(ST.nivel);
     var o=ST.onb||{};if(o.nivel)return o.nivel==='Do zero'||o.nivel==='Entendo pouca coisa';
     return true;
   }
+  function aulasVistas(){return (ST.vistas||[]).length;}
+  function iniciante(){return nivelBaixo()&&aulasVistas()<LIB_REVISAR;}
+  function exige(t){
+    var x=(t.title||'')+' '+(t.sub||'');
+    if(/escrev|frase|diário|diario|fal(e|ar)\b|falar|grav|ora(r|ção|çao)|conversa|pens(e|ar) em inglês|narr|descrev|explic|shadow|cant(e|ar)|imit|ensin|pergunt|apresent|text/i.test(x))return LIB_PRODUZIR;
+    if(/revis|lembr|palavras do dia|flashcard|record|vocab/i.test(x))return LIB_REVISAR;
+    return 0;
+  }
+  function proxAula(){
+    if(!FLAT)return null;var v=ST.vistas||[];
+    return FLAT.filter(function(it){return (!window.isOpen||isOpen(it.l))&&v.indexOf(it.l.id)<0;})[0]||null;
+  }
+  var SPOTIFY_EOM='https://open.spotify.com/playlist/3hcF84KR80VqykVNeJy4x5';
+  var APR={
+    aula:function(){var it=proxAula(),q=it&&it.l.quiz&&it.l.quiz.length;
+      return {icon:'📚',title:q?'Assistir a aula e fazer o quiz':'Assistir a aula da vez',sub:it?it.l.title:'A próxima aula do seu caminho',info:{why:'Tudo começa aqui: a aula ensina, o resto do checklist só pratica o que você viu. Sem aula, não tem o que praticar.',
+        steps:['Toque no botão abaixo pra abrir a aula','Assista inteira, com caderno do lado. Pode pausar e voltar','Anote 3 palavras ou frases que você entendeu','No fim da aula, faça o quiz pra ver o que ficou'],
+        links:[it?{t:'▶️ Abrir: '+it.l.title,u:'#aula:'+it.m.id+':'+it.l.id}:{t:'📚 Ir pras aulas',u:'#modulos'}]}};},
+    imagem:function(){return {icon:'🖼️',title:'Jogo: O que é isso?',sub:'Figura + palavra em inglês, 10 rodadas',info:{why:'O jeito mais rápido de aprender as primeiras palavras: ligar a imagem direto ao inglês, sem passar pelo português.',
+        steps:['Toque em "Jogar agora"','Olhe a figura e escolha o nome em inglês','Ouça a pronúncia e repita em voz alta','Terminou? A tarefa marca sozinha'],links:[{t:'🎮 Jogar agora',u:'#jogo:O que é isso?'}]}};},
+    ouvir:function(){return {icon:'🔊',title:'Jogo: Ouça e Toque',sub:'Ouvir a palavra e achar a figura',info:{why:'Antes de falar, o ouvido precisa reconhecer o som. Aqui você treina isso sem precisar ler nada.',
+        steps:['Toque em "Jogar agora" (som ligado)','Ouça a palavra e toque na figura certa','Pode ouvir de novo quantas vezes quiser','Terminou? A tarefa marca sozinha'],links:[{t:'🎮 Jogar agora',u:'#jogo:Ouça e Toque'}]}};},
+    musica:function(){return {icon:'🎵',title:'Ouvir 1 música e caçar 3 palavras',sub:'Sem letra, só o ouvido',info:{why:'Música repete as mesmas palavras várias vezes. É o jeito mais leve de reconhecer padrões do inglês.',
+        steps:['Escolha 1 música da playlist','Ouça sem ler a letra','Anote 3 palavras que você reconheceu (vale palavra pequena)','Ouça de novo e veja se aparecem mais vezes'],
+        links:[{t:'🟢 Playlist do English on Mission',u:SPOTIFY_EOM},{t:'▶️ Músicas fáceis em inglês',u:'https://www.youtube.com/results?search_query=easy+english+songs+for+beginners+with+lyrics'}],
+        ex:['Palavras que aparecem muito: <b>love</b> (amor), <b>you</b> (você), <b>heart</b> (coração), <b>God</b> (Deus), <b>light</b> (luz)']}};},
+    cognatos:function(){return {icon:'🔎',title:'Caçar 10 palavras que você já conhece',sub:'Inglês parecido com português',info:TI.cognatos};},
+    complete:function(){return {icon:'🧩',title:'Jogo: Complete',sub:'Frases curtinhas do começo',info:{why:'Agora que você já viu algumas aulas, dá pra brincar com frases simples.',steps:['Toque em "Jogar agora"','Escolha a palavra que completa a frase','Terminou? A tarefa marca sozinha'],links:[{t:'🎮 Jogar agora',u:'#jogo:Complete'}]}};}
+  };
+  function diaN(){return Math.floor(Date.now()/864e5);}
+  var BASE={};
+  function tarefasDoDia(label){tarefasDoDia0(label);tarefaDoJeito(label);}
+  function tarefaDoJeito(label){
+    if(!window.CTX_TASKS||!CTX_TASKS[label]||!ST.prisma||!INTEL[ST.prisma])return;
+    var it=INTEL[ST.prisma],R=ST.prismaRes||{},lista=(R.taticas&&R.taticas.length?R.taticas:[]).concat(it.est||[]);if(!lista.length)return;
+    var d=diaN(),dica=lista[d%lista.length];
+    var t={_jeito:1,icon:it.ic,title:'Do seu jeito: '+dica.replace(/\.$/,''),sub:'Prisma · '+it.nome,info:{
+      why:(R.aprende||it.desc)+' Por isso esta tarefa entra todo dia no seu checklist: é o caminho mais curto pro inglês ficar.',
+      steps:['Separe 10 a 15 minutos agora','Faça: '+dica,(R.despertar?'Lembre: '+R.despertar:'Repita amanhã: a constância vale mais que a intensidade'),'Marque como feita'],
+      links:[{t:'🔷 Ver meu Prisma',u:'#prisma'}]}};
+    CTX_TASKS[label]=CTX_TASKS[label].filter(function(x){return !x._jeito;}).concat([t]);
+  }
+  function tarefasDoDia0(label){
+    if(!window.CTX_TASKS)return;
+    if(label!=='Primeiros passos'&&!CTX_TASKS[label]&&!BASE[label])label='Em Casa';
+    if(!BASE[label]&&CTX_TASKS[label]&&label!=='Primeiros passos')BASE[label]=CTX_TASKS[label].map(function(t,i){var o=Object.assign({},t);if(!o.info&&!o.ref)o.ref=[label,i];return o;});
+    var d=diaN(),v=aulasVistas();
+    if(label==='Primeiros passos'){
+      var A=[APR.imagem,APR.ouvir],C=[APR.musica,APR.cognatos];
+      CTX_TASKS[label]=[APR.aula(),A[d%2](),A[(d+1)%2](),C[d%2]()];return;
+    }
+    var base=BASE[label];if(!base)return;
+    if(!nivelBaixo()||v>=LIB_PRODUZIR){CTX_TASKS[label]=base;return;}
+    var pool=['aula','imagem','ouvir','complete','musica','cognatos'],k=d%pool.length,usados={};
+    CTX_TASKS[label]=base.map(function(t){
+      if(exige(t)<=v)return t;
+      for(var n=0;n<pool.length;n++){var nome=pool[(k+n)%pool.length];if(!usados[nome]){usados[nome]=1;k=(k+n+1)%pool.length;return APR[nome]();}}
+      return APR.imagem();
+    });
+  }
   function pintarInicio(){
     var t=$('mar-ctx-title');if(!t)return;var box=$('mi-inicio');
     if(!box){box=document.createElement('div');box.id='mi-inicio';t.insertAdjacentElement('beforebegin',box);}
-    var h='';
+    var h='',v=aulasVistas();
     if(!ST.idioma)h+='<div class="mi-ini idi"><div class="ic">'+IC('idioma','xl')+'</div><div class="tx"><b>Missão de início: deixe seus aparelhos em inglês</b><span>Celular, Instagram, YouTube e Netflix. Você vai ler inglês o dia inteiro sem perceber.</span></div>'
       +'<div class="bt"><button data-ini="como">Como fazer</button><button class="ok" data-ini="feito">Já troquei ✓</button></div></div>';
-    if(iniciante()){var v=Math.min(3,(ST.vistas||[]).length);
-      h+='<div class="mi-ini beg"><div class="tx"><b>🌱 Modo primeiros passos · '+v+'/3 aulas</b><span>Enquanto você assiste suas 3 primeiras aulas, o checklist é só de base: aula, reconhecer palavras e acostumar o ouvido. Depois ele muda conforme o lugar que você escolher.</span></div><div class="bar"><i style="width:'+(v/3*100)+'%"></i></div></div>';}
+    if(iniciante()){
+      h+='<div class="mi-ini beg"><div class="tx"><b>🌱 Primeiros passos · '+v+'/'+LIB_REVISAR+' aulas</b><span>Agora é fase de aprender: aula, jogos de figura e som, música. Nada de escrever ou revisar o que você ainda não viu. Com '+LIB_REVISAR+' aulas, liberam os checklists por lugar.</span></div><div class="bar"><i style="width:'+(v/LIB_REVISAR*100)+'%"></i></div></div>';
+    }else if(nivelBaixo()&&v<LIB_PRODUZIR){
+      h+='<div class="mi-ini beg"><div class="tx"><b>🌿 Seu checklist cresce com você · '+v+'/'+LIB_PRODUZIR+' aulas</b><span>Revisar palavras já liberou. Escrever, falar e orar em inglês liberam com '+LIB_PRODUZIR+' aulas. Até lá, essas tarefas viram tarefas de aprender.</span></div><div class="bar"><i style="width:'+(v/LIB_PRODUZIR*100)+'%"></i></div></div>';
+    }
     box.innerHTML=h;
     var beg=iniciante();document.body.classList.toggle('mi-beg',beg);
     if(beg)t.textContent='Tarefas de hoje · Primeiros passos';
   }
+  /* trocar tarefa: cada tarefa tem 2 variações do mesmo nível; o botão gira original → variação 1 → variação 2 → original */
+  var ORIG=null;
+  function todasTarefas(){
+    if(!ORIG){ORIG=[];var vis={};Object.keys(window.CTX_TASKS||{}).forEach(function(k){if(k==='Primeiros passos'||k==='_idioma')return;
+      (BASE[k]||CTX_TASKS[k]||[]).forEach(function(t,i){if(vis[t.title])return;vis[t.title]=1;var o=Object.assign({},t);if(!o.info&&!o.ref)o.ref=[k,i];ORIG.push(o);});});}
+    return ORIG;
+  }
+  function hashN(x){var h=0;for(var i=0;i<x.length;i++)h=(h*31+x.charCodeAt(i))|0;return Math.abs(h);}
+  function variacoes(label,i,lista){
+    var v=aulasVistas(),lim=(label==='Primeiros passos')?-1:(nivelBaixo()&&v<LIB_PRODUZIR?v:99);
+    var usados={};lista.forEach(function(t){usados[t.title]=1;});
+    // primeiro: tarefas do MESMO lugar que não estão na lista; depois: tarefas de aprender (servem em qualquer lugar)
+    var mesmo=lim>=0?(BASE[label]||[]).filter(function(t){return exige(t)<=lim&&!usados[t.title];}):[];
+    var apr=Object.keys(APR).map(function(k){return APR[k]();}).filter(function(t){return !usados[t.title];});
+    var seed=hashN(dia()+label+i),out=[];
+    mesmo.forEach(function(t,n){var x=mesmo[(seed+n)%mesmo.length];if(out.length<2&&out.indexOf(x)<0)out.push(x);});
+    for(var n=0;n<apr.length&&out.length<2;n++){var t=apr[(seed+n*7)%apr.length];if(out.indexOf(t)<0)out.push(t);}
+    return out;
+  }
+  function trocas(){return LS.get('mi_troca_'+dia(),{});}
+  function aplicarTrocas(label){
+    var tr=trocas()[label];if(!tr||!CTX_TASKS[label])return;var base=CTX_TASKS[label].slice();
+    Object.keys(tr).forEach(function(i){var n=tr[i];if(!n)return;var alt=variacoes(label,+i,base)[n-1];if(alt)CTX_TASKS[label][i]=alt;});
+  }
+  window.miTrocar=function(ev,label,i){
+    ev.stopPropagation();var ch=(window._ctxChecked||{})[label]||[];if(ch[i]){toast('Essa você já fez ✓');return;}
+    var all=trocas();all[label]=all[label]||{};all[label][i]=((all[label][i]||0)+1)%3;LS.set('mi_troca_'+dia(),all);
+    window.renderMarTasks(label);
+  };
   var rmtOrig=window.renderMarTasks;
-  if(rmtOrig){window.renderMarTasks=function(label){if(iniciante()&&label!=='_idioma')label='Primeiros passos';var r=rmtOrig(label);pintarInicio();return r;};}
+  if(rmtOrig){window.renderMarTasks=function(label){
+    if(label!=='_idioma'){if(iniciante())label='Primeiros passos';if(!CTX_TASKS[label])label='Em Casa';tarefasDoDia(label);aplicarTrocas(label);}
+    var r=rmtOrig(label);
+    if(label!=='_idioma'){var tr=(trocas()[label])||{},ch=(window._ctxChecked||{})[label]||[];
+      [].forEach.call(document.querySelectorAll('#mar-tasks-list .mar-task'),function(el,i){if(ch[i])return;
+        var b=document.createElement('button');b.className='mi-troca';b.title='Trocar por outra tarefa';b.innerHTML='🔄<small>'+((tr[i]||0)+1)+'/3</small>';
+        b.setAttribute('onclick',"miTrocar(event,'"+label.replace(/'/g,"\\'")+"',"+i+")");var hint=el.querySelector('.open-hint');el.insertBefore(b,hint);});}
+    pintarInicio();return r;};}
   var tdOrig=window.taskDone;
   window.taskDone=function(){
     var c=window._curTask;
@@ -2107,6 +2532,7 @@
     if(b.dataset.ini==='como'&&window.openTask)openTask('_idioma',0);
     if(b.dataset.ini==='feito'){ST.idioma=true;salvar();pintarInicio();toast('📱 Boa! Aguenta 7 dias que vira hábito.','#10b981');}
   });
+  carregarFlat().then(function(){var tt=$('mar-ctx-title');if(iniciante()&&window.renderMarTasks)renderMarTasks('Primeiros passos');});
   setTimeout(function(){try{pintarInicio();if(iniciante()&&window.renderMarTasks)renderMarTasks('Primeiros passos');}catch(e){}},900);
 
   /* ───────────────────────── PLANOS ─────────────────────────
@@ -2115,10 +2541,10 @@
     var cf=AS().cfg||{};
     return [
       {k:'gratis',nome:'Grátis',preco:'R$ 0',sub:'Pra conhecer o método',cor:'#64748b',beneficios:['Checklist diário e maratona','Jogos liberados','Materiais gratuitos','Lives abertas','Bússola de nível'],checkout:'',produtos:[]},
-      {k:'mission',nome:'Mission',preco:'',sub:'Inglês com a Bíblia',cor:'#1f6b4a',beneficios:['Tudo do Grátis','Devocionais gravados','Inglês bíblico na prática','Comunidade do English on Mission','Materiais do EOM'],checkout:cf.checkoutEom||'',produtos:(cf.eom&&cf.eom.length?cf.eom:['English on Mission'])},
-      {k:'inteligente',nome:'Inteligente',preco:'',sub:'O Programa completo',cor:'#4f6ef7',beneficios:['Tudo do Grátis','Todas as aulas do Programa','Todos os materiais','Marcar aula com o Gediel','Lives com replay'],checkout:cf.checkout||'',produtos:(cf.programa||[]).slice()},
-      {k:'genio',nome:'Gênio',preco:'',sub:'Tudo liberado',cor:'#d4a017',destaque:true,tudo:true,beneficios:['Tudo do Inteligente + Mission','Todos os e-books e mini-cursos','Tudo que for lançado, sem pagar de novo','Prioridade pra marcar aula'],checkout:'',produtos:['Plano Gênio']},
-      {k:'instituicao',nome:'Instituição',preco:'A combinar',sub:'Igrejas, escolas, empresas e grupos',cor:'#0f172a',tudo:true,beneficios:['Tudo do Gênio pra cada pessoa','Quantidade de colaboradores sob medida','Turmas e lives combinadas com o grupo','Acompanhamento com o Gediel'],checkout:'',produtos:['Plano Instituição']}
+      {k:'mission',nome:'Mission',preco:'R$ 25/mês',sub:'Inglês com a Bíblia',cor:'#1f6b4a',beneficios:['Tudo do Grátis','Devocionais gravados','Inglês bíblico na prática','Comunidade do English on Mission','Materiais do EOM'],checkout:cf.checkoutEom||'',produtos:(cf.eom&&cf.eom.length?cf.eom:['English on Mission'])},
+      {k:'inteligente',nome:'Inteligente',preco:'6x R$ 297',promo:'6x R$ 197',promoAte:'2026-11-30',promoNome:'Black Friday',sub:'O Programa completo',cor:'#4f6ef7',beneficios:['Tudo do Grátis','Todas as aulas do Programa','Todos os materiais','Lives com replay','Pode pedir aula particular com o Gediel (paga à parte)'],checkout:cf.checkout||'',produtos:(cf.programa||[]).slice()},
+      {k:'genio',nome:'Gênio',preco:'6x R$ 329',sub:'Tudo liberado',cor:'#d4a017',destaque:true,tudo:true,beneficios:['Tudo do Inteligente + Mission','Todos os e-books e mini-cursos','Tudo que for lançado, sem pagar de novo','Pode pedir aula particular com o Gediel (paga à parte)'],checkout:'',produtos:['Plano Gênio']},
+      {k:'instituicao',nome:'Instituição',preco:'A combinar',sub:'Igrejas, escolas, empresas e grupos',cor:'#0f172a',tudo:true,beneficios:['Tudo do Gênio pra cada pessoa','Quantidade de colaboradores sob medida','Turmas e lives combinadas com o grupo','Encontros com o Gediel definidos no contrato'],checkout:'',produtos:['Plano Instituição']}
     ];
   }
   function planos(){var cf=AS().cfg||{};var l=cf.planos&&cf.planos.lista;return (l&&l.length)?l:planosPadrao();}
@@ -2137,7 +2563,10 @@
       h+='<div class="pl-card'+(x.destaque?' dest':'')+(atual?' atual':'')+'" style="--pc:'+E(x.cor||'#4f6ef7')+'">'
         +(x.destaque?'<div class="pl-rib">Mais completo</div>':'')
         +'<div class="pl-nm">'+(x.k==='genio'||x.tudo?IC('planos'):'')+'Plano '+E(x.nome)+'</div><div class="pl-sub">'+E(x.sub||'')+'</div>'
-        +'<div class="pl-pr'+(x.preco?'':' vazio')+'">'+E(x.preco||'Valor sob consulta')+'</div><ul>'+(x.beneficios||[]).map(function(b){return '<li>'+E(b)+'</li>';}).join('')+'</ul>';
+        +(function(){var hoje=new Date().toISOString().slice(0,10),pr=x.promo&&x.promoAte&&hoje<=x.promoAte;
+          if(pr)return '<div class="pl-promo">'+E(x.promoNome||'Promoção')+' · até '+x.promoAte.split('-').reverse().slice(0,2).join('/')+'</div><div class="pl-de">de '+E(x.preco)+'</div><div class="pl-pr">'+E(x.promo)+'</div>';
+          return '<div class="pl-pr'+(x.preco?'':' vazio')+'">'+E(x.preco||'Valor sob consulta')+'</div>';})()
+        +'<ul>'+(x.beneficios||[]).map(function(b){return '<li>'+E(b)+'</li>';}).join('')+'</ul>';
       if(atual)h+='<div class="pl-ok">✓ Seu plano atual</div>';
       else if(inst)h+='<div class="pl-inst"><label>Quantas pessoas?</label><input type="number" min="2" value="10" id="pl-qtd"></div><button class="pl-btn" data-pl="inst">'+IC('wa-real')+' Combinar pelo WhatsApp</button>';
       else if(x.k==='gratis')h+='<div class="pl-ok sub">Incluído no seu login</div>';
@@ -2145,7 +2574,7 @@
       else h+='<button class="pl-btn" data-pl="zap" data-n="'+E(x.nome)+'">'+IC('wa-real')+' Quero o '+E(x.nome)+'</button>';
       h+='</div>';
     });
-    h+='</div><div class="pl-foot">Já comprou e não liberou? Saia e entre de novo com o e-mail da compra. Se continuar, chama no suporte.</div>';
+    h+='</div><div class="pl-aviso">'+IC('agendar')+'<div><b>Aula particular com o Gediel não está inclusa em nenhum plano.</b> A partir do Inteligente você pode pedir um horário em "Marcar aula". O valor é à parte e combinado direto com ele.</div></div><div class="pl-foot">Já comprou e não liberou? Saia e entre de novo com o e-mail da compra. Se continuar, chama no suporte.</div>';
     p.innerHTML=h;
   }
   function editarPlanos(){
@@ -2153,6 +2582,8 @@
     var h='<div class="pw" style="max-width:640px;max-height:86vh;overflow:auto;text-align:left"><div style="font-size:18px;font-weight:800;margin-bottom:4px">Editar planos</div><div style="font-size:12px;color:var(--fg3);margin-bottom:12px">Produtos = parte do nome do produto na Kiwify. Quem comprou cai nesse plano. "Libera tudo" abre a plataforma inteira.</div>';
     l.forEach(function(x,i){h+='<div class="pl-ed" data-i="'+i+'"><b>Plano '+E(x.nome)+'</b>'
       +'<label>Preço<input data-f="preco" value="'+E(x.preco||'')+'" placeholder="R$ 47/mês"></label>'
+      +'<label>Preço promocional (opcional)<input data-f="promo" value="'+E(x.promo||'')+'" placeholder="6x R$ 197"></label>'
+      +'<label>Promoção vale até (AAAA-MM-DD)<input data-f="promoAte" value="'+E(x.promoAte||'')+'" placeholder="2026-11-30"></label>'
       +'<label>Frase<input data-f="sub" value="'+E(x.sub||'')+'"></label>'
       +'<label>Link de checkout<input data-f="checkout" value="'+E(x.checkout||'')+'" placeholder="https://pay.kiwify.com.br/..."></label>'
       +'<label>Produtos da Kiwify (separe por vírgula)<input data-f="produtos" value="'+E((x.produtos||[]).join(', '))+'"></label>'

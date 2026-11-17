@@ -149,6 +149,9 @@ a{text-decoration:none}
 .ficha-img{aspect-ratio:16/10;overflow:hidden;position:relative}
 .ficha-img img{width:100%;height:100%;object-fit:cover}
 .ficha-img iframe{width:100%;height:100%;border:0}
+/* Reel do Instagram / vídeo do TikTok: vertical, toca dentro da ficha */
+.ficha-img.vert{aspect-ratio:auto;display:flex;justify-content:center;background:#000}
+.ficha-img.vert iframe{width:min(100%,400px);height:min(84vh,820px)}
 .ficha-corpo{padding:18px 20px 28px}
 .ficha h3{font-size:32px;line-height:1.05}
 .metas{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
@@ -315,6 +318,20 @@ body.entrando .mara{bottom:96px}
 .ficha .mara-conta{display:flex;gap:8px;margin:12px 0}
 .ficha .mara-conta b{flex:1;text-align:center;padding:10px 0;border-radius:12px;background:rgba(214,150,90,.16);font:700 22px/1 -apple-system,Inter,sans-serif;color:#fff}
 .ficha .mara-conta b small{display:block;font-size:10px;color:#e9cdb3;margin-top:4px}
+/* maratonas (fileira do hub) */
+.mrt-trilho{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;padding:4px 16px 8px 0;margin-right:-16px;scroll-snap-type:x proximity}
+.mrt-trilho::-webkit-scrollbar{display:none}
+.mrt{flex:0 0 min(78%,300px);scroll-snap-align:start;position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:220px;border-radius:20px;overflow:hidden;text-decoration:none;color:#fff;background:#111d34 center/cover no-repeat;border:1px solid rgba(255,255,255,.08)}
+.mrt:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,20,38,.15) 0%,rgba(10,20,38,.92) 72%)}
+.mrt>*{position:relative}
+.mrt .mrt-in{padding:14px 15px 15px}
+.mrt .mrt-st{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:99px;font:700 11px/1.3 Inter,sans-serif;background:rgba(34,197,94,.18);color:#4ade80;margin-bottom:8px}
+.mrt .mrt-st i{width:7px;height:7px;border-radius:50%;background:currentColor}
+.mrt .mrt-st.andamento{background:rgba(214,150,90,.22);color:#f2c69c}
+.mrt b{display:block;font-family:'Instrument Serif',serif;font-weight:400;font-size:24px;line-height:1.02}
+.mrt small{display:block;font-size:12px;color:#d7dce8;margin-top:5px}
+.mrt .mrt-bt{display:inline-block;margin-top:10px;font:700 13px/1 Inter,sans-serif;padding:9px 14px;border-radius:99px;background:#fff;color:#0a1426}
+.mrt.andamento .mrt-bt{background:rgba(255,255,255,.14);color:#fff}
 /* entrar (área de membros) */
 .entrar-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 15px;border-radius:980px;background:rgba(255,255,255,.12);color:#fff;font:600 14px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text",Inter,system-ui,sans-serif;backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);transition:transform .18s,background .2s}
 .entrar-btn:hover{background:rgba(255,255,255,.2)}.entrar-btn:active{transform:scale(.96)}
@@ -396,6 +413,11 @@ body.entrando .mara{bottom:96px}
     </div>
   </section>
 
+  <section class="secao aparece" id="maratonas" hidden>
+    <div class="cab"><div><h2 class="serif">Maratonas</h2><p style="font-size:13px;margin-top:4px;color:var(--dim)">Uma jornada pra cada fase da vida</p></div><a class="pilula" href="maratonas.html" data-item="maratonas:todas">Ver todas</a></div>
+    <div class="mrt-trilho" id="trilhoMaratonas"></div>
+  </section>
+
   <section class="secao aparece" id="gratis">
     <div class="cab"><h2 class="serif" id="sGratis">Materiais grátis</h2><small id="contaGratis"></small></div>
     <div class="filtros" id="filtros"></div>
@@ -467,6 +489,7 @@ body.entrando .mara{bottom:96px}
 
 <script src="config.js"></script>
 <script src="content.js"></script>
+<script src="maratonas.js"></script>
 <script src="hub-dados.js"></script>
 <script src="jogos-hub.js"></script>
 <script>if (/[?&]editar\b/.test(location.search)) document.write('<script src="editor.js" defer><\/script>');</script>
@@ -590,6 +613,18 @@ body.entrando .mara{bottom:96px}
   $('#atalhos').innerHTML = (H.atalhos || []).map(a => `<${a.ir === 'link' ? `a href="${esc(https(a.url))}" target="_blank" rel="noopener"` : 'button'} class="atalho t3d" ${a.ir === 'login' ? 'data-login' : a.ir === 'link' ? `data-item="atalho:${esc(a.titulo)}"` : `data-ir="#${esc(a.ir || 'gratis')}"`}>${a.img ? `<img src="${esc(a.img)}" alt="">` : ''}<span class="brilho"></span><span class="pop"><span class="ico"><svg viewBox="0 0 24 24" fill="currentColor">${ICO_AT[a.icone] || ICO_AT.estrela}</svg></span><strong>${esc(a.titulo)}</strong><small>${esc(a.sub)}</small></span></${a.ir === 'link' ? 'a' : 'button'}>`).join('');
   $('#atalhos').style.gridTemplateColumns = `repeat(${Math.max(1, (H.atalhos || []).length)},1fr)`;
   $('#atalhos').classList.toggle('muitos', (H.atalhos || []).length > 4);
+
+  /* maratonas: fileira com status de cada uma (dados em maratonas.js) */
+  (() => {
+    const MR = window.EBG_MARATONAS; if (!MR || !$('#trilhoMaratonas')) return;
+    $('#trilhoMaratonas').innerHTML = MR.lista.map(m => {
+      const st = MR.status(m), abre = st !== 'andamento';
+      return `<a class="mrt ${st}" href="maratonas.html?m=${esc(m.id)}" data-item="maratona:${esc(m.id)}" style="background-image:url('${esc(m.img)}')"><span class="mrt-in">
+        <span class="mrt-st ${st}"><i></i>${esc(MR.rotulo[st])}</span><b>${esc(m.icone)} ${esc(m.nome)}</b><small>${esc(m.edicao)} · ${esc(m.quando)}</small>
+        <span class="mrt-bt">${abre ? 'Quero me inscrever' : 'Lista da próxima turma'}</span></span></a>`;
+    }).join('');
+    $('#maratonas').hidden = false;
+  })();
 
   /* redes */
   const IC = {
@@ -772,7 +807,13 @@ body.entrando .mara{bottom:96px}
     DADOS.evento('ficha', k, (itens[k] || {}).titulo);
     const m = itens[k]; if (!m) return;
     ultimoFoco = document.activeElement;
-    const midia = m.video ? `<iframe src="https://www.youtube-nocookie.com/embed/${esc(m.video)}?autoplay=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen title="Vídeo"></iframe>`
+    // vídeo do YouTube (código ou link), Reel/post do Instagram ou vídeo do TikTok: tudo toca aqui dentro, sem sair do Hub
+    const vid = String(m.video || '').trim();
+    const ig = vid.match(/instagram\.com\/(?:[\w.]+\/)?(reels?|p|tv)\/([\w-]+)/i), tk = vid.match(/tiktok\.com\/[^?\s]*\/video\/(\d+)/i);
+    const vertical = !!(ig || tk);
+    const midia = ig ? `<iframe src="https://www.instagram.com/${/^reels?$/i.test(ig[1]) ? 'reel' : ig[1].toLowerCase()}/${esc(ig[2])}/embed" allow="autoplay; encrypted-media; fullscreen" allowfullscreen scrolling="no" title="Vídeo do Instagram"></iframe>`
+      : tk ? `<iframe src="https://www.tiktok.com/embed/v2/${esc(tk[1])}" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="Vídeo do TikTok"></iframe>`
+      : m.video ? `<iframe src="https://www.youtube-nocookie.com/embed/${esc(m.video)}?autoplay=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen title="Vídeo"></iframe>`
       : m.img ? `<img src="${esc(m.img)}" alt="">` : '';
     const botao = (c, cls) => {
       if (!c) return '';
@@ -786,7 +827,7 @@ body.entrando .mara{bottom:96px}
       : parcelado(m) ? `<p class="preco">${parcelado(m).n}x de <b>${esc(parcelado(m).cada)}</b><br><small>ou ${esc(parcelado(m).cheio)} à vista</small></p>`
       : m.preco ? `<p class="preco"><b>${esc(m.preco)}</b></p>` : '';
     $('#ficha').innerHTML = `<span class="alca"></span><button class="fechar" data-fechar aria-label="Fechar">✕</button>
-      ${midia ? `<div class="ficha-img">${midia}</div>` : ''}
+      ${midia ? `<div class="ficha-img${vertical ? ' vert' : ''}">${midia}</div>` : ''}
       <div class="ficha-corpo"><h3 class="serif" id="fichaTitulo">${esc(m.aluno ? '“' + m.titulo + '”' : m.titulo)}</h3>
         ${m.meta ? `<div class="metas">${m.meta.filter(Boolean).map(x => `<span>${esc(x)}</span>`).join('')}</div>` : ''}
         <p>${esc(m.sinopse)}</p>
@@ -800,6 +841,15 @@ body.entrando .mara{bottom:96px}
   }
   /* MARATONA: cartão flutuante que pisca, com contagem regressiva; toque abre a ficha */
   const MA = H.maratona || {};
+  /* a maratona configurada já começou? o cartão passa a mostrar a próxima com inscrição aberta */
+  (() => {
+    const MR = window.EBG_MARATONAS; if (!MR) return;
+    if (MA.fim && new Date(MA.fim) > new Date()) return;
+    const p = MR.abertas()[0]; if (!p) return;
+    Object.assign(MA, { rotulo: 'Maratona', selo: 'Inscrições abertas', titulo: p.nome, sub: p.edicao, detalhe: p.quando + (p.duracao ? ' · ' + p.duracao : ''),
+      foto: MA.foto || p.img, img: p.img, fim: p.inicio + 'T00:00', textoFim: 'Começou!', texto: p.promessa + ' ' + (p.pra || ''),
+      link: 'maratonas.html?m=' + p.id, botao: 'Quero me inscrever' });
+  })();
   const maFim = MA.fim ? new Date(MA.fim) : null;
   const pad = n => String(n).padStart(2, '0');
   function maResta() {

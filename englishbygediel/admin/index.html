@@ -38,6 +38,7 @@
       <button type="button" role="tab" data-aba="hub" aria-selected="false">Hub</button>
       <button type="button" role="tab" data-aba="dados" aria-selected="false">Dados do Hub</button>
       <button type="button" role="tab" data-aba="pessoas" aria-selected="false">Pessoas</button>
+      <button type="button" role="tab" data-aba="maratonas" aria-selected="false">Maratonas</button>
     </nav>
     <div class="topo-dir">
       <a class="link" href="../" target="_blank" rel="noopener">Ver o Hub</a>
@@ -158,13 +159,38 @@
     <p class="erro" id="pessoasAviso"></p>
     <div class="filtros pessoas-filtros" id="pessoasFiltros">
       <input id="pfBusca" type="search" placeholder="Buscar nome, telefone, e-mail, @ ou interesse" aria-label="Buscar pessoa">
-      <select id="pfFonte" aria-label="Veio por"><option value="">Veio por: todos</option><option value="programa">Programa (chat)</option><option value="mentoria">Mentoria particular</option><option value="catalogo">Catálogo antigo</option><option value="compra">Comprou</option></select>
+      <select id="pfFonte" aria-label="Veio por"><option value="">Veio por: todos</option><option value="programa">Programa (chat)</option><option value="mentoria">Mentoria particular</option><option value="catalogo">Catálogo antigo</option><option value="compra">Comprou</option><option value="maratona">Maratona</option></select>
       <select id="pfInteresse" aria-label="Interesse"><option value="">Todos os interesses</option></select>
       <select id="pfTem" aria-label="Tem"><option value="">Qualquer contato</option><option value="whatsapp">Com WhatsApp</option><option value="email">Com e-mail</option><option value="instagram">Com Instagram</option><option value="comprou">Já comprou</option><option value="naocomprou">Ainda não comprou</option></select>
       <select id="pfPeriodo" aria-label="Período"><option value="0">Desde sempre</option><option value="1">Hoje</option><option value="7">7 dias</option><option value="30">30 dias</option><option value="90">90 dias</option></select>
     </div>
     <div class="kpis" id="pessoasResumo"></div>
     <div id="pessoasLista"></div>
+  </section>
+
+  <!-- Maratonas: inscrições separadas pro comercial -->
+  <section class="aba" id="aba-maratonas" hidden>
+    <div class="cabeca">
+      <h2>Maratonas</h2>
+      <div class="filtros"><a class="botao" href="../maratonas.html" target="_blank" rel="noopener">Ver a página</a><button class="botao" type="button" id="mrRecarregar">Atualizar</button><button class="botao cheio" type="button" id="mrBaixar">Baixar planilha</button></div>
+    </div>
+    <p class="sub">Todas as inscrições das maratonas (pelo Hub e pela área de membros). Toque numa maratona pra ver só ela. Temperatura: 🔥 quer garantir vaga · 🌤️ quer saber valores · ❄️ só quer ser avisado. O WhatsApp já vai com a mensagem pronta e marca “Chamei”.</p>
+    <p class="erro" id="mrAviso"></p>
+    <div class="mr-cards" id="mrPorMaratona"></div>
+    <div class="filtros pessoas-filtros" id="mrFiltros">
+      <input id="mrfBusca" type="search" placeholder="Buscar nome, telefone, cidade, país, área…" aria-label="Buscar inscrição">
+      <select id="mrfTemp" aria-label="Temperatura"><option value="">Temperatura: todas</option><option value="quente">🔥 Quente</option><option value="morno">🌤️ Morno</option><option value="frio">❄️ Frio</option></select>
+      <select id="mrfFase" aria-label="Fase"><option value="">Fase: todas</option><option value="novo">Novo (não chamei)</option><option value="chamado">Chamei</option><option value="conversando">Conversando</option><option value="matriculado">Matriculado</option><option value="nao_agora">Não agora</option><option value="perdido">Perdido</option></select>
+      <select id="mrfNivel" aria-label="Nível"></select>
+      <select id="mrfObjetivo" aria-label="Objetivo"></select>
+      <select id="mrfTurno" aria-label="Turno"></select>
+      <select id="mrfPais" aria-label="País"><option value="">Mora: qualquer lugar</option><option value="br">No Brasil</option><option value="fora">Fora do Brasil</option></select>
+      <select id="mrfConheceu" aria-label="Conheceu por"></select>
+      <select id="mrfVeio" aria-label="Veio de"><option value="">Veio de: todos</option><option value="hub">Hub (público)</option><option value="membros">Área de membros</option></select>
+      <select id="mrfPeriodo" aria-label="Período"><option value="0">Desde sempre</option><option value="1">Hoje</option><option value="7">7 dias</option><option value="30">30 dias</option><option value="90">90 dias</option></select>
+    </div>
+    <div class="kpis" id="mrResumo"></div>
+    <div id="mrLista"></div>
   </section>
 
   <!-- Hub: tudo do hub.html editável -->
@@ -247,7 +273,9 @@
 <script src="admin.js"></script>
 <script src="hub-editor.js"></script>
 <script src="hub-numeros.js"></script>
+<script src="../maratonas.js"></script>
 <script src="hub-pessoas.js"></script>
+<script src="hub-maratonas.js"></script>
 <script src="hub-kiwify.js"></script>
 </body>
 </html>
