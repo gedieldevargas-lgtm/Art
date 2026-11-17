@@ -2366,7 +2366,9 @@
       }
       feitas.push('spotify-eom-1');mudou=true;
     }
-    if(mudou){try{await salvarCfg({migr:feitas});CARDS=null;}catch(e){}}
+    var extra={};
+    if(feitas.indexOf('programa-plano-inteligente')<0){var pg=(S.cfg.programa||[]).slice();if(pg.indexOf('Plano Inteligente')<0)pg.push('Plano Inteligente');extra.programa=pg;feitas.push('programa-plano-inteligente');mudou=true;}
+    if(mudou){try{await salvarCfg(Object.assign({migr:feitas},extra));CARDS=null;}catch(e){}}
   }
   (function esperar(n){var S=AS();if(S&&S.pronto&&S.cfg){migrarDados();return;}if(n<40)setTimeout(function(){esperar(n+1);},1000);})(0);
   window.miLink=function(u){
