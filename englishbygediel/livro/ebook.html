@@ -223,8 +223,6 @@ p{margin:0 0 8px;font-size:10.5pt;line-height:1.5}
     dials.forEach(function(d){B.push('<div class="bl bx"><div class="vbt">💬 '+esc(d.titulo)+'</div>'+d.falas.map(function(f){return '<div class="f"><b>'+esc(f[0])+':</b> '+esc(f[1])+'<span>'+esc(f[2])+'</span></div>';}).join('')+'</div>');});
     if(E.escala)B.push('<div class="bl fig"><h4>📊 '+esc(E.escala.titulo)+'</h4>'+escala(E.escala)+'</div>');
     if(E.dia)B.push('<div class="bl fig"><h4>🕐 '+esc(E.dia.titulo)+'</h4>'+dia(E.dia)+'<p class="nota">'+esc(E.dia.nota||'')+'</p></div>');
-    var imgs=(MID.galeria||[]).map(function(x){return [x.v,x.t];}).concat((MID.cenas||[]).map(function(x){return [x.v,x.frase.replace('___',x.resp[0])];})).slice(0,4);
-    if(imgs.length)B.push('<div class="bl"><div class="vbt">🎬 Veja em cena</div><div class="imgs">'+imgs.map(function(x){return '<figure><img src="midia/'+x[0]+'.jpg"><figcaption>'+esc(x[1])+'</figcaption></figure>';}).join('')+'</div></div>');
     B.push('<div class="sep">✍️ Pratique no papel · tente sozinho antes de olhar o gabarito</div>');
     // --- exercícios gerados a partir da aula
     // 1. ligar
@@ -240,6 +238,12 @@ p{margin:0 0 8px;font-size:10.5pt;line-height:1.5}
       var re=new RegExp('\\b'+alvo.replace(/'/g,"'")+'\\b','i');comp.push([f[0].replace(re,'_____'),alvo,f[1]]);banco.push(alvo);});
     if(comp.length>=3){B.push(cab('Complete com as palavras do quadro','🧩')+'<div class="banco">'+mix(banco,3).map(esc).join(' · ')+'</div>'+comp.map(function(c,i){return '<div class="it"><b>'+'abcdefgh'[i]+')</b> '+esc(c[0]).replace('_____','<u>&emsp;&emsp;&emsp;&emsp;</u>')+'<small>'+esc(c[2])+'</small></div>';}).join('')+'</div>');
       GAB.push(['Complete',comp.map(function(c){return c[1];})]);}
+    // 2b. complete escolhendo entre alternativas
+    var alt=comp.slice().reverse().slice(0,5);
+    if(alt.length>=3){var pool=banco.concat(simples.map(function(v){return v[0].split(' / ')[0];}).filter(function(w){return w.split(' ').length===1;}));
+      B.push(cab('Complete escolhendo a alternativa certa','☑️')+alt.map(function(c,i){var outras=mix(pool.filter(function(w){return w.toLowerCase()!==c[1].toLowerCase();}),i+5).slice(0,2);var ops=mix([c[1]].concat(outras),i+9);
+        return '<div class="it"><b>'+'abcde'[i]+')</b> '+esc(c[0]).replace('_____','<u>&emsp;&emsp;&emsp;&emsp;</u>')+'<div class="ops">'+ops.map(function(o,j){return '<span>( ) '+esc(o)+'</span>';}).join('')+'</div></div>';}).join('')+'</div>');
+      GAB.push(['Alternativas',alt.map(function(c){return c[1];})]);}
     // 3. traduza para o inglês
     var tr=FR.slice(0,5);
     B.push(cab('Escreva em inglês','🇺🇸')+tr.map(function(f,i){return '<div class="it"><b>'+'abcdef'[i]+')</b> '+esc(f[1])+LN+'</div>';}).join('')+'</div>');
@@ -273,16 +277,14 @@ p{margin:0 0 8px;font-size:10.5pt;line-height:1.5}
       else if(it.tipo==='lacunas'){B.push(cab(it.titulo,'✏️')+it.linhas.map(function(l){return '<div class="it"><b>'+esc(l[0])+':</b> '+esc(l[1]).replace(/___/g,'<u>&emsp;&emsp;&emsp;</u>')+'</div>';}).join('')+'</div>');GAB.push([it.titulo,it.linhas.map(function(l){return l[2].join(', ');})]);}
       else if(it.tipo==='conversa'&&it.ref!=='traduzir'){var e4=exPorId(it.ref);B.push(cab(it.titulo,'💬')+e4.linhas.map(function(l){return '<div class="it"><b>'+esc(l.quem)+':</b> '+esc(l.pt)+LN+'</div>';}).join('')+'</div>');GAB.push([it.titulo,e4.linhas.map(function(l){return l.resp[0];})]);}
     });
-    // 9. cenas do Get By (escreva a palavra que falta, com a imagem)
-    if((MID.cenas||[]).length){B.push(cab('Que palavra falta na cena?','🎬')+MID.cenas.slice(0,4).map(function(c){return '<div class="cena"><img src="midia/'+c.v+'.jpg"><div>'+esc(c.frase).replace('___','<u>&emsp;&emsp;&emsp;</u>')+'</div></div>';}).join('')+'</div>');
-      GAB.push(['Cenas',MID.cenas.slice(0,4).map(function(c){return c.resp[0];})]);}
     // 10. situações + criar
     B.push(cab('Simule: o que você diria?','🎭')+FR.slice(0,3).map(function(f,i){return '<div class="it"><b>'+(i+1)+'.</b> Situação: '+esc(f[1])+LN+'</div>';}).join('')+'</div>');
     B.push(cab('Crie suas frases','💡')+['sobre a sua rotina','sobre a sua família','sobre o seu trabalho ou estudo','uma pergunta para um amigo'].map(function(t){return '<div class="it">Use o que aprendeu '+esc(t)+':'+LN+'</div>';}).join('')+'</div>');
     B.push(cab('Missão da aula','🎯')+(a.missao.tarefa?'<p class="pq">✅ '+esc(a.missao.tarefa)+'</p>':'')+(a.missao.falar?'<p class="pq">🗣️ Fale 2 vezes: <b>'+esc(a.missao.falar)+'</b></p>':'')+new Array(8).join(LN)+'</div>');
     // gabarito (inclui os do app)
     a.exercicios.forEach(function(e){if(e.tipo==='ditado')GAB.push(['No app · '+e.titulo,e.itens.map(function(x){return x.resp[0];})]);});
-    B.push('<div class="sep">✅ Gabarito</div>');
+    B.push('<!--quebra-->');
+    B.push('<div class="sep">✅ Gabarito · confira só depois de fazer tudo</div>');
     GAB.forEach(function(g,i){B.push('<div class="g"><b>'+(i+1)+'. '+esc(g[0])+'</b><ol type="a">'+g[1].map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ol></div>');});
     document.getElementById('livro').innerHTML=h;
     (document.fonts?document.fonts.ready:Promise.resolve()).then(function(){empacotar(B);document.body.dataset.pronto='1';});
@@ -294,6 +296,12 @@ p{margin:0 0 8px;font-size:10.5pt;line-height:1.5}
     var pg=novaPagina(),ci=0;
     function col(){return pg.querySelectorAll('.col')[ci];}
     blocos.forEach(function(html){
+      if(html==='<!--quebra-->'){
+        // completa o espaço que sobrou com linhas para praticar mais
+        var lim=pg.querySelector('.cols').getBoundingClientRect().bottom;
+        for(var k=ci;k<2;k++){var c=pg.querySelectorAll('.col')[k],fim=c.lastElementChild?c.lastElementChild.getBoundingClientRect().bottom:c.getBoundingClientRect().top,livre=lim-fim-30;
+          if(livre>70){var d=document.createElement('div');d.className='ex extra';d.innerHTML='<h3>📝 Pratique mais: escreva frases com o vocabulário da aula</h3>'+new Array(Math.floor((livre-30)/21)+1).join('<div class="ln"></div>');c.appendChild(d);}}
+        pg=novaPagina();ci=0;return;}
       var tmp=document.createElement('div');tmp.innerHTML=html;var el=tmp.firstChild;
       var full=el.classList&&el.classList.contains('sep');
       for(var t=0;t<4;t++){
