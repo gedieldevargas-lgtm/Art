@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>E-book da aula · Inglês Inteligente</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+@page{size:A4;margin:0}
+:root{--ac:#6d4df5;--ac2:#a855f7;--ink:#14121f;--mut:#6b6880;--line:#e6e3f0;--soft:#f5f3fc;--ok:#10b981}
+*{box-sizing:border-box}
+html,body{margin:0;background:#d9d6e4;font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.pg{width:210mm;height:297mm;margin:12px auto;background:#fff;position:relative;overflow:hidden;padding:16mm 15mm 18mm;page-break-after:always;break-after:page}
+.pg:last-child{page-break-after:auto;break-after:auto}
+@media print{body{background:#fff}.pg{margin:0;box-shadow:none}.barra{display:none}}
+.barra{position:sticky;top:0;z-index:5;background:#14121f;color:#fff;padding:10px;text-align:center;font-size:14px}
+.barra button{font:inherit;font-weight:800;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;border:0;border-radius:10px;padding:9px 16px;cursor:pointer;margin-left:8px}
+.rod{position:absolute;left:15mm;right:15mm;bottom:8mm;display:flex;justify-content:space-between;font-size:9pt;color:var(--mut)}
+.rod b{color:var(--ac)}
+h1,h2,h3{margin:0}
+.ht{font-family:'Archivo Black',sans-serif;font-size:26pt;letter-spacing:-.5px;line-height:1}
+.hs{font-size:10pt;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--ac2);margin-bottom:6px}
+h2{font-family:'Archivo Black',sans-serif;font-size:15pt;margin:18px 0 8px;display:flex;align-items:center;gap:8px}
+h2 .n{width:24px;height:24px;border-radius:50%;background:var(--ac);color:#fff;font:800 11pt 'Plus Jakarta Sans';display:inline-grid;place-items:center}
+p{margin:0 0 8px;font-size:10.5pt;line-height:1.5}
+
+/* capa */
+.capa{background:radial-gradient(120% 80% at 80% 10%,#3b2a8f 0%,#1a1530 45%,#0d0b16 100%);color:#fff;display:flex;flex-direction:column;padding:20mm 18mm}
+.capa .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:12pt;letter-spacing:.5px}
+.capa .logo i{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--ac),var(--ac2));display:grid;place-items:center;font-style:normal}
+.capa .logo small{display:block;font-weight:500;font-size:8pt;opacity:.7;letter-spacing:0}
+.capa .meio{margin:auto 0}
+.capa .kick{font-weight:800;letter-spacing:3px;font-size:11pt;color:#c4b5fd}
+.capa .tt{font-family:'Archivo Black',sans-serif;font-size:62pt;line-height:.95;margin:10px 0 8px;letter-spacing:-1.5px}
+.capa .st{font-size:17pt;font-weight:500;opacity:.85}
+.capa .tags{display:flex;gap:8px;margin-top:22px;flex-wrap:wrap}
+.capa .tags span{border:1px solid rgba(255,255,255,.25);border-radius:30px;padding:6px 14px;font-size:10pt;font-weight:600}
+.capa .ass{font-size:10pt;opacity:.8}
+.capa .ass b{display:block;font-size:12pt;opacity:1;letter-spacing:1px}
+.capa .orb{position:absolute;right:-60mm;bottom:-40mm;width:170mm;height:170mm;border-radius:50%;border:2px solid rgba(168,85,247,.25)}
+.capa .orb2{position:absolute;right:-30mm;bottom:-10mm;width:110mm;height:110mm;border-radius:50%;border:2px solid rgba(168,85,247,.18)}
+
+/* blocos */
+.resumo{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+.resumo li{background:var(--soft);border-radius:10px;padding:8px 12px 8px 34px;position:relative;font-size:10.5pt}
+.resumo li::before{content:'✓';position:absolute;left:12px;top:7px;color:var(--ok);font-weight:800}
+.mapa{border:1px solid var(--line);border-radius:14px;padding:6px;margin-top:6px}
+.mapa svg{display:block;width:100%;height:auto}
+.vgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.vgrid.c3{grid-template-columns:repeat(3,1fr)}
+.vc{border:1px solid var(--line);border-radius:10px;padding:7px 9px;background:#fff}
+.vc b{display:block;font-size:10pt}
+.vc span{font-size:9pt;color:var(--mut)}
+.vc .e{font-size:17pt;line-height:1;display:block;margin-bottom:3px}
+.vbt{font-size:9pt;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--ac2);margin:12px 0 5px}
+.dial{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dial .bx{border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.dial .f{font-size:10pt;margin-bottom:5px}
+.dial .f b{color:var(--ac)}
+.dial .f span{display:block;color:var(--mut);font-size:9pt}
+.dica{background:#f3efff;border-left:4px solid var(--ac2);border-radius:8px;padding:9px 12px;font-size:10.5pt;margin-top:10px}
+.fig{border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-top:8px}
+.fig h3{font-size:11pt;margin-bottom:8px}
+.fig svg{display:block;width:100%;height:auto}
+
+/* exercícios impressos */
+.ex{margin-bottom:12px}
+.ex h3{font-size:12pt;margin-bottom:6px;display:flex;gap:8px;align-items:center}
+.ex h3 .n{width:22px;height:22px;border-radius:50%;background:var(--ac);color:#fff;font-size:10pt;display:inline-grid;place-items:center}
+.ln{border-bottom:1.3px solid #cfcbe0;height:26px}
+.lig{display:grid;grid-template-columns:1fr 60px 1fr;gap:4px 0;align-items:center;font-size:10.5pt}
+.lig div{padding:4px 10px;border:1px solid var(--line);border-radius:8px}
+.lig i{display:flex;justify-content:space-between;padding:0 6px;font-style:normal;color:#b8b3cc}
+.emo{display:grid;grid-template-columns:34px 1fr;gap:4px 8px;align-items:end;font-size:10.5pt;margin-bottom:6px}
+.emo .e{font-size:20pt;line-height:1}
+.lac{font-size:11pt;line-height:2}
+.lac b{color:var(--ac);display:inline-block;width:46px}
+.conv{font-size:10.5pt}
+.conv .pt{color:var(--mut)}
+.gab{columns:2;column-gap:10mm;font-size:9.5pt}
+.gab .g{break-inside:avoid;margin-bottom:10px}
+.gab .g b{display:block;color:var(--ac);margin-bottom:2px}
+.gab ol{margin:0;padding-left:18px}
+.gab li{margin:1px 0}
+/* 2 colunas que enchem a página */
+.cols{position:absolute;top:13mm;bottom:15mm;left:12mm;right:12mm;display:grid;grid-template-columns:1fr 1fr;gap:7mm}
+.col{min-width:0;overflow:hidden}
+.col>*{margin:0 0 9px}
+.vt{width:100%;border-collapse:collapse;font-size:9.6pt}
+.vt td{padding:3.5px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.vt td:first-child{width:52%}.vt td:last-child{color:var(--mut)}
+.vt .e{font-size:12pt}
+.bl .vbt{margin:0 0 5px}
+.bx{border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+.bx .f{font-size:9.6pt;margin-bottom:4px}.bx .f b{color:var(--ac)}.bx .f span{display:block;color:var(--mut);font-size:8.6pt}
+.fig h4{font-size:10pt;margin:0 0 4px}.fig .nota{font-size:8.5pt;color:var(--mut);margin:4px 0 0}
+.imgs{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.imgs figure{margin:0;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+.imgs img{display:block;width:100%;height:58px;object-fit:cover}
+.imgs figcaption{font-size:8pt;padding:3px 5px;font-weight:600}
+.sep{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;border-radius:10px;padding:7px 11px;font-weight:800;font-size:10pt}
+.ex h3{font-size:10.6pt;margin-bottom:5px}
+.ex h3 .n{width:19px;height:19px;font-size:9pt}
+.ex .it{font-size:9.8pt;margin-bottom:5px}
+.ex .it small{display:block;color:var(--mut);font-size:8.3pt}
+.ex .ln{height:21px}
+.banco{border:1.5px dashed var(--ac2);border-radius:8px;padding:5px 8px;font-size:9.5pt;font-weight:700;color:var(--ac);margin-bottom:6px;text-align:center}
+.emb{font-style:italic}
+.ops{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:2px}.ops span{font-size:9.2pt}
+.pq{font-size:9.5pt;margin:0 0 5px}
+.lig{font-size:9.6pt;grid-template-columns:1fr 34px 1fr}
+.lig div{padding:3px 7px}
+.caca{border-collapse:collapse;margin:0 auto}
+.caca td{width:19px;height:19px;text-align:center;font:700 9.5pt 'Plus Jakarta Sans';border:1px solid #e3dff0}
+.cena{display:grid;grid-template-columns:70px 1fr;gap:8px;align-items:center;font-size:9.6pt;margin-bottom:6px}
+.cena img{width:70px;height:46px;object-fit:cover;border-radius:6px}
+.g{font-size:8.8pt}.g b{display:block;color:var(--ac);margin-bottom:1px}.g ol{margin:0;padding-left:16px}
+.emo{grid-template-columns:28px 1fr;font-size:9.6pt}
+.dica{font-size:9.6pt}
+</style>
+</head>
+<body>
+<div class="barra" id="barra">E-book da aula <button onclick="print()">⬇ Salvar em PDF / Imprimir</button></div>
+<main id="livro"></main>
+<script>
+(function(){
+  var q=new URLSearchParams(location.search), id=q.get('u')||'unit-01';
+  if(q.get('pdf'))document.getElementById('barra').remove();
+  var s=document.createElement('script');s.src='aulas/'+encodeURIComponent(id)+'.js';
+  s.onload=function(){var m=document.createElement('script');m.src='midia.js';m.onload=m.onerror=function(){montar((window.LIVRO_AULAS||{})[id]);};document.head.appendChild(m);};
+  s.onerror=function(){document.getElementById('livro').innerHTML='<p style="padding:40px">Aula não encontrada.</p>';};
+  document.head.appendChild(s);
+
+  function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  var PG=0,A;
+  function rod(){return '<div class="rod"><span><b>Inglês Inteligente</b> · '+esc(A.rotulo||(A.nivel+' · Unit '+A.unidade))+' · '+esc(A.titulo)+'</span><span>'+(++PG)+'</span></div>';}
+  function pagina(html,cls){return '<section class="pg '+(cls||'')+'">'+html+rod()+'</section>';}
+
+  // ---------- mapa mental (SVG) ----------
+  function mapa(m){
+    var W=720,cx=W/2,cores=['#6d4df5','#a855f7','#ec4899','#f59e0b','#10b981','#0ea5e9'];
+    var esq=[],dir=[];m.ramos.forEach(function(r,i){(i%2?dir:esq).push([r,i]);});
+    function alt(r){return 30+r.itens.length*17+12;}
+    var hE=esq.reduce(function(s,x){return s+alt(x[0])+14;},0),hD=dir.reduce(function(s,x){return s+alt(x[0])+14;},0);
+    var H=Math.max(hE,hD)+20,cy=H/2,out='',lin='';
+    function lado(lista,x0,ladoDir){
+      var tot=lista.reduce(function(s,x){return s+alt(x[0])+14;},0),y=(H-tot)/2+7;
+      lista.forEach(function(p){
+        var r=p[0],c=cores[p[1]%cores.length],h=alt(r),bw=220,bx=ladoDir?x0:x0-bw,my=y+h/2;
+        var ax=ladoDir?bx:bx+bw,sx=ladoDir?cx+70:cx-70;
+        lin+='<path d="M'+sx+','+cy+' C'+((sx+ax)/2)+','+cy+' '+((sx+ax)/2)+','+my+' '+ax+','+my+'" fill="none" stroke="'+c+'" stroke-width="3" stroke-linecap="round" opacity=".55"/>';
+        out+='<rect x="'+bx+'" y="'+y+'" width="'+bw+'" height="'+h+'" rx="12" fill="#fff" stroke="'+c+'" stroke-width="1.6"/>';
+        out+='<rect x="'+bx+'" y="'+y+'" width="'+bw+'" height="26" rx="12" fill="'+c+'"/><rect x="'+bx+'" y="'+(y+14)+'" width="'+bw+'" height="12" fill="'+c+'"/>';
+        out+='<text x="'+(bx+12)+'" y="'+(y+18)+'" fill="#fff" font-size="12.5" font-weight="800">'+esc(r.t)+'</text>';
+        r.itens.forEach(function(it,j){out+='<text x="'+(bx+14)+'" y="'+(y+46+j*17)+'" fill="#14121f" font-size="12" font-weight="600">• '+esc(it)+'</text>';});
+        y+=h+14;
+      });
+    }
+    lado(esq,cx-110,false);lado(dir,cx+110,true);
+    var centro='<ellipse cx="'+cx+'" cy="'+cy+'" rx="78" ry="34" fill="url(#gc)"/><text x="'+cx+'" y="'+(cy+6)+'" text-anchor="middle" fill="#fff" font-size="18" font-family="Archivo Black">'+esc(m.centro)+'</text>';
+    return '<svg viewBox="0 0 '+W+' '+H+'" font-family="Plus Jakarta Sans,sans-serif"><defs><linearGradient id="gc" x1="0" x2="1"><stop offset="0" stop-color="#6d4df5"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs>'+lin+out+centro+'</svg>';
+  }
+
+  // ---------- gráfico: escala formal → informal ----------
+  function escala(e){
+    var W=720,H=150,x0=40,x1=W-40,y=78,out='';
+    out+='<defs><linearGradient id="ge" x1="0" x2="1"><stop offset="0" stop-color="#6d4df5"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs>';
+    out+='<rect x="'+x0+'" y="'+(y-5)+'" width="'+(x1-x0)+'" height="10" rx="5" fill="url(#ge)"/>';
+    out+='<text x="'+x0+'" y="'+(y+40)+'" font-size="12" font-weight="800" fill="#6d4df5">👔 FORMAL</text><text x="'+x1+'" y="'+(y+40)+'" text-anchor="end" font-size="12" font-weight="800" fill="#ec4899">INFORMAL 😎</text>';
+    e.itens.forEach(function(it,i){
+      var x=x0+(x1-x0)*it[1]/100,up=i%2===0,ty=up?y-22:y+26;
+      out+='<circle cx="'+x+'" cy="'+y+'" r="7" fill="#fff" stroke="#14121f" stroke-width="2"/>';
+      out+='<line x1="'+x+'" y1="'+(up?y-8:y+8)+'" x2="'+x+'" y2="'+(up?y-16:y+14)+'" stroke="#9a96ad"/>';
+      out+='<text x="'+x+'" y="'+ty+'" text-anchor="middle" font-size="12" font-weight="700" fill="#14121f">'+esc(it[0])+'</text>';
+    });
+    return '<svg viewBox="0 0 '+W+' '+H+'" font-family="Plus Jakarta Sans,sans-serif">'+out+'</svg>';
+  }
+
+  // ---------- figura: linha do dia ----------
+  function dia(d){
+    var W=720,H=128,x0=30,x1=W-30,sc=function(h){return x0+(x1-x0)*h/24;},out='',cores=['#f59e0b','#f97316','#4f46e5'];
+    out+='<rect x="'+x0+'" y="40" width="'+(x1-x0)+'" height="34" rx="10" fill="#f1eff8"/>';
+    d.itens.forEach(function(it,i){
+      var a=sc(it[2]),b=sc(it[3]);
+      out+='<rect x="'+a+'" y="40" width="'+(b-a)+'" height="34" rx="'+(i===2?10:0)+'" fill="'+cores[i]+'" opacity=".92"/>';
+      out+='<text x="'+((a+b)/2)+'" y="62" text-anchor="middle" fill="#fff" font-size="13" font-weight="800">'+it[4]+' '+esc(it[0])+'</text>';
+      out+='<text x="'+((a+b)/2)+'" y="96" text-anchor="middle" fill="#6b6880" font-size="11.5" font-weight="600">'+esc(it[1])+'</text>';
+    });
+    [0,6,12,18,24].forEach(function(h){out+='<text x="'+sc(h)+'" y="28" text-anchor="middle" fill="#9a96ad" font-size="11" font-weight="700">'+h+'h</text>';});
+    return '<svg viewBox="0 0 '+W+' '+H+'" font-family="Plus Jakarta Sans,sans-serif">'+out+'</svg>';
+  }
+
+  function exPorId(i){return A.exercicios.filter(function(e){return e.id===i;})[0];}
+
+  function montar(a){
+    A=a;if(!a)return;document.title='E-book · '+a.titulo;
+    var E=a.ebook,h='';
+    // 1. capa
+    h+='<section class="pg capa"><div class="orb"></div><div class="orb2"></div>'
+      +'<div class="logo"><i>✦</i><div>INGLÊS INTELIGENTE<small>Inglês no seu estilo de inteligência.</small></div></div>'
+      +'<div class="meio"><div class="kick">'+esc(a.rotulo||(a.nivel+' · UNIT '+a.unidade)).toUpperCase()+'</div><div class="tt">'+esc(a.titulo)+'</div><div class="st">'+esc(a.subtitulo)+'</div>'
+      +'<div class="tags"><span>🗺️ Mapa mental</span><span>📊 Gráficos</span><span>✍️ Exercícios</span><span>✅ Gabarito</span></div></div>'
+      +'<div class="ass">E-book da aula · continuação do vídeo<b>TEACHER GEDIEL</b></div></section>';
+    PG=1;
+    // 2. resumo + mapa
+    h+=pagina('<div class="hs">Resumo da aula</div><div class="ht">O que você aprendeu</div><h2>✅ Nesta aula você aprendeu a</h2><ul class="resumo">'
+      +E.resumo.map(function(r){return '<li>'+esc(r)+'</li>';}).join('')+'</ul><h2>🗺️ Mapa mental</h2><div class="mapa">'+mapa(E.mapa)+'</div>');
+    // ===== a partir daqui: tudo em blocos que se encaixam em 2 colunas, enchendo as páginas =====
+    var B=[], GAB=[], N=0, MID=(window.LIVRO_MIDIA||{})[a.id]||{};
+    var vocabs=a.revisar.filter(function(b){return b.tipo==='vocab';}), dials=a.revisar.filter(function(b){return b.tipo==='dialogo';});
+    var dica=a.revisar.filter(function(b){return b.tipo==='dica';})[0];
+    var todos=[];vocabs.forEach(function(b){b.itens.forEach(function(it){if(it[1])todos.push(it);});});
+    var VOC=vocabs[0]?vocabs[0].itens.filter(function(it){return it[1];}):[], FR=(vocabs[1]||{itens:[]}).itens;
+    if(!FR.length)FR=todos.filter(function(it){return it[0].split(' ').length>=3;});
+    var simples=todos.filter(function(it){return it[0].split(' ').length<=3&&!/[→\/]/.test(it[0]);});
+    function sem(s){var x=s,o=[];for(var i=0;i<12;i++){x=(x*9301+49297)%233280;o.push(x/233280);}return o;}
+    function mix(arr,k){var a2=arr.slice(),r=sem(k||7);for(var i=a2.length-1;i>0;i--){var j=Math.floor(r[i%12]*(i+1));var t=a2[i];a2[i]=a2[j];a2[j]=t;}return a2;}
+    function cab(t,ic){N++;return '<div class="ex"><h3><span class="n">'+N+'</span>'+(ic?ic+' ':'')+esc(t)+'</h3>';}
+    var LN='<div class="ln"></div>';
+    // --- consulta
+    vocabs.forEach(function(b){B.push('<div class="bl"><div class="vbt">'+esc(b.titulo)+'</div><table class="vt">'+b.itens.map(function(it){return '<tr><td>'+(it[2]?'<span class="e">'+it[2]+'</span> ':'')+'<b>'+esc(it[0])+'</b></td><td>'+esc(it[1]||'')+'</td></tr>';}).join('')+'</table></div>');});
+    if(dica)B.push('<div class="dica">💡 '+esc(dica.texto)+'</div>');
+    dials.forEach(function(d){B.push('<div class="bl bx"><div class="vbt">💬 '+esc(d.titulo)+'</div>'+d.falas.map(function(f){return '<div class="f"><b>'+esc(f[0])+':</b> '+esc(f[1])+'<span>'+esc(f[2])+'</span></div>';}).join('')+'</div>');});
+    if(E.escala)B.push('<div class="bl fig"><h4>📊 '+esc(E.escala.titulo)+'</h4>'+escala(E.escala)+'</div>');
+    if(E.dia)B.push('<div class="bl fig"><h4>🕐 '+esc(E.dia.titulo)+'</h4>'+dia(E.dia)+'<p class="nota">'+esc(E.dia.nota||'')+'</p></div>');
+    B.push('<div class="sep">✍️ Pratique no papel · tente sozinho antes de olhar o gabarito</div>');
+    // --- exercícios gerados a partir da aula
+    // 1. ligar
+    var L=(simples.length>=5?simples:todos).slice(0,8);
+    if(L.length>=4){var nP=L.length,d=L.map(function(_,i){return L[(i+3)%nP][1];});
+      B.push(cab('Ligue o inglês ao português','🔗')+'<div class="lig">'+L.map(function(p,i){return '<div>'+esc(p[0].split(' / ')[0])+'</div><i>●<span>●</span></i><div>'+esc(d[i])+'</div>';}).join('')+'</div></div>');
+      GAB.push(['Ligue',L.map(function(p){return p[0]+' = '+p[1];})]);}
+    // 2. complete com a palavra do quadro
+    var comp=[],banco=[];
+    FR.forEach(function(f){if(comp.length>=6)return;var ws=f[0].split(' ');var alvo=null;
+      simples.forEach(function(v){var k=v[0].toLowerCase().split(' / ')[0];if(!alvo&&k.split(' ').length===1&&ws.some(function(w){return w.toLowerCase().replace(/[^a-z']/g,'')===k;}))alvo=k;});
+      if(!alvo){var lg=ws.slice().sort(function(x,y){return y.replace(/[^a-z]/gi,'').length-x.replace(/[^a-z]/gi,'').length;})[0];alvo=lg.replace(/[^A-Za-z']/g,'');}
+      var re=new RegExp('\\b'+alvo.replace(/'/g,"'")+'\\b','i');comp.push([f[0].replace(re,'_____'),alvo,f[1]]);banco.push(alvo);});
+    if(comp.length>=3){B.push(cab('Complete com as palavras do quadro','🧩')+'<div class="banco">'+mix(banco,3).map(esc).join(' · ')+'</div>'+comp.map(function(c,i){return '<div class="it"><b>'+'abcdefgh'[i]+')</b> '+esc(c[0]).replace('_____','<u>&emsp;&emsp;&emsp;&emsp;</u>')+'<small>'+esc(c[2])+'</small></div>';}).join('')+'</div>');
+      GAB.push(['Complete',comp.map(function(c){return c[1];})]);}
+    // 2b. complete escolhendo entre alternativas
+    var alt=comp.slice().reverse().slice(0,5);
+    if(alt.length>=3){var pool=banco.concat(simples.map(function(v){return v[0].split(' / ')[0];}).filter(function(w){return w.split(' ').length===1;}));
+      B.push(cab('Complete escolhendo a alternativa certa','☑️')+alt.map(function(c,i){var outras=mix(pool.filter(function(w){return w.toLowerCase()!==c[1].toLowerCase();}),i+5).slice(0,2);var ops=mix([c[1]].concat(outras),i+9);
+        return '<div class="it"><b>'+'abcde'[i]+')</b> '+esc(c[0]).replace('_____','<u>&emsp;&emsp;&emsp;&emsp;</u>')+'<div class="ops">'+ops.map(function(o,j){return '<span>( ) '+esc(o)+'</span>';}).join('')+'</div></div>';}).join('')+'</div>');
+      GAB.push(['Alternativas',alt.map(function(c){return c[1];})]);}
+    // 3. traduza para o inglês
+    var tr=FR.slice(0,5);
+    B.push(cab('Escreva em inglês','🇺🇸')+tr.map(function(f,i){return '<div class="it"><b>'+'abcdef'[i]+')</b> '+esc(f[1])+LN+'</div>';}).join('')+'</div>');
+    GAB.push(['Escreva em inglês',tr.map(function(f){return f[0];})]);
+    // 4. organize as palavras
+    var org=FR.slice(2).concat(FR.slice(0,2)).filter(function(f){var n2=f[0].split(' ').length;return n2>=3&&n2<=9;}).slice(0,5);
+    if(org.length){B.push(cab('Coloque as palavras na ordem','🔀')+org.map(function(f,i){var w=f[0].replace(/[.!?]$/,'').split(' ');var m2=mix(w,i+2);if(m2.join(' ')===w.join(' '))m2.push(m2.shift());return '<div class="it"><b>'+'abcdef'[i]+')</b> <span class="emb">'+m2.map(esc).join(' / ')+'</span>'+LN+'</div>';}).join('')+'</div>');
+      GAB.push(['Ordem',org.map(function(f){return f[0];})]);}
+    // 5. quiz para circular
+    var qz=(a.exercicios.filter(function(e){return e.tipo==='escolha';})[0]||{itens:[]}).itens.filter(function(x){return x.p;});
+    if(qz.length){B.push(cab('Circule a alternativa certa','⭕')+qz.slice(0,5).map(function(x,i){return '<div class="it"><b>'+(i+1)+'.</b> '+(x.emoji?x.emoji+' ':'')+esc(x.p)+'<div class="ops">'+x.ops.map(function(o,j){return '<span>'+'abc'[j]+') '+esc(o)+'</span>';}).join('')+'</div></div>';}).join('')+'</div>');
+      GAB.push(['Circule',qz.slice(0,5).map(function(x){return 'abc'[x.c]+') '+x.ops[x.c];})]);}
+    // 6. caça-palavras com o vocabulário
+    var cw=simples.map(function(v){return v[0].split(' / ')[0].toUpperCase().replace(/[^A-Z]/g,'');}).filter(function(w){return w.length>=3&&w.length<=10;});
+    cw=cw.filter(function(w,i){return cw.indexOf(w)===i;}).slice(0,7);
+    if(cw.length>=4){var S=11,G=[],r=sem(cw.length*13+5),ri=0;function R(){ri++;r=ri%12?r:sem(ri*7+3);return r[ri%12];}
+      for(var y=0;y<S;y++){G.push([]);for(var x=0;x<S;x++)G[y].push('');}
+      var postas=[];cw.forEach(function(w,wi){for(var t=0;t<60;t++){var dir=wi%2?[0,1]:[1,0];var x0=Math.floor(R()*(S-(dir[0]?w.length:0))),y0=Math.floor(R()*(S-(dir[1]?w.length:0)));var ok=true;
+        for(var k=0;k<w.length;k++){var c=G[y0+dir[1]*k][x0+dir[0]*k];if(c&&c!==w[k]){ok=false;break;}}
+        if(ok){for(var k2=0;k2<w.length;k2++)G[y0+dir[1]*k2][x0+dir[0]*k2]=w[k2];postas.push(w);break;}}});
+      var AB='ABCDEFGHIJKLMNOPRSTUVWY';for(var y2=0;y2<S;y2++)for(var x2=0;x2<S;x2++)if(!G[y2][x2])G[y2][x2]=AB[Math.floor(R()*AB.length)];
+      B.push(cab('Caça-palavras','🔎')+'<p class="pq">Ache: '+postas.join(' · ')+'</p><table class="caca">'+G.map(function(l){return '<tr>'+l.map(function(c){return '<td>'+c+'</td>';}).join('')+'</tr>';}).join('')+'</table></div>');
+      GAB.push(['Caça-palavras',['Horizontais e verticais: '+postas.join(', ')]]);}
+    // 7. do inglês para o português
+    var pt=FR.slice(-4);
+    B.push(cab('O que significa?','🇧🇷')+pt.map(function(f,i){return '<div class="it"><b>'+'abcd'[i]+')</b> '+esc(f[0])+LN+'</div>';}).join('')+'</div>');
+    GAB.push(['O que significa',pt.map(function(f){return f[1];})]);
+    // 8. exercícios específicos da aula (emoji, lacunas, conversa...)
+    E.imprimir.forEach(function(it){
+      if(it.tipo==='emoji'){var e2=exPorId(it.ref);B.push(cab(it.titulo,'😀')+e2.itens.map(function(x){return '<div class="emo"><span class="e">'+x.emoji+'</span><div>'+esc(x.p)+LN+'</div></div>';}).join('')+'</div>');GAB.push([it.titulo,e2.itens.map(function(x){return x.ops[x.c];})]);}
+      else if(it.tipo==='lacunas'){B.push(cab(it.titulo,'✏️')+it.linhas.map(function(l){return '<div class="it"><b>'+esc(l[0])+':</b> '+esc(l[1]).replace(/___/g,'<u>&emsp;&emsp;&emsp;</u>')+'</div>';}).join('')+'</div>');GAB.push([it.titulo,it.linhas.map(function(l){return l[2].join(', ');})]);}
+      else if(it.tipo==='conversa'&&it.ref!=='traduzir'){var e4=exPorId(it.ref);B.push(cab(it.titulo,'💬')+e4.linhas.map(function(l){return '<div class="it"><b>'+esc(l.quem)+':</b> '+esc(l.pt)+LN+'</div>';}).join('')+'</div>');GAB.push([it.titulo,e4.linhas.map(function(l){return l.resp[0];})]);}
+    });
+    // 10. situações + criar
+    B.push(cab('Simule: o que você diria?','🎭')+FR.slice(0,3).map(function(f,i){return '<div class="it"><b>'+(i+1)+'.</b> Situação: '+esc(f[1])+LN+'</div>';}).join('')+'</div>');
+    B.push(cab('Crie suas frases','💡')+['sobre a sua rotina','sobre a sua família','sobre o seu trabalho ou estudo','uma pergunta para um amigo'].map(function(t){return '<div class="it">Use o que aprendeu '+esc(t)+':'+LN+'</div>';}).join('')+'</div>');
+    B.push(cab('Missão da aula','🎯')+(a.missao.tarefa?'<p class="pq">✅ '+esc(a.missao.tarefa)+'</p>':'')+(a.missao.falar?'<p class="pq">🗣️ Fale 2 vezes: <b>'+esc(a.missao.falar)+'</b></p>':'')+new Array(8).join(LN)+'</div>');
+    // gabarito (inclui os do app)
+    a.exercicios.forEach(function(e){if(e.tipo==='ditado')GAB.push(['No app · '+e.titulo,e.itens.map(function(x){return x.resp[0];})]);});
+    B.push('<!--quebra-->');
+    B.push('<div class="sep">✅ Gabarito · confira só depois de fazer tudo</div>');
+    GAB.forEach(function(g,i){B.push('<div class="g"><b>'+(i+1)+'. '+esc(g[0])+'</b><ol type="a">'+g[1].map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ol></div>');});
+    document.getElementById('livro').innerHTML=h;
+    (document.fonts?document.fonts.ready:Promise.resolve()).then(function(){empacotar(B);document.body.dataset.pronto='1';});
+  }
+  // coloca os blocos em 2 colunas, página por página, sem deixar espaço vazio
+  function empacotar(blocos){
+    var main=document.getElementById('livro');
+    function novaPagina(){var s=document.createElement('section');s.className='pg';s.innerHTML='<div class="cols"><div class="col"></div><div class="col"></div></div>'+rod();main.appendChild(s);return s;}
+    var pg=novaPagina(),ci=0;
+    function col(){return pg.querySelectorAll('.col')[ci];}
+    blocos.forEach(function(html){
+      if(html==='<!--quebra-->'){
+        // completa o espaço que sobrou com linhas para praticar mais
+        var lim=pg.querySelector('.cols').getBoundingClientRect().bottom;
+        for(var k=ci;k<2;k++){var c=pg.querySelectorAll('.col')[k],fim=c.lastElementChild?c.lastElementChild.getBoundingClientRect().bottom:c.getBoundingClientRect().top,livre=lim-fim-30;
+          if(livre>70){var d=document.createElement('div');d.className='ex extra';d.innerHTML='<h3>📝 Pratique mais: escreva frases com o vocabulário da aula</h3>'+new Array(Math.floor((livre-30)/21)+1).join('<div class="ln"></div>');c.appendChild(d);}}
+        pg=novaPagina();ci=0;return;}
+      var tmp=document.createElement('div');tmp.innerHTML=html;var el=tmp.firstChild;
+      var full=el.classList&&el.classList.contains('sep');
+      for(var t=0;t<4;t++){
+        var c=col();c.appendChild(el);
+        var lim=pg.querySelector('.cols').getBoundingClientRect().bottom;
+        if(el.getBoundingClientRect().bottom<=lim+1)return;
+        c.removeChild(el);
+        if(ci===0){ci=1;}else{pg=novaPagina();ci=0;}
+      }
+      col().appendChild(el); // bloco maior que uma coluna: fica sozinho
+    });
+  }
+
+})();
+</script>
+</body>
+</html>
