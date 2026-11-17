@@ -149,6 +149,9 @@ a{text-decoration:none}
 .ficha-img{aspect-ratio:16/10;overflow:hidden;position:relative}
 .ficha-img img{width:100%;height:100%;object-fit:cover}
 .ficha-img iframe{width:100%;height:100%;border:0}
+/* Reel do Instagram / vídeo do TikTok: vertical, toca dentro da ficha */
+.ficha-img.vert{aspect-ratio:auto;display:flex;justify-content:center;background:#000}
+.ficha-img.vert iframe{width:min(100%,400px);height:min(84vh,820px)}
 .ficha-corpo{padding:18px 20px 28px}
 .ficha h3{font-size:32px;line-height:1.05}
 .metas{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
@@ -804,7 +807,13 @@ body.entrando .mara{bottom:96px}
     DADOS.evento('ficha', k, (itens[k] || {}).titulo);
     const m = itens[k]; if (!m) return;
     ultimoFoco = document.activeElement;
-    const midia = m.video ? `<iframe src="https://www.youtube-nocookie.com/embed/${esc(m.video)}?autoplay=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen title="Vídeo"></iframe>`
+    // vídeo do YouTube (código ou link), Reel/post do Instagram ou vídeo do TikTok: tudo toca aqui dentro, sem sair do Hub
+    const vid = String(m.video || '').trim();
+    const ig = vid.match(/instagram\.com\/(?:[\w.]+\/)?(reels?|p|tv)\/([\w-]+)/i), tk = vid.match(/tiktok\.com\/[^?\s]*\/video\/(\d+)/i);
+    const vertical = !!(ig || tk);
+    const midia = ig ? `<iframe src="https://www.instagram.com/${/^reels?$/i.test(ig[1]) ? 'reel' : ig[1].toLowerCase()}/${esc(ig[2])}/embed" allow="autoplay; encrypted-media; fullscreen" allowfullscreen scrolling="no" title="Vídeo do Instagram"></iframe>`
+      : tk ? `<iframe src="https://www.tiktok.com/embed/v2/${esc(tk[1])}" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="Vídeo do TikTok"></iframe>`
+      : m.video ? `<iframe src="https://www.youtube-nocookie.com/embed/${esc(m.video)}?autoplay=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen title="Vídeo"></iframe>`
       : m.img ? `<img src="${esc(m.img)}" alt="">` : '';
     const botao = (c, cls) => {
       if (!c) return '';
@@ -818,7 +827,7 @@ body.entrando .mara{bottom:96px}
       : parcelado(m) ? `<p class="preco">${parcelado(m).n}x de <b>${esc(parcelado(m).cada)}</b><br><small>ou ${esc(parcelado(m).cheio)} à vista</small></p>`
       : m.preco ? `<p class="preco"><b>${esc(m.preco)}</b></p>` : '';
     $('#ficha').innerHTML = `<span class="alca"></span><button class="fechar" data-fechar aria-label="Fechar">✕</button>
-      ${midia ? `<div class="ficha-img">${midia}</div>` : ''}
+      ${midia ? `<div class="ficha-img${vertical ? ' vert' : ''}">${midia}</div>` : ''}
       <div class="ficha-corpo"><h3 class="serif" id="fichaTitulo">${esc(m.aluno ? '“' + m.titulo + '”' : m.titulo)}</h3>
         ${m.meta ? `<div class="metas">${m.meta.filter(Boolean).map(x => `<span>${esc(x)}</span>`).join('')}</div>` : ''}
         <p>${esc(m.sinopse)}</p>
