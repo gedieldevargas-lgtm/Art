@@ -739,6 +739,17 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
 
         <!-- CRIAR ACESSO -->
         <div class="admin-panel" id="adm-criar">
+          <div class="admin-form" id="adm-convite" style="border-color:rgba(79,110,247,.35)">
+            <div class="admin-form-title">🔗 Link de cadastro (pra mandar no privado)</div>
+            <div style="font-size:12px;color:var(--fg2);line-height:1.6;margin-bottom:12px">Escolha o plano, gere o link e mande pro aluno. Ele mesmo cria nome, e-mail e senha e já entra com tudo do plano liberado. Cada link vale para <strong>1 cadastro</strong>.</div>
+            <div class="admin-row">
+              <div class="admin-fld"><label>Plano do aluno</label><select class="admin-inp" id="adm-cv-plano"></select></div>
+              <div class="admin-fld"><label>Pra quem é? (só pra você lembrar)</label><input class="admin-inp" id="adm-cv-nome" type="text" placeholder="Ex.: Maria"></div>
+            </div>
+            <div id="adm-cv-status" style="font-size:12px;min-height:20px;margin-bottom:10px"></div>
+            <button class="admin-btn admin-btn-primary" onclick="conviteGerar()">🔗 Gerar link</button>
+            <div id="adm-cv-lista" style="margin-top:16px"></div>
+          </div>
           <div class="admin-form">
             <div class="admin-form-title">➕ Criar acesso para novo aluno</div>
             <div class="admin-row">
@@ -1691,6 +1702,7 @@ function adminTab(tab,btn){
   btn.classList.add('active');
   document.getElementById('adm-'+tab).classList.add('active');
   if(tab==='usuarios')loadUsers();
+  if(tab==='criar'&&window.conviteLista)conviteLista();
   if(tab==='metricas')loadMetrics();
   if(tab==='comentarios')loadAdminComments();
   if(tab==='duvidas')loadAdminQuestions();

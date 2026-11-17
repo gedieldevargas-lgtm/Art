@@ -2392,6 +2392,38 @@
       if(!b)return;if(b.dataset.of==='pagar'){ov.remove();window.open(o.url||url||(AS().cfg||{}).checkout,'_blank','noopener');}
       if(b.dataset.of==='planos'){ov.remove();go('planos');}});
   };
+  /* ───── link de cadastro privado (Painel Admin → Criar acesso) ───── */
+  var CV_PROD={inteligente:'Plano Inteligente',genio:'Plano Gênio',instituicao:'Plano Instituição'};
+  function cvProduto(pl){if(CV_PROD[pl.k])return CV_PROD[pl.k];var cf=AS().cfg||{};if(pl.k==='mission')return (cf.eom&&cf.eom[0])||'English on Mission';return (pl.produtos&&pl.produtos[0])||'';}
+  function cvPlanos(){return planos().filter(function(x){return x.k!=='gratis'&&cvProduto(x);});}
+  function cvCodigo(){var a='abcdefghjkmnpqrstuvwxyz23456789',o='';var r=(window.crypto&&crypto.getRandomValues)?crypto.getRandomValues(new Uint8Array(12)):Array.apply(null,Array(12)).map(function(){return Math.random()*256;});for(var i=0;i<12;i++)o+=a[r[i]%a.length];return o;}
+  function cvUrl(c){return location.origin+location.pathname.replace(/[^\/]*$/,'')+'convite.html?c='+c;}
+  window.conviteLista=async function(){
+    var sel=$('adm-cv-plano'),box=$('adm-cv-lista');if(!sel||!box)return;
+    if(!sel.options.length){cvPlanos().forEach(function(x){var o=document.createElement('option');o.value=x.k;o.textContent=x.nome+' · '+x.preco;sel.appendChild(o);});var i=cvPlanos().map(function(x){return x.k;}).indexOf('inteligente');if(i>=0)sel.selectedIndex=i;}
+    var r=await window._sb.from('maratona_convites').select('codigo,plano,ativo,created_at').eq('turma','privado').order('created_at',{ascending:false}).limit(30);
+    if(r.error){box.innerHTML='<div style="font-size:12px;color:var(--red)">Não consegui listar os links ('+E(r.error.message)+').</div>';return;}
+    var nomes=LS.get('mi-cv-nomes',{})||{};
+    box.innerHTML=(r.data||[]).length?'<div style="font-size:11px;font-weight:800;letter-spacing:.5px;color:var(--fg3);margin-bottom:6px">LINKS GERADOS</div>'+r.data.map(function(x){
+      return '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 0;border-top:1px solid var(--border);font-size:12px"><div style="flex:1;min-width:140px"><b>'+E(nomes[x.codigo]||'Sem nome')+'</b> · '+E(String(x.plano).replace(/^Plano /,''))+'<br><span style="color:'+(x.ativo?'var(--green)':'var(--fg3)')+'">'+(x.ativo?'● aguardando cadastro':'○ usado ou desligado')+'</span></div>'
+        +(x.ativo?'<button class="admin-btn admin-btn-ghost admin-btn-sm" data-cv="copiar" data-c="'+x.codigo+'">📋 Copiar</button><button class="admin-btn admin-btn-ghost admin-btn-sm" data-cv="zap" data-c="'+x.codigo+'">'+IC('wa-real')+' WhatsApp</button><button class="admin-btn admin-btn-ghost admin-btn-sm" data-cv="off" data-c="'+x.codigo+'">Desligar</button>':'')+'</div>';}).join(''):'';
+  };
+  window.conviteGerar=async function(){
+    var st=$('adm-cv-status'),k=$('adm-cv-plano').value,pl=cvPlanos().filter(function(x){return x.k===k;})[0];if(!pl)return;
+    st.innerHTML='⏳ Gerando…';var c=cvCodigo();
+    var r=await window._sb.from('maratona_convites').insert({codigo:c,turma:'privado',plano:cvProduto(pl)});
+    if(r.error){st.innerHTML='<span style="color:var(--red)">Erro: '+E(r.error.message)+'</span>';return;}
+    var n=($('adm-cv-nome').value||'').trim();if(n){var m=LS.get('mi-cv-nomes',{})||{};m[c]=n;LS.set('mi-cv-nomes',m);}
+    $('adm-cv-nome').value='';st.innerHTML='<span style="color:var(--green)">✅ Link pronto: </span><span style="word-break:break-all">'+E(cvUrl(c))+'</span>';
+    try{await navigator.clipboard.writeText(cvUrl(c));st.innerHTML+='<br><span style="color:var(--green)">Copiado! É só colar no privado.</span>';}catch(e){}
+    conviteLista();
+  };
+  document.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('[data-cv]');if(!b)return;var c=b.dataset.c,a=b.dataset.cv;
+    if(a==='copiar'){var u=cvUrl(c);(navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(function(){toast('Link copiado','#10b981');},function(){window.prompt('Copie o link:',u);});}
+    if(a==='zap'){var n=(LS.get('mi-cv-nomes',{})||{})[c];window.open('https://wa.me/?text='+encodeURIComponent((n?'Oi, '+n+'! ':'Oi! ')+'Aqui está o seu link pra criar o acesso à plataforma: '+cvUrl(c)),'_blank');}
+    if(a==='off'){window._sb.from('maratona_convites').update({ativo:false}).eq('codigo',c).then(function(){toast('Link desligado','#6b7280');conviteLista();});}
+  });
   async function migrarDados(){
     var S=AS();if(!souAdmin()||!S.cfg)return;var feitas=(S.cfg.migr||[]).slice(),mudou=false;
     if(feitas.indexOf('spotify-eom-1')<0){
