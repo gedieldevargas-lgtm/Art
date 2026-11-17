@@ -934,6 +934,7 @@
     if(c.acao==='curso')return cardLock(c)?'Quero esse mini curso ›':'Abrir mini curso ›';
     if(c.acao==='area')return 'Abrir ›';
     if(c.acao==='whatsapp')return 'Chamar no WhatsApp ›';
+    if(c.acao==='playlist')return 'Assistir os vídeos ›';
     return /^R\$/.test(c.tag||'')?'Comprar ›':'Acessar ↗';
   }
   function seloRede(c){
@@ -1409,7 +1410,7 @@
     +'<div class="adm-section">Título</div><input class="admin-inp" id="uc-titulo" maxlength="120">'
     +'<div class="adm-section">Descrição curta</div><textarea class="admin-inp" id="uc-desc" rows="2" maxlength="400"></textarea>'
     +'<div style="display:grid;grid-template-columns:1fr 1fr 90px;gap:10px" class="grid-2"><div><div class="adm-section">Seção (agrupa os cards)</div><input class="admin-inp" id="uc-secao" list="uc-secoes" placeholder="Ex.: Assistir"><datalist id="uc-secoes"></datalist></div><div><div class="adm-section">Etiqueta</div><input class="admin-inp" id="uc-tag" placeholder="Ex.: R$ 27 · Grátis · Em breve" maxlength="40"></div><div><div class="adm-section">Emoji</div><input class="admin-inp" id="uc-emoji" maxlength="8" style="text-align:center;font-size:18px"></div></div>'
-    +'<div class="adm-section">O que acontece ao clicar</div><select class="admin-inp" id="uc-acao"><option value="link">🔗 Abrir um link (YouTube, playlist, checkout, site)</option><option value="whatsapp">💬 Abrir meu WhatsApp com mensagem pronta</option><option value="area">📱 Abrir uma área do app</option><option value="material">📘 Abrir um material / e-book (com cadeado pra quem não comprou)</option><option value="curso">🛒 Abrir um mini curso (com cadeado pra quem não comprou)</option></select>'
+    +'<div class="adm-section">O que acontece ao clicar</div><select class="admin-inp" id="uc-acao"><option value="link">🔗 Abrir um link (YouTube, playlist, checkout, site)</option><option value="whatsapp">💬 Abrir meu WhatsApp com mensagem pronta</option><option value="area">📱 Abrir uma área do app</option><option value="material">📘 Abrir um material / e-book (com cadeado pra quem não comprou)</option><option value="playlist">▶️ Playlist do YouTube (vídeos aparecem sozinhos, com quiz e comentários)</option><option value="curso">🛒 Abrir um mini curso (com cadeado pra quem não comprou)</option></select>'
     +'<div id="uc-valor-box" style="margin-top:8px"></div>'
     +'<div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;font-size:12.5px"><label style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="uc-destaque"> Banner do topo</label><label style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="uc-breve"> Em breve (vira "me avise")</label><label style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="uc-ativo" checked> Visível pros alunos</label></div>'
     +'<div id="uc-st" style="font-size:12px;min-height:18px;margin-top:12px"></div>'
@@ -1423,6 +1424,7 @@
       b.innerHTML='<select class="admin-inp" id="uc-valor"><option value="">— escolha o material —</option>'+ms.map(function(m){return '<option value="'+m.id+'"'+(valor===m.id?' selected':'')+'>'+E(m.nome)+'</option>';}).join('')+'</select>';}
     else if(acao==='curso'){var minis=(MODS_ALL||[]).filter(function(m){return m.trilha==='mini'||m.id===valor;});
       b.innerHTML='<select class="admin-inp" id="uc-valor"><option value="">— ainda não tem módulo (fica "em breve") —</option>'+minis.map(function(m){return '<option value="'+m.id+'"'+(valor===m.id?' selected':'')+'>'+E(m.name)+(m.produto?' · libera com "'+E(m.produto)+'"':' · ⚠ sem produto')+'</option>';}).join('')+'</select>'+(minis.length?'':'<div style="font-size:11px;color:var(--gold);margin-top:6px">Nenhum mini curso criado ainda. Vá em Módulos → Novo módulo → "Mini curso avulso".</div>');}
+    else if(acao==='playlist')b.innerHTML='<input class="admin-inp" id="uc-valor" placeholder="Cole o link da playlist (youtube.com/playlist?list=...)" value="'+E(valor||'')+'"><div style="font-size:11px;color:var(--fg2);margin-top:6px">Todo vídeo novo que você pôr na playlist aparece aqui sozinho. A playlist precisa ser pública ou não listada.</div>';
     else if(acao==='whatsapp')b.innerHTML='<textarea class="admin-inp" id="uc-valor" rows="2" placeholder="Mensagem que o aluno manda pra você">'+E(valor||'')+'</textarea>';
     else b.innerHTML='<input class="admin-inp" id="uc-valor" placeholder="https://... (vazio = aparece como Em breve)" value="'+E(valor||'')+'">';
   }
@@ -2103,6 +2105,7 @@
     var c=(CARDS||[]).filter(function(x){return x.id===id;})[0];if(!c)return;
     if(!temAcesso(c)){irCheckout(checkoutDe(c),'"'+c.titulo+'"');return;}
     if(c.acao==='material'){var mt=(AS().mats||[]).filter(function(x){return x.id===c.valor;})[0];if(mt)return abrirMaterial(mt);toast('Material ainda não ligado a esse card');return;}
+    if(c.acao==='playlist'){if(window.EBG_PLAYLIST)window.EBG_PLAYLIST.abrir(c);return;}
     if(ehDevocional(c))return folhaDevocional();
     return abrirCardOrig(id,uni);
   };

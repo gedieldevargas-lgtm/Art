@@ -137,3 +137,37 @@ create table if not exists public.maratona_convites (
 alter table public.maratona_convites enable row level security;
 drop policy if exists convites_admin on public.maratona_convites;
 create policy convites_admin on public.maratona_convites for all to authenticated using (public.sou_admin()) with check (public.sou_admin());
+
+
+-- ═══ Card "Playlist do YouTube" (vídeos + quiz + comentários) ═══
+alter table public.mi_uni_cards drop constraint if exists mi_uni_cards_acao_check;
+alter table public.mi_uni_cards add constraint mi_uni_cards_acao_check check (acao in ('link','whatsapp','area','curso','material','playlist'));
+
+create table if not exists public.video_quiz (
+  video_id text primary key,
+  quiz jsonb not null default '[]'::jsonb,
+  updated_at timestamptz not null default now()
+);
+alter table public.video_quiz enable row level security;
+drop policy if exists "todos leem video_quiz" on public.video_quiz;
+create policy "todos leem video_quiz" on public.video_quiz for select to authenticated using (true);
+drop policy if exists "admin edita video_quiz" on public.video_quiz;
+create policy "admin edita video_quiz" on public.video_quiz for all to authenticated using (public.sou_admin()) with check (public.sou_admin());
+
+create table if not exists public.video_comentarios (
+  id bigint generated always as identity primary key,
+  video_id text not null,
+  user_id uuid not null default auth.uid(),
+  user_name text not null,
+  body text not null check (length(body) between 1 and 1000),
+  is_admin boolean not null default false,
+  created_at timestamptz not null default now()
+);
+create index if not exists video_coment_idx on public.video_comentarios (video_id, created_at);
+alter table public.video_comentarios enable row level security;
+drop policy if exists "todos leem video_coment" on public.video_comentarios;
+create policy "todos leem video_coment" on public.video_comentarios for select to authenticated using (true);
+drop policy if exists "aluno comenta video" on public.video_comentarios;
+create policy "aluno comenta video" on public.video_comentarios for insert to authenticated with check (user_id = auth.uid() and (is_admin = false or public.sou_admin()));
+drop policy if exists "aluno ou admin apaga video_coment" on public.video_comentarios;
+create policy "aluno ou admin apaga video_coment" on public.video_comentarios for delete to authenticated using (user_id = auth.uid() or public.sou_admin());
