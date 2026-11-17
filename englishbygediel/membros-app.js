@@ -2433,7 +2433,7 @@
     musica:function(){return {icon:'🎵',title:'Ouvir 1 música e caçar 3 palavras',sub:'Sem letra, só o ouvido',info:{why:'Música repete as mesmas palavras várias vezes. É o jeito mais leve de reconhecer padrões do inglês.',
         steps:['Escolha 1 música da playlist','Ouça sem ler a letra','Anote 3 palavras que você reconheceu (vale palavra pequena)','Ouça de novo e veja se aparecem mais vezes'],
         links:[{t:'🟢 Playlist do English on Mission',u:SPOTIFY_EOM},{t:'▶️ Músicas fáceis em inglês',u:'https://www.youtube.com/results?search_query=easy+english+songs+for+beginners+with+lyrics'}],
-        ex:['Palavras que aparecem muito: <b>love</b> (amor), <b>you</b> (você), <b>heart</b> (coração), <b>God</b> (Deus), <b>light</b> (luz)']}};},
+        ex:['Palavras comuns de aprender (podem ou não aparecer na sua música): <b>love</b> (amor), <b>you</b> (você), <b>heart</b> (coração)']}};},
     cognatos:function(){return {icon:'🔎',title:'Caçar 10 palavras que você já conhece',sub:'Inglês parecido com português',info:TI.cognatos};},
     complete:function(){return {icon:'🧩',title:'Jogo: Complete',sub:'Frases curtinhas do começo',info:{why:'Agora que você já viu algumas aulas, dá pra brincar com frases simples.',steps:['Toque em "Jogar agora"','Escolha a palavra que completa a frase','Terminou? A tarefa marca sozinha'],links:[{t:'🎮 Jogar agora',u:'#jogo:Complete'}]}};}
   };
