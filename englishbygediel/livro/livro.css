@@ -128,3 +128,26 @@
 .lv-balao .lv-b2{margin-top:4px;color:#e5e7eb}.lv-balao .lv-b2.mut{color:#9ca3af;font-size:12px}
 .lv-balao .lv-b3{margin-top:6px;padding-top:6px;border-top:1px solid #374151;font-size:12.5px;color:#c7d2fe}
 .lv-balao .lv-b4{display:inline-block;margin-top:6px;color:#93c5fd;font-size:12px;text-decoration:none}
+
+/* flashcards */
+.lv-fc-prog{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;color:var(--lv-fg2);margin-bottom:10px}
+.lv-fc{all:unset;display:block;width:100%;box-sizing:border-box;cursor:pointer;perspective:900px;height:170px}
+.lv-fc-in{position:relative;width:100%;height:100%;transition:transform .45s;transform-style:preserve-3d}
+.lv-fc.virado .lv-fc-in{transform:rotateY(180deg)}
+.lv-fc-f,.lv-fc-v{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:14px;text-align:center}
+.lv-fc-f{background:linear-gradient(135deg,var(--lv-ac),var(--lv-ac2));color:#fff}
+.lv-fc-v{background:var(--lv-bg2);border:2px solid var(--lv-ac);transform:rotateY(180deg)}
+.lv-fc-f b{font-size:24px}.lv-fc-v b{font-size:21px;color:var(--lv-fg)}
+.lv-fc-f small{opacity:.8;font-size:11px}.lv-fc-v small{color:var(--lv-fg2);font-size:12px}
+.lv-fc-e{font-size:34px;line-height:1}
+.lv-fc-acoes{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:10px;flex-wrap:wrap}
+.lv-fc-acoes .lv-som{width:40px;height:40px;font-size:14px}
+.lv-fc-fim{text-align:center;padding:10px}.lv-fc-placar{font-weight:800;font-size:15px;margin-bottom:10px}
+/* pronúncia */
+.lv-pron-acoes{display:flex;gap:6px;align-items:center}
+.lv-mic{all:unset;cursor:pointer;background:#ef4444;color:#fff;font-weight:800;font-size:13px;padding:8px 14px;border-radius:20px}
+.lv-mic.ouvindo{animation:lvPulso 1s infinite}
+@keyframes lvPulso{50%{box-shadow:0 0 0 8px rgba(239,68,68,.25)}}
+.lv-nota{font-size:28px;font-weight:800;line-height:1}
+.lv-pron-alvo{margin-top:4px;font-size:14px;font-weight:700}
+.pw-ok{color:var(--lv-ok)}.pw-erro{color:var(--lv-err);text-decoration:underline wavy}
