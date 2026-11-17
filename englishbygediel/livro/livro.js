@@ -75,7 +75,7 @@
     vozNavegador(txt, devagar);
   }
   function vozNavegador(txt, devagar) {
-    if (!('speechSynthesis' in window)) { aviso('Este navegador não tem voz. Frase: ' + txt); return; }
+    if (!('speechSynthesis' in window)) { vozOnline(txt, devagar, ehPortugues(txt)); return; }
     if (!voz) acharVoz();
     var emPT = ehPortugues(txt);
     if (emPT && !vozPT) vozPT = speechSynthesis.getVoices().filter(function (v) { return /^pt[-_]BR/i.test(v.lang); })[0] || null;
@@ -92,8 +92,22 @@
     speechSynthesis.speak(u);
     // se em 1,5 s nada começou a tocar, avisa (celular no silencioso, voz bloqueada...)
     var comecou = false; u.onstart = function () { comecou = true; };
-    setTimeout(function () { if (!comecou && !speechSynthesis.speaking) aviso('O áudio não saiu. Tire o celular do silencioso, aumente o volume e toque de novo.'); }, 1500);
+    setTimeout(function () { if (!comecou) vozOnline(txt, devagar, emPT); }, 900);
   }
+  // plano B: se a voz do aparelho ficar muda (acontece em alguns iPhones), toca uma voz online pelo mesmo tocador "destravado"
+  var AU = null, SILENCIO = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=';
+  function tocador() { if (!AU) { AU = new Audio(); AU.preload = 'auto'; AU.setAttribute('playsinline', ''); } return AU; }
+  function vozOnline(txt, devagar, emPT) {
+    if (!navigator.onLine) { aviso('Sem internet pra tocar o áudio. Frase: ' + txt); return; }
+    try { speechSynthesis.cancel(); } catch (e) {}
+    var a = tocador(); a.pause();
+    a.src = 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=' + (emPT ? 'pt-BR' : 'en') + '&q=' + encodeURIComponent(String(txt).slice(0, 190));
+    a.playbackRate = devagar ? 0.75 : 1;
+    var pr = a.play(); if (pr && pr.catch) pr.catch(function () { aviso('O áudio não saiu. Confira o volume do celular e toque de novo.'); });
+  }
+  // o 1º toque também destrava o tocador (o iOS só deixa tocar áudio depois de um toque)
+  document.addEventListener('touchstart', function () { var a = tocador(); if (a._ok) return; a._ok = true; a.src = SILENCIO; var p = a.play(); if (p && p.catch) p.catch(function () { a._ok = false; }); }, { capture: true, passive: true });
+
   // destrava a voz no 1º toque na tela (o iOS só libera o áudio depois de um toque do usuário)
   (function () {
     if (!('speechSynthesis' in window)) return;
