@@ -1495,7 +1495,7 @@
 
   /* ───────────────────────── BÚSSOLA (nível) e PRISMA (inteligências) ─────────────────────────
      Os testes são os sites de verdade; o aluno faz dentro do app e marca o resultado que apareceu. */
-  var URL_BUSSOLA='https://nivelamentogediel.netlify.app/',URL_PRISMA='https://testedeinteligencia1.netlify.app/';
+  var URL_BUSSOLA='https://nivelamentogediel.netlify.app/',URL_PRISMA='prisma.html';
   var NIVEIS=['A1','A2','B1','B2','C1','C2'];
   var NIVEL_CAN={A1:'Se apresentar, perguntar e responder o básico do dia a dia.',A2:'Se virar em situações simples: compras, rotina, direções, família.',B1:'Conversar sobre o dia a dia e o trabalho, viajar sem travar.',B2:'Discutir ideias com fluência e entender séries e reuniões.',C1:'Usar o inglês com flexibilidade no trabalho e nos estudos.',C2:'Dominar o idioma com precisão, como um nativo culto.'};
   var INTEL={

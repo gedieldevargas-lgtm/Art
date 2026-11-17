@@ -16,7 +16,7 @@ window.EBG_CONFIG = {
 
   // testes gratuitos: cole aqui o link de cada um
   bussola: 'https://nivelamentogediel.netlify.app/',   // teste de nível (CEFR). Vazio = usa o teste rápido de 5 perguntas da própria página
-  prisma: 'https://testedeinteligencia1.netlify.app/',  // teste de múltiplas inteligências. Vazio = o botão pede o link pelo WhatsApp
+  prisma: 'https://englishbygediel.netlify.app/prisma.html',  // teste de múltiplas inteligências. Vazio = o botão pede o link pelo WhatsApp
 
   // links abertos ao público
   toronto: 'https://forms.gle/V2dDVBXotN1XUmS1A',
