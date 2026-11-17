@@ -78,7 +78,7 @@
       novo: () => ({ modo: 'prompts', ativo: true, titulo: 'Novo site', sub: '', url: 'https://', altura: 88, botao: 'Abrir em tela cheia' }),
       campos: [['modo', 'Código do modo onde aparece'], ['ativo', 'Visível', 'bool'], ['titulo', 'Título'], ['sub', 'Texto embaixo do título'], ['url', 'Link do site'], ['botao', 'Texto do botão de tela cheia'], ['altura', 'Altura (% da tela)', 'num']] },
     { k: 'maratona', t: 'Maratona (destaque flutuante)', d: 'O cartão que flutua e pisca na abertura e no Hub, com contagem regressiva até a data final. Sem link, o botão abre seu WhatsApp com a mensagem abaixo.', campos: [
-      ['ativo', 'Mostrar o destaque', 'bool'], ['rotulo', 'Etiqueta'], ['titulo', 'Título'], ['sub', 'Frase'], ['selo', 'Selo'], ['detalhe', 'Detalhe (duração, vagas)'],
+      ['flutuar', 'Mostrar o cartão flutuante na tela (pisca e tem contagem)', 'bool'], ['ativo', 'Mostrar o destaque', 'bool'], ['rotulo', 'Etiqueta'], ['titulo', 'Título'], ['sub', 'Frase'], ['selo', 'Selo'], ['detalhe', 'Detalhe (duração, vagas)'],
       ['fim', 'Contagem até (AAAA-MM-DDTHH:MM, ex.: 2026-11-30T23:59)'], ['textoFim', 'Texto quando o prazo acabar'], ['texto', 'Texto da ficha', 'area'],
       ['foto', 'Foto do cartão flutuante', 'img'], ['img', 'Imagem da ficha (arte completa)', 'img'], ['link', 'Link do botão (checkout, formulário…)', 'url'],
       ['botao', 'Texto do botão'], ['mensagem', 'Mensagem do WhatsApp (se não tiver link)', 'area']] },
