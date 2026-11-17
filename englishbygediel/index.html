@@ -949,7 +949,8 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
   const maConta = r => r === null ? '' : r === 0 ? `<b style="min-width:0;padding:4px 8px">${esc(MA.textoFim || 'Encerrado')}</b>`
     : `<b>${r.d}<small>dias</small></b><b>${pad(r.h)}<small>h</small></b><b>${pad(r.m)}<small>min</small></b><b>${pad(r.s)}<small>s</small></b>`;
   const maLink = () => https(MA.link) || (/^[\w-]+\.html([?#].*)?$/.test(MA.link || '') ? MA.link : '') || whats(MA.mensagem || 'Oi Gediel! Quero uma vaga na Maratona.');
-  if (MA.ativo !== false && MA.titulo) {
+  // o cartão flutuante só aparece se for ligado no painel (Hub → Maratona → "Mostrar o cartão flutuante")
+  if (MA.flutuar === true && MA.titulo) {
     const el = document.createElement('button');
     el.type = 'button'; el.className = 'mara'; el.id = 'mara'; el.setAttribute('aria-label', `${MA.rotulo || ''} ${MA.titulo}`);
     el.innerHTML = `${MA.foto ? `<img src="${esc(MA.foto)}" alt="">` : ''}<span class="m-txt"><span class="m-rot"><i></i>${esc(MA.rotulo || 'Maratona')}${MA.selo ? ' · ' + esc(MA.selo) : ''}</span>
