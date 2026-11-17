@@ -83,7 +83,10 @@
     if (speechSynthesis.speaking || speechSynthesis.pending) speechSynthesis.cancel();
     if (speechSynthesis.paused) speechSynthesis.resume();
     var u = new SpeechSynthesisUtterance(txt);
-    if (emPT) { u.lang = 'pt-BR'; if (vozPT) u.voice = vozPT; } else { u.lang = 'en-US'; if (voz) u.voice = voz; }
+    // no iPhone/iPad escolher a voz à mão às vezes deixa mudo: lá basta o idioma
+    var ios = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent) && 'ontouchend' in document;
+    if (emPT) { u.lang = 'pt-BR'; if (vozPT && !ios) u.voice = vozPT; } else { u.lang = 'en-US'; if (voz && !ios) u.voice = voz; }
+    window._lvFala = u; // o iOS "esquece" a fala se ninguém guardar a referência
     u.rate = devagar ? 0.6 : 0.92; u.volume = 1;
     u.onerror = function (e) { if (e.error === 'not-allowed' || e.error === 'audio-hardware') aviso('Não consegui tocar o áudio. Confira se o celular não está no silencioso.'); };
     speechSynthesis.speak(u);
@@ -95,7 +98,9 @@
   (function () {
     if (!('speechSynthesis' in window)) return;
     var liberou = false;
-    function destravar() {
+    function destravar(e) {
+      // se o toque já é num botão de áudio, a própria fala destrava (não atrapalhar com a fala muda)
+      if (e && e.target && e.target.closest && e.target.closest('[data-falar],.lv-som,.lv-card,.lv-tile,.lv-fc,.lv-mic')) { liberou = true; }
       if (liberou) return; liberou = true;
       try { var u = new SpeechSynthesisUtterance(' '); u.volume = 0; speechSynthesis.speak(u); } catch (e) {}
       ['touchstart', 'click'].forEach(function (ev) { document.removeEventListener(ev, destravar, true); });
@@ -282,6 +287,9 @@
       '<div class="lv-prog"><div class="lv-bar"><i style="width:' + Math.round(ok / tot * 100) + '%"></i></div><span>' + ok + '/' + tot + ' acertos</span></div>';
 
     h += '<details class="lv-sec" data-sec="revisar"' + (aberto === 'revisar' ? ' open' : '') + '><summary>🔁 Revisar a aula <em>toque para ouvir</em></summary><div class="lv-corpo">' + htmlRevisar(a) + '</div></details>';
+    var cards = cartoes(a), frasesPron = frasesPronuncia(a);
+    if (cards.length >= 3) h += '<details class="lv-sec" data-sec="cards"' + (aberto === 'cards' ? ' open' : '') + '><summary>🃏 Flashcards <em class="lv-cont">' + cards.length + ' cartões</em></summary><div class="lv-corpo" data-cards></div></details>';
+    if (frasesPron.length) h += '<details class="lv-sec" data-sec="pron"' + (aberto === 'pron' ? ' open' : '') + '><summary>🎤 Avalie sua pronúncia</summary><div class="lv-corpo">' + htmlPronuncia(frasesPron) + '</div></details>';
     a.exercicios.forEach(function (ex, n) {
       var itens = (ex.itens || ex.linhas), feitos = itens.filter(function (_, i) { var v = (st.feito || {})[ex.id + '.' + i]; return v === 'ok' || v === 'quase'; }).length;
       h += '<details class="lv-sec" data-sec="' + ex.id + '" data-ex="' + ex.id + '"' + (aberto === ex.id ? ' open' : '') + '><summary>' +
@@ -302,6 +310,7 @@
     }
     h += '</div>';
     el.innerHTML = h;
+    var bc = el.querySelector('[data-cards]'); if (bc) desenharCards(bc, a);
     ligar(el, a);
     avisarAltura();
   }
@@ -383,6 +392,102 @@
     el.querySelector('.lv').insertBefore(d, el.querySelector('.lv-sec'));
   }
 
+  // ---------- flashcards ----------
+  function cartoes(a) {
+    var out = [], vistos = {};
+    a.revisar.forEach(function (b) {
+      if (b.tipo !== 'vocab') return;
+      b.itens.forEach(function (it) { var en = it[0], pt = it[1]; if (!pt || vistos[en]) return; vistos[en] = 1; out.push({ en: en, pt: pt, e: it[2] || '' }); });
+    });
+    return out.slice(0, 24);
+  }
+  function estadoCards(a) {
+    var C = cartoes(a), st = ler(a.id), F = st.fc;
+    if (!F || !F.ordem) F = { ordem: C.map(function (_, k) { return k; }), i: 0, sei: [], nao: [] };
+    return { C: C, st: st, F: F };
+  }
+  function desenharCards(box, a) {
+    var E = estadoCards(a), C = E.C, F = E.F, total = F.ordem.length;
+    if (F.i >= total) {
+      box.innerHTML = '<div class="lv-fc-fim"><div class="lv-fc-placar">✅ ' + F.sei.length + ' já sei · 😕 ' + F.nao.length + ' para revisar</div>' +
+        (F.nao.length ? '<button type="button" class="lv-btn" data-fc="revisar">Revisar os ' + F.nao.length + ' que errei</button> ' : '<p>🏆 Você sabe todas as palavras desta rodada!</p>') +
+        '<button type="button" class="lv-btn sec" data-fc="zerar">Começar de novo</button></div>';
+      return;
+    }
+    var c = C[F.ordem[F.i]];
+    box.innerHTML = '<div class="lv-fc-prog"><div class="lv-bar"><i style="width:' + Math.round(F.i / total * 100) + '%"></i></div><span>' + (F.i + 1) + '/' + total + '</span></div>' +
+      '<button type="button" class="lv-fc" data-fc="virar" aria-label="Virar o cartão"><div class="lv-fc-in"><div class="lv-fc-f">' + (c.e ? '<span class="lv-fc-e">' + c.e + '</span>' : '') + '<b>' + esc(c.en) + '</b><small>Toque para ver a tradução</small></div>' +
+      '<div class="lv-fc-v"><b>' + esc(c.pt) + '</b><small>' + esc(c.en) + '</small></div></div></button>' +
+      '<div class="lv-fc-acoes">' + btnSom(c.en.split(' / ')[0]) + '<button type="button" class="lv-btn sec" data-fc="nao">😕 Ainda não</button><button type="button" class="lv-btn" data-fc="sei">✅ Já sei</button></div>';
+  }
+  function acaoCards(box, a, acao) {
+    if (acao === 'virar') { box.querySelector('.lv-fc').classList.toggle('virado'); return; }
+    var E = estadoCards(a), F = E.F, atual = F.ordem[F.i];
+    if (acao === 'sei') { F.sei.push(atual); F.i++; }
+    else if (acao === 'nao') { F.nao.push(atual); F.i++; }
+    else if (acao === 'zerar') F = null;
+    else if (acao === 'revisar') F = { ordem: F.nao.slice(), i: 0, sei: [], nao: [] };
+    E.st.fc = F; gravar(a.id, E.st); desenharCards(box, a);
+  }
+
+  // ---------- avaliador de pronúncia ----------
+  var Reconhecer = window.SpeechRecognition || window.webkitSpeechRecognition;
+  function frasesPronuncia(a) {
+    var fr = [];
+    a.revisar.forEach(function (b) {
+      if (b.tipo === 'vocab') b.itens.forEach(function (it) { var n = it[0].split(' ').length; if (n >= 2 && n <= 10 && !/[→\/(]/.test(it[0])) fr.push(it[0]); });
+      if (b.tipo === 'dialogo') b.falas.forEach(function (f) { if (f[1].split(' ').length <= 10) fr.push(f[1]); });
+    });
+    fr = fr.filter(function (x, i) { return fr.indexOf(x) === i; });
+    return fr.slice(-6);
+  }
+  function htmlPronuncia(fr) {
+    if (!Reconhecer) return '<div class="lv-dica">🎤 Para avaliar sua pronúncia, abra esta aula no <b>Chrome</b> (Android/computador) ou no <b>Safari</b> (iPhone). Este navegador não tem reconhecimento de voz.</div>';
+    return '<p class="lv-inst">Toque em ▶ para ouvir, depois em 🎤 e fale a frase. O livro mostra o que entendeu e dá uma nota.</p>' +
+      fr.map(function (f, i) {
+        return '<div class="lv-item col lv-pron" data-pron="' + i + '"><div class="lv-perg"><span class="lv-letra">' + (i + 1) + '</span><b data-frase>' + palavras(f) + '</b></div>' +
+          '<div class="lv-pron-acoes">' + btnSom(f) + btnSom(f, true) + '<button type="button" class="lv-mic" data-alvo="' + esc(f) + '">🎤 Falar</button></div><div class="lv-fb"></div></div>';
+      }).join('');
+  }
+  function notaPronuncia(alvo, ditos) {
+    var A = chaveG(alvo).split(' '), melhor = { nota: 0, dito: '', marca: [] };
+    ditos.forEach(function (d) {
+      var D = chaveG(d).split(' '), usados = {}, marca = A.map(function (w) {
+        for (var j = 0; j < D.length; j++) if (!usados[j] && (D[j] === w || dist(D[j], w) <= (w.length > 4 ? 1 : 0))) { usados[j] = 1; return true; }
+        return false;
+      });
+      var ok = marca.filter(Boolean).length, extra = Math.max(0, D.length - A.length);
+      var nota = Math.max(0, Math.round((ok - extra * 0.5) / A.length * 100));
+      if (nota > melhor.nota || !melhor.dito) melhor = { nota: nota, dito: d, marca: marca };
+    });
+    return melhor;
+  }
+  function ouvirPronuncia(btn) {
+    var box = btn.closest('.lv-pron'), fb = box.querySelector('.lv-fb'), alvo = btn.dataset.alvo;
+    if (ouvirPronuncia.rec) { try { ouvirPronuncia.rec.abort(); } catch (e) {} }
+    var r = new Reconhecer(); ouvirPronuncia.rec = r;
+    r.lang = 'en-US'; r.interimResults = false; r.maxAlternatives = 5;
+    btn.classList.add('ouvindo'); btn.textContent = '🔴 Ouvindo…'; fb.innerHTML = '<span class="lv-quase">Fale agora: ' + esc(alvo) + '</span>';
+    var fim = function () { btn.classList.remove('ouvindo'); btn.textContent = '🎤 Falar de novo'; };
+    r.onresult = function (ev) {
+      var alts = []; for (var i = 0; i < ev.results[0].length; i++) alts.push(ev.results[0][i].transcript);
+      var m = notaPronuncia(alvo, alts), ws = alvo.split(' ');
+      var cor = m.nota >= 90 ? 'lv-bom' : m.nota >= 70 ? 'lv-quase' : 'lv-erro';
+      var msg = m.nota >= 90 ? '🏆 Excelente!' : m.nota >= 70 ? '👍 Muito bom! Repare nas palavras em vermelho.' : '💪 Tente de novo, ouvindo antes com 🐢.';
+      fb.innerHTML = '<div class="lv-nota ' + cor + '">' + m.nota + '%</div><div class="' + cor + '">' + msg + '</div>' +
+        '<div class="lv-pron-alvo">' + ws.map(function (w, k) { return '<span class="' + (m.marca[k] ? 'pw-ok' : 'pw-erro') + '">' + esc(w) + '</span>'; }).join(' ') + '</div>' +
+        '<div class="lv-mini-info">Entendi: "' + esc(m.dito) + '"</div>';
+      box.classList.remove('ok', 'quase', 'erro'); box.classList.add(m.nota >= 90 ? 'ok' : m.nota >= 70 ? 'quase' : 'erro');
+    };
+    r.onerror = function (ev) {
+      fim();
+      fb.innerHTML = '<span class="lv-erro">' + (ev.error === 'not-allowed' || ev.error === 'service-not-allowed' ? 'Libere o microfone para esta página (no aviso do navegador) e tente de novo.' :
+        ev.error === 'no-speech' ? 'Não ouvi nada. Toque em 🎤 e fale logo em seguida.' : 'Não consegui ouvir (' + esc(ev.error) + '). Tente de novo.') + '</span>';
+    };
+    r.onend = fim;
+    try { r.start(); } catch (e) { fim(); fb.innerHTML = '<span class="lv-erro">Não consegui ligar o microfone.</span>'; }
+  }
+
   function ligar(el, a) {
     var raiz = el.querySelector('.lv');
     raiz.addEventListener('click', function (e) {
@@ -399,6 +504,8 @@
         st.aberto = t.dataset.limpar; gravar(a.id, st); desenhar(el, a); return;
       }
       if (t.classList.contains('lv-tile')) return clicarPar(el, a, t);
+      if (t.dataset.fc) return acaoCards(t.closest('[data-cards]'), a, t.dataset.fc);
+      if (t.classList.contains('lv-mic')) return ouvirPronuncia(t);
       var box = t.closest('.lv-item'); if (!box) return;
       var k = box.dataset.k, st2 = ler(a.id); st2.txt = st2.txt || {};
       if (t.classList.contains('lv-op')) {
