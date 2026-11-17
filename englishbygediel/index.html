@@ -218,8 +218,20 @@ a{text-decoration:none}
 .faixa-login button{flex:0 0 auto;padding:9px 14px;border-radius:99px;background:var(--cobre);color:#fff;font-weight:700;font-size:12.5px}
 .planos-topo{text-align:center;margin-bottom:22px}.planos-topo h2{font-size:clamp(34px,6.5vw,60px);line-height:1;margin:8px 0 12px}.planos-topo p{color:var(--dim);font-size:14px;max-width:54ch;margin:0 auto;line-height:1.5}
 .planos-pista{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:36px 8px 26px;margin:0 -8px;scrollbar-width:none;align-items:stretch}.planos-pista::-webkit-scrollbar{display:none}
-.plano{--pc:#7a8cff;position:relative;flex:0 0 min(78%,290px);scroll-snap-align:center;display:flex;flex-direction:column;padding:22px 20px 20px;border-radius:22px;color:var(--marfim);background:linear-gradient(165deg,rgba(25,42,76,.95),rgba(11,21,41,.95));border:1px solid var(--linha);box-shadow:0 22px 44px -26px #000;transition:transform .3s,box-shadow .3s}
-.plano.dest{border-color:rgba(137,156,255,.9);background:linear-gradient(165deg,#1b2a5c,#0d1838);box-shadow:0 0 0 1px rgba(137,156,255,.45),0 0 40px 4px rgba(104,122,255,.5),0 34px 60px -22px rgba(64,80,255,.6);transform:translateY(-14px) scale(1.03);z-index:2}
+.plano{--pc:#7a8cff;position:relative;flex:0 0 min(78%,290px);scroll-snap-align:center;display:flex;flex-direction:column;padding:22px 20px 20px;border-radius:22px;color:var(--marfim);background:linear-gradient(165deg,rgba(25,42,76,.95),rgba(11,21,41,.95));border:1px solid var(--linha);box-shadow:0 22px 44px -26px #000;transition:transform .18s ease-out,box-shadow .3s;transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));will-change:transform}
+.plano.dest{border-color:rgba(137,156,255,.9);background:linear-gradient(165deg,#1b2a5c,#0d1838);box-shadow:0 0 0 1px rgba(137,156,255,.45),0 0 40px 4px rgba(104,122,255,.5),0 34px 60px -22px rgba(64,80,255,.6);transform:perspective(900px) translateY(-14px) scale(1.03) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));z-index:2;animation:planoPulsa 2.2s ease-in-out infinite}
+/* o brilho do destaque pulsa de verdade; a luz do cursor passa por cima de qualquer cartão */
+@keyframes planoPulsa{0%,100%{border-color:rgba(137,156,255,.7);box-shadow:0 0 0 1px rgba(137,156,255,.35),0 0 26px 2px rgba(104,122,255,.30),0 34px 60px -24px rgba(64,80,255,.45)}50%{border-color:rgba(190,200,255,1);box-shadow:0 0 0 2px rgba(170,184,255,.9),0 0 70px 14px rgba(124,142,255,.85),0 38px 74px -18px rgba(76,96,255,.85)}}
+@keyframes planoBtnPulsa{0%,100%{box-shadow:0 0 14px rgba(122,120,255,.45)}50%{box-shadow:0 0 38px 6px rgba(140,130,255,.95)}}
+.plano::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .25s;background:radial-gradient(280px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.2),transparent 62%)}
+@media (hover:hover){.plano:hover::after{opacity:1}.plano:not(.dest):hover{box-shadow:0 0 0 1px rgba(255,255,255,.22),0 0 34px 2px color-mix(in srgb,var(--pc) 55%,transparent),0 26px 50px -24px #000}}
+@keyframes bfPulsa{0%,100%{box-shadow:0 0 12px rgba(255,40,60,.5)}50%{box-shadow:0 0 30px 5px rgba(255,40,60,.95)}}
+.plano .p-bf{display:flex;flex-direction:column;border-radius:12px;overflow:hidden;margin-bottom:10px;font-weight:800;animation:bfPulsa 1.3s ease-in-out infinite}
+.plano .p-bf{text-align:center}
+.plano .p-bf-nome{background:#e11d2e;color:#fff;padding:7px 10px;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.plano .p-bf-cont{background:#fff;color:#d10f22;padding:7px 10px;font-size:13px;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.plano .p-bf-cont small{display:block;font-size:9.5px;font-weight:700;color:#7a1620;margin-bottom:1px;text-transform:uppercase;letter-spacing:.08em}
+@media (prefers-reduced-motion:reduce){.plano.dest,.plano .p-bf,.plano.dest .p-btn{animation:none}.plano{transform:none!important}}
 .plano .tab{position:absolute;top:-16px;left:50%;translate:-50% 0;white-space:nowrap;background:linear-gradient(135deg,#8294ff,#5566f0);color:#fff;font-size:12px;font-weight:800;letter-spacing:.03em;padding:7px 18px;border-radius:12px 12px 0 0;box-shadow:0 -4px 18px rgba(104,122,255,.5)}
 .plano:not(.dest) .tab{background:rgba(255,255,255,.12);box-shadow:none;color:#e9eefb;font-size:11px;padding:6px 14px}
 .plano .p-cab{display:flex;align-items:center;justify-content:space-between;gap:10px}.plano h3{font-size:22px;font-weight:800;letter-spacing:-.01em}
@@ -230,7 +242,7 @@ a{text-decoration:none}
 .plano .p-esp{flex:1}
 .plano .p-btn{display:block;text-align:center;padding:13px 12px;border-radius:13px;font-weight:700;font-size:14px;color:#fff;background:rgba(255,255,255,.1);border:1px solid var(--linha);transition:filter .2s}
 .plano .p-btn:hover{filter:brightness(1.25)}
-.plano.dest .p-btn{border:0;background:linear-gradient(135deg,#9a8bff,#5b6cff);box-shadow:0 0 24px rgba(122,120,255,.65)}
+.plano.dest .p-btn{border:0;background:linear-gradient(135deg,#9a8bff,#5b6cff);box-shadow:0 0 24px rgba(122,120,255,.65);animation:planoBtnPulsa 2.2s ease-in-out infinite}
 .plano .p-preco{margin-top:18px;padding-top:16px;border-top:1px solid var(--linha);text-align:center}
 .plano .p-promo{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#ffd27a;background:rgba(255,200,90,.14);border-radius:99px;padding:4px 10px;margin-bottom:8px}
 .plano .p-de{font-size:12.5px;color:var(--dim);text-decoration:line-through}
@@ -799,6 +811,28 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
     const s = String(p || '').trim(), suf = s.match(/^(.*?)\s*(\/\s*(?:mês|mes|ano))$/i), pre = (suf ? suf[1] : s).match(/^(\d+x)\s+(.+)$/i);
     return `${pre ? `<small class="pre">${esc(pre[1])}</small>${esc(pre[2])}` : esc(suf ? suf[1] : s)}${suf ? `<small>${esc(suf[2].replace(/\s/g, ''))}</small>` : ''}`;
   }
+  // contagem regressiva da promoção (vermelho e branco), atualizada a cada segundo
+  function tickPlanos() {
+    document.querySelectorAll('.p-bf-cont[data-fim]').forEach(el => {
+      const ms = new Date(el.dataset.fim) - Date.now();
+      if (isNaN(ms)) return;
+      if (ms <= 0) { el.innerHTML = 'Promoção encerrada'; return; }
+      const s = Math.floor(ms / 1000), d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60), x = s % 60, p2 = n => String(n).padStart(2, '0');
+      el.innerHTML = `<small>termina em</small>${d}d ${p2(h)}h ${p2(m)}m ${p2(x)}s`;
+    });
+  }
+  setInterval(tickPlanos, 1000);
+  // a luz e a inclinação seguem o cursor (só com mouse)
+  if (matchMedia('(hover:hover)').matches && !reduz) {
+    const pista = document.getElementById('planosPista');
+    pista.addEventListener('pointermove', e => {
+      const el = e.target.closest('.plano'); if (!el) return;
+      const r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      el.style.setProperty('--mx', (x * 100).toFixed(1) + '%'); el.style.setProperty('--my', (y * 100).toFixed(1) + '%');
+      el.style.setProperty('--rx', ((.5 - y) * 12).toFixed(2) + 'deg'); el.style.setProperty('--ry', ((x - .5) * 14).toFixed(2) + 'deg');
+    });
+    pista.addEventListener('pointerout', e => { const el = e.target.closest('.plano'); if (el && !el.contains(e.relatedTarget)) { el.style.removeProperty('--rx'); el.style.removeProperty('--ry'); } });
+  }
   function desenharPlanos() {
     const id = modo ? modo.id : '';
     if (planosModo === id) return; planosModo = id;
@@ -819,9 +853,10 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
         ${(rotulo => rotulo ? `<span class="tab">${esc(rotulo)}</span>` : '')(d && modo && (p.modos || []).includes(modo.id) ? 'Pra você' : p.selo || (d ? 'Mais escolhido' : ''))}
         <div class="p-cab"><h3>${esc(p.nome)}</h3><span class="p-ic">${esc(p.icone || '⭐')}</span></div><p class="p-sub">${esc(p.sub || '')}</p>
         <hr><ul>${bens.map(b => `<li>${esc(b)}</li>`).join('')}</ul><div class="p-esp"></div>${acao}
-        <div class="p-preco">${promo ? `<span class="p-promo">${esc(p.promoNome || 'Promoção')} · até ${esc(p.promoAte.split('-').reverse().slice(0, 2).join('/'))}</span><div class="p-de">de ${esc(p.preco)}</div>` : ''}
+        <div class="p-preco">${promo ? `<div class="p-bf"><span class="p-bf-nome">🔥 ${esc(p.promoNome || 'Promoção')}</span><span class="p-bf-cont" data-fim="${esc(p.promoAte)}T23:59:59"></span></div><div class="p-de">de ${esc(p.preco)}</div>` : ''}
           <div class="p-pr">${partePreco(promo ? p.promo : p.preco)}</div>${p.nota ? `<div class="p-nota">${esc(p.nota)}</div>` : ''}${p.pagamento ? `<div class="p-pag">${esc(p.pagamento)}</div>` : ''}</div></article>`;
     }).join('');
+    tickPlanos();
     // no celular os cartões rolam de lado: já abre com o destaque no meio
     const pista = $('#planosPista'), el = pista.querySelector('.dest');
     if (el && matchMedia('(max-width:899px)').matches) pista.scrollLeft = el.offsetLeft - (pista.clientWidth - el.clientWidth) / 2;
