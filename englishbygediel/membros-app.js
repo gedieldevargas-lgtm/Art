@@ -1010,7 +1010,7 @@
     var c=(CARDS||[]).filter(function(x){return x.id===id;})[0];if(!c)return;
     if(cardSoon(c)){wa('Oi Gediel! Quero ser avisado quando sair: '+c.titulo+'.');return;}
     if(c.acao==='whatsapp'){wa(c.valor||('Oi Gediel! Vim pelo app: '+c.titulo));return;}
-    if(c.acao==='area'){go(c.valor);return;}
+    if(c.acao==='area'){window._voltaPend={uni:uni,nome:UNIV[uni].title,pill:pill(uni)};go(c.valor);return;}
     if(c.acao==='curso'){
       await carregarModsAll();var m=MODS_ALL.filter(function(x){return x.id===c.valor;})[0];
       if(!m){toast('Esse mini curso ainda está sendo preparado 🙏');return;}
@@ -1199,9 +1199,19 @@
 
   /* navegação: desenha o que cada área precisa */
   var goAnt=window.goTo;
+  /* botão "← voltar" flutuante: quando um card de um universo leva pra outra área do app (jogos, materiais, planos...) */
+  function voltaUni(vp,page){
+    var x=$('mi-volta-uni');if(x)x.remove();
+    if(!vp||vp.uni===page)return;
+    x=document.createElement('button');x.id='mi-volta-uni';x.type='button';x.textContent='← '+vp.nome;
+    x.style.cssText='position:fixed;left:max(12px,env(safe-area-inset-left));top:calc(env(safe-area-inset-top,0px) + 66px);z-index:60;background:var(--accent);color:#fff;border:0;border-radius:99px;padding:9px 16px;font:inherit;font-size:13px;font-weight:800;box-shadow:0 6px 20px rgba(0,0,0,.3);cursor:pointer';
+    x.onclick=function(){window.goTo(vp.uni,vp.pill);};
+    document.body.appendChild(x);
+  }
   window.goTo=function(page,el){
     gaveta(false);
     window._miniBack=null;
+    var vp=window._voltaPend;window._voltaPend=null;voltaUni(vp,page);
     if(UNIV[page])desenharUni(page);
     if(page==='prompts'){var f=document.querySelector('#pane-prompts iframe');if(f&&!f.src)f.src=f.dataset.src;}
     if(page==='home')setTimeout(renderHome,160);
