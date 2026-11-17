@@ -79,15 +79,29 @@
     if (!voz) acharVoz();
     var emPT = ehPortugues(txt);
     if (emPT && !vozPT) vozPT = speechSynthesis.getVoices().filter(function (v) { return /^pt[-_]BR/i.test(v.lang); })[0] || null;
-    speechSynthesis.cancel();
+    // iPhone: precisa falar NO MESMO instante do toque (sem setTimeout) e só cancelar se algo já está tocando
+    if (speechSynthesis.speaking || speechSynthesis.pending) speechSynthesis.cancel();
     if (speechSynthesis.paused) speechSynthesis.resume();
     var u = new SpeechSynthesisUtterance(txt);
     if (emPT) { u.lang = 'pt-BR'; if (vozPT) u.voice = vozPT; } else { u.lang = 'en-US'; if (voz) u.voice = voz; }
     u.rate = devagar ? 0.6 : 0.92; u.volume = 1;
     u.onerror = function (e) { if (e.error === 'not-allowed' || e.error === 'audio-hardware') aviso('Não consegui tocar o áudio. Confira se o celular não está no silencioso.'); };
-    // alguns iPhones precisam de um pequeno atraso depois do cancel()
-    setTimeout(function () { speechSynthesis.speak(u); }, 60);
+    speechSynthesis.speak(u);
+    // se em 1,5 s nada começou a tocar, avisa (celular no silencioso, voz bloqueada...)
+    var comecou = false; u.onstart = function () { comecou = true; };
+    setTimeout(function () { if (!comecou && !speechSynthesis.speaking) aviso('O áudio não saiu. Tire o celular do silencioso, aumente o volume e toque de novo.'); }, 1500);
   }
+  // destrava a voz no 1º toque na tela (o iOS só libera o áudio depois de um toque do usuário)
+  (function () {
+    if (!('speechSynthesis' in window)) return;
+    var liberou = false;
+    function destravar() {
+      if (liberou) return; liberou = true;
+      try { var u = new SpeechSynthesisUtterance(' '); u.volume = 0; speechSynthesis.speak(u); } catch (e) {}
+      ['touchstart', 'click'].forEach(function (ev) { document.removeEventListener(ev, destravar, true); });
+    }
+    ['touchstart', 'click'].forEach(function (ev) { document.addEventListener(ev, destravar, true); });
+  })();
   function aviso(t) {
     var d = document.querySelector('.lv-aviso'); if (!d) { d = document.createElement('div'); d.className = 'lv-aviso'; document.body.appendChild(d); }
     d.textContent = t; d.classList.add('on'); clearTimeout(d._t); d._t = setTimeout(function () { d.classList.remove('on'); }, 3500);
