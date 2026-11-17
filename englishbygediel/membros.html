@@ -51,6 +51,7 @@ button,input,select,textarea{font-family:inherit}
 /* Pane transitions via JS classes */
 .pane{display:none;opacity:0}
 .pane.active{display:block}
+@media(min-width:1001px){body:has(#pane-modulos.active #mod-view-lesson[style*="block"]) .right-rail{display:none}}
 .pane.pane-enter{animation:fadeUp .28s cubic-bezier(.22,1,.36,1) both}
 .pane.pane-leave{animation:fadeIn .15s reverse both;pointer-events:none}
 
@@ -2120,7 +2121,7 @@ function slugAula(t){t=String(t||'').normalize('NFKD').replace(/[\u0300-\u036f]/
 function descSemLivro(d){return (d||'').replace(LIVRO_RE,'$1').trim();}
 function abrirLivroAula(id){
   var el=document.getElementById('aula-livro');if(!el)return;
-  if(!document.getElementById('livro-css')){var c=document.createElement('link');c.id='livro-css';c.rel='stylesheet';c.href='livro/livro.css?v=1';document.head.appendChild(c);}
+  if(!document.getElementById('livro-css')){var c=document.createElement('link');c.id='livro-css';c.rel='stylesheet';c.href='livro/livro.css?v=3';document.head.appendChild(c);}
   var semLivro=function(){var g=el.closest('.aula-grid');if(g){var vd=g.querySelector('.aula-video');g.parentNode.replaceChild(vd.firstChild,g);}};
   if(window.Livro)return window.Livro.abrir(el,id,semLivro);
   var s=document.createElement('script');s.src='livro/livro.js?v=2';s.onload=function(){window.Livro.abrir(document.getElementById('aula-livro'),id,semLivro);};document.head.appendChild(s);
