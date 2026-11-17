@@ -2238,6 +2238,7 @@
     if(a==='mn-fechar')return mn.classList.remove('open');
     if(a==='mn-salvar')return salvarMenu();
     if(a==='mn-apagar')return apagarUni();
+    if(a==='quiz-exp'){exportarQuizzes();return;}
     if(a==='mod-ed'){go('admin');setTimeout(function(){var t=[].filter.call(document.querySelectorAll('.admin-tab'),function(x){return /módulos/i.test(x.textContent);})[0];if(t)t.click();},250);return;}
   },true);
   // depois de salvar ou apagar um card, redesenha o universo aberto
@@ -2325,6 +2326,22 @@
     var p=$('pane-modulos');if(!p)return;var x=$('mi-mod-ed');
     if(!EDIT){if(x)x.remove();return;}
     if(!x){x=document.createElement('button');x.id='mi-mod-ed';x.className='mi-novo';x.dataset.ed='mod-ed';x.style.cssText='width:100%;margin-bottom:14px;min-height:0;padding:14px';x.textContent='✏️ Editar módulos, aulas, capas e quizzes';p.insertBefore(x,p.firstChild);}
+    var y=$('mi-quiz-exp');if(!y){y=document.createElement('button');y.id='mi-quiz-exp';y.className='mi-novo';y.dataset.ed='quiz-exp';y.style.cssText='width:100%;margin-bottom:14px;min-height:0;padding:12px';y.textContent='📋 Copiar todos os quizzes das aulas (pra revisar)';x.insertAdjacentElement('afterend',y);}
+  }
+  async function exportarQuizzes(){
+    var sb=window._sb;if(!sb)return;toast('Juntando as aulas…','#4f6ef7');
+    var m=await sb.from('mi_modules').select('id,name,ord').order('ord'),l=await sb.from('mi_lessons').select('id,module_id,ord,title,description,quiz').order('ord');
+    if(m.error||l.error){toast('Erro: '+((m.error||l.error).message),'#ef4444');return;}
+    var t='';(m.data||[]).forEach(function(mo){t+='\n=== MÓDULO: '+mo.name+' ===\n';
+      (l.data||[]).filter(function(x){return x.module_id===mo.id;}).forEach(function(x,i){
+        t+='\n[Aula '+(i+1)+'] '+x.title+'\n';
+        if(x.description)t+='Descrição: '+String(x.description).slice(0,500)+'\n';
+        (x.quiz||[]).forEach(function(q,qi){t+='  '+(qi+1)+'. '+q.q+'\n'+(q.a||[]).map(function(o,oi){return '     '+'ABCD'[oi]+') '+o+(oi===q.c?'  ✅':'');}).join('\n')+'\n';});
+        if(!(x.quiz||[]).length)t+='  (sem quiz)\n';});});
+    var ok=false;try{await navigator.clipboard.writeText(t);ok=true;}catch(e){}
+    var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:16px';
+    d.innerHTML='<div style="background:var(--surface);border-radius:16px;padding:16px;width:100%;max-width:560px;max-height:85vh;display:flex;flex-direction:column;gap:10px"><b>'+(ok?'✅ Copiado! Cola aqui no chat.':'Segura e copia o texto abaixo, depois cola no chat.')+'</b><textarea readonly style="flex:1;min-height:50vh;font-size:12px;border:1px solid var(--border);border-radius:10px;padding:10px;background:var(--surface2);color:var(--fg)">'+E(t)+'</textarea><button class="admin-btn admin-btn-primary" id="mi-qx-ok">Fechar</button></div>';
+    document.body.appendChild(d);d.querySelector('#mi-qx-ok').onclick=function(){d.remove();};d.querySelector('textarea').onfocus=function(){this.select();};
   }
   function modoEdicao(on){
     EDIT=!!on&&souAdmin();document.body.classList.toggle('mi-edit',EDIT);
