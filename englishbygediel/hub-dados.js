@@ -81,6 +81,12 @@
       secoes: { gratis: 'Materiais grátis', pagos: 'Pra ir mais fundo', botaoPagos: 'Programa →', membros: 'Dentro do programa', membrosSub: 'Só pra alunos',
         planosRotulo: 'Planos', planos: 'Escolha até onde você quer ir', planosSub: 'Todo mundo começa no Grátis. Cada plano libera um nível a mais da plataforma.',
         planosAviso: 'Aula particular com o Gediel não está inclusa em nenhum plano: a partir do Inteligente você pode pedir um horário, e o valor é combinado direto com ele.',
+        gratisTexto: 'Comece por aqui: é tudo de graça, é só tocar no que te interessa.',
+        gratisFaixa: 'Os jogos, as lives abertas e os materiais da plataforma ficam na área de membros.',
+        pagosTexto: 'Materiais completos pra ir mais fundo, com pagamento único.',
+        membrosTexto: 'O que você libera quando vira aluno: aulas, lives, salas de prática e acompanhamento.',
+        extrasTexto: 'Outros projetos do Gediel: escola, viagens e aulas particulares.',
+        alunosTexto: 'Histórias reais de quem aprendeu com o método.',
         jogos: 'Jogos', simuladores: 'Simuladores', extras: 'Ecossistema', alunos: 'Alunos que destravaram', botaoAluno: 'Quero esse resultado' },
       membros: { botaoTopo: 'Entrar', titulo: 'Área de membros', url: 'membros.html',
         texto: 'Já é aluno ou comprou um material? Entre com o e-mail que você usou na compra pra acessar suas aulas, trilhas e materiais.',
@@ -88,7 +94,7 @@
       cards,
       // aba de planos (preços): igual à da área de membros, em cartões com brilho. Benefícios: um por linha
       planos: [
-        { ativo: true, nome: 'Grátis', sub: 'Pra conhecer o método', icone: '🎁', cor: '#8fa66a', preco: 'R$ 0', promo: '', promoAte: '', promoNome: '', nota: 'pra sempre', selo: '', destaque: false, acao: 'login', botao: 'Entrar grátis', link: '', modos: [],
+        { ativo: true, nome: 'Grátis', sub: 'Pra conhecer o método', icone: '🎁', cor: '#8fa66a', preco: 'R$ 0', promo: '', promoAte: '', promoNome: '', nota: 'pra sempre', selo: '', destaque: false, acao: 'login', botao: 'Entrar na plataforma', link: '', modos: [],
           beneficios: ['Checklist diário e maratona', 'Jogos liberados', 'Materiais gratuitos', 'Lives abertas', 'Bússola de nível'].join('\n') },
         { ativo: true, nome: 'Mission', sub: 'Inglês com a Bíblia', icone: '📖', cor: '#3fb27f', preco: 'R$ 25/mês', promo: '', promoAte: '', promoNome: '', nota: 'assinatura mensal', selo: '', destaque: false, acao: 'link', botao: 'Quero o Mission', link: 'https://pay.kiwify.com.br/oIjfTK8', modos: ['fe'],
           beneficios: ['Tudo do Grátis', 'Devocionais gravados', 'Inglês bíblico na prática', 'Comunidade do English on Mission', 'Materiais do EOM'].join('\n') },
