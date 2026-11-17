@@ -39,7 +39,7 @@
       ['rotulo', 'Etiqueta'], ['titulo', 'Título'], ['texto', 'Texto', 'area'], ['botao', 'Botão'], ['img', 'Imagem', 'img']] },
     { k: 'mentoria', t: 'Ficha da mentoria', d: 'O que aparece ao tocar no vídeo em destaque.', campos: [
       ['titulo', 'Título'], ['sinopse', 'Descrição', 'area'], ['inclui', 'O que inclui (um item por linha)', 'area'], ['meta', 'Etiquetas (separe por vírgula)'],
-      ['precoDe', 'Preço "de"'], ['precoPor', 'Preço "por"'], ['nota', 'Observação do preço'], ['video', 'Vídeo do YouTube (link ou código)', 'video'],
+      ['precoDe', 'Preço "de"'], ['precoPor', 'Preço "por"'], ['nota', 'Observação do preço'], ['video', 'Vídeo (link do YouTube, Reel do Instagram ou TikTok)', 'video'],
       ['img', 'Imagem (se não tiver vídeo)', 'img'], ['checkout', 'Link de compra', 'url'], ['botaoAplicar', 'Botão que leva ao chat'], ['botaoComprar', 'Botão de compra']] },
     { k: 'secoes', t: 'Títulos das fileiras', campos: [
       ['gratis', 'Fileira grátis'], ['pagos', 'Fileira à venda'], ['botaoPagos', 'Link ao lado do título à venda'], ['membros', 'Fileira dentro da mentoria'], ['membrosSub', 'Link ao lado (abre o login)'], ['jogos', 'Galeria de jogos'], ['simuladores', 'Galeria de simuladores'], ['extras', 'Fileira ecossistema'], ['alunos', 'Fileira de alunos'], ['botaoAluno', 'Botão na ficha do aluno']] },
@@ -49,7 +49,7 @@
       campos: [['tipo', 'Tipo', 'sel', OPC.tipoCard], ['ativo', 'Visível', 'bool'], ['titulo', 'Título (no depoimento, a frase)'], ['linha', 'Linha embaixo do título'],
         ['nome', 'Nome do aluno (só depoimento)'], ['setor', 'Setor (vira filtro na fileira grátis: Prompts, E-books, Guias…)'], ['img', 'Capa', 'img'],
         ['preco', 'Preço (à venda)'], ['parcelas', 'Parcelas (ex.: 6 mostra "6x de…"; 1 mostra só o valor cheio; vazio = 6x a partir de R$ 300)'], ['link', 'Link do botão (landing, checkout, PDF…)', 'url'], ['botao', 'Texto do botão'],
-        ['link2', 'Segundo link (opcional)', 'url'], ['botao2', 'Texto do segundo botão'], ['video', 'Vídeo do YouTube (link ou código)', 'video'],
+        ['link2', 'Segundo link (opcional)', 'url'], ['botao2', 'Texto do segundo botão'], ['video', 'Vídeo (link do YouTube, Reel do Instagram ou TikTok)', 'video'],
         ['sinopse', 'Descrição (aparece ao tocar)', 'area'], ['meta', 'Etiquetas (separe por vírgula)'], ['modos', 'Aparece primeiro nos modos', 'modos']] },
     { k: 'lojinha', t: 'Lojinha (coluna lateral)', d: 'A coluna fina com os produtos andando na vertical, no canto direito. Ao tocar, abre a lojinha com os achados de afiliado, os seus e-books à venda (cards "À venda") e os grátis (cards grátis com link).', campos: [
       ['ativo', 'Mostrar a lojinha', 'bool'], ['rail', 'Nome curto no topo da coluna'], ['titulo', 'Título da lojinha'], ['sub', 'Texto embaixo do título'], ['aviso', 'Aviso de afiliado (rodapé da lojinha)', 'area']] },
@@ -94,7 +94,7 @@
     const abertos = new Set(opt.so ? [opt.so.sec, opt.so.item != null ? `${opt.so.sec}.${opt.so.item}` : ''] : []);
 
     const marcar = () => opt.onChange && opt.onChange();
-    const videoId = v => { const m = String(v || '').match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{6,})/); return m ? m[1] : String(v || '').trim(); };
+    const videoId = v => { if (/instagram\.com|tiktok\.com/i.test(String(v || ''))) return String(v).trim(); const m = String(v || '').match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{6,})/); return m ? m[1] : String(v || '').trim(); };
 
     function campoHTML(f, obj, caminho) {
       const [k, rot, tipo = 'txt', ops] = f;
@@ -112,7 +112,7 @@
           <div class="hub-mini">${v ? `<img src="${esc(verImg(v))}" alt="">` : '<i>sem foto</i>'}</div>
           <div class="hub-img-acoes"><label class="botao arquivo">Enviar foto<input type="file" accept="image/*" data-up="${nome}"></label>
           <input data-c="${nome}" value="${esc(v)}" placeholder="ou cole o link da imagem">${v ? `<button class="link perigo" type="button" data-limpa="${nome}">Tirar foto</button>` : ''}</div></div></div>`;
-      else entrada = `<input data-c="${nome}" value="${esc(v)}" ${tipo === 'url' ? 'type="url" placeholder="https://"' : ''} ${tipo === 'video' ? 'placeholder="https://youtu.be/…"' : ''}>`;
+      else entrada = `<input data-c="${nome}" value="${esc(v)}" ${tipo === 'url' ? 'type="url" placeholder="https://"' : ''} ${tipo === 'video' ? 'placeholder="https://youtu.be/… ou https://www.instagram.com/reel/…"' : ''}>`;
       return `<label class="campo"><span>${esc(rot)}</span>${entrada}</label>`;
     }
 
