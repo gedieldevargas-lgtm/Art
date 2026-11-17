@@ -235,6 +235,7 @@ a{text-decoration:none}
 .plano .p-promo{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#ffd27a;background:rgba(255,200,90,.14);border-radius:99px;padding:4px 10px;margin-bottom:8px}
 .plano .p-de{font-size:12.5px;color:var(--dim);text-decoration:line-through}
 .plano .p-pr{font-size:33px;font-weight:800;letter-spacing:-.02em;line-height:1.1}.plano .p-pr small{font-size:13px;font-weight:600;color:var(--dim);letter-spacing:0;margin-left:3px}.plano .p-pr small.pre{margin:0 6px 0 0}
+.plano .p-pag{font-size:11.5px;color:#c9d4ea;margin-top:6px;padding:5px 10px;border-radius:99px;background:rgba(255,255,255,.07);display:inline-block}
 .plano .p-nota{font-size:11.5px;color:var(--dim);margin-top:3px}
 .planos-aviso{font-size:12px;color:var(--dim);text-align:center;max-width:60ch;margin:6px auto 0;line-height:1.5}
 @media (min-width:900px){.planos-pista{overflow:visible;justify-content:center;padding-top:40px}.plano{flex:1 1 0;min-width:0;max-width:300px}}
@@ -819,7 +820,7 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
         <div class="p-cab"><h3>${esc(p.nome)}</h3><span class="p-ic">${esc(p.icone || '⭐')}</span></div><p class="p-sub">${esc(p.sub || '')}</p>
         <hr><ul>${bens.map(b => `<li>${esc(b)}</li>`).join('')}</ul><div class="p-esp"></div>${acao}
         <div class="p-preco">${promo ? `<span class="p-promo">${esc(p.promoNome || 'Promoção')} · até ${esc(p.promoAte.split('-').reverse().slice(0, 2).join('/'))}</span><div class="p-de">de ${esc(p.preco)}</div>` : ''}
-          <div class="p-pr">${partePreco(promo ? p.promo : p.preco)}</div>${p.nota ? `<div class="p-nota">${esc(p.nota)}</div>` : ''}</div></article>`;
+          <div class="p-pr">${partePreco(promo ? p.promo : p.preco)}</div>${p.nota ? `<div class="p-nota">${esc(p.nota)}</div>` : ''}${p.pagamento ? `<div class="p-pag">${esc(p.pagamento)}</div>` : ''}</div></article>`;
     }).join('');
     // no celular os cartões rolam de lado: já abre com o destaque no meio
     const pista = $('#planosPista'), el = pista.querySelector('.dest');
