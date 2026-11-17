@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
+<style
 @font-face{font-family:'Advercase';src:url('fonts/advercase.woff2') format('woff2'),url('fonts/advercase.otf') format('opentype');font-display:swap}
 :root{
   --bg:#0a1426; --bg2:color-mix(in srgb,var(--bg) 82%,#fff 4%); --card:#13233f; --grad:url(img/gradiente-azul.webp); --linha:rgba(255,255,255,.09);
@@ -72,7 +72,9 @@ a{text-decoration:none}
 
 /* seções com fileira */
 .secao{margin-top:34px}
-.cab{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.cab{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px}
+.btn-quiz-cta{display:inline-flex;align-items:center;gap:5px;padding:7px 16px;border-radius:30px;font-size:13px;font-weight:600;background:linear-gradient(135deg,#2a7a4f,#1d5c3a);color:#fff;border:1px solid rgba(255,255,255,.18);transition:background .2s,transform .15s;white-space:nowrap}
+.btn-quiz-cta:hover{background:linear-gradient(135deg,#348a5c,#256849);transform:translateY(-1px)}
 .cab h2{font-size:28px}
 .cab a,.cab button{font-size:13px;color:var(--marfim);display:inline-flex;gap:6px;align-items:center}
 .filtros{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:-2px 0 14px;padding-bottom:2px}
@@ -432,7 +434,7 @@ body.entrando .mara{bottom:96px}
   </section>
 
   <section class="secao aparece" id="pagos">
-    <div class="cab"><h2 class="serif" id="sPagos">Pra ir mais fundo</h2><button data-ir="#aplicar" id="sBotaoPagos">Mentoria →</button></div>
+    <div class="cab"><h2 class="serif" id="sPagos">Pra ir mais fundo</h2><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><a href="https://claude.ai/artifact/PwZGV88dW8hgB1HZkWzxz7" target="_blank" rel="noopener" class="btn-quiz-cta" id="sBotaoQuiz">🎯 Descobrir meu método →</a><button data-ir="#aplicar" id="sBotaoPagos">Mentoria →</button></div></div>
     <div class="trilho cena" id="trilhoPagos"></div>
   </section>
 
