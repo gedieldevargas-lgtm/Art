@@ -21,6 +21,7 @@ window.EBG_CONFIG = {
   // links abertos ao público
   toronto: 'https://forms.gle/V2dDVBXotN1XUmS1A',
   vlogs: 'https://www.youtube.com/@oficialinfly/videos',
+  eomquiz: 'https://claude.ai/artifact/QQ5ATUBNT2uAo97TnJcdCS',
 
   // ícones pequenos no topo da página. Confirme o TikTok.
   redes: {
