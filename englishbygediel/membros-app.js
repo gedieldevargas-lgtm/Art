@@ -22,6 +22,7 @@
   window.IC=IC;
   var IC_MENU={home:'home',maratona:'maratona',lives:'lives',modulos:'modulos',jogos:'jogos',materiais:'materiais',prompts:'prompts',agendar:'agendar',planos:'planos',indicar:'indicar',eom:'eom',culture:'culture',viagens:'viagens',bussola:'bussola',prisma:'prisma',admin:'admin'};
   var IC_CTX={'Em Casa':'home','Acabei de acordar':'ctx-acordar','Vou pro banho':'ctx-banho','Prestes a dormir':'ctx-dormir','No carro':'ctx-carro','No Transporte':'ctx-transporte','No Trabalho':'ctx-trabalho','Intervalo do almoço':'ctx-almoco','Lavando a louça':'ctx-louca','Limpando a casa':'ctx-limpeza','Cozinhando':'ctx-cozinha','Caminhando':'ctx-caminhada','Na Academia':'ctx-academia','Na fila':'ctx-fila','No sofá':'ctx-sofa','Só 5 minutos':'ctx-5min','Focado pra estudar':'ctx-foco','Viajando':'viagens','No mercado':'ctx-mercado','Na igreja':'ctx-igreja','Com a família':'ctx-familia'};
+  function tileBtn(ic,txt,cor){return '<span class="tb-tile" style="--c:'+cor+'">'+IC(ic)+'<b>'+txt+'</b></span>';}
   function icCtx(c,cls){return IC_CTX[c.k]?IC(IC_CTX[c.k],cls):c.ic;}
   var CTX_COR={"5min": "#6e1c2a", "academia": "#6c1f1f", "acordar": "#6e4705", "almoco": "#70340a", "banho": "#03525f", "caminhada": "#09534b", "carro": "#6c1f1f", "cozinha": "#70340a", "dormir": "#2d2e6c", "familia": "#6a2045", "fila": "#4c266f", "foco": "#112d6a", "igreja": "#623603", "limpeza": "#07533a", "louca": "#03525f", "mercado": "#0a4921", "sofa": "#3f296f", "trabalho": "#381a6b", "transporte": "#6e4705", "casa": "#0d3067", "viagem": "#09534b"};
   function ctxNome(c){var n=IC_CTX[c.k];if(!n)return '';n=n.replace(/^ctx-/,'');return n==='home'?'casa':n==='viagens'?'viagem':n;}
@@ -325,10 +326,10 @@
   '.mi-logo{display:inline-block;width:1em;height:1em;background:currentColor;-webkit-mask:url(img/logo-mi.svg) center/contain no-repeat;mask:url(img/logo-mi.svg) center/contain no-repeat}',
   '.mi-lg-badge{background:#000817!important;color:#fbf7ee;font-size:24px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}',
   '.mi-lg-ent{font-size:34px;color:#fbf7ee;opacity:.9;display:block;margin:0 auto 10px}#mi-onb .mi-lg-ent{margin-left:0}',
-  '#pane-home{position:relative}#pane-home>.mi-lg-marca{position:absolute;top:-6px;right:4px;font-size:118px;color:var(--fg);opacity:.06!important;animation:none!important;pointer-events:none;transform:rotate(-12deg);z-index:0}',
+  '#pane-home{position:relative}#pane-home>.mi-lg-marca{position:absolute;top:-6px;right:4px;font-size:189px;color:var(--fg);opacity:.06!important;animation:none!important;pointer-events:none;transform:rotate(-12deg);z-index:0}',
   '.mi-lg-rail{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:22px;font-size:11px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--fg3);opacity:.55}.mi-lg-rail .mi-logo{font-size:16px}',
   '.mi-lg-festa{position:absolute;right:-26px;bottom:-30px;font-size:150px;color:#fff;opacity:.09;pointer-events:none}#mi-festa .fb{overflow:hidden}',
-  '@media(max-width:680px){.mi-lg-badge{font-size:20px}#pane-home>.mi-lg-marca{font-size:84px;right:-6px;top:-4px}}',
+  '@media(max-width:680px){.mi-lg-badge{font-size:20px}#pane-home>.mi-lg-marca{font-size:134px;right:-6px;top:-4px}}',
   /* cards Checklist e Lives como ícones gigantes */
   '.hm-big{min-height:176px!important;padding:22px!important;justify-content:flex-end}.hm-big .ic{position:absolute;right:-6px;top:50%;transform:translateY(-50%);margin:0!important}',
   '.hm-big .ic .ic3d{width:168px!important;height:168px!important;mix-blend-mode:multiply;filter:none!important}.hm-big .lb{font-size:22px!important;letter-spacing:-.3px;position:relative}.hm-big .pg{font-size:13px!important;opacity:1!important;position:relative;max-width:60%}',
@@ -460,6 +461,25 @@
   ' .ai-panel{bottom:calc(136px + env(safe-area-inset-bottom))!important;right:12px!important}',
   ' #toast-global{bottom:calc(84px + env(safe-area-inset-bottom))!important}',
   '}',
+  /* a imagem do ícone É o botão: sem moldura extra em volta */
+  '.topbar .tb-btn,.topbar .tb-theme-btn{background:none!important;border:0!important;padding:0!important;box-shadow:none!important;line-height:0;border-radius:14px;min-width:0!important;min-height:0!important;transition:transform .22s cubic-bezier(.34,1.56,.64,1)}',
+  '.topbar .tb-btn:hover,.topbar .tb-theme-btn:hover{transform:translateY(-2px) scale(1.07)}.topbar .tb-btn:active,.topbar .tb-theme-btn:active{transform:scale(.92)}',
+  '.topbar .tb-btn .ic3d,.topbar .tb-theme-btn .ic3d{width:40px!important;height:40px!important;vertical-align:0;filter:drop-shadow(0 4px 8px rgba(0,0,0,.28))}',
+  '.tb-tile{position:relative;display:inline-block;width:44px;height:44px;line-height:0}.tb-tile .ic3d{width:100%!important;height:100%!important}',
+  '.tb-tile b{position:absolute;left:0;right:0;bottom:0;border-radius:0 0 13px 13px;padding:7px 0 3px;font-size:9px;line-height:1;font-weight:800;color:#fff;text-align:center;background:linear-gradient(to top,var(--c) 0%,var(--c) 40%,rgba(0,0,0,0));background:linear-gradient(to top,color-mix(in srgb,var(--c) 96%,transparent),color-mix(in srgb,var(--c) 80%,transparent) 45%,transparent)}',
+  '#mi-ed-btn.on{background:none!important}#mi-ed-btn.on .tb-tile{filter:drop-shadow(0 0 10px var(--accent));border-radius:16px;box-shadow:0 0 0 2px var(--accent)}',
+  '.topbar .tb-btn .notif-dot{top:2px;right:2px}',
+  '.hm-quick{grid-template-columns:repeat(4,minmax(0,150px))!important;justify-content:start}',
+  '.hm-quick button{position:relative;aspect-ratio:1/1;padding:0!important;border:0!important;background:none!important;box-shadow:none!important;border-radius:22px!important;overflow:hidden;transition:transform .25s cubic-bezier(.34,1.56,.64,1)}',
+  '.hm-quick button:hover{transform:translateY(-4px) scale(1.03)}.hm-quick button:active{transform:scale(.96)}',
+  '.hm-quick button>span{position:absolute;inset:0;display:block;font-size:0!important}.hm-quick button>span .ic3d{width:100%!important;height:100%!important;object-fit:cover;filter:drop-shadow(0 6px 12px rgba(0,0,0,.2))}',
+  '.hm-quick button>i,.hm-uni>b{position:absolute;left:0;right:0;bottom:0;padding:22px 6px 9px;font-style:normal;font-size:12.5px;font-weight:800;line-height:1.15;color:#fff;text-align:center;background:linear-gradient(to top,var(--c) 0%,var(--c) 35%,rgba(0,0,0,0));background:linear-gradient(to top,color-mix(in srgb,var(--c) 94%,transparent),color-mix(in srgb,var(--c) 78%,transparent) 50%,transparent)}',
+  '.hm-unis{grid-template-columns:repeat(3,minmax(0,170px))!important;justify-content:start}',
+  '.hm-uni{position:relative;aspect-ratio:1/1;min-height:0!important;padding:0!important;background:none!important;box-shadow:none!important;border-radius:22px!important;overflow:hidden;transition:transform .25s cubic-bezier(.34,1.56,.64,1)}',
+  '.hm-uni:hover{transform:translateY(-4px) scale(1.03)}.hm-uni:active{transform:scale(.96)}',
+  '.hm-uni>span{position:absolute;inset:0;display:block;font-size:0!important}.hm-uni>span .ic3d{width:100%!important;height:100%!important;object-fit:cover}',
+  '.hm-uni[data-hm="eom"]{--c:#15281f}.hm-uni[data-hm="culture"]{--c:#1b2a6b}.hm-uni[data-hm="viagens"]{--c:#0c4a6e}',
+  '@media(max-width:560px){.hm-quick{grid-template-columns:repeat(4,1fr)!important}.hm-unis{grid-template-columns:repeat(3,1fr)!important}.hm-quick button>i,.hm-uni>b{font-size:10.5px;padding:16px 3px 6px}}',
   /* início: checklist com borda verde fina, brilho que pulsa de leve e o tick balançando; selo da live com contagem */
   '.hm-check::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;box-shadow:inset 0 0 0 1.5px rgba(34,197,94,.95),inset 0 0 26px rgba(34,197,94,.32);animation:miGlowVerde 3.6s ease-in-out infinite}',
   '@keyframes miGlowVerde{0%,100%{opacity:.55}50%{opacity:1}}',
@@ -774,10 +794,10 @@
     h+=resumoMes();
     h+='<div class="sec-hd">Sua aula</div><div class="hm-aula" id="hm-aula"><div class="cv"><div class="lock">Carregando…</div></div><div class="bd"><div class="st">&nbsp;</div></div></div>';
     h+='<div class="hm-quick">'
-      +'<button data-hm="duvida"><span>'+IC('suporte')+'</span>Dúvida</button>'
-      +'<button data-hm="jogos"><span>'+IC('jogos')+'</span>Jogos</button>'
-      +'<button data-hm="prompts"><span>'+IC('prompts')+'</span>Prompts</button>'
-      +'<button data-hm="video"><span>'+IC('youtube')+'</span>Como usar</button>'
+      +'<button data-hm="duvida" style="--c:#0d3067"><span>'+IC('suporte')+'</span><i>Dúvida</i></button>'
+      +'<button data-hm="jogos" style="--c:#2d2e6c"><span>'+IC('jogos')+'</span><i>Jogos</i></button>'
+      +'<button data-hm="prompts" style="--c:#381a6b"><span>'+IC('prompts')+'</span><i>Prompts</i></button>'
+      +'<button data-hm="video" style="--c:#6c1f1f"><span>'+IC('youtube')+'</span><i>Como usar</i></button>'
       +'</div>';
     h+='<div class="sec-hd">Universos</div><div class="hm-unis">'
       +'<button class="hm-uni" style="background:linear-gradient(135deg,#15281f,#2f6b4f)" data-hm="eom"><span>'+IC('eom')+'</span><b>English On Mission</b></button>'
@@ -2452,7 +2472,7 @@
   }
   function modoEdicao(on){
     EDIT=!!on&&souAdmin();document.body.classList.toggle('mi-edit',EDIT);
-    var t=$('mi-ed-btn');if(t){t.innerHTML=EDIT?IC('check')+' Concluir':IC('editar')+' Editar';t.classList.toggle('on',EDIT);}
+    var t=$('mi-ed-btn');if(t){t.innerHTML=EDIT?tileBtn('check','Concluir','#0a4921'):tileBtn('editar','Editar','#6e4705');t.classList.toggle('on',EDIT);}
     pintarEdicaoMenu();pintarEdModulos();
     var pg=window.currentPage;if(UNIV[pg]){CARDS=null;desenharUni(pg);}if(pg==='materiais')renderMat();
     if(EDIT)toast('✏️ Modo edição: toque em qualquer card, material ou menu pra editar','#4f6ef7');
@@ -2460,7 +2480,7 @@
   function botaoEdicao(){
     if($('mi-ed-btn')||!souAdmin())return;
     var tb=document.querySelector('.topbar'),th=$('theme-toggle');if(!tb)return;
-    var b=document.createElement('button');b.id='mi-ed-btn';b.className='tb-btn';b.dataset.ed='toggle';b.innerHTML=IC('editar')+' Editar';
+    var b=document.createElement('button');b.id='mi-ed-btn';b.className='tb-btn';b.dataset.ed='toggle';b.innerHTML=tileBtn('editar','Editar','#6e4705');
     tb.insertBefore(b,th||null);
   }
   async function iniciarEdicao(){
