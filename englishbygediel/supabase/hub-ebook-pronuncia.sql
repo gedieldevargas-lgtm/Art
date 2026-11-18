@@ -1,0 +1,6 @@
+-- E-BOOK "Destrave Seu Inglês: pronúncia pra brasileiro" (R$ 14,90) no Hub (projeto do HUB, iwivldvubmsqyzkkdxoy). Cole no SQL Editor e clique Run.
+-- Pode rodar mais de uma vez. Aparece em "Pra ir mais fundo" e na lojinha. Botão "Adquirir" vai direto ao checkout da Kiwify;
+-- "Ver a página do e-book" abre a página de vendas dele.
+update site_config set dados = jsonb_set(dados, '{cards}',
+  '[{"id": "ebook-pronuncia", "tipo": "pago", "ativo": true, "titulo": "Destrave Seu Inglês: pronúncia pra brasileiro", "linha": "E-book visual de 15 páginas pra destravar a fala", "nome": "", "setor": "E-books", "img": "img/capa-ebook-pronuncia.webp", "preco": "R$ 14,90", "link": "https://pay.kiwify.com.br/ODOhEzc", "botao": "Adquirir", "link2": "https://intelligentpronounciation.netlify.app/", "botao2": "Ver a página do e-book", "video": "", "sinopse": "O guia visual pra quem trava na hora de falar. A pronúncia vem escrita do jeito que brasileiro lê, sem símbolo estranho de dicionário: chocolate vira TCHÓK-let, vegetable vira VÉDJ-tâ-bol. Do fácil ao chefão, são 4 níveis, cada um com explicação, exercício e canais do YouTube pra praticar. 15 páginas, acesso imediato.", "meta": "E-book, 15 páginas, Acesso imediato", "modos": ["zero", "teste", "carreira"]}]'::jsonb || (dados->'cards'))
+where id = 'hub' and not ((dados->'cards') @> '[{"id":"ebook-pronuncia"}]'::jsonb);
