@@ -2005,8 +2005,15 @@ function modShow(view){
   ['grid','lessons','lesson'].forEach(function(v){document.getElementById('mod-view-'+v).style.display=v===view?'block':'none';});
 }
 
+var _stT=0,_stBusy=null;
+function _modSkel(){var s='';for(var i=0;i<9;i++)s+='<div class="module-card"><div class="mod-thumb cover" style="background:var(--surface2)"></div><div class="mod-body"><div style="height:14px;width:60%;border-radius:6px;background:var(--surface2)"></div><div style="height:10px;width:35%;border-radius:6px;background:var(--surface2);margin-top:8px"></div></div></div>';return s;}
+function _preImgs(urls){return Promise.race([Promise.all(urls.map(function(u){return new Promise(function(ok){var i=new Image();i.onload=i.onerror=ok;i.src=u;});})),new Promise(function(ok){setTimeout(ok,1800);})]);}
 async function loadStudentModules(force){
-  if(_stMods&&!force){return;}
+  if(_stMods&&!force&&Date.now()-_stT<20000)return;
+  if(_stBusy)return _stBusy;
+  var g=document.getElementById('modules-grid');
+  if(g&&!g.children.length)g.innerHTML=_modSkel();
+  _stBusy=(async function(){
   try{
     var r=await _sb.from('mi_modules').select('*').order('ord').order('created_at');
     if(r.error)throw r.error;
@@ -2014,18 +2021,26 @@ async function loadStudentModules(force){
     if(!mods.length){renderStaticModules();return;}
     var l=await _sb.from('mi_lessons').select('id,module_id,published,youtube_url,release_at').order('ord');
     var byMod={};(l.data||[]).forEach(function(x){byMod[x.module_id]=byMod[x.module_id]||{t:0,p:0};byMod[x.module_id].t++;if(isOpen(x))byMod[x.module_id].p++;});
-    _stMods=mods;
-    var g=document.getElementById('modules-grid');g.innerHTML='';
-    mods.filter(function(m){return (m.trilha||'programa')==='programa';}).forEach(function(m,mi){
+    _stMods=mods;_stT=Date.now();
+    var html='';
+    var vis=mods.filter(function(m){return (m.trilha||'programa')==='programa';});
+    vis.forEach(function(m,mi){
       var c=byMod[m.id]||{t:0,p:0};
       var ready=c.p>0;
       var thumb=m.cover_url?'<div class="mod-thumb cover"><img src="'+esc(m.cover_url)+'" alt=""></div>'
         :'<div class="mod-thumb cover" style="position:relative">'+capaAuto(m.name,mi)+'</div>';
       var tag=ready?'<div class="mod-tag-ok">'+c.p+' AULA'+(c.p>1?'S':'')+' DISPONÍVE'+(c.p>1?'IS':'L')+'</div>':'<div class="mod-lock-tag">EM BREVE'+(c.t?' · '+c.t+' aula'+(c.t>1?'s':''):'')+'</div>';
-      g.innerHTML+='<div class="module-card '+(c.t?'ready':'')+'" '+(c.t?'onclick="openModule(\''+m.id+'\')"':'')+'>'+thumb+'<div class="mod-body"><div class="mod-name">'+esc(m.name)+'</div><div class="mod-sub">'+esc(m.sub||'')+'</div>'+tag+'</div></div>';
+      html+='<div class="module-card '+(c.t?'ready':'')+'" '+(c.t?'onclick="openModule(\''+m.id+'\')"':'')+'>'+thumb+'<div class="mod-body"><div class="mod-name">'+esc(m.name)+'</div><div class="mod-sub">'+esc(m.sub||'')+'</div>'+tag+'</div></div>';
     });
-    modShow('grid');
-  }catch(e){console.warn('modulos',e);renderStaticModules();}
+    if(g&&g.dataset.sig!==html){
+      await _preImgs(vis.map(function(m){return m.cover_url;}).filter(Boolean));
+      g.innerHTML=html;g.dataset.sig=html;
+    }
+    if(document.getElementById('mod-view-lessons').style.display!=='block'&&document.getElementById('mod-view-lesson').style.display!=='block')modShow('grid');
+  }catch(e){console.warn('modulos',e);if(g&&!g.dataset.sig)renderStaticModules();}
+  finally{_stBusy=null;}
+  })();
+  return _stBusy;
 }
 
 async function openModule(modId){
@@ -2701,7 +2716,7 @@ document.getElementById('adm-les-modal').addEventListener('click',function(e){if
 <script src="membros-filmes.js?v=2"></script>
 <script src="prisma-perfis.js?v=1"></script>
 <script src="membros-prisma.js?v=1"></script>
-<script src="membros-app.js?v=202611182030"></script>
+<script src="membros-app.js?v=202611182050"></script>
 <script src="playlist.js?v=1"></script>
 <script src="fx.js?v=2"></script>
 <script src="config.js"></script>

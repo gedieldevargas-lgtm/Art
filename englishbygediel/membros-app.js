@@ -3018,6 +3018,7 @@
     if(b.dataset.ini==='como'&&window.openTask)openTask('_idioma',0);
     if(b.dataset.ini==='feito'){ST.idioma=true;salvar();pintarInicio();toast('📱 Boa! Aguenta 7 dias que vira hábito.','#10b981');}
   });
+  try{if(window.loadStudentModules)window.loadStudentModules(true);}catch(e){}
   carregarFlat().then(function(){var tt=$('mar-ctx-title');if(iniciante()&&window.renderMarTasks)renderMarTasks('Primeiros passos');});
   setTimeout(function(){try{pintarInicio();if(iniciante()&&window.renderMarTasks)renderMarTasks('Primeiros passos');}catch(e){}},900);
 
