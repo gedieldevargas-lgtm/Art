@@ -2313,7 +2313,7 @@
     {r:/central de prompts|prompts/i,img:'img/capa-prompts.webp',url:''}
   ];
   function ebkDe(m){var n=(m.nome||'')+' '+(m.produto||'');return EBK.filter(function(x){return x.r.test(n);})[0]||null;}
-  function capaEbook(m){var k=ebkDe(m);return k?k.img:'';}
+  function capaEbook(m){var e=window.EBG_EBOOKS&&EBG_EBOOKS.deMaterial(m);if(e&&e.img)return e.img;var k=ebkDe(m);return k?k.img:'';}
   var renderMatOrig=window.renderMat;
   window.renderMat=function(){
     var g=$('mat-grid'),S=AS();if(!g)return;
