@@ -2528,6 +2528,19 @@
         feitas.push('ebooks-visto-fora');mudou=true;
       }catch(e){}
     }
+    if(feitas.indexOf('ebook-destrave-1')<0){
+      /* Destrave Seu Inglês (R$ 14,90): material pago, com cadeado e botão de compra pra quem não tem */
+      try{
+        var dj=await window._sb.from('materiais').select('id,ordem');if(dj.error)throw 0;
+        var jaTem=await window._sb.from('materiais').select('id').eq('nome','Destrave Seu Inglês');if(jaTem.error)throw 0;
+        if(!(jaTem.data||[]).length){
+          var mx=0;(dj.data||[]).forEach(function(x){mx=Math.max(mx,x.ordem||0);});
+          var di=await window._sb.from('materiais').insert({nome:'Destrave Seu Inglês',descricao:'Pronúncia pra brasileiro: guia visual com a pronúncia escrita do jeito que a gente lê.',secao:'E-books',icone:'🗣️',tipo:'produto',produto:'Destrave Seu Inglês',checkout:'https://pay.kiwify.com.br/ODOhEzc',preco:'R$ 14,90',ativo:true,ordem:mx+1}).select().single();if(di.error)throw 0;
+          var dl=await window._sb.from('material_links').upsert({material_id:di.data.id,link:'https://drive.google.com/file/d/1jHMPxGfsiur-3FUCHnwIqNCutywjkEak/view'});if(dl.error)throw 0;
+        }
+        feitas.push('ebook-destrave-1');mudou=true;
+      }catch(e){}
+    }
     var extra={};
     if(feitas.indexOf('programa-plano-inteligente')<0){var pg=(S.cfg.programa||[]).slice();if(pg.indexOf('Plano Inteligente')<0)pg.push('Plano Inteligente');extra.programa=pg;feitas.push('programa-plano-inteligente');mudou=true;}
     if(mudou){try{await salvarCfg(Object.assign({migr:feitas},extra));CARDS=null;}catch(e){}}
