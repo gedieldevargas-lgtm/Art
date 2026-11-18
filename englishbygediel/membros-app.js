@@ -526,6 +526,12 @@
   '.hm-uni>span{position:absolute;inset:0;display:block;font-size:0!important}.hm-uni>span .ic3d{width:100%!important;height:100%!important;object-fit:cover}',
   '.hm-uni[data-hm="eom"]{--c:#15281f}.hm-uni[data-hm="culture"]{--c:#1b2a6b}.hm-uni[data-hm="viagens"]{--c:#0c4a6e}',
   '@media(max-width:560px){.hm-quick{grid-template-columns:repeat(4,1fr)!important}.hm-unis{grid-template-columns:repeat(3,1fr)!important}.hm-quick button>i,.hm-uni>b{font-size:10.5px;padding:16px 3px 6px}}',
+  /* icones dos universos/atalhos: corta a margem transparente e iguala o arredondamento, pra faixa do nome ficar alinhada */
+  '.hm-quick button,.hm-uni{border-radius:24%!important}.hm-quick button>span .ic3d,.hm-uni>span .ic3d{transform:scale(1.07);filter:none!important}',
+  /* planos: titulo largo e cards numa linha so no PC */
+  '#pane-planos .pl-top{display:block!important;max-width:none!important;width:100%;text-align:center}#pane-planos .pl-top h1{display:block;max-width:none!important;width:100%;margin:8px 0!important;white-space:normal}#pane-planos .pl-top .pl-k{display:block;margin-bottom:4px}#pane-planos .pl-top p{max-width:820px;margin-left:auto;margin-right:auto}',
+  '@media(min-width:1100px){#pane-planos .pl-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}#pane-planos .pl-card{padding:20px 14px 16px}#pane-planos .pl-nm{font-size:15.5px}#pane-planos .pl-pr{font-size:21px}#pane-planos .pl-card li{font-size:12.5px}}',
+  '@media(min-width:760px) and (max-width:1099px){#pane-planos .pl-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}',
   /* início: checklist com borda verde fina, brilho que pulsa de leve e o tick balançando; selo da live com contagem */
   '.hm-check::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;box-shadow:inset 0 0 0 1.5px rgba(34,197,94,.95),inset 0 0 26px rgba(34,197,94,.32);animation:miGlowVerde 3.6s ease-in-out infinite}',
   '@keyframes miGlowVerde{0%,100%{opacity:.55}50%{opacity:1}}',

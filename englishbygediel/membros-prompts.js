@@ -5,11 +5,15 @@
   var ST = { cat: 'rapido', aberto: null, nivel: null, pers: true };
   var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   var CSS = '.pp{max-width:1000px}.pp-h{font-size:22px;font-weight:800;letter-spacing:-.3px}.pp-s{font-size:13.5px;color:var(--fg2);margin:4px 0 16px;line-height:1.5}'
-    + '.pp-como{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-bottom:12px}'
-    + '.pp-pas{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:16px;display:flex;gap:12px;align-items:flex-start;box-shadow:var(--shadow)}'
-    + '.pp-n{flex:none;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#8b5cf6);color:#fff;font-weight:800;display:grid;place-items:center;font-size:14px}'
-    + '.pp-pas b{display:block;font-size:14.5px;margin-bottom:2px}.pp-pas span{font-size:13px;color:var(--fg2);line-height:1.45}'
-    + '.pp-ias{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 16px}.pp-ias a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:14px;border:1.5px solid var(--border);background:var(--surface);color:var(--fg);font-weight:800;font-size:13.5px;text-decoration:none}.pp-ias a:hover{border-color:var(--accent);color:var(--accent)}'
+    + '.pp-como{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:6px 0 14px;counter-reset:pp}'
+    + '.pp-pas{--c:#4f6ef7;position:relative;border-radius:22px;padding:18px 16px 16px;display:flex;flex-direction:column;gap:6px;color:var(--fg);background:linear-gradient(160deg,color-mix(in srgb,var(--c) 22%,var(--surface)),color-mix(in srgb,var(--c) 7%,var(--surface)));border:2px solid color-mix(in srgb,var(--c) 55%,transparent);box-shadow:0 10px 26px -14px var(--c)}'
+    + '.pp-pas.p2{--c:#10b981}.pp-pas.p3{--c:#f59e0b}'
+    + '.pp-pas:not(:last-child):after{content:"➜";position:absolute;right:-17px;top:50%;transform:translateY(-50%);z-index:2;width:26px;height:26px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-size:13px;box-shadow:0 4px 10px rgba(0,0,0,.25)}'
+    + '.pp-top{display:flex;align-items:center;gap:10px}.pp-n{flex:none;width:36px;height:36px;border-radius:12px;background:var(--c);color:#fff;font-weight:900;display:grid;place-items:center;font-size:18px;box-shadow:0 6px 14px -4px var(--c)}.pp-e{font-size:30px;line-height:1;margin-left:auto}'
+    + '.pp-pas b{display:block;font-size:16px;font-weight:800;color:var(--c);filter:brightness(.85)}.pp-pas span.tx{font-size:13.5px;color:var(--fg);line-height:1.5}.pp-pas small{font-size:12px;color:var(--fg2);line-height:1.4}'
+    + '.pp-pas .pp-ias{margin:6px 0 0}'
+    + '@media(max-width:720px){.pp-como{grid-template-columns:1fr;gap:22px}.pp-pas:not(:last-child):after{right:auto;left:50%;top:auto;bottom:-20px;transform:translateX(-50%) rotate(90deg)}}'
+    + '.pp-ias{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 16px}.pp-ias a{display:inline-flex;align-items:center;min-height:42px;padding:0 14px;border-radius:12px;background:#f59e0b;color:#1a1200;font-weight:800;font-size:13px;text-decoration:none;box-shadow:0 6px 14px -6px #f59e0b}.pp-ias a+a{background:transparent;color:var(--fg);border:1.5px solid #f59e0b;box-shadow:none}.pp-ias a:hover{filter:brightness(1.08)}'
     + '.pp-pers{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--fg2);margin:0 0 14px;cursor:pointer}.pp-pers input{width:18px;height:18px;accent-color:var(--accent)}'
     + '.pp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}'
     + '.pp-c{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:10px;box-shadow:var(--shadow)}.pp-c.on{grid-column:1/-1;border-color:var(--accent)}'
@@ -40,10 +44,11 @@
     var lista = D.lista.filter(function (p) { return p.cat === ST.cat; });
     el.innerHTML = '<style>' + CSS + '</style><div class="pp">'
       + '<div class="pp-h">Prompts</div><div class="pp-s">Um prompt é uma instrução pronta que você cola no ChatGPT ou no Claude. Ele vira seu professor particular e você responde às perguntas dele, em inglês.</div>'
-      + '<div class="pp-como"><div class="pp-pas"><div class="pp-n">1</div><div><b>Escolha pelo tempo</b><span>Só tem 5 minutos? Use a aba "5 min".</span></div></div>'
-      + '<div class="pp-pas"><div class="pp-n">2</div><div><b>Copie</b><span>Toque em Copiar. O texto vai pro seu celular.</span></div></div>'
-      + '<div class="pp-pas"><div class="pp-n">3</div><div><b>Cole e responda</b><span>Abra o ChatGPT, cole e responda às perguntas dele. Vale falar, no modo de voz.</span></div></div></div>'
-      + '<div class="pp-ias"><a href="https://chatgpt.com/" target="_blank" rel="noopener">Abrir o ChatGPT ↗</a><a href="https://claude.ai/" target="_blank" rel="noopener">Abrir o Claude ↗</a></div>'
+      + '<div class="pp-como">'
+      + '<div class="pp-pas p1"><div class="pp-top"><div class="pp-n">1</div><div class="pp-e">⏱️</div></div><b>Escolha pelo tempo</b><span class="tx">Veja as abas logo abaixo e pegue um prompt do seu tamanho.</span><small>Só tem 5 minutos? Use a aba "5 min".</small></div>'
+      + '<div class="pp-pas p2"><div class="pp-top"><div class="pp-n">2</div><div class="pp-e">📋</div></div><b>Copie o prompt</b><span class="tx">Toque em <u>Copiar</u> no card que você escolheu.</span><small>O texto vai direto pro seu celular ou computador.</small></div>'
+      + '<div class="pp-pas p3"><div class="pp-top"><div class="pp-n">3</div><div class="pp-e">💬</div></div><b>Cole e responda</b><span class="tx">Abra a IA, cole e responda às perguntas dela, em inglês.</span><small>Vale falar, no modo de voz.</small>'
+      + '<div class="pp-ias"><a href="https://chatgpt.com/" target="_blank" rel="noopener">Abrir o ChatGPT ↗</a><a href="https://claude.ai/" target="_blank" rel="noopener">Abrir o Claude ↗</a></div></div></div>'
       + (ST.nivel ? '<label class="pp-pers"><input type="checkbox" data-pp="pers"' + (ST.pers ? ' checked' : '') + '> Avisar meu nível (' + esc(ST.nivel) + ') no prompt, pra ele ajustar a dificuldade</label>' : '')
       + '<div class="mi-dock" id="pp-abas">' + D.cats.map(function (c) { return '<button data-cat="' + c.id + '"' + (c.id === ST.cat ? ' class="on"' : '') + '>' + esc(c.short) + '</button>'; }).join('') + '</div>'
       + '<div class="pp-grid">' + lista.map(card).join('') + '</div></div>';
