@@ -454,7 +454,21 @@
   ' .ai-fab{bottom:calc(78px + env(safe-area-inset-bottom))!important;right:14px!important;width:50px!important;height:50px!important}',
   ' .ai-panel{bottom:calc(136px + env(safe-area-inset-bottom))!important;right:12px!important}',
   ' #toast-global{bottom:calc(84px + env(safe-area-inset-bottom))!important}',
-  '}'
+  '}',
+  /* entrada v2: o card é a própria imagem do ícone, com a frase escrita em cima; grade larga no notebook */
+  '#mi-entry .mi-ent-box{max-width:1040px}',
+  '#mi-entry .mi-ctx{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(168px,1fr))!important;gap:16px!important}',
+  '#mi-entry .mi-ctx button{position:relative;aspect-ratio:1/1;padding:0!important;border:0!important;border-radius:26px!important;overflow:hidden;background:transparent!important;display:block;box-shadow:0 10px 26px rgba(0,0,0,.35);transition:transform .28s cubic-bezier(.22,1,.36,1),box-shadow .28s}',
+  '#mi-entry .mi-ctx .ic{position:absolute;inset:0;display:block;font-size:0!important}',
+  '#mi-entry .mi-ctx .ic .ic3d{position:absolute;inset:0;width:100%!important;height:100%!important;object-fit:cover;vertical-align:0;transform:translateY(-9%) scale(1.1);transform-origin:50% 45%;transition:transform .35s cubic-bezier(.34,1.56,.64,1)}',
+  '#mi-entry .mi-ctx .tx{position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;gap:2px;text-align:left;padding:22px 12px 11px;background:linear-gradient(to top,rgba(11,13,28,.94) 0%,rgba(11,13,28,.8) 60%,rgba(11,13,28,0) 100%)}',
+  '#mi-entry .mi-ctx .lb{font-size:15.5px!important;font-weight:800;line-height:1.15;color:#fff}',
+  '#mi-entry .mi-ctx .ht{display:none}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover{transform:translateY(-6px);box-shadow:0 18px 38px rgba(0,0,0,.5),0 0 0 2px rgba(255,255,255,.55)}#mi-entry .mi-ctx button:hover .ic3d{transform:translateY(-9%) scale(1.2) rotate(-3deg)}}',
+  '#mi-entry .mi-ctx button:focus-visible{outline:3px solid #fff;outline-offset:3px}#mi-entry .mi-ctx button:active{transform:scale(.96)}',
+  '@media(max-width:700px){#mi-entry .mi-ctx{grid-template-columns:repeat(3,1fr)!important;gap:10px!important}#mi-entry .mi-ctx button{border-radius:18px!important}#mi-entry .mi-ctx .tx{padding:22px 7px 8px}#mi-entry .mi-ctx .lb{font-size:12.5px!important}#mi-entry .mi-ctx .ht{display:none}}',
+  '@media(max-width:330px){#mi-entry .mi-ctx{grid-template-columns:repeat(2,1fr)!important}}',
+  '@media(prefers-reduced-motion:reduce){#mi-entry .mi-ctx button,#mi-entry .mi-ctx .ic3d{transition:none!important;animation:none!important;opacity:1!important;transform:none!important}}',
   ].join('');
   document.head.appendChild(css);
 
@@ -873,7 +887,7 @@
     abrirEntrada('<span class="mi-logo mi-lg-ent"></span><div class="mi-ent-kicker">'+E(saudacao())+(nomeCurto()?', '+E(nomeCurto()):'')+'</div>'
       +'<div class="mi-ent-q">Onde você está agora?</div>'
       +'<div class="mi-ent-s">Escolha o mais parecido com onde você está ou o que está fazendo. Eu monto o checklist de hoje pra esse momento.</div>'
-      +'<div class="mi-ctx">'+CTX.map(function(c,i){return '<button data-ent="ctx" data-k="'+E(c.k)+'" style="animation-delay:'+(0.08+i*0.07)+'s"><span class="ic">'+icCtx(c)+'</span><span class="lb">'+E(c.lb)+'</span><span class="ht">'+E(c.hint)+'</span></button>';}).join('')+'</div>'
+      +'<div class="mi-ctx">'+CTX.map(function(c,i){return '<button data-ent="ctx" data-k="'+E(c.k)+'" title="'+E(c.hint)+'" style="animation-delay:'+(0.06+i*0.05)+'s"><span class="ic">'+icCtx(c)+'</span><span class="tx"><span class="lb">'+E(c.lb)+'</span><span class="ht">'+E(c.hint)+'</span></span></button>';}).join('')+'</div>'
       +'<button class="mi-ctx-skip" data-ent="ctx" data-k="">Só vim dar uma olhada</button>');
     ent.onclick=function(e){
       var b=e.target.closest('[data-ent="ctx"]');if(!b)return;
