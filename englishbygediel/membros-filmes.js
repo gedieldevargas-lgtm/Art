@@ -26,6 +26,7 @@
     var h = 0; for (var i = 0; i < f.t.length; i++) h = (h * 31 + f.t.charCodeAt(i)) % 360;
     var ph = '<div class="fl-ph" style="background:linear-gradient(160deg,hsl(' + h + ',55%,32%),hsl(' + ((h + 50) % 360) + ',60%,18%))">' + esc(f.t) + '</div>';
     var u = IMG[f.id];
+    if (!u && window.EBG_POSTERS && EBG_POSTERS[f.id]) u = EBG_POSTERS[f.id];
     if (u === undefined || u) return ph + '<img alt="" loading="lazy" data-fid="' + f.id + '" src="' + esc(u || 'img/filmes/' + f.id + '.jpg') + '">';
     return ph;
   }
@@ -68,7 +69,7 @@
       + '<div class="mi-dock" id="fl-abas">' + NIV.map(function (n) { return '<button data-nv="' + n + '"' + (n === ST.n ? ' class="on"' : '') + '>' + n + '</button>'; }).join('') + '</div>'
       + '<div class="fl-prog"><b>' + vistos + ' de ' + lista.length + ' assistidos</b><div class="fl-bar"><i style="width:' + Math.round(vistos / lista.length * 100) + '%"></i></div></div>'
       + '<div class="fl-fil">' + fil.map(function (x) { return '<button data-ff="' + x[0] + '"' + (x[0] === ST.f ? ' class="on"' : '') + '>' + x[1] + '</button>'; }).join('') + '</div>'
-      + '<div class="fl-grid">' + (vis.map(card).join('') || '<div class="fl-s">Nenhum filme nessa lista ainda.</div>') + '</div></div>';
+      + '<div class="fl-grid">' + (vis.map(card).join('') || '<div class="fl-s">Nenhum filme nessa lista ainda.</div>') + '</div><div class="fl-s" style="font-size:11px;margin-top:14px;opacity:.7">Pôsteres: The Movie Database (TMDB). Este produto usa dados do TMDB, mas não é endossado nem certificado por ele.</div></div>';
   }
   document.addEventListener('click', function (e) {
     var pane = document.getElementById('pane-filmes'); if (!pane || !pane.contains(e.target)) return;
