@@ -1,0 +1,6 @@
+-- E-BOOK GRÁTIS "10 Jogos para Aprender Inglês" no Hub (projeto do HUB, iwivldvubmsqyzkkdxoy). Cole no SQL Editor e clique Run.
+-- Pode rodar mais de uma vez. O card vira o primeiro dos materiais grátis (nos modos Jogos, Zero e Teste e no Hub geral).
+-- Botões: "Baixar o e-book grátis" (baixa o PDF direto do Drive) e "Ler online" (abre o PDF no Drive).
+update site_config set dados = jsonb_set(dados, '{cards}',
+  '[{"id": "ebook-jogos", "tipo": "gratis", "ativo": true, "titulo": "10 Jogos para Aprender Inglês", "linha": "E-book grátis: aprenda inglês jogando", "nome": "", "setor": "E-books", "img": "img/capa-ebook-jogos.webp", "preco": "", "link": "https://drive.google.com/uc?export=download&id=1-oVACvzU2k7see4kU5-8_jW5gjxV6kMu", "botao": "Baixar o e-book grátis", "link2": "https://drive.google.com/file/d/1-oVACvzU2k7see4kU5-8_jW5gjxV6kMu/view", "botao2": "Ler online", "video": "", "sinopse": "Seus jogos favoritos viram aula de inglês, sem você perceber. São 10 jogos, como Stardew Valley, Coffee Talk, Minecraft e Wordle, cada um com frases em inglês e português e uma missão pra você praticar. PDF de 7 páginas, pra baixar e usar hoje.", "meta": "E-book grátis, 10 jogos, PDF", "modos": ["jogos", "zero", "teste"]}]'::jsonb || (dados->'cards'))
+where id = 'hub' and not ((dados->'cards') @> '[{"id":"ebook-jogos"}]'::jsonb);
