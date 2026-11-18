@@ -803,12 +803,6 @@
       +'</div>';
     h+=resumoMes();
     h+='<div class="sec-hd">Sua aula</div><div class="hm-aula" id="hm-aula"><div class="cv"><div class="lock">Carregando…</div></div><div class="bd"><div class="st">&nbsp;</div></div></div>';
-    h+='<div class="hm-quick">'
-      +'<button data-hm="duvida" style="--c:#0d3067"><span>'+IC('suporte')+'</span><i>Dúvida</i></button>'
-      +'<button data-hm="jogos" style="--c:#2d2e6c"><span>'+IC('jogos')+'</span><i>Jogos</i></button>'
-      +'<button data-hm="prompts" style="--c:#381a6b"><span>'+IC('prompts')+'</span><i>Prompts</i></button>'
-      +'<button data-hm="video" style="--c:#6c1f1f"><span>'+IC('youtube')+'</span><i>Como usar</i></button>'
-      +'</div>';
     h+='<div class="sec-hd">Universos</div><div class="hm-unis">'
       +'<button class="hm-uni" style="background:linear-gradient(135deg,#15281f,#2f6b4f)" data-hm="eom"><span>'+IC('eom')+'</span><b>English On Mission</b></button>'
       +'<button class="hm-uni" style="background:linear-gradient(135deg,#1b2a6b,#4f6ef7)" data-hm="culture"><span>'+IC('culture')+'</span><b>Culture English</b></button>'
@@ -3207,6 +3201,38 @@
     else{var r=await window._sb.from('mi_lesson_votes').insert({lesson_id:id,user_id:U.id});if(r.error){toast('Não deu: '+r.error.message,'#ef4444');b.disabled=false;return;}toast('🔔 Anotado! Te aviso quando for ao vivo','#10b981');}
     pintarAulasAoVivo();
   });
+
+  /* ───────────────────────── BOTÃO VOLTAR em toda tela (menos o Início) ───────────────────────── */
+  (function(){
+    var hist=[];
+    var st=document.createElement('style');st.textContent='#mi-voltar{display:none;align-items:center;gap:6px;border:0;background:var(--accent,#4f6ef7);color:#fff;font:inherit;font-weight:800;font-size:13px;border-radius:99px;padding:7px 14px 7px 10px;cursor:pointer;margin-right:12px;flex:none;box-shadow:0 4px 12px rgba(79,110,247,.35);transition:transform .2s,box-shadow .2s}#mi-voltar.on{display:inline-flex}#mi-voltar:hover{transform:scale(1.06);box-shadow:0 8px 18px rgba(79,110,247,.45)}#mi-voltar:active{transform:scale(.95)}#mi-volta-uni{display:none!important}';
+    document.head.appendChild(st);
+    var tb=document.querySelector('.topbar'),tt=document.getElementById('topbar-title');
+    var bt=document.createElement('button');bt.id='mi-voltar';bt.type='button';bt.setAttribute('aria-label','Voltar');bt.innerHTML='<span style="font-size:17px;line-height:1">‹</span> Voltar';
+    if(tb&&tt)tb.insertBefore(bt,tt);
+    function vis(id){var e=document.getElementById(id);return !!e&&e.style.display==='block';}
+    function atualizar(){var p=window.currentPage||'home';bt.classList.toggle('on',p!=='home');}
+    var g0=window.goTo;
+    window.goTo=function(page,el){
+      var ant=window.currentPage||'home';
+      var r=g0.apply(this,arguments);
+      if(page!==ant&&!window.__voltando){hist.push({p:ant,el:null});if(hist.length>30)hist.shift();}
+      setTimeout(atualizar,0);return r;
+    };
+    bt.onclick=function(){
+      if((window.currentPage||'')==='modulos'){
+        if(vis('mod-view-lesson')&&window._stCurMod&&window.openModule){openModule(_stCurMod.id);return;}
+        if(vis('mod-view-lessons')&&window.modShow){modShow('grid');return;}
+      }
+      var h=hist.pop();while(h&&h.p===window.currentPage)h=hist.pop();
+      var dest=h?h.p:'home';
+      var pill=[].filter.call(document.querySelectorAll('.nav-pill'),function(n){return (n.getAttribute('onclick')||'').indexOf("'"+dest+"'")>=0;})[0]||document.querySelector('.nav-pill');
+      window.__voltando=1;try{window.goTo(dest,pill);}finally{window.__voltando=0;}
+      atualizar();
+    };
+    document.addEventListener('click',function(){setTimeout(atualizar,60);},true);
+    atualizar();
+  })();
   setTimeout(montarAbasLives,0);
   window.MI_APP={conhecer:conhecer,tour:tour,aulaAberta:aulaAberta,marcarDia:marcarDia,abrirAula:abrirAula,renderHome:renderHome,
     compartilharQuiz:compartilharConquista,compartilharDia:function(){compartilharConquista(null);},festa:festa};
