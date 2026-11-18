@@ -463,7 +463,7 @@
   '}',
   /* a imagem do ícone É o botão: sem moldura extra em volta */
   '.topbar .tb-btn,.topbar .tb-theme-btn{background:none!important;border:0!important;padding:0!important;box-shadow:none!important;line-height:0;border-radius:14px;min-width:0!important;min-height:0!important;transition:transform .22s cubic-bezier(.34,1.56,.64,1)}',
-  '.topbar .tb-btn:hover,.topbar .tb-theme-btn:hover{transform:translateY(-2px) scale(1.07)}.topbar .tb-btn:active,.topbar .tb-theme-btn:active{transform:scale(.92)}',
+  '.topbar .tb-btn:hover,.topbar .tb-theme-btn:hover,.topbar .tb-btn:focus-visible,.topbar .tb-theme-btn:focus-visible{outline:none;transform:scale(1.14);filter:drop-shadow(0 6px 8px rgba(0,0,0,.45))}.topbar .tb-btn:active,.topbar .tb-theme-btn:active{transform:scale(.92)}',
   '.topbar .tb-btn .ic3d,.topbar .tb-theme-btn .ic3d{width:40px!important;height:40px!important;vertical-align:0;filter:drop-shadow(0 4px 8px rgba(0,0,0,.28))}',
   '.tb-tile{position:relative;display:inline-block;width:44px;height:44px;line-height:0}.tb-tile .ic3d{width:100%!important;height:100%!important}',
   '.tb-tile b{position:absolute;left:0;right:0;bottom:0;border-radius:0 0 13px 13px;padding:7px 0 3px;font-size:9px;line-height:1;font-weight:800;color:#fff;text-align:center;background:linear-gradient(to top,var(--c) 0%,var(--c) 40%,rgba(0,0,0,0));background:linear-gradient(to top,color-mix(in srgb,var(--c) 96%,transparent),color-mix(in srgb,var(--c) 80%,transparent) 45%,transparent)}',
@@ -471,12 +471,12 @@
   '.topbar .tb-btn .notif-dot{top:2px;right:2px}',
   '.hm-quick{grid-template-columns:repeat(4,minmax(0,150px))!important;justify-content:start}',
   '.hm-quick button{position:relative;aspect-ratio:1/1;padding:0!important;border:0!important;background:none!important;box-shadow:none!important;border-radius:22px!important;overflow:hidden;transition:transform .25s cubic-bezier(.34,1.56,.64,1)}',
-  '.hm-quick button:hover{transform:translateY(-4px) scale(1.03)}.hm-quick button:active{transform:scale(.96)}',
+  '.hm-quick button:hover,.hm-quick button:focus-visible{outline:none;transform:scale(1.08);z-index:2;box-shadow:0 20px 40px rgba(0,0,0,.45),0 6px 14px rgba(0,0,0,.3)}.hm-quick button:active{transform:scale(.96)}',
   '.hm-quick button>span{position:absolute;inset:0;display:block;font-size:0!important}.hm-quick button>span .ic3d{width:100%!important;height:100%!important;object-fit:cover;filter:drop-shadow(0 6px 12px rgba(0,0,0,.2))}',
   '.hm-quick button>i,.hm-uni>b{position:absolute;left:0;right:0;bottom:0;padding:22px 6px 9px;font-style:normal;font-size:12.5px;font-weight:800;line-height:1.15;color:#fff;text-align:center;background:linear-gradient(to top,var(--c) 0%,var(--c) 35%,rgba(0,0,0,0));background:linear-gradient(to top,color-mix(in srgb,var(--c) 94%,transparent),color-mix(in srgb,var(--c) 78%,transparent) 50%,transparent)}',
   '.hm-unis{grid-template-columns:repeat(3,minmax(0,170px))!important;justify-content:start}',
   '.hm-uni{position:relative;aspect-ratio:1/1;min-height:0!important;padding:0!important;background:none!important;box-shadow:none!important;border-radius:22px!important;overflow:hidden;transition:transform .25s cubic-bezier(.34,1.56,.64,1)}',
-  '.hm-uni:hover{transform:translateY(-4px) scale(1.03)}.hm-uni:active{transform:scale(.96)}',
+  '.hm-uni:hover,.hm-uni:focus-visible{outline:none;transform:scale(1.08);z-index:2;box-shadow:0 20px 40px rgba(0,0,0,.45),0 6px 14px rgba(0,0,0,.3)}.hm-uni:active{transform:scale(.96)}',
   '.hm-uni>span{position:absolute;inset:0;display:block;font-size:0!important}.hm-uni>span .ic3d{width:100%!important;height:100%!important;object-fit:cover}',
   '.hm-uni[data-hm="eom"]{--c:#15281f}.hm-uni[data-hm="culture"]{--c:#1b2a6b}.hm-uni[data-hm="viagens"]{--c:#0c4a6e}',
   '@media(max-width:560px){.hm-quick{grid-template-columns:repeat(4,1fr)!important}.hm-unis{grid-template-columns:repeat(3,1fr)!important}.hm-quick button>i,.hm-uni>b{font-size:10.5px;padding:16px 3px 6px}}',
@@ -503,8 +503,12 @@
   '#mi-entry .mi-ctx .tx{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:center;text-align:center;padding:26px 10px 11px;background:linear-gradient(to top,var(--c) 0%,var(--c) 30%,rgba(0,0,0,0) 100%);background:linear-gradient(to top,color-mix(in srgb,var(--c) 96%,transparent) 0%,color-mix(in srgb,var(--c) 82%,transparent) 42%,transparent 100%)}',
   '#mi-entry .mi-ctx .lb{font-size:15.5px!important;font-weight:800;line-height:1.15;color:#fff;text-align:center;text-shadow:0 1px 3px rgba(0,0,0,.35)}',
   '#mi-entry .mi-ctx .ht{display:none}',
-  '@media(hover:hover){#mi-entry .mi-ctx button:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.5),0 0 0 2px rgba(255,255,255,.6)}}',
-  '#mi-entry .mi-ctx button:focus-visible{outline:3px solid #fff;outline-offset:3px}#mi-entry .mi-ctx button:active{transform:scale(.96)}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover{transform:scale(1.08);z-index:2;box-shadow:0 22px 44px rgba(0,0,0,.6),0 8px 16px rgba(0,0,0,.4)}}',
+  '.rail-evo{background:var(--card,var(--bg2));border:1px solid var(--border);border-radius:14px;padding:12px}.re-top,.re-st{display:flex;gap:8px}.re-top>div,.re-st>div{flex:1;display:flex;flex-direction:column}.re-top strong{font-size:22px;font-weight:800;line-height:1.1}.re-st strong{font-size:16px;font-weight:800}.re-top span,.re-st span{font-size:10.5px;color:var(--fg3);line-height:1.3}',
+  '.re-bars{display:flex;align-items:flex-end;gap:3px;height:56px;margin:10px 0 3px}.re-bars i{flex:1;background:linear-gradient(180deg,#34d399,#10b981);border-radius:3px 3px 1px 1px;min-height:4px}.re-bars i.hj{background:linear-gradient(180deg,#fbbf24,#f59e0b)}.re-lbl{display:flex;gap:3px;margin-bottom:10px}.re-lbl b{flex:1;text-align:center;font-size:8.5px;font-weight:700;color:var(--fg3)}.re-st{border-top:1px solid var(--border);padding-top:9px}',
+  '.rail-mt{display:flex;gap:12px;align-items:center;cursor:pointer;background:linear-gradient(135deg,rgba(212,160,23,.14),rgba(245,158,11,.05));border:1px solid rgba(212,160,23,.35);border-radius:14px;padding:12px}.rm-pos{display:flex;flex-direction:column;align-items:center;min-width:54px}.rm-pos strong{font-size:24px;font-weight:800;color:#d4a017;line-height:1}.rm-pos span{font-size:10px;color:var(--fg3);text-align:center}.rm-i{flex:1;min-width:0}.rm-t{font-size:12px;font-weight:800}.rm-s{font-size:11px;color:var(--fg2);margin:2px 0 7px}.rm-b{height:5px;border-radius:5px;background:var(--border);overflow:hidden}.rm-b i{display:block;height:100%;background:#d4a017;border-radius:5px}',
+  '.rail-soc{margin-top:auto;display:flex;justify-content:flex-start;gap:6px;padding-top:6px}.right-rail .rail-soc a,.right-rail .rail-soc button{width:26px;height:26px;padding:0!important;display:flex!important;align-items:center;justify-content:center;background:none!important;border:0!important;border-radius:8px;cursor:pointer;opacity:.7;transition:transform .2s,opacity .2s,filter .2s}.right-rail .rail-soc a:hover,.right-rail .rail-soc button:hover{opacity:1;transform:scale(1.25);filter:drop-shadow(0 4px 5px rgba(0,0,0,.35))}.right-rail .rail-soc .ic3d,.right-rail .rail-soc img,.right-rail .rail-soc svg{width:18px!important;height:18px!important}',
+  '#mi-entry .mi-ctx button:focus-visible{outline:none;transform:scale(1.08);z-index:2;box-shadow:0 22px 44px rgba(0,0,0,.6),0 8px 16px rgba(0,0,0,.4)}#mi-entry .mi-ctx button:active{transform:scale(.96)}',
   /* animação de 1,5 s de cada ícone, proporcional ao que ele é; só roda quando a pessoa passa o mouse, foca ou toca (nada se mexe sozinho) */
   '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-casa{animation:mk-hop 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-casa,#mi-entry .mi-ctx button:active .a-casa{animation:mk-hop 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
   '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-acordar{animation:mk-rise 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-acordar,#mi-entry .mi-ctx button:active .a-acordar{animation:mk-rise 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
@@ -900,6 +904,7 @@
     var a=b.dataset.hm;
     if(a==='check'){go('maratona');var k=ctxAtual();if(k)setTimeout(function(){escolherCtxNaMaratona(k);},200);}
     else if(a==='lives')go('lives');
+    else if(a==='maratona-10'){var nv=document.getElementById('mt10-nav');if(nv&&window.goTo)goTo('mt10',nv);}
     else if(a==='modulos')go('modulos');
     else if(a==='abrir'){var it=FLAT&&FLAT[hmIdx];if(it)abrirAula(it.m.id,it.l.id);}
     else if(a==='ant'){if(hmIdx>0){hmIdx--;pintarAula();}}
@@ -922,14 +927,35 @@
       +'<div class="streak-card" style="margin-bottom:12px"><div class="streak-val">'+sq.n+IC('fogo','lg')+'</div><div><div style="font-size:13px;font-weight:700;margin-bottom:2px">'+(sq.n===1?'Dia seguido':'Dias seguidos')+'</div><div style="font-size:11px;color:var(--fg2)">'+(sq.hoje?'Hoje já conta. Volte amanhã!':'Faça 1 tarefa hoje pra '+(sq.n?'manter':'começar'))+'</div></div></div>'
       +'<div class="card-sm" style="cursor:pointer" data-hm="check"><div style="display:flex;align-items:center;gap:12px"><svg width="52" height="52" viewBox="0 0 52 52"><circle cx="26" cy="26" r="22" fill="none" stroke="var(--border)" stroke-width="5"/><circle cx="26" cy="26" r="22" fill="none" stroke="#10b981" stroke-width="5" stroke-dasharray="138.2" stroke-dashoffset="'+off.toFixed(1)+'" stroke-linecap="round" transform="rotate(-90 26 26)"/><text x="26" y="31" text-anchor="middle" font-size="11" font-weight="800" fill="var(--fg)" font-family="inherit">'+pc.pct+'%</text></svg>'
       +'<div><div style="font-size:13px;font-weight:700;margin-bottom:3px">Checklist de hoje</div><div style="font-size:11px;color:var(--fg2)">'+pc.feitos+' de '+pc.tot+' · '+E((CTX.filter(function(x){return x.k===pc.k;})[0]||CTX[0]).lb)+'</div></div></div></div></div>'
-      +'<div><div class="rail-hd">Próximas lives</div>'+lv.map(function(x){
-        return '<div class="upcoming-item" style="cursor:pointer" data-hm="lives"><div class="upc-date"><span class="day">'+x.st.getDate()+'</span>'+x.st.toLocaleDateString('pt-BR',{month:'short'}).replace('.','').toUpperCase()+'</div><div><div class="upc-title">'+E(x.lv.title)+(x.aoVivo?' <span style="color:#ef4444;font-weight:800">● AO VIVO</span>':'')+'</div><div class="upc-time">'+E(quando(x))+'</div></div></div>';}).join('')+'</div>'
-      +'<div><div class="rail-hd">Atalhos</div><div style="display:flex;flex-direction:column;gap:7px">'
-      +'<a href="https://www.youtube.com/@teachergediel" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:11px;padding:9px 12px;text-decoration:none;font-size:12px;font-weight:700;color:#ef4444">'+IC('yt-real')+' Canal no YouTube</a>'
-      +'<a href="https://instagram.com/englishbygediel" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.18);border-radius:11px;padding:9px 12px;text-decoration:none;font-size:12px;font-weight:700;color:#8b5cf6">'+IC('ig-real')+' @englishbygediel</a>'
-      +'<button data-hm="indicar" style="display:flex;align-items:center;gap:8px;background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.25);border-radius:11px;padding:9px 12px;font-size:12px;font-weight:700;color:#16a34a;cursor:pointer;text-align:left">'+IC('indicar')+' Indicar um amigo</button>'
-      +'</div><div class="mi-lg-rail"><span class="mi-logo"></span>Método Inteligente</div></div>';
+      +evolucaoHTML()
+      +'<div id="rail-mt"></div>'
+      +'<div class="rail-soc"><a href="https://www.youtube.com/@teachergediel" target="_blank" rel="noopener" title="YouTube" aria-label="YouTube">'+IC('yt-real')+'</a>'
+      +'<a href="https://instagram.com/englishbygediel" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">'+IC('ig-real')+'</a>'
+      +'<button data-hm="indicar" title="Indicar um amigo" aria-label="Indicar um amigo">'+IC('indicar')+'</button></div>';
+    pintarMaratonaRail();
   }
+  function evolucaoHTML(){
+    var hoje=new Date();hoje.setHours(12,0,0,0);var bars='',ativos=0,soma=0,N=14,ini=null;
+    var sem=['D','S','T','Q','Q','S','S'];
+    for(var k=N-1;k>=0;k--){var d=new Date(hoje);d.setDate(d.getDate()-k);var v=valDia(dia(d));if(v>0)ativos++;soma+=v;
+      bars+='<i class="'+(k===0?'hj':'')+'" title="'+d.toLocaleDateString('pt-BR',{day:'numeric',month:'short'})+'" style="height:'+Math.max(6,Math.round(v*100))+'%;opacity:'+(v>0?1:.28)+'"></i>';}
+    var lbl='';for(var k2=N-1;k2>=0;k2--){var d2=new Date(hoje);d2.setDate(d2.getDate()-k2);lbl+='<b>'+sem[d2.getDay()]+'</b>';}
+    var med=Math.round(soma/N*100),vistas=(ST.vistas||[]).length,sq=sequencia();
+    return '<div><div class="rail-hd">Sua evolução</div><div class="rail-evo">'
+      +'<div class="re-top"><div><strong>'+ativos+'</strong><span>de 14 dias ativos</span></div><div><strong>'+med+'%</strong><span>checklist médio</span></div></div>'
+      +'<div class="re-bars">'+bars+'</div><div class="re-lbl">'+lbl+'</div>'
+      +'<div class="re-st"><div><strong>'+vistas+'</strong><span>aulas vistas</span></div><div><strong>'+sq.n+'</strong><span>dias seguidos</span></div></div>'
+      +'</div></div>';
+  }
+  async function pintarMaratonaRail(){
+    var box=document.getElementById('rail-mt');if(!box||!window.EBG_MARATONA)return;
+    var m=await window.EBG_MARATONA.resumo();box=document.getElementById('rail-mt');if(!box||!m)return;
+    var cab='🏁 Maratona · ciclo '+m.ciclo;
+    box.innerHTML='<div class="rail-hd">Maratona 10 meses</div><div class="rail-mt" data-hm="maratona-10"><div class="rm-pos">'+(m.pos?'<strong>'+m.pos+'º</strong><span>de '+m.total+'</span>':'<strong>—</strong><span>sem pontos ainda</span>')+'</div>'
+      +'<div class="rm-i"><div class="rm-t">'+cab+'</div><div class="rm-s">'+m.pts+' pts'+(m.pos>1&&m.falta?' · faltam '+m.falta+' pra subir':(m.pos===1?' · você lidera 👑':''))+'</div>'
+      +'<div class="rm-b"><i style="width:'+Math.min(100,m.prog||0)+'%"></i></div></div></div>';
+  }
+
 
   /* ───────────────────────── ENTRADA: boas-vindas + onde você está ───────────────────────── */
   var ent=document.createElement('div');ent.id='mi-entry';document.body.appendChild(ent);

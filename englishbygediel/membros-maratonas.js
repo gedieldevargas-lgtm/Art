@@ -443,5 +443,20 @@
     if (s && (ev === 'SIGNED_IN' || ev === 'INITIAL_SESSION')) setTimeout(carregar, 300);
     if (ev === 'SIGNED_OUT') { EU.dentro = false; EU.admin = false; var n = $('mt10-nav'); if (n) n.style.display = 'none'; }
   });
+  /* resumo pro painel lateral do app: posição no ciclo atual (null se a pessoa não está na maratona) */
+  window.EBG_MARATONA = {
+    async resumo() {
+      try {
+        if (!EU.dentro) return null;
+        var c = CIC.filter(function (x) { return estado(x) === 'atual'; })[0] || CIC.filter(function (x) { return estado(x) === 'feito'; }).pop();
+        if (!c) return null;
+        var r = await sb.rpc('maratona_ranking', { p_ciclo: c.n, p_de: c.de, p_ate: c.ate });
+        if (r.error || !r.data) return { ciclo: c.n, pos: 0, total: 0, pts: 0, prog: progresso(EU.feitos || {}, null) };
+        var meu = -1; r.data.forEach(function (x, k) { if (x.email === EU.email) meu = k; });
+        return { ciclo: c.n, pos: meu + 1, total: r.data.length, pts: meu >= 0 ? r.data[meu].pontos : 0,
+                 falta: meu > 0 ? r.data[meu - 1].pontos - r.data[meu].pontos + 1 : 0, prog: progresso(EU.feitos || {}, null) };
+      } catch (e) { return null; }
+    }
+  };
   montar();
 })();
