@@ -26,7 +26,7 @@
     var h = 0; for (var i = 0; i < f.t.length; i++) h = (h * 31 + f.t.charCodeAt(i)) % 360;
     var ph = '<div class="fl-ph" style="background:linear-gradient(160deg,hsl(' + h + ',55%,32%),hsl(' + ((h + 50) % 360) + ',60%,18%))">' + esc(f.t) + '</div>';
     var u = IMG[f.id];
-    if (u === undefined || u) return ph + '<img alt="" loading="lazy" data-fid="' + f.id + '" src="' + esc(u || 'img/filmes/' + f.id + '.jpg') + '">';
+    if (u === undefined || u) return ph + '<img alt="" loading="lazy" data-fid="' + f.id + '" src="' + esc(u || 'img/filmes/' + f.id + '.jpg?v=2') + '">';
     return ph;
   }
   async function wiki(f) {
