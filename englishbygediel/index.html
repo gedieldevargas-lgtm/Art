@@ -182,7 +182,7 @@ a{text-decoration:none}
 .ent-titulo p{font-size:13px;margin-top:8px}
 .anel{position:relative;flex:1;width:100%;perspective:1100px;touch-action:pan-y;cursor:grab;user-select:none}
 .anel:active{cursor:grabbing}
-.gediel{position:absolute;left:50%;bottom:-100px;height:min(68vh,760px);max-width:none;transform:translateX(-50%);z-index:5;pointer-events:none;filter:drop-shadow(0 0 22px rgba(255,255,255,.95)) drop-shadow(0 0 60px rgba(255,255,255,.7)) drop-shadow(0 0 110px rgba(255,255,255,.35))}
+.gediel{position:absolute;left:50%;bottom:-150px;height:min(81.6vh,912px);max-width:none;transform:translateX(-50%);z-index:5;pointer-events:none;filter:drop-shadow(0 0 22px rgba(255,255,255,.95)) drop-shadow(0 0 60px rgba(255,255,255,.7)) drop-shadow(0 0 110px rgba(255,255,255,.35))}
 .aura{position:absolute;left:50%;bottom:8%;width:min(80vw,620px);aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(143,166,106,.35),transparent 65%);filter:blur(10px)}
 .giro{position:absolute;left:50%;top:34%;width:0;height:0}
 .modo{clip-path:inset(0 round 18px);-webkit-mask-image:-webkit-radial-gradient(white,black);isolation:isolate;position:absolute;background-image:var(--grad)!important;background-size:cover!important;width:clamp(108px,26vw,170px);aspect-ratio:3/4;margin-left:calc(clamp(108px,26vw,170px)/-2);margin-top:calc(clamp(108px,26vw,170px)*-.66);border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#1b2d4d,#0e1b33);border:1px solid var(--linha);backface-visibility:hidden;box-shadow:0 20px 40px -18px #000;transition:box-shadow .3s,border-color .3s;text-align:left}
@@ -212,6 +212,45 @@ a{text-decoration:none}
 .ficha-jogo small{color:var(--dim);font-size:12.5px}
 .b1.off{opacity:.55;pointer-events:none}
 @media (prefers-reduced-motion:reduce){.loop{overflow-x:auto;-webkit-mask-image:none;mask-image:none}.loop-faixa{animation:none}}
+/* planos: cartões escuros com brilho; o destaque sobe e brilha */
+.sec-texto{font-size:13.5px;color:var(--dim);line-height:1.5;margin:-8px 0 14px;max-width:62ch}
+.faixa-login{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 14px;padding:12px 14px;border-radius:16px;background:rgba(143,166,106,.12);border:1px solid rgba(143,166,106,.35);font-size:13px;line-height:1.4}
+.faixa-login button{flex:0 0 auto;padding:9px 14px;border-radius:99px;background:var(--cobre);color:#fff;font-weight:700;font-size:12.5px}
+.planos-topo{text-align:center;margin-bottom:22px}.planos-topo h2{font-size:clamp(34px,6.5vw,60px);line-height:1;margin:8px 0 12px}.planos-topo p{color:var(--dim);font-size:14px;max-width:54ch;margin:0 auto;line-height:1.5}
+.planos-pista{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:36px 8px 26px;margin:0 -8px;scrollbar-width:none;align-items:stretch}.planos-pista::-webkit-scrollbar{display:none}
+.plano{--pc:#7a8cff;position:relative;flex:0 0 min(78%,290px);scroll-snap-align:center;display:flex;flex-direction:column;padding:22px 20px 20px;border-radius:22px;color:var(--marfim);background:linear-gradient(165deg,rgba(25,42,76,.95),rgba(11,21,41,.95));border:1px solid var(--linha);box-shadow:0 22px 44px -26px #000;transition:transform .18s ease-out,box-shadow .3s;transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));will-change:transform}
+.plano.dest{border-color:rgba(137,156,255,.9);background:linear-gradient(165deg,#1b2a5c,#0d1838);box-shadow:0 0 0 1px rgba(137,156,255,.45),0 0 40px 4px rgba(104,122,255,.5),0 34px 60px -22px rgba(64,80,255,.6);transform:perspective(900px) translateY(-14px) scale(1.03) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));z-index:2;animation:planoPulsa 2.2s ease-in-out infinite}
+/* o brilho do destaque pulsa de verdade; a luz do cursor passa por cima de qualquer cartão */
+@keyframes planoPulsa{0%,100%{border-color:rgba(137,156,255,.7);box-shadow:0 0 0 1px rgba(137,156,255,.35),0 0 26px 2px rgba(104,122,255,.30),0 34px 60px -24px rgba(64,80,255,.45)}50%{border-color:rgba(190,200,255,1);box-shadow:0 0 0 2px rgba(170,184,255,.9),0 0 70px 14px rgba(124,142,255,.85),0 38px 74px -18px rgba(76,96,255,.85)}}
+@keyframes planoBtnPulsa{0%,100%{box-shadow:0 0 14px rgba(122,120,255,.45)}50%{box-shadow:0 0 38px 6px rgba(140,130,255,.95)}}
+.plano::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .25s;background:radial-gradient(280px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.2),transparent 62%)}
+@media (hover:hover){.plano:hover::after{opacity:1}.plano:not(.dest):hover{box-shadow:0 0 0 1px rgba(255,255,255,.22),0 0 34px 2px color-mix(in srgb,var(--pc) 55%,transparent),0 26px 50px -24px #000}}
+@keyframes bfPulsa{0%,100%{box-shadow:0 0 12px rgba(255,40,60,.5)}50%{box-shadow:0 0 30px 5px rgba(255,40,60,.95)}}
+.plano .p-bf{display:flex;flex-direction:column;border-radius:12px;overflow:hidden;margin-bottom:10px;font-weight:800;animation:bfPulsa 1.3s ease-in-out infinite}
+.plano .p-bf{text-align:center}
+.plano .p-bf-nome{background:#e11d2e;color:#fff;padding:7px 10px;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.plano .p-bf-cont{background:#fff;color:#d10f22;padding:7px 10px;font-size:13px;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.plano .p-bf-cont small{display:block;font-size:9.5px;font-weight:700;color:#7a1620;margin-bottom:1px;text-transform:uppercase;letter-spacing:.08em}
+@media (prefers-reduced-motion:reduce){.plano.dest,.plano .p-bf,.plano.dest .p-btn{animation:none}.plano{transform:none!important}}
+.plano .tab{position:absolute;top:-16px;left:50%;translate:-50% 0;white-space:nowrap;background:linear-gradient(135deg,#8294ff,#5566f0);color:#fff;font-size:12px;font-weight:800;letter-spacing:.03em;padding:7px 18px;border-radius:12px 12px 0 0;box-shadow:0 -4px 18px rgba(104,122,255,.5)}
+.plano:not(.dest) .tab{background:rgba(255,255,255,.12);box-shadow:none;color:#e9eefb;font-size:11px;padding:6px 14px}
+.plano .p-cab{display:flex;align-items:center;justify-content:space-between;gap:10px}.plano h3{font-size:22px;font-weight:800;letter-spacing:-.01em}
+.plano .p-ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:20px;background:color-mix(in srgb,var(--pc) 22%,transparent);border:1px solid color-mix(in srgb,var(--pc) 45%,transparent)}
+.plano .p-sub{font-size:12.5px;color:var(--dim);margin:4px 0 0;line-height:1.35}
+.plano hr{border:0;border-top:1px solid var(--linha);margin:16px 0 4px}
+.plano ul{list-style:none;margin:6px 0 18px;padding:0}.plano li{display:flex;gap:10px;font-size:13.5px;line-height:1.4;margin:10px 0;color:#dfe7f6}.plano li::before{content:"✓";color:var(--pc);font-weight:900;flex:0 0 auto}
+.plano .p-esp{flex:1}
+.plano .p-btn{display:block;text-align:center;padding:13px 12px;border-radius:13px;font-weight:700;font-size:14px;color:#fff;background:rgba(255,255,255,.1);border:1px solid var(--linha);transition:filter .2s}
+.plano .p-btn:hover{filter:brightness(1.25)}
+.plano.dest .p-btn{border:0;background:linear-gradient(135deg,#9a8bff,#5b6cff);box-shadow:0 0 24px rgba(122,120,255,.65);animation:planoBtnPulsa 2.2s ease-in-out infinite}
+.plano .p-preco{margin-top:18px;padding-top:16px;border-top:1px solid var(--linha);text-align:center}
+.plano .p-promo{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#ffd27a;background:rgba(255,200,90,.14);border-radius:99px;padding:4px 10px;margin-bottom:8px}
+.plano .p-de{font-size:12.5px;color:var(--dim);text-decoration:line-through}
+.plano .p-pr{font-size:33px;font-weight:800;letter-spacing:-.02em;line-height:1.1}.plano .p-pr small{font-size:13px;font-weight:600;color:var(--dim);letter-spacing:0;margin-left:3px}.plano .p-pr small.pre{margin:0 6px 0 0}
+.plano .p-pag{font-size:11.5px;color:#c9d4ea;margin-top:6px;padding:5px 10px;border-radius:99px;background:rgba(255,255,255,.07);display:inline-block}
+.plano .p-nota{font-size:11.5px;color:var(--dim);margin-top:3px}
+.planos-aviso{font-size:12px;color:var(--dim);text-align:center;max-width:60ch;margin:6px auto 0;line-height:1.5}
+@media (min-width:900px){.planos-pista{overflow:visible;justify-content:center;padding-top:40px}.plano{flex:1 1 0;min-width:0;max-width:300px}}
 /* lojinha: coluna fina na lateral, passarela vertical em loop */
 .rail{position:fixed;right:8px;top:84px;bottom:100px;width:72px;z-index:14;display:flex;flex-direction:column;border-radius:22px;background:rgba(10,20,38,.74);border:1px solid var(--linha);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);overflow:hidden;box-shadow:0 18px 40px -18px #000}
 .rail[hidden],body.entrando .rail{display:none}
@@ -311,7 +350,7 @@ body.carregando .entrada>*,body.carregando main,body.carregando .mara{opacity:0}
 .mara.mini img{width:32px;height:32px;border-radius:50%}
 .mara.mini .m-tit,.mara.mini .m-det,.mara.mini .m-x{display:none}
 .mara.mini .m-conta{margin:2px 0 0}.mara.mini .m-conta b{min-width:0;padding:0 2px;background:none;font-size:12px}.mara.mini .m-conta b small{display:inline;margin-left:1px}
-body.entrando .mara{bottom:96px}
+body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão da Maratona não aparece; ele entra junto com o Hub */
 @media (max-width:520px){.mara:not(.mini){width:calc(100% - 28px)}}
 @media (prefers-reduced-motion:reduce){.mara,.mara .m-rot i{animation:none}}
 .ficha .mara-arte{width:100%;display:block}
@@ -337,6 +376,7 @@ body.entrando .mara{bottom:96px}
 .entrar-btn:hover{background:rgba(255,255,255,.2)}.entrar-btn:active{transform:scale(.96)}
 .entrar-btn svg{width:16px;height:16px}
 .entrar-btn.fixo{position:fixed;top:14px;left:14px;z-index:15}
+.entrar-btn.fixo.planos-fixo{left:112px;background:linear-gradient(135deg,#8294ff,#5566f0);box-shadow:0 0 18px rgba(104,122,255,.5)}
 .selo.tranca{background:rgba(10,20,38,.75);color:#fff}
 .atalhos{grid-auto-flow:column}
 @media (max-width:520px){.atalhos.muitos{display:flex;overflow-x:auto;scrollbar-width:none;margin-right:-16px;padding-right:16px}.atalhos.muitos::-webkit-scrollbar{display:none}.atalhos.muitos .atalho{flex:0 0 23%}}
@@ -380,6 +420,7 @@ body.entrando .mara{bottom:96px}
   </div>
   <button class="ligar" id="ligar" type="button">Ligar modo</button>
 </section>
+<button class="entrar-btn fixo planos-fixo" id="planosFixo" type="button" data-ir="#planos" hidden><span>Planos</span></button>
 <button class="entrar-btn fixo" id="entrarFixo" type="button" data-login hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg><span class="entrarTxt">Entrar</span></button>
 <button class="trocar" id="trocar" type="button" hidden>Modo <b id="trocarNome"></b> · trocar</button>
 
@@ -420,8 +461,16 @@ body.entrando .mara{bottom:96px}
 
   <section class="secao aparece" id="gratis">
     <div class="cab"><h2 class="serif" id="sGratis">Materiais grátis</h2><small id="contaGratis"></small></div>
+    <p class="sec-texto" id="tGratis"></p>
+    <div class="faixa-login" id="faixaLogin" hidden><span id="faixaTxt"></span><button type="button" data-login>Entrar na área de membros</button></div>
     <div class="filtros" id="filtros"></div>
     <div class="trilho cena" id="trilhoGratis"></div>
+  </section>
+
+  <section class="secao aparece" id="planos" hidden>
+    <div class="planos-topo"><span class="rotulo" id="pRotulo">Planos</span><h2 class="serif" id="pTitulo"></h2><p id="pSub"></p></div>
+    <div class="planos-pista" id="planosPista"></div>
+    <p class="planos-aviso" id="pAviso"></p>
   </section>
 
   <section class="secao aparece" id="jogos" hidden>
@@ -435,22 +484,26 @@ body.entrando .mara{bottom:96px}
   </section>
 
   <section class="secao aparece" id="pagos">
-    <div class="cab"><h2 class="serif" id="sPagos">Pra ir mais fundo</h2><button data-ir="#aplicar" id="sBotaoPagos">Mentoria →</button></div>
+    <div class="cab"><h2 class="serif" id="sPagos">Pra ir mais fundo</h2><button data-ir="#planos" id="sBotaoPagos">Planos →</button></div>
+    <p class="sec-texto" id="tPagos"></p>
     <div class="trilho cena" id="trilhoPagos"></div>
   </section>
 
   <section class="secao aparece" id="membros">
     <div class="cab"><h2 class="serif" id="sMembros">Dentro da mentoria</h2><button data-login id="sMembrosSub">Só pra alunos</button></div>
+    <p class="sec-texto" id="tMembros"></p>
     <div class="trilho cena" id="trilhoMembros"></div>
   </section>
 
   <section class="secao aparece" id="extras">
     <div class="cab"><h2 class="serif" id="sExtras">Ecossistema</h2></div>
+    <p class="sec-texto" id="tExtras"></p>
     <div class="trilho cena" id="trilhoExtras"></div>
   </section>
 
   <section class="secao aparece" id="alunos">
     <div class="cab"><h2 class="serif" id="sAlunos">Alunos que destravaram</h2></div>
+    <p class="sec-texto" id="tAlunos"></p>
     <div class="trilho cena" id="trilhoAlunos"></div>
   </section>
 
@@ -594,6 +647,9 @@ body.entrando .mara{bottom:96px}
   txt('#dRotulo', D.rotulo); txt('#dTitulo', D.titulo); txt('#dTexto', D.texto); txt('#dBotao', D.botao); src('#dImg', D.img);
   const S = H.secoes;
   txt('#sGratis', S.gratis); txt('#sPagos', S.pagos); txt('#sBotaoPagos', S.botaoPagos); txt('#sAlunos', S.alunos); txt('#sMembros', S.membros); txt('#sMembrosSub', S.membrosSub); txt('#sExtras', S.extras);
+  const S3 = H.secoes || {};
+  [['tGratis', 'gratisTexto'], ['tPagos', 'pagosTexto'], ['tMembros', 'membrosTexto'], ['tExtras', 'extrasTexto'], ['tAlunos', 'alunosTexto']].forEach(([id, k]) => { const el = $('#' + id); if (el) { el.textContent = S3[k] || ''; el.hidden = !S3[k]; } });
+  if (S3.gratisFaixa) { $('#faixaTxt').textContent = S3.gratisFaixa; $('#faixaLogin').hidden = false; }
   const MB = H.membros || {};
   document.querySelectorAll('.entrarTxt').forEach(e => { e.textContent = MB.botaoTopo || 'Entrar'; });
   const A = H.aplicacao;
@@ -650,8 +706,15 @@ body.entrando .mara{bottom:96px}
   }
 
   /* cards: tudo vem do Hub editável (hub-dados.js + painel) */
-  const itens = {};
-  (H.cards || []).filter(c => c.ativo !== false).forEach(c => {
+  const itens = {}, vistosId = new Set();
+  // some o que está repetido ou vazio (mesmo id duas vezes, "Novo material", cartão sem texto nem link)
+  const semConteudo = c => {
+    const t = c.tipo, tem = x => !!String(x || '').trim();
+    if (t === 'aluno') return !(tem(c.sinopse) || tem(c.video));
+    if (t === 'membros') return false;
+    return !(tem(c.link) || tem(c.video) || tem(c.sinopse) || (t === 'pago' && tem(c.preco)));
+  };
+  (H.cards || []).filter(c => c.ativo !== false && c.titulo && !semConteudo(c) && !vistosId.has(c.id) && vistosId.add(c.id)).forEach(c => {
     const interno = u => (/^[\w-]+\.html([?#].*)?$/.test(u || '') ? u : '');
     const link = https(c.link) || interno(c.link), link2 = https(c.link2) || interno(c.link2);
     itens[c.id] = { modos: c.modos || [], titulo: c.titulo, img: c.img, cat: c.setor || '', linha: c.linha, sinopse: c.sinopse,
@@ -680,17 +743,18 @@ body.entrando .mara{bottom:96px}
     const v = parseFloat(txt.replace(/[^\d,.]/g, '').replace(/\./g, '').replace(',', '.')); if (!isFinite(v) || v <= 0) return null;
     const n = parseInt(m.parcelas, 10) || (v >= 300 ? 6 : 1); if (n < 2) return null;
     return { n, cada: (v / n).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }), cheio: txt }; };
+  const resumo = t => { const s = String(t || '').replace(/\s+/g, ' ').trim(); if (!s) return ''; const f = (s.match(/^.*?[.!?](?=\s|$)/) || [s])[0]; return f.length > 78 ? f.slice(0, 75).replace(/\s+\S*$/, '') + '…' : f; };
   const cardPost = (k, sub) => { const m = itens[k]; const pc = parcelado(m);
     const foto = m.img && !/logo-/.test(m.img) ? `<img src="${esc(m.img)}" alt="" loading="lazy">` : `<span class="letra grad g${[...k].reduce((a, c) => a + c.charCodeAt(0), 0) % 6}"><span>${esc(m.cat === 'Comunidade' ? 'Grupo' : m.cat)}</span></span>`;
     const selo = m.membros ? '<span class="selo tranca">🔒 No programa</span>' : m.gratis ? '<span class="selo gratis">Grátis</span>' : m.preco && typeof m.preco === 'string' ? `<span class="selo">${esc(pc ? pc.n + 'x ' + pc.cada : m.preco)}</span>` : m.pago ? '<span class="selo">Novo</span>' : '';
     return `<button class="post t3d" data-abrir="${esc(k)}"><span class="brilho"></span>${selo}<span class="foto">${foto}</span>
-      <span class="rodape"><span>${esc(m.aluno ? '“' + m.titulo + '”' : m.titulo)}<small>${esc(m.linha || sub(m))}</small></span><i class="seta">${SETA}</i></span></button>`; };
+      <span class="rodape"><span>${esc(m.aluno ? '“' + m.titulo + '”' : m.titulo)}<small>${esc(m.linha || resumo(m.sinopse) || sub(m))}</small></span><i class="seta">${SETA}</i></span></button>`; };
 
   function desenhar() {
     const gr = ordem().filter(k => itens[k].gratis && (filtro === 'Tudo' || itens[k].cat === filtro));
     $('#trilhoGratis').innerHTML = gr.map(k => cardPost(k, m => m.cat)).join('');
     $('#contaGratis').textContent = gr.length + ' materiais';
-    const cats = ['Tudo', ...new Set(ordem().filter(k => itens[k].gratis).map(k => itens[k].cat))];
+    const cats = ['Tudo', ...new Set(ordem().filter(k => itens[k].gratis).map(k => itens[k].cat).filter(Boolean))];
     $('#filtros').innerHTML = cats.map(c => `<button class="filtro" aria-pressed="${c === filtro}" data-filtro="${esc(c)}">${esc(c)}</button>`).join('');
     // materiais à venda: todos sempre aparecem; os do modo primeiro
     const doMp = k => modo && (itens[k].modos || []).includes(modo.id) ? 0 : 1;
@@ -707,12 +771,15 @@ body.entrando .mara{bottom:96px}
     const doM = k => modo && (itens[k].modos || []).includes(modo.id) ? 0 : 1;
     al.sort((a, b) => doM(a) - doM(b));
     $('#trilhoAlunos').innerHTML = al.map(k => cardPost(k, m => m.nome)).join('');
+    desenharPlanos();
     ligar3d();
   }
 
   /* galerias em loop (Jogos e Simuladores) */
   function galeria(tipo, idSec, idLoop, idConta, titulo) {
-    const lista = (H[tipo] || []).filter(x => x && x.ativo !== false && x.titulo);
+    // sem link não dá pra jogar: o item (e a galeria inteira, se ficar vazia) só aparece quando tiver o link
+    const jogavel = u => !!(https(u) || /^[\w-]+\.html([?#].*)?$/.test(u || ''));
+    const lista = (H[tipo] || []).filter(x => x && x.ativo !== false && x.titulo && jogavel(x.link));
     $('#' + idSec).hidden = !lista.length; if (!lista.length) return;
     txt('#' + titulo, (H.secoes || {})[tipo]); $('#' + idConta).textContent = lista.length + (tipo === 'jogos' ? ' jogos' : ' simuladores');
     const um = lista.map((x, i) => `<button class="jogo t3d" type="button" data-jogo="${tipo}:${(H[tipo] || []).indexOf(x)}" aria-label="${esc(x.titulo)}"><span class="jogo-ico ${x.img ? '' : 'grad g' + (i % 5 + 1)}">${x.img ? `<img src="${esc(x.img)}" alt="" loading="lazy">` : `<span>${esc(x.icone || '🎮')}</span>`}</span><b>${esc(x.titulo)}</b></button>`).join('');
@@ -737,6 +804,63 @@ body.entrando .mara{bottom:96px}
   }
   galeria('jogos', 'jogos', 'loopJogos', 'contaJogos', 'sJogos');
   galeria('simuladores', 'simuladores', 'loopSimuladores', 'contaSimuladores', 'sSimuladores');
+
+  /* PLANOS: cartões de preço. O plano ligado ao modo da pessoa (ex.: Mission no Modo Fé) ganha o destaque; senão, o marcado como destaque */
+  let planosModo = '__nunca';
+  function partePreco(p) {
+    const s = String(p || '').trim(), suf = s.match(/^(.*?)\s*(\/\s*(?:mês|mes|ano))$/i), pre = (suf ? suf[1] : s).match(/^(\d+x)\s+(.+)$/i);
+    return `${pre ? `<small class="pre">${esc(pre[1])}</small>${esc(pre[2])}` : esc(suf ? suf[1] : s)}${suf ? `<small>${esc(suf[2].replace(/\s/g, ''))}</small>` : ''}`;
+  }
+  // contagem regressiva da promoção (vermelho e branco), atualizada a cada segundo
+  function tickPlanos() {
+    document.querySelectorAll('.p-bf-cont[data-fim]').forEach(el => {
+      const ms = new Date(el.dataset.fim) - Date.now();
+      if (isNaN(ms)) return;
+      if (ms <= 0) { el.innerHTML = 'Promoção encerrada'; return; }
+      const s = Math.floor(ms / 1000), d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60), x = s % 60, p2 = n => String(n).padStart(2, '0');
+      el.innerHTML = `<small>termina em</small>${d}d ${p2(h)}h ${p2(m)}m ${p2(x)}s`;
+    });
+  }
+  setInterval(tickPlanos, 1000);
+  // a luz e a inclinação seguem o cursor (só com mouse)
+  if (matchMedia('(hover:hover)').matches && !reduz) {
+    const pista = document.getElementById('planosPista');
+    pista.addEventListener('pointermove', e => {
+      const el = e.target.closest('.plano'); if (!el) return;
+      const r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      el.style.setProperty('--mx', (x * 100).toFixed(1) + '%'); el.style.setProperty('--my', (y * 100).toFixed(1) + '%');
+      el.style.setProperty('--rx', ((.5 - y) * 12).toFixed(2) + 'deg'); el.style.setProperty('--ry', ((x - .5) * 14).toFixed(2) + 'deg');
+    });
+    pista.addEventListener('pointerout', e => { const el = e.target.closest('.plano'); if (el && !el.contains(e.relatedTarget)) { el.style.removeProperty('--rx'); el.style.removeProperty('--ry'); } });
+  }
+  function desenharPlanos() {
+    const id = modo ? modo.id : '';
+    if (planosModo === id) return; planosModo = id;
+    const lista = (H.planos || []).filter(p => p && p.ativo !== false && p.nome);
+    $('#planos').hidden = !lista.length; if (!lista.length) return;
+    const S2 = H.secoes || {};
+    txt('#pRotulo', S2.planosRotulo); txt('#pTitulo', S2.planos); txt('#pSub', S2.planosSub); txt('#pAviso', S2.planosAviso);
+    const dest = lista.find(p => modo && (p.modos || []).includes(modo.id)) || lista.find(p => p.destaque) || null;
+    const hoje = new Date().toISOString().slice(0, 10);
+    $('#planosPista').innerHTML = lista.map(p => {
+      const promo = p.promo && p.promoAte && hoje <= p.promoAte, d = p === dest;
+      const bens = String(p.beneficios || '').split('\n').map(x => x.trim()).filter(Boolean);
+      const botao = esc(p.botao || 'Quero esse plano'), u = https(p.link);
+      const acao = p.acao === 'login' ? `<button class="p-btn" type="button" data-login>${botao}</button>`
+        : p.acao !== 'whatsapp' && u ? `<a class="p-btn" href="${esc(u)}" target="_blank" rel="noopener">${botao}</a>`
+        : `<a class="p-btn" href="${esc(whats('Oi Gediel! Quero saber do plano ' + p.nome + '.'))}" target="_blank" rel="noopener">${botao}</a>`;
+      return `<article class="plano${d ? ' dest' : ''}" style="--pc:${esc(p.cor || '#7a8cff')}">
+        ${(rotulo => rotulo ? `<span class="tab">${esc(rotulo)}</span>` : '')(d && modo && (p.modos || []).includes(modo.id) ? 'Pra você' : p.selo || (d ? 'Mais escolhido' : ''))}
+        <div class="p-cab"><h3>${esc(p.nome)}</h3><span class="p-ic">${esc(p.icone || '⭐')}</span></div><p class="p-sub">${esc(p.sub || '')}</p>
+        <hr><ul>${bens.map(b => `<li>${esc(b)}</li>`).join('')}</ul><div class="p-esp"></div>${acao}
+        <div class="p-preco">${promo ? `<div class="p-bf"><span class="p-bf-nome">🔥 ${esc(p.promoNome || 'Promoção')}</span><span class="p-bf-cont" data-fim="${esc(p.promoAte)}T23:59:59"></span></div><div class="p-de">de ${esc(p.preco)}</div>` : ''}
+          <div class="p-pr">${partePreco(promo ? p.promo : p.preco)}</div>${p.nota ? `<div class="p-nota">${esc(p.nota)}</div>` : ''}${p.pagamento ? `<div class="p-pag">${esc(p.pagamento)}</div>` : ''}</div></article>`;
+    }).join('');
+    tickPlanos();
+    // no celular os cartões rolam de lado: já abre com o destaque no meio
+    const pista = $('#planosPista'), el = pista.querySelector('.dest');
+    if (el && matchMedia('(max-width:899px)').matches) pista.scrollLeft = el.offsetLeft - (pista.clientWidth - el.clientWidth) / 2;
+  }
 
   /* LOJINHA: passarela vertical na lateral + janela com os achados de afiliado, seus produtos à venda e os grátis */
   const LJ = H.lojinha || {};
@@ -861,7 +985,8 @@ body.entrando .mara{bottom:96px}
   const maConta = r => r === null ? '' : r === 0 ? `<b style="min-width:0;padding:4px 8px">${esc(MA.textoFim || 'Encerrado')}</b>`
     : `<b>${r.d}<small>dias</small></b><b>${pad(r.h)}<small>h</small></b><b>${pad(r.m)}<small>min</small></b><b>${pad(r.s)}<small>s</small></b>`;
   const maLink = () => https(MA.link) || (/^[\w-]+\.html([?#].*)?$/.test(MA.link || '') ? MA.link : '') || whats(MA.mensagem || 'Oi Gediel! Quero uma vaga na Maratona.');
-  if (MA.ativo !== false && MA.titulo) {
+  // o cartão flutuante só aparece se for ligado no painel (Hub → Maratona → "Mostrar o cartão flutuante")
+  if (MA.flutuar === true && MA.titulo) {
     const el = document.createElement('button');
     el.type = 'button'; el.className = 'mara'; el.id = 'mara'; el.setAttribute('aria-label', `${MA.rotulo || ''} ${MA.titulo}`);
     el.innerHTML = `${MA.foto ? `<img src="${esc(MA.foto)}" alt="">` : ''}<span class="m-txt"><span class="m-rot"><i></i>${esc(MA.rotulo || 'Maratona')}${MA.selo ? ' · ' + esc(MA.selo) : ''}</span>
@@ -1111,7 +1236,7 @@ body.entrando .mara{bottom:96px}
     modo = m;
     try { localStorage.setItem('ebg:hubmodo', m.id); } catch (e) {}
     $('#trocarNome').textContent = m.nome.replace(/^Modo /, '');
-    $('#trocar').hidden = false; $('#entrarFixo').hidden = false;
+    $('#trocar').hidden = false; $('#entrarFixo').hidden = false; $('#planosFixo').hidden = !(H.planos || []).some(p => p && p.ativo !== false && p.nome);
     // site inteiro dentro do modo (ex.: Central de Prompts no Modo Prompts)
     const emb = (H.embutidos || []).find(x => x.ativo !== false && x.modo === m.id);
     const urlEmb = emb && (https(emb.url) || (/^[\w-]+\.html([?#].*)?$/.test(emb.url || '') ? emb.url : ''));
@@ -1130,7 +1255,7 @@ body.entrando .mara{bottom:96px}
     scrollTo(0, 0); setTimeout(mover, 50);
   }
   $('#ligar').addEventListener('click', () => ligarModo(escolhido || modos[0]));
-  $('#trocar').addEventListener('click', () => { document.body.classList.add('entrando'); $('#entrarFixo').hidden = true; $('#entrada').classList.remove('sai'); document.body.style.overflow = 'hidden'; requestAnimationFrame(sozinho); });
+  $('#trocar').addEventListener('click', () => { document.body.classList.add('entrando'); $('#entrarFixo').hidden = true; $('#planosFixo').hidden = true; $('#entrada').classList.remove('sai'); document.body.style.overflow = 'hidden'; requestAnimationFrame(sozinho); });
 
   let salvo = null; try { salvo = localStorage.getItem('ebg:hubmodo'); } catch (e) {}
   escolher((modos.find(m => m.id === salvo) || modos[0]).id);
