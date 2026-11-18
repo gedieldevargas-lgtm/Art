@@ -447,6 +447,12 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
 .ai-input{display:flex;gap:8px;padding:10px;border-top:1px solid var(--border)}
 .ai-input input{flex:1;border:1.5px solid var(--border);border-radius:12px;padding:10px 12px;font-size:13px;background:var(--surface2);color:var(--fg);outline:none}
 .ai-input button{background:var(--accent);color:#fff;border:none;border-radius:12px;padding:0 16px;font-weight:800;cursor:pointer}
+.ai-input{flex-wrap:wrap;align-items:center}.ai-input input{min-width:0}
+.ai-ib{width:40px;height:40px;padding:0!important;display:flex;align-items:center;justify-content:center;background:var(--surface2)!important;color:var(--fg2)!important;border:1.5px solid var(--border)!important;border-radius:12px;flex:none}.ai-ib:hover{color:var(--accent)!important;border-color:var(--accent)!important}.ai-ib svg{width:20px;height:20px}
+.ai-ib.rec{background:#e11d48!important;color:#fff!important;border-color:#e11d48!important}.ai-lang{font-size:11px;font-weight:800;padding:0 8px!important;height:40px;flex:none}
+.ai-prev{display:none;width:100%;gap:8px;flex-wrap:wrap}.ai-prev.on{display:flex}.ai-prev div{position:relative}.ai-prev img{width:64px;height:64px;object-fit:cover;border-radius:10px;border:1.5px solid var(--border);display:block}.ai-prev button{position:absolute;top:-6px;right:-6px;width:22px;height:22px;padding:0;border-radius:50%;background:#e11d48;color:#fff;font-size:11px;line-height:22px}
+.ai-msg img,.adm-img{display:block;max-width:100%;max-height:220px;border-radius:10px;margin-top:6px;cursor:zoom-in}
+.ai-send{height:40px}
 @media(max-width:600px){.ai-fab{bottom:76px}.ai-panel{bottom:140px}}
 .admin-mod-preview{width:48px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;cursor:pointer;transition:.15s}
 .admin-mod-preview:hover{transform:scale(1.1)}
@@ -924,7 +930,10 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
 <div class="ai-panel" id="ai-panel">
   <div class="ai-head"><div style="font-size:22px">🙋</div><div style="flex:1"><div class="t">Fale com o professor</div><div class="s">Sua dúvida vai direto pro painel do Gediel</div></div><button class="modal-close" style="color:#fff" onclick="aiToggle()">✕</button></div>
   <div class="ai-msgs" id="ai-msgs"></div>
-  <div class="ai-input"><input id="ai-txt" placeholder="Escreve sua dúvida..." onkeydown="if(event.key==='Enter')duvSend()"><button onclick="duvSend()">➤</button></div>
+  <div class="ai-input"><div class="ai-prev" id="ai-prev"></div>
+    <button type="button" class="ai-ib" id="ai-img" title="Anexar imagem ou print" aria-label="Anexar imagem"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M216 40H40a16 16 0 0 0-16 16v144a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V56a16 16 0 0 0-16-16Zm0 16v102.75l-26.07-26.06a16 16 0 0 0-22.63 0l-20 20-44-44a16 16 0 0 0-22.62 0L40 149.37V56ZM40 172l52-52 80 80H40Zm176 28h-21.37l-36-36 20-20L216 181.38V200ZM144 100a12 12 0 1 1 12 12 12 12 0 0 1-12-12Z"/></svg></button><input type="file" id="ai-file" accept="image/*" multiple hidden>
+    <button type="button" class="ai-ib" id="ai-mic" title="Ditar com a voz" aria-label="Ditar com a voz"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M128 176a48.05 48.05 0 0 0 48-48V64a48 48 0 0 0-96 0v64a48.05 48.05 0 0 0 48 48ZM96 64a32 32 0 0 1 64 0v64a32 32 0 0 1-64 0Zm40 143.6V232a8 8 0 0 1-16 0v-24.4A80.11 80.11 0 0 1 48 128a8 8 0 0 1 16 0 64 64 0 0 0 128 0 8 8 0 0 1 16 0 80.11 80.11 0 0 1-72 79.6Z"/></svg></button><button type="button" class="ai-ib ai-lang" id="ai-lang" title="Idioma do ditado">PT</button>
+    <input id="ai-txt" placeholder="Escreva, cole um print ou dite..." onkeydown="if(event.key==='Enter')duvSend()"><button class="ai-send" onclick="duvSend()">➤</button></div>
 </div>
 
 <!-- MODAL: detalhe da tarefa -->
@@ -2601,7 +2610,7 @@ async function loadAdminQuestions(){
     html+='<div class="adm-com'+(q.answer?'':' replying')+'" id="admduv-'+q.id+'">'
       +'<div style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap"><span style="font-size:12px;font-weight:800">'+esc(q.user_name)+'</span><span style="font-size:10px;color:var(--fg3)">'+esc(q.user_email||'')+' · '+fmtDate(q.created_at)+'</span>'
       +(q.answer?'<span class="adm-pill adm-pill-on">RESPONDIDA</span>':'<span class="adm-pill adm-pill-off">AGUARDANDO</span>')+'</div>'
-      +'<div style="font-size:12.5px;line-height:1.6;margin-top:4px;white-space:pre-wrap">'+esc(q.body)+'</div>'
+      +'<div style="font-size:12.5px;line-height:1.6;margin-top:4px;white-space:pre-wrap">'+duvHtml(q.body)+'</div>'
       +(q.answer?'<div class="task-ex" style="margin-top:8px"><b>Sua resposta:</b> '+esc(q.answer)+'</div>':'')
       +'<div class="reply-box" style="margin-top:10px"><textarea class="admin-inp" id="admduvrep-'+q.id+'" rows="2" placeholder="Responder pro aluno...">'+esc(q.answer||'')+'</textarea><button class="admin-btn admin-btn-primary admin-btn-sm" onclick="admAnswer('+q.id+')">Enviar</button></div>'
       +'<div style="display:flex;gap:8px;margin-top:8px">'
@@ -2623,6 +2632,29 @@ async function admDelQuestion(id){
 
 // ─── DÚVIDAS COM O PROFESSOR ───
 var _duvLoaded=false;
+var _duvImgs=[];
+function duvParse(b){var im=[];var t=String(b||'').replace(/\[\[img:(data:image\/[a-z+]+;base64,[A-Za-z0-9+\/=]+)\]\]/g,function(_,u){im.push(u);return '';}).trim();return {t:t,im:im};}
+function duvHtml(b){var p=duvParse(b);return (p.t?esc(p.t).replace(/\n/g,'<br>'):'')+p.im.map(function(u){return '<img class="adm-img" src="'+u+'" onclick="window.open(this.src)" alt="">';}).join('');}
+function duvShrink(file){return new Promise(function(ok){var r=new FileReader();r.onload=function(){var i=new Image();i.onload=function(){var m=1000,s=Math.min(1,m/Math.max(i.width,i.height)),c=document.createElement('canvas');c.width=Math.round(i.width*s);c.height=Math.round(i.height*s);var x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(i,0,0,c.width,c.height);ok(c.toDataURL('image/jpeg',0.72));};i.onerror=function(){ok(null);};i.src=r.result;};r.onerror=function(){ok(null);};r.readAsDataURL(file);});}
+async function duvAdd(files){for(var f of files){if(!/^image\//.test(f.type))continue;if(_duvImgs.length>=3){toast('Máximo de 3 imagens por mensagem','#f59e0b');break;}var u=await duvShrink(f);if(u)_duvImgs.push(u);}duvPrev();}
+function duvPrev(){var p=document.getElementById('ai-prev');p.classList.toggle('on',_duvImgs.length>0);p.innerHTML=_duvImgs.map(function(u,i){return '<div><img src="'+u+'" alt=""><button type="button" onclick="_duvImgs.splice('+i+',1);duvPrev()" aria-label="Remover">✕</button></div>';}).join('');}
+(function(){
+  var f=document.getElementById('ai-file'),b=document.getElementById('ai-img'),t=document.getElementById('ai-txt'),pn=document.getElementById('ai-panel');
+  b.onclick=function(){f.click();};f.onchange=function(){duvAdd([].slice.call(f.files));f.value='';};
+  pn.addEventListener('paste',function(e){var it=[].slice.call((e.clipboardData&&e.clipboardData.items)||[]).filter(function(x){return x.kind==='file'&&/^image\//.test(x.type);});if(it.length){e.preventDefault();duvAdd(it.map(function(x){return x.getAsFile();}));}});
+  pn.addEventListener('dragover',function(e){e.preventDefault();});pn.addEventListener('drop',function(e){if(e.dataTransfer&&e.dataTransfer.files.length){e.preventDefault();duvAdd([].slice.call(e.dataTransfer.files));}});
+  var SR=window.SpeechRecognition||window.webkitSpeechRecognition,m=document.getElementById('ai-mic'),lg=document.getElementById('ai-lang'),rec=null,base='',lang='pt-BR';
+  if(!SR){m.style.display='none';lg.style.display='none';return;}
+  lg.onclick=function(){lang=lang==='pt-BR'?'en-US':'pt-BR';lg.textContent=lang==='pt-BR'?'PT':'EN';if(rec)rec.stop();};
+  m.onclick=function(){
+    if(rec){rec.stop();return;}
+    rec=new SR();rec.lang=lang;rec.interimResults=true;rec.continuous=true;base=t.value?t.value.replace(/\s*$/,' '):'';
+    rec.onresult=function(e){var s='';for(var i=0;i<e.results.length;i++)s+=e.results[i][0].transcript;t.value=base+s;};
+    rec.onend=function(){m.classList.remove('rec');rec=null;};
+    rec.onerror=function(e){if(e.error==='not-allowed'||e.error==='service-not-allowed')toast('Libere o microfone no navegador pra ditar','#f59e0b');};
+    try{rec.start();m.classList.add('rec');}catch(x){rec=null;}
+  };
+})();
 function aiToggle(){
   var pn=document.getElementById('ai-panel');pn.classList.toggle('open');
   if(pn.classList.contains('open')){duvLoad();document.getElementById('ai-txt').focus();}
@@ -2639,18 +2671,19 @@ async function duvLoad(){
   try{
     var r=await _sb.from('mi_questions').select('*').order('created_at');
     (r.data||[]).forEach(function(q){
-      duvMsg('user',q.body);
+      duvMsg('user','',duvHtml(q.body));
       if(q.answer)duvMsg('bot','',"<b style='font-size:10px;letter-spacing:.4px;opacity:.7'>PROFESSOR GEDIEL</b><br>"+esc(q.answer).replace(/\n/g,'<br>'));
       else duvMsg('bot','⏳ Enviada! O professor responde em breve.');
     });
   }catch(e){}
 }
 async function duvSend(){
-  var t=document.getElementById('ai-txt');var q=t.value.trim();if(!q)return;
+  var t=document.getElementById('ai-txt');var q=t.value.trim();if(!q&&!_duvImgs.length)return;
   var u=(await _sb.auth.getUser()).data.user;if(!u)return;
   var meta=u.user_metadata||{};var name=meta.full_name||meta.name||u.email.split('@')[0];
-  t.value='';duvMsg('user',q);
-  var r=await _sb.from('mi_questions').insert({user_id:u.id,user_name:name,user_email:u.email,body:q});
+  var body=q+_duvImgs.map(function(x){return '\n[[img:'+x+']]';}).join('');
+  t.value='';_duvImgs=[];duvPrev();duvMsg('user','',duvHtml(body));
+  var r=await _sb.from('mi_questions').insert({user_id:u.id,user_name:name,user_email:u.email,body:body});
   if(r.error){duvMsg('bot','⚠️ Não consegui enviar: '+r.error.message);return;}
   duvMsg('bot','⏳ Enviada! O professor responde em breve — volta aqui depois pra ver.');
 }
@@ -2668,7 +2701,7 @@ document.getElementById('adm-les-modal').addEventListener('click',function(e){if
 <script src="membros-filmes.js?v=2"></script>
 <script src="prisma-perfis.js?v=1"></script>
 <script src="membros-prisma.js?v=1"></script>
-<script src="membros-app.js?v=202611182000"></script>
+<script src="membros-app.js?v=202611182030"></script>
 <script src="playlist.js?v=1"></script>
 <script src="fx.js?v=2"></script>
 <script src="config.js"></script>

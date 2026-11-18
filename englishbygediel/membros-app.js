@@ -864,11 +864,6 @@
       +'</div>';
     h+=resumoMes();
     h+='<div class="sec-hd">Sua aula</div><div class="hm-aula" id="hm-aula"><div class="cv"><div class="lock">Carregando…</div></div><div class="bd"><div class="st">&nbsp;</div></div></div>';
-    h+='<div class="sec-hd">Universos</div><div class="hm-unis">'
-      +'<button class="hm-uni" style="background:linear-gradient(135deg,#15281f,#2f6b4f)" data-hm="eom"><span>'+IC('eom')+'</span><b>English On Mission</b></button>'
-      +'<button class="hm-uni" style="background:linear-gradient(135deg,#1b2a6b,#4f6ef7)" data-hm="culture"><span>'+IC('culture')+'</span><b>Culture English</b></button>'
-      +'<button class="hm-uni" style="background:linear-gradient(135deg,#0c4a6e,#0ea5e9)" data-hm="viagens"><span>'+IC('viagens')+'</span><b>Viagens</b></button>'
-      +'</div>';
     h+='<div class="hm-ref"><div>'+IC('indicar','xl')+'</div><div><div class="t">Conhece alguém que trava no inglês?</div><div class="s">Manda o seu link: ele leva a pessoa direto pro pagamento, com desconto aplicado. Leva 10 segundos.</div></div>'
       +'<div class="bts"><button data-hm="indicar" style="background:#25d366;color:#fff;display:inline-flex;align-items:center;gap:8px">'+IC('wa-real')+' Convidar no WhatsApp</button><button data-hm="copiar" style="background:var(--surface2);color:var(--fg)">Copiar link</button></div></div>';
     p.innerHTML=h;
