@@ -495,11 +495,11 @@
   /* entrada v2: o card é a própria imagem do ícone (3D, em camadas), a frase centralizada num degradê escuro da cor do card */
   '#mi-entry .mi-ent-box{max-width:1040px}',
   '#mi-entry .mi-ctx{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(168px,1fr))!important;gap:16px!important}',
-  '#mi-entry .mi-ctx button{position:relative;aspect-ratio:1/1;padding:0!important;border:0!important;border-radius:26px!important;overflow:hidden;background:transparent!important;display:block;box-shadow:0 12px 28px rgba(0,0,0,.38);transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s}',
+  '#mi-entry .mi-ctx button{position:relative;aspect-ratio:1/1;padding:0!important;border:0!important;border-radius:25.4%!important;overflow:hidden;background:transparent!important;display:block;box-shadow:0 12px 28px rgba(0,0,0,.38);transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s}',
   '#mi-entry .mi-ctx .ic{position:absolute;inset:0;display:block;font-size:0!important}',
-  '#mi-entry .mi-ctx .ly{position:absolute;inset:0;display:block;transform:scale(1.06)}',
+  '#mi-entry .mi-ctx .ly{position:absolute;inset:0;display:block;transform:scale(1.05)}',
   '#mi-entry .mi-ctx .ly img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;user-select:none;-webkit-user-drag:none}',
-  '#mi-entry .mi-ctx .fg{transform-origin:50% 52%;will-change:transform}',
+  '#mi-entry .mi-ctx .fg{transform-origin:50% 52%}',
   '#mi-entry .mi-ctx .tx{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:center;text-align:center;padding:26px 10px 11px;background:linear-gradient(to top,var(--c) 0%,var(--c) 30%,rgba(0,0,0,0) 100%);background:linear-gradient(to top,color-mix(in srgb,var(--c) 96%,transparent) 0%,color-mix(in srgb,var(--c) 82%,transparent) 42%,transparent 100%)}',
   '#mi-entry .mi-ctx .lb{font-size:15.5px!important;font-weight:800;line-height:1.15;color:#fff;text-align:center;text-shadow:0 1px 3px rgba(0,0,0,.35)}',
   '#mi-entry .mi-ctx .ht{display:none}',
@@ -610,6 +610,10 @@
   }
   function salvarChecks(){LS.set(chkKey(),window._ctxChecked||{});try{registrarProg();}catch(e){}}
   function restaurarChecks(){var c=LS.get(chkKey(),{});Object.keys(c).forEach(function(k){window._ctxChecked[k]=c[k];});}
+
+  /* limpeza: apaga caches antigos do navegador e sobras diárias do localStorage (checklists e trocas de dias passados) */
+  try{if(window.caches)caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}catch(e){}
+  try{var hoje=dia();Object.keys(localStorage).forEach(function(k){var m=k.match(/^mi_(checks|troca)_(\d{4}-\d{2}-\d{2})$/);if(m&&m[2]!==hoje)localStorage.removeItem(k);});}catch(e){}
   function ctxAtual(){var c=LS.get('mi_ctx',{});return c.d===dia()?c.k:null;}
   function progCtx(k){
     k=k||ctxAtual()||'Em Casa';
@@ -1021,7 +1025,7 @@
       if(k)LS.set('mi_ctx',{d:dia(),k:k});
       var ir=function(){ent.dataset.indo='';perguntarTempo(function(){var kk=k||ctxAtual();if(kk)escolherCtxNaMaratona(kk);fecharEntrada(function(){go('home');renderHome();pintarRail();setTimeout(tourAuto,700);if(k)toast('✅ Checklist pronto: '+(CTX.filter(function(x){return x.k===k;})[0].lb)+' · '+tempoUso()+' min','#10b981');});});};
       ent.dataset.indo='1';
-      if(k&&window.EBG_FX&&b.querySelector('.ly'))EBG_FX.zoom(b,ir);else ir();
+      ir();
     };
   }
   var entrou=false;
