@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   var F = window.EBG_FILMES || [], NIV = ['A1', 'A2', 'B1', 'B2', 'C1'];
-  var KEY = 'mi_filmes', KIMG = 'mi_fl_img';
+  var KEY = 'mi_filmes', KIMG = 'mi_fl_img2';
   var ST = { n: 'A1', aberto: null, f: 'todos' };
   var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   var ld = function (k, d) { try { return JSON.parse(localStorage.getItem(k)) || d; } catch (e) { return d; } };
