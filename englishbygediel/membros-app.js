@@ -367,6 +367,18 @@
    +'body.mi-mini .sidebar-footer{justify-content:center}body.mi-mini #mi-bnav{left:84px!important}}',
   '@media(max-width:680px){#mi-recolher{display:none}}',
   '.ag-tipo .ic .ic3d{width:54px;height:54px}.ag-t .ic3d{width:30px;height:30px}',
+  '.th-icbtns{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start}',
+  '.th-ib{all:unset;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;gap:8px;width:104px;cursor:pointer;text-align:center;color:#fff;font:inherit;-webkit-tap-highlight-color:transparent}',
+  '.th-ib .ic3d{width:96px!important;height:96px!important;max-width:none!important;border-radius:25.4%;display:block;transition:transform .18s,filter .18s}',
+  '.th-ib b{font-size:12.5px;line-height:1.2;font-weight:800;text-shadow:0 1px 3px rgba(0,0,0,.5)}',
+  '.th-ib:hover .ic3d,.th-ib:focus-visible .ic3d{transform:scale(1.1);filter:drop-shadow(0 12px 18px rgba(0,0,0,.55))}',
+  /* botão de suporte: só a imagem */
+  '#ai-fab{background:transparent!important;box-shadow:none!important;width:68px!important;height:68px!important;border-radius:25.4%!important;padding:0!important;overflow:visible}#ai-fab .ic3d{width:68px!important;height:68px!important;border-radius:25.4%;transition:transform .18s,filter .18s}#ai-fab:hover{transform:none!important}#ai-fab:hover .ic3d{transform:scale(1.1);filter:drop-shadow(0 12px 16px rgba(30,40,90,.5))}',
+  /* barra direita minimizável */
+  '#rail-tg{position:fixed;top:84px;right:270px;z-index:40;width:26px;height:46px;border:1px solid var(--border);border-right:none;border-radius:12px 0 0 12px;background:var(--surface);color:var(--fg2);cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);padding:0}',
+  '#rail-tg:hover{color:var(--accent)}body.rail-off .right-rail{display:none!important}body.rail-off #rail-tg{right:0}',
+  '@media(max-width:1000px){#rail-tg{display:none}}',
+
   /* ── abas em "dock": barra de vidro, rola de lado em tela pequena, aba ativa com degradê (estilo do Hub) ── */
   '.lv-abas,.mat-tabs,.mi-dock{display:flex!important;gap:6px;padding:5px;margin:0 0 18px;width:100%;max-width:100%;box-sizing:border-box;border-radius:22px;background:color-mix(in srgb,var(--surface) 72%,transparent);-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);border:1px solid var(--border);box-shadow:0 8px 24px -14px rgba(10,20,50,.35);overflow-x:auto;flex-wrap:nowrap!important;scroll-snap-type:x proximity;scrollbar-width:none}',
   '.lv-abas::-webkit-scrollbar,.mat-tabs::-webkit-scrollbar,.mi-dock::-webkit-scrollbar{display:none}',
@@ -1165,7 +1177,7 @@
         +'<p>'+E(u.sub||'Séries, filmes e música como sala de aula.')+'</p>'
         +(function(){var lv=(window.LIVES||[]).filter(function(x){return x.id==='series';})[0];if(!lv||!window.nextOccurrence)return '';var nx=nextOccurrence(lv);
           return '<div class="th-prox"><span>Próximo encontro · '+E(dayLabel(nx))+' às '+lv.startH+'h</span><div class="lv-cd" data-at="'+nx.getTime()+'"></div></div>';})()
-        +'<div class="th-cta"><button class="th-b1" data-th="live">'+IC('lives')+' Lives do Culture English</button><button class="th-b2" data-th="jogos">'+IC('jogos')+' Jogos</button></div>'
+        +'<div class="th-cta th-icbtns"><button class="th-ib" data-th="live">'+IC('lives')+'<b>Lives</b></button><button class="th-ib" data-th="filmes">'+IC('culture')+'<b>Filmes por nível</b></button><button class="th-ib" data-th="jogos">'+IC('jogos')+'<b>Jogos</b></button></div>'
         +(EDIT?'<button class="admin-btn admin-btn-ghost admin-btn-sm" style="margin-top:12px" data-ed="menu-ed" data-k="culture">✏️ Nome, frase e acesso do menu</button>':'')
         +'<div class="th-nav"></div><div class="th-film b"></div></div>';
     }
@@ -1175,7 +1187,7 @@
     var g=e.target.closest('[data-goto]');if(g){var el=$(g.dataset.goto);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});return;}
     var t=e.target.closest('[data-th]');if(!t)return;var a=t.dataset.th;
     if(a==='grupo')abrirGrupo();
-    else if(a==='live')go('lives');else if(a==='jogos')go('jogos');
+    else if(a==='live')go('lives');else if(a==='jogos')go('jogos');else if(a==='filmes')go('filmes');
   });
   function ofertaMini(m,c){
     var ov=$('pw-ov');if(!ov){if(m.checkout)window.open(m.checkout,'_blank','noopener');return;}
@@ -1213,6 +1225,7 @@
     var pr=document.createElement('div');pr.className='pane';pr.id='pane-prompts';
     pr.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px"><div><div style="font-size:21px;font-weight:800">Central de Prompts</div><div style="font-size:13px;color:var(--fg2)">Escolha, personalize, copie e cole no ChatGPT ou no Claude.</div></div><a class="back-btn" style="margin:0;text-decoration:none" href="central-prompts.html" target="_blank" rel="noopener">Abrir em tela cheia ↗</a></div><iframe class="mi-frame" title="Central de Prompts" loading="lazy" data-src="central-prompts.html"></iframe>';
     matPane.insertAdjacentElement('afterend',pr);
+    var pfl=document.createElement('div');pfl.className='pane';pfl.id='pane-filmes';pr.insertAdjacentElement('afterend',pfl);
     var pa=document.createElement('div');pa.className='nav-pill';pa.setAttribute('onclick',"goTo('agendar',this)");pa.innerHTML='<span class="nav-icon">📅</span><span>Marcar aula</span>';
     pp.insertAdjacentElement('afterend',pa);
     var pag=document.createElement('div');pag.className='pane';pag.id='pane-agendar';pr.insertAdjacentElement('afterend',pag);
@@ -1230,7 +1243,7 @@
       p.innerHTML='<span class="nav-icon">'+u.icon+'</span><span>'+E(u.nav)+'</span>';ant.insertAdjacentElement('afterend',p);ant=p;
       var pane=document.createElement('div');pane.className='pane';pane.id='pane-'+k;antPane.insertAdjacentElement('afterend',pane);antPane=pane;
     });
-    if(window.TITLES){TITLES.prompts='Prompts';TITLES.agendar='Marcar aula';TITLES.planos='Planos';TITLES.indicar='Indique e ganhe';Object.keys(UNIV).forEach(function(k){TITLES[k]=UNIV[k].title;});TITLES.home='Início';}
+    if(window.TITLES){TITLES.prompts='Prompts';TITLES.filmes='Filmes por nível';TITLES.agendar='Marcar aula';TITLES.planos='Planos';TITLES.indicar='Indique e ganhe';Object.keys(UNIV).forEach(function(k){TITLES[k]=UNIV[k].title;});TITLES.home='Início';}
   }
   montarMenu();iconesMenu();iconesTopo();
 
@@ -1392,6 +1405,7 @@
     var vp=window._voltaPend;window._voltaPend=null;voltaUni(vp,page);
     if(UNIV[page])desenharUni(page);
     if(page==='prompts'){if(window.EBG_PROMPTS_UI)EBG_PROMPTS_UI.render($('pane-prompts'),ST.nivel);else{var f=document.querySelector('#pane-prompts iframe');if(f&&!f.src)f.src=f.dataset.src;}}
+    if(page==='filmes'&&window.EBG_FILMES_UI)EBG_FILMES_UI.render($('pane-filmes'),ST.nivel);
     if(page==='home')setTimeout(renderHome,160);
     if(page==='agendar')renderAgendar();
     if(page==='planos')renderPlanos();
@@ -3260,6 +3274,10 @@
     atualizar();
   })();
   document.addEventListener('click',function(e){var b=e.target.closest('.lv-abas button,.mat-tab,.mi-dock button,.th-nav button');if(b&&b.scrollIntoView)try{b.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});}catch(x){}});
+  (function(){var b=document.createElement('button');b.id='rail-tg';b.type='button';b.setAttribute('aria-label','Minimizar ou abrir a barra lateral direita');document.body.appendChild(b);
+    var pr=function(){var off=document.body.classList.contains('rail-off');b.textContent=off?'‹':'›';b.title=off?'Abrir a barra':'Minimizar a barra';};
+    try{if(localStorage.getItem('mi_rail_off')==='1')document.body.classList.add('rail-off');}catch(e){}pr();
+    b.addEventListener('click',function(){document.body.classList.toggle('rail-off');try{localStorage.setItem('mi_rail_off',document.body.classList.contains('rail-off')?'1':'0');}catch(e){}pr();});})();
   setTimeout(montarAbasLives,0);
   window.MI_APP={conhecer:conhecer,tour:tour,aulaAberta:aulaAberta,marcarDia:marcarDia,abrirAula:abrirAula,renderHome:renderHome,
     compartilharQuiz:compartilharConquista,compartilharDia:function(){compartilharConquista(null);},festa:festa};
