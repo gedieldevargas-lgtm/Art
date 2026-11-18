@@ -215,11 +215,24 @@
   '.uni-hero .ht{font-size:18px;font-weight:800;line-height:1.25}.uni-hero .hs{font-size:12.5px;opacity:.9;margin-top:4px;line-height:1.5;max-width:520px}',
   '.uni-hero button{margin-left:auto;background:#fff;color:#111;border:none;border-radius:12px;padding:11px 18px;font-size:13px;font-weight:800;cursor:pointer;white-space:nowrap}',
   '.uni-sec{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--fg2);margin:22px 0 10px}',
+  '.uni-grid.uni-std{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}',
+  '.uni-std .uni-card .th{aspect-ratio:16/9}.uni-std .uni-card .bd{flex:1;display:flex;flex-direction:column}.uni-std .uni-card .ss{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.6em}.uni-std .uni-card .ac{margin-top:auto;padding-top:8px}',
   '.uni-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}',
   '.uni-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:transform .15s,border-color .15s;box-shadow:var(--shadow)}',
   '.uni-card:hover{transform:translateY(-3px);border-color:var(--accent)}',
   '.uni-card .th{aspect-ratio:16/9;background:var(--surface2);position:relative;display:flex;align-items:center;justify-content:center;font-size:38px;overflow:hidden}',
   '.uni-card .th img{width:100%;height:100%;object-fit:cover;display:block}',
+  '.uni-grid.mat-v{grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:18px 14px}',
+  '.mat-v .uni-card{border-radius:6px 14px 14px 6px;background:var(--surface);box-shadow:0 10px 24px -10px rgba(10,20,50,.45),inset 5px 0 0 rgba(255,255,255,.14)}',
+  '.mat-v .uni-card .th{aspect-ratio:4/5.4;border-radius:0}',
+  '.mat-v .uni-card:hover{transform:translateY(-5px) scale(1.02);box-shadow:0 18px 32px -12px rgba(10,20,50,.55)}',
+  '.mat-v .uni-card.lock .th img{filter:saturate(.75) brightness(.92)}',
+  '.mat-v .uni-card .bd{padding:10px 11px 12px;gap:4px;display:flex;flex-direction:column}',
+  '.mat-v .uni-card .tt{font-size:13px;line-height:1.25;font-weight:800;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}',
+  '.mat-v .uni-card .ac{font-size:12px;font-weight:800;color:var(--accent)}',
+  '.mat-v .uni-card .tg{top:auto;bottom:8px;left:8px;font-size:11px;padding:4px 9px;border-radius:8px}',
+  '.mat-v .uni-card .tg.own{background:#16a34a}',
+  '.mat-v .uni-card .mv-lk{position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;background:rgba(10,14,30,.7);display:flex;align-items:center;justify-content:center;font-size:13px}',
   '.uni-card .tg{position:absolute;top:8px;left:8px;background:rgba(10,14,30,.78);color:#fff;font-size:9.5px;font-weight:800;letter-spacing:.3px;padding:3px 8px;border-radius:7px}',
   '.uni-card.buy .tg{background:#10b981}.uni-card.soon{opacity:.85}.uni-card.soon .tg{background:#f59e0b;color:#1a1200}.uni-card.lock .th:after{content:"🔒";position:absolute;top:8px;right:10px;font-size:16px}',
   '.uni-card .bd{padding:11px 12px 13px;display:flex;flex-direction:column;gap:4px;flex:1}',
@@ -354,6 +367,27 @@
    +'body.mi-mini .sidebar-footer{justify-content:center}body.mi-mini #mi-bnav{left:84px!important}}',
   '@media(max-width:680px){#mi-recolher{display:none}}',
   '.ag-tipo .ic .ic3d{width:54px;height:54px}.ag-t .ic3d{width:30px;height:30px}',
+  /* ── abas em "dock": barra de vidro, rola de lado em tela pequena, aba ativa com degradê (estilo do Hub) ── */
+  '.lv-abas,.mat-tabs,.mi-dock{display:flex!important;gap:6px;padding:5px;margin:0 0 18px;width:100%;max-width:100%;box-sizing:border-box;border-radius:22px;background:color-mix(in srgb,var(--surface) 72%,transparent);-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);border:1px solid var(--border);box-shadow:0 8px 24px -14px rgba(10,20,50,.35);overflow-x:auto;flex-wrap:nowrap!important;scroll-snap-type:x proximity;scrollbar-width:none}',
+  '.lv-abas::-webkit-scrollbar,.mat-tabs::-webkit-scrollbar,.mi-dock::-webkit-scrollbar{display:none}',
+  '.lv-abas button,.mat-tab,.mi-dock button{flex:1 0 auto;min-height:46px;padding:0 clamp(14px,3vw,24px);border:none!important;border-radius:17px;background:transparent;color:var(--fg2);font:inherit;font-size:clamp(12.5px,1.5vw+9px,14.5px);font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;cursor:pointer;scroll-snap-align:center;transition:background .18s,color .18s,box-shadow .18s,transform .18s}',
+  '.lv-abas button:hover,.mat-tab:hover,.mi-dock button:hover{color:var(--fg);background:color-mix(in srgb,var(--accent) 10%,transparent)}',
+  '.lv-abas button.on,.mat-tab.active,.mi-dock button.on{background:linear-gradient(135deg,var(--accent),#8b5cf6)!important;color:#fff!important;box-shadow:0 8px 18px -8px color-mix(in srgb,var(--accent) 80%,transparent),inset 0 1px 0 rgba(255,255,255,.28)}',
+  '.lv-abas button:active,.mat-tab:active,.mi-dock button:active{transform:scale(.97)}',
+  '.th-nav{overflow-x:auto;flex-wrap:nowrap!important;scrollbar-width:none;padding-bottom:2px}.th-nav::-webkit-scrollbar{display:none}.th-nav button{flex:none;min-height:42px;padding:0 18px!important}',
+  /* ── Marcar aula: caixas e alvos de toque maiores ── */
+  '.ag-wrap{max-width:980px}',
+  '.ag-box{padding:clamp(18px,3vw,28px);border-radius:24px;margin-bottom:18px}.ag-t{font-size:18px;margin-bottom:18px}.ag-n{width:30px;height:30px;font-size:14px}',
+  '.ag-tipos{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}',
+  '.ag-tipo{min-height:156px;padding:18px;gap:6px;border-radius:20px;transition:transform .15s,box-shadow .15s,border-color .15s}.ag-tipo:hover{transform:translateY(-3px);box-shadow:0 14px 26px -16px rgba(10,20,50,.55)}.ag-tipo b{font-size:17px}.ag-tipo small{font-size:13px}',
+  '.ag-lb{font-size:14px;margin:20px 0 10px}.ag-chips,.ag-dias,.ag-horas{gap:10px}',
+  '.ag-chip,.ag-dia,.ag-hora{min-height:46px;padding:0 18px;font-size:14px;display:inline-flex;align-items:center;justify-content:center}',
+  '.ag-horas{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr))}.ag-hora{min-width:0}',
+  '.ag-grid{gap:14px}.ag-box input,.ag-box textarea{padding:14px;border-radius:14px}.ag-btn{padding:18px;font-size:16px;margin-top:10px}',
+  '@media(min-width:700px){.ag-tipos{grid-template-columns:repeat(6,1fr)}.ag-tipo{grid-column:span 2}.ag-tipo:nth-child(n+4){grid-column:span 3}}',
+  '#pane-materiais .mat-tabs{display:none!important}',
+  '@media(max-width:560px){.ag-tipos{grid-template-columns:1fr 1fr;gap:10px}.ag-tipo{min-height:140px;padding:14px}.ag-tipos .ag-tipo:last-child:nth-child(odd){grid-column:1/-1;min-height:96px}.ag-grid{grid-template-columns:1fr}}',
+
   '#mi-onb .teste .ic .ic3d{width:48px;height:48px}.mi-gate-it>span .ic3d{width:34px;height:34px}.ag-btn .ic3d,.ag-btn2 .ic3d,.set-btn .ic3d{width:22px;height:22px;vertical-align:-5px}',
   '.mi-ini-ent{display:flex;flex-direction:column;gap:8px;max-width:460px;margin:0 auto 18px;text-align:left}.mi-ini-ent .it{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:11px 13px}',
   '.mi-ini-ent .it>span{font-size:22px;width:34px;text-align:center;flex:none}.mi-ini-ent .it .ic3d{width:34px;height:34px}.mi-ini-ent b{display:block;font-size:13.5px}.mi-ini-ent small{font-size:12px;opacity:.75}.mi-ini-ent .it.idi{background:rgba(14,165,233,.18);border-color:rgba(14,165,233,.45)}',
@@ -808,7 +842,7 @@
       +'<button class="hm-uni" style="background:linear-gradient(135deg,#1b2a6b,#4f6ef7)" data-hm="culture"><span>'+IC('culture')+'</span><b>Culture English</b></button>'
       +'<button class="hm-uni" style="background:linear-gradient(135deg,#0c4a6e,#0ea5e9)" data-hm="viagens"><span>'+IC('viagens')+'</span><b>Viagens</b></button>'
       +'</div>';
-    h+='<div class="hm-ref"><div>'+IC('indicar','xl')+'</div><div><div class="t">Conhece alguém que trava no inglês?</div><div class="s">Manda o convite: a pessoa faz o teste de nível grátis e descobre por onde começar. Leva 10 segundos.</div></div>'
+    h+='<div class="hm-ref"><div>'+IC('indicar','xl')+'</div><div><div class="t">Conhece alguém que trava no inglês?</div><div class="s">Manda o seu link: ele leva a pessoa direto pro pagamento, com desconto aplicado. Leva 10 segundos.</div></div>'
       +'<div class="bts"><button data-hm="indicar" style="background:#25d366;color:#fff;display:inline-flex;align-items:center;gap:8px">'+IC('wa-real')+' Convidar no WhatsApp</button><button data-hm="copiar" style="background:var(--surface2);color:var(--fg)">Copiar link</button></div></div>';
     p.innerHTML=h;
     pintarAula();
@@ -830,9 +864,11 @@
       +'<button class="main" data-hm="abrir">'+(op?(cont?'▶ Continuar':'▶ Assistir'):'Ver aula')+'</button>'
       +'<button data-hm="prox" '+(hmIdx>=FLAT.length-1?'disabled':'')+' aria-label="Próxima aula">▶</button></div></div>';
   }
-  function linkIndicacao(){return SITE+'?ir=teste'+(nomeCurto()?'&ref='+encodeURIComponent(nomeCurto().toLowerCase()):'');}
-  function msgIndicacao(){var c=meuCupom();return 'Tô estudando inglês com o Gediel no Método Inteligente e tá fazendo diferença 🙌 Faz o teste de nível grátis e vê por onde você começaria: '+linkIndicacao()
-    +'\n\nSe quiser entrar no programa, usa meu cupom *'+c.cod+'* que você ganha '+c.pct+'% de desconto. É só mandar o cupom pro comercial: https://wa.me/'+WA+'?text='+encodeURIComponent('Oi! Vim por indicação. Meu cupom: '+c.cod);}
+  /* o convite leva direto pro pagamento da Kiwify (Programa), já com o cupom do amigo e a origem marcada (utm) pra venda cair como indicação */
+  function checkoutIndicacao(){var cf=AS().cfg||{},pl=planos().filter(function(x){return x.k==='inteligente';})[0];return (pl&&pl.checkout)||cf.checkout||'https://pay.kiwify.com.br/CohRPDI';}
+  function linkIndicacao(){var c=meuCupom(),u=checkoutIndicacao();return u+(u.indexOf('?')>=0?'&':'?')+'coupon='+encodeURIComponent(c.cod)+'&utm_source=indicacao&utm_medium=membros&utm_campaign='+encodeURIComponent(c.cod);}
+  function msgIndicacao(){var c=meuCupom();return 'Tô estudando inglês com o Gediel no Método Inteligente e tá fazendo diferença 🙌\n\nEntra pelo meu link que o seu desconto de '+c.pct+'% já vem aplicado (cupom *'+c.cod+'*):\n'+linkIndicacao()
+    +'\n\nQuer ver seu nível antes? Faz o teste grátis: '+SITE+'?ir=teste';}
   /* ───────────────────────── INDIQUE E GANHE ─────────────────────────
      Quem fecha pelo convite conta 1 passo. Prêmios: 1 = e-book de viagem · 2 = upgrade pro Gênio · 5 = +3 meses grátis.
      O cupom do amigo: 5% na 1ª indicação, 10% nas próximas. O comercial registra a venda aqui no modo edição. */
@@ -856,7 +892,7 @@
     if(IND.lista===null){p.innerHTML='<div class="admin-loading">Carregando…</div>';await carregarInd();}
     var n=Math.min(5,IND.lista.length),c=meuCupom(),prox=[1,2,5].filter(function(k){return k>n;})[0];
     var h='<div class="in-hero"><div class="in-k">Indique e ganhe</div><h1>Traga até 5 amigos.<br><span>Cada um que entrar vale um prêmio.</span></h1>'
-      +'<p>Manda o seu convite. Quando o amigo fechar o programa usando o seu cupom, ele conta aqui.</p></div>';
+      +'<p>Manda o seu link. Ele leva o amigo direto pro pagamento, com o seu cupom. Quando a compra sair, conta aqui.</p></div>';
     h+='<div class="in-trilha">';
     for(var i=1;i<=5;i++){var pr=PREMIOS[i],ok=i<=n,al=IND.lista[i-1];
       h+='<div class="in-passo'+(ok?' ok':'')+(pr?' premio':'')+(i===n+1?' prox':'')+'"><div class="bola">'+(ok?(al&&al.indicado_nome?E(al.indicado_nome.charAt(0).toUpperCase()):'✓'):i)+'</div>'
@@ -866,7 +902,7 @@
     h+='<div class="in-status">'+(n>=5?'🏆 Você completou a missão! Fala com o Gediel pra liberar os 3 meses.':n?'Você já trouxe <b>'+n+'</b> '+(n>1?'amigos':'amigo')+'. '+(prox?'Faltam <b>'+(prox-n)+'</b> pro próximo prêmio: '+E(PREMIOS[prox].t)+'.':''):'Nenhum amigo entrou ainda. O primeiro já vale um e-book.')+'</div>';
     h+='<div class="in-cupom"><div><small>Seu cupom</small><b id="in-cod">'+E(c.cod)+'</b><span>Seu amigo ganha <b>'+c.pct+'%</b> de desconto'+(c.pct===5?' (a partir da 2ª indicação fechada, vira 10%)':'')+'</span></div><button data-in="copiar">Copiar</button></div>';
     h+='<button class="pl-btn" style="--pc:#25d366;margin-top:12px" data-in="zap">'+IC('wa-real')+' Mandar meu convite no WhatsApp</button>';
-    h+='<div class="in-como"><b>Como funciona</b><ol><li>Você manda o convite com o seu cupom.</li><li>Seu amigo faz o teste de nível e fala com o comercial usando o cupom.</li><li>Quando ele fechar, a indicação aparece aqui e o prêmio é liberado.</li></ol></div>';
+    h+='<div class="in-como"><b>Como funciona</b><ol><li>Você manda o seu link: ele abre direto na página de pagamento, com o desconto já aplicado.</li><li>Seu amigo paga pela Kiwify e recebe o acesso no mesmo e-mail.</li><li>Quando a compra for confirmada, a indicação conta aqui e o prêmio é liberado.</li></ol></div>';
     if(IND.erro&&souAdmin())h+='<div class="pl-aviso">⚠️ A tabela de indicações ainda não existe. Rode o SQL pendente no Supabase.</div>';
     if(souAdmin())h+=painelIndAdmin();
     p.innerHTML=h;
@@ -1092,7 +1128,7 @@
     var u=UNIV[k],p=$('pane-'+k);if(!u||!p)return;
     p.innerHTML='<div style="font-size:21px;font-weight:800;margin-bottom:4px">'+E(u.title)+'</div><div style="font-size:13px;color:var(--fg2);margin-bottom:18px">'+E(u.sub)+'</div><div class="admin-loading">Carregando…</div>';
     await Promise.all([carregarCards(),carregarModsAll()]);
-    var lista=CARDS.filter(function(c){return c.universo===k&&(c.ativo!==false||EDIT);});
+    var lista=CARDS.filter(function(c){return c.universo===k&&(c.ativo!==false||EDIT)&&!(k==='eom'&&!EDIT&&/^(jogos|assinar o english on mission)$/i.test((c.titulo||'').trim()));});
     var h='<div style="font-size:21px;font-weight:800;margin-bottom:4px">'+E(u.title)+'</div><div style="font-size:13px;color:var(--fg2);margin-bottom:18px">'+E(u.sub)+'</div>';
     var HERO=heroUni(k,u,lista);if(HERO)h=HERO;
     if(CARDS._erro){p.innerHTML=h+'<div class="admin-loading">'+(souAdmin()?'Rode o arquivo COLE-NO-SUPABASE.sql no Supabase pra ativar os Universos.':'Em instantes tem conteúdo novo aqui 🙂')+'</div>';return;}
@@ -1101,7 +1137,8 @@
     });
     var resto=lista.filter(function(c){return !c.destaque;}),secs=[],por={};
     resto.forEach(function(c){var s=c.secao||'';if(!por[s]){por[s]=[];secs.push(s);}por[s].push(c);});
-    var n=0;secs.forEach(function(s,si){h+=(s?'<div class="uni-sec" id="sec-'+k+'-'+si+'">'+E(s)+'</div>':'')+'<div class="uni-grid">'+por[s].map(function(c){return cardHtml(c,n++);}).join('')+(EDIT?'<button class="mi-novo" data-ed="card-novo" data-uni="'+k+'" data-sec="'+E(s)+'">＋ Novo card'+(s?' em '+E(s):'')+'</button>':'')+'</div>';});
+    if(k==='eom'){secs=[''];por={'':resto};}
+    var n=0;secs.forEach(function(s,si){h+=(s?'<div class="uni-sec" id="sec-'+k+'-'+si+'">'+E(s)+'</div>':'')+'<div class="uni-grid'+(k==='eom'?' uni-std':'')+'">'+por[s].map(function(c){return cardHtml(c,n++);}).join('')+(EDIT?'<button class="mi-novo" data-ed="card-novo" data-uni="'+k+'" data-sec="'+E(s)+'">＋ Novo card'+(s?' em '+E(s):'')+'</button>':'')+'</div>';});
     if(EDIT){h=h.replace('<div style="font-size:21px;font-weight:800;margin-bottom:4px">'+E(u.title)+'</div>','<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px"><div style="font-size:21px;font-weight:800">'+E(u.title)+'</div><button class="admin-btn admin-btn-ghost admin-btn-sm" data-ed="menu-ed" data-k="'+k+'">✏️ Nome, frase e acesso</button></div>');if(!secs.length)h+='<div class="uni-grid"><button class="mi-novo" data-ed="card-novo" data-uni="'+k+'">＋ Novo card</button></div>';}
     if(!lista.length&&!EDIT)h+='<div class="admin-loading">Nenhum card ainda.'+(souAdmin()?' Toque em ✏️ Editar, lá em cima, pra criar.':'')+'</div>';
     if(lista.some(function(c){return /indica/i.test(c.tag||'');}))h+='<div style="font-size:10.5px;color:var(--fg3);margin-top:16px">Indicação = link de afiliado. Você paga o mesmo preço e eu posso receber uma comissão.</div>';
@@ -1354,7 +1391,7 @@
     window._miniBack=null;
     var vp=window._voltaPend;window._voltaPend=null;voltaUni(vp,page);
     if(UNIV[page])desenharUni(page);
-    if(page==='prompts'){var f=document.querySelector('#pane-prompts iframe');if(f&&!f.src)f.src=f.dataset.src;}
+    if(page==='prompts'){if(window.EBG_PROMPTS_UI)EBG_PROMPTS_UI.render($('pane-prompts'),ST.nivel);else{var f=document.querySelector('#pane-prompts iframe');if(f&&!f.src)f.src=f.dataset.src;}}
     if(page==='home')setTimeout(renderHome,160);
     if(page==='agendar')renderAgendar();
     if(page==='planos')renderPlanos();
@@ -1438,7 +1475,7 @@
     if(a==='sair'){gv.classList.remove('on');gv.innerHTML='';document.body.style.overflow='';G=null;return;}
     if(a==='denovo'){jogar(G.nome);return;}
     if(a==='som'){falar(G.itens[G.i][0]);return;}
-    if(a==='share'){wa('Fiz '+G.acertos+'/'+G.total+' no jogo '+G.nome+' do Método Inteligente 🎮 Duvido você bater! Faz o teste de nível grátis: '+linkIndicacao(),false);return;}
+    if(a==='share'){wa('Fiz '+G.acertos+'/'+G.total+' no jogo '+G.nome+' do Método Inteligente 🎮 Duvido você bater! Faz o teste de nível grátis: '+SITE+'?ir=teste',false);return;}
     if(G.t==='flash'){
       var c=G.fila[0];
       if(a==='virar'&&!G.virou){G.virou=true;
@@ -2252,6 +2289,17 @@
 
   /* ── materiais: grade com capa, seção, preço e cadeado ── */
   function matLivre(m){var S=AS();return !S.ok||souAdmin()||!!S.programa||m.tipo==='gratis'||(m.tipo==='produto'&&temProduto(m.produto));}
+  /* capas originais (vertical) e página de venda de cada e-book conhecido; vale pelo trecho do nome */
+  var EBK=[
+    {r:/pron[uú]nc|destrave/i,img:'img/capa-ebook-pronuncia.webp',url:'https://pay.kiwify.com.br/ODOhEzc'},
+    {r:/passaporte|viagem|viagens/i,img:'img/capa-viagens.webp',url:'https://ebookviagens.netlify.app/'},
+    {r:/guia a1|a1 at[eé] b2/i,img:'img/capa-guia.webp',url:'https://guia-a1-b2.netlify.app/'},
+    {r:/kit frases|frases/i,img:'img/capa-frases.webp',url:''},
+    {r:/10 jogos|jogos para aprender/i,img:'img/capa-ebook-jogos.webp',url:''},
+    {r:/central de prompts|prompts/i,img:'img/capa-prompts.webp',url:''}
+  ];
+  function ebkDe(m){var n=(m.nome||'')+' '+(m.produto||'');return EBK.filter(function(x){return x.r.test(n);})[0]||null;}
+  function capaEbook(m){var k=ebkDe(m);return k?k.img:'';}
   var renderMatOrig=window.renderMat;
   window.renderMat=function(){
     var g=$('mat-grid'),S=AS();if(!g)return;
@@ -2261,12 +2309,12 @@
     var lista=(S.mats||[]).filter(function(m){return m.ativo!==false||EDIT;});
     var secs=[],por={};lista.forEach(function(m){var s=m.secao||'Materiais';if(!por[s]){por[s]=[];secs.push(s);}por[s].push(m);});
     var n=0,h='';
-    secs.forEach(function(s){h+='<div class="uni-sec">'+E(s)+'</div><div class="uni-grid">'+por[s].map(function(m){
-      var ok=matLivre(m),tag=m.tipo==='gratis'?'Grátis':ok?'✓ Seu':m.tipo==='programa'?'🔒 Programa':(m.preco||'🔒');
-      var fr=m.tipo==='gratis';
+    secs.forEach(function(s){h+='<div class="uni-sec">'+E(s)+'</div><div class="uni-grid mat-v">'+por[s].map(function(m){
+      var ok=matLivre(m),tag=m.tipo==='gratis'?'Grátis':ok?'✓ Seu':m.tipo==='programa'?'🔒 Programa':(m.preco||'🔒 Pago');
+      var fr=m.tipo==='gratis',cv=capaEbook(m);
       return '<div class="uni-card'+(ok?'':' lock')+(fr?' free':'')+(m.ativo===false?' mi-off':'')+'" data-mat="'+m.id+'">'+edCtl('mat',m.id)
-        +'<div class="th">'+(m.capa_url?'<img loading="lazy" alt="" src="'+E(m.capa_url)+'">':capaAuto(m.nome,n))+'<span class="tg'+(fr?' free':'')+'">'+(fr?'✓ ':'')+E(tag)+'</span></div>'
-        +'<div class="bd"><div class="tt">'+E((m.icone?m.icone+' ':'')+m.nome)+'</div><div class="ss">'+E(m.descricao||'')+'</div><div class="ac">'+(ok?'Acessar ›':'Adquirir ›')+'</div></div></div>';n++;}).join('')
+        +'<div class="th">'+(cv?'<img loading="lazy" alt="" src="'+E(cv)+'">':(m.capa_url?'<img loading="lazy" alt="" src="'+E(m.capa_url)+'">':capaAuto(m.nome,n)))+'<span class="tg'+(fr?' free':ok?' own':'')+'">'+(fr?'✓ ':'')+E(tag)+'</span>'+(ok?'':'<span class="mv-lk">🔒</span>')+'</div>'
+        +'<div class="bd"><div class="tt">'+E(m.nome)+'</div><div class="ac">'+(ok?(fr?'Abrir ›':'Ler agora ›'):(m.tipo==='programa'?'Ver o Programa ›':'Conhecer ›'))+'</div></div></div>';n++;}).join('')
       +(EDIT?'<button class="mi-novo" data-ed="mat-novo" data-sec="'+E(s)+'">＋ Novo material</button>':'')+'</div>';});
     if(!lista.length)h='<div class="admin-loading">Nenhum material ainda.</div>'+(EDIT?'<div class="uni-grid"><button class="mi-novo" data-ed="mat-novo">＋ Novo material</button></div>':'');
     g.innerHTML=h;
@@ -2279,7 +2327,10 @@
   },true);
   /* abre o material: sem acesso → checkout; PDF guardado → ver ou baixar (link temporário); senão → link do conteúdo */
   async function abrirMaterial(m){
-    if(!matLivre(m)){irCheckout(m.tipo==='programa'?(AS().cfg||{}).checkout:(m.checkout||(AS().cfg||{}).checkout),'"'+m.nome+'"');return;}
+    if(!matLivre(m)){
+      var kb=ebkDe(m),land=m.tipo==='programa'?'':(m.checkout||(kb&&kb.url)||'');
+      if(land&&m.tipo!=='programa'){window.open(land,'_blank','noopener');return;}
+      irCheckout(m.tipo==='programa'?(AS().cfg||{}).checkout:(m.checkout||(AS().cfg||{}).checkout),'"'+m.nome+'"');return;}
     if(m.arquivo){
       var v=await window._sb.storage.from('ebooks').createSignedUrl(m.arquivo,3600),d=await window._sb.storage.from('ebooks').createSignedUrl(m.arquivo,3600,{download:(m.nome||'ebook').replace(/[^\wÀ-ÿ -]/g,'').trim()+'.pdf'});
       if(v.error||!v.data){toast('Não consegui abrir o PDF agora. Tenta de novo ou avise o Gediel 🙏','#ef4444');return;}
@@ -2688,7 +2739,7 @@
   (function esperar(n){var S=AS();if(S&&S.pronto&&S.cfg){migrarDados();return;}if(n<40)setTimeout(function(){esperar(n+1);},1000);})(0);
   window.miLink=function(u){
     var t=window._curTask?{key:window._curTask.key,i:window._curTask.i}:null;
-    if(u==='#jogos')return go('jogos');if(u==='#modulos')return go('modulos');if(u==='#planos')return go('planos');if(u==='#prisma')return go('prisma');
+    if(u==='#jogos')return go('jogos');if(u==='#prompts'){if(window.EBG_PROMPTS_UI)EBG_PROMPTS_UI.abrir('rapido');return go('prompts');}if(u==='#modulos')return go('modulos');if(u==='#planos')return go('planos');if(u==='#prisma')return go('prisma');
     if(u.indexOf('#aula:')===0){var x=u.split(':');return abrirAula(x[1],x[2]);}
     if(u.indexOf('#jogo:')===0){window.__tarefaJogo=t;if(!jogar(u.slice(6)))go('jogos');return;}
   };
@@ -3208,6 +3259,7 @@
     document.addEventListener('click',function(){setTimeout(atualizar,60);},true);
     atualizar();
   })();
+  document.addEventListener('click',function(e){var b=e.target.closest('.lv-abas button,.mat-tab,.mi-dock button,.th-nav button');if(b&&b.scrollIntoView)try{b.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});}catch(x){}});
   setTimeout(montarAbasLives,0);
   window.MI_APP={conhecer:conhecer,tour:tour,aulaAberta:aulaAberta,marcarDia:marcarDia,abrirAula:abrirAula,renderHome:renderHome,
     compartilharQuiz:compartilharConquista,compartilharDia:function(){compartilharConquista(null);},festa:festa};

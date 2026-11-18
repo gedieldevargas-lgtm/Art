@@ -167,7 +167,7 @@
 
   /* o que faz mais sentido em cada lugar (nessa ordem de prioridade) */
   var PREF = {
-    'Em Casa': ['frases4', 'jogoFlash', 'serie', 'diario', 'comentar', 'versiculo', 'jogoImagem'],
+    'Em Casa': ['frases4', 'jogoFlash', 'chatgpt5', 'serie', 'diario', 'comentar', 'versiculo', 'jogoImagem'],
     'Acabei de acordar': ['frase1', 'versiculo', 'orar', 'musica', 'diario', 'frases3'],
     'Vou pro banho': ['cantar', 'narrar', 'frase1', 'frases4', 'musica', 'podcast5'],
     'Prestes a dormir': ['orar', 'versiculo', 'diario', 'frase1', 'frases3'],
@@ -181,9 +181,9 @@
     'Caminhando': ['pod', 'musica', 'narrar', 'shadow', 'frases4', 'frase1'],
     'Na Academia': ['musica', 'pod', 'shadow', 'frases3', 'story', 'nomear'],
     'Na fila': ['jogoOuvir', 'jogoFlash', 'video4', 'cognatos', 'noticia', 'frases3', 'grupo'],
-    'No sofá': ['serie', 'video4', 'jogoImagem', 'jogoFlash', 'cantar', 'grupo', 'perguntaFam'],
-    'Só 5 minutos': ['jogoImagem', 'jogoFlash', 'frase1', 'grupo', 'comentar', 'musica', 'jogoOuvir'],
-    'Focado pra estudar': ['jogoComplete', 'jogoMonta', 'diario5', 'jogoFlash', 'serie', 'comentar', 'diario', 'podcast5'],
+    'No sofá': ['serie', 'video4', 'chatgpt5', 'jogoImagem', 'jogoFlash', 'cantar', 'grupo', 'perguntaFam'],
+    'Só 5 minutos': ['chatgpt5', 'jogoImagem', 'jogoFlash', 'frase1', 'grupo', 'comentar', 'musica', 'jogoOuvir'],
+    'Focado pra estudar': ['jogoComplete', 'jogoMonta', 'chatgpt5', 'diario5', 'jogoFlash', 'serie', 'comentar', 'diario', 'podcast5'],
     'Viajando': ['frases3', 'cognatos', 'story', 'pod', 'video4', 'musica'],
     'No mercado': ['frases3', 'cognatos', 'objetos6', 'nomear', 'story', 'musica'],
     'Na igreja': ['orar', 'versiculo', 'frase1', 'grupo', 'storyFam'],
@@ -237,6 +237,11 @@
         info: { why: 'Escrever um comentário de verdade, pra uma pessoa real, é produção de inglês com propósito. Uma frase já vale.',
           steps: ['Abra uma aula ou um vídeo da playlist', 'Escolha o momento que você mais gostou', 'Comente em inglês. Modelo: "I really liked this part. Thank you!"', 'Quer mais? "I liked this because…" e complete'],
           links: [{ t: '📚 Abrir as aulas', u: '#modulos' }] } }; } },
+    { id: 'chatgpt5', adv: true, kind: 'ia', mn: 5, need: { s: 2 }, not: ['No Trabalho'], at: ['Em Casa', 'No sofá', 'Focado pra estudar', 'Só 5 minutos', 'Intervalo do almoço', 'Na fila', 'No Transporte', 'Viajando'],
+      b: function (c) { return { icon: '🤖', title: 'Pergunte pro ChatGPT e responda às perguntas dele (5 min)', sub: 'Prompt pronto: 5 perguntas sobre o seu dia',
+        info: { why: 'O ChatGPT vira seu parceiro de conversa. Ele pergunta, você responde em inglês e ele corrige em uma linha. É prática de verdade, no seu ritmo.',
+          steps: ['Toque em "Abrir os prompts" e escolha "5 perguntas sobre o seu dia"', 'Toque em Copiar e cole no ChatGPT (ou no Claude)', 'Responda às 5 perguntas, uma por vez. Vale usar o modo de voz', 'Terminou? Pode marcar a tarefa'],
+          links: [{ t: '🤖 Abrir os prompts', u: '#prompts' }] } }; } },
     { id: 'perguntaFam', kind: 'social', mn: 1, need: { v: 1 }, only: ['Com a família', 'Em Casa', 'No sofá'],
       b: function (c) { return { icon: '🗣️', title: 'Perguntar em inglês pra alguém de casa: "How was your day?"', sub: 'Como foi o seu dia?',
         info: { why: 'Uma pergunta pronta, feita pra uma pessoa real, treina conversa de verdade.', steps: ['Chame alguém da casa', 'Pergunte: "How was your day?"', 'A pessoa pode responder em português, vale! Se responder "Good", você já ganhou o dia'] } }; } },

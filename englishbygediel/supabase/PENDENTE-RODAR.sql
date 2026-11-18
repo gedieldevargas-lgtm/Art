@@ -171,3 +171,6 @@ drop policy if exists "aluno comenta video" on public.video_comentarios;
 create policy "aluno comenta video" on public.video_comentarios for insert to authenticated with check (user_id = auth.uid() and (is_admin = false or public.sou_admin()));
 drop policy if exists "aluno ou admin apaga video_coment" on public.video_comentarios;
 create policy "aluno ou admin apaga video_coment" on public.video_comentarios for delete to authenticated using (user_id = auth.uid() or public.sou_admin());
+
+-- English on Mission: tira os cards "Jogos" e "Assinar o English On Mission" (o botão de assinar já está no topo da página)
+delete from public.mi_uni_cards where universo='eom' and titulo in ('Jogos','Assinar o English On Mission');
