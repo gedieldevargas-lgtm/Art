@@ -2321,6 +2321,8 @@
     g.className='';
     if(!S.pronto){g.innerHTML='<div class="admin-loading">Carregando…</div>';return;}
     var lista=(S.mats||[]).filter(function(m){return m.ativo!==false||EDIT;});
+    var EBx=window.EBG_EBOOKS;
+    if(EBx&&!EDIT)lista=lista.filter(function(m){var c=EBx.deMaterial(m);if(!c||!c.bonusDe)return true;return !lista.some(function(o){var z=EBx.deMaterial(o);return z&&z.k===c.bonusDe;});});
     var secs=[],por={};lista.forEach(function(m){var s=m.secao||'Materiais';if(!por[s]){por[s]=[];secs.push(s);}por[s].push(m);});
     var n=0,h='';
     secs.forEach(function(s){h+='<div class="uni-sec">'+E(s)+'</div><div class="uni-grid mat-v">'+por[s].map(function(m){
@@ -2328,7 +2330,7 @@
       var fr=m.tipo==='gratis',cv=capaEbook(m);
       return '<div class="uni-card'+(ok?'':' lock')+(fr?' free':'')+(m.ativo===false?' mi-off':'')+'" data-mat="'+m.id+'">'+edCtl('mat',m.id)
         +'<div class="th">'+(cv?'<img loading="lazy" alt="" src="'+E(cv)+'">':(m.capa_url?'<img loading="lazy" alt="" src="'+E(m.capa_url)+'">':capaAuto(m.nome,n)))+'<span class="tg'+(fr?' free':ok?' own':'')+'">'+(fr?'✓ ':'')+E(tag)+'</span>'+(ok?'':'<span class="mv-lk">🔒</span>')+'</div>'
-        +'<div class="bd"><div class="tt">'+E(m.nome)+'</div><div class="ac">'+(ok?(fr?'Abrir ›':'Ler agora ›'):(m.tipo==='programa'?'Ver o Programa ›':'Conhecer ›'))+'</div></div></div>';n++;}).join('')
+        +'<div class="bd"><div class="tt">'+E(m.nome)+'</div><div class="ss" style="font-size:11.5px">'+(EBx&&(EBx.deMaterial(m)||{}).bonus?'📘 E-book + 📄 caderno pra imprimir':'')+'</div><div class="ac">'+(ok?(fr?'Abrir ›':'Ler agora ›'):(m.tipo==='programa'?'Ver o Programa ›':'Conhecer ›'))+'</div></div></div>';n++;}).join('')
       +(EDIT?'<button class="mi-novo" data-ed="mat-novo" data-sec="'+E(s)+'">＋ Novo material</button>':'')+'</div>';});
     if(!lista.length)h='<div class="admin-loading">Nenhum material ainda.</div>'+(EDIT?'<div class="uni-grid"><button class="mi-novo" data-ed="mat-novo">＋ Novo material</button></div>':'');
     if(EDIT)h='<div style="margin-bottom:14px"><label class="admin-btn admin-btn-ghost admin-btn-sm" style="cursor:pointer;display:inline-block">📥 Importar vários PDFs de uma vez<input type="file" id="mm-lote" accept="application/pdf" multiple style="display:none"></label></div>'+h;
@@ -2382,8 +2384,9 @@
       var v=await window._sb.storage.from('ebooks').createSignedUrl(m.arquivo,3600),d=await window._sb.storage.from('ebooks').createSignedUrl(m.arquivo,3600,{download:(m.nome||'ebook').replace(/[^\wÀ-ÿ -]/g,'').trim()+'.pdf'});
       if(v.error||!v.data){toast('Não consegui abrir o PDF agora. Tenta de novo ou avise o Gediel 🙏','#ef4444');return;}
       var ov=$('pw-ov');if(!ov){window.open(v.data.signedUrl,'_blank','noopener');return;}
-      var EB=window.EBG_EBOOKS;
-      ov.innerHTML=EB?EB.obrigado(m,v.data.signedUrl,d.data?d.data.signedUrl:v.data.signedUrl,{tem:function(x){var mt=(AS().mats||[]).filter(function(y){var c=EB.deMaterial(y);return c&&c.k===x.k;})[0];return !!(mt&&matLivre(mt));}})
+      var EB=window.EBG_EBOOKS,extras=[];
+      if(EB){var cm=EB.deMaterial(m);if(cm&&cm.bonus){for(var bi=0;bi<cm.bonus.length;bi++){var bm=(AS().mats||[]).filter(function(y){var z=EB.deMaterial(y);return z&&z.k===cm.bonus[bi]&&y.arquivo;})[0];if(!bm)continue;var bv=await window._sb.storage.from('ebooks').createSignedUrl(bm.arquivo,3600),bd=await window._sb.storage.from('ebooks').createSignedUrl(bm.arquivo,3600,{download:(bm.nome||'arquivo').replace(/[^\wÀ-ÿ -]/g,'').trim()+'.pdf'});if(bv.data)extras.push({nome:bm.nome,ler:bv.data.signedUrl,baixar:bd.data?bd.data.signedUrl:bv.data.signedUrl});}}}
+      ov.innerHTML=EB?EB.obrigado(m,v.data.signedUrl,d.data?d.data.signedUrl:v.data.signedUrl,{extras:extras,tem:function(x){var mt=(AS().mats||[]).filter(function(y){var c=EB.deMaterial(y);return c&&c.k===x.k;})[0];return !!(mt&&matLivre(mt));}})
         :'<div class="pw"><h3>'+E(m.nome)+'</h3><a class="sim" href="'+E(v.data.signedUrl)+'" target="_blank" rel="noopener" style="display:block;text-decoration:none;text-align:center">👀 Ler agora</a><button class="nao" data-fechar style="display:block;width:100%">Fechar</button></div>';
       ov.classList.add('open');return;
     }

@@ -24,11 +24,11 @@
   /* página de obrigado: abre depois que o aluno acessa um PDF dele */
   function obrigado(m, ler, baixar, ctx) {
     var c = deMaterial(m), leve = c ? c.leve.map(por).filter(Boolean) : [];
-    leve = leve.filter(function (x) { return !(ctx && ctx.tem && ctx.tem(x)); }).slice(0, 3);
-    var h = '<div class="pw ob"><div class="ob-ic">🎉</div><h3>Obrigado! Seu e-book está liberado</h3><p class="ob-n">' + E(m.nome) + '</p>'
-      + '<a class="sim" href="' + E(ler) + '" target="_blank" rel="noopener">👀 Ler agora</a>'
-      + '<a class="nao ob-dl" href="' + E(baixar || ler) + '">⬇️ Baixar o PDF</a>';
-    if (c && c.bonus && c.bonus.length) h += '<div class="ob-sec">Já incluso pra você</div>' + c.bonus.map(por).map(function (b) { return '<button class="ob-it" data-ob-abrir="' + E(b.k) + '"><b>' + E(b.nome) + '</b><span>' + E(b.desc) + '</span></button>'; }).join('');
+    leve = leve.filter(function (x) { return !(ctx && ctx.tem && ctx.tem(x)) && !(c && ((c.bonus || []).indexOf(x.k) >= 0 || x.bonusDe === c.k || c.bonusDe === x.k)); }).slice(0, 3);
+    var ex = (ctx && ctx.extras) || [];
+    var h = '<div class="pw ob"><div class="ob-ic">🎉</div><h3>Obrigado! ' + (ex.length ? 'Seus ' + (ex.length + 1) + ' arquivos estão liberados' : 'Seu e-book está liberado') + '</h3>';
+    var arq = function (nome, l, b, tag) { return '<div class="ob-arq"><div class="ob-an">' + tag + ' ' + E(nome) + '</div><div class="ob-ab"><a class="sim" href="' + E(l) + '" target="_blank" rel="noopener">👀 Ler</a><a class="nao" href="' + E(b || l) + '">⬇️ Baixar</a></div></div>'; };
+    h += arq(m.nome, ler, baixar, '📘') + ex.map(function (x) { return arq(x.nome, x.ler, x.baixar, '📄'); }).join('');
     if (leve.length) h += '<div class="ob-sec">' + E(c.por || 'Pra ir mais longe, leve junto') + '</div><div class="ob-up">' + leve.map(function (x) {
       return '<button class="ob-card" data-ob-up="' + E(x.k) + '">' + (x.img ? '<img alt="" src="' + E(x.img) + '">' : '<div class="ob-ph">' + E(x.nome) + '</div>') + '<b>' + E(x.nome) + '</b><span>' + E(x.virtual ? 'Conhecer ›' : (x.tipo === 'gratis' ? 'Baixar grátis ›' : 'Quero esse ›')) + '</span></button>'; }).join('') + '</div>';
     return h + '<button class="nao" data-fechar style="display:block;width:100%;margin-top:6px">Fechar</button></div>';
@@ -36,7 +36,7 @@
   var css = document.createElement('style');
   css.textContent = '.ob{max-width:480px;max-height:92vh;overflow:auto}.ob-ic{font-size:44px;text-align:center}.ob h3{text-align:center}.ob-n{text-align:center;color:var(--fg2);font-weight:700;margin:0 0 12px}'
     + '.ob .sim,.ob .nao{display:block;text-decoration:none;text-align:center;min-height:48px;line-height:48px;border-radius:14px}.ob .sim{background:linear-gradient(135deg,#4f6ef7,#8b5cf6)!important;color:#fff!important;font-weight:800;margin-top:6px}.ob .nao{background:transparent!important;border:1.5px solid var(--border)!important;color:var(--fg)!important}.ob-dl{margin-top:8px;font-weight:800}'
-    + '.ob-sec{font-size:13px;font-weight:800;margin:18px 0 8px}.ob-it{all:unset;box-sizing:border-box;display:block;width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:14px;cursor:pointer;margin-bottom:8px}.ob-it b{display:block;font-size:14px}.ob-it span{font-size:12.5px;color:var(--fg2)}'
+    + '.ob-arq{border:1.5px solid var(--border);border-radius:14px;padding:12px;margin-bottom:10px}.ob-an{font-weight:800;font-size:14px;margin-bottom:8px}.ob-ab{display:grid;grid-template-columns:1fr 1fr;gap:8px}.ob-ab a{min-height:44px!important;line-height:44px!important;margin:0!important}.ob-sec{font-size:13px;font-weight:800;margin:18px 0 8px}.ob-it{all:unset;box-sizing:border-box;display:block;width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:14px;cursor:pointer;margin-bottom:8px}.ob-it b{display:block;font-size:14px}.ob-it span{font-size:12.5px;color:var(--fg2)}'
     + '.ob-up{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}.ob-card{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:5px;padding:8px;border:1.5px solid var(--border);border-radius:14px}.ob-card:hover{border-color:var(--accent)}'
     + '.ob-card img,.ob-ph{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:9px}.ob-ph{background:linear-gradient(160deg,#4f6ef7,#1b2440);color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;font:800 14px/1.15 Georgia,serif}.ob-card b{font-size:12.5px;line-height:1.25}.ob-card span{font-size:12px;font-weight:800;color:var(--accent)}';
   document.head.appendChild(css);
