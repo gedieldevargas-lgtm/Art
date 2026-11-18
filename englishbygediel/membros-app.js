@@ -460,6 +460,18 @@
   ' .ai-panel{bottom:calc(136px + env(safe-area-inset-bottom))!important;right:12px!important}',
   ' #toast-global{bottom:calc(84px + env(safe-area-inset-bottom))!important}',
   '}',
+  /* início: checklist com borda verde fina, brilho que pulsa de leve e o tick balançando; selo da live com contagem */
+  '.hm-check::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;box-shadow:inset 0 0 0 1.5px rgba(34,197,94,.95),inset 0 0 26px rgba(34,197,94,.32);animation:miGlowVerde 3.6s ease-in-out infinite}',
+  '@keyframes miGlowVerde{0%,100%{opacity:.55}50%{opacity:1}}',
+  '.hm-check .ic .ic3d{transform-origin:50% 88%;animation:miTick 3.6s ease-in-out infinite}',
+  '@keyframes miTick{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(6deg) translateY(-2%)}}',
+  '.hm-live .lv-seal{position:absolute;top:14px;left:22px;z-index:3;display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:800;letter-spacing:.2px;background:#fff;color:#1e3a8a;padding:5px 11px;border-radius:99px;box-shadow:0 4px 14px rgba(30,58,138,.22),inset 0 0 0 1.5px rgba(37,99,235,.35)}',
+  '.hm-live .lv-seal.on{background:#ef4444;color:#fff;box-shadow:0 4px 16px rgba(239,68,68,.5);animation:miPulse 1.4s infinite}',
+  '.hm-live.ao{box-shadow:0 18px 42px rgba(239,68,68,.3),inset 0 0 0 1.5px rgba(239,68,68,.9)!important}',
+  '@media(prefers-reduced-motion:reduce){.hm-check::after,.hm-check .ic .ic3d,.hm-live .lv-seal.on{animation:none!important}}',
+  /* entrada: botão de som */
+  '#mi-som{position:fixed;top:calc(env(safe-area-inset-top,0px) + 14px);right:max(14px,env(safe-area-inset-right));z-index:9100;width:42px;height:42px;border-radius:50%;border:1.5px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:#fff;font-size:18px;cursor:pointer;backdrop-filter:blur(6px)}',
+  '#mi-som:hover{background:rgba(255,255,255,.22)}',
   /* entrada v2: o card é a própria imagem do ícone (3D, em camadas), a frase centralizada num degradê escuro da cor do card */
   '#mi-entry .mi-ent-box{max-width:1040px}',
   '#mi-entry .mi-ctx{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(168px,1fr))!important;gap:16px!important}',
@@ -728,6 +740,20 @@
     var mes=hoje.toLocaleDateString('pt-BR',{month:'long'});
     return '<div class="hm-mes"><div class="hm-mes-t"><b>'+E(mes.charAt(0).toUpperCase()+mes.slice(1))+'</b><span>'+E(frase)+'</span></div><div class="hm-mes-b">'+bol+'</div></div>';
   }
+  /* selo do card Lives: contagem pro próximo encontro; se estiver no ar, "Live acontecendo" */
+  function seloTxt(x){
+    if(!x)return '';if(x.aoVivo)return '● LIVE ACONTECENDO';
+    var m=Math.max(0,Math.round((x.st-new Date())/60000));
+    if(m<60)return '⏱ começa em '+Math.max(1,m)+' min';
+    if(m<1440)return '⏱ em '+Math.floor(m/60)+'h'+(m%60?(' '+pad(m%60)+'min'):'');
+    var d=Math.floor(m/1440),h=Math.floor((m%1440)/60);return '⏱ em '+d+'d'+(h?' '+h+'h':'');
+  }
+  function selo(x){return x?'<span class="lv-seal'+(x.aoVivo?' on':'')+'" id="lv-seal">'+seloTxt(x)+'</span>':'';}
+  setInterval(function(){
+    var el=$('lv-seal');if(!el)return;var x=proxLives()[0];if(!x)return;
+    el.className='lv-seal'+(x.aoVivo?' on':'');el.textContent=seloTxt(x);
+    var card=el.closest('.hm-live');if(card)card.classList.toggle('ao',!!x.aoVivo);
+  },30000);
   function renderHome(){
     var p=$('pane-home');if(!p||!U)return;
     var sq=sequencia(),pc=progCtx(),c=CTX.filter(function(x){return x.k===pc.k;})[0]||CTX[0],lv=proxLives()[0];
@@ -743,7 +769,7 @@
     }
     h+='<div class="hm-row">'
       +'<button class="hm-big hm-check" data-hm="check" aria-label="Checklist de hoje"><div class="ic">'+IC('check')+'</div><div class="lb">Checklist de hoje</div><div class="pg">'+(faltaDiagnostico()?'🔒 Faça os 2 testes pra liberar':c.ic+' '+E(c.lb)+' · '+pc.feitos+' de '+pc.tot+' feitas')+'</div><div class="bar"><i style="width:'+pc.pct+'%"></i></div></button>'
-      +'<button class="hm-big hm-live'+(lv&&lv.aoVivo?'':' off')+'" data-hm="lives" aria-label="Lives">'+(lv&&lv.aoVivo?'<span class="dot">● AO VIVO</span>':'')+'<div class="ic">'+IC('lives')+'</div><div class="lb">Lives</div><div class="pg">'+(lv?E(lv.lv.title)+'<br>'+E(quando(lv)):'Ver agenda')+'</div></button>'
+      +'<button class="hm-big hm-live'+(lv&&lv.aoVivo?' ao':' off')+'" data-hm="lives" aria-label="Lives">'+selo(lv)+'<div class="ic">'+IC('lives')+'</div><div class="lb">Lives</div><div class="pg">'+(lv?E(lv.lv.title)+'<br>'+E(quando(lv)):'Ver agenda')+'</div></button>'
       +'</div>';
     h+=resumoMes();
     h+='<div class="sec-hd">Sua aula</div><div class="hm-aula" id="hm-aula"><div class="cv"><div class="lock">Carregando…</div></div><div class="bd"><div class="st">&nbsp;</div></div></div>';
@@ -938,12 +964,16 @@
       +'<div class="mi-ent-q">Onde você está agora?</div>'
       +'<div class="mi-ent-s">Escolha o mais parecido com onde você está ou o que está fazendo. Eu monto o checklist de hoje pra esse momento.</div>'
       +'<div class="mi-ctx">'+CTX.map(function(c,i){return '<button data-ent="ctx" data-k="'+E(c.k)+'" title="'+E(c.hint)+'" style="--c:'+ctxCor(c)+';animation-delay:'+(0.06+i*0.05)+'s"><span class="ic">'+ctxImg(c)+'</span><span class="tx"><span class="lb">'+E(c.lb)+'</span></span></button>';}).join('')+'</div>'
-      +'<button class="mi-ctx-skip" data-ent="ctx" data-k="">Só vim dar uma olhada</button>');
+      +'<button class="mi-ctx-skip" data-ent="ctx" data-k="">Só vim dar uma olhada</button>'
+      +'<button id="mi-som" type="button" aria-label="Som dos ícones"></button>');
+    if(window.EBG_FX)EBG_FX.pintaBotao();
     ent.onclick=function(e){
-      var b=e.target.closest('[data-ent="ctx"]');if(!b)return;
+      var b=e.target.closest('[data-ent="ctx"]');if(!b||ent.dataset.indo)return;
       var k=b.dataset.k;
       if(k){LS.set('mi_ctx',{d:dia(),k:k});escolherCtxNaMaratona(k);}
-      fecharEntrada(function(){go('home');renderHome();pintarRail();setTimeout(tourAuto,700);if(k)toast('✅ Checklist pronto: '+(CTX.filter(function(x){return x.k===k;})[0].lb),'#10b981');});
+      var ir=function(){fecharEntrada(function(){ent.dataset.indo='';go('home');renderHome();pintarRail();setTimeout(tourAuto,700);if(k)toast('✅ Checklist pronto: '+(CTX.filter(function(x){return x.k===k;})[0].lb),'#10b981');});};
+      ent.dataset.indo='1';
+      if(k&&window.EBG_FX&&b.querySelector('.ly'))EBG_FX.zoom(b,ir);else ir();
     };
   }
   var entrou=false;
