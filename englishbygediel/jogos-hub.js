@@ -145,7 +145,7 @@ window.EBG_JOGOS = [
   "linha": "Jogos · no programa",
   "nome": "",
   "setor": "Jogos",
-  "img": "img/jogos/todos.webp",
+  "img": "img/jogos/todos.svg",
   "preco": "",
   "link": "",
   "botao": "",
