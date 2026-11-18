@@ -2353,16 +2353,20 @@
   /* admin: escolhe vários PDFs de uma vez; cada um é reconhecido pelo nome do arquivo, cria o material se não existir e envia o PDF */
   async function importarPdfs(files){
     var EB=window.EBG_EBOOKS,rel=[];if(!EB)return;
+    /* nomes de produto que o Kiwify já mandou (tabela compras): o importador usa o nome real quando existe */
+    var nomesK=[];try{var rc=await window._sb.from('compras').select('produto');nomesK=Array.from(new Set((rc.data||[]).map(function(x){return x.produto;}).filter(Boolean)));}catch(e){}
+    var prodDe=function(c){var base=c.bonusDe?EB.por(c.bonusDe):c;var re=base.nome_re;var real=nomesK.filter(function(n){return re.test(n);})[0];return real||base.nome;};
     for(var i=0;i<files.length;i++){
       var f=files[i],c=EB.deArquivo(f.name);
       if(!c){rel.push('❓ '+f.name+': não reconheci');continue;}
       toast('⏳ '+(i+1)+'/'+files.length+' · '+c.nome);
       try{
-        var mt=(AS().mats||[]).filter(function(y){return c.nome_re.test((y.nome||'')+' '+(y.produto||''));})[0],id=mt&&mt.id;
-        if(!id){var ins=await window._sb.from('materiais').insert({nome:c.nome,descricao:c.desc,icone:'📘',secao:'E-books',tipo:c.tipo==='gratis'?'gratis':'produto',produto:'',checkout:c.url||'',ativo:true,ordem:(AS().mats||[]).length+1+i}).select().single();if(ins.error)throw ins.error;id=ins.data.id;}
+        var mt=(AS().mats||[]).filter(function(y){return c.nome_re.test((y.nome||'')+' '+(y.produto||''));})[0],id=mt&&mt.id,pr=c.tipo==='gratis'?'':prodDe(c);
+        if(!id){var ins=await window._sb.from('materiais').insert({nome:c.nome,descricao:c.desc,icone:'📘',secao:'E-books',tipo:c.tipo==='gratis'?'gratis':'produto',produto:pr,checkout:c.url||'',ativo:true,ordem:(AS().mats||[]).length+1+i}).select().single();if(ins.error)throw ins.error;id=ins.data.id;}
+        else if(pr&&mt.tipo==='produto'&&!mt.produto){await window._sb.from('materiais').update({produto:pr}).eq('id',id);}
         var pth='materiais/'+id+'.pdf',up=await window._sb.storage.from('ebooks').upload(pth,f,{upsert:true,contentType:'application/pdf'});if(up.error)throw up.error;
         var u2=await window._sb.from('materiais').update({arquivo:pth}).eq('id',id);if(u2.error)throw u2.error;
-        rel.push('✅ '+c.nome+(mt?'':' (criado: falta o nome do produto Kiwify)'));
+        rel.push('✅ '+c.nome+(pr?' · libera pra quem comprou "'+pr+'"':'')+(c.bonusDe?' (bônus de '+EB.por(c.bonusDe).nome+')':''));
       }catch(err){rel.push('⚠️ '+f.name+': '+(err.message||err));}
     }
     await recarregarAcesso();alert(rel.join('\n'));
