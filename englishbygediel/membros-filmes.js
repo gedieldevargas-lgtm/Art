@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   var F = window.EBG_FILMES || [], NIV = ['A1', 'A2', 'B1', 'B2', 'C1'];
-  var KEY = 'mi_filmes', KIMG = 'mi_fl_img2';
+  var KEY = 'mi_filmes', KIMG = 'mi_fl_img3';
   var ST = { n: 'A1', aberto: null, f: 'todos' };
   var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   var ld = function (k, d) { try { return JSON.parse(localStorage.getItem(k)) || d; } catch (e) { return d; } };
@@ -43,10 +43,10 @@
   document.addEventListener('error', async function (e) {
     var im = e.target; if (!im || im.tagName !== 'IMG' || !im.dataset || !im.dataset.fid) return;
     var f = F.filter(function (x) { return x.id === im.dataset.fid; })[0]; if (!f) return;
-    if (im.dataset.tent) { IMG[f.id] = ''; sv(KIMG, IMG); im.remove(); return; }
+    if (im.dataset.tent) { im.remove(); return; }
     im.dataset.tent = '1';
     var u = await wiki(f);
-    if (u) { IMG[f.id] = u; sv(KIMG, IMG); im.src = u; } else { IMG[f.id] = ''; sv(KIMG, IMG); im.remove(); }
+    if (u) { IMG[f.id] = u; sv(KIMG, IMG); im.src = u; } else { im.remove(); }
   }, true);
   function est(id) { return DB[id] || {}; }
   function card(f) {
