@@ -104,7 +104,7 @@ window.EBG = {
       sinopse: 'O guia visual pra quem trava na hora de falar. A pronúncia vem escrita do jeito que brasileiro lê, sem símbolo estranho de dicionário: chocolate vira TCHÓK-let, vegetable vira VÉDJ-tâ-bol. Do fácil ao chefão, são 4 níveis, cada um com explicação, exercício e canais do YouTube pra praticar. 15 páginas, acesso imediato.' },
     { id: 'passaporte', titulo: 'Passaporte do Inglês', linha: 'Inglês para Viagens', cat: 'E-books', img: 'img/capa-viagens.webp',
       preco: 'R$ 27', link: 'https://ebookviagens.netlify.app/', modos: ['viagem', 'intercambio', 'zero'],
-      meta: ['E-book', '9 capítulos', 'Pagamento único'],
+      meta: ['E-book', '10 situações', 'Pagamento único'],
       sinopse: 'O manual pra quem tem viagem marcada e não quer depender de ninguém lá fora. 9 capítulos na ordem da viagem, com vocabulário com imagem, frases, o que você vai ouvir e diálogos reais. Inclui o Kit de Sobrevivência com as 20 frases que salvam qualquer situação.' },
     { id: 'guiaa1b2', titulo: 'Guia A1 até B2', linha: 'Seu próximo passo no inglês', cat: 'Guias', img: 'img/capa-guia.webp',
       preco: 'R$ 27', link: 'https://guia-a1-b2.netlify.app/', modos: ['teste', 'zero', 'carreira'],
