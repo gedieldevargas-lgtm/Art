@@ -105,7 +105,7 @@ window.EBG = {
     { id: 'passaporte', titulo: 'Passaporte do Inglês', linha: 'Inglês para Viagens', cat: 'E-books', img: 'img/capa-viagens.webp',
       preco: 'R$ 27', link: 'https://ebookviagens.netlify.app/', modos: ['viagem', 'intercambio', 'zero'],
       meta: ['E-book', '10 situações', 'Pagamento único'],
-      sinopse: 'O manual pra quem tem viagem marcada e não quer depender de ninguém lá fora. 9 capítulos na ordem da viagem, com vocabulário com imagem, frases, o que você vai ouvir e diálogos reais. Inclui o Kit de Sobrevivência com as 20 frases que salvam qualquer situação.' },
+      sinopse: 'O manual pra quem tem viagem marcada e não quer depender de ninguém lá fora. O que falar e o que você vai ouvir em 10 situações, do aeroporto à emergência, com vocabulário com imagem, frases e diálogos reais.' },
     { id: 'guiaa1b2', titulo: 'Guia A1 até B2', linha: 'Seu próximo passo no inglês', cat: 'Guias', img: 'img/capa-guia.webp',
       preco: 'R$ 27', link: 'https://guia-a1-b2.netlify.app/', modos: ['teste', 'zero', 'carreira'],
       meta: ['Guia digital', '20 páginas em PDF', 'A1 → B2'],
