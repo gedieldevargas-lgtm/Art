@@ -2506,7 +2506,6 @@
         ['Inglês com Séries','Aprenda inglês de verdade com as séries que você já assiste.','E-books','📺','1HaM6XZAp7l04yYSJllkQB04lwmxwal3v'],
         ['Caderno de Séries (pra imprimir)','Caderno pra anotar vocabulário e frases enquanto assiste.','E-books','📓','1R49fo0W_a3n2QJd4_ZhCqxZSbBAbP1nc'],
         ['Culture English · Edição Visual','O e-book do Culture English, em edição visual.','E-books','🎬','15LIrNj5jdl9GYH8MTVfLykkNwmfnNBmh'],
-        ['Guia do Visto Americano','Guia pra se preparar pro visto americano.','E-books','🛂','1hIbZ81p9-7fynEXq2UM7U2Pa9Pp-rHbY'],
         ['Inglês a Dois · 15 meses','Plano pra casais estudarem inglês juntos durante 15 meses.','Casais','💑','1aKbxRMobZFtXMXmozCPMBEgWxxrZQXjd'],
         ['Templates de Casais · 15 meses','Templates pra imprimir e acompanhar o plano a dois.','Casais','💑','1A3QgPZoDjUGgc-aHWsAd7mm_xIvn9b3q'],
         ['Do Zero ao Inglês em 360 Dias','Cronograma de estudo de 1 ano pra quem começa do zero.','Planners','🗓️','1nlahe-iS-FbQjw_QSH_trKnSljBzlW44'],
@@ -2519,6 +2518,14 @@
           var ins=await window._sb.from('materiais').insert({nome:e[0],descricao:e[1],secao:e[2],icone:e[3],tipo:'programa',produto:'',checkout:'',preco:'',ativo:true,ordem:++ord}).select().single();if(ins.error)throw 0;
           var lk=await window._sb.from('material_links').upsert({material_id:ins.data.id,link:D(e[4])});if(lk.error)throw 0;}
         feitas.push('ebooks-drive-1');mudou=true;
+      }catch(e){}
+    }
+    if(feitas.indexOf('ebooks-visto-fora')<0){
+      /* o Guia do Visto Americano é vendido (tem landing): sai de Materiais se já tinha entrado */
+      try{
+        var vm=await window._sb.from('materiais').select('id').eq('nome','Guia do Visto Americano').eq('tipo','programa');if(vm.error)throw 0;
+        for(var v=0;v<(vm.data||[]).length;v++){await window._sb.from('material_links').delete().eq('material_id',vm.data[v].id);var dv=await window._sb.from('materiais').delete().eq('id',vm.data[v].id);if(dv.error)throw 0;}
+        feitas.push('ebooks-visto-fora');mudou=true;
       }catch(e){}
     }
     var extra={};
