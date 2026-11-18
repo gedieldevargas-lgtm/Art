@@ -2331,6 +2331,7 @@
         +'<div class="bd"><div class="tt">'+E(m.nome)+'</div><div class="ac">'+(ok?(fr?'Abrir ›':'Ler agora ›'):(m.tipo==='programa'?'Ver o Programa ›':'Conhecer ›'))+'</div></div></div>';n++;}).join('')
       +(EDIT?'<button class="mi-novo" data-ed="mat-novo" data-sec="'+E(s)+'">＋ Novo material</button>':'')+'</div>';});
     if(!lista.length)h='<div class="admin-loading">Nenhum material ainda.</div>'+(EDIT?'<div class="uni-grid"><button class="mi-novo" data-ed="mat-novo">＋ Novo material</button></div>':'');
+    if(EDIT)h='<div style="margin-bottom:14px"><label class="admin-btn admin-btn-ghost admin-btn-sm" style="cursor:pointer;display:inline-block">📥 Importar vários PDFs de uma vez<input type="file" id="mm-lote" accept="application/pdf" multiple style="display:none"></label></div>'+h;
     g.innerHTML=h;
   };
   document.addEventListener('click',async function(e){
@@ -2339,6 +2340,34 @@
     if(EDIT){abrirMat(m);return;}
     abrirMaterial(m);
   },true);
+  document.addEventListener('click',function(e){
+    var ab=e.target.closest('[data-ob-abrir]'),up=e.target.closest('[data-ob-up]'),EB=window.EBG_EBOOKS;if(!EB||(!ab&&!up))return;
+    if(ab){var c=EB.por(ab.dataset.obAbrir),mt=(AS().mats||[]).filter(function(y){var z=EB.deMaterial(y);return z&&c&&z.k===c.k;})[0];var ov=$('pw-ov');if(ov)ov.classList.remove('open');if(mt)abrirMaterial(mt);else toast('Esse arquivo ainda não foi enviado. Avise o Gediel 🙏');return;}
+    var x=EB.por(up.dataset.obUp);if(!x)return;
+    if(x.virtual){var ov2=$('pw-ov');if(ov2)ov2.classList.remove('open');go('planos');return;}
+    var mt2=(AS().mats||[]).filter(function(y){var z=EB.deMaterial(y);return z&&z.k===x.k;})[0];
+    if(mt2){var ov3=$('pw-ov');if(ov3)ov3.classList.remove('open');abrirMaterial(mt2);return;}
+    if(x.url){window.open(x.url,'_blank','noopener');return;}
+    wa('Oi Gediel! Quero saber mais sobre "'+x.nome+'".');
+  });
+  /* admin: escolhe vários PDFs de uma vez; cada um é reconhecido pelo nome do arquivo, cria o material se não existir e envia o PDF */
+  async function importarPdfs(files){
+    var EB=window.EBG_EBOOKS,rel=[];if(!EB)return;
+    for(var i=0;i<files.length;i++){
+      var f=files[i],c=EB.deArquivo(f.name);
+      if(!c){rel.push('❓ '+f.name+': não reconheci');continue;}
+      toast('⏳ '+(i+1)+'/'+files.length+' · '+c.nome);
+      try{
+        var mt=(AS().mats||[]).filter(function(y){return c.nome_re.test((y.nome||'')+' '+(y.produto||''));})[0],id=mt&&mt.id;
+        if(!id){var ins=await window._sb.from('materiais').insert({nome:c.nome,descricao:c.desc,icone:'📘',secao:'E-books',tipo:c.tipo==='gratis'?'gratis':'produto',produto:'',checkout:c.url||'',ativo:true,ordem:(AS().mats||[]).length+1+i}).select().single();if(ins.error)throw ins.error;id=ins.data.id;}
+        var pth='materiais/'+id+'.pdf',up=await window._sb.storage.from('ebooks').upload(pth,f,{upsert:true,contentType:'application/pdf'});if(up.error)throw up.error;
+        var u2=await window._sb.from('materiais').update({arquivo:pth}).eq('id',id);if(u2.error)throw u2.error;
+        rel.push('✅ '+c.nome+(mt?'':' (criado: falta o nome do produto Kiwify)'));
+      }catch(err){rel.push('⚠️ '+f.name+': '+(err.message||err));}
+    }
+    await recarregarAcesso();alert(rel.join('\n'));
+  }
+  document.addEventListener('change',function(e){if(e.target&&e.target.id==='mm-lote'){importarPdfs([].slice.call(e.target.files));e.target.value='';}});
   /* abre o material: sem acesso → checkout; PDF guardado → ver ou baixar (link temporário); senão → link do conteúdo */
   async function abrirMaterial(m){
     if(!matLivre(m)){
@@ -2349,10 +2378,9 @@
       var v=await window._sb.storage.from('ebooks').createSignedUrl(m.arquivo,3600),d=await window._sb.storage.from('ebooks').createSignedUrl(m.arquivo,3600,{download:(m.nome||'ebook').replace(/[^\wÀ-ÿ -]/g,'').trim()+'.pdf'});
       if(v.error||!v.data){toast('Não consegui abrir o PDF agora. Tenta de novo ou avise o Gediel 🙏','#ef4444');return;}
       var ov=$('pw-ov');if(!ov){window.open(v.data.signedUrl,'_blank','noopener');return;}
-      ov.innerHTML='<div class="pw"><div style="text-align:center">'+IC('materiais','xl')+'</div><h3>'+E(m.nome)+'</h3><p>Seu e-book está liberado. Leia aqui ou baixe pra ter no celular.</p>'
-        +'<a class="sim" href="'+E(v.data.signedUrl)+'" target="_blank" rel="noopener" style="display:block;text-decoration:none;text-align:center">👀 Ler agora</a>'
-        +'<a class="nao" href="'+E(d.data?d.data.signedUrl:v.data.signedUrl)+'" style="display:block;text-decoration:none;text-align:center;margin-top:8px;font-weight:800">⬇️ Baixar o PDF</a>'
-        +'<button class="nao" data-fechar style="display:block;width:100%">Fechar</button></div>';
+      var EB=window.EBG_EBOOKS;
+      ov.innerHTML=EB?EB.obrigado(m,v.data.signedUrl,d.data?d.data.signedUrl:v.data.signedUrl,{tem:function(x){var mt=(AS().mats||[]).filter(function(y){var c=EB.deMaterial(y);return c&&c.k===x.k;})[0];return !!(mt&&matLivre(mt));}})
+        :'<div class="pw"><h3>'+E(m.nome)+'</h3><a class="sim" href="'+E(v.data.signedUrl)+'" target="_blank" rel="noopener" style="display:block;text-decoration:none;text-align:center">👀 Ler agora</a><button class="nao" data-fechar style="display:block;width:100%">Fechar</button></div>';
       ov.classList.add('open');return;
     }
     var r=await window._sb.from('material_links').select('link').eq('material_id',m.id).maybeSingle();
