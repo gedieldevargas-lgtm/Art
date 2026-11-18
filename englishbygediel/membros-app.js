@@ -23,6 +23,11 @@
   var IC_MENU={home:'home',maratona:'maratona',lives:'lives',modulos:'modulos',jogos:'jogos',materiais:'materiais',prompts:'prompts',agendar:'agendar',planos:'planos',indicar:'indicar',eom:'eom',culture:'culture',viagens:'viagens',bussola:'bussola',prisma:'prisma',admin:'admin'};
   var IC_CTX={'Em Casa':'home','Acabei de acordar':'ctx-acordar','Vou pro banho':'ctx-banho','Prestes a dormir':'ctx-dormir','No carro':'ctx-carro','No Transporte':'ctx-transporte','No Trabalho':'ctx-trabalho','Intervalo do almoço':'ctx-almoco','Lavando a louça':'ctx-louca','Limpando a casa':'ctx-limpeza','Cozinhando':'ctx-cozinha','Caminhando':'ctx-caminhada','Na Academia':'ctx-academia','Na fila':'ctx-fila','No sofá':'ctx-sofa','Só 5 minutos':'ctx-5min','Focado pra estudar':'ctx-foco','Viajando':'viagens','No mercado':'ctx-mercado','Na igreja':'ctx-igreja','Com a família':'ctx-familia'};
   function icCtx(c,cls){return IC_CTX[c.k]?IC(IC_CTX[c.k],cls):c.ic;}
+  var CTX_COR={"5min": "#6e1c2a", "academia": "#6c1f1f", "acordar": "#6e4705", "almoco": "#70340a", "banho": "#03525f", "caminhada": "#09534b", "carro": "#6c1f1f", "cozinha": "#70340a", "dormir": "#2d2e6c", "familia": "#6a2045", "fila": "#4c266f", "foco": "#112d6a", "igreja": "#623603", "limpeza": "#07533a", "louca": "#03525f", "mercado": "#0a4921", "sofa": "#3f296f", "trabalho": "#381a6b", "transporte": "#6e4705", "casa": "#0d3067", "viagem": "#09534b"};
+  function ctxNome(c){var n=IC_CTX[c.k];if(!n)return '';n=n.replace(/^ctx-/,'');return n==='home'?'casa':n==='viagens'?'viagem':n;}
+  function ctxCor(c){return CTX_COR[ctxNome(c)]||'#1b1f4b';}
+  /* cartão da entrada: fundo e desenho em camadas separadas (o desenho anima sozinho) */
+  function ctxImg(c){var n=ctxNome(c);if(!CTX_COR[n])return icCtx(c);return '<span class="ly"><img class="bgi" src="img/icons/ctx3d/'+n+'-bg.svg" alt="" draggable="false"><img class="fg a-'+n+'" src="img/icons/ctx3d/'+n+'-fg.svg" alt="" draggable="false"></span>';}
   function iconesMenu(){
     [].forEach.call(document.querySelectorAll('.sidebar .nav-pill'),function(n){var t=n.querySelectorAll('span')[1];if(t&&!n.title)n.title=t.textContent;});
     var lg=document.querySelector('.sidebar-logo');
@@ -455,20 +460,65 @@
   ' .ai-panel{bottom:calc(136px + env(safe-area-inset-bottom))!important;right:12px!important}',
   ' #toast-global{bottom:calc(84px + env(safe-area-inset-bottom))!important}',
   '}',
-  /* entrada v2: o card é a própria imagem do ícone, com a frase escrita em cima; grade larga no notebook */
+  /* entrada v2: o card é a própria imagem do ícone (3D, em camadas), a frase centralizada num degradê escuro da cor do card */
   '#mi-entry .mi-ent-box{max-width:1040px}',
   '#mi-entry .mi-ctx{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(168px,1fr))!important;gap:16px!important}',
-  '#mi-entry .mi-ctx button{position:relative;aspect-ratio:1/1;padding:0!important;border:0!important;border-radius:26px!important;overflow:hidden;background:transparent!important;display:block;box-shadow:0 10px 26px rgba(0,0,0,.35);transition:transform .28s cubic-bezier(.22,1,.36,1),box-shadow .28s}',
+  '#mi-entry .mi-ctx button{position:relative;aspect-ratio:1/1;padding:0!important;border:0!important;border-radius:26px!important;overflow:hidden;background:transparent!important;display:block;box-shadow:0 12px 28px rgba(0,0,0,.38);transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s}',
   '#mi-entry .mi-ctx .ic{position:absolute;inset:0;display:block;font-size:0!important}',
-  '#mi-entry .mi-ctx .ic .ic3d{position:absolute;inset:0;width:100%!important;height:100%!important;object-fit:cover;vertical-align:0;transform:translateY(-9%) scale(1.1);transform-origin:50% 45%;transition:transform .35s cubic-bezier(.34,1.56,.64,1)}',
-  '#mi-entry .mi-ctx .tx{position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;gap:2px;text-align:left;padding:22px 12px 11px;background:linear-gradient(to top,rgba(11,13,28,.94) 0%,rgba(11,13,28,.8) 60%,rgba(11,13,28,0) 100%)}',
-  '#mi-entry .mi-ctx .lb{font-size:15.5px!important;font-weight:800;line-height:1.15;color:#fff}',
+  '#mi-entry .mi-ctx .ly{position:absolute;inset:0;display:block;transform:scale(1.06)}',
+  '#mi-entry .mi-ctx .ly img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;user-select:none;-webkit-user-drag:none}',
+  '#mi-entry .mi-ctx .fg{transform-origin:50% 52%;will-change:transform}',
+  '#mi-entry .mi-ctx .tx{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:center;text-align:center;padding:26px 10px 11px;background:linear-gradient(to top,var(--c) 0%,var(--c) 30%,rgba(0,0,0,0) 100%);background:linear-gradient(to top,color-mix(in srgb,var(--c) 96%,transparent) 0%,color-mix(in srgb,var(--c) 82%,transparent) 42%,transparent 100%)}',
+  '#mi-entry .mi-ctx .lb{font-size:15.5px!important;font-weight:800;line-height:1.15;color:#fff;text-align:center;text-shadow:0 1px 3px rgba(0,0,0,.35)}',
   '#mi-entry .mi-ctx .ht{display:none}',
-  '@media(hover:hover){#mi-entry .mi-ctx button:hover{transform:translateY(-6px);box-shadow:0 18px 38px rgba(0,0,0,.5),0 0 0 2px rgba(255,255,255,.55)}#mi-entry .mi-ctx button:hover .ic3d{transform:translateY(-9%) scale(1.2) rotate(-3deg)}}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.5),0 0 0 2px rgba(255,255,255,.6)}}',
   '#mi-entry .mi-ctx button:focus-visible{outline:3px solid #fff;outline-offset:3px}#mi-entry .mi-ctx button:active{transform:scale(.96)}',
-  '@media(max-width:700px){#mi-entry .mi-ctx{grid-template-columns:repeat(3,1fr)!important;gap:10px!important}#mi-entry .mi-ctx button{border-radius:18px!important}#mi-entry .mi-ctx .tx{padding:22px 7px 8px}#mi-entry .mi-ctx .lb{font-size:12.5px!important}#mi-entry .mi-ctx .ht{display:none}}',
+  /* animação de 1,5 s de cada ícone, proporcional ao que ele é; só roda quando a pessoa passa o mouse, foca ou toca (nada se mexe sozinho) */
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-casa{animation:mk-hop 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-casa,#mi-entry .mi-ctx button:active .a-casa{animation:mk-hop 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-acordar{animation:mk-rise 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-acordar,#mi-entry .mi-ctx button:active .a-acordar{animation:mk-rise 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-banho{animation:mk-shake 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-banho,#mi-entry .mi-ctx button:active .a-banho{animation:mk-shake 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-dormir{animation:mk-rock 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-dormir,#mi-entry .mi-ctx button:active .a-dormir{animation:mk-rock 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-carro{animation:mk-drive 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-carro,#mi-entry .mi-ctx button:active .a-carro{animation:mk-drive 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-transporte{animation:mk-bus 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-transporte,#mi-entry .mi-ctx button:active .a-transporte{animation:mk-bus 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-trabalho{animation:mk-lift 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-trabalho,#mi-entry .mi-ctx button:active .a-trabalho{animation:mk-lift 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-almoco{animation:mk-clink 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-almoco,#mi-entry .mi-ctx button:active .a-almoco{animation:mk-clink 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-louca{animation:mk-wiggle 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-louca,#mi-entry .mi-ctx button:active .a-louca{animation:mk-wiggle 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-limpeza{animation:mk-sweep 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-limpeza,#mi-entry .mi-ctx button:active .a-limpeza{animation:mk-sweep 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-cozinha{animation:mk-bounce 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-cozinha,#mi-entry .mi-ctx button:active .a-cozinha{animation:mk-bounce 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-caminhada{animation:mk-steps 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-caminhada,#mi-entry .mi-ctx button:active .a-caminhada{animation:mk-steps 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-academia{animation:mk-pump 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-academia,#mi-entry .mi-ctx button:active .a-academia{animation:mk-pump 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-fila{animation:mk-flip 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-fila,#mi-entry .mi-ctx button:active .a-fila{animation:mk-flip 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-sofa{animation:mk-squash 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-sofa,#mi-entry .mi-ctx button:active .a-sofa{animation:mk-squash 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-5min{animation:mk-swing 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-5min,#mi-entry .mi-ctx button:active .a-5min{animation:mk-swing 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-foco{animation:mk-pulse 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-foco,#mi-entry .mi-ctx button:active .a-foco{animation:mk-pulse 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-viagem{animation:mk-fly 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-viagem,#mi-entry .mi-ctx button:active .a-viagem{animation:mk-fly 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-mercado{animation:mk-roll 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-mercado,#mi-entry .mi-ctx button:active .a-mercado{animation:mk-roll 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-igreja{animation:mk-float 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-igreja,#mi-entry .mi-ctx button:active .a-igreja{animation:mk-float 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-familia{animation:mk-beat 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-familia,#mi-entry .mi-ctx button:active .a-familia{animation:mk-beat 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@keyframes mk-hop{0%{transform:none}25%{transform:translateY(-14%) scale(1.04)}50%{transform:translateY(0) scale(1.06,.94)}70%{transform:translateY(-5%)}100%{transform:none}}',
+  '@keyframes mk-rise{0%{transform:translateY(14%)}55%{transform:translateY(-9%) scale(1.07)}100%{transform:none}}',
+  '@keyframes mk-shake{0%,100%{transform:none}15%{transform:rotate(-8deg)}30%{transform:rotate(8deg)}45%{transform:rotate(-6deg) translateY(3%)}60%{transform:rotate(6deg)}80%{transform:rotate(-2deg)}}',
+  '@keyframes mk-rock{0%{transform:rotate(0)}30%{transform:rotate(-12deg) translateY(-3%)}65%{transform:rotate(9deg)}100%{transform:rotate(0)}}',
+  '@keyframes mk-drive{0%{transform:translateX(-22%)}55%{transform:translateX(9%)}75%{transform:translateX(-3%)}100%{transform:none}}',
+  '@keyframes mk-bus{0%{transform:translateX(24%)}60%{transform:translateX(-7%)}80%{transform:translateX(2%)}100%{transform:none}}',
+  '@keyframes mk-lift{0%{transform:none}35%{transform:translateY(-10%) rotate(-4deg)}65%{transform:translateY(-10%) rotate(4deg)}100%{transform:none}}',
+  '@keyframes mk-clink{0%,100%{transform:none}25%{transform:rotate(-9deg) translateY(-3%)}50%{transform:rotate(7deg)}75%{transform:rotate(-3deg)}}',
+  '@keyframes mk-wiggle{0%,100%{transform:none}12%{transform:rotate(-5deg) translateX(-2%)}28%{transform:rotate(5deg) translateX(2%)}44%{transform:rotate(-4deg)}60%{transform:rotate(4deg)}80%{transform:rotate(-1deg)}}',
+  '@keyframes mk-sweep{0%{transform:rotate(0)}25%{transform:rotate(-16deg) translateX(-5%)}60%{transform:rotate(14deg) translateX(5%)}100%{transform:rotate(0)}}',
+  '@keyframes mk-bounce{0%,100%{transform:none}22%{transform:translateY(-12%)}42%{transform:translateY(0) scale(1.05,.95)}62%{transform:translateY(-6%)}80%{transform:none}}',
+  '@keyframes mk-steps{0%{transform:translateX(-8%) translateY(0)}20%{transform:translateX(-3%) translateY(-5%)}40%{transform:translateX(2%) translateY(0)}60%{transform:translateX(6%) translateY(-5%)}80%{transform:translateX(2%) translateY(0)}100%{transform:none}}',
+  '@keyframes mk-pump{0%{transform:none}25%{transform:translateY(-16%) scale(1.08)}45%{transform:translateY(4%)}70%{transform:translateY(-10%) scale(1.05)}100%{transform:none}}',
+  '@keyframes mk-flip{0%{transform:rotate(0)}70%{transform:rotate(190deg)}85%{transform:rotate(176deg)}100%{transform:rotate(180deg)}}',
+  '@keyframes mk-squash{0%{transform:none}20%{transform:translateY(-12%)}40%{transform:translateY(2%) scale(1.08,.88)}60%{transform:translateY(-4%)}100%{transform:none}}',
+  '@keyframes mk-swing{0%,100%{transform:none}20%{transform:rotate(-14deg)}45%{transform:rotate(12deg)}70%{transform:rotate(-6deg)}}',
+  '@keyframes mk-pulse{0%,100%{transform:none}30%{transform:scale(1.18)}55%{transform:scale(.94)}75%{transform:scale(1.06)}}',
+  '@keyframes mk-fly{0%{transform:translate(-30%,26%) rotate(-8deg);opacity:.2}45%{opacity:1}75%{transform:translate(6%,-6%) rotate(3deg)}100%{transform:none}}',
+  '@keyframes mk-roll{0%{transform:translateX(-22%)}55%{transform:translateX(8%)}80%{transform:translateX(-2%)}100%{transform:none}}',
+  '@keyframes mk-float{0%,100%{transform:none}45%{transform:translateY(-10%) scale(1.07)}}',
+  '@keyframes mk-beat{0%,100%{transform:none}18%{transform:scale(1.15)}34%{transform:scale(.97)}52%{transform:scale(1.12)}70%{transform:none}}',
+  '@media(max-width:700px){#mi-entry .mi-ctx{grid-template-columns:repeat(3,1fr)!important;gap:10px!important}#mi-entry .mi-ctx button{border-radius:18px!important}#mi-entry .mi-ctx .tx{padding:18px 5px 7px}#mi-entry .mi-ctx .lb{font-size:12.5px!important}}',
   '@media(max-width:330px){#mi-entry .mi-ctx{grid-template-columns:repeat(2,1fr)!important}}',
-  '@media(prefers-reduced-motion:reduce){#mi-entry .mi-ctx button,#mi-entry .mi-ctx .ic3d{transition:none!important;animation:none!important;opacity:1!important;transform:none!important}}',
+  '@media(prefers-reduced-motion:reduce){#mi-entry .mi-ctx button{opacity:1!important;transform:none!important;animation:none!important}#mi-entry .mi-ctx button,#mi-entry .mi-ctx .fg{transition:none!important}#mi-entry .mi-ctx .fg{animation:none!important}}',
   ].join('');
   document.head.appendChild(css);
 
@@ -887,7 +937,7 @@
     abrirEntrada('<span class="mi-logo mi-lg-ent"></span><div class="mi-ent-kicker">'+E(saudacao())+(nomeCurto()?', '+E(nomeCurto()):'')+'</div>'
       +'<div class="mi-ent-q">Onde você está agora?</div>'
       +'<div class="mi-ent-s">Escolha o mais parecido com onde você está ou o que está fazendo. Eu monto o checklist de hoje pra esse momento.</div>'
-      +'<div class="mi-ctx">'+CTX.map(function(c,i){return '<button data-ent="ctx" data-k="'+E(c.k)+'" title="'+E(c.hint)+'" style="animation-delay:'+(0.06+i*0.05)+'s"><span class="ic">'+icCtx(c)+'</span><span class="tx"><span class="lb">'+E(c.lb)+'</span><span class="ht">'+E(c.hint)+'</span></span></button>';}).join('')+'</div>'
+      +'<div class="mi-ctx">'+CTX.map(function(c,i){return '<button data-ent="ctx" data-k="'+E(c.k)+'" title="'+E(c.hint)+'" style="--c:'+ctxCor(c)+';animation-delay:'+(0.06+i*0.05)+'s"><span class="ic">'+ctxImg(c)+'</span><span class="tx"><span class="lb">'+E(c.lb)+'</span></span></button>';}).join('')+'</div>'
       +'<button class="mi-ctx-skip" data-ent="ctx" data-k="">Só vim dar uma olhada</button>');
     ent.onclick=function(e){
       var b=e.target.closest('[data-ent="ctx"]');if(!b)return;
