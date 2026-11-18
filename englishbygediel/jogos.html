@@ -360,7 +360,7 @@ const SH={quiz:'Escolha a tradução em 60 segundos',scr:'Desembaralhe as letras
 function cover(g,k){const L=(g.l||g.n.replace(/[^A-Za-z]/g,'')).toUpperCase().split('');
  const fl=Array.from({length:9},(_,i)=>{const h=(k*7+i*13)%100,x=(i*37+k*11)%92,y=(i*23+k*17)%70,sz=18+((i*29+k)%5)*9;return `<span style="left:${x}%;top:${y}%;font-size:${sz}px;animation-delay:-${(h%6)}s">${L[i%L.length]}</span>`}).join('');
  const img=GIC.includes(g.id);
- return `<button class="cv${img?' art':''}" style="--c1:${g.c[0]};--c2:${g.c[1]}" onclick="location.hash='g/${g.id}'" title="${esc(g.d)}">${img?`<img class="cvi" src="img/icons/jogo-${g.id}.svg" alt="" draggable="false">`:`<div class="ce">${g.e}</div>`}${g.nw?'<span class="nw">NOVO</span>':''}${ST.best[g.id]?`<span class="rec">🏆 ${ST.best[g.id]}</span>`:''}<div class="tt"><b>${esc(g.n)}</b>${SH[g.id]?`<small>${esc(SH[g.id])}</small>`:''}</div></button>`}
+ return `<button class="cv${img?' art':''}" style="--c1:${g.c[0]};--c2:${g.c[1]}" onclick="location.hash='g/${g.id}'" title="${esc(g.d)}">${img?`<img class="cvi" src="img/jogos/${g.id}.webp" alt="" draggable="false">`:`<div class="ce">${g.e}</div>`}${g.nw?'<span class="nw">NOVO</span>':''}${ST.best[g.id]?`<span class="rec">🏆 ${ST.best[g.id]}</span>`:''}<div class="tt"><b>${esc(g.n)}</b>${SH[g.id]?`<small>${esc(SH[g.id])}</small>`:''}</div></button>`}
 let FIL='todos';try{FIL=localStorage.getItem('jogos:fil')||'todos'}catch(e){}
 function menu(){stopT();cln();const list=G.filter(g=>FIL==='todos'||g.t.includes(FIL));
  A().innerHTML=`<div class="row sp" style="margin-bottom:6px"><a class="btn sm backlnk" href="membros.html" style="text-decoration:none;color:inherit">← Área de membros</a><span class="mono">grátis · sem login · funciona offline</span></div>

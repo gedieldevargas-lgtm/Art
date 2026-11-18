@@ -554,6 +554,8 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
   const C = window.EBG, CFG = window.EBG_CONFIG || {};
   const H = await window.HUB_DADOS.carregar(C, CFG);
   if (Array.isArray(window.EBG_JOGOS) && Array.isArray(H.cards) && !H.cards.some(c => /^jg-/.test(c.id || ''))) H.cards = H.cards.concat(window.EBG_JOGOS);
+  // capas novas dos jogos: se o Hub salvo ainda aponta pro desenho antigo (.svg), troca pela imagem nova
+  if (Array.isArray(H.cards)) H.cards.forEach(c => { if (c && /^img\/jogos\/[a-z]+\.svg$/.test(c.img || '')) c.img = c.img.replace(/\.svg$/, '.webp'); });
   window.HUB_ATUAL = H; // o modo editor (?editar) edita este objeto
 
   /* DADOS: tudo vai pro Supabase (tabelas hub_visitas, hub_eventos, leads_programa; supabase/dados.sql).
