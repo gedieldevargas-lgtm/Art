@@ -104,7 +104,7 @@
       steps:['Escolha um vídeo bem simples (pra iniciantes)','Assista 3 minutos sem pausar e sem legenda em português','Anote as palavras que você reconheceu, mesmo poucas','Assista de novo com legenda em inglês e veja quantas você pegou'],
       links:[{t:'▶️ Vídeos pra quem está começando',u:'https://www.youtube.com/results?search_query=comprehensible+input+english+absolute+beginner'}]},
     jogo:{why:'Jogar fixa vocabulário sem parecer estudo. Perfeito pra quando a energia está baixa.',
-      steps:['Abra o menu Jogos','Escolha 1 jogo do seu nível','Jogue 1 rodada inteira'],
+      steps:['Abra o menu Jogos','Escolha 1 destes (todos liberados): Flashcards, Complete, Monta Frase ou Quiz Phrasal','Jogue 1 rodada inteira'],
       links:[{t:'🎮 Abrir os jogos',u:'#jogos'}]},
     aula:{why:'A aula da semana é a espinha do seu plano. O checklist completa, a aula ensina.',
       steps:['Abra a sua aula da vez','Assista inteira, com caderno do lado','Faça o quiz no fim da aula'],
@@ -508,6 +508,8 @@
   '.re-bars{display:flex;align-items:flex-end;gap:3px;height:56px;margin:10px 0 3px}.re-bars i{flex:1;background:linear-gradient(180deg,#34d399,#10b981);border-radius:3px 3px 1px 1px;min-height:4px}.re-bars i.hj{background:linear-gradient(180deg,#fbbf24,#f59e0b)}.re-lbl{display:flex;gap:3px;margin-bottom:10px}.re-lbl b{flex:1;text-align:center;font-size:8.5px;font-weight:700;color:var(--fg3)}.re-st{border-top:1px solid var(--border);padding-top:9px}',
   '.rail-mt{display:flex;gap:12px;align-items:center;cursor:pointer;background:linear-gradient(135deg,rgba(212,160,23,.14),rgba(245,158,11,.05));border:1px solid rgba(212,160,23,.35);border-radius:14px;padding:12px}.rm-pos{display:flex;flex-direction:column;align-items:center;min-width:54px}.rm-pos strong{font-size:24px;font-weight:800;color:#d4a017;line-height:1}.rm-pos span{font-size:10px;color:var(--fg3);text-align:center}.rm-i{flex:1;min-width:0}.rm-t{font-size:12px;font-weight:800}.rm-s{font-size:11px;color:var(--fg2);margin:2px 0 7px}.rm-b{height:5px;border-radius:5px;background:var(--border);overflow:hidden}.rm-b i{display:block;height:100%;background:#d4a017;border-radius:5px}',
   '.rail-soc{margin-top:auto;display:flex;justify-content:flex-start;gap:6px;padding-top:6px}.right-rail .rail-soc a,.right-rail .rail-soc button{width:26px;height:26px;padding:0!important;display:flex!important;align-items:center;justify-content:center;background:none!important;border:0!important;border-radius:8px;cursor:pointer;opacity:.7;transition:transform .2s,opacity .2s,filter .2s}.right-rail .rail-soc a:hover,.right-rail .rail-soc button:hover{opacity:1;transform:scale(1.25);filter:drop-shadow(0 4px 5px rgba(0,0,0,.35))}.right-rail .rail-soc .ic3d,.right-rail .rail-soc img,.right-rail .rail-soc svg{width:18px!important;height:18px!important}',
+  '.mi-tm{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--card,var(--bg2));border:1px solid var(--border);border-radius:16px;padding:10px 14px}.mi-tm>b{font-size:12.5px;font-weight:800}.mi-tm>div{display:flex;gap:6px;flex-wrap:wrap}.mi-tm button{border:1.5px solid var(--border);background:transparent;color:inherit;border-radius:20px;padding:6px 13px;font-size:12.5px;font-weight:800;cursor:pointer}.mi-tm button.on{background:#4f6ef7;border-color:#4f6ef7;color:#fff}.mi-mn{font-size:10.5px;font-weight:800;color:var(--fg3);background:rgba(79,110,247,.1);border-radius:10px;padding:1px 7px;white-space:nowrap}',
+  '.mi-tmg{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;max-width:640px;margin:0 auto}.mi-tmg button{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.18);border-radius:22px;color:#fff;padding:18px 6px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;transition:transform .25s cubic-bezier(.22,1,.36,1),box-shadow .25s,background .25s}.mi-tmg button b{font-size:34px;font-weight:800;line-height:1}.mi-tmg button small{font-size:12px;font-weight:700;margin-left:2px;opacity:.8}.mi-tmg button span{font-size:12px;opacity:.8;font-weight:600}.mi-tmg button.on{background:rgba(79,110,247,.45);border-color:#8da2ff}@media(hover:hover){.mi-tmg button:hover{transform:scale(1.08);background:rgba(255,255,255,.18);box-shadow:0 18px 36px rgba(0,0,0,.45)}}.mi-tmg button:active{transform:scale(.96)}@media(max-width:560px){.mi-tmg{grid-template-columns:repeat(3,1fr)}}',
   '#mi-entry .mi-ctx button:focus-visible{outline:none;transform:scale(1.08);z-index:2;box-shadow:0 22px 44px rgba(0,0,0,.6),0 8px 16px rgba(0,0,0,.4)}#mi-entry .mi-ctx button:active{transform:scale(.96)}',
   /* animação de 1,5 s de cada ícone, proporcional ao que ele é; só roda quando a pessoa passa o mouse, foca ou toca (nada se mexe sozinho) */
   '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-casa{animation:mk-hop 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-casa,#mi-entry .mi-ctx button:active .a-casa{animation:mk-hop 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
@@ -1005,7 +1007,7 @@
   }
   function perguntarContexto(){
     // iniciante: sem tela cheia na frente (atrapalhava a navegação). O checklist 'Primeiros passos' já fica valendo.
-    if(iniciante()){LS.set('mi_ctx',{d:dia(),k:'Primeiros passos'});return fecharEntrada(function(){go('home');renderHome();pintarRail();setTimeout(tourAuto,700);});}
+    if(iniciante()){LS.set('mi_ctx',{d:dia(),k:'Primeiros passos'});return perguntarTempo(function(){try{window.renderMarTasks('Primeiros passos');}catch(x){}fecharEntrada(function(){go('home');renderHome();pintarRail();setTimeout(tourAuto,700);});});}
     abrirEntrada('<span class="mi-logo mi-lg-ent"></span><div class="mi-ent-kicker">'+E(saudacao())+(nomeCurto()?', '+E(nomeCurto()):'')+'</div>'
       +'<div class="mi-ent-q">Onde você está agora?</div>'
       +'<div class="mi-ent-s">Escolha o mais parecido com onde você está ou o que está fazendo. Eu monto o checklist de hoje pra esse momento.</div>'
@@ -1016,8 +1018,8 @@
     ent.onclick=function(e){
       var b=e.target.closest('[data-ent="ctx"]');if(!b||ent.dataset.indo)return;
       var k=b.dataset.k;
-      if(k){LS.set('mi_ctx',{d:dia(),k:k});escolherCtxNaMaratona(k);}
-      var ir=function(){fecharEntrada(function(){ent.dataset.indo='';go('home');renderHome();pintarRail();setTimeout(tourAuto,700);if(k)toast('✅ Checklist pronto: '+(CTX.filter(function(x){return x.k===k;})[0].lb),'#10b981');});};
+      if(k)LS.set('mi_ctx',{d:dia(),k:k});
+      var ir=function(){ent.dataset.indo='';perguntarTempo(function(){var kk=k||ctxAtual();if(kk)escolherCtxNaMaratona(kk);fecharEntrada(function(){go('home');renderHome();pintarRail();setTimeout(tourAuto,700);if(k)toast('✅ Checklist pronto: '+(CTX.filter(function(x){return x.k===k;})[0].lb)+' · '+tempoUso()+' min','#10b981');});});};
       ent.dataset.indo='1';
       if(k&&window.EBG_FX&&b.querySelector('.ly'))EBG_FX.zoom(b,ir);else ir();
     };
@@ -2707,6 +2709,7 @@
   function aulasVistas(){return (ST.vistas||[]).length;}
   function iniciante(){return nivelBaixo()&&aulasVistas()<LIB_REVISAR;}
   function exige(t){
+    if(t.ex!=null)return t.ex;
     var x=(t.title||'')+' '+(t.sub||'');
     if(/escrev|frase|diário|diario|fal(e|ar)\b|falar|grav|ora(r|ção|çao)|conversa|pens(e|ar) em inglês|narr|descrev|explic|shadow|cant(e|ar)|imit|ensin|pergunt|apresent|text/i.test(x))return LIB_PRODUZIR;
     if(/revis|lembr|palavras do dia|flashcard|record|vocab/i.test(x))return LIB_REVISAR;
@@ -2719,23 +2722,104 @@
   var SPOTIFY_EOM='https://open.spotify.com/playlist/3hcF84KR80VqykVNeJy4x5';
   var APR={
     aula:function(){var it=proxAula(),q=it&&it.l.quiz&&it.l.quiz.length;
-      return {icon:'📚',title:q?'Assistir a aula e fazer o quiz':'Assistir a aula da vez',sub:it?it.l.title:'A próxima aula do seu caminho',info:{why:'Tudo começa aqui: a aula ensina, o resto do checklist só pratica o que você viu. Sem aula, não tem o que praticar.',
+      return {mn:15,icon:'📚',title:q?'Assistir a aula e fazer o quiz':'Assistir a aula da vez',sub:it?it.l.title:'A próxima aula do seu caminho',info:{why:'Tudo começa aqui: a aula ensina, o resto do checklist só pratica o que você viu. Sem aula, não tem o que praticar.',
         steps:['Toque no botão abaixo pra abrir a aula','Assista inteira, com caderno do lado. Pode pausar e voltar','Anote 3 palavras ou frases que você entendeu','No fim da aula, faça o quiz pra ver o que ficou'],
         links:[it?{t:'▶️ Abrir: '+it.l.title,u:'#aula:'+it.m.id+':'+it.l.id}:{t:'📚 Ir pras aulas',u:'#modulos'}]}};},
-    imagem:function(){return {icon:'🖼️',title:'Jogo: O que é isso?',sub:'Figura + palavra em inglês, 10 rodadas',info:{why:'O jeito mais rápido de aprender as primeiras palavras: ligar a imagem direto ao inglês, sem passar pelo português.',
+    imagem:function(){return {mn:3,icon:'🖼️',title:'Jogo: O que é isso?',sub:'Figura + palavra em inglês, 10 rodadas',info:{why:'O jeito mais rápido de aprender as primeiras palavras: ligar a imagem direto ao inglês, sem passar pelo português.',
         steps:['Toque em "Jogar agora"','Olhe a figura e escolha o nome em inglês','Ouça a pronúncia e repita em voz alta','Terminou? A tarefa marca sozinha'],links:[{t:'🎮 Jogar agora',u:'#jogo:O que é isso?'}]}};},
-    ouvir:function(){return {icon:'🔊',title:'Jogo: Ouça e Toque',sub:'Ouvir a palavra e achar a figura',info:{why:'Antes de falar, o ouvido precisa reconhecer o som. Aqui você treina isso sem precisar ler nada.',
+    ouvir:function(){return {mn:3,icon:'🔊',title:'Jogo: Ouça e Toque',sub:'Ouvir a palavra e achar a figura',info:{why:'Antes de falar, o ouvido precisa reconhecer o som. Aqui você treina isso sem precisar ler nada.',
         steps:['Toque em "Jogar agora" (som ligado)','Ouça a palavra e toque na figura certa','Pode ouvir de novo quantas vezes quiser','Terminou? A tarefa marca sozinha'],links:[{t:'🎮 Jogar agora',u:'#jogo:Ouça e Toque'}]}};},
-    musica:function(){return {icon:'🎵',title:'Ouvir 1 música e caçar 3 palavras',sub:'Sem letra, só o ouvido',info:{why:'Música repete as mesmas palavras várias vezes. É o jeito mais leve de reconhecer padrões do inglês.',
+    musica:function(){return {mn:4,icon:'🎵',title:'Ouvir 1 música e caçar 3 palavras',sub:'Sem letra, só o ouvido',info:{why:'Música repete as mesmas palavras várias vezes. É o jeito mais leve de reconhecer padrões do inglês.',
         steps:['Escolha 1 música da playlist','Ouça sem ler a letra','Anote 3 palavras que você reconheceu (vale palavra pequena)','Ouça de novo e veja se aparecem mais vezes'],
         links:[{t:'🟢 Playlist do English on Mission',u:SPOTIFY_EOM},{t:'▶️ Músicas fáceis em inglês',u:'https://www.youtube.com/results?search_query=easy+english+songs+for+beginners+with+lyrics'}],
         ex:['Palavras comuns de aprender (podem ou não aparecer na sua música): <b>love</b> (amor), <b>you</b> (você), <b>heart</b> (coração)']}};},
-    cognatos:function(){return {icon:'🔎',title:'Caçar 10 palavras que você já conhece',sub:'Inglês parecido com português',info:TI.cognatos};},
-    complete:function(){return {icon:'🧩',title:'Jogo: Complete',sub:'Frases curtinhas do começo',info:{why:'Agora que você já viu algumas aulas, dá pra brincar com frases simples.',steps:['Toque em "Jogar agora"','Escolha a palavra que completa a frase','Terminou? A tarefa marca sozinha'],links:[{t:'🎮 Jogar agora',u:'#jogo:Complete'}]}};}
+    cognatos:function(){return {mn:4,icon:'🔎',title:'Caçar 10 palavras que você já conhece',sub:'Inglês parecido com português',info:TI.cognatos};},
+    complete:function(){return {mn:3,icon:'🧩',title:'Jogo: Complete',sub:'Frases curtinhas do começo',info:{why:'Agora que você já viu algumas aulas, dá pra brincar com frases simples.',steps:['Toque em "Jogar agora"','Escolha a palavra que completa a frase','Terminou? A tarefa marca sozinha'],links:[{t:'🎮 Jogar agora',u:'#jogo:Complete'}]}};}
   };
   function diaN(){return Math.floor(Date.now()/864e5);}
   var BASE={};
-  function tarefasDoDia(label){tarefasDoDia0(label);tarefaDoJeito(label);}
+
+  /* ───────────────────────── TEMPO DISPONÍVEL ─────────────────────────
+     Toda vez que a pessoa entra, ela diz quanto tempo tem (1, 5, 10, 30 ou 60 min) e o checklist se ajusta:
+     poucas tarefas, curtas e fáceis. Aula só aparece com 30 min ou mais. */
+  var TEMPOS=[{m:1,t:'1 min',s:'Só um minutinho'},{m:5,t:'5 min',s:'Rapidinho'},{m:10,t:'10 min',s:'Dá pra um pouco'},{m:30,t:'30 min',s:'Com calma'},{m:60,t:'60 min',s:'Tenho tempo'}];
+  var TIER={1:{n:2,max:1,sum:1},5:{n:3,max:4,sum:5},10:{n:3,max:6,sum:10},30:{n:4,max:12,sum:30},60:{n:5,max:20,sum:60}};
+  function tempoAtual(){var c=LS.get('mi_tempo',{});return c&&c.d===dia()&&TIER[c.m]?c.m:null;}
+  function tempoUso(){return tempoAtual()||LS.get('mi_tempo',{}).m||10;}
+  function dur(t){
+    if(t.mn!=null)return t.mn;
+    var x=((t.title||'')+' '+(t.sub||'')).toLowerCase(),m;
+    if(/assistir (a )?(próxima )?aula|aula gravada|a aula da vez/.test(x))return 15;
+    if((m=x.match(/(\d+)\s*min/)))return +m[1];
+    if(/toda a viagem|todo o treino|durante todo|inteiro|toda a/.test(x))return 20;
+    if(/cena|série|filme/.test(x))return 8;
+    if((m=x.match(/(\d+)\s*flashcards/)))return Math.ceil(+m[1]/3)+1;
+    if(/podcast/.test(x))return 10;
+    if(/v[ií]deo/.test(x))return 4;
+    if(/jog(o|ar)/.test(x))return 4;
+    if(/escrev|di[aá]rio|mensagem|e-mail/.test(x))return 4;
+    if(/shadowing|narrar|cantar|ensinar/.test(x))return 4;
+    if(/separe 10|do seu jeito/.test(x))return 12;
+    if(/m[uú]sica|playlist|louvor/.test(x))return 3;
+    return 3;
+  }
+  function microTarefas(m){
+    var d=diaN(),w=VOCAB[d%VOCAB.length],fr=DATA.flash[d%DATA.flash.length],w2=VOCAB[(d+7)%VOCAB.length];
+    var M1=[
+      {mn:.5,ex:0,icon:'🗣️',title:'Dizer em voz alta: "'+w[1]+'"',sub:w[0]+' '+w[2]+' · repita 3 vezes',info:{why:'Uma palavra por dia, falada em voz alta, já é treino de pronúncia. 30 segundos e pronto.',steps:['Leia a palavra: '+w[1],'Diga em voz alta 3 vezes, sem pressa','Pense numa coisa sua que tem esse nome']}},
+      {mn:.5,ex:0,icon:'💬',title:'Frase do dia: "'+fr[0]+'"',sub:fr[1]+' · repita 3 vezes',info:{why:'Uma frase pronta por dia vira repertório. Não precisa decorar: só repetir.',steps:['Leia a frase: '+fr[0],'Significa: '+fr[1],'Repita 3 vezes em voz alta'],ex:[fr[2]]}},
+      {mn:.5,ex:0,icon:'👀',title:'Achar 1 coisa perto e dizer em inglês',sub:'Pode ser "phone", "door", "chair"…',info:{why:'Olhar o mundo e pensar em inglês é o jeito mais rápido de tirar o inglês da folha.',steps:['Olhe em volta','Escolha 1 objeto','Diga o nome dele em inglês (se não souber, procure)']}},
+      {mn:.5,ex:0,icon:'👂',title:'Ouvir 30 segundos de uma música em inglês',sub:'Qualquer uma. Só ouvir.',info:{why:'Ouvir é treino. Meio minuto já conta.',steps:['Abra uma música em inglês','Ouça 30 segundos','Repare em 1 palavra que reconheceu']}}
+    ];
+    var M5=[
+      {mn:3,ex:0,icon:'🃏',title:'Jogo: Flashcards',sub:'Palavras e frases com exemplo',info:{why:'Cartinhas curtas fixam vocabulário sem pesar.',steps:['Toque em "Jogar agora"','Leia, ouça e vire o card','Terminou? Pode parar'],links:[{t:'🎮 Jogar agora',u:'#jogo:Flashcards'}]}},
+      APR.imagem(),APR.ouvir(),
+      {mn:2,ex:0,icon:'💬',title:'Aprender 2 palavras novas',sub:w[0]+' '+w[1]+' = '+w[2]+' · '+w2[0]+' '+w2[1]+' = '+w2[2],info:{why:'Duas palavras por dia são 700 por ano. Pouco e todo dia ganha de muito e nunca.',steps:['Diga '+w[1]+' ('+w[2]+') 3 vezes','Diga '+w2[1]+' ('+w2[2]+') 3 vezes','Invente uma frase curta com uma delas, nem que seja só "I like '+w[1]+'"']}},
+      {mn:3,ex:0,icon:'🎵',title:'Ouvir 1 música em inglês',sub:'Uma música, só o ouvido',info:APR.musica().info},
+      Object.assign(APR.complete(),{ex:3})
+    ];
+    var M10=[Object.assign(APR.cognatos(),{mn:4}),{mn:3,ex:0,icon:'🔤',title:'Jogo: Monta Frase',sub:'Coloque as palavras na ordem',info:{why:'Montar frases curtas treina a ordem do inglês sem escrever nada.',steps:['Toque em "Jogar agora"','Toque nas palavras na ordem certa'],links:[{t:'🎮 Jogar agora',u:'#jogo:Monta Frase'}]}}];
+    var L=m<=1?M1:(m<=5?M5:M5.concat(M10));
+    var k=d%L.length;return L.slice(k).concat(L.slice(0,k));
+  }
+  function ajustarTempo(label){
+    var m=tempoUso(),T=TIER[m]||TIER[10],list=CTX_TASKS[label]||[],out=[],tot=0,v=aulasVistas(),usados={};
+    var poe=function(t,dd){out.push(Object.assign({},t,{_mn:dd}));tot+=dd;usados[t.title]=1;};
+    var cabe=function(t,dd){return out.length<T.n&&!usados[t.title]&&dd<=T.max&&tot+dd<=T.sum;};
+    // 30 min ou mais: a aula da vez entra primeiro (precisa de tempo pra assistir)
+    if(m>=30&&proxAula()){var au=APR.aula();poe(au,au.mn);}
+    list.forEach(function(t){if(t.mn===15&&/aula/i.test(t.title)&&out.length&&/aula/i.test(out[0].title))return;});
+    var micros=function(){microTarefas(m).forEach(function(t){var dd=dur(t);if(cabe(t,dd)&&exige(t)<=v)poe(t,dd);});};
+    var reais=function(){list.forEach(function(t){var dd=dur(t);if(/aula/i.test(t.title)&&out.length&&/aula/i.test(out[0].title))return;if(cabe(t,dd))poe(t,dd);});};
+    // tempos curtos: tarefas feitas sob medida primeiro; tempos longos: as do lugar primeiro
+    if(m<=5){micros();reais();}else{reais();micros();}
+    if(!out.length)poe(microTarefas(1)[0],.5);
+    CTX_TASKS[label]=out;
+  }
+  function fmtMn(x){return x<1?'30 seg':x+' min';}
+  function tempoBarra(){
+    var m=tempoUso();
+    return '<div class="mi-tm"><b>⏱ Quanto tempo você tem agora?</b><div>'+TEMPOS.map(function(t){return '<button type="button" data-tm="'+t.m+'"'+(t.m===m?' class="on"':'')+'>'+t.t+'</button>';}).join('')+'</div></div>';
+  }
+  function guardarTempo(m){
+    var ant=LS.get('mi_tempo',{});LS.set('mi_tempo',{d:dia(),m:m});
+    if(ant.m!==m||ant.d!==dia()){var ch=window._ctxChecked||{};Object.keys(ch).forEach(function(k){if(k!=='_idioma')ch[k]=[];});try{salvarChecks();}catch(e){}}
+  }
+  function perguntarTempo(cb){
+    var m=tempoUso();
+    abrirEntrada('<span class="mi-logo mi-lg-ent"></span><div class="mi-ent-kicker">Último passo</div>'
+      +'<div class="mi-ent-q">Quanto tempo você tem agora?</div>'
+      +'<div class="mi-ent-s">Eu ajusto o checklist pra caber no seu tempo. Pouco tempo, tarefa curtinha e leve. Mais tempo, entra a aula.</div>'
+      +'<div class="mi-tmg">'+TEMPOS.map(function(t){return '<button type="button" data-tm="'+t.m+'"'+(t.m===m?' class="on"':'')+'><b>'+t.m+'<small>min</small></b><span>'+t.s+'</span></button>';}).join('')+'</div>');
+    ent.onclick=function(e){var b=e.target.closest('[data-tm]');if(!b)return;guardarTempo(+b.dataset.tm);cb();};
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.mi-tm [data-tm]');if(!b)return;
+    guardarTempo(+b.dataset.tm);var k=ctxAtual()||(iniciante()?'Primeiros passos':'Em Casa');
+    if(window.renderMarTasks)window.renderMarTasks(k);pintarRail();try{renderHome();}catch(x){}
+    toast('⏱ Checklist ajustado pra '+b.dataset.tm+' min','#10b981');
+  });
+  function tarefasDoDia(label){tarefasDoDia0(label);tarefaDoJeito(label);ajustarTempo(label);}
   function tarefaDoJeito(label){
     if(!window.CTX_TASKS||!CTX_TASKS[label]||!ST.prisma||!INTEL[ST.prisma])return;
     var it=INTEL[ST.prisma],R=ST.prismaRes||{},lista=(R.taticas&&R.taticas.length?R.taticas:[]).concat(it.est||[]);if(!lista.length)return;
@@ -2767,7 +2851,8 @@
   function pintarInicio(){
     var t=$('mar-ctx-title');if(!t)return;var box=$('mi-inicio');
     if(!box){box=document.createElement('div');box.id='mi-inicio';t.insertAdjacentElement('beforebegin',box);}
-    var h='',v=aulasVistas();
+    var h=tempoBarra(),v=aulasVistas();
+    if(tempoUso()<30)h+='<div class="mi-ini beg"><div class="tx"><b>📚 Aula fica pra quando tiver 30 min</b><span>Com '+tempoUso()+' min o checklist traz só tarefas curtas e leves. Tem 30 min ou mais? Escolha acima e a aula da vez entra.</span></div></div>';
     if(!ST.idioma)h+='<div class="mi-ini idi"><div class="ic">'+IC('idioma','xl')+'</div><div class="tx"><b>Missão de início: deixe seus aparelhos em inglês</b><span>Celular, Instagram, YouTube e Netflix. Você vai ler inglês o dia inteiro sem perceber.</span></div>'
       +'<div class="bt"><button data-ini="como">Como fazer</button><button class="ok" data-ini="feito">Já troquei ✓</button></div></div>';
     if(iniciante()){
@@ -2791,8 +2876,8 @@
     var v=aulasVistas(),lim=(label==='Primeiros passos')?-1:(nivelBaixo()&&v<LIB_PRODUZIR?v:99);
     var usados={};lista.forEach(function(t){usados[t.title]=1;});
     // primeiro: tarefas do MESMO lugar que não estão na lista; depois: tarefas de aprender (servem em qualquer lugar)
-    var mesmo=lim>=0?(BASE[label]||[]).filter(function(t){return exige(t)<=lim&&!usados[t.title];}):[];
-    var apr=Object.keys(APR).map(function(k){return APR[k]();}).filter(function(t){return !usados[t.title];});
+    var cap=(TIER[tempoUso()]||TIER[10]).max;var mesmo=lim>=0?(BASE[label]||[]).filter(function(t){return exige(t)<=lim&&!usados[t.title]&&dur(t)<=cap;}):[];
+    var apr=Object.keys(APR).map(function(k){return APR[k]();}).filter(function(t){return !usados[t.title]&&dur(t)<=cap;});
     var seed=hashN(dia()+label+i),out=[];
     mesmo.forEach(function(t,n){var x=mesmo[(seed+n)%mesmo.length];if(out.length<2&&out.indexOf(x)<0)out.push(x);});
     for(var n=0;n<apr.length&&out.length<2;n++){var t=apr[(seed+n*7)%apr.length];if(out.indexOf(t)<0)out.push(t);}
@@ -2816,6 +2901,7 @@
       [].forEach.call(document.querySelectorAll('#mar-tasks-list .mar-task'),function(el,i){if(ch[i])return;
         var b=document.createElement('button');b.className='mi-troca';b.title='Trocar por outra tarefa';b.innerHTML='🔄<small>'+((tr[i]||0)+1)+'/3</small>';
         b.setAttribute('onclick',"miTrocar(event,'"+label.replace(/'/g,"\\'")+"',"+i+")");var hint=el.querySelector('.open-hint');el.insertBefore(b,hint);});}
+    if(label!=='_idioma'){var lt=CTX_TASKS[label]||[];[].forEach.call(document.querySelectorAll('#mar-tasks-list .mar-task-title'),function(el,i){var x=lt[i];if(x&&x._mn!=null&&!el.querySelector('.mi-mn'))el.insertAdjacentHTML('beforeend',' <span class="mi-mn">⏱ '+fmtMn(x._mn)+'</span>');});}
     pintarInicio();return r;};}
   var tdOrig=window.taskDone;
   window.taskDone=function(){

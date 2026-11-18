@@ -9,7 +9,8 @@
     var ts=String(trecho||'').toLowerCase().split(',').map(function(x){return x.trim();}).filter(Boolean);
     return ts.some(function(t){return S.compras.some(function(c){return (c.produto||'').toLowerCase().indexOf(t)>=0;})||S.meta.toLowerCase().indexOf(t)>=0;});};
   var livre=function(){return !S.ok||S.programa||S.admin;};           // vê tudo
-  var jogoLivre=function(n){return livre()||(S.cfg.jogosGratis||[]).indexOf(n)>=0;};
+  var JOGOS_CHECKLIST=['Flashcards','Quiz Phrasal','Monta Frase','Complete','O que é isso?','Ouça e Toque'];   // os jogos que o checklist pede: sempre liberados pra todo aluno
+  var jogoLivre=function(n){return livre()||JOGOS_CHECKLIST.indexOf(n)>=0||(S.cfg.jogosGratis||[]).indexOf(n)>=0;};
   var matLivre=function(m){return livre()||m.tipo==='gratis'||(m.tipo==='produto'&&tem(m.produto));};
 
   var css=document.createElement('style');
