@@ -2462,7 +2462,7 @@
         {m:'Diagnóstico',t:'Bússula',novoTitulo:'Descubra seu Nível com a Bússola',troca:{
           0:Q('Pra que serve o resultado da Bússola (CEFR)?',['Pra ficar frustrado','Pra saber seu ponto de partida','Pra receber um certificado oficial','Pra ver como é um teste americano'],1),
           2:Q('Em geral, quem está no nível A2 consegue:',['Dar palestras','Se virar em situações simples e rotineiras','Escrever artigo científico','Traduzir livros'],1)}},
-        {m:'Diagnóstico',t:'Prisma de Intelig',troca:{1:Q('Quantas inteligências o Prisma analisa?',['4','6','8','10'],2)}},
+        {m:'Diagnóstico',t:'Prisma de Intelig',troca:{1:Q('Quantas inteligências o Prisma analisa?',['6','8','9','10'],2)}},
         {m:'Vocabulário',t:'Números, datas',troca:{4:Q('US$ 2.50 se fala, naturalmente:',['two fifty','two point five money','dollars two five','fifty two'],0)}},
         {m:'Gramática A1',t:'Artigos',troca:{2:Q('A escolha entre a e an depende:',['Da letra escrita','Do SOM inicial da palavra','Do tamanho da palavra','Do gênero'],1)}},
         {m:'Escrita',t:'Mensagens e redes',troca:{3:Q('Como dizer "faço aniversário hoje"?',['I make birthday today','Today is my birthday','I do birthday today','Today I birth'],1)}},
@@ -2486,6 +2486,16 @@
           if(Object.keys(row).length){var up=await window._sb.from('mi_lessons').update(row).eq('id',le.id);if(up.error)throw 0;}
         }
         feitas.push('quiz-revisao-1');mudou=true;
+      }catch(e){}
+    }
+    if(feitas.indexOf('quiz-prisma-9')<0){
+      try{
+        var mp=await window._sb.from('mi_modules').select('id,name'),lp=await window._sb.from('mi_lessons').select('id,module_id,title,quiz');
+        if(mp.error||lp.error)throw 0;
+        var md=(mp.data||[]).filter(function(x){return x.name.toLowerCase().indexOf('diagnóstico')===0;})[0];
+        var ls=md?(lp.data||[]).filter(function(x){return x.module_id===md.id&&x.title.toLowerCase().indexOf('prisma de intelig')>=0;})[0]:null;
+        if(ls&&(ls.quiz||[]).length>1){var q2=ls.quiz.slice();q2[1]={q:'Quantas inteligências o Prisma analisa?',a:['6','8','9','10'],c:2};var u2=await window._sb.from('mi_lessons').update({quiz:q2}).eq('id',ls.id);if(u2.error)throw 0;}
+        feitas.push('quiz-prisma-9');mudou=true;
       }catch(e){}
     }
     var extra={};
