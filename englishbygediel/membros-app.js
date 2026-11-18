@@ -2498,6 +2498,29 @@
         feitas.push('quiz-prisma-9');mudou=true;
       }catch(e){}
     }
+    if(feitas.indexOf('ebooks-drive-1')<0){
+      /* e-books da pasta do Drive que não têm landing de venda: entram em Materiais, liberados pra quem tem o Programa */
+      var D=function(id){return 'https://drive.google.com/file/d/'+id+'/view';};
+      var EB=[
+        ['10 Jogos para Aprender Inglês','Jogos prontos pra treinar inglês brincando.','E-books','🎮','1-oVACvzU2k7see4kU5-8_jW5gjxV6kMu'],
+        ['Inglês com Séries','Aprenda inglês de verdade com as séries que você já assiste.','E-books','📺','1HaM6XZAp7l04yYSJllkQB04lwmxwal3v'],
+        ['Caderno de Séries (pra imprimir)','Caderno pra anotar vocabulário e frases enquanto assiste.','E-books','📓','1R49fo0W_a3n2QJd4_ZhCqxZSbBAbP1nc'],
+        ['Culture English · Edição Visual','O e-book do Culture English, em edição visual.','E-books','🎬','15LIrNj5jdl9GYH8MTVfLykkNwmfnNBmh'],
+        ['Guia do Visto Americano','Guia pra se preparar pro visto americano.','E-books','🛂','1hIbZ81p9-7fynEXq2UM7U2Pa9Pp-rHbY'],
+        ['Inglês a Dois · 15 meses','Plano pra casais estudarem inglês juntos durante 15 meses.','Casais','💑','1aKbxRMobZFtXMXmozCPMBEgWxxrZQXjd'],
+        ['Templates de Casais · 15 meses','Templates pra imprimir e acompanhar o plano a dois.','Casais','💑','1A3QgPZoDjUGgc-aHWsAd7mm_xIvn9b3q'],
+        ['Do Zero ao Inglês em 360 Dias','Cronograma de estudo de 1 ano pra quem começa do zero.','Planners','🗓️','1nlahe-iS-FbQjw_QSH_trKnSljBzlW44'],
+        ['English on Mission · Planner Anual','Planner anual do English on Mission.','Planners','🗓️','1XOX7L7Xsiqydq7D8t1OsB1-hItwfok7n']
+      ];
+      try{
+        var ja=await window._sb.from('materiais').select('nome,ordem');if(ja.error)throw 0;
+        var tem={},ord=0;(ja.data||[]).forEach(function(x){tem[(x.nome||'').toLowerCase()]=1;ord=Math.max(ord,x.ordem||0);});
+        for(var k=0;k<EB.length;k++){var e=EB[k];if(tem[e[0].toLowerCase()])continue;
+          var ins=await window._sb.from('materiais').insert({nome:e[0],descricao:e[1],secao:e[2],icone:e[3],tipo:'programa',produto:'',checkout:'',preco:'',ativo:true,ordem:++ord}).select().single();if(ins.error)throw 0;
+          var lk=await window._sb.from('material_links').upsert({material_id:ins.data.id,link:D(e[4])});if(lk.error)throw 0;}
+        feitas.push('ebooks-drive-1');mudou=true;
+      }catch(e){}
+    }
     var extra={};
     if(feitas.indexOf('programa-plano-inteligente')<0){var pg=(S.cfg.programa||[]).slice();if(pg.indexOf('Plano Inteligente')<0)pg.push('Plano Inteligente');extra.programa=pg;feitas.push('programa-plano-inteligente');mudou=true;}
     if(mudou){try{await salvarCfg(Object.assign({migr:feitas},extra));CARDS=null;}catch(e){}}
