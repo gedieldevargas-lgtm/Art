@@ -2346,6 +2346,8 @@
   function ebkDe(m){var n=(m.nome||'')+' '+(m.produto||'');return EBK.filter(function(x){return x.r.test(n);})[0]||null;}
   function capaEbook(m){var e=window.EBG_EBOOKS&&EBG_EBOOKS.deMaterial(m);if(e&&e.img)return e.img;var k=ebkDe(m);return k?k.img:'';}
   var renderMatOrig=window.renderMat;
+  (function(){var c=document.createElement('style');c.textContent='.mat-chips{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 18px}.mat-chips .gf-btn small{opacity:.7;font-weight:800;margin-left:2px}@media(max-width:700px){.mat-chips{flex-wrap:nowrap;overflow-x:auto;margin-right:-16px;padding-right:16px;padding-bottom:4px}.mat-chips .gf-btn{flex:none}}';document.head.appendChild(c);
+    document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-mf]');if(!b)return;window._matF=b.dataset.mf;window.renderMat();});})();
   window.renderMat=function(){
     var g=$('mat-grid'),S=AS();if(!g)return;
     var tabs=document.querySelector('#pane-materiais .mat-tabs');if(tabs)tabs.style.display='none';
@@ -2356,13 +2358,21 @@
     if(EBx&&!EDIT)lista=lista.filter(function(m){var c=EBx.deMaterial(m);if(!c||!c.bonusDe)return true;return !lista.some(function(o){var z=EBx.deMaterial(o);return z&&z.k===c.bonusDe;});});
     var secs=[],por={};lista.forEach(function(m){var s=m.secao||'Materiais';if(!por[s]){por[s]=[];secs.push(s);}por[s].push(m);});
     var n=0,h='';
-    secs.forEach(function(s){h+='<div class="uni-sec">'+E(s)+'</div><div class="uni-grid mat-v">'+por[s].map(function(m){
+    var F=window._matF||'todos';if(F!=='todos'&&F!=='gratis'&&F!=='meus'&&secs.indexOf(F)<0)F=window._matF='todos';
+    var qtd={todos:lista.length,gratis:lista.filter(function(m){return m.tipo==='gratis';}).length,meus:lista.filter(function(m){return matLivre(m)&&m.tipo!=='gratis';}).length};
+    var chips=[['todos','Todos',qtd.todos]];
+    secs.forEach(function(x){chips.push([x,x,por[x].length]);});
+    if(qtd.gratis)chips.push(['gratis','Grátis',qtd.gratis]);
+    if(qtd.meus)chips.push(['meus','Meus',qtd.meus]);
+    h+='<div class="mat-chips">'+chips.map(function(c){return '<button class="gf-btn'+(c[0]===F?' active':'')+'" data-mf="'+E(c[0])+'">'+E(c[1])+' <small>'+c[2]+'</small></button>';}).join('')+'</div>';
+    var vis=lista.filter(function(m){return F==='todos'||(F==='gratis'?m.tipo==='gratis':F==='meus'?(matLivre(m)&&m.tipo!=='gratis'):(m.secao||'Materiais')===F);});
+    h+='<div class="uni-grid mat-v">'+vis.map(function(m){
       var ok=matLivre(m),tag=m.tipo==='gratis'?'Grátis':ok?'✓ Seu':m.tipo==='programa'?'🔒 Programa':(m.preco||'🔒 Pago');
       var fr=m.tipo==='gratis',cv=capaEbook(m);
       return '<div class="uni-card'+(ok?'':' lock')+(fr?' free':'')+(m.ativo===false?' mi-off':'')+'" data-mat="'+m.id+'">'+edCtl('mat',m.id)
         +'<div class="th">'+(cv?'<img loading="lazy" alt="" src="'+E(cv)+'">':(m.capa_url?'<img loading="lazy" alt="" src="'+E(m.capa_url)+'">':capaAuto(m.nome,n)))+'<span class="tg'+(fr?' free':ok?' own':'')+'">'+(fr?'✓ ':'')+E(tag)+'</span>'+(ok?'':'<span class="mv-lk">🔒</span>')+'</div>'
         +'<div class="bd"><div class="tt">'+E(m.nome)+'</div><div class="ss" style="font-size:11.5px">'+(EBx&&(EBx.deMaterial(m)||{}).bonus?'📘 E-book + 📄 caderno pra imprimir':'')+'</div><div class="ac">'+(ok?(fr?'Abrir ›':'Ler agora ›'):(m.tipo==='programa'?'Ver o Programa ›':'Conhecer ›'))+'</div></div></div>';n++;}).join('')
-      +(EDIT?'<button class="mi-novo" data-ed="mat-novo" data-sec="'+E(s)+'">＋ Novo material</button>':'')+'</div>';});
+      +(EDIT?'<button class="mi-novo" data-ed="mat-novo" data-sec="'+E(secs.indexOf(F)>=0?F:(secs[0]||'E-books'))+'">＋ Novo material</button>':'')+'</div>';
     if(!lista.length)h='<div class="admin-loading">Nenhum material ainda.</div>'+(EDIT?'<div class="uni-grid"><button class="mi-novo" data-ed="mat-novo">＋ Novo material</button></div>':'');
     if(EDIT)h='<div style="margin-bottom:14px"><label class="admin-btn admin-btn-ghost admin-btn-sm" style="cursor:pointer;display:inline-block">📥 Importar vários PDFs de uma vez<input type="file" id="mm-lote" accept="application/pdf" multiple style="display:none"></label></div>'+h;
     g.innerHTML=h;
