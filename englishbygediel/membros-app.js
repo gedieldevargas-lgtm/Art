@@ -944,7 +944,7 @@
     return '<div><div class="rail-hd">Sua evolução</div><div class="rail-evo">'
       +'<div class="re-top"><div><strong>'+ativos+'</strong><span>de 14 dias ativos</span></div><div><strong>'+med+'%</strong><span>checklist médio</span></div></div>'
       +'<div class="re-bars">'+bars+'</div><div class="re-lbl">'+lbl+'</div>'
-      +'<div class="re-st"><div><strong>'+vistas+'</strong><span>aulas vistas</span></div><div><strong>'+sq.n+'</strong><span>dias seguidos</span></div></div>'
+      +'<div class="re-st"><div><strong>'+vistas+'</strong><span>aulas vistas</span></div><div><strong>'+(ST.dias||[]).length+'</strong><span>dias de estudo</span></div></div>'
       +'</div></div>';
   }
   async function pintarMaratonaRail(){
