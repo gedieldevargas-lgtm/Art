@@ -931,7 +931,8 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
   })();
   const precoCurto = x => /^R\$|^Gr[aá]tis/i.test(x.preco || '') ? x.preco.replace(/,00$/, '') : 'ver';
   const miniLoja = (x, i) => x.img ? `<img src="${esc(x.img)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : `<span class="letra grad g${i % 6}"></span>`;
-  if (LJ.ativo !== false && lojaItens.length) {
+  // a coluna lateral da loja distrai: fica desligada (liga com lojinha.coluna = true no editor)
+  if (LJ.ativo !== false && LJ.coluna === true && lojaItens.length) {
     document.body.classList.add('tem-rail'); $('#rail').hidden = false; txt('#railNome', LJ.rail || 'Achados');
     const noRail = lojaItens.map((x, i) => [x, i]).filter(([x]) => x.grupo !== 'Grátis');
     const um = noRail.map(([x, i]) => `<button class="rail-item" type="button" data-loja="${i}" aria-label="${esc(x.titulo)}">${miniLoja(x, i)}<span class="pr">${esc(precoCurto(x))}</span></button>`).join('');
