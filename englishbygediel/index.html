@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
+<style
 @font-face{font-family:'Advercase';src:url('fonts/advercase.woff2') format('woff2'),url('fonts/advercase.otf') format('opentype');font-display:swap}
 :root{
   --bg:#0a1426; --bg2:color-mix(in srgb,var(--bg) 82%,#fff 4%); --card:#13233f; --grad:url(img/gradiente-azul.webp); --linha:rgba(255,255,255,.09);
@@ -72,7 +72,9 @@ a{text-decoration:none}
 
 /* seções com fileira */
 .secao{margin-top:34px}
-.cab{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.cab{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px}
+.btn-quiz-cta{display:inline-flex;align-items:center;gap:5px;padding:7px 16px;border-radius:30px;font-size:13px;font-weight:600;background:linear-gradient(135deg,#2a7a4f,#1d5c3a);color:#fff;border:1px solid rgba(255,255,255,.18);transition:background .2s,transform .15s;white-space:nowrap}
+.btn-quiz-cta:hover{background:linear-gradient(135deg,#348a5c,#256849);transform:translateY(-1px)}
 .cab h2{font-size:28px}
 .cab a,.cab button{font-size:13px;color:var(--marfim);display:inline-flex;gap:6px;align-items:center}
 .filtros{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:-2px 0 14px;padding-bottom:2px}
@@ -260,7 +262,7 @@ a{text-decoration:none}
 .atalho .pop{left:12px;right:12px;bottom:12px}
 .atalho strong{font-size:15px}.atalho small{display:block;font-size:11.5px}
 .atalho .at-tx{display:block;font-size:11.5px;line-height:1.3;color:#d5deec;margin-top:3px}
-.atalho .at-chip{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:5px 10px;border-radius:99px;background:rgba(255,255,255,.16);font-weight:800;font-size:12.5px;color:#fff;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.atalho .at-chip{display:inline-flex;flex-wrap:wrap;align-items:center;gap:2px 6px;white-space:nowrap;margin-top:8px;padding:5px 10px;border-radius:99px;background:rgba(255,255,255,.16);font-weight:800;font-size:12.5px;color:#fff;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .atalho .at-chip i{font-style:normal;font-size:9px;letter-spacing:.06em;text-transform:uppercase;background:#e11d2e;border-radius:5px;padding:2px 5px}
 .atalho .at-chip small{display:inline;font-size:10px;font-weight:600;color:#c9d3e2;margin:0}
 @media (max-width:819px){.atalhos#atalhos{grid-template-columns:1fr 1fr}#atalhos .atalho{min-height:236px}#atalhos>:last-child:nth-child(odd){grid-column:1/-1;min-height:150px}}
@@ -527,7 +529,7 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
   </section>
 
   <section class="secao aparece" id="pagos">
-    <div class="cab"><h2 class="serif" id="sPagos">Pra ir mais fundo</h2><button data-ir="#planos" id="sBotaoPagos">Planos →</button></div>
+    <div class="cab"><h2 class="serif" id="sPagos">Pra ir mais fundo</h2><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><a href="https://claude.ai/artifact/PwZGV88dW8hgB1HZkWzxz7" target="_blank" rel="noopener" class="btn-quiz-cta" id="sBotaoQuiz">🎯 Descobrir meu método →</a><button data-ir="#planos" id="sBotaoPagos">Planos →</button></div></div>
     <p class="sec-texto" id="tPagos"></p>
     <p class="confianca" id="tConfianca" hidden></p>
     <div class="filtros" id="filtrosPagos"></div>
@@ -945,7 +947,7 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
     const menor = Math.min(...Object.keys(itens).filter(k => itens[k].pago && /e-?book|guia/i.test(itens[k].cat)).map(k => valorPreco(itens[k].preco)));
     const pl = d.plano ? (H.planos || []).find(p => nrm(p.nome) === nrm(d.plano)) : null;
     const promo = !!(pl && pl.promo && pl.promoAte && hoje <= pl.promoAte);
-    const preco = pl ? (promo ? pl.promo : pl.preco) : d.auto === 'ebooks' && menor < 1e9 ? 'a partir de ' + realBR(menor) : d.preco || '';
+    const preco = pl ? (promo ? pl.promo : pl.preco) : d.auto === 'ebooks' && menor < 1e9 ? 'desde ' + realBR(menor) : d.preco || '';
     return { preco, promo, promoNome: promo ? (pl.promoNome || 'Promoção') : '', html: pl || /^\d+x\s*R\$|\/\s*m[eê]s/i.test(preco) ? partePreco(preco) : esc(preco) };
   }
   // ATALHOS DO TOPO: a capa de sempre, agora com título, uma frase que explica e o preço
@@ -967,7 +969,7 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
     $('#escadaLista').innerHTML = lista.map((d, i) => {
       const pl = d.plano ? (H.planos || []).find(p => nrm(p.nome) === nrm(d.plano)) : null;
       const promo = !!(pl && pl.promo && pl.promoAte && hoje <= pl.promoAte);
-      const preco = pl ? (promo ? pl.promo : pl.preco) : d.auto === 'ebooks' && menor < 1e9 ? 'a partir de ' + realBR(menor) : d.preco || '';
+      const preco = pl ? (promo ? pl.promo : pl.preco) : d.auto === 'ebooks' && menor < 1e9 ? 'desde ' + realBR(menor) : d.preco || '';
       const precoHtml = pl || /^R\$/.test(preco) ? partePreco(preco) : esc(preco);
       return `<li><button type="button" class="degrau" data-ir="#${esc(d.ir || 'planos')}"><span class="n">${i + 1}</span><span class="ic">${esc(d.icone || '')}</span><b>${esc(d.titulo)}</b>
         <span class="tx">${esc(d.texto || '')}</span>${promo ? `<span class="bf">${esc(pl.promoNome || 'Promoção')}</span>` : ''}<span class="pr">${precoHtml}</span></button></li>`;
