@@ -48,6 +48,9 @@
     var fab=document.getElementById('ai-fab');if(fab)fab.innerHTML=IC('suporte');
   }
   var ttOrig=window.toggleTheme;if(ttOrig)window.toggleTheme=function(){ttOrig();iconesTopo();};
+  var CTX_EN={'Em Casa':'At home','Acabei de acordar':'Just woke up','Vou pro banho':'Shower time','Prestes a dormir':'About to sleep','No carro':'In the car','No Transporte':'On the go','No Trabalho':'At work','Intervalo do almoço':'Lunch break','Lavando a louça':'Doing the dishes','Limpando a casa':'Cleaning up','Cozinhando':'Cooking','Caminhando':'Out walking','Na Academia':'At the gym','Na fila':'Waiting in line','No sofá':'Chilling on the couch','Só 5 minutos':'Just 5 minutes','Focado pra estudar':'Ready to study','Viajando':'Traveling','No mercado':'At the store','Na igreja':'At church','Com a família':'With family'};
+  function acessos(){try{return parseInt(localStorage.getItem('mi_acessos')||'0',10)||0;}catch(e){return 0;}}
+  function contaAcesso(){try{if(sessionStorage.getItem('mi_sess_ok'))return;sessionStorage.setItem('mi_sess_ok','1');localStorage.setItem('mi_acessos',String(acessos()+1));}catch(e){}}
   var CTX=[
     {k:'Em Casa',ic:'🏠',lb:'Em casa',hint:'Tempo pra estudar com calma'},
     {k:'Acabei de acordar',ic:'🥱',lb:'Acabei de acordar',hint:'Olho meio aberto, cérebro ligando'},
@@ -564,6 +567,7 @@
   '#mi-entry .mi-ctx .tx{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:center;text-align:center;padding:26px 10px 11px;background:linear-gradient(to top,var(--c) 0%,var(--c) 30%,rgba(0,0,0,0) 100%);background:linear-gradient(to top,color-mix(in srgb,var(--c) 96%,transparent) 0%,color-mix(in srgb,var(--c) 82%,transparent) 42%,transparent 100%)}',
   '#mi-entry .mi-ctx .lb{font-size:15.5px!important;font-weight:800;line-height:1.15;color:#fff;text-align:center;text-shadow:0 1px 3px rgba(0,0,0,.35)}',
   '#mi-entry .mi-ctx .ht{display:none}',
+  '#mi-entry .mi-ctx .tx{flex-direction:column;align-items:center;gap:2px}#mi-entry .mi-ctx .pt{font-size:11px;font-weight:600;color:#fff;opacity:0;max-height:0;overflow:hidden;transition:opacity .2s,max-height .2s;text-shadow:0 1px 3px rgba(0,0,0,.4)}@media(hover:hover){#mi-entry .mi-ctx button:hover .pt{opacity:.92;max-height:20px}}#mi-entry .mi-ctx button:focus-visible .pt{opacity:.92;max-height:20px}',
   '@media(hover:hover){#mi-entry .mi-ctx button:hover{transform:scale(1.08);z-index:2;box-shadow:0 22px 44px rgba(0,0,0,.6),0 8px 16px rgba(0,0,0,.4)}}',
   '.rail-evo{background:var(--card,var(--bg2));border:1px solid var(--border);border-radius:14px;padding:12px}.re-top,.re-st{display:flex;gap:8px}.re-top>div,.re-st>div{flex:1;display:flex;flex-direction:column}.re-top strong{font-size:22px;font-weight:800;line-height:1.1}.re-st strong{font-size:16px;font-weight:800}.re-top span,.re-st span{font-size:10.5px;color:var(--fg3);line-height:1.3}',
   '.re-bars{display:flex;align-items:flex-end;gap:3px;height:56px;margin:10px 0 3px}.re-bars i{flex:1;background:linear-gradient(180deg,#34d399,#10b981);border-radius:3px 3px 1px 1px;min-height:4px}.re-bars i.hj{background:linear-gradient(180deg,#fbbf24,#f59e0b)}.re-lbl{display:flex;gap:3px;margin-bottom:10px}.re-lbl b{flex:1;text-align:center;font-size:8.5px;font-weight:700;color:var(--fg3)}.re-st{border-top:1px solid var(--border);padding-top:9px}',
@@ -1067,7 +1071,7 @@
     abrirEntrada('<span class="mi-logo mi-lg-ent"></span><div class="mi-ent-kicker">'+E(saudacao())+(nomeCurto()?', '+E(nomeCurto()):'')+'</div>'
       +'<div class="mi-ent-q">Onde você está agora?</div>'
       +'<div class="mi-ent-s">Escolha o mais parecido com onde você está ou o que está fazendo. Eu monto o checklist de hoje pra esse momento.</div>'
-      +'<div class="mi-ctx">'+CTX.map(function(c,i){return '<button data-ent="ctx" data-k="'+E(c.k)+'" title="'+E(c.hint)+'" style="--c:'+ctxCor(c)+';animation-delay:'+(0.06+i*0.05)+'s"><span class="ic">'+ctxImg(c)+'</span><span class="tx"><span class="lb">'+E(c.lb)+'</span></span></button>';}).join('')+'</div>'
+      +'<div class="mi-ctx">'+CTX.map(function(c,i){return '<button data-ent="ctx" data-k="'+E(c.k)+'" title="'+E(c.hint)+'" style="--c:'+ctxCor(c)+';animation-delay:'+(0.06+i*0.05)+'s"><span class="ic">'+ctxImg(c)+'</span><span class="tx">'+(acessos()>5&&CTX_EN[c.k]?'<span class="lb">'+E(CTX_EN[c.k])+'</span><span class="pt">'+E(c.lb)+'</span>':'<span class="lb">'+E(c.lb)+'</span>')+'</span></button>';}).join('')+'</div>'
       +'<button class="mi-ctx-skip" data-ent="ctx" data-k="">Só vim dar uma olhada</button>'
       +'<button id="mi-som" type="button" aria-label="Som dos ícones"></button>');
     if(window.EBG_FX)EBG_FX.pintaBotao();
@@ -1082,7 +1086,7 @@
   }
   var entrou=false;
   function entrar(user){
-    if(entrou||!user)return;entrou=true;
+    if(entrou||!user)return;entrou=true;contaAcesso();
     carregarEstado(user);restaurarChecks();pintarPerfil();iniciarEdicao();
     pintarRail();renderHome();
     var seguir=function(){if(!ST.bv)mostrarBoasVindas(false);else perguntarContexto();};
