@@ -61,7 +61,7 @@
         ['beneficios', 'Benefícios (um por linha)', 'area'], ['acao', 'O botão faz', 'sel', [['link', 'Abre o link de compra'], ['whatsapp', 'Chama no WhatsApp'], ['login', 'Entrar grátis (área de membros)']]], ['botao', 'Texto do botão'], ['link', 'Link de compra (Kiwify)', 'url'],
         ['modos', 'Ganha o destaque nestes modos', 'modos']] },
     { k: 'lojinha', t: 'Lojinha (coluna lateral)', d: 'A coluna fina com os produtos andando na vertical, no canto direito. Ao tocar, abre a lojinha com os achados de afiliado, os seus e-books à venda (cards "À venda") e os grátis (cards grátis com link).', campos: [
-      ['ativo', 'Mostrar a lojinha', 'bool'], ['rail', 'Nome curto no topo da coluna'], ['titulo', 'Título da lojinha'], ['sub', 'Texto embaixo do título'], ['aviso', 'Aviso de afiliado (rodapé da lojinha)', 'area']] },
+      ['coluna', 'Mostrar a coluna lateral (desligada por padrão)', 'bool'], ['rail', 'Nome curto no topo da coluna'], ['titulo', 'Título da lojinha'], ['sub', 'Texto embaixo do título'], ['aviso', 'Aviso de afiliado (rodapé da lojinha)', 'area']] },
     { k: 'achados', t: 'Achados (links de afiliado)', d: 'Produtos que você indica e ganha comissão (Amazon, Mercado Livre, seguro viagem…). A categoria vira filtro na lojinha (Estudo, Fé, Viagem…).', lista: true, titulo: 'titulo', foto: 'img',
       novo: () => ({ ativo: true, cat: 'Estudo', loja: '', titulo: 'Novo achado', desc: '', preco: '', link: 'https://', img: '' }),
       campos: [['titulo', 'Nome do produto'], ['ativo', 'Visível', 'bool'], ['cat', 'Categoria (Estudo, Fé, Viagem…)'], ['loja', 'Loja (Amazon, Mercado Livre…)'], ['desc', 'Descrição curta', 'area'],
