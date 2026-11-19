@@ -81,6 +81,8 @@
       secoes: { gratis: 'Materiais grátis', pagos: 'Pra ir mais fundo', botaoPagos: 'Programa →', membros: 'Dentro do programa', membrosSub: 'Só pra alunos',
         planosRotulo: 'Planos', planos: 'Escolha até onde você quer ir', planosSub: 'Todo mundo começa no Grátis. Cada plano libera um nível a mais da plataforma.',
         planosAviso: 'Aula particular com o Gediel não está inclusa em nenhum plano: a partir do Inteligente você pode pedir um horário, e o valor é combinado direto com ele.',
+        escadaTitulo: 'Por onde começar', escadaTexto: 'Cada degrau leva você um passo adiante. Comece pelo que faz sentido hoje.',
+        pagosConfianca: '🔒 Pagamento seguro pela Kiwify. Você finaliza a compra na página deles.',
         gratisTexto: 'Comece por aqui: é tudo de graça, é só tocar no que te interessa.',
         gratisFaixa: 'Os jogos, as lives abertas e os materiais da plataforma ficam na área de membros.',
         pagosTexto: 'Materiais completos pra ir mais fundo, com pagamento único.',
@@ -92,6 +94,13 @@
         texto: 'Já é aluno ou comprou um material? Entre com o e-mail que você usou na compra pra acessar suas aulas, trilhas e materiais.',
         botao: 'Entrar na área de membros', semConta: 'Ainda não sou aluno', cardBotao: 'Já sou aluno, entrar' },
       cards,
+      // escada de valor no topo: grátis → e-book → assinatura → programa. Preço vem dos cards (auto) e dos planos (plano)
+      escada: [
+        { ativo: true, icone: '🎁', titulo: 'Comece grátis', preco: 'R$ 0', texto: 'Testes, prompts, jogos e e-books gratuitos', ir: 'gratis' },
+        { ativo: true, icone: '📘', titulo: 'E-books', auto: 'ebooks', preco: '', texto: 'Guias rápidos, com pagamento único', ir: 'pagos' },
+        { ativo: true, icone: '📖', titulo: 'Assinatura Mission', plano: 'Mission', preco: '', texto: 'Devocionais e inglês com a Bíblia', ir: 'planos' },
+        { ativo: true, icone: '🧠', titulo: 'Programa Inteligente', plano: 'Inteligente', preco: '', texto: 'Aulas ao vivo e acompanhamento de perto', ir: 'planos' }
+      ],
       // aba de planos (preços): igual à da área de membros, em cartões com brilho. Benefícios: um por linha
       planos: [
         { ativo: true, nome: 'Grátis', sub: 'Pra conhecer o método', icone: '🎁', cor: '#8fa66a', preco: 'R$ 0', promo: '', promoAte: '', promoNome: '', nota: 'pra sempre', selo: '', destaque: false, acao: 'login', botao: 'Entrar na plataforma', link: '', modos: [],
@@ -106,7 +115,7 @@
           beneficios: ['Tudo do Gênio pra cada pessoa', 'Quantidade de colaboradores sob medida', 'Turmas e lives combinadas com o grupo', 'Encontros com o Gediel definidos no contrato'].join('\n') }
       ],
       // lojinha: coluna fina na lateral (passarela vertical) + janela com os achados de afiliado e os seus produtos
-      lojinha: { ativo: true, rail: 'Achados', titulo: 'Achados do Gediel', sub: 'Minhas indicações pra estudar, ler e viajar, e os meus materiais.',
+      lojinha: { ativo: true, rail: 'Loja', titulo: 'Achados do Gediel', sub: 'Minhas indicações pra estudar, ler e viajar, e os meus materiais.',
         aviso: 'Alguns links são de afiliado: posso receber comissão por compras qualificadas, sem custo a mais pra você. Como associado da Amazon, eu ganho com compras qualificadas. Preços de referência, sujeitos a alteração: confira o valor e a disponibilidade na loja.' },
       achados: [
         { ativo: true, cat: 'Estudo', loja: 'Amazon', titulo: 'English for Everyone: English Grammar Guide', desc: 'Um guia visual de gramática para consultar enquanto você estuda.', preco: '', link: 'https://amzn.to/4iyoaQO', img: 'img/achados/0.webp' },

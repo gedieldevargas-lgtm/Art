@@ -77,7 +77,7 @@ a{text-decoration:none}
 .cab a,.cab button{font-size:13px;color:var(--marfim);display:inline-flex;gap:6px;align-items:center}
 .filtros{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:-2px 0 14px;padding-bottom:2px}
 .filtros::-webkit-scrollbar,.trilho::-webkit-scrollbar{display:none}
-.filtro{flex:0 0 auto;padding:8px 14px;border-radius:99px;border:1px solid var(--linha);font-size:12.5px;font-weight:600;color:var(--dim)}
+.filtro{flex:0 0 auto;min-height:40px;padding:10px 15px;border-radius:99px;border:1px solid var(--linha);font-size:12.5px;font-weight:600;color:var(--dim)}
 .filtro[aria-pressed="true"]{background:var(--marfim);color:var(--bg);border-color:var(--marfim)}
 .trilho{display:flex;align-items:flex-start;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:10px 2px 26px;margin:-10px -2px -20px}
 .post{clip-path:inset(0 round 18px);isolation:isolate;display:flex;flex-direction:column;position:relative;flex:0 0 clamp(150px,42vw,230px);scroll-snap-align:start;border-radius:18px;overflow:hidden;background:var(--card);border:1px solid var(--linha);text-align:left;box-shadow:var(--sombra)}
@@ -219,6 +219,25 @@ a{text-decoration:none}
 .sec-texto{font-size:13.5px;color:var(--dim);line-height:1.5;margin:-8px 0 14px;max-width:62ch}
 .faixa-login{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 14px;padding:12px 14px;border-radius:16px;background:rgba(143,166,106,.12);border:1px solid rgba(143,166,106,.35);font-size:13px;line-height:1.4}
 .faixa-login button{flex:0 0 auto;padding:9px 14px;border-radius:99px;background:var(--cobre);color:#fff;font-weight:700;font-size:12.5px}
+/* escada de valor: grátis → e-book → assinatura → programa, com o preço de cada degrau */
+.escada{margin-top:22px}.escada h2{font-size:clamp(24px,5vw,34px);line-height:1.05;margin-bottom:6px}
+.escada-lista li{display:flex}.escada-lista .degrau{width:100%}
+.escada-lista{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0;padding:0}
+.degrau{position:relative;display:flex;flex-direction:column;gap:4px;text-align:left;padding:14px 13px 13px;border-radius:18px;background:linear-gradient(165deg,rgba(25,42,76,.9),rgba(11,21,41,.9));border:1px solid var(--linha);color:var(--marfim);min-height:150px;transition:transform .2s,border-color .2s}
+.degrau:hover{transform:translateY(-3px);border-color:var(--cobre2)}
+.degrau .n{font-size:10px;font-weight:800;letter-spacing:.14em;color:var(--cobre2)}
+.degrau .ic{font-size:24px;line-height:1}
+.degrau b{font-size:15px;line-height:1.2}
+.degrau .pr{font-size:19px;font-weight:800;letter-spacing:-.01em;margin-top:auto}
+.degrau .pr small{font-size:11px;font-weight:600;color:var(--dim);margin-left:3px}
+.degrau .tx{font-size:12px;line-height:1.35;color:var(--dim)}
+.degrau .bf{align-self:flex-start;font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:#e11d2e;border-radius:6px;padding:3px 7px}
+@media (min-width:820px){.escada-lista{grid-template-columns:repeat(4,1fr);gap:14px}.escada-lista li:not(:last-child) .degrau::after{content:"→";position:absolute;right:-13px;top:50%;translate:0 -50%;color:var(--cobre2);font-weight:800;z-index:2}}
+.confianca{font-size:12px;color:var(--dim);margin:-6px 0 12px}
+.combina{margin-top:18px;padding-top:14px;border-top:1px solid var(--linha)}.combina h4{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--cobre2);margin-bottom:10px}
+.combina-lista{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none}
+.combina-item{flex:0 0 140px;text-align:left;border-radius:14px;overflow:hidden;background:var(--card);border:1px solid var(--linha);color:var(--marfim)}
+.combina-item img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}.combina-item span{display:block;padding:8px 10px 10px;font-size:12px;line-height:1.25;font-weight:600}.combina-item small{display:block;margin-top:3px;color:var(--cobre2);font-weight:800}
 .planos-topo{text-align:center;margin-bottom:22px}.planos-topo h2{font-size:clamp(34px,6.5vw,60px);line-height:1;margin:8px 0 12px}.planos-topo p{color:var(--dim);font-size:14px;max-width:54ch;margin:0 auto;line-height:1.5}
 .planos-pista{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:36px 8px 26px;margin:0 -8px;scrollbar-width:none;align-items:stretch}.planos-pista::-webkit-scrollbar{display:none}
 .plano{--pc:#7a8cff;position:relative;flex:0 0 min(78%,290px);scroll-snap-align:center;display:flex;flex-direction:column;padding:22px 20px 20px;border-radius:22px;color:var(--marfim);background:linear-gradient(165deg,rgba(25,42,76,.95),rgba(11,21,41,.95));border:1px solid var(--linha);box-shadow:0 22px 44px -26px #000;transition:transform .18s ease-out,box-shadow .3s;transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));will-change:transform}
@@ -299,6 +318,14 @@ body.tem-rail .pagina{padding-right:92px}
 .ligar{position:relative;z-index:6;width:min(420px,calc(100% - 32px));margin:0 0 max(18px,env(safe-area-inset-bottom));padding:17px;border-radius:16px;background:var(--cobre);color:#fff;font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:13px;box-shadow:0 18px 40px -14px rgba(74,90,53,.9);border:1px solid rgba(255,255,255,.15)}
 .trocar{position:fixed;top:14px;right:14px;z-index:15;padding:10px 14px;border-radius:99px;background:rgba(10,20,38,.65);border:1px solid var(--linha);color:#fff;font-size:12.5px;font-weight:700;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 .trocar b{color:var(--cobre2)}
+/* barra de topo única: Entrar, Planos e Trocar modo juntos, com fundo, sem boto flutuando sobre o texto */
+.barra-topo{position:fixed;top:0;left:0;right:0;z-index:16;display:flex;align-items:center;gap:8px;padding:8px 12px;background:linear-gradient(180deg,rgba(10,20,38,.94),rgba(10,20,38,.8));-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--linha)}
+body.entrando .barra-topo{display:none}
+.barra-topo .entrar-btn.fixo,.barra-topo .trocar{position:static;min-height:40px}
+.barra-topo .trocar{margin-left:auto}
+body:not(.entrando) .pagina{padding-top:56px}
+body:not(.entrando) .hero{padding-top:28px}
+@media (min-width:820px){body:not(.entrando) .hero{padding-top:36px}}
 .modo-texto{max-width:46ch;margin:0 auto;font-size:14px;color:#d6deea}
 
 @media (min-width:820px){
@@ -423,9 +450,11 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
   </div>
   <button class="ligar" id="ligar" type="button">Ligar modo</button>
 </section>
+<div class="barra-topo" id="barraTopo">
 <button class="entrar-btn fixo planos-fixo" id="planosFixo" type="button" data-ir="#planos" hidden><span>Planos</span></button>
 <button class="entrar-btn fixo" id="entrarFixo" type="button" data-login hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg><span class="entrarTxt">Entrar</span></button>
 <button class="trocar" id="trocar" type="button" hidden>Modo <b id="trocarNome"></b> · trocar</button>
+</div>
 
 <main class="pagina">
   <header class="hero">
@@ -445,6 +474,11 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
   </section>
 
   <section class="atalhos cena" aria-label="Atalhos" id="atalhos"></section>
+
+  <section class="secao escada" id="escada" hidden aria-label="Por onde começar">
+    <h2 class="serif" id="escTitulo"></h2><p class="sec-texto" id="escTexto"></p>
+    <ol class="escada-lista" id="escadaLista"></ol>
+  </section>
 
   <section class="destaque t3d aparece" data-abrir="mentoria" role="button" tabindex="0">
     <span class="brilho"></span>
@@ -489,6 +523,8 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
   <section class="secao aparece" id="pagos">
     <div class="cab"><h2 class="serif" id="sPagos">Pra ir mais fundo</h2><button data-ir="#planos" id="sBotaoPagos">Planos →</button></div>
     <p class="sec-texto" id="tPagos"></p>
+    <p class="confianca" id="tConfianca" hidden></p>
+    <div class="filtros" id="filtrosPagos"></div>
     <div class="trilho cena" id="trilhoPagos"></div>
   </section>
 
@@ -653,7 +689,7 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
   const S = H.secoes;
   txt('#sGratis', S.gratis); txt('#sPagos', S.pagos); txt('#sBotaoPagos', S.botaoPagos); txt('#sAlunos', S.alunos); txt('#sMembros', S.membros); txt('#sMembrosSub', S.membrosSub); txt('#sExtras', S.extras);
   const S3 = H.secoes || {};
-  [['tGratis', 'gratisTexto'], ['tPagos', 'pagosTexto'], ['tMembros', 'membrosTexto'], ['tExtras', 'extrasTexto'], ['tAlunos', 'alunosTexto']].forEach(([id, k]) => { const el = $('#' + id); if (el) { el.textContent = S3[k] || ''; el.hidden = !S3[k]; } });
+  [['tGratis', 'gratisTexto'], ['tPagos', 'pagosTexto'], ['tConfianca', 'pagosConfianca'], ['tMembros', 'membrosTexto'], ['tExtras', 'extrasTexto'], ['tAlunos', 'alunosTexto']].forEach(([id, k]) => { const el = $('#' + id); if (el) { el.textContent = S3[k] || ''; el.hidden = !S3[k]; } });
   if (S3.gratisFaixa) { $('#faixaTxt').textContent = S3.gratisFaixa; $('#faixaLogin').hidden = false; }
   const MB = H.membros || {};
   document.querySelectorAll('.entrarTxt').forEach(e => { e.textContent = MB.botaoTopo || 'Entrar'; });
@@ -725,7 +761,7 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
     itens[c.id] = { modos: c.modos || [], titulo: c.titulo, img: c.img, cat: c.setor || '', linha: c.linha, sinopse: c.sinopse,
       meta: String(c.meta || '').split(',').map(x => x.trim()).filter(Boolean),
       gratis: c.tipo === 'gratis', pago: c.tipo === 'pago', aluno: c.tipo === 'aluno', membros: c.tipo === 'membros', extra: c.tipo === 'extra',
-      nome: c.nome, video: c.video, preco: c.preco || '', parcelas: c.parcelas || '',
+      nome: c.nome, video: c.video, preco: c.preco || '', combina: (Array.isArray(c.combina) ? c.combina : String(c.combina || '').split(',')).map(x => x.trim()).filter(Boolean), parcelas: c.parcelas || '',
       cta: c.tipo === 'aluno' || (c.tipo === 'pago' && !link) ? null : c.tipo === 'membros' ? { rotulo: (H.membros || {}).cardBotao || 'Já sou aluno, entrar', acao: 'login' } : link ? { rotulo: c.botao || 'Abrir', acao: 'link', href: link }
         : { rotulo: c.botao || 'Quero saber mais', acao: 'whatsapp', texto: `Oi Gediel! Quero o ${c.titulo}.` },
       cta2: link2 ? { rotulo: c.botao2 || 'Saber mais', acao: 'link', href: link2 } : c.tipo === 'membros' ? { rotulo: (H.mentoria || {}).botaoAplicar || 'Quero entrar no programa', acao: 'aplicar' } : null };
@@ -736,7 +772,7 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
     preco: MT.precoPor ? { separado: MT.precoDe, parcelas: MT.precoPor, nota: MT.nota } : '',
     cta: { rotulo: MT.botaoAplicar, acao: 'aplicar' }, cta2: https(MT.checkout) ? { rotulo: MT.botaoComprar, acao: 'link', href: MT.checkout } : null };
 
-  let filtro = 'Tudo', modo = null;
+  let filtro = 'Tudo', filtroPago = 'Tudo', modo = null;
   const doModo = k => { const ms = itens[k].modos || []; return !modo || modo.id === 'materiais' || !ms.length || ms.includes(modo.id); };
   const ordem = () => { const ks = Object.keys(itens); const f = ks.filter(doModo);
     // o destaque do modo sobe pro começo
@@ -763,8 +799,14 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
     $('#filtros').innerHTML = cats.map(c => `<button class="filtro" aria-pressed="${c === filtro}" data-filtro="${esc(c)}">${esc(c)}</button>`).join('');
     // materiais à venda: todos sempre aparecem; os do modo primeiro
     const doMp = k => modo && (itens[k].modos || []).includes(modo.id) ? 0 : 1;
-    const pg = Object.keys(itens).filter(k => itens[k].pago).sort((a, b) => doMp(a) - doMp(b));
-    $('#pagos').hidden = !pg.length;
+    // do mais barato pro mais caro (a escada de valor), com os do modo primeiro; abas por tipo (E-books, Guias, Programa…)
+    const valor = k => { const m = String(itens[k].preco || '').replace(/\s/g, ' ').match(/R\$\s?([\d.]+(?:,\d+)?)/); return m ? parseFloat(m[1].replace(/\./g, '').replace(',', '.')) : 1e9; };
+    const todosPg = Object.keys(itens).filter(k => itens[k].pago).sort((a, b) => doMp(a) - doMp(b) || valor(a) - valor(b));
+    const tiposPg = [...new Set(todosPg.map(k => itens[k].cat).filter(Boolean))];
+    if (filtroPago !== 'Tudo' && !tiposPg.includes(filtroPago)) filtroPago = 'Tudo';
+    const pg = todosPg.filter(k => filtroPago === 'Tudo' || itens[k].cat === filtroPago);
+    $('#pagos').hidden = !todosPg.length;
+    $('#filtrosPagos').innerHTML = tiposPg.length > 1 ? ['Tudo', ...tiposPg].map(c => `<button class="filtro" aria-pressed="${c === filtroPago}" data-filtropago="${esc(c)}">${esc(c)}</button>`).join('') : '';
     $('#trilhoPagos').innerHTML = pg.map(k => cardPost(k, m => m.cat)).join('');
     // dentro da mentoria e ecossistema: tudo aparece; os do modo primeiro
     const mb = Object.keys(itens).filter(k => itens[k].membros).sort((a, b) => doMp(a) - doMp(b));
@@ -885,10 +927,30 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
   const miniLoja = (x, i) => x.img ? `<img src="${esc(x.img)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : `<span class="letra grad g${i % 6}"></span>`;
   if (LJ.ativo !== false && lojaItens.length) {
     document.body.classList.add('tem-rail'); $('#rail').hidden = false; txt('#railNome', LJ.rail || 'Achados');
-    const um = lojaItens.map((x, i) => `<button class="rail-item" type="button" data-loja="${i}" aria-label="${esc(x.titulo)}">${miniLoja(x, i)}<span class="pr">${esc(precoCurto(x))}</span></button>`).join('');
-    const cop = Math.max(1, Math.ceil(1000 / (lojaItens.length * 86)));
-    $('#railPista').innerHTML = `<div class="rail-faixa" style="--dur:${Math.max(30, lojaItens.length * cop * 4)}s">${um.repeat(cop * 2)}</div>`;
+    const noRail = lojaItens.map((x, i) => [x, i]).filter(([x]) => x.grupo !== 'Grátis');
+    const um = noRail.map(([x, i]) => `<button class="rail-item" type="button" data-loja="${i}" aria-label="${esc(x.titulo)}">${miniLoja(x, i)}<span class="pr">${esc(precoCurto(x))}</span></button>`).join('');
+    const cop = Math.max(1, Math.ceil(1000 / (Math.max(1, noRail.length) * 86)));
+    $('#railPista').innerHTML = `<div class="rail-faixa" style="--dur:${Math.max(30, noRail.length * cop * 4)}s">${um.repeat(cop * 2)}</div>`;
   }
+  /* ESCADA DE VALOR: Grátis → E-book → Assinatura → Programa, cada degrau com o seu preço (puxado dos cards e dos planos) */
+  const valorPreco = s => { const m = String(s || '').replace(/\s/g, ' ').match(/R\$\s?([\d.]+(?:,\d+)?)/); return m ? parseFloat(m[1].replace(/\./g, '').replace(',', '.')) : 1e9; };
+  const realBR = n => 'R$ ' + n.toLocaleString('pt-BR', { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 });
+  function desenharEscada() {
+    const lista = (H.escada || []).filter(d => d && d.ativo !== false && d.titulo);
+    $('#escada').hidden = !lista.length; if (!lista.length) return;
+    const S4 = H.secoes || {}; txt('#escTitulo', S4.escadaTitulo); txt('#escTexto', S4.escadaTexto); $('#escTexto').hidden = !S4.escadaTexto;
+    const hoje = new Date().toISOString().slice(0, 10);
+    const menor = Math.min(...Object.keys(itens).filter(k => itens[k].pago && /e-?book|guia/i.test(itens[k].cat)).map(k => valorPreco(itens[k].preco)));
+    $('#escadaLista').innerHTML = lista.map((d, i) => {
+      const pl = d.plano ? (H.planos || []).find(p => nrm(p.nome) === nrm(d.plano)) : null;
+      const promo = !!(pl && pl.promo && pl.promoAte && hoje <= pl.promoAte);
+      const preco = pl ? (promo ? pl.promo : pl.preco) : d.auto === 'ebooks' && menor < 1e9 ? 'a partir de ' + realBR(menor) : d.preco || '';
+      const precoHtml = pl || /^R\$/.test(preco) ? partePreco(preco) : esc(preco);
+      return `<li><button type="button" class="degrau" data-ir="#${esc(d.ir || 'planos')}"><span class="n">${i + 1}</span><span class="ic">${esc(d.icone || '')}</span><b>${esc(d.titulo)}</b>
+        <span class="tx">${esc(d.texto || '')}</span>${promo ? `<span class="bf">${esc(pl.promoNome || 'Promoção')}</span>` : ''}<span class="pr">${precoHtml}</span></button></li>`;
+    }).join('');
+  }
+  desenharEscada();
   let lojaFiltro = 'Tudo';
   function desenharLoja(foco) {
     txt('#lojaTitulo', LJ.titulo || 'Lojinha'); txt('#lojaSub', LJ.sub || ''); txt('#lojaAviso', LJ.aviso || '');
@@ -964,6 +1026,7 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
         ${preco}
         ${m.pago && !m.cta ? '<p class="preco"><small>Link de compra em breve.</small></p>' : ''}
         <div class="botoes">${botao(m.cta, 'b1')}${botao(m.cta2, 'b2')}${m.aluno ? `<button class="b1" data-ir="#aplicar" data-fechar>${esc(H.secoes.botaoAluno || 'Quero esse resultado')}</button>` : ''}</div>
+        ${(m.combina || []).filter(id => itens[id] && id !== k).length ? `<div class="combina"><h4>Combina com</h4><div class="combina-lista">${(m.combina || []).filter(id => itens[id] && id !== k).map(id => `<button class="combina-item" type="button" data-abrir="${esc(id)}">${itens[id].img ? `<img src="${esc(itens[id].img)}" alt="" loading="lazy">` : ''}<span>${esc(itens[id].titulo)}${typeof itens[id].preco === 'string' && itens[id].preco ? `<small>${esc(itens[id].preco)}</small>` : ''}</span></button>`).join('')}</div></div>` : ''}
         ${k !== 'mentoria' ? `<button class="copiar" type="button" data-copiar="${esc(k)}">🔗 Copiar link deste material</button>` : ''}
       </div>`;
     document.body.classList.add('aberta'); document.body.style.overflow = 'hidden';
@@ -1047,6 +1110,7 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
     const lg = e.target.closest('[data-login]'); if (lg) { e.preventDefault(); if (!$('#entrada').classList.contains('sai')) ligarModo(escolhido || modos[0]); abrirLogin(); return; }
     const lj = e.target.closest('[data-loja]'); if (lj) { abrirLoja(lj.dataset.loja === '' ? null : +lj.dataset.loja); return; }
     if (e.target.closest('[data-loja-fechar]')) { fecharLoja(); return; }
+    const fp = e.target.closest('[data-filtropago]'); if (fp) { filtroPago = fp.dataset.filtropago; desenhar(); return; }
     const lf = e.target.closest('[data-lojafiltro]'); if (lf) { lojaFiltro = lf.dataset.lojafiltro; desenharLoja(); return; }
     const cp = e.target.closest('[data-copiar]');
     if (cp) {
