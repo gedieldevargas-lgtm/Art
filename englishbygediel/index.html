@@ -253,6 +253,17 @@ a{text-decoration:none}
 .plano .p-bf-nome{background:#e11d2e;color:#fff;padding:7px 10px;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
 .plano .p-bf-cont{background:#fff;color:#d10f22;padding:7px 10px;font-size:13px;letter-spacing:.02em;font-variant-numeric:tabular-nums}
 .plano .p-bf-cont small{display:block;font-size:9.5px;font-weight:700;color:#7a1620;margin-bottom:1px;text-transform:uppercase;letter-spacing:.08em}
+/* atalhos do topo com informação: capa + título + frase + preço */
+.atalhos#atalhos{display:grid;grid-template-columns:repeat(var(--n,4),1fr);grid-auto-flow:row;gap:12px}
+.atalho{aspect-ratio:auto;min-height:236px}
+.atalho::after{background:linear-gradient(180deg,transparent 18%,rgba(6,12,24,.94))}
+.atalho .pop{left:12px;right:12px;bottom:12px}
+.atalho strong{font-size:15px}.atalho small{display:block;font-size:11.5px}
+.atalho .at-tx{display:block;font-size:11.5px;line-height:1.3;color:#d5deec;margin-top:3px}
+.atalho .at-chip{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:5px 10px;border-radius:99px;background:rgba(255,255,255,.16);font-weight:800;font-size:12.5px;color:#fff;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.atalho .at-chip i{font-style:normal;font-size:9px;letter-spacing:.06em;text-transform:uppercase;background:#e11d2e;border-radius:5px;padding:2px 5px}
+.atalho .at-chip small{display:inline;font-size:10px;font-weight:600;color:#c9d3e2;margin:0}
+@media (max-width:819px){.atalhos#atalhos{grid-template-columns:1fr 1fr}#atalhos .atalho{min-height:236px}#atalhos>:last-child:nth-child(odd){grid-column:1/-1;min-height:150px}}
 @media (prefers-reduced-motion:reduce){.plano.dest,.plano .p-bf,.plano.dest .p-btn{animation:none}.plano{transform:none!important}}
 .plano .tab{position:absolute;top:-16px;left:50%;translate:-50% 0;white-space:nowrap;background:linear-gradient(135deg,#8294ff,#5566f0);color:#fff;font-size:12px;font-weight:800;letter-spacing:.03em;padding:7px 18px;border-radius:12px 12px 0 0;box-shadow:0 -4px 18px rgba(104,122,255,.5)}
 .plano:not(.dest) .tab{background:rgba(255,255,255,.12);box-shadow:none;color:#e9eefb;font-size:11px;padding:6px 14px}
@@ -331,7 +342,6 @@ body:not(.entrando) .hero{padding-top:28px}
 @media (min-width:820px){
   .hero{margin:16px 0 0;border-radius:30px;padding-top:40px}
   .atalhos{gap:16px}
-  .atalho{aspect-ratio:4/3}
   .atalho strong{font-size:16px}
   .destaque{padding:16px;gap:28px}
   .post{flex-basis:240px}
@@ -341,8 +351,6 @@ body:not(.entrando) .hero{padding-top:28px}
   .alca{display:none}
 }
 @media (max-width:520px){
-  .atalhos{grid-template-columns:repeat(4,1fr);gap:8px}
-  .atalho strong{font-size:11.5px}.atalho small{display:none}
   .destaque{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.aparece{opacity:1;transform:none}}
@@ -408,8 +416,6 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
 .entrar-btn.fixo{position:fixed;top:14px;left:14px;z-index:15}
 .entrar-btn.fixo.planos-fixo{left:112px;background:linear-gradient(135deg,#8294ff,#5566f0);box-shadow:0 0 18px rgba(104,122,255,.5)}
 .selo.tranca{background:rgba(10,20,38,.75);color:#fff}
-.atalhos{grid-auto-flow:column}
-@media (max-width:520px){.atalhos.muitos{display:flex;overflow-x:auto;scrollbar-width:none;margin-right:-16px;padding-right:16px}.atalhos.muitos::-webkit-scrollbar{display:none}.atalhos.muitos .atalho{flex:0 0 23%}}
 .login-corpo{padding:30px 22px 30px;text-align:center}
 .login-corpo .avatar{width:84px;height:84px;margin-bottom:14px}
 .login-corpo h3{font-size:30px;line-height:1.05}
@@ -707,9 +713,7 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
     play: '<path d="M7 4l13 8-13 8z"/>',
     coracao: '<path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/>'
   };
-  $('#atalhos').innerHTML = (H.atalhos || []).map(a => `<${a.ir === 'link' ? `a href="${esc(https(a.url))}" target="_blank" rel="noopener"` : 'button'} class="atalho t3d" ${a.ir === 'login' ? 'data-login' : a.ir === 'link' ? `data-item="atalho:${esc(a.titulo)}"` : `data-ir="#${esc(a.ir || 'gratis')}"`}>${a.img ? `<img src="${esc(a.img)}" alt="">` : ''}<span class="brilho"></span><span class="pop"><span class="ico"><svg viewBox="0 0 24 24" fill="currentColor">${ICO_AT[a.icone] || ICO_AT.estrela}</svg></span><strong>${esc(a.titulo)}</strong><small>${esc(a.sub)}</small></span></${a.ir === 'link' ? 'a' : 'button'}>`).join('');
-  $('#atalhos').style.gridTemplateColumns = `repeat(${Math.max(1, (H.atalhos || []).length)},1fr)`;
-  $('#atalhos').classList.toggle('muitos', (H.atalhos || []).length > 4);
+  // (os atalhos do topo são montados mais abaixo, depois dos cards e planos, porque mostram preço e frase)
 
   /* maratonas: fileira com status de cada uma (dados em maratonas.js) */
   (() => {
@@ -935,6 +939,25 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
   /* ESCADA DE VALOR: Grátis → E-book → Assinatura → Programa, cada degrau com o seu preço (puxado dos cards e dos planos) */
   const valorPreco = s => { const m = String(s || '').replace(/\s/g, ' ').match(/R\$\s?([\d.]+(?:,\d+)?)/); return m ? parseFloat(m[1].replace(/\./g, '').replace(',', '.')) : 1e9; };
   const realBR = n => 'R$ ' + n.toLocaleString('pt-BR', { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 });
+  // preço de um degrau/atalho: do plano (com a promoção), automático (menor e-book) ou escrito à mão
+  function precoDe(d) {
+    const hoje = new Date().toISOString().slice(0, 10);
+    const menor = Math.min(...Object.keys(itens).filter(k => itens[k].pago && /e-?book|guia/i.test(itens[k].cat)).map(k => valorPreco(itens[k].preco)));
+    const pl = d.plano ? (H.planos || []).find(p => nrm(p.nome) === nrm(d.plano)) : null;
+    const promo = !!(pl && pl.promo && pl.promoAte && hoje <= pl.promoAte);
+    const preco = pl ? (promo ? pl.promo : pl.preco) : d.auto === 'ebooks' && menor < 1e9 ? 'a partir de ' + realBR(menor) : d.preco || '';
+    return { preco, promo, promoNome: promo ? (pl.promoNome || 'Promoção') : '', html: pl || /^\d+x\s*R\$|\/\s*m[eê]s/i.test(preco) ? partePreco(preco) : esc(preco) };
+  }
+  // ATALHOS DO TOPO: a capa de sempre, agora com título, uma frase que explica e o preço
+  function desenharAtalhos() {
+    const lista = H.atalhos || [];
+    $('#atalhos').style.setProperty('--n', Math.max(1, lista.length));
+    $('#atalhos').innerHTML = lista.map(a => {
+      const p = precoDe(a), tag = a.ir === 'link' ? 'a' : 'button';
+      const attrs = a.ir === 'link' ? `href="${esc(https(a.url))}" target="_blank" rel="noopener" data-item="atalho:${esc(a.titulo)}"` : a.ir === 'login' ? 'data-login' : `data-ir="#${esc(a.ir || 'gratis')}"`;
+      return `<${tag} ${a.ir === 'link' ? '' : 'type="button" '}class="atalho t3d" ${attrs}>${a.img ? `<img src="${esc(a.img)}" alt="">` : ''}<span class="brilho"></span><span class="pop"><span class="ico"><svg viewBox="0 0 24 24" fill="currentColor">${ICO_AT[a.icone] || ICO_AT.estrela}</svg></span><strong>${esc(a.titulo)}</strong>${a.texto ? `<span class="at-tx">${esc(a.texto)}</span>` : a.sub ? `<small>${esc(a.sub)}</small>` : ''}${p.preco ? `<span class="at-chip">${p.promo ? `<i>${esc(p.promoNome)}</i>` : ''}${p.html}</span>` : ''}</span></${tag}>`;
+    }).join('');
+  }
   function desenharEscada() {
     const lista = (H.escada || []).filter(d => d && d.ativo !== false && d.titulo);
     $('#escada').hidden = !lista.length; if (!lista.length) return;
@@ -951,6 +974,7 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
     }).join('');
   }
   desenharEscada();
+  desenharAtalhos();
   let lojaFiltro = 'Tudo';
   function desenharLoja(foco) {
     txt('#lojaTitulo', LJ.titulo || 'Lojinha'); txt('#lojaSub', LJ.sub || ''); txt('#lojaAviso', LJ.aviso || '');

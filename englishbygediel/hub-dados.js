@@ -65,12 +65,11 @@
         { tipo: 'whatsapp', url: whats('Oi Gediel! Vim pelo Hub.') }
       ],
       atalhos: [
-        { titulo: 'Grátis', sub: 'Pegue e use hoje', img: 'img/card-teste.webp', ir: 'gratis', icone: 'estrela' },
-        { titulo: 'Completos', sub: 'Pra ir mais fundo', img: 'img/card-aulas.webp', ir: 'pagos', icone: 'livro' },
-        { titulo: 'Alunos', sub: 'Resultados reais', img: 'img/aula-turma.webp', ir: 'alunos', icone: 'pessoas' },
-        { titulo: 'Programa', sub: 'Fale comigo', img: 'img/gediel-london.webp', ir: 'aplicar', icone: 'chat' },
-        { titulo: 'Mentoria', sub: 'Aulas particulares', img: 'img/card-particular.webp', ir: 'link', url: CFG.mentoriaParticular || '', icone: 'pessoas' },
-        { titulo: 'Entrar', sub: 'Área de membros', img: 'img/card-aulas.webp', ir: 'login', icone: 'cadeado' }
+        { titulo: 'Grátis', sub: 'Pegue e use hoje', texto: 'Jogos, testes, lives e e-books pra começar hoje.', preco: 'R$ 0', img: 'img/card-teste.webp', ir: 'gratis', icone: 'estrela' },
+        { titulo: 'E-books', sub: 'Pra ir mais fundo', texto: 'Guias práticos pra estudar no seu ritmo.', auto: 'ebooks', img: 'img/card-aulas.webp', ir: 'pagos', icone: 'livro' },
+        { titulo: 'Alunos', sub: 'Resultados reais', texto: 'Veja quem já destravou o inglês.', img: 'img/aula-turma.webp', ir: 'alunos', icone: 'pessoas' },
+        { titulo: 'Programa', sub: 'Fale comigo', texto: 'Aula ao vivo, plano pra cada dia e acompanhamento.', plano: 'Inteligente', img: 'img/gediel-london.webp', ir: 'aplicar', icone: 'chat' },
+        { titulo: 'Já é aluno?', sub: 'Área de membros', texto: 'Entre e continue de onde parou.', img: 'img/card-aulas.webp', ir: 'login', icone: 'cadeado' }
       ],
       destaque: { rotulo: 'Vídeo em destaque', titulo: 'Programa de Acompanhamento Inglês Inteligente', img: 'img/apresentacao.webp', botao: '▶ Assistir e ver detalhes',
         texto: 'Aula ao vivo toda semana no seu nível, cronograma pra cada dia e acompanhamento de perto.' },
@@ -95,11 +94,11 @@
         botao: 'Entrar na área de membros', semConta: 'Ainda não sou aluno', cardBotao: 'Já sou aluno, entrar' },
       cards,
       // escada de valor no topo: grátis → e-book → assinatura → programa. Preço vem dos cards (auto) e dos planos (plano)
-      escada: [
-        { ativo: true, icone: '🎁', titulo: 'Comece grátis', preco: 'R$ 0', texto: 'Testes, prompts, jogos e e-books gratuitos', ir: 'gratis' },
+      escada: [   // desligada por padrão: as mesmas informações agora ficam nos atalhos do topo
+        /* { ativo: true, icone: '🎁', titulo: 'Comece grátis', preco: 'R$ 0', texto: 'Testes, prompts, jogos e e-books gratuitos', ir: 'gratis' },
         { ativo: true, icone: '📘', titulo: 'E-books', auto: 'ebooks', preco: '', texto: 'Guias rápidos, com pagamento único', ir: 'pagos' },
         { ativo: true, icone: '📖', titulo: 'Assinatura Mission', plano: 'Mission', preco: '', texto: 'Devocionais e inglês com a Bíblia', ir: 'planos' },
-        { ativo: true, icone: '🧠', titulo: 'Programa Inteligente', plano: 'Inteligente', preco: '', texto: 'Aulas ao vivo e acompanhamento de perto', ir: 'planos' }
+        { ativo: true, icone: '🧠', titulo: 'Programa Inteligente', plano: 'Inteligente', preco: '', texto: 'Aulas ao vivo e acompanhamento de perto', ir: 'planos' } */
       ],
       // aba de planos (preços): igual à da área de membros, em cartões com brilho. Benefícios: um por linha
       planos: [

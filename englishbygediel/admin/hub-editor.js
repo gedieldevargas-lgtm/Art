@@ -34,7 +34,7 @@
       campos: [['tipo', 'Rede', 'sel', OPC.rede], ['url', 'Link', 'url']] },
     { k: 'atalhos', t: 'Atalhos', d: 'Os 4 quadrados com ícone que giram, logo abaixo do topo.', lista: true, titulo: 'titulo', foto: 'img',
       novo: () => ({ titulo: 'Novo', sub: '', img: '', ir: 'gratis', icone: 'estrela' }),
-      campos: [['titulo', 'Título'], ['sub', 'Subtítulo'], ['img', 'Foto', 'img'], ['ir', 'Leva até', 'sel', OPC.ir], ['url', 'Link (quando "Leva até" for um link)', 'url'], ['icone', 'Ícone', 'sel', OPC.icone]] },
+      campos: [['titulo', 'Título'], ['sub', 'Subtítulo'], ['img', 'Foto', 'img'], ['texto', 'Frase que explica o card (aparece embaixo do título)', 'area'], ['plano', 'Nome do plano (puxa o preço e a promoção dele)'], ['auto', 'Preço automático', 'sel', [['', 'Não'], ['ebooks', 'Menor preço dos e-books']]], ['preco', 'Preço ou etiqueta escrita (ex.: R$ 0)'], ['ir', 'Leva até', 'sel', OPC.ir], ['url', 'Link (quando "Leva até" for um link)', 'url'], ['icone', 'Ícone', 'sel', OPC.icone]] },
     { k: 'destaque', t: 'Vídeo em destaque', d: 'O cartão grande. Ao tocar, abre a ficha da mentoria.', campos: [
       ['rotulo', 'Etiqueta'], ['titulo', 'Título'], ['texto', 'Texto', 'area'], ['botao', 'Botão'], ['img', 'Imagem', 'img']] },
     { k: 'mentoria', t: 'Ficha da mentoria', d: 'O que aparece ao tocar no vídeo em destaque.', campos: [
