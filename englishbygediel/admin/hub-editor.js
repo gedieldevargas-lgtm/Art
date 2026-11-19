@@ -10,7 +10,7 @@
   const OPC = {
     tipoCard: [['gratis', 'Grátis'], ['pago', 'À venda'], ['membros', 'Dentro da mentoria (trancado)'], ['extra', 'Ecossistema'], ['aluno', 'Depoimento de aluno']],
     rede: [['youtube', 'YouTube'], ['tiktok', 'TikTok'], ['instagram', 'Instagram'], ['whatsapp', 'WhatsApp'], ['link', 'Outro link']],
-    ir: [['gratis', 'Materiais grátis'], ['pagos', 'À venda'], ['membros', 'Dentro da mentoria'], ['extras', 'Ecossistema'], ['alunos', 'Alunos'], ['aplicar', 'Chat do programa'], ['login', 'Entrar (área de membros)'], ['link', 'Um link (preencha o campo Link)']],
+    ir: [['gratis', 'Materiais grátis'], ['pagos', 'À venda'], ['membros', 'Dentro da mentoria'], ['extras', 'Ecossistema'], ['alunos', 'Alunos'], ['planos', 'Planos (preços)'], ['aplicar', 'Chat do programa'], ['login', 'Entrar (área de membros)'], ['link', 'Um link (preencha o campo Link)']],
     icone: [['estrela', 'Estrela'], ['livro', 'Livro'], ['pessoas', 'Pessoas'], ['chat', 'Balão'], ['play', 'Play'], ['coracao', 'Coração'], ['cadeado', 'Cadeado']]
   };
   const SECOES = [
@@ -34,23 +34,32 @@
       campos: [['tipo', 'Rede', 'sel', OPC.rede], ['url', 'Link', 'url']] },
     { k: 'atalhos', t: 'Atalhos', d: 'Os 4 quadrados com ícone que giram, logo abaixo do topo.', lista: true, titulo: 'titulo', foto: 'img',
       novo: () => ({ titulo: 'Novo', sub: '', img: '', ir: 'gratis', icone: 'estrela' }),
-      campos: [['titulo', 'Título'], ['sub', 'Subtítulo'], ['img', 'Foto', 'img'], ['ir', 'Leva até', 'sel', OPC.ir], ['url', 'Link (quando "Leva até" for um link)', 'url'], ['icone', 'Ícone', 'sel', OPC.icone]] },
+      campos: [['titulo', 'Título'], ['sub', 'Subtítulo'], ['img', 'Foto', 'img'], ['texto', 'Frase que explica o card (aparece embaixo do título)', 'area'], ['plano', 'Nome do plano (puxa o preço e a promoção dele)'], ['auto', 'Preço automático', 'sel', [['', 'Não'], ['ebooks', 'Menor preço dos e-books']]], ['preco', 'Preço ou etiqueta escrita (ex.: R$ 0)'], ['ir', 'Leva até', 'sel', OPC.ir], ['url', 'Link (quando "Leva até" for um link)', 'url'], ['icone', 'Ícone', 'sel', OPC.icone]] },
     { k: 'destaque', t: 'Vídeo em destaque', d: 'O cartão grande. Ao tocar, abre a ficha da mentoria.', campos: [
       ['rotulo', 'Etiqueta'], ['titulo', 'Título'], ['texto', 'Texto', 'area'], ['botao', 'Botão'], ['img', 'Imagem', 'img']] },
     { k: 'mentoria', t: 'Ficha da mentoria', d: 'O que aparece ao tocar no vídeo em destaque.', campos: [
       ['titulo', 'Título'], ['sinopse', 'Descrição', 'area'], ['inclui', 'O que inclui (um item por linha)', 'area'], ['meta', 'Etiquetas (separe por vírgula)'],
-      ['precoDe', 'Preço "de"'], ['precoPor', 'Preço "por"'], ['nota', 'Observação do preço'], ['video', 'Vídeo do YouTube (link ou código)', 'video'],
+      ['precoDe', 'Preço "de"'], ['precoPor', 'Preço "por"'], ['nota', 'Observação do preço'], ['video', 'Vídeo (link do YouTube, Reel do Instagram ou TikTok)', 'video'],
       ['img', 'Imagem (se não tiver vídeo)', 'img'], ['checkout', 'Link de compra', 'url'], ['botaoAplicar', 'Botão que leva ao chat'], ['botaoComprar', 'Botão de compra']] },
     { k: 'secoes', t: 'Títulos das fileiras', campos: [
-      ['gratis', 'Fileira grátis'], ['pagos', 'Fileira à venda'], ['botaoPagos', 'Link ao lado do título à venda'], ['membros', 'Fileira dentro da mentoria'], ['membrosSub', 'Link ao lado (abre o login)'], ['jogos', 'Galeria de jogos'], ['simuladores', 'Galeria de simuladores'], ['extras', 'Fileira ecossistema'], ['alunos', 'Fileira de alunos'], ['botaoAluno', 'Botão na ficha do aluno']] },
+      ['gratis', 'Fileira grátis'], ['pagos', 'Fileira à venda'], ['botaoPagos', 'Link ao lado do título à venda'], ['membros', 'Fileira dentro da mentoria'], ['membrosSub', 'Link ao lado (abre o login)'], ['escadaTitulo', 'Título da escada (topo)'], ['escadaTexto', 'Texto da escada'], ['pagosConfianca', 'Frase de confiança embaixo do título à venda'], ['gratisTexto', 'Frase embaixo do título grátis'], ['gratisFaixa', 'Faixa de login nos materiais grátis (vazio = some)'], ['pagosTexto', 'Frase embaixo do título à venda'], ['membrosTexto', 'Frase embaixo do título dentro da mentoria'], ['extrasTexto', 'Frase embaixo do título ecossistema'], ['alunosTexto', 'Frase embaixo do título alunos'], ['planosRotulo', 'Etiqueta da aba de planos'], ['planos', 'Título da aba de planos'], ['planosSub', 'Texto da aba de planos'], ['planosAviso', 'Aviso embaixo dos planos'], ['jogos', 'Galeria de jogos'], ['simuladores', 'Galeria de simuladores'], ['extras', 'Fileira ecossistema'], ['alunos', 'Fileira de alunos'], ['botaoAluno', 'Botão na ficha do aluno']] },
     { k: 'cards', t: 'Cards (materiais e depoimentos)', d: 'Tudo o que aparece nas fileiras. Grátis vão pra fileira grátis, à venda pra "Pra ir mais fundo", trancados pra "Dentro da mentoria", ecossistema pra fileira própria e depoimentos pra fileira de alunos. Marque os modos onde o card aparece primeiro (sem nenhum marcado, aparece em todos).',
       lista: true, filtro: true, titulo: 'titulo', foto: 'img',
       novo: () => ({ id: 'c' + Date.now().toString(36), tipo: 'gratis', ativo: true, titulo: 'Novo material', linha: '', nome: '', setor: '', img: '', preco: '', link: '', botao: '', link2: '', botao2: '', video: '', sinopse: '', meta: '', modos: [] }),
       campos: [['tipo', 'Tipo', 'sel', OPC.tipoCard], ['ativo', 'Visível', 'bool'], ['titulo', 'Título (no depoimento, a frase)'], ['linha', 'Linha embaixo do título'],
         ['nome', 'Nome do aluno (só depoimento)'], ['setor', 'Setor (vira filtro na fileira grátis: Prompts, E-books, Guias…)'], ['img', 'Capa', 'img'],
         ['preco', 'Preço (à venda)'], ['parcelas', 'Parcelas (ex.: 6 mostra "6x de…"; 1 mostra só o valor cheio; vazio = 6x a partir de R$ 300)'], ['link', 'Link do botão (landing, checkout, PDF…)', 'url'], ['botao', 'Texto do botão'],
-        ['link2', 'Segundo link (opcional)', 'url'], ['botao2', 'Texto do segundo botão'], ['video', 'Vídeo do YouTube (link ou código)', 'video'],
-        ['sinopse', 'Descrição (aparece ao tocar)', 'area'], ['meta', 'Etiquetas (separe por vírgula)'], ['modos', 'Aparece primeiro nos modos', 'modos']] },
+        ['link2', 'Segundo link (opcional)', 'url'], ['botao2', 'Texto do segundo botão'], ['video', 'Vídeo (link do YouTube, Reel do Instagram ou TikTok)', 'video'],
+        ['sinopse', 'Descrição (aparece ao tocar)', 'area'], ['combina', 'Combina com (códigos de outros cards, separados por vírgula)'], ['meta', 'Etiquetas (separe por vírgula)'], ['modos', 'Aparece primeiro nos modos', 'modos']] },
+    { k: 'escada', t: 'Escada de valor (topo da página)', d: 'Os 4 degraus logo abaixo dos atalhos: grátis, e-book, assinatura e programa. "Plano" puxa o preço do plano com esse nome (e a promoção, se estiver valendo); "Preço automático" pega o menor preço dos e-books.', lista: true, titulo: 'titulo',
+      novo: () => ({ ativo: true, icone: '⭐', titulo: 'Novo degrau', preco: '', auto: '', plano: '', texto: '', ir: 'planos' }),
+      campos: [['titulo', 'Nome do degrau'], ['ativo', 'Visível', 'bool'], ['icone', 'Emoji'], ['texto', 'Frase curta', 'area'], ['plano', 'Nome do plano (puxa o preço dele)'], ['auto', 'Preço automático', 'sel', [['', 'Não (uso o preço escrito abaixo)'], ['ebooks', 'Menor preço dos e-books']]], ['preco', 'Preço escrito (se não for plano nem automático)'], ['ir', 'Ao tocar, vai até', 'sel', OPC.ir]] },
+    { k: 'planos', t: 'Planos (aba de preços)', d: 'Os cartões de preço, na ordem daqui. O marcado como destaque sobe e brilha; se você marcar modos num plano, ele ganha o destaque quando a pessoa liga aquele modo (ex.: Mission no Modo Fé). Atalhos podem levar até aqui ("Leva até: Planos").', lista: true, titulo: 'nome',
+      novo: () => ({ ativo: true, nome: 'Novo plano', sub: '', icone: '⭐', cor: '#7a8cff', preco: 'R$ 0', promo: '', promoAte: '', promoNome: '', nota: '', pagamento: '', selo: '', destaque: false, acao: 'link', botao: 'Quero esse plano', link: 'https://', modos: [], beneficios: '' }),
+      campos: [['nome', 'Nome do plano'], ['ativo', 'Visível', 'bool'], ['destaque', 'Cartão em destaque (sobe e brilha)', 'bool'], ['selo', 'Selo no topo (ex.: Mais escolhido)'], ['sub', 'Frase embaixo do nome'], ['icone', 'Emoji do cartão'], ['cor', 'Cor do plano', 'cor'],
+        ['preco', 'Preço (ex.: R$ 25/mês ou 6x R$ 297)'], ['nota', 'Observação do preço (ex.: em até 6x)'], ['pagamento', 'Formas de pagamento (ex.: Pix, cartão ou boleto)'], ['promo', 'Preço promocional (opcional)'], ['promoAte', 'Promoção vale até (AAAA-MM-DD)'], ['promoNome', 'Nome da promoção (ex.: Black Friday)'],
+        ['beneficios', 'Benefícios (um por linha)', 'area'], ['acao', 'O botão faz', 'sel', [['link', 'Abre o link de compra'], ['whatsapp', 'Chama no WhatsApp'], ['login', 'Entrar grátis (área de membros)']]], ['botao', 'Texto do botão'], ['link', 'Link de compra (Kiwify)', 'url'],
+        ['modos', 'Ganha o destaque nestes modos', 'modos']] },
     { k: 'lojinha', t: 'Lojinha (coluna lateral)', d: 'A coluna fina com os produtos andando na vertical, no canto direito. Ao tocar, abre a lojinha com os achados de afiliado, os seus e-books à venda (cards "À venda") e os grátis (cards grátis com link).', campos: [
       ['ativo', 'Mostrar a lojinha', 'bool'], ['rail', 'Nome curto no topo da coluna'], ['titulo', 'Título da lojinha'], ['sub', 'Texto embaixo do título'], ['aviso', 'Aviso de afiliado (rodapé da lojinha)', 'area']] },
     { k: 'achados', t: 'Achados (links de afiliado)', d: 'Produtos que você indica e ganha comissão (Amazon, Mercado Livre, seguro viagem…). A categoria vira filtro na lojinha (Estudo, Fé, Viagem…).', lista: true, titulo: 'titulo', foto: 'img',
@@ -72,7 +81,7 @@
       novo: () => ({ modo: 'prompts', ativo: true, titulo: 'Novo site', sub: '', url: 'https://', altura: 88, botao: 'Abrir em tela cheia' }),
       campos: [['modo', 'Código do modo onde aparece'], ['ativo', 'Visível', 'bool'], ['titulo', 'Título'], ['sub', 'Texto embaixo do título'], ['url', 'Link do site'], ['botao', 'Texto do botão de tela cheia'], ['altura', 'Altura (% da tela)', 'num']] },
     { k: 'maratona', t: 'Maratona (destaque flutuante)', d: 'O cartão que flutua e pisca na abertura e no Hub, com contagem regressiva até a data final. Sem link, o botão abre seu WhatsApp com a mensagem abaixo.', campos: [
-      ['ativo', 'Mostrar o destaque', 'bool'], ['rotulo', 'Etiqueta'], ['titulo', 'Título'], ['sub', 'Frase'], ['selo', 'Selo'], ['detalhe', 'Detalhe (duração, vagas)'],
+      ['flutuar', 'Mostrar o cartão flutuante na tela (pisca e tem contagem)', 'bool'], ['ativo', 'Mostrar o destaque', 'bool'], ['rotulo', 'Etiqueta'], ['titulo', 'Título'], ['sub', 'Frase'], ['selo', 'Selo'], ['detalhe', 'Detalhe (duração, vagas)'],
       ['fim', 'Contagem até (AAAA-MM-DDTHH:MM, ex.: 2026-11-30T23:59)'], ['textoFim', 'Texto quando o prazo acabar'], ['texto', 'Texto da ficha', 'area'],
       ['foto', 'Foto do cartão flutuante', 'img'], ['img', 'Imagem da ficha (arte completa)', 'img'], ['link', 'Link do botão (checkout, formulário…)', 'url'],
       ['botao', 'Texto do botão'], ['mensagem', 'Mensagem do WhatsApp (se não tiver link)', 'area']] },
@@ -94,7 +103,7 @@
     const abertos = new Set(opt.so ? [opt.so.sec, opt.so.item != null ? `${opt.so.sec}.${opt.so.item}` : ''] : []);
 
     const marcar = () => opt.onChange && opt.onChange();
-    const videoId = v => { const m = String(v || '').match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{6,})/); return m ? m[1] : String(v || '').trim(); };
+    const videoId = v => { if (/instagram\.com|tiktok\.com/i.test(String(v || ''))) return String(v).trim(); const m = String(v || '').match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{6,})/); return m ? m[1] : String(v || '').trim(); };
 
     function campoHTML(f, obj, caminho) {
       const [k, rot, tipo = 'txt', ops] = f;
@@ -112,7 +121,7 @@
           <div class="hub-mini">${v ? `<img src="${esc(verImg(v))}" alt="">` : '<i>sem foto</i>'}</div>
           <div class="hub-img-acoes"><label class="botao arquivo">Enviar foto<input type="file" accept="image/*" data-up="${nome}"></label>
           <input data-c="${nome}" value="${esc(v)}" placeholder="ou cole o link da imagem">${v ? `<button class="link perigo" type="button" data-limpa="${nome}">Tirar foto</button>` : ''}</div></div></div>`;
-      else entrada = `<input data-c="${nome}" value="${esc(v)}" ${tipo === 'url' ? 'type="url" placeholder="https://"' : ''} ${tipo === 'video' ? 'placeholder="https://youtu.be/…"' : ''}>`;
+      else entrada = `<input data-c="${nome}" value="${esc(v)}" ${tipo === 'url' ? 'type="url" placeholder="https://"' : ''} ${tipo === 'video' ? 'placeholder="https://youtu.be/… ou https://www.instagram.com/reel/…"' : ''}>`;
       return `<label class="campo"><span>${esc(rot)}</span>${entrada}</label>`;
     }
 
@@ -143,7 +152,7 @@
             <select data-filtro-modo><option value="">Todos os modos</option>${(H.modos || []).map(m => `<option value="${esc(m.id)}" ${m.id === filtroModo ? 'selected' : ''}>${esc(m.nome)}</option>`).join('')}</select>
             <span class="conta">${vis.length} de ${itens.length}</span></div>` : '';
           corpo = filtros + `<div class="hub-lista">${vis.map(([it, i]) => itemHTML(sec, it, i)).join('')}</div>`
-            + (opt.so && opt.so.item != null ? '' : `<button class="botao cheio" type="button" data-novo="${sec.k}">Adicionar ${sec.k === 'cards' ? 'card' : sec.k === 'modos' ? 'modo' : sec.k === 'redes' ? 'rede' : sec.k === 'embutidos' ? 'site' : sec.k === 'achados' ? 'achado' : sec.k === 'jogos' ? 'jogo' : sec.k === 'simuladores' ? 'simulador' : 'atalho'}</button>`);
+            + (opt.so && opt.so.item != null ? '' : `<button class="botao cheio" type="button" data-novo="${sec.k}">Adicionar ${sec.k === 'cards' ? 'card' : sec.k === 'modos' ? 'modo' : sec.k === 'redes' ? 'rede' : sec.k === 'embutidos' ? 'site' : sec.k === 'planos' ? 'plano' : sec.k === 'achados' ? 'achado' : sec.k === 'jogos' ? 'jogo' : sec.k === 'simuladores' ? 'simulador' : 'atalho'}</button>`);
         } else corpo = `<div class="hub-campos">${sec.campos.map(f => campoHTML(f, H[sec.k] = H[sec.k] || {}, sec.k)).join('')}</div>`;
         const aberto = opt.so || abertos.has(sec.k);
         return `<details class="cartao hub-sec" data-sec="${sec.k}" ${aberto ? 'open' : ''}><summary><h3>${esc(sec.t)}</h3></summary>${sec.d && !(opt.so && opt.so.item != null) ? `<p class="sub">${esc(sec.d)}</p>` : ''}${corpo}</details>`;

@@ -65,12 +65,11 @@
         { tipo: 'whatsapp', url: whats('Oi Gediel! Vim pelo Hub.') }
       ],
       atalhos: [
-        { titulo: 'Grátis', sub: 'Pegue e use hoje', img: 'img/card-teste.webp', ir: 'gratis', icone: 'estrela' },
-        { titulo: 'Completos', sub: 'Pra ir mais fundo', img: 'img/card-aulas.webp', ir: 'pagos', icone: 'livro' },
-        { titulo: 'Alunos', sub: 'Resultados reais', img: 'img/aula-turma.webp', ir: 'alunos', icone: 'pessoas' },
-        { titulo: 'Programa', sub: 'Fale comigo', img: 'img/gediel-london.webp', ir: 'aplicar', icone: 'chat' },
-        { titulo: 'Mentoria', sub: 'Aulas particulares', img: 'img/card-particular.webp', ir: 'link', url: CFG.mentoriaParticular || '', icone: 'pessoas' },
-        { titulo: 'Entrar', sub: 'Área de membros', img: 'img/card-aulas.webp', ir: 'login', icone: 'cadeado' }
+        { titulo: 'Grátis', sub: 'Pegue e use hoje', texto: 'Jogos, testes, lives e e-books pra começar hoje.', preco: 'R$ 0', img: 'img/card-teste.webp', ir: 'gratis', icone: 'estrela' },
+        { titulo: 'E-books', sub: 'Pra ir mais fundo', texto: 'Guias práticos pra estudar no seu ritmo.', auto: 'ebooks', img: 'img/card-aulas.webp', ir: 'pagos', icone: 'livro' },
+        { titulo: 'Alunos', sub: 'Resultados reais', texto: 'Veja quem já destravou o inglês.', img: 'img/aula-turma.webp', ir: 'alunos', icone: 'pessoas' },
+        { titulo: 'Programa', sub: 'Fale comigo', texto: 'Aula ao vivo, plano pra cada dia e acompanhamento.', plano: 'Inteligente', img: 'img/gediel-london.webp', ir: 'aplicar', icone: 'chat' },
+        { titulo: 'Já é aluno?', sub: 'Área de membros', texto: 'Entre e continue de onde parou.', img: 'img/card-aulas.webp', ir: 'login', icone: 'cadeado' }
       ],
       destaque: { rotulo: 'Vídeo em destaque', titulo: 'Programa de Acompanhamento Inglês Inteligente', img: 'img/apresentacao.webp', botao: '▶ Assistir e ver detalhes',
         texto: 'Aula ao vivo toda semana no seu nível, cronograma pra cada dia e acompanhamento de perto.' },
@@ -79,13 +78,43 @@
         video: M.video || CFG.videoApresentacao || '', img: M.imgLarga || M.img || '', checkout: CFG.checkoutMentoria || '',
         botaoAplicar: 'Aplicar pro programa', botaoComprar: (M.cta || {}).rotulo || 'Quero minha vaga' },
       secoes: { gratis: 'Materiais grátis', pagos: 'Pra ir mais fundo', botaoPagos: 'Programa →', membros: 'Dentro do programa', membrosSub: 'Só pra alunos',
+        planosRotulo: 'Planos', planos: 'Escolha até onde você quer ir', planosSub: 'Todo mundo começa no Grátis. Cada plano libera um nível a mais da plataforma.',
+        planosAviso: 'Aula particular com o Gediel não está inclusa em nenhum plano: a partir do Inteligente você pode pedir um horário, e o valor é combinado direto com ele.',
+        escadaTitulo: 'Por onde começar', escadaTexto: 'Cada degrau leva você um passo adiante. Comece pelo que faz sentido hoje.',
+        pagosConfianca: '🔒 Pagamento seguro pela Kiwify. Você finaliza a compra na página deles.',
+        gratisTexto: 'Comece por aqui: é tudo de graça, é só tocar no que te interessa.',
+        gratisFaixa: 'Os jogos, as lives abertas e os materiais da plataforma ficam na área de membros.',
+        pagosTexto: 'Materiais completos pra ir mais fundo, com pagamento único.',
+        membrosTexto: 'O que você libera quando vira aluno: aulas, lives, salas de prática e acompanhamento.',
+        extrasTexto: 'Outros projetos do Gediel: escola, viagens e aulas particulares.',
+        alunosTexto: 'Histórias reais de quem aprendeu com o método.',
         jogos: 'Jogos', simuladores: 'Simuladores', extras: 'Ecossistema', alunos: 'Alunos que destravaram', botaoAluno: 'Quero esse resultado' },
       membros: { botaoTopo: 'Entrar', titulo: 'Área de membros', url: 'membros.html',
         texto: 'Já é aluno ou comprou um material? Entre com o e-mail que você usou na compra pra acessar suas aulas, trilhas e materiais.',
         botao: 'Entrar na área de membros', semConta: 'Ainda não sou aluno', cardBotao: 'Já sou aluno, entrar' },
       cards,
+      // escada de valor no topo: grátis → e-book → assinatura → programa. Preço vem dos cards (auto) e dos planos (plano)
+      escada: [   // desligada por padrão: as mesmas informações agora ficam nos atalhos do topo
+        /* { ativo: true, icone: '🎁', titulo: 'Comece grátis', preco: 'R$ 0', texto: 'Testes, prompts, jogos e e-books gratuitos', ir: 'gratis' },
+        { ativo: true, icone: '📘', titulo: 'E-books', auto: 'ebooks', preco: '', texto: 'Guias rápidos, com pagamento único', ir: 'pagos' },
+        { ativo: true, icone: '📖', titulo: 'Assinatura Mission', plano: 'Mission', preco: '', texto: 'Devocionais e inglês com a Bíblia', ir: 'planos' },
+        { ativo: true, icone: '🧠', titulo: 'Programa Inteligente', plano: 'Inteligente', preco: '', texto: 'Aulas ao vivo e acompanhamento de perto', ir: 'planos' } */
+      ],
+      // aba de planos (preços): igual à da área de membros, em cartões com brilho. Benefícios: um por linha
+      planos: [
+        { ativo: true, nome: 'Grátis', sub: 'Pra conhecer o método', icone: '🎁', cor: '#8fa66a', preco: 'R$ 0', promo: '', promoAte: '', promoNome: '', nota: 'pra sempre', selo: '', destaque: false, acao: 'login', botao: 'Entrar na plataforma', link: '', modos: [],
+          beneficios: ['Jogos', 'Testes e diagnósticos', 'Lives abertas', 'Prompts', 'E-books gratuitos'].join('\n') },
+        { ativo: true, nome: 'Mission', sub: 'Inglês com a Bíblia', icone: '📖', cor: '#3fb27f', preco: 'R$ 25/mês', promo: '', promoAte: '', promoNome: '', nota: 'assinatura mensal', selo: '', destaque: false, acao: 'link', botao: 'Quero o Mission', link: 'https://pay.kiwify.com.br/oIjfTK8', modos: ['fe'],
+          beneficios: ['Tudo do Grátis', 'Devocionais gravados', 'Inglês bíblico na prática', 'Comunidade do English on Mission', 'Materiais do EOM'].join('\n') },
+        { ativo: true, nome: 'Inteligente', sub: 'O Programa completo', icone: '🧠', cor: '#7a8cff', preco: '6x R$ 297', promo: '6x R$ 197', promoAte: '2026-11-30', promoNome: 'Black Friday', nota: 'em até 6x', selo: '', destaque: true, acao: 'link', botao: 'Quero o Inteligente', link: 'https://pay.kiwify.com.br/CohRPDI', modos: [],
+          beneficios: ['Tudo do Grátis', 'Todas as aulas do Programa', 'Todos os materiais', 'Lives com replay', 'Pode pedir aula particular com o Gediel (paga à parte)'].join('\n') },
+        { ativo: true, nome: 'Gênio', sub: 'Tudo liberado', icone: '👑', cor: '#e0b43a', preco: '6x R$ 329', promo: '', promoAte: '', promoNome: '', nota: 'em até 6x', selo: 'Mais completo', destaque: false, acao: 'whatsapp', botao: 'Quero o Gênio', link: '', modos: [],
+          beneficios: ['Tudo do Inteligente + Mission', 'Todos os e-books e mini-cursos', 'Tudo que for lançado, sem pagar de novo', 'Pode pedir aula particular com o Gediel (paga à parte)'].join('\n') },
+        { ativo: true, nome: 'Instituição', sub: 'Igrejas, escolas, empresas e grupos', icone: '🏫', cor: '#9fb3d9', preco: 'A combinar', promo: '', promoAte: '', promoNome: '', nota: 'sob medida', selo: '', destaque: false, acao: 'whatsapp', botao: 'Combinar pelo WhatsApp', link: '', modos: [],
+          beneficios: ['Tudo do Gênio pra cada pessoa', 'Quantidade de colaboradores sob medida', 'Turmas e lives combinadas com o grupo', 'Encontros com o Gediel definidos no contrato'].join('\n') }
+      ],
       // lojinha: coluna fina na lateral (passarela vertical) + janela com os achados de afiliado e os seus produtos
-      lojinha: { ativo: true, rail: 'Achados', titulo: 'Achados do Gediel', sub: 'Minhas indicações pra estudar, ler e viajar, e os meus materiais.',
+      lojinha: { ativo: true, rail: 'Loja', titulo: 'Achados do Gediel', sub: 'Minhas indicações pra estudar, ler e viajar, e os meus materiais.',
         aviso: 'Alguns links são de afiliado: posso receber comissão por compras qualificadas, sem custo a mais pra você. Como associado da Amazon, eu ganho com compras qualificadas. Preços de referência, sujeitos a alteração: confira o valor e a disponibilidade na loja.' },
       achados: [
         { ativo: true, cat: 'Estudo', loja: 'Amazon', titulo: 'English for Everyone: English Grammar Guide', desc: 'Um guia visual de gramática para consultar enquanto você estuda.', preco: '', link: 'https://amzn.to/4iyoaQO', img: 'img/achados/0.webp' },
@@ -157,9 +186,10 @@
     let guardado = null;
     try { guardado = JSON.parse(localStorage.getItem('ebg:hubcache') || 'null'); } catch (e) {}
     const buscar = buscarSalvo(CFG).then(d => { if (d) try { localStorage.setItem('ebg:hubcache', JSON.stringify(d)); } catch (e) {} return d; });
-    if (guardado) return juntar(base, guardado);
+    // link direto (?abrir=...): o material pode ser novo e faltar na cópia guardada, então espera o conteúdo atualizado
+    if (guardado && !/[?&]abrir=/.test(location.search)) return juntar(base, guardado);
     const d = await buscar;
-    return juntar(base, d);
+    return juntar(base, d || guardado);
   }
 
   async function buscarSalvo(CFG) {

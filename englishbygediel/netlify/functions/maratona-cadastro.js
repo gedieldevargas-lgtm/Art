@@ -52,7 +52,23 @@ exports.handler = async (event) => {
   // 4) acesso ao plano + entrada na maratona
   const up = (tabela, linha, conflito) => fetch(`${URL_MEMBROS}/rest/v1/${tabela}?on_conflict=${conflito}`, { method: 'POST', headers: { ...sk, Prefer: 'resolution=merge-duplicates,return=minimal' }, body: JSON.stringify(linha) });
   await up('compras', { pedido: `maratona-${conv.turma}-${email}`.slice(0, 200), email, produto: conv.plano }, 'pedido');
+  // libera o PROGRAMA de verdade: grava também o 1º produto da lista do Programa (Planos → Inteligente),
+  // que é o que a plataforma confere pra abrir aulas, materiais e checklist
+  try {
+    const cf = await fetch(`${URL_MEMBROS}/rest/v1/acesso?select=dados&id=eq.cfg`, { headers: sk });
+    const dados = cf.ok ? ((await cf.json())[0] || {}).dados || {} : {};
+    const prog = (dados.programa || [])[0] || 'Inglês de Cada Dia';
+    await up('compras', { pedido: `maratona-programa-${email}`.slice(0, 200), email, produto: prog }, 'pedido');
+  } catch (e) {}
   const mm = await up('maratona_membros', { email, nome, turma: conv.turma }, 'email');
   if (!mm.ok) return resp(502, { erro: 'Conta criada, mas não consegui liberar a maratona. Avise o Gediel.' });
-  return resp(200, { ok: true, existia, turma: conv.turma });
+  // número de peito: a ordem de chegada na turma
+  let numero = '';
+  try {
+    const l = await fetch(`${URL_MEMBROS}/rest/v1/maratona_membros?select=email,created_at&turma=eq.${encodeURIComponent(conv.turma)}&order=created_at.asc`, { headers: sk });
+    const ls = l.ok ? await l.json() : [];
+    const pos = ls.findIndex(x => String(x.email).toLowerCase() === email);
+    if (pos >= 0) numero = String(pos + 1).padStart(2, '0');
+  } catch (e) {}
+  return resp(200, { ok: true, existia, turma: conv.turma, numero });
 };

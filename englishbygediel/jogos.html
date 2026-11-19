@@ -218,7 +218,21 @@ body.fh-on{overflow:hidden}
 .emb .backlnk{display:none}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media(max-width:520px){.covers{grid-template-columns:1fr 1fr;gap:10px}.cv .ce{font-size:52px}.cv .tt b{font-size:16px}.cv .tt small{display:none}
+
 .opts{grid-template-columns:1fr}h1{font-size:24px}}
+
+/* cards compactos: a imagem do ícone é o card inteiro */
+.covers{grid-template-columns:repeat(auto-fill,minmax(128px,1fr))!important;gap:12px!important}
+.cv{aspect-ratio:1/1!important;border-radius:25.4%!important;box-shadow:0 8px 20px -8px rgba(0,0,0,.6)!important;background:linear-gradient(155deg,var(--c1),var(--c2))}
+.cv .cvi{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.05);display:block;pointer-events:none}
+.cv .ce{top:42%!important;font-size:54px!important;animation:none!important}
+.cv .tt{padding:26px 8px 9px!important;align-items:center;text-align:center;background:linear-gradient(to top,color-mix(in srgb,var(--c2) 96%,#000) 0%,color-mix(in srgb,var(--c2) 80%,transparent) 45%,transparent 100%)!important}
+.cv .tt b{font-size:14.5px!important;line-height:1.1;text-shadow:0 1px 3px rgba(0,0,0,.4)}
+.cv .nw{top:8px!important;left:8px!important;font-size:9px!important;padding:3px 7px!important;z-index:2}.cv .rec{top:8px!important;right:8px!important;font-size:9px!important;padding:3px 7px!important;z-index:2}
+@media(hover:hover){.cv:hover{transform:scale(1.08);z-index:2;box-shadow:0 18px 36px rgba(0,0,0,.55),0 6px 12px rgba(0,0,0,.35)!important}}
+.cv:focus-visible{outline:none;transform:scale(1.08);z-index:2}.cv:active{transform:scale(.96)}
+@media(max-width:520px){.covers{grid-template-columns:repeat(3,1fr)!important;gap:9px!important}.cv .tt b{font-size:12px!important}.cv .tt small{display:-webkit-box!important;font-size:9.5px!important;line-height:1.2!important}}
+.cv .tt small{display:-webkit-box!important;text-align:center;font-size:10.5px;line-height:1.25;opacity:.95!important;text-shadow:0 1px 2px rgba(0,0,0,.45)}.cv .tt{padding-top:34px!important}
 .ce .ic3d{width:1.15em;height:1.15em;object-fit:contain;filter:drop-shadow(0 8px 16px rgba(0,0,0,.25))}
 </style></head><body><script>
 const GIC='quiz scr hang build dict speak taboo heads wyr ice couple story pro pitch verse faith drop sudo draw stop five mem dice snake show deep duel gq who ws cw visa border student job remote hotel'.split(' ');if(self!==top)document.documentElement.classList.add('emb')</script><div id="app"></div>
@@ -342,9 +356,11 @@ function endScreen(g,score,unit,msg,missed){stopT();played(g.id);addXP(Math.max(
 
 /* ================= MENU ================= */
 function cln(){if(window.CLEAN){try{window.CLEAN()}catch(e){}window.CLEAN=null}}
+const SH={quiz:'Escolha a tradução em 60 segundos',scr:'Desembaralhe as letras da palavra',hang:'Adivinhe a palavra letra por letra',build:'Monte a frase na ordem certa',dict:'Ouça e escreva o que entendeu',speak:'Leia alto e veja sua pronúncia',taboo:'Explique sem falar as proibidas',heads:'Celular na testa, amigos dão dicas',wyr:'Escolha um lado e explique',ice:'Perguntas pra soltar a fala',couple:'Conversa a dois, só em inglês',story:'Cada um continua a história',pro:'Treine entrevista e reunião',pitch:'Convença em 45 segundos',verse:'Monte versículos em inglês',faith:'Palavras de fé em inglês'};
 function cover(g,k){const L=(g.l||g.n.replace(/[^A-Za-z]/g,'')).toUpperCase().split('');
  const fl=Array.from({length:9},(_,i)=>{const h=(k*7+i*13)%100,x=(i*37+k*11)%92,y=(i*23+k*17)%70,sz=18+((i*29+k)%5)*9;return `<span style="left:${x}%;top:${y}%;font-size:${sz}px;animation-delay:-${(h%6)}s">${L[i%L.length]}</span>`}).join('');
- return `<button class="cv" style="--c1:${g.c[0]};--c2:${g.c[1]}" onclick="location.hash='g/${g.id}'" title="${esc(g.d)}"><div class="fl">${fl}</div><div class="sh"></div><div class="ce">${GIC.includes(g.id)?`<img class="ic3d" src="img/icons/jogo-${g.id}.svg" alt="">`:g.e}</div>${g.nw?'<span class="nw">NOVO</span>':''}${ST.best[g.id]?`<span class="rec">🏆 ${ST.best[g.id]}</span>`:''}<div class="tt"><b>${esc(g.n)}</b><small>${esc(g.d)}</small><i>${g.t.join(' · ')}</i></div></button>`}
+ const img=GIC.includes(g.id);
+ return `<button class="cv${img?' art':''}" style="--c1:${g.c[0]};--c2:${g.c[1]}" onclick="location.hash='g/${g.id}'" title="${esc(g.d)}">${img?`<img class="cvi" src="img/jogos/${g.id}.webp" alt="" draggable="false">`:`<div class="ce">${g.e}</div>`}${g.nw?'<span class="nw">NOVO</span>':''}${ST.best[g.id]?`<span class="rec">🏆 ${ST.best[g.id]}</span>`:''}<div class="tt"><b>${esc(g.n)}</b>${SH[g.id]?`<small>${esc(SH[g.id])}</small>`:''}</div></button>`}
 let FIL='todos';try{FIL=localStorage.getItem('jogos:fil')||'todos'}catch(e){}
 function menu(){stopT();cln();const list=G.filter(g=>FIL==='todos'||g.t.includes(FIL));
  A().innerHTML=`<div class="row sp" style="margin-bottom:6px"><a class="btn sm backlnk" href="membros.html" style="text-decoration:none;color:inherit">← Área de membros</a><span class="mono">grátis · sem login · funciona offline</span></div>
@@ -1257,5 +1273,8 @@ route();
   const t=A().querySelector('.ttl');if(t&&!A().querySelector('.hubnote'))t.insertAdjacentHTML('afterend','<p class="hubnote">🎁 Os jogos com cadeado são do <a href="index.html#aplicar">Programa Inteligente</a>. Os liberados são grátis pra você testar agora.</p>')};
  route()})();
 </script>
-<style>.cv.locked{filter:saturate(.35) brightness(.7)}.cv.locked::after{content:"🔒";position:absolute;top:10px;right:10px;font-size:20px;background:rgba(0,0,0,.55);border-radius:99px;padding:4px 8px}.hubnote{margin:6px 0 10px;padding:10px 12px;border-radius:14px;background:rgba(255,211,110,.1);border:1px solid rgba(255,211,110,.3);font-size:14px}.hubnote a{color:var(--warn)}</style>
+<style>.cv.locked{filter:saturate(.35) brightness(.7)}.cv.locked::after{content:"🔒";position:absolute;top:10px;right:10px;font-size:20px;background:rgba(0,0,0,.55);border-radius:99px;padding:4px 8px}.hubnote{margin:6px 0 10px;padding:10px 12px;border-radius:14px;background:rgba(255,211,110,.1);border:1px solid rgba(255,211,110,.3);font-size:14px}.hubnote a{color:var(--warn)}
+.chips{display:flex!important;flex-wrap:nowrap!important;gap:6px;padding:5px;border-radius:22px;background:color-mix(in srgb,var(--card,#fff) 70%,transparent);border:1px solid rgba(127,127,127,.25);overflow-x:auto;scrollbar-width:none;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}.chips::-webkit-scrollbar{display:none}
+.chips .chip{flex:1 0 auto;min-height:44px;padding:0 20px!important;border:none!important;border-radius:17px!important;white-space:nowrap;font-weight:800}.chips .chip.on{background:linear-gradient(135deg,#4f6ef7,#8b5cf6)!important;color:#fff!important;box-shadow:0 8px 18px -8px rgba(79,110,247,.8)}
+</style>
 </body></html>

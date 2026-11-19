@@ -17,12 +17,18 @@
   var pill=function(p){return [].filter.call(document.querySelectorAll('.nav-pill'),function(n){return (n.getAttribute('onclick')||'').indexOf("'"+p+"'")>=0;})[0]||null;};
   var go=function(p){window.goTo(p,pill(p));};
   /* ── ícones 3D (img/icons): os 20 do Gediel em .webp e os do mesmo estilo em .svg ── */
-  var IC_BASE='home maratona lives modulos jogos materiais prompts agendar check fogo eom culture viagens bussola prisma youtube instagram indicar sino suporte'.split(' ');
+  var IC_BASE='jogo-couple home maratona lives modulos jogos materiais prompts agendar check fogo eom culture viagens bussola prisma youtube instagram indicar sino suporte'.split(' ');
   function IC(n,cls){if(!n)return '';return '<img class="ic3d'+(cls?' '+cls:'')+'" src="img/icons/'+n+'.'+(IC_BASE.indexOf(n)>=0?'webp':'svg')+'" alt="" draggable="false">';}
   window.IC=IC;
   var IC_MENU={home:'home',maratona:'maratona',lives:'lives',modulos:'modulos',jogos:'jogos',materiais:'materiais',prompts:'prompts',agendar:'agendar',planos:'planos',indicar:'indicar',eom:'eom',culture:'culture',viagens:'viagens',bussola:'bussola',prisma:'prisma',admin:'admin'};
   var IC_CTX={'Em Casa':'home','Acabei de acordar':'ctx-acordar','Vou pro banho':'ctx-banho','Prestes a dormir':'ctx-dormir','No carro':'ctx-carro','No Transporte':'ctx-transporte','No Trabalho':'ctx-trabalho','Intervalo do almoço':'ctx-almoco','Lavando a louça':'ctx-louca','Limpando a casa':'ctx-limpeza','Cozinhando':'ctx-cozinha','Caminhando':'ctx-caminhada','Na Academia':'ctx-academia','Na fila':'ctx-fila','No sofá':'ctx-sofa','Só 5 minutos':'ctx-5min','Focado pra estudar':'ctx-foco','Viajando':'viagens','No mercado':'ctx-mercado','Na igreja':'ctx-igreja','Com a família':'ctx-familia'};
+  function tileBtn(ic,txt,cor){return '<span class="tb-tile" style="--c:'+cor+'">'+IC(ic)+'<b>'+txt+'</b></span>';}
   function icCtx(c,cls){return IC_CTX[c.k]?IC(IC_CTX[c.k],cls):c.ic;}
+  var CTX_COR={"5min": "#6e1c2a", "academia": "#6c1f1f", "acordar": "#6e4705", "almoco": "#70340a", "banho": "#03525f", "caminhada": "#09534b", "carro": "#6c1f1f", "cozinha": "#70340a", "dormir": "#2d2e6c", "familia": "#6a2045", "fila": "#4c266f", "foco": "#112d6a", "igreja": "#623603", "limpeza": "#07533a", "louca": "#03525f", "mercado": "#0a4921", "sofa": "#3f296f", "trabalho": "#381a6b", "transporte": "#6e4705", "casa": "#0d3067", "viagem": "#09534b"};
+  function ctxNome(c){var n=IC_CTX[c.k];if(!n)return '';n=n.replace(/^ctx-/,'');return n==='home'?'casa':n==='viagens'?'viagem':n;}
+  function ctxCor(c){return CTX_COR[ctxNome(c)]||'#1b1f4b';}
+  /* cartão da entrada: fundo e desenho em camadas separadas (o desenho anima sozinho) */
+  function ctxImg(c){var n=ctxNome(c);if(!CTX_COR[n])return icCtx(c);return '<span class="ly"><img class="bgi" src="img/icons/ctx3d/'+n+'-bg.svg" alt="" draggable="false"><img class="fg a-'+n+'" src="img/icons/ctx3d/'+n+'-fg.svg" alt="" draggable="false"></span>';}
   function iconesMenu(){
     [].forEach.call(document.querySelectorAll('.sidebar .nav-pill'),function(n){var t=n.querySelectorAll('span')[1];if(t&&!n.title)n.title=t.textContent;});
     var lg=document.querySelector('.sidebar-logo');
@@ -98,7 +104,7 @@
       steps:['Escolha um vídeo bem simples (pra iniciantes)','Assista 3 minutos sem pausar e sem legenda em português','Anote as palavras que você reconheceu, mesmo poucas','Assista de novo com legenda em inglês e veja quantas você pegou'],
       links:[{t:'▶️ Vídeos pra quem está começando',u:'https://www.youtube.com/results?search_query=comprehensible+input+english+absolute+beginner'}]},
     jogo:{why:'Jogar fixa vocabulário sem parecer estudo. Perfeito pra quando a energia está baixa.',
-      steps:['Abra o menu Jogos','Escolha 1 jogo do seu nível','Jogue 1 rodada inteira'],
+      steps:['Abra o menu Jogos','Escolha 1 destes (todos liberados): Flashcards, Complete, Monta Frase ou Quiz Phrasal','Jogue 1 rodada inteira'],
       links:[{t:'🎮 Abrir os jogos',u:'#jogos'}]},
     aula:{why:'A aula da semana é a espinha do seu plano. O checklist completa, a aula ensina.',
       steps:['Abra a sua aula da vez','Assista inteira, com caderno do lado','Faça o quiz no fim da aula'],
@@ -209,11 +215,24 @@
   '.uni-hero .ht{font-size:18px;font-weight:800;line-height:1.25}.uni-hero .hs{font-size:12.5px;opacity:.9;margin-top:4px;line-height:1.5;max-width:520px}',
   '.uni-hero button{margin-left:auto;background:#fff;color:#111;border:none;border-radius:12px;padding:11px 18px;font-size:13px;font-weight:800;cursor:pointer;white-space:nowrap}',
   '.uni-sec{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--fg2);margin:22px 0 10px}',
+  '.uni-grid.uni-std{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}',
+  '.uni-std .uni-card .th{aspect-ratio:16/9}.uni-std .uni-card .bd{flex:1;display:flex;flex-direction:column}.uni-std .uni-card .ss{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.6em}.uni-std .uni-card .ac{margin-top:auto;padding-top:8px}',
   '.uni-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}',
   '.uni-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:transform .15s,border-color .15s;box-shadow:var(--shadow)}',
   '.uni-card:hover{transform:translateY(-3px);border-color:var(--accent)}',
   '.uni-card .th{aspect-ratio:16/9;background:var(--surface2);position:relative;display:flex;align-items:center;justify-content:center;font-size:38px;overflow:hidden}',
   '.uni-card .th img{width:100%;height:100%;object-fit:cover;display:block}',
+  '.uni-grid.mat-v{grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:18px 14px}',
+  '.mat-v .uni-card{border-radius:6px 14px 14px 6px;background:var(--surface);box-shadow:0 10px 24px -10px rgba(10,20,50,.45),inset 5px 0 0 rgba(255,255,255,.14)}',
+  '.mat-v .uni-card .th{aspect-ratio:4/5.4;border-radius:0}',
+  '.mat-v .uni-card:hover{transform:translateY(-5px) scale(1.02);box-shadow:0 18px 32px -12px rgba(10,20,50,.55)}',
+  '.mat-v .uni-card.lock .th img{filter:saturate(.75) brightness(.92)}',
+  '.mat-v .uni-card .bd{padding:10px 11px 12px;gap:4px;display:flex;flex-direction:column}',
+  '.mat-v .uni-card .tt{font-size:13px;line-height:1.25;font-weight:800;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}',
+  '.mat-v .uni-card .ac{font-size:12px;font-weight:800;color:var(--accent)}',
+  '.mat-v .uni-card .tg{top:auto;bottom:8px;left:8px;font-size:11px;padding:4px 9px;border-radius:8px}',
+  '.mat-v .uni-card .tg.own{background:#16a34a}',
+  '.mat-v .uni-card .mv-lk{position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;background:rgba(10,14,30,.7);display:flex;align-items:center;justify-content:center;font-size:13px}',
   '.uni-card .tg{position:absolute;top:8px;left:8px;background:rgba(10,14,30,.78);color:#fff;font-size:9.5px;font-weight:800;letter-spacing:.3px;padding:3px 8px;border-radius:7px}',
   '.uni-card.buy .tg{background:#10b981}.uni-card.soon{opacity:.85}.uni-card.soon .tg{background:#f59e0b;color:#1a1200}.uni-card.lock .th:after{content:"🔒";position:absolute;top:8px;right:10px;font-size:16px}',
   '.uni-card .bd{padding:11px 12px 13px;display:flex;flex-direction:column;gap:4px;flex:1}',
@@ -320,10 +339,10 @@
   '.mi-logo{display:inline-block;width:1em;height:1em;background:currentColor;-webkit-mask:url(img/logo-mi.svg) center/contain no-repeat;mask:url(img/logo-mi.svg) center/contain no-repeat}',
   '.mi-lg-badge{background:#000817!important;color:#fbf7ee;font-size:24px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}',
   '.mi-lg-ent{font-size:34px;color:#fbf7ee;opacity:.9;display:block;margin:0 auto 10px}#mi-onb .mi-lg-ent{margin-left:0}',
-  '#pane-home{position:relative}#pane-home>.mi-lg-marca{position:absolute;top:-6px;right:4px;font-size:118px;color:var(--fg);opacity:.06!important;animation:none!important;pointer-events:none;transform:rotate(-12deg);z-index:0}',
+  '#pane-home{position:relative}#pane-home>.mi-lg-marca{position:absolute;top:-6px;right:4px;font-size:189px;color:var(--fg);opacity:.06!important;animation:none!important;pointer-events:none;transform:rotate(-12deg);z-index:0}',
   '.mi-lg-rail{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:22px;font-size:11px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--fg3);opacity:.55}.mi-lg-rail .mi-logo{font-size:16px}',
   '.mi-lg-festa{position:absolute;right:-26px;bottom:-30px;font-size:150px;color:#fff;opacity:.09;pointer-events:none}#mi-festa .fb{overflow:hidden}',
-  '@media(max-width:680px){.mi-lg-badge{font-size:20px}#pane-home>.mi-lg-marca{font-size:84px;right:-6px;top:-4px}}',
+  '@media(max-width:680px){.mi-lg-badge{font-size:20px}#pane-home>.mi-lg-marca{font-size:134px;right:-6px;top:-4px}}',
   /* cards Checklist e Lives como ícones gigantes */
   '.hm-big{min-height:176px!important;padding:22px!important;justify-content:flex-end}.hm-big .ic{position:absolute;right:-6px;top:50%;transform:translateY(-50%);margin:0!important}',
   '.hm-big .ic .ic3d{width:168px!important;height:168px!important;mix-blend-mode:multiply;filter:none!important}.hm-big .lb{font-size:22px!important;letter-spacing:-.3px;position:relative}.hm-big .pg{font-size:13px!important;opacity:1!important;position:relative;max-width:60%}',
@@ -348,6 +367,39 @@
    +'body.mi-mini .sidebar-footer{justify-content:center}body.mi-mini #mi-bnav{left:84px!important}}',
   '@media(max-width:680px){#mi-recolher{display:none}}',
   '.ag-tipo .ic .ic3d{width:54px;height:54px}.ag-t .ic3d{width:30px;height:30px}',
+  '.th-icbtns{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start}',
+  '.th-ib{all:unset;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;gap:8px;width:104px;cursor:pointer;text-align:center;color:#fff;font:inherit;-webkit-tap-highlight-color:transparent}',
+  '.th-ib .ic3d{width:96px!important;height:96px!important;max-width:none!important;border-radius:25.4%;display:block;transition:transform .18s,filter .18s}',
+  '.th-ib b{font-size:12.5px;line-height:1.2;font-weight:800;text-shadow:0 1px 3px rgba(0,0,0,.5)}',
+  '.th-ib:hover .ic3d,.th-ib:focus-visible .ic3d{transform:scale(1.1);filter:drop-shadow(0 12px 18px rgba(0,0,0,.55))}',
+  /* botão de suporte: só a imagem */
+  '#ai-fab{background:transparent!important;box-shadow:none!important;width:68px!important;height:68px!important;border-radius:25.4%!important;padding:0!important;overflow:visible}#ai-fab .ic3d{width:68px!important;height:68px!important;border-radius:25.4%;transition:transform .18s,filter .18s}#ai-fab:hover{transform:none!important}#ai-fab:hover .ic3d{transform:scale(1.1);filter:drop-shadow(0 12px 16px rgba(30,40,90,.5))}',
+  /* barra direita minimizável */
+  '#rail-tg{position:fixed;top:84px;right:270px;z-index:40;width:26px;height:46px;border:1px solid var(--border);border-right:none;border-radius:12px 0 0 12px;background:var(--surface);color:var(--fg2);cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);padding:0}',
+  '#rail-tg:hover{color:var(--accent)}body.rail-off .right-rail{display:none!important}body.rail-off #rail-tg{right:0}',
+  '@media(max-width:1000px){#rail-tg{display:none}}',
+
+  /* ── abas em "dock": barra de vidro, rola de lado em tela pequena, aba ativa com degradê (estilo do Hub) ── */
+  '.lv-abas,.mat-tabs,.mi-dock{display:flex!important;gap:6px;padding:5px;margin:0 0 18px;width:100%;max-width:100%;box-sizing:border-box;border-radius:22px;background:color-mix(in srgb,var(--surface) 72%,transparent);-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);border:1px solid var(--border);box-shadow:0 8px 24px -14px rgba(10,20,50,.35);overflow-x:auto;flex-wrap:nowrap!important;scroll-snap-type:x proximity;scrollbar-width:none}',
+  '.lv-abas::-webkit-scrollbar,.mat-tabs::-webkit-scrollbar,.mi-dock::-webkit-scrollbar{display:none}',
+  '.lv-abas button,.mat-tab,.mi-dock button{flex:1 0 auto;min-height:46px;padding:0 clamp(14px,3vw,24px);border:none!important;border-radius:17px;background:transparent;color:var(--fg2);font:inherit;font-size:clamp(12.5px,1.5vw+9px,14.5px);font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;cursor:pointer;scroll-snap-align:center;transition:background .18s,color .18s,box-shadow .18s,transform .18s}',
+  '.lv-abas button:hover,.mat-tab:hover,.mi-dock button:hover{color:var(--fg);background:color-mix(in srgb,var(--accent) 10%,transparent)}',
+  '.lv-abas button.on,.mat-tab.active,.mi-dock button.on{background:linear-gradient(135deg,var(--accent),#8b5cf6)!important;color:#fff!important;box-shadow:0 8px 18px -8px color-mix(in srgb,var(--accent) 80%,transparent),inset 0 1px 0 rgba(255,255,255,.28)}',
+  '.lv-abas button:active,.mat-tab:active,.mi-dock button:active{transform:scale(.97)}',
+  '.th-nav{overflow-x:auto;flex-wrap:nowrap!important;scrollbar-width:none;padding-bottom:2px}.th-nav::-webkit-scrollbar{display:none}.th-nav button{flex:none;min-height:42px;padding:0 18px!important}',
+  /* ── Marcar aula: caixas e alvos de toque maiores ── */
+  '.ag-wrap{max-width:980px}',
+  '.ag-box{padding:clamp(18px,3vw,28px);border-radius:24px;margin-bottom:18px}.ag-t{font-size:18px;margin-bottom:18px}.ag-n{width:30px;height:30px;font-size:14px}',
+  '.ag-tipos{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}',
+  '.ag-tipo{min-height:156px;padding:18px;gap:6px;border-radius:20px;transition:transform .15s,box-shadow .15s,border-color .15s}.ag-tipo:hover{transform:translateY(-3px);box-shadow:0 14px 26px -16px rgba(10,20,50,.55)}.ag-tipo b{font-size:17px}.ag-tipo small{font-size:13px}',
+  '.ag-lb{font-size:14px;margin:20px 0 10px}.ag-chips,.ag-dias,.ag-horas{gap:10px}',
+  '.ag-chip,.ag-dia,.ag-hora{min-height:46px;padding:0 18px;font-size:14px;display:inline-flex;align-items:center;justify-content:center}',
+  '.ag-horas{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr))}.ag-hora{min-width:0}',
+  '.ag-grid{gap:14px}.ag-box input,.ag-box textarea{padding:14px;border-radius:14px}.ag-btn{padding:18px;font-size:16px;margin-top:10px}',
+  '@media(min-width:700px){.ag-tipos{grid-template-columns:repeat(6,1fr)}.ag-tipo{grid-column:span 2}.ag-tipo:nth-child(n+4){grid-column:span 3}}',
+  '#pane-materiais .mat-tabs{display:none!important}',
+  '@media(max-width:560px){.ag-tipos{grid-template-columns:1fr 1fr;gap:10px}.ag-tipo{min-height:140px;padding:14px}.ag-tipos .ag-tipo:last-child:nth-child(odd){grid-column:1/-1;min-height:96px}.ag-grid{grid-template-columns:1fr}}',
+
   '#mi-onb .teste .ic .ic3d{width:48px;height:48px}.mi-gate-it>span .ic3d{width:34px;height:34px}.ag-btn .ic3d,.ag-btn2 .ic3d,.set-btn .ic3d{width:22px;height:22px;vertical-align:-5px}',
   '.mi-ini-ent{display:flex;flex-direction:column;gap:8px;max-width:460px;margin:0 auto 18px;text-align:left}.mi-ini-ent .it{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:11px 13px}',
   '.mi-ini-ent .it>span{font-size:22px;width:34px;text-align:center;flex:none}.mi-ini-ent .it .ic3d{width:34px;height:34px}.mi-ini-ent b{display:block;font-size:13.5px}.mi-ini-ent small{font-size:12px;opacity:.75}.mi-ini-ent .it.idi{background:rgba(14,165,233,.18);border-color:rgba(14,165,233,.45)}',
@@ -382,6 +434,7 @@
   '.of-img{width:100%;max-height:170px;object-fit:cover;border-radius:14px;margin-bottom:12px}.of-k{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--pc)}.of-t{font-size:20px;font-weight:800;margin:4px 0 2px}.of-s{font-size:13px;color:var(--fg2)}.of-p{font-size:26px;font-weight:900;color:var(--pc);margin:6px 0 2px}',
   '.of-l{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--fg3);margin:14px 0 8px}.of-box ul{list-style:none;padding:0;margin:0 0 16px;display:flex;flex-direction:column;gap:7px}.of-box li{font-size:13.5px;padding-left:22px;position:relative;line-height:1.4}.of-box li:before{content:"✓";position:absolute;left:0;color:var(--pc);font-weight:900}',
   '.of-alt{display:block;width:100%;margin-top:8px;border:1px solid var(--border);background:transparent;color:var(--fg);border-radius:14px;padding:11px;font:inherit;font-weight:700;cursor:pointer}.of-f{font-size:11.5px;color:var(--fg3);text-align:center;margin-top:10px}',
+  '.mi-troca{flex:none;display:flex;flex-direction:column;align-items:center;gap:0;border:1px solid var(--border);background:transparent;color:var(--fg2);border-radius:10px;padding:4px 7px;font-size:15px;cursor:pointer;margin-left:auto;line-height:1.1}.mi-troca small{font-size:9px;font-weight:800;color:var(--fg3)}.mi-troca:active{transform:rotate(-30deg)}',
   '#mi-inicio{display:flex;flex-direction:column;gap:10px;margin:4px 0 14px}.mi-ini{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-radius:18px;padding:14px 16px;border:1px solid var(--border)}',
   '.mi-ini .tx{flex:1;min-width:200px;display:flex;flex-direction:column;gap:3px}.mi-ini b{font-size:14px}.mi-ini span{font-size:12.5px;color:var(--fg2);line-height:1.5}.mi-ini .ic .ic3d{width:52px;height:52px}',
   '.mi-ini.idi{background:linear-gradient(135deg,rgba(14,165,233,.12),rgba(79,110,247,.08));border-color:rgba(14,165,233,.35)}.mi-ini .bt{display:flex;gap:8px}',
@@ -453,7 +506,118 @@
   ' .ai-fab{bottom:calc(78px + env(safe-area-inset-bottom))!important;right:14px!important;width:50px!important;height:50px!important}',
   ' .ai-panel{bottom:calc(136px + env(safe-area-inset-bottom))!important;right:12px!important}',
   ' #toast-global{bottom:calc(84px + env(safe-area-inset-bottom))!important}',
-  '}'
+  '}',
+  /* a imagem do ícone É o botão: sem moldura extra em volta */
+  '.topbar .tb-btn,.topbar .tb-theme-btn{background:none!important;border:0!important;padding:0!important;box-shadow:none!important;line-height:0;border-radius:14px;min-width:0!important;min-height:0!important;transition:transform .22s cubic-bezier(.34,1.56,.64,1)}',
+  '.topbar .tb-btn:hover,.topbar .tb-theme-btn:hover,.topbar .tb-btn:focus-visible,.topbar .tb-theme-btn:focus-visible{outline:none;transform:scale(1.14);filter:drop-shadow(0 6px 8px rgba(0,0,0,.45))}.topbar .tb-btn:active,.topbar .tb-theme-btn:active{transform:scale(.92)}',
+  '.topbar .tb-btn .ic3d,.topbar .tb-theme-btn .ic3d{width:40px!important;height:40px!important;vertical-align:0;filter:drop-shadow(0 4px 8px rgba(0,0,0,.28))}',
+  '.tb-tile{position:relative;display:inline-block;width:44px;height:44px;line-height:0}.tb-tile .ic3d{width:100%!important;height:100%!important}',
+  '.tb-tile b{position:absolute;left:0;right:0;bottom:0;border-radius:0 0 13px 13px;padding:7px 0 3px;font-size:9px;line-height:1;font-weight:800;color:#fff;text-align:center;background:linear-gradient(to top,var(--c) 0%,var(--c) 40%,rgba(0,0,0,0));background:linear-gradient(to top,color-mix(in srgb,var(--c) 96%,transparent),color-mix(in srgb,var(--c) 80%,transparent) 45%,transparent)}',
+  '#mi-ed-btn.on{background:none!important}#mi-ed-btn.on .tb-tile{filter:drop-shadow(0 0 10px var(--accent));border-radius:16px;box-shadow:0 0 0 2px var(--accent)}',
+  '.topbar .tb-btn .notif-dot{top:2px;right:2px}',
+  '.hm-quick{grid-template-columns:repeat(4,minmax(0,150px))!important;justify-content:start}',
+  '.hm-quick button{position:relative;aspect-ratio:1/1;padding:0!important;border:0!important;background:none!important;box-shadow:none!important;border-radius:22px!important;overflow:hidden;transition:transform .25s cubic-bezier(.34,1.56,.64,1)}',
+  '.hm-quick button:hover,.hm-quick button:focus-visible{outline:none;transform:scale(1.08);z-index:2;box-shadow:0 20px 40px rgba(0,0,0,.45),0 6px 14px rgba(0,0,0,.3)}.hm-quick button:active{transform:scale(.96)}',
+  '.hm-quick button>span{position:absolute;inset:0;display:block;font-size:0!important}.hm-quick button>span .ic3d{width:100%!important;height:100%!important;object-fit:cover;filter:drop-shadow(0 6px 12px rgba(0,0,0,.2))}',
+  '.hm-quick button>i,.hm-uni>b{position:absolute;left:0;right:0;bottom:0;padding:22px 6px 9px;font-style:normal;font-size:12.5px;font-weight:800;line-height:1.15;color:#fff;text-align:center;background:linear-gradient(to top,var(--c) 0%,var(--c) 35%,rgba(0,0,0,0));background:linear-gradient(to top,color-mix(in srgb,var(--c) 94%,transparent),color-mix(in srgb,var(--c) 78%,transparent) 50%,transparent)}',
+  '.hm-unis{grid-template-columns:repeat(3,minmax(0,170px))!important;justify-content:start}',
+  '.hm-uni{position:relative;aspect-ratio:1/1;min-height:0!important;padding:0!important;background:none!important;box-shadow:none!important;border-radius:22px!important;overflow:hidden;transition:transform .25s cubic-bezier(.34,1.56,.64,1)}',
+  '.hm-uni:hover,.hm-uni:focus-visible{outline:none;transform:scale(1.08);z-index:2;box-shadow:0 20px 40px rgba(0,0,0,.45),0 6px 14px rgba(0,0,0,.3)}.hm-uni:active{transform:scale(.96)}',
+  '.hm-uni>span{position:absolute;inset:0;display:block;font-size:0!important}.hm-uni>span .ic3d{width:100%!important;height:100%!important;object-fit:cover}',
+  '.hm-uni[data-hm="eom"]{--c:#15281f}.hm-uni[data-hm="culture"]{--c:#1b2a6b}.hm-uni[data-hm="viagens"]{--c:#0c4a6e}',
+  '@media(max-width:560px){.hm-quick{grid-template-columns:repeat(4,1fr)!important}.hm-unis{grid-template-columns:repeat(3,1fr)!important}.hm-quick button>i,.hm-uni>b{font-size:10.5px;padding:16px 3px 6px}}',
+  '.nv-ov{position:fixed;inset:0;z-index:9500;background:rgba(8,12,28,.62);backdrop-filter:blur(4px);display:none;align-items:flex-end;justify-content:center}.nv-ov.on{display:flex}@media(min-width:700px){.nv-ov{align-items:center}}',
+  '.nv-fo{--c:#4f6ef7;width:100%;max-width:640px;max-height:92vh;overflow:auto;background:var(--surface);color:var(--fg);border-radius:26px 26px 0 0;padding:18px 20px 26px}@media(min-width:700px){.nv-fo{border-radius:26px}}',
+  '.nv-x{float:right;border:0;background:var(--surface2);color:var(--fg);width:38px;height:38px;border-radius:50%;font-size:16px;cursor:pointer}.nv-top{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--fg2);padding-top:10px}',
+  '.nv-tabs{display:flex;gap:6px;margin:12px 0 14px;overflow-x:auto;padding-bottom:4px;clear:both}.nv-tabs button{--c:#4f6ef7;flex:1;min-width:48px;min-height:42px;border-radius:12px;border:2px solid color-mix(in srgb,var(--c) 40%,transparent);background:color-mix(in srgb,var(--c) 10%,var(--surface));color:var(--fg);font:inherit;font-weight:800;cursor:pointer}.nv-tabs button.on{background:var(--c);border-color:var(--c);color:#fff;box-shadow:0 8px 18px -8px var(--c)}',
+  '.nv-hero{display:flex;align-items:center;gap:14px;padding:14px;border-radius:18px;background:linear-gradient(135deg,color-mix(in srgb,var(--c) 22%,var(--surface)),color-mix(in srgb,var(--c) 6%,var(--surface)));border:1.5px solid color-mix(in srgb,var(--c) 50%,transparent)}',
+  '.nv-big{width:64px;height:64px;border-radius:18px;background:var(--c);color:#fff;font-size:28px;font-weight:900;display:grid;place-items:center;flex:none}.nv-hero b{display:block;font-size:20px}.nv-hero span{font-size:12.5px;color:var(--fg2)}',
+  '.nv-res{font-size:14px;line-height:1.6;color:var(--fg);margin:12px 0}.nv-sec{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--c);margin:18px 0 8px}.nv-no{color:#e11d48}.nv-go{color:#16a34a}',
+  '.nv-it{display:flex;gap:12px;align-items:flex-start;padding:11px 12px;border-radius:14px;background:var(--surface2);margin-bottom:7px}.nv-e{flex:none;width:5px;align-self:stretch;border-radius:9px;background:var(--c)}.nv-it b{display:block;font-size:13.5px}.nv-it span{font-size:13px;color:var(--fg2);line-height:1.5}',
+  '.nv-ul{margin:0;padding-left:20px;font-size:13.5px;line-height:1.7;color:var(--fg2)}.nv-eu{margin-top:14px;padding:11px;border-radius:12px;background:color-mix(in srgb,var(--c) 14%,transparent);text-align:center;font-weight:800;color:var(--c)}.nv-foot{font-size:11.5px;color:var(--fg3);line-height:1.5;margin:14px 0 0}',
+  /* icones dos universos/atalhos: corta a margem transparente e iguala o arredondamento, pra faixa do nome ficar alinhada */
+  '.hm-quick button,.hm-uni{border-radius:24%!important}.hm-quick button>span .ic3d,.hm-uni>span .ic3d{transform:scale(1.07);filter:none!important}',
+  /* planos: titulo largo e cards numa linha so no PC */
+  '#pane-planos .pl-top{display:block!important;max-width:none!important;width:100%;text-align:center}#pane-planos .pl-top h1{display:block;max-width:none!important;width:100%;margin:8px 0!important;white-space:normal}#pane-planos .pl-top .pl-k{display:block;margin-bottom:4px}#pane-planos .pl-top p{max-width:820px;margin-left:auto;margin-right:auto}',
+  '@media(min-width:1100px){#pane-planos .pl-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}#pane-planos .pl-card{padding:20px 14px 16px}#pane-planos .pl-nm{font-size:15.5px}#pane-planos .pl-pr{font-size:21px}#pane-planos .pl-card li{font-size:12.5px}}',
+  '@media(min-width:760px) and (max-width:1099px){#pane-planos .pl-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}',
+  /* início: checklist com borda verde fina, brilho que pulsa de leve e o tick balançando; selo da live com contagem */
+  '.hm-check::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;box-shadow:inset 0 0 0 1.5px rgba(34,197,94,.95),inset 0 0 26px rgba(34,197,94,.32);animation:miGlowVerde 3.6s ease-in-out infinite}',
+  '@keyframes miGlowVerde{0%,100%{opacity:.55}50%{opacity:1}}',
+  '.hm-check .ic .ic3d{transform-origin:50% 88%;animation:miTick 3.6s ease-in-out infinite}',
+  '@keyframes miTick{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(6deg) translateY(-2%)}}',
+  '.hm-live .lv-seal{position:absolute;top:14px;left:22px;z-index:3;display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:800;letter-spacing:.2px;background:#fff;color:#1e3a8a;padding:5px 11px;border-radius:99px;box-shadow:0 4px 14px rgba(30,58,138,.22),inset 0 0 0 1.5px rgba(37,99,235,.35)}',
+  '.hm-live .lv-seal.on{background:#ef4444;color:#fff;box-shadow:0 4px 16px rgba(239,68,68,.5);animation:miPulse 1.4s infinite}',
+  '.hm-live.ao{box-shadow:0 18px 42px rgba(239,68,68,.3),inset 0 0 0 1.5px rgba(239,68,68,.9)!important}',
+  '@media(prefers-reduced-motion:reduce){.hm-check::after,.hm-check .ic .ic3d,.hm-live .lv-seal.on{animation:none!important}}',
+  /* entrada: botão de som */
+  '#mi-som{position:fixed;top:calc(env(safe-area-inset-top,0px) + 14px);right:max(14px,env(safe-area-inset-right));z-index:9100;width:42px;height:42px;border-radius:50%;border:1.5px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:#fff;font-size:18px;cursor:pointer;backdrop-filter:blur(6px)}',
+  '#mi-som:hover{background:rgba(255,255,255,.22)}',
+  /* entrada v2: o card é a própria imagem do ícone (3D, em camadas), a frase centralizada num degradê escuro da cor do card */
+  '#mi-entry .mi-ent-box{max-width:1040px}',
+  '#mi-entry .mi-ctx{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(168px,1fr))!important;gap:16px!important}',
+  '#mi-entry .mi-ctx button{position:relative;aspect-ratio:1/1;padding:0!important;border:0!important;border-radius:25.4%!important;overflow:hidden;background:transparent!important;display:block;box-shadow:0 12px 28px rgba(0,0,0,.38);transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s}',
+  '#mi-entry .mi-ctx .ic{position:absolute;inset:0;display:block;font-size:0!important}',
+  '#mi-entry .mi-ctx .ly{position:absolute;inset:0;display:block;transform:scale(1.05)}',
+  '#mi-entry .mi-ctx .ly img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;user-select:none;-webkit-user-drag:none}',
+  '#mi-entry .mi-ctx .fg{transform-origin:50% 52%}',
+  '#mi-entry .mi-ctx .tx{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:center;text-align:center;padding:26px 10px 11px;background:linear-gradient(to top,var(--c) 0%,var(--c) 30%,rgba(0,0,0,0) 100%);background:linear-gradient(to top,color-mix(in srgb,var(--c) 96%,transparent) 0%,color-mix(in srgb,var(--c) 82%,transparent) 42%,transparent 100%)}',
+  '#mi-entry .mi-ctx .lb{font-size:15.5px!important;font-weight:800;line-height:1.15;color:#fff;text-align:center;text-shadow:0 1px 3px rgba(0,0,0,.35)}',
+  '#mi-entry .mi-ctx .ht{display:none}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover{transform:scale(1.08);z-index:2;box-shadow:0 22px 44px rgba(0,0,0,.6),0 8px 16px rgba(0,0,0,.4)}}',
+  '.rail-evo{background:var(--card,var(--bg2));border:1px solid var(--border);border-radius:14px;padding:12px}.re-top,.re-st{display:flex;gap:8px}.re-top>div,.re-st>div{flex:1;display:flex;flex-direction:column}.re-top strong{font-size:22px;font-weight:800;line-height:1.1}.re-st strong{font-size:16px;font-weight:800}.re-top span,.re-st span{font-size:10.5px;color:var(--fg3);line-height:1.3}',
+  '.re-bars{display:flex;align-items:flex-end;gap:3px;height:56px;margin:10px 0 3px}.re-bars i{flex:1;background:linear-gradient(180deg,#34d399,#10b981);border-radius:3px 3px 1px 1px;min-height:4px}.re-bars i.hj{background:linear-gradient(180deg,#fbbf24,#f59e0b)}.re-lbl{display:flex;gap:3px;margin-bottom:10px}.re-lbl b{flex:1;text-align:center;font-size:8.5px;font-weight:700;color:var(--fg3)}.re-st{border-top:1px solid var(--border);padding-top:9px}',
+  '.rail-mt{display:flex;gap:12px;align-items:center;cursor:pointer;background:linear-gradient(135deg,rgba(212,160,23,.14),rgba(245,158,11,.05));border:1px solid rgba(212,160,23,.35);border-radius:14px;padding:12px}.rm-pos{display:flex;flex-direction:column;align-items:center;min-width:54px}.rm-pos strong{font-size:24px;font-weight:800;color:#d4a017;line-height:1}.rm-pos span{font-size:10px;color:var(--fg3);text-align:center}.rm-i{flex:1;min-width:0}.rm-t{font-size:12px;font-weight:800}.rm-s{font-size:11px;color:var(--fg2);margin:2px 0 7px}.rm-b{height:5px;border-radius:5px;background:var(--border);overflow:hidden}.rm-b i{display:block;height:100%;background:#d4a017;border-radius:5px}',
+  '.rail-soc{margin-top:auto;display:flex;justify-content:flex-start;gap:6px;padding-top:6px}.right-rail .rail-soc a,.right-rail .rail-soc button{width:26px;height:26px;padding:0!important;display:flex!important;align-items:center;justify-content:center;background:none!important;border:0!important;border-radius:8px;cursor:pointer;opacity:.7;transition:transform .2s,opacity .2s,filter .2s}.right-rail .rail-soc a:hover,.right-rail .rail-soc button:hover{opacity:1;transform:scale(1.25);filter:drop-shadow(0 4px 5px rgba(0,0,0,.35))}.right-rail .rail-soc .ic3d,.right-rail .rail-soc img,.right-rail .rail-soc svg{width:18px!important;height:18px!important}',
+  '.mi-tm{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--card,var(--bg2));border:1px solid var(--border);border-radius:16px;padding:10px 14px}.mi-tm>b{font-size:12.5px;font-weight:800}.mi-tm>div{display:flex;gap:6px;flex-wrap:wrap}.mi-tm button{border:1.5px solid var(--border);background:transparent;color:inherit;border-radius:20px;padding:6px 13px;font-size:12.5px;font-weight:800;cursor:pointer}.mi-tm button.on{background:#4f6ef7;border-color:#4f6ef7;color:#fff}.mi-mn{font-size:10.5px;font-weight:800;color:var(--fg3);background:rgba(79,110,247,.1);border-radius:10px;padding:1px 7px;white-space:nowrap}',
+  '.mi-tmg{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;max-width:640px;margin:0 auto}.mi-tmg button{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.18);border-radius:22px;color:#fff;padding:18px 6px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;transition:transform .25s cubic-bezier(.22,1,.36,1),box-shadow .25s,background .25s}.mi-tmg button b{font-size:34px;font-weight:800;line-height:1}.mi-tmg button small{font-size:12px;font-weight:700;margin-left:2px;opacity:.8}.mi-tmg button span{font-size:12px;opacity:.8;font-weight:600}.mi-tmg button.on{background:rgba(79,110,247,.45);border-color:#8da2ff}@media(hover:hover){.mi-tmg button:hover{transform:scale(1.08);background:rgba(255,255,255,.18);box-shadow:0 18px 36px rgba(0,0,0,.45)}}.mi-tmg button:active{transform:scale(.96)}@media(max-width:560px){.mi-tmg{grid-template-columns:repeat(3,1fr)}}',
+  '#mi-entry .mi-ctx button:focus-visible{outline:none;transform:scale(1.08);z-index:2;box-shadow:0 22px 44px rgba(0,0,0,.6),0 8px 16px rgba(0,0,0,.4)}#mi-entry .mi-ctx button:active{transform:scale(.96)}',
+  /* animação de 1,5 s de cada ícone, proporcional ao que ele é; só roda quando a pessoa passa o mouse, foca ou toca (nada se mexe sozinho) */
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-casa{animation:mk-hop 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-casa,#mi-entry .mi-ctx button:active .a-casa{animation:mk-hop 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-acordar{animation:mk-rise 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-acordar,#mi-entry .mi-ctx button:active .a-acordar{animation:mk-rise 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-banho{animation:mk-shake 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-banho,#mi-entry .mi-ctx button:active .a-banho{animation:mk-shake 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-dormir{animation:mk-rock 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-dormir,#mi-entry .mi-ctx button:active .a-dormir{animation:mk-rock 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-carro{animation:mk-drive 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-carro,#mi-entry .mi-ctx button:active .a-carro{animation:mk-drive 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-transporte{animation:mk-bus 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-transporte,#mi-entry .mi-ctx button:active .a-transporte{animation:mk-bus 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-trabalho{animation:mk-lift 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-trabalho,#mi-entry .mi-ctx button:active .a-trabalho{animation:mk-lift 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-almoco{animation:mk-clink 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-almoco,#mi-entry .mi-ctx button:active .a-almoco{animation:mk-clink 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-louca{animation:mk-wiggle 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-louca,#mi-entry .mi-ctx button:active .a-louca{animation:mk-wiggle 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-limpeza{animation:mk-sweep 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-limpeza,#mi-entry .mi-ctx button:active .a-limpeza{animation:mk-sweep 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-cozinha{animation:mk-bounce 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-cozinha,#mi-entry .mi-ctx button:active .a-cozinha{animation:mk-bounce 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-caminhada{animation:mk-steps 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-caminhada,#mi-entry .mi-ctx button:active .a-caminhada{animation:mk-steps 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-academia{animation:mk-pump 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-academia,#mi-entry .mi-ctx button:active .a-academia{animation:mk-pump 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-fila{animation:mk-flip 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-fila,#mi-entry .mi-ctx button:active .a-fila{animation:mk-flip 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-sofa{animation:mk-squash 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-sofa,#mi-entry .mi-ctx button:active .a-sofa{animation:mk-squash 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-5min{animation:mk-swing 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-5min,#mi-entry .mi-ctx button:active .a-5min{animation:mk-swing 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-foco{animation:mk-pulse 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-foco,#mi-entry .mi-ctx button:active .a-foco{animation:mk-pulse 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-viagem{animation:mk-fly 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-viagem,#mi-entry .mi-ctx button:active .a-viagem{animation:mk-fly 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-mercado{animation:mk-roll 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-mercado,#mi-entry .mi-ctx button:active .a-mercado{animation:mk-roll 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-igreja{animation:mk-float 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-igreja,#mi-entry .mi-ctx button:active .a-igreja{animation:mk-float 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@media(hover:hover){#mi-entry .mi-ctx button:hover .a-familia{animation:mk-beat 1.5s cubic-bezier(.34,1.3,.5,1) 1}}#mi-entry .mi-ctx button:focus-visible .a-familia,#mi-entry .mi-ctx button:active .a-familia{animation:mk-beat 1.5s cubic-bezier(.34,1.3,.5,1) 1}',
+  '@keyframes mk-hop{0%{transform:none}25%{transform:translateY(-14%) scale(1.04)}50%{transform:translateY(0) scale(1.06,.94)}70%{transform:translateY(-5%)}100%{transform:none}}',
+  '@keyframes mk-rise{0%{transform:translateY(14%)}55%{transform:translateY(-9%) scale(1.07)}100%{transform:none}}',
+  '@keyframes mk-shake{0%,100%{transform:none}15%{transform:rotate(-8deg)}30%{transform:rotate(8deg)}45%{transform:rotate(-6deg) translateY(3%)}60%{transform:rotate(6deg)}80%{transform:rotate(-2deg)}}',
+  '@keyframes mk-rock{0%{transform:rotate(0)}30%{transform:rotate(-12deg) translateY(-3%)}65%{transform:rotate(9deg)}100%{transform:rotate(0)}}',
+  '@keyframes mk-drive{0%{transform:translateX(-22%)}55%{transform:translateX(9%)}75%{transform:translateX(-3%)}100%{transform:none}}',
+  '@keyframes mk-bus{0%{transform:translateX(24%)}60%{transform:translateX(-7%)}80%{transform:translateX(2%)}100%{transform:none}}',
+  '@keyframes mk-lift{0%{transform:none}35%{transform:translateY(-10%) rotate(-4deg)}65%{transform:translateY(-10%) rotate(4deg)}100%{transform:none}}',
+  '@keyframes mk-clink{0%,100%{transform:none}25%{transform:rotate(-9deg) translateY(-3%)}50%{transform:rotate(7deg)}75%{transform:rotate(-3deg)}}',
+  '@keyframes mk-wiggle{0%,100%{transform:none}12%{transform:rotate(-5deg) translateX(-2%)}28%{transform:rotate(5deg) translateX(2%)}44%{transform:rotate(-4deg)}60%{transform:rotate(4deg)}80%{transform:rotate(-1deg)}}',
+  '@keyframes mk-sweep{0%{transform:rotate(0)}25%{transform:rotate(-16deg) translateX(-5%)}60%{transform:rotate(14deg) translateX(5%)}100%{transform:rotate(0)}}',
+  '@keyframes mk-bounce{0%,100%{transform:none}22%{transform:translateY(-12%)}42%{transform:translateY(0) scale(1.05,.95)}62%{transform:translateY(-6%)}80%{transform:none}}',
+  '@keyframes mk-steps{0%{transform:translateX(-8%) translateY(0)}20%{transform:translateX(-3%) translateY(-5%)}40%{transform:translateX(2%) translateY(0)}60%{transform:translateX(6%) translateY(-5%)}80%{transform:translateX(2%) translateY(0)}100%{transform:none}}',
+  '@keyframes mk-pump{0%{transform:none}25%{transform:translateY(-16%) scale(1.08)}45%{transform:translateY(4%)}70%{transform:translateY(-10%) scale(1.05)}100%{transform:none}}',
+  '@keyframes mk-flip{0%{transform:rotate(0)}70%{transform:rotate(190deg)}85%{transform:rotate(176deg)}100%{transform:rotate(180deg)}}',
+  '@keyframes mk-squash{0%{transform:none}20%{transform:translateY(-12%)}40%{transform:translateY(2%) scale(1.08,.88)}60%{transform:translateY(-4%)}100%{transform:none}}',
+  '@keyframes mk-swing{0%,100%{transform:none}20%{transform:rotate(-14deg)}45%{transform:rotate(12deg)}70%{transform:rotate(-6deg)}}',
+  '@keyframes mk-pulse{0%,100%{transform:none}30%{transform:scale(1.18)}55%{transform:scale(.94)}75%{transform:scale(1.06)}}',
+  '@keyframes mk-fly{0%{transform:translate(-30%,26%) rotate(-8deg);opacity:.2}45%{opacity:1}75%{transform:translate(6%,-6%) rotate(3deg)}100%{transform:none}}',
+  '@keyframes mk-roll{0%{transform:translateX(-22%)}55%{transform:translateX(8%)}80%{transform:translateX(-2%)}100%{transform:none}}',
+  '@keyframes mk-float{0%,100%{transform:none}45%{transform:translateY(-10%) scale(1.07)}}',
+  '@keyframes mk-beat{0%,100%{transform:none}18%{transform:scale(1.15)}34%{transform:scale(.97)}52%{transform:scale(1.12)}70%{transform:none}}',
+  '@media(max-width:700px){#mi-entry .mi-ctx{grid-template-columns:repeat(3,1fr)!important;gap:10px!important}#mi-entry .mi-ctx button{border-radius:18px!important}#mi-entry .mi-ctx .tx{padding:18px 5px 7px}#mi-entry .mi-ctx .lb{font-size:12.5px!important}}',
+  '@media(max-width:330px){#mi-entry .mi-ctx{grid-template-columns:repeat(2,1fr)!important}}',
+  '@media(prefers-reduced-motion:reduce){#mi-entry .mi-ctx button{opacity:1!important;transform:none!important;animation:none!important}#mi-entry .mi-ctx button,#mi-entry .mi-ctx .fg{transition:none!important}#mi-entry .mi-ctx .fg{animation:none!important}}',
   ].join('');
   document.head.appendChild(css);
 
@@ -473,6 +637,7 @@
     var lvLocal=null;try{lvLocal=localStorage.getItem('userLevel');}catch(e){}
     ST.nivel=m.nivel||l.nivel||lvLocal||null;
     ST.prisma=m.prisma||l.prisma||null;
+    ST.prismaRes=m.prismaRes||l.prismaRes||null;
     ST.onb=m.onb||l.onb||null;
     ST.idioma=!!(m.idioma||l.idioma);
   }
@@ -481,7 +646,7 @@
     clearTimeout(salvarT);
     salvarT=setTimeout(function(){
       if(!U)return;
-      window._sb.auth.updateUser({data:{mi:{dias:ST.dias.slice(-150),vistas:ST.vistas.slice(-400),ultima:ST.ultima,bv:ST.bv,tour:ST.tour,nivel:ST.nivel,prisma:ST.prisma,onb:ST.onb,idioma:ST.idioma,prog:podarProg()}}}).catch(function(){});
+      window._sb.auth.updateUser({data:{mi:{dias:ST.dias.slice(-150),vistas:ST.vistas.slice(-400),ultima:ST.ultima,bv:ST.bv,tour:ST.tour,nivel:ST.nivel,prisma:ST.prisma,prismaRes:ST.prismaRes,onb:ST.onb,idioma:ST.idioma,prog:podarProg()}}}).catch(function(){});
     },1500);
   }
   function marcarDia(){
@@ -506,6 +671,10 @@
   }
   function salvarChecks(){LS.set(chkKey(),window._ctxChecked||{});try{registrarProg();}catch(e){}}
   function restaurarChecks(){var c=LS.get(chkKey(),{});Object.keys(c).forEach(function(k){window._ctxChecked[k]=c[k];});}
+
+  /* limpeza: apaga caches antigos do navegador e sobras diárias do localStorage (checklists e trocas de dias passados) */
+  try{if(window.caches)caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}catch(e){}
+  try{var hoje=dia();Object.keys(localStorage).forEach(function(k){var m=k.match(/^mi_(checks|troca)_(\d{4}-\d{2}-\d{2})$/);if(m&&m[2]!==hoje)localStorage.removeItem(k);});}catch(e){}
   function ctxAtual(){var c=LS.get('mi_ctx',{});return c.d===dia()?c.k:null;}
   function progCtx(k){
     k=k||ctxAtual()||'Em Casa';
@@ -662,6 +831,20 @@
     var mes=hoje.toLocaleDateString('pt-BR',{month:'long'});
     return '<div class="hm-mes"><div class="hm-mes-t"><b>'+E(mes.charAt(0).toUpperCase()+mes.slice(1))+'</b><span>'+E(frase)+'</span></div><div class="hm-mes-b">'+bol+'</div></div>';
   }
+  /* selo do card Lives: contagem pro próximo encontro; se estiver no ar, "Live acontecendo" */
+  function seloTxt(x){
+    if(!x)return '';if(x.aoVivo)return '● LIVE ACONTECENDO';
+    var m=Math.max(0,Math.round((x.st-new Date())/60000));
+    if(m<60)return '⏱ começa em '+Math.max(1,m)+' min';
+    if(m<1440)return '⏱ em '+Math.floor(m/60)+'h'+(m%60?(' '+pad(m%60)+'min'):'');
+    var d=Math.floor(m/1440),h=Math.floor((m%1440)/60);return '⏱ em '+d+'d'+(h?' '+h+'h':'');
+  }
+  function selo(x){return x?'<span class="lv-seal'+(x.aoVivo?' on':'')+'" id="lv-seal">'+seloTxt(x)+'</span>':'';}
+  setInterval(function(){
+    var el=$('lv-seal');if(!el)return;var x=proxLives()[0];if(!x)return;
+    el.className='lv-seal'+(x.aoVivo?' on':'');el.textContent=seloTxt(x);
+    var card=el.closest('.hm-live');if(card)card.classList.toggle('ao',!!x.aoVivo);
+  },30000);
   function renderHome(){
     var p=$('pane-home');if(!p||!U)return;
     var sq=sequencia(),pc=progCtx(),c=CTX.filter(function(x){return x.k===pc.k;})[0]||CTX[0],lv=proxLives()[0];
@@ -677,22 +860,11 @@
     }
     h+='<div class="hm-row">'
       +'<button class="hm-big hm-check" data-hm="check" aria-label="Checklist de hoje"><div class="ic">'+IC('check')+'</div><div class="lb">Checklist de hoje</div><div class="pg">'+(faltaDiagnostico()?'🔒 Faça os 2 testes pra liberar':c.ic+' '+E(c.lb)+' · '+pc.feitos+' de '+pc.tot+' feitas')+'</div><div class="bar"><i style="width:'+pc.pct+'%"></i></div></button>'
-      +'<button class="hm-big hm-live'+(lv&&lv.aoVivo?'':' off')+'" data-hm="lives" aria-label="Lives">'+(lv&&lv.aoVivo?'<span class="dot">● AO VIVO</span>':'')+'<div class="ic">'+IC('lives')+'</div><div class="lb">Lives</div><div class="pg">'+(lv?E(lv.lv.title)+'<br>'+E(quando(lv)):'Ver agenda')+'</div></button>'
+      +'<button class="hm-big hm-live'+(lv&&lv.aoVivo?' ao':' off')+'" data-hm="lives" aria-label="Lives">'+selo(lv)+'<div class="ic">'+IC('lives')+'</div><div class="lb">Lives</div><div class="pg">'+(lv?E(lv.lv.title)+'<br>'+E(quando(lv)):'Ver agenda')+'</div></button>'
       +'</div>';
     h+=resumoMes();
     h+='<div class="sec-hd">Sua aula</div><div class="hm-aula" id="hm-aula"><div class="cv"><div class="lock">Carregando…</div></div><div class="bd"><div class="st">&nbsp;</div></div></div>';
-    h+='<div class="hm-quick">'
-      +'<button data-hm="duvida"><span>'+IC('suporte')+'</span>Dúvida</button>'
-      +'<button data-hm="jogos"><span>'+IC('jogos')+'</span>Jogos</button>'
-      +'<button data-hm="prompts"><span>'+IC('prompts')+'</span>Prompts</button>'
-      +'<button data-hm="video"><span>'+IC('youtube')+'</span>Como usar</button>'
-      +'</div>';
-    h+='<div class="sec-hd">Universos</div><div class="hm-unis">'
-      +'<button class="hm-uni" style="background:linear-gradient(135deg,#15281f,#2f6b4f)" data-hm="eom"><span>'+IC('eom')+'</span><b>English On Mission</b></button>'
-      +'<button class="hm-uni" style="background:linear-gradient(135deg,#1b2a6b,#4f6ef7)" data-hm="culture"><span>'+IC('culture')+'</span><b>Culture English</b></button>'
-      +'<button class="hm-uni" style="background:linear-gradient(135deg,#0c4a6e,#0ea5e9)" data-hm="viagens"><span>'+IC('viagens')+'</span><b>Viagens</b></button>'
-      +'</div>';
-    h+='<div class="hm-ref"><div>'+IC('indicar','xl')+'</div><div><div class="t">Conhece alguém que trava no inglês?</div><div class="s">Manda o convite: a pessoa faz o teste de nível grátis e descobre por onde começar. Leva 10 segundos.</div></div>'
+    h+='<div class="hm-ref"><div>'+IC('indicar','xl')+'</div><div><div class="t">Conhece alguém que trava no inglês?</div><div class="s">Manda o seu link: ele leva a pessoa direto pro pagamento, com desconto aplicado. Leva 10 segundos.</div></div>'
       +'<div class="bts"><button data-hm="indicar" style="background:#25d366;color:#fff;display:inline-flex;align-items:center;gap:8px">'+IC('wa-real')+' Convidar no WhatsApp</button><button data-hm="copiar" style="background:var(--surface2);color:var(--fg)">Copiar link</button></div></div>';
     p.innerHTML=h;
     pintarAula();
@@ -714,9 +886,11 @@
       +'<button class="main" data-hm="abrir">'+(op?(cont?'▶ Continuar':'▶ Assistir'):'Ver aula')+'</button>'
       +'<button data-hm="prox" '+(hmIdx>=FLAT.length-1?'disabled':'')+' aria-label="Próxima aula">▶</button></div></div>';
   }
-  function linkIndicacao(){return SITE+'?ir=teste'+(nomeCurto()?'&ref='+encodeURIComponent(nomeCurto().toLowerCase()):'');}
-  function msgIndicacao(){var c=meuCupom();return 'Tô estudando inglês com o Gediel no Método Inteligente e tá fazendo diferença 🙌 Faz o teste de nível grátis e vê por onde você começaria: '+linkIndicacao()
-    +'\n\nSe quiser entrar no programa, usa meu cupom *'+c.cod+'* que você ganha '+c.pct+'% de desconto. É só mandar o cupom pro comercial: https://wa.me/'+WA+'?text='+encodeURIComponent('Oi! Vim por indicação. Meu cupom: '+c.cod);}
+  /* o convite leva direto pro pagamento da Kiwify (Programa), já com o cupom do amigo e a origem marcada (utm) pra venda cair como indicação */
+  function checkoutIndicacao(){var cf=AS().cfg||{},pl=planos().filter(function(x){return x.k==='inteligente';})[0];return (pl&&pl.checkout)||cf.checkout||'https://pay.kiwify.com.br/CohRPDI';}
+  function linkIndicacao(){var c=meuCupom(),u=checkoutIndicacao();return u+(u.indexOf('?')>=0?'&':'?')+'coupon='+encodeURIComponent(c.cod)+'&utm_source=indicacao&utm_medium=membros&utm_campaign='+encodeURIComponent(c.cod);}
+  function msgIndicacao(){var c=meuCupom();return 'Tô estudando inglês com o Gediel no Método Inteligente e tá fazendo diferença 🙌\n\nEntra pelo meu link que o seu desconto de '+c.pct+'% já vem aplicado (cupom *'+c.cod+'*):\n'+linkIndicacao()
+    +'\n\nQuer ver seu nível antes? Faz o teste grátis: '+SITE+'?ir=teste';}
   /* ───────────────────────── INDIQUE E GANHE ─────────────────────────
      Quem fecha pelo convite conta 1 passo. Prêmios: 1 = e-book de viagem · 2 = upgrade pro Gênio · 5 = +3 meses grátis.
      O cupom do amigo: 5% na 1ª indicação, 10% nas próximas. O comercial registra a venda aqui no modo edição. */
@@ -740,7 +914,7 @@
     if(IND.lista===null){p.innerHTML='<div class="admin-loading">Carregando…</div>';await carregarInd();}
     var n=Math.min(5,IND.lista.length),c=meuCupom(),prox=[1,2,5].filter(function(k){return k>n;})[0];
     var h='<div class="in-hero"><div class="in-k">Indique e ganhe</div><h1>Traga até 5 amigos.<br><span>Cada um que entrar vale um prêmio.</span></h1>'
-      +'<p>Manda o seu convite. Quando o amigo fechar o programa usando o seu cupom, ele conta aqui.</p></div>';
+      +'<p>Manda o seu link. Ele leva o amigo direto pro pagamento, com o seu cupom. Quando a compra sair, conta aqui.</p></div>';
     h+='<div class="in-trilha">';
     for(var i=1;i<=5;i++){var pr=PREMIOS[i],ok=i<=n,al=IND.lista[i-1];
       h+='<div class="in-passo'+(ok?' ok':'')+(pr?' premio':'')+(i===n+1?' prox':'')+'"><div class="bola">'+(ok?(al&&al.indicado_nome?E(al.indicado_nome.charAt(0).toUpperCase()):'✓'):i)+'</div>'
@@ -750,7 +924,7 @@
     h+='<div class="in-status">'+(n>=5?'🏆 Você completou a missão! Fala com o Gediel pra liberar os 3 meses.':n?'Você já trouxe <b>'+n+'</b> '+(n>1?'amigos':'amigo')+'. '+(prox?'Faltam <b>'+(prox-n)+'</b> pro próximo prêmio: '+E(PREMIOS[prox].t)+'.':''):'Nenhum amigo entrou ainda. O primeiro já vale um e-book.')+'</div>';
     h+='<div class="in-cupom"><div><small>Seu cupom</small><b id="in-cod">'+E(c.cod)+'</b><span>Seu amigo ganha <b>'+c.pct+'%</b> de desconto'+(c.pct===5?' (a partir da 2ª indicação fechada, vira 10%)':'')+'</span></div><button data-in="copiar">Copiar</button></div>';
     h+='<button class="pl-btn" style="--pc:#25d366;margin-top:12px" data-in="zap">'+IC('wa-real')+' Mandar meu convite no WhatsApp</button>';
-    h+='<div class="in-como"><b>Como funciona</b><ol><li>Você manda o convite com o seu cupom.</li><li>Seu amigo faz o teste de nível e fala com o comercial usando o cupom.</li><li>Quando ele fechar, a indicação aparece aqui e o prêmio é liberado.</li></ol></div>';
+    h+='<div class="in-como"><b>Como funciona</b><ol><li>Você manda o seu link: ele abre direto na página de pagamento, com o desconto já aplicado.</li><li>Seu amigo paga pela Kiwify e recebe o acesso no mesmo e-mail.</li><li>Quando a compra for confirmada, a indicação conta aqui e o prêmio é liberado.</li></ol></div>';
     if(IND.erro&&souAdmin())h+='<div class="pl-aviso">⚠️ A tabela de indicações ainda não existe. Rode o SQL pendente no Supabase.</div>';
     if(souAdmin())h+=painelIndAdmin();
     p.innerHTML=h;
@@ -788,6 +962,7 @@
     var a=b.dataset.hm;
     if(a==='check'){go('maratona');var k=ctxAtual();if(k)setTimeout(function(){escolherCtxNaMaratona(k);},200);}
     else if(a==='lives')go('lives');
+    else if(a==='maratona-10'){var nv=document.getElementById('mt10-nav');if(nv&&window.goTo)goTo('mt10',nv);}
     else if(a==='modulos')go('modulos');
     else if(a==='abrir'){var it=FLAT&&FLAT[hmIdx];if(it)abrirAula(it.m.id,it.l.id);}
     else if(a==='ant'){if(hmIdx>0){hmIdx--;pintarAula();}}
@@ -810,14 +985,35 @@
       +'<div class="streak-card" style="margin-bottom:12px"><div class="streak-val">'+sq.n+IC('fogo','lg')+'</div><div><div style="font-size:13px;font-weight:700;margin-bottom:2px">'+(sq.n===1?'Dia seguido':'Dias seguidos')+'</div><div style="font-size:11px;color:var(--fg2)">'+(sq.hoje?'Hoje já conta. Volte amanhã!':'Faça 1 tarefa hoje pra '+(sq.n?'manter':'começar'))+'</div></div></div>'
       +'<div class="card-sm" style="cursor:pointer" data-hm="check"><div style="display:flex;align-items:center;gap:12px"><svg width="52" height="52" viewBox="0 0 52 52"><circle cx="26" cy="26" r="22" fill="none" stroke="var(--border)" stroke-width="5"/><circle cx="26" cy="26" r="22" fill="none" stroke="#10b981" stroke-width="5" stroke-dasharray="138.2" stroke-dashoffset="'+off.toFixed(1)+'" stroke-linecap="round" transform="rotate(-90 26 26)"/><text x="26" y="31" text-anchor="middle" font-size="11" font-weight="800" fill="var(--fg)" font-family="inherit">'+pc.pct+'%</text></svg>'
       +'<div><div style="font-size:13px;font-weight:700;margin-bottom:3px">Checklist de hoje</div><div style="font-size:11px;color:var(--fg2)">'+pc.feitos+' de '+pc.tot+' · '+E((CTX.filter(function(x){return x.k===pc.k;})[0]||CTX[0]).lb)+'</div></div></div></div></div>'
-      +'<div><div class="rail-hd">Próximas lives</div>'+lv.map(function(x){
-        return '<div class="upcoming-item" style="cursor:pointer" data-hm="lives"><div class="upc-date"><span class="day">'+x.st.getDate()+'</span>'+x.st.toLocaleDateString('pt-BR',{month:'short'}).replace('.','').toUpperCase()+'</div><div><div class="upc-title">'+E(x.lv.title)+(x.aoVivo?' <span style="color:#ef4444;font-weight:800">● AO VIVO</span>':'')+'</div><div class="upc-time">'+E(quando(x))+'</div></div></div>';}).join('')+'</div>'
-      +'<div><div class="rail-hd">Atalhos</div><div style="display:flex;flex-direction:column;gap:7px">'
-      +'<a href="https://www.youtube.com/@teachergediel" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:11px;padding:9px 12px;text-decoration:none;font-size:12px;font-weight:700;color:#ef4444">'+IC('yt-real')+' Canal no YouTube</a>'
-      +'<a href="https://instagram.com/englishbygediel" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.18);border-radius:11px;padding:9px 12px;text-decoration:none;font-size:12px;font-weight:700;color:#8b5cf6">'+IC('ig-real')+' @englishbygediel</a>'
-      +'<button data-hm="indicar" style="display:flex;align-items:center;gap:8px;background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.25);border-radius:11px;padding:9px 12px;font-size:12px;font-weight:700;color:#16a34a;cursor:pointer;text-align:left">'+IC('indicar')+' Indicar um amigo</button>'
-      +'</div><div class="mi-lg-rail"><span class="mi-logo"></span>Método Inteligente</div></div>';
+      +evolucaoHTML()
+      +'<div id="rail-mt"></div>'
+      +'<div class="rail-soc"><a href="https://www.youtube.com/@teachergediel" target="_blank" rel="noopener" title="YouTube" aria-label="YouTube">'+IC('yt-real')+'</a>'
+      +'<a href="https://instagram.com/englishbygediel" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">'+IC('ig-real')+'</a>'
+      +'<button data-hm="indicar" title="Indicar um amigo" aria-label="Indicar um amigo">'+IC('indicar')+'</button></div>';
+    pintarMaratonaRail();
   }
+  function evolucaoHTML(){
+    var hoje=new Date();hoje.setHours(12,0,0,0);var bars='',ativos=0,soma=0,N=14,ini=null;
+    var sem=['D','S','T','Q','Q','S','S'];
+    for(var k=N-1;k>=0;k--){var d=new Date(hoje);d.setDate(d.getDate()-k);var v=valDia(dia(d));if(v>0)ativos++;soma+=v;
+      bars+='<i class="'+(k===0?'hj':'')+'" title="'+d.toLocaleDateString('pt-BR',{day:'numeric',month:'short'})+'" style="height:'+Math.max(6,Math.round(v*100))+'%;opacity:'+(v>0?1:.28)+'"></i>';}
+    var lbl='';for(var k2=N-1;k2>=0;k2--){var d2=new Date(hoje);d2.setDate(d2.getDate()-k2);lbl+='<b>'+sem[d2.getDay()]+'</b>';}
+    var med=Math.round(soma/N*100),vistas=(ST.vistas||[]).length,sq=sequencia();
+    return '<div><div class="rail-hd">Sua evolução</div><div class="rail-evo">'
+      +'<div class="re-top"><div><strong>'+ativos+'</strong><span>de 14 dias ativos</span></div><div><strong>'+med+'%</strong><span>checklist médio</span></div></div>'
+      +'<div class="re-bars">'+bars+'</div><div class="re-lbl">'+lbl+'</div>'
+      +'<div class="re-st"><div><strong>'+vistas+'</strong><span>aulas vistas</span></div><div><strong>'+(ST.dias||[]).length+'</strong><span>dias de estudo</span></div></div>'
+      +'</div></div>';
+  }
+  async function pintarMaratonaRail(){
+    var box=document.getElementById('rail-mt');if(!box||!window.EBG_MARATONA)return;
+    var m=await window.EBG_MARATONA.resumo();box=document.getElementById('rail-mt');if(!box||!m)return;
+    var cab='🏁 Maratona · ciclo '+m.ciclo;
+    box.innerHTML='<div class="rail-hd">Maratona 10 meses</div><div class="rail-mt" data-hm="maratona-10"><div class="rm-pos">'+(m.pos?'<strong>'+m.pos+'º</strong><span>de '+m.total+'</span>':'<strong>—</strong><span>sem pontos ainda</span>')+'</div>'
+      +'<div class="rm-i"><div class="rm-t">'+cab+'</div><div class="rm-s">'+m.pts+' pts'+(m.pos>1&&m.falta?' · faltam '+m.falta+' pra subir':(m.pos===1?' · você lidera 👑':''))+'</div>'
+      +'<div class="rm-b"><i style="width:'+Math.min(100,m.prog||0)+'%"></i></div></div></div>';
+  }
+
 
   /* ───────────────────────── ENTRADA: boas-vindas + onde você está ───────────────────────── */
   var ent=document.createElement('div');ent.id='mi-entry';document.body.appendChild(ent);
@@ -866,17 +1062,22 @@
     };
   }
   function perguntarContexto(){
-    if(iniciante())return entradaIniciante();
+    // iniciante: sem tela cheia na frente (atrapalhava a navegação). O checklist 'Primeiros passos' já fica valendo.
+    if(iniciante()){LS.set('mi_ctx',{d:dia(),k:'Primeiros passos'});return perguntarTempo(function(){try{window.renderMarTasks('Primeiros passos');}catch(x){}fecharEntrada(function(){go('home');renderHome();pintarRail();setTimeout(tourAuto,700);});});}
     abrirEntrada('<span class="mi-logo mi-lg-ent"></span><div class="mi-ent-kicker">'+E(saudacao())+(nomeCurto()?', '+E(nomeCurto()):'')+'</div>'
       +'<div class="mi-ent-q">Onde você está agora?</div>'
       +'<div class="mi-ent-s">Escolha o mais parecido com onde você está ou o que está fazendo. Eu monto o checklist de hoje pra esse momento.</div>'
-      +'<div class="mi-ctx">'+CTX.map(function(c,i){return '<button data-ent="ctx" data-k="'+E(c.k)+'" style="animation-delay:'+(0.08+i*0.07)+'s"><span class="ic">'+icCtx(c)+'</span><span class="lb">'+E(c.lb)+'</span><span class="ht">'+E(c.hint)+'</span></button>';}).join('')+'</div>'
-      +'<button class="mi-ctx-skip" data-ent="ctx" data-k="">Só vim dar uma olhada</button>');
+      +'<div class="mi-ctx">'+CTX.map(function(c,i){return '<button data-ent="ctx" data-k="'+E(c.k)+'" title="'+E(c.hint)+'" style="--c:'+ctxCor(c)+';animation-delay:'+(0.06+i*0.05)+'s"><span class="ic">'+ctxImg(c)+'</span><span class="tx"><span class="lb">'+E(c.lb)+'</span></span></button>';}).join('')+'</div>'
+      +'<button class="mi-ctx-skip" data-ent="ctx" data-k="">Só vim dar uma olhada</button>'
+      +'<button id="mi-som" type="button" aria-label="Som dos ícones"></button>');
+    if(window.EBG_FX)EBG_FX.pintaBotao();
     ent.onclick=function(e){
-      var b=e.target.closest('[data-ent="ctx"]');if(!b)return;
+      var b=e.target.closest('[data-ent="ctx"]');if(!b||ent.dataset.indo)return;
       var k=b.dataset.k;
-      if(k){LS.set('mi_ctx',{d:dia(),k:k});escolherCtxNaMaratona(k);}
-      fecharEntrada(function(){go('home');renderHome();pintarRail();setTimeout(tourAuto,700);if(k)toast('✅ Checklist pronto: '+(CTX.filter(function(x){return x.k===k;})[0].lb),'#10b981');});
+      if(k)LS.set('mi_ctx',{d:dia(),k:k});if(k==='Na igreja')LS.set('mi_fe',true);
+      var ir=function(){ent.dataset.indo='';var ap=function(){var kk=k||ctxAtual();if(kk)escolherCtxNaMaratona(kk);fecharEntrada(function(){go('home');renderHome();pintarRail();setTimeout(tourAuto,700);if(k)toast('✅ Checklist pronto: '+(CTX.filter(function(x){return x.k===k;})[0].lb)+' · '+tempoUso()+' min','#10b981');});};if(k==='Só 5 minutos'){guardarTempo(5);ap();}else perguntarTempo(ap);};
+      ent.dataset.indo='1';
+      ir();
     };
   }
   var entrou=false;
@@ -931,6 +1132,7 @@
     if(c.acao==='curso')return cardLock(c)?'Quero esse mini curso ›':'Abrir mini curso ›';
     if(c.acao==='area')return 'Abrir ›';
     if(c.acao==='whatsapp')return 'Chamar no WhatsApp ›';
+    if(c.acao==='playlist')return 'Assistir os vídeos ›';
     return /^R\$/.test(c.tag||'')?'Comprar ›':'Acessar ↗';
   }
   function seloRede(c){
@@ -948,7 +1150,7 @@
     var u=UNIV[k],p=$('pane-'+k);if(!u||!p)return;
     p.innerHTML='<div style="font-size:21px;font-weight:800;margin-bottom:4px">'+E(u.title)+'</div><div style="font-size:13px;color:var(--fg2);margin-bottom:18px">'+E(u.sub)+'</div><div class="admin-loading">Carregando…</div>';
     await Promise.all([carregarCards(),carregarModsAll()]);
-    var lista=CARDS.filter(function(c){return c.universo===k&&(c.ativo!==false||EDIT);});
+    var lista=CARDS.filter(function(c){return c.universo===k&&(c.ativo!==false||EDIT)&&!(k==='eom'&&!EDIT&&/^(jogos|assinar o english on mission)$/i.test((c.titulo||'').trim()));});
     var h='<div style="font-size:21px;font-weight:800;margin-bottom:4px">'+E(u.title)+'</div><div style="font-size:13px;color:var(--fg2);margin-bottom:18px">'+E(u.sub)+'</div>';
     var HERO=heroUni(k,u,lista);if(HERO)h=HERO;
     if(CARDS._erro){p.innerHTML=h+'<div class="admin-loading">'+(souAdmin()?'Rode o arquivo COLE-NO-SUPABASE.sql no Supabase pra ativar os Universos.':'Em instantes tem conteúdo novo aqui 🙂')+'</div>';return;}
@@ -957,7 +1159,8 @@
     });
     var resto=lista.filter(function(c){return !c.destaque;}),secs=[],por={};
     resto.forEach(function(c){var s=c.secao||'';if(!por[s]){por[s]=[];secs.push(s);}por[s].push(c);});
-    var n=0;secs.forEach(function(s,si){h+=(s?'<div class="uni-sec" id="sec-'+k+'-'+si+'">'+E(s)+'</div>':'')+'<div class="uni-grid">'+por[s].map(function(c){return cardHtml(c,n++);}).join('')+(EDIT?'<button class="mi-novo" data-ed="card-novo" data-uni="'+k+'" data-sec="'+E(s)+'">＋ Novo card'+(s?' em '+E(s):'')+'</button>':'')+'</div>';});
+    if(k==='eom'){secs=[''];por={'':resto};}
+    var n=0;secs.forEach(function(s,si){h+=(s?'<div class="uni-sec" id="sec-'+k+'-'+si+'">'+E(s)+'</div>':'')+'<div class="uni-grid'+(k==='eom'?' uni-std':'')+'">'+por[s].map(function(c){return cardHtml(c,n++);}).join('')+(EDIT?'<button class="mi-novo" data-ed="card-novo" data-uni="'+k+'" data-sec="'+E(s)+'">＋ Novo card'+(s?' em '+E(s):'')+'</button>':'')+'</div>';});
     if(EDIT){h=h.replace('<div style="font-size:21px;font-weight:800;margin-bottom:4px">'+E(u.title)+'</div>','<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px"><div style="font-size:21px;font-weight:800">'+E(u.title)+'</div><button class="admin-btn admin-btn-ghost admin-btn-sm" data-ed="menu-ed" data-k="'+k+'">✏️ Nome, frase e acesso</button></div>');if(!secs.length)h+='<div class="uni-grid"><button class="mi-novo" data-ed="card-novo" data-uni="'+k+'">＋ Novo card</button></div>';}
     if(!lista.length&&!EDIT)h+='<div class="admin-loading">Nenhum card ainda.'+(souAdmin()?' Toque em ✏️ Editar, lá em cima, pra criar.':'')+'</div>';
     if(lista.some(function(c){return /indica/i.test(c.tag||'');}))h+='<div style="font-size:10.5px;color:var(--fg3);margin-top:16px">Indicação = link de afiliado. Você paga o mesmo preço e eu posso receber uma comissão.</div>';
@@ -984,7 +1187,7 @@
         +'<p>'+E(u.sub||'Séries, filmes e música como sala de aula.')+'</p>'
         +(function(){var lv=(window.LIVES||[]).filter(function(x){return x.id==='series';})[0];if(!lv||!window.nextOccurrence)return '';var nx=nextOccurrence(lv);
           return '<div class="th-prox"><span>Próximo encontro · '+E(dayLabel(nx))+' às '+lv.startH+'h</span><div class="lv-cd" data-at="'+nx.getTime()+'"></div></div>';})()
-        +'<div class="th-cta"><button class="th-b1" data-th="live">'+IC('lives')+' Lives do Culture English</button><button class="th-b2" data-th="jogos">'+IC('jogos')+' Jogos</button></div>'
+        +'<div class="th-cta th-icbtns"><button class="th-ib" data-th="live">'+IC('lives')+'<b>Lives</b></button><button class="th-ib" data-th="filmes">'+IC('culture')+'<b>Filmes por nível</b></button><button class="th-ib" data-th="jogos">'+IC('jogos')+'<b>Jogos</b></button></div>'
         +(EDIT?'<button class="admin-btn admin-btn-ghost admin-btn-sm" style="margin-top:12px" data-ed="menu-ed" data-k="culture">✏️ Nome, frase e acesso do menu</button>':'')
         +'<div class="th-nav"></div><div class="th-film b"></div></div>';
     }
@@ -994,7 +1197,7 @@
     var g=e.target.closest('[data-goto]');if(g){var el=$(g.dataset.goto);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});return;}
     var t=e.target.closest('[data-th]');if(!t)return;var a=t.dataset.th;
     if(a==='grupo')abrirGrupo();
-    else if(a==='live')go('lives');else if(a==='jogos')go('jogos');
+    else if(a==='live')go('lives');else if(a==='jogos')go('jogos');else if(a==='filmes')go('filmes');
   });
   function ofertaMini(m,c){
     var ov=$('pw-ov');if(!ov){if(m.checkout)window.open(m.checkout,'_blank','noopener');return;}
@@ -1007,7 +1210,7 @@
     var c=(CARDS||[]).filter(function(x){return x.id===id;})[0];if(!c)return;
     if(cardSoon(c)){wa('Oi Gediel! Quero ser avisado quando sair: '+c.titulo+'.');return;}
     if(c.acao==='whatsapp'){wa(c.valor||('Oi Gediel! Vim pelo app: '+c.titulo));return;}
-    if(c.acao==='area'){go(c.valor);return;}
+    if(c.acao==='area'){window._voltaPend={uni:uni,nome:UNIV[uni].title,pill:pill(uni)};go(c.valor);return;}
     if(c.acao==='curso'){
       await carregarModsAll();var m=MODS_ALL.filter(function(x){return x.id===c.valor;})[0];
       if(!m){toast('Esse mini curso ainda está sendo preparado 🙏');return;}
@@ -1032,6 +1235,7 @@
     var pr=document.createElement('div');pr.className='pane';pr.id='pane-prompts';
     pr.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px"><div><div style="font-size:21px;font-weight:800">Central de Prompts</div><div style="font-size:13px;color:var(--fg2)">Escolha, personalize, copie e cole no ChatGPT ou no Claude.</div></div><a class="back-btn" style="margin:0;text-decoration:none" href="central-prompts.html" target="_blank" rel="noopener">Abrir em tela cheia ↗</a></div><iframe class="mi-frame" title="Central de Prompts" loading="lazy" data-src="central-prompts.html"></iframe>';
     matPane.insertAdjacentElement('afterend',pr);
+    var pfl=document.createElement('div');pfl.className='pane';pfl.id='pane-filmes';pr.insertAdjacentElement('afterend',pfl);
     var pa=document.createElement('div');pa.className='nav-pill';pa.setAttribute('onclick',"goTo('agendar',this)");pa.innerHTML='<span class="nav-icon">📅</span><span>Marcar aula</span>';
     pp.insertAdjacentElement('afterend',pa);
     var pag=document.createElement('div');pag.className='pane';pag.id='pane-agendar';pr.insertAdjacentElement('afterend',pag);
@@ -1049,7 +1253,7 @@
       p.innerHTML='<span class="nav-icon">'+u.icon+'</span><span>'+E(u.nav)+'</span>';ant.insertAdjacentElement('afterend',p);ant=p;
       var pane=document.createElement('div');pane.className='pane';pane.id='pane-'+k;antPane.insertAdjacentElement('afterend',pane);antPane=pane;
     });
-    if(window.TITLES){TITLES.prompts='Prompts';TITLES.agendar='Marcar aula';TITLES.planos='Planos';TITLES.indicar='Indique e ganhe';Object.keys(UNIV).forEach(function(k){TITLES[k]=UNIV[k].title;});TITLES.home='Início';}
+    if(window.TITLES){TITLES.prompts='Prompts';TITLES.filmes='Filmes por nível';TITLES.agendar='Marcar aula';TITLES.planos='Planos';TITLES.indicar='Indique e ganhe';Object.keys(UNIV).forEach(function(k){TITLES[k]=UNIV[k].title;});TITLES.home='Início';}
   }
   montarMenu();iconesMenu();iconesTopo();
 
@@ -1196,11 +1400,22 @@
 
   /* navegação: desenha o que cada área precisa */
   var goAnt=window.goTo;
+  /* botão "← voltar" flutuante: quando um card de um universo leva pra outra área do app (jogos, materiais, planos...) */
+  function voltaUni(vp,page){
+    var x=$('mi-volta-uni');if(x)x.remove();
+    if(!vp||vp.uni===page)return;
+    x=document.createElement('button');x.id='mi-volta-uni';x.type='button';x.textContent='← '+vp.nome;
+    x.style.cssText='position:fixed;left:max(12px,env(safe-area-inset-left));top:calc(env(safe-area-inset-top,0px) + 66px);z-index:60;background:var(--accent);color:#fff;border:0;border-radius:99px;padding:9px 16px;font:inherit;font-size:13px;font-weight:800;box-shadow:0 6px 20px rgba(0,0,0,.3);cursor:pointer';
+    x.onclick=function(){window.goTo(vp.uni,vp.pill);};
+    document.body.appendChild(x);
+  }
   window.goTo=function(page,el){
     gaveta(false);
     window._miniBack=null;
+    var vp=window._voltaPend;window._voltaPend=null;voltaUni(vp,page);
     if(UNIV[page])desenharUni(page);
-    if(page==='prompts'){var f=document.querySelector('#pane-prompts iframe');if(f&&!f.src)f.src=f.dataset.src;}
+    if(page==='prompts'){if(window.EBG_PROMPTS_UI)EBG_PROMPTS_UI.render($('pane-prompts'),ST.nivel);else{var f=document.querySelector('#pane-prompts iframe');if(f&&!f.src)f.src=f.dataset.src;}}
+    if(page==='filmes'&&window.EBG_FILMES_UI)EBG_FILMES_UI.render($('pane-filmes'),ST.nivel);
     if(page==='home')setTimeout(renderHome,160);
     if(page==='agendar')renderAgendar();
     if(page==='planos')renderPlanos();
@@ -1284,7 +1499,7 @@
     if(a==='sair'){gv.classList.remove('on');gv.innerHTML='';document.body.style.overflow='';G=null;return;}
     if(a==='denovo'){jogar(G.nome);return;}
     if(a==='som'){falar(G.itens[G.i][0]);return;}
-    if(a==='share'){wa('Fiz '+G.acertos+'/'+G.total+' no jogo '+G.nome+' do Método Inteligente 🎮 Duvido você bater! Faz o teste de nível grátis: '+linkIndicacao(),false);return;}
+    if(a==='share'){wa('Fiz '+G.acertos+'/'+G.total+' no jogo '+G.nome+' do Método Inteligente 🎮 Duvido você bater! Faz o teste de nível grátis: '+SITE+'?ir=teste',false);return;}
     if(G.t==='flash'){
       var c=G.fila[0];
       if(a==='virar'&&!G.virou){G.virou=true;
@@ -1396,7 +1611,7 @@
     +'<div class="adm-section">Título</div><input class="admin-inp" id="uc-titulo" maxlength="120">'
     +'<div class="adm-section">Descrição curta</div><textarea class="admin-inp" id="uc-desc" rows="2" maxlength="400"></textarea>'
     +'<div style="display:grid;grid-template-columns:1fr 1fr 90px;gap:10px" class="grid-2"><div><div class="adm-section">Seção (agrupa os cards)</div><input class="admin-inp" id="uc-secao" list="uc-secoes" placeholder="Ex.: Assistir"><datalist id="uc-secoes"></datalist></div><div><div class="adm-section">Etiqueta</div><input class="admin-inp" id="uc-tag" placeholder="Ex.: R$ 27 · Grátis · Em breve" maxlength="40"></div><div><div class="adm-section">Emoji</div><input class="admin-inp" id="uc-emoji" maxlength="8" style="text-align:center;font-size:18px"></div></div>'
-    +'<div class="adm-section">O que acontece ao clicar</div><select class="admin-inp" id="uc-acao"><option value="link">🔗 Abrir um link (YouTube, playlist, checkout, site)</option><option value="whatsapp">💬 Abrir meu WhatsApp com mensagem pronta</option><option value="area">📱 Abrir uma área do app</option><option value="material">📘 Abrir um material / e-book (com cadeado pra quem não comprou)</option><option value="curso">🛒 Abrir um mini curso (com cadeado pra quem não comprou)</option></select>'
+    +'<div class="adm-section">O que acontece ao clicar</div><select class="admin-inp" id="uc-acao"><option value="link">🔗 Abrir um link (YouTube, playlist, checkout, site)</option><option value="whatsapp">💬 Abrir meu WhatsApp com mensagem pronta</option><option value="area">📱 Abrir uma área do app</option><option value="material">📘 Abrir um material / e-book (com cadeado pra quem não comprou)</option><option value="playlist">▶️ Playlist do YouTube (vídeos aparecem sozinhos, com quiz e comentários)</option><option value="curso">🛒 Abrir um mini curso (com cadeado pra quem não comprou)</option></select>'
     +'<div id="uc-valor-box" style="margin-top:8px"></div>'
     +'<div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;font-size:12.5px"><label style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="uc-destaque"> Banner do topo</label><label style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="uc-breve"> Em breve (vira "me avise")</label><label style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="uc-ativo" checked> Visível pros alunos</label></div>'
     +'<div id="uc-st" style="font-size:12px;min-height:18px;margin-top:12px"></div>'
@@ -1410,6 +1625,7 @@
       b.innerHTML='<select class="admin-inp" id="uc-valor"><option value="">— escolha o material —</option>'+ms.map(function(m){return '<option value="'+m.id+'"'+(valor===m.id?' selected':'')+'>'+E(m.nome)+'</option>';}).join('')+'</select>';}
     else if(acao==='curso'){var minis=(MODS_ALL||[]).filter(function(m){return m.trilha==='mini'||m.id===valor;});
       b.innerHTML='<select class="admin-inp" id="uc-valor"><option value="">— ainda não tem módulo (fica "em breve") —</option>'+minis.map(function(m){return '<option value="'+m.id+'"'+(valor===m.id?' selected':'')+'>'+E(m.name)+(m.produto?' · libera com "'+E(m.produto)+'"':' · ⚠ sem produto')+'</option>';}).join('')+'</select>'+(minis.length?'':'<div style="font-size:11px;color:var(--gold);margin-top:6px">Nenhum mini curso criado ainda. Vá em Módulos → Novo módulo → "Mini curso avulso".</div>');}
+    else if(acao==='playlist')b.innerHTML='<input class="admin-inp" id="uc-valor" placeholder="Cole o link da playlist (youtube.com/playlist?list=...)" value="'+E(valor||'')+'"><div style="font-size:11px;color:var(--fg2);margin-top:6px">Todo vídeo novo que você pôr na playlist aparece aqui sozinho. A playlist precisa ser pública ou não listada.</div>';
     else if(acao==='whatsapp')b.innerHTML='<textarea class="admin-inp" id="uc-valor" rows="2" placeholder="Mensagem que o aluno manda pra você">'+E(valor||'')+'</textarea>';
     else b.innerHTML='<input class="admin-inp" id="uc-valor" placeholder="https://... (vazio = aparece como Em breve)" value="'+E(valor||'')+'">';
   }
@@ -1494,7 +1710,7 @@
 
   /* ───────────────────────── BÚSSOLA (nível) e PRISMA (inteligências) ─────────────────────────
      Os testes são os sites de verdade; o aluno faz dentro do app e marca o resultado que apareceu. */
-  var URL_BUSSOLA='https://nivelamentogediel.netlify.app/',URL_PRISMA='https://testedeinteligencia1.netlify.app/';
+  var URL_BUSSOLA='bussola.html?membro=1',URL_PRISMA='prisma.html?membro=1';
   var NIVEIS=['A1','A2','B1','B2','C1','C2'];
   var NIVEL_CAN={A1:'Se apresentar, perguntar e responder o básico do dia a dia.',A2:'Se virar em situações simples: compras, rotina, direções, família.',B1:'Conversar sobre o dia a dia e o trabalho, viajar sem travar.',B2:'Discutir ideias com fluência e entender séries e reuniões.',C1:'Usar o inglês com flexibilidade no trabalho e nos estudos.',C2:'Dominar o idioma com precisão, como um nativo culto.'};
   var INTEL={
@@ -1516,27 +1732,61 @@
   }
   window.setManualLevel=function(lvl){if(NIVEIS.indexOf(lvl)<0)return;ST.nivel=lvl;try{localStorage.setItem('userLevel',lvl);}catch(e){}salvar();pintarPerfil();renderBussola();toast('✅ Seu nível agora é '+lvl,'#4f6ef7');};
   function setPrisma(k){if(!INTEL[k])return;ST.prisma=k;salvar();pintarPerfil();renderPrisma();toast('✅ '+INTEL[k].nome+' salvo no seu perfil','#8b5cf6');}
+  var NV_DET={
+    A1:{nome:'Iniciante',h:'≈ 90 a 100 horas de estudo',cor:'#ef4444',res:'Você entende e usa expressões do dia a dia e frases bem simples, desde que a pessoa fale devagar e ajude.',faz:[['🗣️','Falar','Se apresentar: nome, idade, de onde você é, onde mora. Pedir e dar informações básicas, como "Where is the bathroom?".'],['👂','Ouvir','Entender cumprimentos, números, horas e frases curtas ditas devagar e com pausas.'],['📖','Ler','Ler placas, cardápios, preços e mensagens bem curtas.'],['✍️','Escrever','Preencher um formulário simples e escrever frases soltas sobre você.'],['🌍','Na vida real','Pedir um café, dizer o que quer comprar e se identificar num hotel.']],naoV:['Acompanhar uma conversa em ritmo normal','Contar o que aconteceu ontem','Entender séries ou músicas sem ajuda'],prox:'Aprender o verbo to be, o presente simples, as 500 palavras mais comuns e perguntas básicas. Falar todo dia, mesmo errando.'},
+    A2:{nome:'Básico',h:'≈ 180 a 200 horas',cor:'#f97316',res:'Você se vira em situações simples e previsíveis e fala de assuntos do seu dia a dia com frases curtas.',faz:[['🗣️','Falar','Descrever rotina, família, trabalho e gostos. Contar o que fez ontem com frases simples.'],['👂','Ouvir','Entender o essencial de avisos, conversas lentas e instruções curtas.'],['📖','Ler','Ler textos curtos, e-mails simples, anúncios e informações de viagem.'],['✍️','Escrever','Mensagens e bilhetes curtos, como convidar alguém ou agradecer.'],['🌍','Na vida real','Pedir comida, comprar, perguntar direção, fazer check-in, usar transporte e marcar horário.']],naoV:['Manter uma conversa longa sem travar','Dar opinião e explicar por quê','Entender nativos falando rápido ou ao telefone'],prox:'Dominar passado e futuro, ampliar o vocabulário e treinar conversas de 3 a 5 minutos. Aqui o hábito diário pesa mais que a teoria.'},
+    B1:{nome:'Intermediário',h:'≈ 350 a 400 horas',cor:'#eab308',res:'Você se vira na maioria das situações, principalmente em viagem, e conversa sobre assuntos que conhece.',faz:[['🗣️','Falar','Manter uma conversa sobre trabalho, viagem e planos. Contar histórias, relatar experiências e dar opinião simples.'],['👂','Ouvir','Entender o ponto principal de vídeos, podcasts e conversas quando o assunto é familiar e o ritmo é claro.'],['📖','Ler','Ler textos do dia a dia, notícias simples, e-mails e instruções.'],['✍️','Escrever','Textos simples e conectados, como e-mail de trabalho, relato de viagem e mensagens mais longas.'],['🌍','Na vida real','Viajar sem travar, resolver problemas (voo atrasado, reserva errada) e participar de conversa informal.']],naoV:['Entender humor, gírias e falas rápidas','Participar de reuniões técnicas','Defender uma ideia com argumentos'],prox:'Treinar opinião e argumentação, entender nativos em ritmo normal, aprender expressões e phrasal verbs, ver séries com legenda em inglês.'},
+    B2:{nome:'Intermediário avançado',h:'≈ 500 a 600 horas',cor:'#22c55e',res:'Você conversa com fluência e naturalidade, sem esforço pra você nem pra quem fala com você.',faz:[['🗣️','Falar','Debater assuntos variados, defender seu ponto de vista e explicar vantagens e desvantagens.'],['👂','Ouvir','Entender a maior parte de séries, filmes, palestras e reuniões, mesmo com sotaques diferentes.'],['📖','Ler','Ler artigos, relatórios e livros fáceis sem depender de tradução.'],['✍️','Escrever','Textos claros e detalhados: e-mails profissionais, relatórios e redações.'],['🌍','Na vida real','Fazer entrevista de emprego, participar de reuniões, estudar ou trabalhar em inglês.']],naoV:['Usar expressões idiomáticas raras com segurança','Captar ironia e sutilezas','Ler textos acadêmicos muito densos sem esforço'],prox:'Vocabulário avançado por tema, escrita mais elaborada, nuances e registro formal e informal. Muito inglês real: podcasts, filmes e conversas.'},
+    C1:{nome:'Avançado',h:'≈ 700 a 800 horas',cor:'#3b82f6',res:'Você usa o inglês com flexibilidade e eficiência no trabalho, nos estudos e na vida social.',faz:[['🗣️','Falar','Se expressar de forma espontânea, quase sem procurar palavras. Apresentar e negociar com confiança.'],['👂','Ouvir','Entender falas longas, mesmo quando não são bem organizadas, e captar o que está implícito.'],['📖','Ler','Textos longos e exigentes, técnicos ou literários, percebendo estilo e intenção.'],['✍️','Escrever','Textos bem estruturados e detalhados sobre temas complexos, com o tom certo.'],['🌍','Na vida real','Trabalhar, estudar e liderar em inglês. Lidar com humor, gírias e linguagem indireta.']],naoV:['Ter a precisão de um nativo culto em qualquer assunto','Dominar todas as sutilezas culturais'],prox:'Refinar precisão, estilo e naturalidade. Ler e ouvir material sem adaptação e escrever de forma profissional.'},
+    C2:{nome:'Proficiente',h:'≈ 1.000 horas ou mais',cor:'#8b5cf6',res:'Você domina o idioma com precisão, como um nativo culto, em qualquer situação.',faz:[['🗣️','Falar','Se expressar com fluidez e precisão, diferenciando nuances finas de significado, mesmo em temas complexos.'],['👂','Ouvir','Entender praticamente tudo, ao vivo ou gravado, em qualquer velocidade.'],['📖','Ler','Ler qualquer texto, inclusive abstrato, técnico ou literário, com facilidade.'],['✍️','Escrever','Escrever textos claros, elegantes e bem argumentados, resumindo fontes diferentes.'],['🌍','Na vida real','Atuar em qualquer contexto profissional ou acadêmico, no mesmo nível de um falante nativo educado.']],naoV:['Nada que impeça: aqui é manter e refinar'],prox:'Manter o contato diário com o idioma, ensinar, escrever e aprofundar áreas específicas.'}
+  };
+  function nvModal(n){
+    n=NV_DET[n]?n:'A1';var o=$('nv-ov');if(!o){o=document.createElement('div');o.id='nv-ov';o.className='nv-ov';document.body.appendChild(o);o.addEventListener('click',function(e){if(e.target===o||e.target.closest('[data-nv-x]'))o.classList.remove('on');var t=e.target.closest('[data-nvt]');if(t)nvModal(t.dataset.nvt);});}
+    var d=NV_DET[n],lv=ST.nivel;
+    o.innerHTML='<div class="nv-fo" style="--c:'+d.cor+'"><button class="nv-x" data-nv-x aria-label="Fechar">✕</button><div class="nv-top">Os níveis do inglês</div>'
+      +'<div class="nv-tabs">'+NIVEIS.map(function(k){return '<button data-nvt="'+k+'" class="'+(k===n?'on':'')+'" style="--c:'+NV_DET[k].cor+'">'+k+(k===lv?' ★':'')+'</button>';}).join('')+'</div>'
+      +'<div class="nv-hero"><div class="nv-big">'+n+'</div><div><b>'+E(d.nome)+'</b><span>'+E(d.h)+' (estimativa)</span></div></div><p class="nv-res">'+E(d.res)+'</p>'
+      +'<div class="nv-sec">O que você consegue fazer</div>'+d.faz.map(function(x){return '<div class="nv-it"><div class="nv-e"></div><div><b>'+x[1]+'</b><span>'+E(x[2])+'</span></div></div>';}).join('')
+      +'<div class="nv-sec nv-no">Ainda é difícil</div><ul class="nv-ul">'+d.naoV.map(function(x){return '<li>'+E(x)+'</li>';}).join('')+'</ul>'
+      +'<div class="nv-sec nv-go">Pra chegar no próximo nível</div><p class="nv-res">'+E(d.prox)+'</p>'
+      +(lv===n?'<div class="nv-eu">★ Esse é o seu nível hoje</div>':'')+'<p class="nv-foot">As horas são uma média de referência internacional (CEFR). Cada pessoa avança num ritmo. Estudar um pouco todo dia vale mais do que muito de vez em quando.</p></div>';
+    o.classList.add('on');
+  }
+  document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-nv]');if(b)nvModal(b.dataset.nv);});
   function renderBussola(){
     var p=$('pane-bussola');if(!p)return;var lv=ST.nivel,info=lv&&window.LEVEL_INFO?LEVEL_INFO[lv]:null;
     p.innerHTML='<div style="font-size:21px;font-weight:800;margin-bottom:16px">Bússola CEFR</div>'
       +'<div class="intel-banner"><div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:56px;height:56px;border-radius:16px;background:'+(info?info.bg:'var(--surface2)')+';display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:'+(info?'#fff':'var(--fg3)')+';flex-shrink:0">'+(lv||'?')+'</div>'
       +'<div><div style="font-size:16px;font-weight:800">'+(info?E(info.title):'Você ainda não fez o teste de nível')+'</div><div style="font-size:12px;color:var(--fg2);margin-top:2px">Bússola CEFR · do A1 ao C2</div></div></div>'
       +'<div style="font-size:12.5px;color:var(--fg2);line-height:1.7;margin-bottom:14px">'+(info?E(info.desc):'O teste se adapta às suas respostas e mostra onde você está. Leva uns 10 minutos. No fim, é só marcar aqui o nível que apareceu.')+'</div>'
-      +'<button class="set-btn set-btn-primary" style="margin:0" data-dg="bussola">'+(lv?'🔁 Refazer o teste de nível':IC('bussola')+' Fazer o teste de nível')+'</button></div>'
-      +'<div class="card" style="margin:16px 0"><div class="sec-hd" style="margin-bottom:10px">🎯 '+(lv?'Seu nível':'Já sabe seu nível? Marque aqui')+'</div><div style="display:flex;flex-wrap:wrap;gap:8px">'
+      +'<button class="set-btn set-btn-primary" style="margin:0" data-dg="bussola">'+(lv?IC('refazer')+' Refazer o teste de nível':IC('bussola')+' Fazer o teste de nível')+'</button> <button class="set-btn set-btn-ghost nv-open" style="margin:8px 0 0" data-nv="'+(lv||'A1')+'">'+IC('materiais')+' Entender cada nível em detalhe</button></div>'
+      +'<div class="card" style="margin:16px 0"><div class="sec-hd" style="margin-bottom:10px;display:flex;align-items:center;gap:8px">'+IC('alvo')+' '+(lv?'Seu nível':'Já sabe seu nível? Marque aqui')+'</div><div style="display:flex;flex-wrap:wrap;gap:8px">'
       +NIVEIS.map(function(n){return '<button class="gf-btn'+(n===lv?' active':'')+'" onclick="setManualLevel(\''+n+'\')">'+n+'</button>';}).join('')+'</div></div>'
-      +'<div class="sec-hd">O que cada nível consegue fazer</div><div class="card">'+NIVEIS.map(function(n){return '<div style="display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--border)'+(n===lv?';font-weight:700':'')+'"><span class="level-tag" style="flex-shrink:0;'+(n===lv?'':'background:var(--surface2);color:var(--fg2)')+'">'+n+'</span><span style="font-size:12.5px;line-height:1.5;color:'+(n===lv?'var(--fg)':'var(--fg2)')+'">'+E(NIVEL_CAN[n])+'</span></div>';}).join('')+'</div>';
+      +'<div class="sec-hd" style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">O que cada nível consegue fazer <button class="set-btn set-btn-ghost nv-open" style="margin:0;padding:6px 12px;font-size:12px" data-nv="'+(lv||'A1')+'">Ver explicação completa</button></div><div class="card">'+NIVEIS.map(function(n){return '<div style="display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--border)'+(n===lv?';font-weight:700':'')+'"><span class="level-tag" style="flex-shrink:0;'+(n===lv?'':'background:var(--surface2);color:var(--fg2)')+'">'+n+'</span><span style="font-size:12.5px;line-height:1.5;color:'+(n===lv?'var(--fg)':'var(--fg2)')+'">'+E(NIVEL_CAN[n])+'</span></div>';}).join('')+'</div>';
   }
-  function renderPrisma(){
+  function renderPrisma(){renderPrisma0();barrasPrisma();if(window.EBG_PRISMA)window.EBG_PRISMA.render($('pane-prisma'),ST);}
+  function barrasPrisma(){
+    var p=$('pane-prisma'),R=ST.prismaRes;if(!p||!R||!R.todas||!R.todas.length)return;
+    var cor={linguistica:'#E6B964',logica:'#5EC5B6',espacial:'#C97BA0',musical:'#7FA6E8',corporal:'#E8875E',interpessoal:'#6FBF73',intrapessoal:'#A98CE0',naturalista:'#8FBF6A',existencial:'#D96C6C'};
+    var mx=Math.max.apply(null,R.todas.map(function(x){return x.v;}))||1;
+    var box=document.createElement('div');box.className='intel-banner';box.style.marginTop='14px';
+    box.innerHTML='<div style="font-size:14px;font-weight:800;margin-bottom:12px">Seu mapa de inteligências</div>'
+      +R.todas.map(function(x,n){var c=cor[x.k]||'#8b5cf6';return '<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12.5px;font-weight:700;margin-bottom:4px"><span>'+(n<3?'<b style="color:var(--fg3);margin-right:4px">'+(n+1)+'º</b>':'')+E(x.nome)+'</span><span style="color:'+c+'">'+x.v+'%</span></div><div style="height:9px;border-radius:99px;background:var(--surface2);overflow:hidden"><i data-pw="'+x.v+'" style="display:block;height:100%;width:0;background:'+c+';border-radius:99px;transition:width 1.2s cubic-bezier(.22,1,.36,1) '+(n*.08)+'s"></i></div></div>';}).join('')
+      +(R.taticas&&R.taticas.length?'<div style="font-size:13px;font-weight:800;margin:14px 0 6px">Faça a partir de hoje</div><ul style="margin:0;padding-left:18px;font-size:12.5px;line-height:1.7;color:var(--fg2)">'+R.taticas.map(function(t){return '<li>'+E(t)+'</li>';}).join('')+'</ul>':'')
+      +(R.armadilha?'<div style="font-size:12.5px;margin-top:10px;padding:10px 12px;border-radius:12px;background:rgba(239,68,68,.08)"><b>⚠️ Cuidado:</b> '+E(R.armadilha)+'</div>':'');
+    var ban=p.querySelector('.intel-banner');if(ban)ban.insertAdjacentElement('afterend',box);else p.appendChild(box);
+    setTimeout(function(){[].forEach.call(box.querySelectorAll('[data-pw]'),function(el){el.style.width=el.dataset.pw+'%';});},60);
+  }
+  function renderPrisma0(){
     var p=$('pane-prisma');if(!p)return;var k=ST.prisma,it=k&&INTEL[k];
     p.innerHTML='<div style="font-size:21px;font-weight:800;margin-bottom:16px">Prisma de Talentos</div>'
-      +'<div class="intel-banner"><div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:56px;height:56px;border-radius:16px;background:'+(it?'linear-gradient(135deg,#8b5cf6,#ec4899)':'var(--surface2)')+';display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0">'+(it?it.ic:'🔷')+'</div>'
+      +'<div class="intel-banner"><div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:56px;height:56px;border-radius:16px;background:'+(it?'linear-gradient(135deg,#8b5cf6,#ec4899)':'var(--surface2)')+';display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0">'+(it?IC('i-'+k):IC('prisma'))+'</div>'
       +'<div><div style="font-size:16px;font-weight:800">'+(it?'Inteligência '+E(it.nome):'Descubra como você aprende melhor')+'</div><div style="font-size:12px;color:var(--fg2);margin-top:2px">'+(it?'Sua inteligência mais forte · Howard Gardner':'Teste das Inteligências Múltiplas · Howard Gardner')+'</div></div></div>'
       +'<div style="font-size:12.5px;color:var(--fg2);line-height:1.7;margin-bottom:14px">'+(it?E(it.desc):'O teste mostra quais das suas inteligências mais aparecem quando você aprende. Com isso, o seu estudo fica do seu jeito. No fim, é só marcar aqui a que deu mais forte.')+'</div>'
-      +'<button class="set-btn set-btn-primary" style="margin:0" data-dg="prisma">'+(it?'🔁 Refazer o Prisma':IC('prisma')+' Fazer o Prisma')+'</button></div>'
+      +'<button class="set-btn set-btn-primary" style="margin:0" data-dg="prisma">'+(it?IC('refazer')+' Refazer o Prisma':IC('prisma')+' Fazer o Prisma')+'</button></div>'
       +(it?'<div class="card" style="margin-top:16px"><div style="font-size:12px;font-weight:800;margin-bottom:10px">Estratégias pra você</div><div style="font-size:12.5px;color:var(--fg2);line-height:1.9">'+it.est.map(function(x){return '• '+E(x);}).join('<br>')+'</div></div>':'')
       +'<div class="card" style="margin:16px 0"><div class="sec-hd" style="margin-bottom:10px">'+(it?'Mudou o resultado? Marque a sua':'Qual deu como sua inteligência mais forte?')+'</div><div style="display:flex;flex-wrap:wrap;gap:8px">'
-      +Object.keys(INTEL).map(function(x){return '<button class="gf-btn'+(x===k?' active':'')+'" data-dg-int="'+x+'">'+INTEL[x].ic+' '+E(INTEL[x].nome)+'</button>';}).join('')+'</div></div>';
+      +Object.keys(INTEL).map(function(x){return '<button class="gf-btn'+(x===k?' active':'')+'" data-dg-int="'+x+'">'+IC('i-'+x)+' '+E(INTEL[x].nome)+'</button>';}).join('')+'</div></div>';
   }
   // o teste roda dentro do app
   var tq=document.createElement('div');tq.id='mi-teste';document.body.appendChild(tq);
@@ -1550,12 +1800,24 @@
   function abrirTeste(qual){
     var b=qual==='bussola';
     tq.innerHTML='<div class="tt"><button class="tb-btn" data-dg="fechar">✕</button><b>'+(b?IC('bussola')+' Teste de nível':IC('prisma')+' Prisma de Talentos')+'</b><a class="tb-btn" style="text-decoration:none" href="'+(b?URL_BUSSOLA:URL_PRISMA)+'" target="_blank" rel="noopener">Abrir fora ↗</a></div>'
-      +'<iframe src="'+(b?URL_BUSSOLA:URL_PRISMA)+'" title="'+(b?'Teste de nível':'Prisma de Talentos')+'" allow="autoplay; microphone"></iframe>'
-      +'<div class="fim"><div class="q">Terminou? Toque no resultado que apareceu:</div><div class="ch">'
-      +(b?NIVEIS.map(function(n){return '<button class="gf-btn" data-dg-fim="'+n+'">'+n+'</button>';}).join(''):Object.keys(INTEL).map(function(x){return '<button class="gf-btn" data-dg-fim="'+x+'">'+INTEL[x].ic+' '+E(INTEL[x].nome)+'</button>';}).join(''))
+      +'<iframe src="'+(b?URL_BUSSOLA:URL_PRISMA)+'&nome='+encodeURIComponent(((U&&U.user_metadata)||{}).full_name||'')+'" title="'+(b?'Teste de nível':'Prisma de Talentos')+'" allow="autoplay; microphone"></iframe>'
+      +'<div class="fim" hidden><div class="q">Terminou? Toque no resultado que apareceu:</div><div class="ch">'
+      +(b?NIVEIS.map(function(n){return '<button class="gf-btn" data-dg-fim="'+n+'">'+n+'</button>';}).join(''):Object.keys(INTEL).map(function(x){return '<button class="gf-btn" data-dg-fim="'+x+'">'+IC('i-'+x)+' '+E(INTEL[x].nome)+'</button>';}).join(''))
       +'</div></div>';
     tq.dataset.qual=qual;tq.classList.add('on');document.body.style.overflow='hidden';
   }
+  // o Prisma avisa sozinho o resultado (prisma.html?membro=1): salva e mostra o retorno, sem a pessoa precisar marcar
+  window.addEventListener('message',function(e){
+    var d=e.data||{};if(e.origin!==location.origin||!tq.classList.contains('on'))return;
+    if(d.tipo==='prisma-resultado'&&INTEL[d.k]){
+      ST.prismaRes={k:d.k,top:(d.top||[]).slice(0,3),todas:(d.todas||[]).slice(0,9),canal:d.canal||null,taticas:(d.taticas||[]).slice(0,5),aprende:d.aprende||'',armadilha:d.armadilha||'',despertar:d.despertar||'',em:new Date().toISOString()};
+      setPrisma(d.k);
+      // o checklist do dia se refaz já com a tarefa do seu jeito
+      try{var lb=(LS.get('mi_ctx',{})||{}).k;if(lb&&window.renderMarTasks)window.renderMarTasks(lb);}catch(x){}
+    }
+    if(d.tipo==='bussola-resultado'&&NIVEIS.indexOf(d.nivel)>=0){window.setManualLevel(d.nivel);}
+    if(d.tipo==='prisma-fechar'||d.tipo==='bussola-fechar'){fecharTeste();if(d.ir){setTimeout(function(){var pl=document.querySelector('.sidebar .nav-pill[onclick*="\''+d.ir+'\'"]');goTo(d.ir,pl);},350);}}
+  });
   function fecharTeste(){tq.classList.remove('on');tq.innerHTML='';document.body.style.overflow='';if(window._aposTeste){var f=window._aposTeste;window._aposTeste=null;setTimeout(f,250);}}
   document.addEventListener('click',function(e){
     var b=e.target.closest('[data-dg]');
@@ -1627,6 +1889,8 @@
     menus.forEach(function(m){p.push({k:m.k,t:m.lb,d:tourTexto(m.k,m.lb),el:m.el,menu:true,kick:'Menu'});});
     return p;
   }
+  // usados pela largada da maratona (membros-maratonas.js)
+  window.miTour=function(m){tour(m||'todos');};window.miConhecer=function(cb){conhecer(cb);};
   function tour(modo){
     var p=passosTour(modo);if(!p.length)return;
     T={p:p,i:0,modo:modo};tv.classList.add('on');
@@ -1793,7 +2057,7 @@
       var esc=OB_TRAVAS.filter(function(o){return r.travas.indexOf(o.k)>=0;});
       h='<div class="k">Respira</div><h2>Não é falta de capacidade. É o jeito que te ensinaram.</h2>'
         +'<div class="card">'+esc.map(function(o){return '<div class="causa"><span style="font-size:20px">'+o.ic+'</span><div><b>'+E(o.t)+'</b>'+E(o.c)+'</div></div>';}).join('')+'</div>'
-        +'<div class="card" style="text-align:center"><div class="portas">'+Object.keys(INTEL).map(function(k,i){return '<span style="animation-delay:'+(i*0.06)+'s">'+INTEL[k].ic+'</span>';}).join('')+'</div>'
+        +'<div class="card" style="text-align:center"><div class="portas">'+Object.keys(INTEL).map(function(k,i){return '<span style="animation-delay:'+(i*0.06)+'s">'+IC('i-'+k)+'</span>';}).join('')+'</div>'
         +'<div style="font-weight:800;margin:10px 0 4px">Cada pessoa aprende por uma porta diferente</div><div class="leg" style="margin:0">Uns pela música, outros pelas imagens, pela conversa, pela lógica… A maioria dos cursos usa uma porta só. Daqui a pouco eu te mostro como descobrir a sua.</div></div>'
         +obBtn('Faz sentido →','data-ob="prox"');
     }else if(passo==='gostos'){
@@ -1835,13 +2099,13 @@
         +'<div class="card teste"><span class="ic">'+IC('prisma')+'</span><div><b>Prisma de Talentos</b><div class="leg" style="margin:2px 0 0">Descobre por qual porta o inglês entra em você.</div></div><span class="min">± '+MIN_PRISMA+' min</span></div>'
         +'<div class="card teste"><span class="ic">'+IC('bussola')+'</span><div><b>Bússola</b><div class="leg" style="margin:2px 0 0">Mostra seu nível real, do A1 ao C2.</div></div><span class="min">± '+MIN_BUSSOLA+' min</span></div>'
         +'<p class="leg">Ao todo, uns '+(MIN_PRISMA+MIN_BUSSOLA)+' minutos. Faça num lugar tranquilo, com fone.</p>'
-        +obBtn('Fazer os 2 testes agora →','data-ob="t-agora"')
+        +obBtn('Fazer os 2 testes agora →','data-ob="t-agora"')+'<button class="cta2" data-ob="t-prisma">Fazer só o Prisma agora</button>'
         +'<button class="cta2" data-ob="t-manual">Já sei meu nível e meu jeito: escolher manualmente</button>'
         +'<button class="cta2" data-ob="t-depois">Deixar pra depois</button>';
     }else if(passo==='manual'){
       h='<div class="k">Escolha manual</div><h2>Me conta onde você está</h2><p class="s">Se depois quiser confirmar, os testes ficam no menu Perfil.</p>'
         +'<label class="lb">Seu nível</label><div class="chips" style="margin-bottom:18px">'+NIVEIS.map(function(n){return '<button class="chip'+(r.mNivel===n?' on':'')+'" data-ob-mn="'+n+'">'+n+'</button>';}).join('')+'</div>'
-        +'<label class="lb">Seu jeito de aprender</label><div class="chips">'+Object.keys(INTEL).map(function(k){return '<button class="chip'+(r.mIntel===k?' on':'')+'" data-ob-mi="'+k+'">'+INTEL[k].ic+' '+E(INTEL[k].nome)+'</button>';}).join('')+'</div>'
+        +'<label class="lb">Seu jeito de aprender</label><div class="chips">'+Object.keys(INTEL).map(function(k){return '<button class="chip'+(r.mIntel===k?' on':'')+'" data-ob-mi="'+k+'">'+IC('i-'+k)+' '+E(INTEL[k].nome)+'</button>';}).join('')+'</div>'
         +obBtn('Salvar e continuar →','data-ob="m-ok"',!(r.mNivel&&r.mIntel));
     }else if(passo==='fim'){
       var tAg=OB.testes==='agora',tDep=OB.testes==='depois';
@@ -1872,7 +2136,7 @@
     obEl.classList.remove('vis');
     setTimeout(function(){
       obEl.classList.remove('on');obEl.innerHTML='';document.body.style.overflow='';OB=null;
-      var fila=testes==='agora'?['prisma','bussola']:[],fim=obFim;
+      var fila=testes==='agora'?['prisma','bussola']:testes==='prisma'?['prisma']:[],fim=obFim;
       (function prox(){if(fila.length){window._aposTeste=prox;abrirTeste(fila.shift());}else fim();})();
     },330);
   }
@@ -1889,6 +2153,7 @@
     }
     if(a==='mar'){var q=$('ob-marq');if(q)r.maratonaQual=q.value.trim();return obAvancar();}
     if(a==='t-agora'){OB.testes='agora';return obIr('fim');}
+    if(a==='t-prisma'){OB.testes='prisma';return obIr('fim');}
     if(a==='t-depois'){OB.testes='depois';return obIr('fim');}
     if(a==='t-manual'){OB.testes='manual';return obIr('manual');}
     if(a==='m-ok'){ST.nivel=r.mNivel;ST.prisma=r.mIntel;try{localStorage.setItem('userLevel',r.mNivel);}catch(x){}salvar();pintarPerfil();return obIr('fim');}
@@ -1902,12 +2167,12 @@
   });
 
   /* ───────────────────────── PORTÃO: checklist e aulas só depois do diagnóstico ───────────────────────── */
-  function faltaDiagnostico(){return !souAdmin()&&ehPrograma()&&!(ST.nivel&&ST.prisma);}
+  function faltaDiagnostico(){return !souAdmin()&&ehPrograma()&&!(ST.nivel||ST.prisma);}
   function portao(oque){
     var ov=$('pw-ov');if(!ov)return;
     var feitoN=!!ST.nivel,feitoP=!!ST.prisma;
     ov.innerHTML='<div class="pw" style="text-align:left"><div style="text-align:center">'+IC('bussola','xl')+'</div><h3 style="text-align:center">Falta pouco pra liberar '+E(oque)+'</h3>'
-      +'<p style="text-align:center">O checklist e as aulas são montados a partir do seu nível e do seu jeito de aprender.</p>'
+      +'<p style="text-align:center">Faça <b>um dos dois</b> testes (ou os dois): o checklist e as aulas se montam a partir do resultado.</p>'
       +'<div class="mi-gate-it'+(feitoP?' ok':'')+'"><span>'+IC('prisma')+'</span><div><b>Prisma de Talentos</b><small>'+(feitoP?'Feito: '+E(INTEL[ST.prisma].nome):'± '+MIN_PRISMA+' minutos')+'</small></div>'+(feitoP?'<i>✓</i>':'<button data-gate="prisma">Fazer</button>')+'</div>'
       +'<div class="mi-gate-it'+(feitoN?' ok':'')+'"><span>'+IC('bussola')+'</span><div><b>Bússola de nível</b><small>'+(feitoN?'Feito: '+E(ST.nivel):'± '+MIN_BUSSOLA+' minutos')+'</small></div>'+(feitoN?'<i>✓</i>':'<button data-gate="bussola">Fazer</button>')+'</div>'
       +'<button class="nao" data-gate="manual" style="display:block;width:100%;margin-top:14px;font-weight:700;color:var(--accent)">Já sei: escolher manualmente</button>'
@@ -2062,29 +2327,54 @@
     var c=(CARDS||[]).filter(function(x){return x.id===id;})[0];if(!c)return;
     if(!temAcesso(c)){irCheckout(checkoutDe(c),'"'+c.titulo+'"');return;}
     if(c.acao==='material'){var mt=(AS().mats||[]).filter(function(x){return x.id===c.valor;})[0];if(mt)return abrirMaterial(mt);toast('Material ainda não ligado a esse card');return;}
+    if(c.acao==='playlist'){if(window.EBG_PLAYLIST)window.EBG_PLAYLIST.abrir(c);return;}
     if(ehDevocional(c))return folhaDevocional();
     return abrirCardOrig(id,uni);
   };
 
   /* ── materiais: grade com capa, seção, preço e cadeado ── */
   function matLivre(m){var S=AS();return !S.ok||souAdmin()||!!S.programa||m.tipo==='gratis'||(m.tipo==='produto'&&temProduto(m.produto));}
+  /* capas originais (vertical) e página de venda de cada e-book conhecido; vale pelo trecho do nome */
+  var EBK=[
+    {r:/pron[uú]nc|destrave/i,img:'img/capa-ebook-pronuncia.webp',url:'https://pay.kiwify.com.br/ODOhEzc'},
+    {r:/passaporte|viagem|viagens/i,img:'img/capa-viagens.webp',url:'https://ebookviagens.netlify.app/'},
+    {r:/guia a1|a1 at[eé] b2/i,img:'img/capa-guia.webp',url:'https://guia-a1-b2.netlify.app/'},
+    {r:/kit frases|frases/i,img:'img/capa-frases.webp',url:''},
+    {r:/10 jogos|jogos para aprender/i,img:'img/capa-ebook-jogos.webp',url:''},
+    {r:/central de prompts|prompts/i,img:'img/capa-prompts.webp',url:''}
+  ];
+  function ebkDe(m){var n=(m.nome||'')+' '+(m.produto||'');return EBK.filter(function(x){return x.r.test(n);})[0]||null;}
+  function capaEbook(m){var e=window.EBG_EBOOKS&&EBG_EBOOKS.deMaterial(m);if(e&&e.img)return e.img;var k=ebkDe(m);return k?k.img:'';}
   var renderMatOrig=window.renderMat;
+  (function(){var c=document.createElement('style');c.textContent='.mat-chips{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 18px}.mat-chips .gf-btn small{opacity:.7;font-weight:800;margin-left:2px}@media(max-width:700px){.mat-chips{flex-wrap:nowrap;overflow-x:auto;margin-right:-16px;padding-right:16px;padding-bottom:4px}.mat-chips .gf-btn{flex:none}}';document.head.appendChild(c);
+    document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-mf]');if(!b)return;window._matF=b.dataset.mf;window.renderMat();});})();
   window.renderMat=function(){
     var g=$('mat-grid'),S=AS();if(!g)return;
     var tabs=document.querySelector('#pane-materiais .mat-tabs');if(tabs)tabs.style.display='none';
     g.className='';
     if(!S.pronto){g.innerHTML='<div class="admin-loading">Carregando…</div>';return;}
     var lista=(S.mats||[]).filter(function(m){return m.ativo!==false||EDIT;});
+    var EBx=window.EBG_EBOOKS;
+    if(EBx&&!EDIT)lista=lista.filter(function(m){var c=EBx.deMaterial(m);if(!c||!c.bonusDe)return true;return !lista.some(function(o){var z=EBx.deMaterial(o);return z&&z.k===c.bonusDe;});});
     var secs=[],por={};lista.forEach(function(m){var s=m.secao||'Materiais';if(!por[s]){por[s]=[];secs.push(s);}por[s].push(m);});
     var n=0,h='';
-    secs.forEach(function(s){h+='<div class="uni-sec">'+E(s)+'</div><div class="uni-grid">'+por[s].map(function(m){
-      var ok=matLivre(m),tag=m.tipo==='gratis'?'Grátis':ok?'✓ Seu':m.tipo==='programa'?'🔒 Programa':(m.preco||'🔒');
-      var fr=m.tipo==='gratis';
+    var F=window._matF||'todos';if(F!=='todos'&&F!=='gratis'&&F!=='meus'&&secs.indexOf(F)<0)F=window._matF='todos';
+    var qtd={todos:lista.length,gratis:lista.filter(function(m){return m.tipo==='gratis';}).length,meus:lista.filter(function(m){return matLivre(m)&&m.tipo!=='gratis';}).length};
+    var chips=[['todos','Todos',qtd.todos]];
+    secs.forEach(function(x){chips.push([x,x,por[x].length]);});
+    if(qtd.gratis)chips.push(['gratis','Grátis',qtd.gratis]);
+    if(qtd.meus)chips.push(['meus','Meus',qtd.meus]);
+    h+='<div class="mat-chips">'+chips.map(function(c){return '<button class="gf-btn'+(c[0]===F?' active':'')+'" data-mf="'+E(c[0])+'">'+E(c[1])+' <small>'+c[2]+'</small></button>';}).join('')+'</div>';
+    var vis=lista.filter(function(m){return F==='todos'||(F==='gratis'?m.tipo==='gratis':F==='meus'?(matLivre(m)&&m.tipo!=='gratis'):(m.secao||'Materiais')===F);});
+    h+='<div class="uni-grid mat-v">'+vis.map(function(m){
+      var ok=matLivre(m),tag=m.tipo==='gratis'?'Grátis':ok?'✓ Seu':m.tipo==='programa'?'🔒 Programa':(m.preco||'🔒 Pago');
+      var fr=m.tipo==='gratis',cv=capaEbook(m);
       return '<div class="uni-card'+(ok?'':' lock')+(fr?' free':'')+(m.ativo===false?' mi-off':'')+'" data-mat="'+m.id+'">'+edCtl('mat',m.id)
-        +'<div class="th">'+(m.capa_url?'<img loading="lazy" alt="" src="'+E(m.capa_url)+'">':capaAuto(m.nome,n))+'<span class="tg'+(fr?' free':'')+'">'+(fr?'✓ ':'')+E(tag)+'</span></div>'
-        +'<div class="bd"><div class="tt">'+E((m.icone?m.icone+' ':'')+m.nome)+'</div><div class="ss">'+E(m.descricao||'')+'</div><div class="ac">'+(ok?'Acessar ›':'Adquirir ›')+'</div></div></div>';n++;}).join('')
-      +(EDIT?'<button class="mi-novo" data-ed="mat-novo" data-sec="'+E(s)+'">＋ Novo material</button>':'')+'</div>';});
+        +'<div class="th">'+(cv?'<img loading="lazy" alt="" src="'+E(cv)+'">':(m.capa_url?'<img loading="lazy" alt="" src="'+E(m.capa_url)+'">':capaAuto(m.nome,n)))+'<span class="tg'+(fr?' free':ok?' own':'')+'">'+(fr?'✓ ':'')+E(tag)+'</span>'+(ok?'':'<span class="mv-lk">🔒</span>')+'</div>'
+        +'<div class="bd"><div class="tt">'+E(m.nome)+'</div><div class="ss" style="font-size:11.5px">'+(EBx&&(EBx.deMaterial(m)||{}).bonus?'📘 E-book + 📄 caderno pra imprimir':'')+'</div><div class="ac">'+(ok?(fr?'Abrir ›':'Ler agora ›'):(m.tipo==='programa'?'Ver o Programa ›':'Conhecer ›'))+'</div></div></div>';n++;}).join('')
+      +(EDIT?'<button class="mi-novo" data-ed="mat-novo" data-sec="'+E(secs.indexOf(F)>=0?F:(secs[0]||'E-books'))+'">＋ Novo material</button>':'')+'</div>';
     if(!lista.length)h='<div class="admin-loading">Nenhum material ainda.</div>'+(EDIT?'<div class="uni-grid"><button class="mi-novo" data-ed="mat-novo">＋ Novo material</button></div>':'');
+    if(EDIT)h='<div style="margin-bottom:14px"><label class="admin-btn admin-btn-ghost admin-btn-sm" style="cursor:pointer;display:inline-block">📥 Importar vários PDFs de uma vez<input type="file" id="mm-lote" accept="application/pdf" multiple style="display:none"></label></div>'+h;
     g.innerHTML=h;
   };
   document.addEventListener('click',async function(e){
@@ -2093,17 +2383,52 @@
     if(EDIT){abrirMat(m);return;}
     abrirMaterial(m);
   },true);
+  document.addEventListener('click',function(e){
+    var ab=e.target.closest('[data-ob-abrir]'),up=e.target.closest('[data-ob-up]'),EB=window.EBG_EBOOKS;if(!EB||(!ab&&!up))return;
+    if(ab){var c=EB.por(ab.dataset.obAbrir),mt=(AS().mats||[]).filter(function(y){var z=EB.deMaterial(y);return z&&c&&z.k===c.k;})[0];var ov=$('pw-ov');if(ov)ov.classList.remove('open');if(mt)abrirMaterial(mt);else toast('Esse arquivo ainda não foi enviado. Avise o Gediel 🙏');return;}
+    var x=EB.por(up.dataset.obUp);if(!x)return;
+    if(x.virtual){var ov2=$('pw-ov');if(ov2)ov2.classList.remove('open');go('planos');return;}
+    var mt2=(AS().mats||[]).filter(function(y){var z=EB.deMaterial(y);return z&&z.k===x.k;})[0];
+    if(mt2){var ov3=$('pw-ov');if(ov3)ov3.classList.remove('open');abrirMaterial(mt2);return;}
+    if(x.url){window.open(x.url,'_blank','noopener');return;}
+    wa('Oi Gediel! Quero saber mais sobre "'+x.nome+'".');
+  });
+  /* admin: escolhe vários PDFs de uma vez; cada um é reconhecido pelo nome do arquivo, cria o material se não existir e envia o PDF */
+  async function importarPdfs(files){
+    var EB=window.EBG_EBOOKS,rel=[];if(!EB)return;
+    /* nomes de produto que o Kiwify já mandou (tabela compras): o importador usa o nome real quando existe */
+    var nomesK=[];try{var rc=await window._sb.from('compras').select('produto');nomesK=Array.from(new Set((rc.data||[]).map(function(x){return x.produto;}).filter(Boolean)));}catch(e){}
+    var prodDe=function(c){var base=c.bonusDe?EB.por(c.bonusDe):c;var re=base.nome_re;var real=nomesK.filter(function(n){return re.test(n);})[0];return real||base.nome;};
+    for(var i=0;i<files.length;i++){
+      var f=files[i],c=EB.deArquivo(f.name);
+      if(!c){rel.push('❓ '+f.name+': não reconheci');continue;}
+      toast('⏳ '+(i+1)+'/'+files.length+' · '+c.nome);
+      try{
+        var mt=(AS().mats||[]).filter(function(y){return c.nome_re.test((y.nome||'')+' '+(y.produto||''));})[0],id=mt&&mt.id,pr=c.tipo==='gratis'?'':prodDe(c);
+        if(!id){var ins=await window._sb.from('materiais').insert({nome:c.nome,descricao:c.desc,icone:'📘',secao:'E-books',tipo:c.tipo==='gratis'?'gratis':'produto',produto:pr,checkout:c.url||'',ativo:true,ordem:(AS().mats||[]).length+1+i}).select().single();if(ins.error)throw ins.error;id=ins.data.id;}
+        else if(pr&&mt.tipo==='produto'&&!mt.produto){await window._sb.from('materiais').update({produto:pr}).eq('id',id);}
+        var pth='materiais/'+id+'.pdf',up=await window._sb.storage.from('ebooks').upload(pth,f,{upsert:true,contentType:'application/pdf'});if(up.error)throw up.error;
+        var u2=await window._sb.from('materiais').update({arquivo:pth}).eq('id',id);if(u2.error)throw u2.error;
+        rel.push('✅ '+c.nome+(pr?' · libera pra quem comprou "'+pr+'"':'')+(c.bonusDe?' (bônus de '+EB.por(c.bonusDe).nome+')':''));
+      }catch(err){rel.push('⚠️ '+f.name+': '+(err.message||err));}
+    }
+    await recarregarAcesso();alert(rel.join('\n'));
+  }
+  document.addEventListener('change',function(e){if(e.target&&e.target.id==='mm-lote'){importarPdfs([].slice.call(e.target.files));e.target.value='';}});
   /* abre o material: sem acesso → checkout; PDF guardado → ver ou baixar (link temporário); senão → link do conteúdo */
   async function abrirMaterial(m){
-    if(!matLivre(m)){irCheckout(m.tipo==='programa'?(AS().cfg||{}).checkout:(m.checkout||(AS().cfg||{}).checkout),'"'+m.nome+'"');return;}
+    if(!matLivre(m)){
+      var kb=ebkDe(m),land=m.tipo==='programa'?'':(m.checkout||(kb&&kb.url)||'');
+      if(land&&m.tipo!=='programa'){window.open(land,'_blank','noopener');return;}
+      irCheckout(m.tipo==='programa'?(AS().cfg||{}).checkout:(m.checkout||(AS().cfg||{}).checkout),'"'+m.nome+'"');return;}
     if(m.arquivo){
       var v=await window._sb.storage.from('ebooks').createSignedUrl(m.arquivo,3600),d=await window._sb.storage.from('ebooks').createSignedUrl(m.arquivo,3600,{download:(m.nome||'ebook').replace(/[^\wÀ-ÿ -]/g,'').trim()+'.pdf'});
       if(v.error||!v.data){toast('Não consegui abrir o PDF agora. Tenta de novo ou avise o Gediel 🙏','#ef4444');return;}
       var ov=$('pw-ov');if(!ov){window.open(v.data.signedUrl,'_blank','noopener');return;}
-      ov.innerHTML='<div class="pw"><div style="text-align:center">'+IC('materiais','xl')+'</div><h3>'+E(m.nome)+'</h3><p>Seu e-book está liberado. Leia aqui ou baixe pra ter no celular.</p>'
-        +'<a class="sim" href="'+E(v.data.signedUrl)+'" target="_blank" rel="noopener" style="display:block;text-decoration:none;text-align:center">👀 Ler agora</a>'
-        +'<a class="nao" href="'+E(d.data?d.data.signedUrl:v.data.signedUrl)+'" style="display:block;text-decoration:none;text-align:center;margin-top:8px;font-weight:800">⬇️ Baixar o PDF</a>'
-        +'<button class="nao" data-fechar style="display:block;width:100%">Fechar</button></div>';
+      var EB=window.EBG_EBOOKS,extras=[];
+      if(EB){var cm=EB.deMaterial(m);if(cm&&cm.bonus){for(var bi=0;bi<cm.bonus.length;bi++){var bm=(AS().mats||[]).filter(function(y){var z=EB.deMaterial(y);return z&&z.k===cm.bonus[bi]&&y.arquivo;})[0];if(!bm)continue;var bv=await window._sb.storage.from('ebooks').createSignedUrl(bm.arquivo,3600),bd=await window._sb.storage.from('ebooks').createSignedUrl(bm.arquivo,3600,{download:(bm.nome||'arquivo').replace(/[^\wÀ-ÿ -]/g,'').trim()+'.pdf'});if(bv.data)extras.push({nome:bm.nome,ler:bv.data.signedUrl,baixar:bd.data?bd.data.signedUrl:bv.data.signedUrl});}}}
+      ov.innerHTML=EB?EB.obrigado(m,v.data.signedUrl,d.data?d.data.signedUrl:v.data.signedUrl,{extras:extras,tem:function(x){var mt=(AS().mats||[]).filter(function(y){var c=EB.deMaterial(y);return c&&c.k===x.k;})[0];return !!(mt&&matLivre(mt));}})
+        :'<div class="pw"><h3>'+E(m.nome)+'</h3><a class="sim" href="'+E(v.data.signedUrl)+'" target="_blank" rel="noopener" style="display:block;text-decoration:none;text-align:center">👀 Ler agora</a><button class="nao" data-fechar style="display:block;width:100%">Fechar</button></div>';
       ov.classList.add('open');return;
     }
     var r=await window._sb.from('material_links').select('link').eq('material_id',m.id).maybeSingle();
@@ -2207,6 +2532,7 @@
     if(a==='mn-fechar')return mn.classList.remove('open');
     if(a==='mn-salvar')return salvarMenu();
     if(a==='mn-apagar')return apagarUni();
+    if(a==='quiz-exp'){exportarQuizzes();return;}
     if(a==='mod-ed'){go('admin');setTimeout(function(){var t=[].filter.call(document.querySelectorAll('.admin-tab'),function(x){return /módulos/i.test(x.textContent);})[0];if(t)t.click();},250);return;}
   },true);
   // depois de salvar ou apagar um card, redesenha o universo aberto
@@ -2294,10 +2620,26 @@
     var p=$('pane-modulos');if(!p)return;var x=$('mi-mod-ed');
     if(!EDIT){if(x)x.remove();return;}
     if(!x){x=document.createElement('button');x.id='mi-mod-ed';x.className='mi-novo';x.dataset.ed='mod-ed';x.style.cssText='width:100%;margin-bottom:14px;min-height:0;padding:14px';x.textContent='✏️ Editar módulos, aulas, capas e quizzes';p.insertBefore(x,p.firstChild);}
+    var y=$('mi-quiz-exp');if(!y){y=document.createElement('button');y.id='mi-quiz-exp';y.className='mi-novo';y.dataset.ed='quiz-exp';y.style.cssText='width:100%;margin-bottom:14px;min-height:0;padding:12px';y.textContent='📋 Copiar todos os quizzes das aulas (pra revisar)';x.insertAdjacentElement('afterend',y);}
+  }
+  async function exportarQuizzes(){
+    var sb=window._sb;if(!sb)return;toast('Juntando as aulas…','#4f6ef7');
+    var m=await sb.from('mi_modules').select('id,name,ord').order('ord'),l=await sb.from('mi_lessons').select('id,module_id,ord,title,description,quiz').order('ord');
+    if(m.error||l.error){toast('Erro: '+((m.error||l.error).message),'#ef4444');return;}
+    var t='';(m.data||[]).forEach(function(mo){t+='\n=== MÓDULO: '+mo.name+' ===\n';
+      (l.data||[]).filter(function(x){return x.module_id===mo.id;}).forEach(function(x,i){
+        t+='\n[Aula '+(i+1)+'] '+x.title+'\n';
+        if(x.description)t+='Descrição: '+String(x.description).slice(0,500)+'\n';
+        (x.quiz||[]).forEach(function(q,qi){t+='  '+(qi+1)+'. '+q.q+'\n'+(q.a||[]).map(function(o,oi){return '     '+'ABCD'[oi]+') '+o+(oi===q.c?'  ✅':'');}).join('\n')+'\n';});
+        if(!(x.quiz||[]).length)t+='  (sem quiz)\n';});});
+    var ok=false;try{await navigator.clipboard.writeText(t);ok=true;}catch(e){}
+    var d=document.createElement('div');d.style.cssText='position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:16px';
+    d.innerHTML='<div style="background:var(--surface);border-radius:16px;padding:16px;width:100%;max-width:560px;max-height:85vh;display:flex;flex-direction:column;gap:10px"><b>'+(ok?'✅ Copiado! Cola aqui no chat.':'Segura e copia o texto abaixo, depois cola no chat.')+'</b><textarea readonly style="flex:1;min-height:50vh;font-size:12px;border:1px solid var(--border);border-radius:10px;padding:10px;background:var(--surface2);color:var(--fg)">'+E(t)+'</textarea><button class="admin-btn admin-btn-primary" id="mi-qx-ok">Fechar</button></div>';
+    document.body.appendChild(d);d.querySelector('#mi-qx-ok').onclick=function(){d.remove();};d.querySelector('textarea').onfocus=function(){this.select();};
   }
   function modoEdicao(on){
     EDIT=!!on&&souAdmin();document.body.classList.toggle('mi-edit',EDIT);
-    var t=$('mi-ed-btn');if(t){t.innerHTML=EDIT?IC('check')+' Concluir':IC('editar')+' Editar';t.classList.toggle('on',EDIT);}
+    var t=$('mi-ed-btn');if(t){t.innerHTML=EDIT?tileBtn('check','Concluir','#0a4921'):tileBtn('editar','Editar','#6e4705');t.classList.toggle('on',EDIT);}
     pintarEdicaoMenu();pintarEdModulos();
     var pg=window.currentPage;if(UNIV[pg]){CARDS=null;desenharUni(pg);}if(pg==='materiais')renderMat();
     if(EDIT)toast('✏️ Modo edição: toque em qualquer card, material ou menu pra editar','#4f6ef7');
@@ -2305,7 +2647,7 @@
   function botaoEdicao(){
     if($('mi-ed-btn')||!souAdmin())return;
     var tb=document.querySelector('.topbar'),th=$('theme-toggle');if(!tb)return;
-    var b=document.createElement('button');b.id='mi-ed-btn';b.className='tb-btn';b.dataset.ed='toggle';b.innerHTML=IC('editar')+' Editar';
+    var b=document.createElement('button');b.id='mi-ed-btn';b.className='tb-btn';b.dataset.ed='toggle';b.innerHTML=tileBtn('editar','Editar','#6e4705');
     tb.insertBefore(b,th||null);
   }
   async function iniciarEdicao(){
@@ -2344,6 +2686,38 @@
       if(!b)return;if(b.dataset.of==='pagar'){ov.remove();window.open(o.url||url||(AS().cfg||{}).checkout,'_blank','noopener');}
       if(b.dataset.of==='planos'){ov.remove();go('planos');}});
   };
+  /* ───── link de cadastro privado (Painel Admin → Criar acesso) ───── */
+  var CV_PROD={inteligente:'Plano Inteligente',genio:'Plano Gênio',instituicao:'Plano Instituição'};
+  function cvProduto(pl){if(CV_PROD[pl.k])return CV_PROD[pl.k];var cf=AS().cfg||{};if(pl.k==='mission')return (cf.eom&&cf.eom[0])||'English on Mission';return (pl.produtos&&pl.produtos[0])||'';}
+  function cvPlanos(){return planos().filter(function(x){return x.k!=='gratis'&&cvProduto(x);});}
+  function cvCodigo(){var a='abcdefghjkmnpqrstuvwxyz23456789',o='';var r=(window.crypto&&crypto.getRandomValues)?crypto.getRandomValues(new Uint8Array(12)):Array.apply(null,Array(12)).map(function(){return Math.random()*256;});for(var i=0;i<12;i++)o+=a[r[i]%a.length];return o;}
+  function cvUrl(c){return location.origin+location.pathname.replace(/[^\/]*$/,'')+'convite.html?c='+c;}
+  window.conviteLista=async function(){
+    var sel=$('adm-cv-plano'),box=$('adm-cv-lista');if(!sel||!box)return;
+    if(!sel.options.length){cvPlanos().forEach(function(x){var o=document.createElement('option');o.value=x.k;o.textContent=x.nome+' · '+x.preco;sel.appendChild(o);});var i=cvPlanos().map(function(x){return x.k;}).indexOf('inteligente');if(i>=0)sel.selectedIndex=i;}
+    var r=await window._sb.from('maratona_convites').select('codigo,plano,ativo,created_at').eq('turma','privado').order('created_at',{ascending:false}).limit(30);
+    if(r.error){box.innerHTML='<div style="font-size:12px;color:var(--red)">Não consegui listar os links ('+E(r.error.message)+').</div>';return;}
+    var nomes=LS.get('mi-cv-nomes',{})||{};
+    box.innerHTML=(r.data||[]).length?'<div style="font-size:11px;font-weight:800;letter-spacing:.5px;color:var(--fg3);margin-bottom:6px">LINKS GERADOS</div>'+r.data.map(function(x){
+      return '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 0;border-top:1px solid var(--border);font-size:12px"><div style="flex:1;min-width:140px"><b>'+E(nomes[x.codigo]||'Sem nome')+'</b> · '+E(String(x.plano).replace(/^Plano /,''))+'<br><span style="color:'+(x.ativo?'var(--green)':'var(--fg3)')+'">'+(x.ativo?'● aguardando cadastro':'○ usado ou desligado')+'</span></div>'
+        +(x.ativo?'<button class="admin-btn admin-btn-ghost admin-btn-sm" data-cv="copiar" data-c="'+x.codigo+'">📋 Copiar</button><button class="admin-btn admin-btn-ghost admin-btn-sm" data-cv="zap" data-c="'+x.codigo+'">'+IC('wa-real')+' WhatsApp</button><button class="admin-btn admin-btn-ghost admin-btn-sm" data-cv="off" data-c="'+x.codigo+'">Desligar</button>':'')+'</div>';}).join(''):'';
+  };
+  window.conviteGerar=async function(){
+    var st=$('adm-cv-status'),k=$('adm-cv-plano').value,pl=cvPlanos().filter(function(x){return x.k===k;})[0];if(!pl)return;
+    st.innerHTML='⏳ Gerando…';var c=cvCodigo();
+    var r=await window._sb.from('maratona_convites').insert({codigo:c,turma:'privado',plano:cvProduto(pl)});
+    if(r.error){st.innerHTML='<span style="color:var(--red)">Erro: '+E(r.error.message)+'</span>';return;}
+    var n=($('adm-cv-nome').value||'').trim();if(n){var m=LS.get('mi-cv-nomes',{})||{};m[c]=n;LS.set('mi-cv-nomes',m);}
+    $('adm-cv-nome').value='';st.innerHTML='<span style="color:var(--green)">✅ Link pronto: </span><span style="word-break:break-all">'+E(cvUrl(c))+'</span>';
+    try{await navigator.clipboard.writeText(cvUrl(c));st.innerHTML+='<br><span style="color:var(--green)">Copiado! É só colar no privado.</span>';}catch(e){}
+    conviteLista();
+  };
+  document.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('[data-cv]');if(!b)return;var c=b.dataset.c,a=b.dataset.cv;
+    if(a==='copiar'){var u=cvUrl(c);(navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(function(){toast('Link copiado','#10b981');},function(){window.prompt('Copie o link:',u);});}
+    if(a==='zap'){var n=(LS.get('mi-cv-nomes',{})||{})[c];window.open('https://wa.me/?text='+encodeURIComponent((n?'Oi, '+n+'! ':'Oi! ')+'Aqui está o seu link pra criar o acesso à plataforma: '+cvUrl(c)),'_blank');}
+    if(a==='off'){window._sb.from('maratona_convites').update({ativo:false}).eq('codigo',c).then(function(){toast('Link desligado','#6b7280');conviteLista();});}
+  });
   async function migrarDados(){
     var S=AS();if(!souAdmin()||!S.cfg)return;var feitas=(S.cfg.migr||[]).slice(),mudou=false;
     if(feitas.indexOf('spotify-eom-1')<0){
@@ -2354,12 +2728,108 @@
       }
       feitas.push('spotify-eom-1');mudou=true;
     }
-    if(mudou){try{await salvarCfg({migr:feitas});CARDS=null;}catch(e){}}
+    /* revisão dos quizzes das aulas (erros achados na leitura): troca só as perguntas indicadas */
+    if(feitas.indexOf('quiz-revisao-1')<0){
+      var Q=function(q,a,c){return {q:q,a:a,c:c};};
+      var PT=[
+        {m:'Orientação',t:'Oque é o EOM',novoTitulo:'O que é o EOM',tudo:[
+          Q('Quando acontece a live do Devocional em Inglês?',['Aos sábados, às 9h','Aos domingos','Às segundas, às 14h','Aos sábados, às 21h'],0),
+          Q('O English on Mission é só para cristãos?',['Não, é aberto a todos','Sim, só para cristãos','Só para evangélicos','Só para católicos'],0),
+          Q('Posso assistir às lives sem ter uma Bíblia?',['Não, a Bíblia é obrigatória','Sim, dá pra usar uma Bíblia no celular','Sim, mas só depois de comprar uma','Nunca'],1)]},
+        {m:'Orientação',t:'Oque é o Culture English',novoTitulo:'O que é o Culture English',sePouco:[
+          Q('Com que frequência acontece o encontro Culture English?',['Todo mês','Toda semana','Todo ano','Todo dia'],0),
+          Q('Em qual dia do mês ele acontece?',['Na segunda terça-feira','No primeiro sábado','No último domingo','Toda quinta'],0),
+          Q('Quando será o primeiro encontro?',['8 de dezembro','17 de novembro','5 de novembro','1º de janeiro'],0)]},
+        {m:'Diagnóstico',t:'Bússula',novoTitulo:'Descubra seu Nível com a Bússola',troca:{
+          0:Q('Pra que serve o resultado da Bússola (CEFR)?',['Pra ficar frustrado','Pra saber seu ponto de partida','Pra receber um certificado oficial','Pra ver como é um teste americano'],1),
+          2:Q('Em geral, quem está no nível A2 consegue:',['Dar palestras','Se virar em situações simples e rotineiras','Escrever artigo científico','Traduzir livros'],1)}},
+        {m:'Diagnóstico',t:'Prisma de Intelig',troca:{1:Q('Quantas inteligências o Prisma analisa?',['6','8','9','10'],2)}},
+        {m:'Vocabulário',t:'Números, datas',troca:{4:Q('US$ 2.50 se fala, naturalmente:',['two fifty','two point five money','dollars two five','fifty two'],0)}},
+        {m:'Gramática A1',t:'Artigos',troca:{2:Q('A escolha entre a e an depende:',['Da letra escrita','Do SOM inicial da palavra','Do tamanho da palavra','Do gênero'],1)}},
+        {m:'Escrita',t:'Mensagens e redes',troca:{3:Q('Como dizer "faço aniversário hoje"?',['I make birthday today','Today is my birthday','I do birthday today','Today I birth'],1)}},
+        {m:'Inglês pela Música',t:'Gramática escondida',troca:{
+          0:Q('"I haven\'t finished yet" usa:',['Past simple','Present perfect','Futuro','Imperativo'],1),
+          1:Q('"If I were rich, I would travel" é:',['Condicional hipotético','Passado real','Futuro certo','Pergunta'],0),
+          4:Q('"Yesterday I walked home" está no:',['Presente','Passado','Futuro','Condicional'],1)}},
+        {m:'Listening',t:'séries e filmes',troca:{4:Q('Quando subir de degrau na legenda?',['Nunca','Quando você entende bem o degrau atual','No dia 1','Quando alguém mandar'],1)}}
+      ];
+      try{
+        var mods=await window._sb.from('mi_modules').select('id,name'),less=await window._sb.from('mi_lessons').select('id,module_id,title,quiz');
+        if(mods.error||less.error)throw 0;
+        for(var i=0;i<PT.length;i++){var pt=PT[i];
+          var mo=(mods.data||[]).filter(function(x){return x.name.toLowerCase().indexOf(pt.m.toLowerCase())===0;})[0];if(!mo)continue;
+          var le=(less.data||[]).filter(function(x){return x.module_id===mo.id&&x.title.toLowerCase().indexOf(pt.t.toLowerCase())>=0;})[0];if(!le)continue;
+          var qz=(le.quiz||[]).slice(),row={};
+          if(pt.tudo)row.quiz=pt.tudo;
+          else if(pt.sePouco){if(!qz.length)row.quiz=pt.sePouco;}
+          else if(pt.troca){Object.keys(pt.troca).forEach(function(k){qz[+k]=pt.troca[k];});row.quiz=qz;}
+          if(pt.novoTitulo)row.title=pt.novoTitulo;
+          if(Object.keys(row).length){var up=await window._sb.from('mi_lessons').update(row).eq('id',le.id);if(up.error)throw 0;}
+        }
+        feitas.push('quiz-revisao-1');mudou=true;
+      }catch(e){}
+    }
+    if(feitas.indexOf('quiz-prisma-9')<0){
+      try{
+        var mp=await window._sb.from('mi_modules').select('id,name'),lp=await window._sb.from('mi_lessons').select('id,module_id,title,quiz');
+        if(mp.error||lp.error)throw 0;
+        var md=(mp.data||[]).filter(function(x){return x.name.toLowerCase().indexOf('diagnóstico')===0;})[0];
+        var ls=md?(lp.data||[]).filter(function(x){return x.module_id===md.id&&x.title.toLowerCase().indexOf('prisma de intelig')>=0;})[0]:null;
+        if(ls&&(ls.quiz||[]).length>1){var q2=ls.quiz.slice();q2[1]={q:'Quantas inteligências o Prisma analisa?',a:['6','8','9','10'],c:2};var u2=await window._sb.from('mi_lessons').update({quiz:q2}).eq('id',ls.id);if(u2.error)throw 0;}
+        feitas.push('quiz-prisma-9');mudou=true;
+      }catch(e){}
+    }
+    if(feitas.indexOf('ebooks-drive-1')<0){
+      /* e-books da pasta do Drive que não têm landing de venda: entram em Materiais, liberados pra quem tem o Programa */
+      var D=function(id){return 'https://drive.google.com/file/d/'+id+'/view';};
+      var EB=[
+        ['10 Jogos para Aprender Inglês','Jogos prontos pra treinar inglês brincando.','E-books','🎮','1-oVACvzU2k7see4kU5-8_jW5gjxV6kMu'],
+        ['Inglês com Séries','Aprenda inglês de verdade com as séries que você já assiste.','E-books','📺','1HaM6XZAp7l04yYSJllkQB04lwmxwal3v'],
+        ['Caderno de Séries (pra imprimir)','Caderno pra anotar vocabulário e frases enquanto assiste.','E-books','📓','1R49fo0W_a3n2QJd4_ZhCqxZSbBAbP1nc'],
+        ['Culture English · Edição Visual','O e-book do Culture English, em edição visual.','E-books','🎬','15LIrNj5jdl9GYH8MTVfLykkNwmfnNBmh'],
+        ['Inglês a Dois · 15 meses','Plano pra casais estudarem inglês juntos durante 15 meses.','Casais','💑','1aKbxRMobZFtXMXmozCPMBEgWxxrZQXjd'],
+        ['Templates de Casais · 15 meses','Templates pra imprimir e acompanhar o plano a dois.','Casais','💑','1A3QgPZoDjUGgc-aHWsAd7mm_xIvn9b3q'],
+        ['Do Zero ao Inglês em 360 Dias','Cronograma de estudo de 1 ano pra quem começa do zero.','Planners','🗓️','1nlahe-iS-FbQjw_QSH_trKnSljBzlW44'],
+        ['English on Mission · Planner Anual','Planner anual do English on Mission.','Planners','🗓️','1XOX7L7Xsiqydq7D8t1OsB1-hItwfok7n']
+      ];
+      try{
+        var ja=await window._sb.from('materiais').select('nome,ordem');if(ja.error)throw 0;
+        var tem={},ord=0;(ja.data||[]).forEach(function(x){tem[(x.nome||'').toLowerCase()]=1;ord=Math.max(ord,x.ordem||0);});
+        for(var k=0;k<EB.length;k++){var e=EB[k];if(tem[e[0].toLowerCase()])continue;
+          var ins=await window._sb.from('materiais').insert({nome:e[0],descricao:e[1],secao:e[2],icone:e[3],tipo:'programa',produto:'',checkout:'',preco:'',ativo:true,ordem:++ord}).select().single();if(ins.error)throw 0;
+          var lk=await window._sb.from('material_links').upsert({material_id:ins.data.id,link:D(e[4])});if(lk.error)throw 0;}
+        feitas.push('ebooks-drive-1');mudou=true;
+      }catch(e){}
+    }
+    if(feitas.indexOf('ebooks-visto-fora')<0){
+      /* o Guia do Visto Americano é vendido (tem landing): sai de Materiais se já tinha entrado */
+      try{
+        var vm=await window._sb.from('materiais').select('id').eq('nome','Guia do Visto Americano').eq('tipo','programa');if(vm.error)throw 0;
+        for(var v=0;v<(vm.data||[]).length;v++){await window._sb.from('material_links').delete().eq('material_id',vm.data[v].id);var dv=await window._sb.from('materiais').delete().eq('id',vm.data[v].id);if(dv.error)throw 0;}
+        feitas.push('ebooks-visto-fora');mudou=true;
+      }catch(e){}
+    }
+    if(feitas.indexOf('ebook-destrave-1')<0){
+      /* Destrave Seu Inglês (R$ 14,90): material pago, com cadeado e botão de compra pra quem não tem */
+      try{
+        var dj=await window._sb.from('materiais').select('id,ordem');if(dj.error)throw 0;
+        var jaTem=await window._sb.from('materiais').select('id').eq('nome','Destrave Seu Inglês');if(jaTem.error)throw 0;
+        if(!(jaTem.data||[]).length){
+          var mx=0;(dj.data||[]).forEach(function(x){mx=Math.max(mx,x.ordem||0);});
+          var di=await window._sb.from('materiais').insert({nome:'Destrave Seu Inglês',descricao:'Pronúncia pra brasileiro: guia visual com a pronúncia escrita do jeito que a gente lê.',secao:'E-books',icone:'🗣️',tipo:'produto',produto:'Destrave Seu Inglês',checkout:'https://pay.kiwify.com.br/ODOhEzc',preco:'R$ 14,90',ativo:true,ordem:mx+1}).select().single();if(di.error)throw 0;
+          var dl=await window._sb.from('material_links').upsert({material_id:di.data.id,link:'https://drive.google.com/file/d/1jHMPxGfsiur-3FUCHnwIqNCutywjkEak/view'});if(dl.error)throw 0;
+        }
+        feitas.push('ebook-destrave-1');mudou=true;
+      }catch(e){}
+    }
+    var extra={};
+    if(feitas.indexOf('programa-plano-inteligente')<0){var pg=(S.cfg.programa||[]).slice();if(pg.indexOf('Plano Inteligente')<0)pg.push('Plano Inteligente');extra.programa=pg;feitas.push('programa-plano-inteligente');mudou=true;}
+    if(mudou){try{await salvarCfg(Object.assign({migr:feitas},extra));CARDS=null;}catch(e){}}
   }
   (function esperar(n){var S=AS();if(S&&S.pronto&&S.cfg){migrarDados();return;}if(n<40)setTimeout(function(){esperar(n+1);},1000);})(0);
   window.miLink=function(u){
     var t=window._curTask?{key:window._curTask.key,i:window._curTask.i}:null;
-    if(u==='#jogos')return go('jogos');if(u==='#modulos')return go('modulos');if(u==='#planos')return go('planos');
+    if(u==='#jogos')return go('jogos');if(u==='#prompts'){if(window.EBG_PROMPTS_UI)EBG_PROMPTS_UI.abrir('rapido');return go('prompts');}if(u==='#modulos')return go('modulos');if(u==='#planos')return go('planos');if(u==='#prisma')return go('prisma');
     if(u.indexOf('#aula:')===0){var x=u.split(':');return abrirAula(x[1],x[2]);}
     if(u.indexOf('#jogo:')===0){window.__tarefaJogo=t;if(!jogar(u.slice(6)))go('jogos');return;}
   };
@@ -2378,6 +2848,7 @@
   function aulasVistas(){return (ST.vistas||[]).length;}
   function iniciante(){return nivelBaixo()&&aulasVistas()<LIB_REVISAR;}
   function exige(t){
+    if(t.ex!=null)return t.ex;
     var x=(t.title||'')+' '+(t.sub||'');
     if(/escrev|frase|diário|diario|fal(e|ar)\b|falar|grav|ora(r|ção|çao)|conversa|pens(e|ar) em inglês|narr|descrev|explic|shadow|cant(e|ar)|imit|ensin|pergunt|apresent|text/i.test(x))return LIB_PRODUZIR;
     if(/revis|lembr|palavras do dia|flashcard|record|vocab/i.test(x))return LIB_REVISAR;
@@ -2390,23 +2861,93 @@
   var SPOTIFY_EOM='https://open.spotify.com/playlist/3hcF84KR80VqykVNeJy4x5';
   var APR={
     aula:function(){var it=proxAula(),q=it&&it.l.quiz&&it.l.quiz.length;
-      return {icon:'📚',title:q?'Assistir a aula e fazer o quiz':'Assistir a aula da vez',sub:it?it.l.title:'A próxima aula do seu caminho',info:{why:'Tudo começa aqui: a aula ensina, o resto do checklist só pratica o que você viu. Sem aula, não tem o que praticar.',
+      return {mn:15,icon:'📚',title:q?'Assistir a aula e fazer o quiz':'Assistir a aula da vez',sub:it?it.l.title:'A próxima aula do seu caminho',info:{why:'Tudo começa aqui: a aula ensina, o resto do checklist só pratica o que você viu. Sem aula, não tem o que praticar.',
         steps:['Toque no botão abaixo pra abrir a aula','Assista inteira, com caderno do lado. Pode pausar e voltar','Anote 3 palavras ou frases que você entendeu','No fim da aula, faça o quiz pra ver o que ficou'],
         links:[it?{t:'▶️ Abrir: '+it.l.title,u:'#aula:'+it.m.id+':'+it.l.id}:{t:'📚 Ir pras aulas',u:'#modulos'}]}};},
-    imagem:function(){return {icon:'🖼️',title:'Jogo: O que é isso?',sub:'Figura + palavra em inglês, 10 rodadas',info:{why:'O jeito mais rápido de aprender as primeiras palavras: ligar a imagem direto ao inglês, sem passar pelo português.',
+    imagem:function(){return {mn:3,icon:'🖼️',title:'Jogo: O que é isso?',sub:'Figura + palavra em inglês, 10 rodadas',info:{why:'O jeito mais rápido de aprender as primeiras palavras: ligar a imagem direto ao inglês, sem passar pelo português.',
         steps:['Toque em "Jogar agora"','Olhe a figura e escolha o nome em inglês','Ouça a pronúncia e repita em voz alta','Terminou? A tarefa marca sozinha'],links:[{t:'🎮 Jogar agora',u:'#jogo:O que é isso?'}]}};},
-    ouvir:function(){return {icon:'🔊',title:'Jogo: Ouça e Toque',sub:'Ouvir a palavra e achar a figura',info:{why:'Antes de falar, o ouvido precisa reconhecer o som. Aqui você treina isso sem precisar ler nada.',
+    ouvir:function(){return {mn:3,icon:'🔊',title:'Jogo: Ouça e Toque',sub:'Ouvir a palavra e achar a figura',info:{why:'Antes de falar, o ouvido precisa reconhecer o som. Aqui você treina isso sem precisar ler nada.',
         steps:['Toque em "Jogar agora" (som ligado)','Ouça a palavra e toque na figura certa','Pode ouvir de novo quantas vezes quiser','Terminou? A tarefa marca sozinha'],links:[{t:'🎮 Jogar agora',u:'#jogo:Ouça e Toque'}]}};},
-    musica:function(){return {icon:'🎵',title:'Ouvir 1 música e caçar 3 palavras',sub:'Sem letra, só o ouvido',info:{why:'Música repete as mesmas palavras várias vezes. É o jeito mais leve de reconhecer padrões do inglês.',
+    musica:function(){return {mn:4,icon:'🎵',title:'Ouvir 1 música e caçar 3 palavras',sub:'Sem letra, só o ouvido',info:{why:'Música repete as mesmas palavras várias vezes. É o jeito mais leve de reconhecer padrões do inglês.',
         steps:['Escolha 1 música da playlist','Ouça sem ler a letra','Anote 3 palavras que você reconheceu (vale palavra pequena)','Ouça de novo e veja se aparecem mais vezes'],
         links:[{t:'🟢 Playlist do English on Mission',u:SPOTIFY_EOM},{t:'▶️ Músicas fáceis em inglês',u:'https://www.youtube.com/results?search_query=easy+english+songs+for+beginners+with+lyrics'}],
-        ex:['Palavras que aparecem muito: <b>love</b> (amor), <b>you</b> (você), <b>heart</b> (coração), <b>God</b> (Deus), <b>light</b> (luz)']}};},
-    cognatos:function(){return {icon:'🔎',title:'Caçar 10 palavras que você já conhece',sub:'Inglês parecido com português',info:TI.cognatos};},
-    complete:function(){return {icon:'🧩',title:'Jogo: Complete',sub:'Frases curtinhas do começo',info:{why:'Agora que você já viu algumas aulas, dá pra brincar com frases simples.',steps:['Toque em "Jogar agora"','Escolha a palavra que completa a frase','Terminou? A tarefa marca sozinha'],links:[{t:'🎮 Jogar agora',u:'#jogo:Complete'}]}};}
+        ex:['Palavras comuns de aprender (podem ou não aparecer na sua música): <b>love</b> (amor), <b>you</b> (você), <b>heart</b> (coração)']}};},
+    cognatos:function(){return {mn:4,icon:'🔎',title:'Caçar 10 palavras que você já conhece',sub:'Inglês parecido com português',info:TI.cognatos};},
+    complete:function(){return {mn:3,icon:'🧩',title:'Jogo: Complete',sub:'Frases curtinhas do começo',info:{why:'Agora que você já viu algumas aulas, dá pra brincar com frases simples.',steps:['Toque em "Jogar agora"','Escolha a palavra que completa a frase','Terminou? A tarefa marca sozinha'],links:[{t:'🎮 Jogar agora',u:'#jogo:Complete'}]}};}
   };
   function diaN(){return Math.floor(Date.now()/864e5);}
   var BASE={};
-  function tarefasDoDia(label){
+
+  /* ───────────────────────── TEMPO DISPONÍVEL ─────────────────────────
+     Toda vez que a pessoa entra, ela diz quanto tempo tem (1, 5, 10, 30 ou 60 min) e o checklist se ajusta:
+     poucas tarefas, curtas e fáceis. Aula só aparece com 30 min ou mais. */
+  var TEMPOS=[{m:1,t:'1 min',s:'Só um minutinho'},{m:5,t:'5 min',s:'Rapidinho'},{m:10,t:'10 min',s:'Dá pra um pouco'},{m:30,t:'30 min',s:'Com calma'},{m:60,t:'60 min',s:'Tenho tempo'}];
+  var TIER={1:{n:2,max:1,sum:1},5:{n:3,max:4,sum:5},10:{n:3,max:6,sum:10},30:{n:4,max:12,sum:30},60:{n:5,max:20,sum:60}};
+  function tempoAtual(){var c=LS.get('mi_tempo',{});return c&&c.d===dia()&&TIER[c.m]?c.m:null;}
+  function tempoUso(){return tempoAtual()||LS.get('mi_tempo',{}).m||10;}
+  function dur(t){
+    if(t.mn!=null)return t.mn;
+    var x=((t.title||'')+' '+(t.sub||'')).toLowerCase(),m;
+    if(/assistir (a )?(próxima )?aula|aula gravada|a aula da vez/.test(x))return 15;
+    if((m=x.match(/(\d+)\s*min/)))return +m[1];
+    if(/toda a viagem|todo o treino|durante todo|inteiro|toda a/.test(x))return 20;
+    if(/cena|série|filme/.test(x))return 8;
+    if((m=x.match(/(\d+)\s*flashcards/)))return Math.ceil(+m[1]/3)+1;
+    if(/podcast/.test(x))return 10;
+    if(/v[ií]deo/.test(x))return 4;
+    if(/jog(o|ar)/.test(x))return 4;
+    if(/escrev|di[aá]rio|mensagem|e-mail/.test(x))return 4;
+    if(/shadowing|narrar|cantar|ensinar/.test(x))return 4;
+    if(/separe 10|do seu jeito/.test(x))return 12;
+    if(/m[uú]sica|playlist|louvor/.test(x))return 3;
+    return 3;
+  }
+  function xTarefas(){
+    return {dia:diaN(),hora:new Date().getHours(),fe:!!LS.get('mi_fe',false)||temProduto('English on Mission'),baixo:nivelBaixo()&&aulasVistas()<LIB_PRODUZIR,ini:iniciante(),vistas:aulasVistas(),
+      aula:function(){return proxAula()?APR.aula():null;}};
+  }
+  function ajustarTempo(label){
+    var m=tempoUso(),T=TIER[m]||TIER[10],jeito=(CTX_TASKS[label]||[]).filter(function(x){return x._jeito;})[0];
+    var lista=window.EBG_TAREFAS?EBG_TAREFAS.gerar(label,m,xTarefas()):[];
+    if(!lista.length){lista=(CTX_TASKS[label]||[]).slice(0,T.n);}
+    if(jeito&&m>=30&&lista.length<T.n){var tot=lista.reduce(function(a,x){return a+(x._mn||dur(x));},0);if(tot+12<=T.sum)lista.push(Object.assign({},jeito,{_mn:12}));}
+    CTX_TASKS[label]=lista;
+  }
+  function fmtMn(x){return x<1?'30 seg':x+' min';}
+  function tempoBarra(){
+    var m=tempoUso();
+    return '<div class="mi-tm"><b>⏱ Quanto tempo você tem agora?</b><div>'+TEMPOS.map(function(t){return '<button type="button" data-tm="'+t.m+'"'+(t.m===m?' class="on"':'')+'>'+t.t+'</button>';}).join('')+'</div></div>';
+  }
+  function guardarTempo(m){
+    var ant=LS.get('mi_tempo',{});LS.set('mi_tempo',{d:dia(),m:m});
+    if(ant.m!==m||ant.d!==dia()){var ch=window._ctxChecked||{};Object.keys(ch).forEach(function(k){if(k!=='_idioma')ch[k]=[];});try{salvarChecks();}catch(e){}}
+  }
+  function perguntarTempo(cb){
+    var m=tempoUso();
+    abrirEntrada('<span class="mi-logo mi-lg-ent"></span><div class="mi-ent-kicker">Último passo</div>'
+      +'<div class="mi-ent-q">Quanto tempo você tem agora?</div>'
+      +'<div class="mi-ent-s">Eu ajusto o checklist pra caber no seu tempo. Pouco tempo, tarefa curtinha e leve. Mais tempo, entra a aula.</div>'
+      +'<div class="mi-tmg">'+TEMPOS.map(function(t){return '<button type="button" data-tm="'+t.m+'"'+(t.m===m?' class="on"':'')+'><b>'+t.m+'<small>min</small></b><span>'+t.s+'</span></button>';}).join('')+'</div>');
+    ent.onclick=function(e){var b=e.target.closest('[data-tm]');if(!b)return;guardarTempo(+b.dataset.tm);cb();};
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.mi-tm [data-tm]');if(!b)return;
+    guardarTempo(+b.dataset.tm);var k=ctxAtual()||(iniciante()?'Primeiros passos':'Em Casa');
+    if(window.renderMarTasks)window.renderMarTasks(k);pintarRail();try{renderHome();}catch(x){}
+    toast('⏱ Checklist ajustado pra '+b.dataset.tm+' min','#10b981');
+  });
+  function tarefasDoDia(label){tarefasDoDia0(label);tarefaDoJeito(label);ajustarTempo(label);}
+  function tarefaDoJeito(label){
+    if(!window.CTX_TASKS||!CTX_TASKS[label]||!ST.prisma||!INTEL[ST.prisma])return;
+    var it=INTEL[ST.prisma],R=ST.prismaRes||{},lista=(R.taticas&&R.taticas.length?R.taticas:[]).concat(it.est||[]);if(!lista.length)return;
+    var d=diaN(),dica=lista[d%lista.length];
+    var t={_jeito:1,icon:it.ic,title:'Do seu jeito: '+dica.replace(/\.$/,''),sub:'Prisma · '+it.nome,info:{
+      why:(R.aprende||it.desc)+' Por isso esta tarefa entra todo dia no seu checklist: é o caminho mais curto pro inglês ficar.',
+      steps:['Separe 10 a 15 minutos agora','Faça: '+dica,(R.despertar?'Lembre: '+R.despertar:'Repita amanhã: a constância vale mais que a intensidade'),'Marque como feita'],
+      links:[{t:'🔷 Ver meu Prisma',u:'#prisma'}]}};
+    CTX_TASKS[label]=CTX_TASKS[label].filter(function(x){return !x._jeito;}).concat([t]);
+  }
+  function tarefasDoDia0(label){
     if(!window.CTX_TASKS)return;
     if(label!=='Primeiros passos'&&!CTX_TASKS[label]&&!BASE[label])label='Em Casa';
     if(!BASE[label]&&CTX_TASKS[label]&&label!=='Primeiros passos')BASE[label]=CTX_TASKS[label].map(function(t,i){var o=Object.assign({},t);if(!o.info&&!o.ref)o.ref=[label,i];return o;});
@@ -2427,7 +2968,8 @@
   function pintarInicio(){
     var t=$('mar-ctx-title');if(!t)return;var box=$('mi-inicio');
     if(!box){box=document.createElement('div');box.id='mi-inicio';t.insertAdjacentElement('beforebegin',box);}
-    var h='',v=aulasVistas();
+    var h=tempoBarra(),v=aulasVistas();
+    if(tempoUso()<30)h+='<div class="mi-ini beg"><div class="tx"><b>📚 Aula fica pra quando tiver 30 min</b><span>Com '+tempoUso()+' min o checklist traz só tarefas curtas e leves. Tem 30 min ou mais? Escolha acima e a aula da vez entra.</span></div></div>';
     if(!ST.idioma)h+='<div class="mi-ini idi"><div class="ic">'+IC('idioma','xl')+'</div><div class="tx"><b>Missão de início: deixe seus aparelhos em inglês</b><span>Celular, Instagram, YouTube e Netflix. Você vai ler inglês o dia inteiro sem perceber.</span></div>'
       +'<div class="bt"><button data-ini="como">Como fazer</button><button class="ok" data-ini="feito">Já troquei ✓</button></div></div>';
     if(iniciante()){
@@ -2439,10 +2981,42 @@
     var beg=iniciante();document.body.classList.toggle('mi-beg',beg);
     if(beg)t.textContent='Tarefas de hoje · Primeiros passos';
   }
+  /* trocar tarefa: cada tarefa tem 2 variações do mesmo nível; o botão gira original → variação 1 → variação 2 → original */
+  var ORIG=null;
+  function todasTarefas(){
+    if(!ORIG){ORIG=[];var vis={};Object.keys(window.CTX_TASKS||{}).forEach(function(k){if(k==='Primeiros passos'||k==='_idioma')return;
+      (BASE[k]||CTX_TASKS[k]||[]).forEach(function(t,i){if(vis[t.title])return;vis[t.title]=1;var o=Object.assign({},t);if(!o.info&&!o.ref)o.ref=[k,i];ORIG.push(o);});});}
+    return ORIG;
+  }
+  function hashN(x){var h=0;for(var i=0;i<x.length;i++)h=(h*31+x.charCodeAt(i))|0;return Math.abs(h);}
+  function variacoes(label,i,lista){
+    var T=TIER[tempoUso()]||TIER[10],atual=lista[i]||{},resto=lista.reduce(function(a,x,k){return k===i?a:a+(x._mn||dur(x));},0);
+    var excl=lista.map(function(t){return t.title;});
+    var alt=window.EBG_TAREFAS?EBG_TAREFAS.alternativas(label,tempoUso(),xTarefas(),excl).filter(function(t){return resto+t._mn<=T.sum+1e-9;}):[];
+    var seed=hashN(dia()+label+i),out=[];
+    for(var n=0;n<alt.length&&out.length<2;n++){var t=alt[(seed+n*3)%alt.length];if(out.indexOf(t)<0)out.push(t);}
+    return out;
+  }
+  function trocas(){return LS.get('mi_troca_'+dia(),{});}
+  function aplicarTrocas(label){
+    var tr=trocas()[label];if(!tr||!CTX_TASKS[label])return;var base=CTX_TASKS[label].slice();
+    Object.keys(tr).forEach(function(i){var n=tr[i];if(!n)return;var alt=variacoes(label,+i,base)[n-1];if(alt)CTX_TASKS[label][i]=alt;});
+  }
+  window.miTrocar=function(ev,label,i){
+    ev.stopPropagation();var ch=(window._ctxChecked||{})[label]||[];if(ch[i]){toast('Essa você já fez ✓');return;}
+    var all=trocas();all[label]=all[label]||{};all[label][i]=((all[label][i]||0)+1)%3;LS.set('mi_troca_'+dia(),all);
+    window.renderMarTasks(label);
+  };
   var rmtOrig=window.renderMarTasks;
   if(rmtOrig){window.renderMarTasks=function(label){
-    if(label!=='_idioma'){if(iniciante())label='Primeiros passos';tarefasDoDia(label);}
-    var r=rmtOrig(label);pintarInicio();return r;};}
+    if(label!=='_idioma'){if(iniciante())label='Primeiros passos';if(!CTX_TASKS[label])label='Em Casa';tarefasDoDia(label);aplicarTrocas(label);}
+    var r=rmtOrig(label);
+    if(label!=='_idioma'){var tr=(trocas()[label])||{},ch=(window._ctxChecked||{})[label]||[];
+      [].forEach.call(document.querySelectorAll('#mar-tasks-list .mar-task'),function(el,i){if(ch[i])return;
+        var b=document.createElement('button');b.className='mi-troca';b.title='Trocar por outra tarefa';b.innerHTML='🔄<small>'+((tr[i]||0)+1)+'/3</small>';
+        b.setAttribute('onclick',"miTrocar(event,'"+label.replace(/'/g,"\\'")+"',"+i+")");var hint=el.querySelector('.open-hint');el.insertBefore(b,hint);});}
+    if(label!=='_idioma'){var lt=CTX_TASKS[label]||[];[].forEach.call(document.querySelectorAll('#mar-tasks-list .mar-task-title'),function(el,i){var x=lt[i];if(x&&x._mn!=null&&!el.querySelector('.mi-mn'))el.insertAdjacentHTML('beforeend',' <span class="mi-mn">⏱ '+fmtMn(x._mn)+'</span>');});}
+    pintarInicio();return r;};}
   var tdOrig=window.taskDone;
   window.taskDone=function(){
     var c=window._curTask;
@@ -2454,6 +3028,7 @@
     if(b.dataset.ini==='como'&&window.openTask)openTask('_idioma',0);
     if(b.dataset.ini==='feito'){ST.idioma=true;salvar();pintarInicio();toast('📱 Boa! Aguenta 7 dias que vira hábito.','#10b981');}
   });
+  try{if(window.loadStudentModules)window.loadStudentModules(true);}catch(e){}
   carregarFlat().then(function(){var tt=$('mar-ctx-title');if(iniciante()&&window.renderMarTasks)renderMarTasks('Primeiros passos');});
   setTimeout(function(){try{pintarInicio();if(iniciante()&&window.renderMarTasks)renderMarTasks('Primeiros passos');}catch(e){}},900);
 
@@ -2743,6 +3318,43 @@
     else{var r=await window._sb.from('mi_lesson_votes').insert({lesson_id:id,user_id:U.id});if(r.error){toast('Não deu: '+r.error.message,'#ef4444');b.disabled=false;return;}toast('🔔 Anotado! Te aviso quando for ao vivo','#10b981');}
     pintarAulasAoVivo();
   });
+
+  /* ───────────────────────── BOTÃO VOLTAR em toda tela (menos o Início) ───────────────────────── */
+  (function(){
+    var hist=[];
+    var st=document.createElement('style');st.textContent='#mi-voltar{display:none;align-items:center;gap:6px;border:0;background:var(--accent,#4f6ef7);color:#fff;font:inherit;font-weight:800;font-size:13px;border-radius:99px;padding:7px 14px 7px 10px;cursor:pointer;margin-right:12px;flex:none;box-shadow:0 4px 12px rgba(79,110,247,.35);transition:transform .2s,box-shadow .2s}#mi-voltar.on{display:inline-flex}#mi-voltar:hover{transform:scale(1.06);box-shadow:0 8px 18px rgba(79,110,247,.45)}#mi-voltar:active{transform:scale(.95)}#mi-volta-uni{display:none!important}';
+    document.head.appendChild(st);
+    var tb=document.querySelector('.topbar'),tt=document.getElementById('topbar-title');
+    var bt=document.createElement('button');bt.id='mi-voltar';bt.type='button';bt.setAttribute('aria-label','Voltar');bt.innerHTML='<span style="font-size:17px;line-height:1">‹</span> Voltar';
+    if(tb&&tt)tb.insertBefore(bt,tt);
+    function vis(id){var e=document.getElementById(id);return !!e&&e.style.display==='block';}
+    function atualizar(){var p=window.currentPage||'home';bt.classList.toggle('on',p!=='home');}
+    var g0=window.goTo;
+    window.goTo=function(page,el){
+      var ant=window.currentPage||'home';
+      var r=g0.apply(this,arguments);
+      if(page!==ant&&!window.__voltando){hist.push({p:ant,el:null});if(hist.length>30)hist.shift();}
+      setTimeout(atualizar,0);return r;
+    };
+    bt.onclick=function(){
+      if((window.currentPage||'')==='modulos'){
+        if(vis('mod-view-lesson')&&window._stCurMod&&window.openModule){openModule(_stCurMod.id);return;}
+        if(vis('mod-view-lessons')&&window.modShow){modShow('grid');return;}
+      }
+      var h=hist.pop();while(h&&h.p===window.currentPage)h=hist.pop();
+      var dest=h?h.p:'home';
+      var pill=[].filter.call(document.querySelectorAll('.nav-pill'),function(n){return (n.getAttribute('onclick')||'').indexOf("'"+dest+"'")>=0;})[0]||document.querySelector('.nav-pill');
+      window.__voltando=1;try{window.goTo(dest,pill);}finally{window.__voltando=0;}
+      atualizar();
+    };
+    document.addEventListener('click',function(){setTimeout(atualizar,60);},true);
+    atualizar();
+  })();
+  document.addEventListener('click',function(e){var b=e.target.closest('.lv-abas button,.mat-tab,.mi-dock button,.th-nav button');if(b&&b.scrollIntoView)try{b.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});}catch(x){}});
+  (function(){var b=document.createElement('button');b.id='rail-tg';b.type='button';b.setAttribute('aria-label','Minimizar ou abrir a barra lateral direita');document.body.appendChild(b);
+    var pr=function(){var off=document.body.classList.contains('rail-off');b.textContent=off?'‹':'›';b.title=off?'Abrir a barra':'Minimizar a barra';};
+    try{if(localStorage.getItem('mi_rail_off')==='1')document.body.classList.add('rail-off');}catch(e){}pr();
+    b.addEventListener('click',function(){document.body.classList.toggle('rail-off');try{localStorage.setItem('mi_rail_off',document.body.classList.contains('rail-off')?'1':'0');}catch(e){}pr();});})();
   setTimeout(montarAbasLives,0);
   window.MI_APP={conhecer:conhecer,tour:tour,aulaAberta:aulaAberta,marcarDia:marcarDia,abrirAula:abrirAula,renderHome:renderHome,
     compartilharQuiz:compartilharConquista,compartilharDia:function(){compartilharConquista(null);},festa:festa};

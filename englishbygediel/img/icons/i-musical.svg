@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><defs>
+<linearGradient id="bimusical" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3effe"/><stop offset="1" stop-color="#e8defd"/></linearGradient>
+<linearGradient id="gimusical" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0" stop-color="#ab8af9"/><stop offset=".55" stop-color="#8b5cf6"/><stop offset="1" stop-color="#7d53dd"/></linearGradient>
+<filter id="simusical" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="11"/></filter>
+<filter id="dimusical" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#7d53dd" flood-opacity=".28"/></filter></defs>
+<rect x="6" y="6" width="244" height="244" rx="62" fill="url(#bimusical)"/>
+<rect x="7.5" y="7.5" width="241" height="241" rx="60.5" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="3"/>
+<ellipse cx="128" cy="204" rx="62" ry="13" fill="#8b5cf6" opacity=".45" filter="url(#simusical)"/>
+<g transform="translate(128 120) scale(.66) translate(-128 -128)" fill="url(#gimusical)" filter="url(#dimusical)"><path d="M212.92,17.71a7.89,7.89,0,0,0-6.86-1.46l-128,32A8,8,0,0,0,72,56V166.1A36,36,0,1,0,88,196V102.25l112-28V134.1A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.71Z"/></g></svg>

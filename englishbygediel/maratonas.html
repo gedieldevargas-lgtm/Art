@@ -138,7 +138,7 @@ body.embed .topo{display:none}
     else if (s === 'em-breve') botoes = '<button class="b2" data-inscrever="' + m.id + '">Me avise quando abrir</button>';
     else if (s === 'andamento' && m.proxima) botoes = '<button class="b2" data-inscrever="' + m.proxima + '">Entrar na lista da ' + esc((MR.porId(m.proxima) || {}).edicao || 'próxima turma') + '</button>';
     return '<article class="mara' + (s === 'abertas' ? '' : ' fechada') + '" id="m-' + m.id + '" style="--cor:' + esc(m.cor) + '">'
-      + '<div class="arte" style="background-image:url(\'' + esc(m.img) + '\')"><span>' + m.icone + '</span></div>'
+      + '<div class="arte" style="background-image:url(\'' + esc(m.img) + '\')"></div>'
       + '<div class="corpo"><div class="linha1"><span class="pill ' + s + '"><i></i>' + MR.rotulo[s] + '</span>'
       + (s === 'abertas' && d > 0 ? '<span class="pill dias">faltam ' + d + ' dias</span>' : '')
       + (m.vagas ? '<span class="pill dias">' + m.vagas + ' vagas</span>' : '') + '</div>'

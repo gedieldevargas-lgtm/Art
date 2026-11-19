@@ -52,7 +52,30 @@
     + '.mt-premio{display:grid;gap:8px;margin-top:12px}.mt-premio div{padding:12px;border-radius:14px;font-size:13px;font-weight:600;background:linear-gradient(135deg,rgba(214,150,90,.16),rgba(139,92,246,.1))}'
     + '.mt-post{display:flex;gap:8px;flex-wrap:wrap}.mt-post input{flex:1;min-width:200px;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:var(--surface2);color:var(--fg)}.mt-post button{border:0;border-radius:10px;padding:10px 14px;font-weight:800;background:var(--accent);color:#fff;cursor:pointer}'
     + '.mt-outras{display:flex;gap:8px;overflow-x:auto}.mt-outras div{flex:0 0 170px;padding:12px;border-radius:14px;background:var(--surface2);font-size:12px;color:var(--fg2)}.mt-outras b{display:block;color:var(--fg);font-size:13px;margin:4px 0}'
-    + '#pane-maratonas iframe{width:100%;height:calc(100vh - 150px);min-height:560px;border:0;border-radius:18px;background:#0a1426}';
+    + '.mr-h{font-size:22px;font-weight:800;letter-spacing:-.3px}.mr-s{font-size:13.5px;color:var(--fg2);margin:4px 0 14px;line-height:1.5}'
+    + '.mr-leg{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}'
+    + '.mr-pill{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:800;padding:5px 11px;border-radius:99px;background:var(--surface2);color:var(--fg2);white-space:nowrap}.mr-pill i{width:7px;height:7px;border-radius:50%;background:currentColor}'
+    + '.mr-pill.abertas{background:rgba(16,185,129,.14);color:#0f9d6b}.mr-pill.andamento{background:rgba(245,158,11,.16);color:#c27a05}.mr-pill.dias{background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent)}'
+    + '.mr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px}'
+    + '.mr-c{--cor:#4f6ef7;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--border);border-radius:22px;overflow:hidden;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}.mr-c:hover{transform:translateY(-3px);box-shadow:0 18px 36px -18px var(--cor)}'
+    + '.mr-art{position:relative;aspect-ratio:16/9;background-size:cover;background-position:center;background-color:var(--surface2)}.mr-art:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,var(--surface) 0%,transparent 45%),linear-gradient(135deg,color-mix(in srgb,var(--cor) 28%,transparent),transparent 60%)}'
+    + '.mr-c.fechada .mr-art{filter:saturate(.7)}'
+    + '.mr-bd{display:flex;flex-direction:column;gap:6px;padding:0 18px 18px;margin-top:-18px;position:relative;z-index:1;flex:1}'
+    + '.mr-bd h3{font-size:19px;line-height:1.2;font-weight:800;margin:4px 0 0}.mr-ed{font-size:12.5px;color:var(--fg2);font-weight:700}.mr-q{font-size:13px;font-weight:800;color:var(--cor)}'
+    + '.mr-bd p{font-size:13.5px;line-height:1.5;color:var(--fg2);margin:2px 0 0}.mr-bd p b{color:var(--fg)}'
+    + '.mr-av{font-size:12.5px;line-height:1.45;padding:10px 12px;border-radius:12px;background:var(--surface2);color:var(--fg2);margin-top:4px}'
+    + '.mr-ac{margin-top:auto;padding-top:12px;display:flex;gap:8px}'
+    + '.mr-b1,.mr-b2{flex:1;min-height:46px;border-radius:14px;border:0;font:inherit;font-weight:800;font-size:13.5px;cursor:pointer}.mr-b1{background:var(--cor);color:#fff;box-shadow:0 8px 18px -8px var(--cor)}.mr-b2{background:var(--surface2);color:var(--fg);border:1.5px solid var(--border)}'
+    + '.mr-ov{position:fixed;inset:0;z-index:9000;background:rgba(8,12,28,.6);backdrop-filter:blur(4px);display:none;align-items:flex-end;justify-content:center}.mr-ov.on{display:flex}@media(min-width:700px){.mr-ov{align-items:center}}'
+    + '.mr-fo{width:100%;max-width:620px;max-height:92vh;overflow:auto;background:var(--surface);color:var(--fg);border-radius:24px 24px 0 0;padding:20px 20px 26px}@media(min-width:700px){.mr-fo{border-radius:24px}}'
+    + '.mr-fo h3{font-size:21px;font-weight:800;margin:8px 0 2px}.mr-fo .sub{font-size:13px;color:var(--fg2);margin-bottom:12px}.mr-x{float:right;border:0;background:var(--surface2);color:var(--fg);width:38px;height:38px;border-radius:50%;font-size:16px;cursor:pointer}'
+    + '.mr-gr{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--accent);margin:16px 0 8px}'
+    + '.mr-cp{display:flex;flex-direction:column;gap:5px;margin-bottom:12px;font-size:13px;font-weight:700}.mr-cp em{font-weight:500;color:var(--fg3);font-style:normal}'
+    + '.mr-cp input[type=text],.mr-cp input[type=tel],.mr-cp input[type=email],.mr-cp textarea{font:inherit;font-size:14px;padding:12px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface2);color:var(--fg)}.mr-cp textarea{min-height:76px}'
+    + '.mr-dois{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:520px){.mr-dois{grid-template-columns:1fr}}'
+    + '.mr-ops{display:flex;flex-wrap:wrap;gap:8px}.mr-ops label{cursor:pointer}.mr-ops input{position:absolute;opacity:0;pointer-events:none}.mr-ops span{display:inline-block;padding:9px 13px;border-radius:99px;border:1.5px solid var(--border);background:var(--surface2);font-size:13px;font-weight:700}.mr-ops input:checked+span{background:var(--accent);border-color:var(--accent);color:#fff}'
+    + '.mr-er{color:#e11d48;font-size:13px;font-weight:700;min-height:18px;margin:6px 0}.mr-ok{text-align:center;padding:20px 6px}.mr-ok .ck{width:70px;height:70px;border-radius:50%;background:#10b981;color:#fff;display:grid;place-items:center;font-size:34px;margin:0 auto 10px}'
+    + '.mr-ok a{text-decoration:none;display:flex;align-items:center;justify-content:center}';
   document.head.appendChild(css);
 
   /* ---------- menu e telas ---------- */
@@ -63,13 +86,13 @@
     if (!perfil || !base) return false;
     var sec = document.createElement('div'); sec.className = 'nav-section'; sec.textContent = 'Maratonas';
     var p1 = document.createElement('div'); p1.className = 'nav-pill'; p1.id = 'mt10-nav'; p1.style.display = 'none';
-    p1.setAttribute('onclick', "goTo('mt10',this)"); p1.innerHTML = '<span class="nav-icon">🏁</span><span>Maratona 10 meses</span><span class="nav-badge">Turma</span>';
+    p1.setAttribute('onclick', "goTo('mt10',this)"); p1.innerHTML = '<span class="nav-icon"><img class="ic3d" src="img/icons/bandeira.svg" alt="" draggable="false"></span><span>Maratona 10 meses</span><span class="nav-badge">Turma</span>';
     var p2 = document.createElement('div'); p2.className = 'nav-pill'; p2.setAttribute('onclick', "goTo('maratonas',this)");
-    p2.innerHTML = '<span class="nav-icon">🗓️</span><span>Maratonas</span>';
+    p2.innerHTML = '<span class="nav-icon"><img class="ic3d" src="img/icons/calendario.svg" alt="" draggable="false"></span><span>Maratonas</span>';
     perfil.insertAdjacentElement('beforebegin', sec); sec.insertAdjacentElement('afterend', p1); p1.insertAdjacentElement('afterend', p2);
     var a = document.createElement('div'); a.className = 'pane'; a.id = 'pane-mt10';
     var b = document.createElement('div'); b.className = 'pane'; b.id = 'pane-maratonas';
-    b.innerHTML = '<div style="font-size:21px;font-weight:800;margin-bottom:4px">Maratonas</div><div style="font-size:13px;color:var(--fg2);margin-bottom:14px">Todas as maratonas, com status. Se inscreva na próxima.</div><iframe title="Maratonas" loading="lazy"></iframe>';
+    b.innerHTML = '';
     base.insertAdjacentElement('afterend', a); a.insertAdjacentElement('afterend', b);
     if (window.TITLES) { TITLES.mt10 = 'Maratona 10 meses'; TITLES.maratonas = 'Maratonas'; }
 
@@ -83,6 +106,85 @@
     return true;
   }
 
+
+  /* ---------- Maratonas (todas, nativo) ---------- */
+  var CFG = window.EBG_CONFIG || {}, ATUAL = null;
+  var zapM = function (t) { return 'https://wa.me/' + (CFG.whatsapp || '5555999895429') + '?text=' + encodeURIComponent(t || ''); };
+  function cardM(m) {
+    var st = MR.status(m), d = MR.diasAte(m), inscrito = false;
+    try { inscrito = !!localStorage.getItem('ebg:maratona:' + m.id); } catch (e) {}
+    var bt = '';
+    if (st === 'abertas') bt = inscrito ? '<span class="mr-pill abertas"><i></i>Você já está inscrito(a)</span>' : '<button class="mr-b1" data-mr="' + m.id + '">Quero me inscrever</button>';
+    else if (st === 'em-breve') bt = '<button class="mr-b2" data-mr="' + m.id + '">Me avise quando abrir</button>';
+    else if (st === 'andamento' && m.proxima) bt = '<button class="mr-b2" data-mr="' + m.proxima + '">Entrar na lista da ' + esc((MR.porId(m.proxima) || {}).edicao || 'próxima turma') + '</button>';
+    return '<article class="mr-c' + (st === 'abertas' ? '' : ' fechada') + '" style="--cor:' + esc(m.cor) + '"><div class="mr-art" style="background-image:url(\'' + esc(m.img) + '\');background-position:' + esc(m.pos || 'center') + '"></div><div class="mr-bd">'
+      + '<div style="display:flex;gap:6px;flex-wrap:wrap"><span class="mr-pill ' + st + '"><i></i>' + MR.rotulo[st] + '</span>' + (st === 'abertas' && d > 0 ? '<span class="mr-pill dias">faltam ' + d + ' dias</span>' : '') + (m.vagas ? '<span class="mr-pill dias">' + m.vagas + ' vagas</span>' : '') + '</div>'
+      + '<h3>' + esc(m.nome) + '</h3><div class="mr-ed">' + esc(m.edicao) + (m.duracao ? ' · ' + esc(m.duracao) : '') + '</div><div class="mr-q">' + esc(m.quando) + '</div>'
+      + '<p>' + esc(m.promessa) + '</p><p><b>Pra quem:</b> ' + esc(m.pra) + '</p>'
+      + (st === 'andamento' && m.aviso ? '<div class="mr-av">' + esc(m.aviso) + '</div>' : '')
+      + '<div class="mr-ac">' + bt + '</div></div></article>';
+  }
+  function renderMaratonas() {
+    var p = $('pane-maratonas'); if (!p) return;
+    var ab = MR.lista.filter(function (m) { return MR.status(m) === 'abertas'; }).length, an = MR.lista.filter(function (m) { return MR.status(m) === 'andamento'; }).length;
+    p.innerHTML = '<div class="mr-h">Maratonas</div><div class="mr-s">Todas as maratonas do Gediel, com status. Se inscreva na próxima.</div>'
+      + '<div class="mr-leg">' + (ab ? '<span class="mr-pill abertas"><i></i>' + ab + ' com inscrições abertas</span>' : '') + (an ? '<span class="mr-pill andamento"><i></i>' + an + ' em andamento</span>' : '') + '</div>'
+      + '<div class="mr-grid">' + MR.lista.map(cardM).join('') + '</div><div class="mr-ov" id="mr-ov"><div class="mr-fo" id="mr-fo"></div></div>';
+  }
+  var cp = function (nome, lista, tipo) { return '<div class="mr-ops">' + lista.map(function (o) { return '<label><input type="' + (tipo || 'radio') + '" name="' + nome + '" value="' + esc(o) + '"><span>' + esc(o) + '</span></label>'; }).join('') + '</div>'; };
+  function abrirForm(id) {
+    var m = MR.porId(id); if (!m) return; ATUAL = m;
+    var C = MR.comuns, extra = (m.pergunta || []).map(function (q) { return '<div class="mr-cp"><span>' + esc(q.r) + '</span>' + (q.tipo === 'opcoes' ? cp('x_' + q.k, q.op) : '<input type="text" name="x_' + q.k + '" maxlength="120" placeholder="' + esc(q.ph || '') + '">') + '</div>'; }).join('');
+    $('mr-fo').innerHTML = '<button class="mr-x" type="button" data-mrx aria-label="Fechar">✕</button><span class="mr-pill ' + MR.status(m) + '"><i></i>' + esc(m.quando) + '</span><h3>' + esc(m.nome) + '</h3>'
+      + '<div class="sub">' + esc(m.edicao) + '. Leva 1 minuto. O Gediel lê cada inscrição e te chama no WhatsApp.</div>'
+      + '<form id="mr-form" novalidate><div class="mr-gr">Seu contato</div>'
+      + '<label class="mr-cp"><span>Nome completo</span><input type="text" name="nome" maxlength="120" value="' + esc(EU.nome || '') + '"></label>'
+      + '<div class="mr-dois"><label class="mr-cp"><span>WhatsApp com DDD</span><input type="tel" name="whatsapp" maxlength="30" placeholder="(55) 99999-9999"></label><label class="mr-cp"><span>E-mail <em>(opcional)</em></span><input type="email" name="email" maxlength="160" value="' + esc(EU.email || '') + '"></label></div>'
+      + '<div class="mr-dois"><label class="mr-cp"><span>Instagram <em>(opcional)</em></span><input type="text" name="instagram" maxlength="80" placeholder="@seuperfil"></label><label class="mr-cp"><span>Cidade</span><input type="text" name="cidade" maxlength="120"></label></div>'
+      + '<label class="mr-cp"><span>País onde você mora</span><input type="text" name="pais" maxlength="80" value="Brasil"></label>'
+      + '<div class="mr-gr">Seu inglês</div><div class="mr-cp"><span>Seu nível hoje</span>' + cp('nivel', C.nivel) + '</div>'
+      + '<div class="mr-cp"><span>Pra que você quer o inglês? <em>(pode marcar mais de um)</em></span>' + cp('objetivo', C.objetivo, 'checkbox') + '</div>' + extra
+      + '<div class="mr-gr">Sua rotina</div><div class="mr-cp"><span>Que horário você consegue participar? <em>(mais de um)</em></span>' + cp('turno', C.turno, 'checkbox') + '</div>'
+      + '<div class="mr-cp"><span>Qual é o seu momento?</span>' + cp('momento', C.momento) + '</div>'
+      + '<label class="mr-cp"><span>Quer contar algo? <em>(opcional)</em></span><textarea name="mensagem" maxlength="1000" placeholder="Seu sonho, sua dificuldade, sua data de viagem…"></textarea></label>'
+      + '<div class="mr-er" id="mr-er" role="alert"></div><button class="mr-b1" type="submit" style="width:100%;--cor:var(--accent)">Enviar inscrição</button></form>';
+    $('mr-ov').classList.add('on');
+  }
+  var lerU = function (f, n) { var e = f.querySelector('[name="' + n + '"]:checked'); return e ? e.value : ''; };
+  var lerV = function (f, n) { return [].map.call(f.querySelectorAll('[name="' + n + '"]:checked'), function (x) { return x.value; }).join(', '); };
+  var cor = function (v, n) { v = String(v || '').trim(); return v ? v.slice(0, n) : null; };
+  function gravarM(l) {
+    if (!CFG.supabaseUrl || !CFG.supabaseAnonKey) return Promise.reject(new Error('sem config'));
+    return fetch(CFG.supabaseUrl.replace(/\/$/, '') + '/rest/v1/maratonas_inscricoes', { method: 'POST', keepalive: true, headers: { apikey: CFG.supabaseAnonKey, Authorization: 'Bearer ' + CFG.supabaseAnonKey, 'Content-Type': 'application/json', Prefer: 'return=minimal' }, body: JSON.stringify([l]) }).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); });
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('[data-mr]'); if (b) { abrirForm(b.dataset.mr); return; }
+    if (e.target.closest && e.target.closest('[data-mrx]') || e.target.id === 'mr-ov') { var o = $('mr-ov'); if (o) o.classList.remove('on'); }
+  });
+  document.addEventListener('submit', function (e) {
+    if (e.target.id !== 'mr-form') return; e.preventDefault();
+    var f = e.target, m = ATUAL, er = $('mr-er'), nome = f.nome.value.trim(), tel = f.whatsapp.value.replace(/\D/g, '');
+    if (nome.length < 2) { er.textContent = 'Escreva o seu nome.'; return; }
+    if (tel.length < 10) { er.textContent = 'Confira o WhatsApp com DDD.'; return; }
+    if (f.email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value.trim())) { er.textContent = 'Confira o e-mail.'; return; }
+    var momento = lerU(f, 'momento'); if (!momento) { er.textContent = 'Marque qual é o seu momento.'; return; }
+    er.textContent = '';
+    var resp = {}; (m.pergunta || []).forEach(function (q) { var v = q.tipo === 'opcoes' ? lerU(f, 'x_' + q.k) : (f['x_' + q.k] || {}).value; if (v) resp[q.k] = String(v).slice(0, 200); });
+    var linha = { maratona: m.id, nome: cor(nome, 120), whatsapp: cor(tel, 30), email: cor(f.email.value.toLowerCase(), 160), instagram: cor(f.instagram.value.replace(/^@/, ''), 80), cidade: cor(f.cidade.value, 120), pais: cor(f.pais.value, 80),
+      nivel: cor(lerU(f, 'nivel'), 60), objetivo: cor(lerV(f, 'objetivo'), 200), turno: cor(lerV(f, 'turno'), 120), momento: cor(momento, 80), temperatura: MR.temperatura(momento), conheceu: 'Já sou aluno(a)',
+      respostas: resp, mensagem: cor(f.mensagem.value, 1000), veio_de: 'membros', ja_aluno: true, aceita_contato: true, visitante: null, origem: 'de=membros' };
+    var bt = f.querySelector('[type=submit]'); bt.disabled = true; bt.textContent = 'Enviando…';
+    var msg = 'Oi Gediel! Acabei de me inscrever na maratona *' + m.nome + '* (' + m.edicao + ', ' + m.quando.toLowerCase() + ').\nNome: ' + nome + (linha.nivel ? '\nNível: ' + linha.nivel : '') + '\nMomento: ' + momento;
+    var fim = function (ok) {
+      if (ok) { try { localStorage.setItem('ebg:maratona:' + m.id, new Date().toISOString()); } catch (x) {} }
+      $('mr-fo').innerHTML = '<div class="mr-ok"><div class="ck">✓</div><h3>' + (ok ? 'Inscrição feita!' : 'Quase lá') + '</h3><div class="sub">' + (ok ? 'Você está na lista da ' + esc(m.nome) + '. O Gediel vai te chamar no WhatsApp.' : 'Não consegui enviar agora. Avise o Gediel pelo WhatsApp pra garantir seu lugar.') + '</div>'
+        + '<div class="mr-ac" style="flex-direction:column"><a class="mr-b1" style="--cor:#16a34a" target="_blank" rel="noopener" href="' + esc(zapM(msg)) + '">Avisar o Gediel no WhatsApp</a><button class="mr-b2" type="button" data-mrx>Ver as outras maratonas</button></div></div>';
+      renderMaratonasKeep();
+    };
+    gravarM(linha).then(function () { fim(true); }, function () { fim(false); });
+  });
+  function renderMaratonasKeep() { var g = document.querySelector('#pane-maratonas .mr-grid'); if (g) g.innerHTML = MR.lista.map(cardM).join(''); }
+
   var goAnt = window.goTo;
   window.goTo = function (page, el) {
     if (page === 'mt10') {
@@ -90,10 +192,7 @@
       sb.auth.getUser().then(function (r) { if (r.data && r.data.user) { lerPlataforma(r.data.user); if (EU.dentro) registrar(); desenhar(); } });
       RK.ciclo = null; desenhar();
     }
-    if (page === 'maratonas') {
-      var f = document.querySelector('#pane-maratonas iframe');
-      if (f && !f.src) f.src = 'maratonas.html?embed=1&de=membros&nome=' + encodeURIComponent(EU.nome) + '&email=' + encodeURIComponent(EU.email);
-    }
+    if (page === 'maratonas') renderMaratonas();
     return goAnt.apply(this, arguments);
   };
   var tabAnt = window.adminTab;
@@ -125,6 +224,7 @@
     EU.uid = u.id;
     lerPlataforma(u);
     if (EU.dentro) registrar();
+    if (EU.dentro) talvezLargada();
   }
 
   /* ---------- tela do participante ---------- */
@@ -146,8 +246,7 @@
   function adaptacao() {
     var P = EU.pl || { vistas: [], tour: [] }, n = M10.adapt.aulas, va = Math.min(n, P.vistas.length);
     var it = [
-      { t: 'Fazer o teste de nível (Bússola)', ok: !!P.nivel, ir: 'bussola' },
-      { t: 'Fazer o teste de talentos (Prisma)', ok: !!P.prisma, ir: 'prisma' },
+      { t: 'Fazer um teste: Prisma ou Bússola (você escolhe)', ok: !!(P.prisma || P.nivel), ir: 'prisma' },
       { t: 'Responder as perguntas do seu perfil', ok: !!(P.onb && !P.onb.pulou), ir: 'config' },
       { t: 'Ver o tutorial dos menus', ok: P.tour.length > 0, ir: 'tour' },
       { t: 'Assistir ' + n + ' aulas (' + va + '/' + n + ')', ok: va >= n, ir: 'modulos' }
@@ -207,6 +306,7 @@
       + '<div class="mt-barra" title="Tempo da maratona"><i style="width:' + Math.round(dia / totalDias * 100) + '%"></i></div></div>';
     if (EU.admin && !EU.dentro) h += '<div class="mt-aviso">🛡️ Você está vendo como admin. O aluno entra pelo link de cadastro ou quando você marca em <b>Painel Admin → 🏁 Maratona 10m</b>.' + (EU.semTabela ? ' <b>Falta rodar o SQL da maratona no Supabase dos membros.</b>' : '') + '</div>';
 
+    h += '<div style="text-align:right;margin:-6px 0 12px"><button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="mtLargada()" style="border:0;background:none;color:var(--accent);font-weight:800;cursor:pointer">🏁 Rever a largada</button></div>';
     // como funciona
     h += '<details class="mt-box"' + (AD.ok ? '' : ' open') + '><summary style="cursor:pointer;font-weight:800">📖 Como funciona a maratona</summary><div style="margin-top:10px;font-size:13px;line-height:1.6;color:var(--fg2)">'
       + '<p><b style="color:var(--fg)">1. Adaptação.</b> Primeiro você conhece a plataforma: testes, perfil, tutorial e as primeiras aulas. Isso libera o checklist dos ciclos.</p>'
@@ -217,7 +317,7 @@
       + '<div class="mt-premio"><div>🏆 ' + esc(M10.premios.concluir) + '</div><div>❓ ' + esc(M10.premios.primeiro) + '</div></div></div></details>';
 
     // adaptação
-    h += '<div class="mt-box' + (AD.ok ? '' : ' trava') + '"><h3>' + (AD.ok ? '✅ Adaptação concluída' : '🔓 Adaptação: libere o seu checklist') + '</h3><div class="s">' + (AD.ok ? 'Seu checklist dos ciclos está liberado.' : 'Faça os 5 passos. Assim que terminar, os marcos do ciclo abrem.') + '</div>'
+    h += '<div class="mt-box' + (AD.ok ? '' : ' trava') + '"><h3>' + (AD.ok ? '✅ Adaptação concluída' : '🔓 Adaptação: libere o seu checklist') + '</h3><div class="s">' + (AD.ok ? 'Seu checklist dos ciclos está liberado.' : 'Faça os 4 passos. Assim que terminar, os marcos do ciclo abrem.') + '</div>'
       + AD.itens.map(function (x) { return '<div class="mt-ad' + (x.ok ? ' ok' : '') + '"><span class="ck">' + (x.ok ? '✓' : '') + '</span><span class="t">' + esc(x.t) + '</span>' + (x.ok ? '' : '<button data-mt-ir="' + x.ir + '">Fazer</button>') + '</div>'; }).join('') + '</div>';
 
     if (atual) h += '<div style="font-size:13px;color:var(--fg2);margin:0 2px 10px">Agora: <b style="color:var(--fg)">Ciclo ' + atual.n + ' · ' + esc(atual.nome) + '</b> · faltam ' + falta + ' dias pra fechar o ciclo e sair o Top 15.</div>';
@@ -247,8 +347,8 @@
     if (t.dataset.mtRk) return ranking(+t.dataset.mtRk);
     if (t.dataset.mtIr) {
       var ir = t.dataset.mtIr;
-      if (ir === 'config') { if (window.openSettings) openSettings(); return; }
-      if (ir === 'tour') { var b = document.querySelector('[data-ent="tour"]'); if (b) b.click(); else { goTo('home', document.querySelector('.nav-pill')); if (window.toast) toast('Abra ⚙️ Configurações → rever o tutorial', '#4f6ef7'); } return; }
+      if (ir === 'config') { if (window.miConhecer) window.miConhecer(function () {}); else if (window.openSettings) openSettings(); return; }
+      if (ir === 'tour') { if (window.miTour) { goTo('home', document.querySelector('.sidebar .nav-pill')); setTimeout(function () { window.miTour('todos'); }, 500); } return; }
       var pill = document.querySelector('.sidebar .nav-pill[onclick*="\'' + ir + '\'"]'); goTo(ir, pill); return;
     }
     if (t.hasAttribute('data-mt-post')) {
@@ -269,6 +369,102 @@
     desenhar();
   });
   document.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('details[data-tranca] > summary')) e.preventDefault(); });
+
+  /* ---------- LARGADA: card de boas-vindas do maratonista (1ª vez) e guia dos primeiros passos ---------- */
+  var lgCss = document.createElement('style');
+  lgCss.textContent = ''
+    + '#mt-lg{position:fixed;inset:0;z-index:9500;background:radial-gradient(ellipse at 20% 0%,#3b4fd8 0%,#1b1f4b 45%,#0b0d1c 100%);color:#fff;display:flex;align-items:center;justify-content:center;padding:20px 20px 100px;overflow-y:auto;opacity:0;transition:opacity .4s}'
+    + '#mt-lg.vis{opacity:1}#mt-lg .bx{width:100%;max-width:560px;margin:auto}'
+    + '#mt-lg .sl{animation:lgIn .55s cubic-bezier(.22,1,.36,1) both}@keyframes lgIn{from{opacity:0;transform:translateX(40px)}}'
+    + '#mt-lg .k{font-size:11px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;opacity:.65;text-align:center}'
+    + '#mt-lg .q{font-size:clamp(24px,5vw,32px);font-weight:800;text-align:center;line-height:1.15;margin:10px 0 8px}'
+    + '#mt-lg .q em{font-style:normal;background:linear-gradient(90deg,#fff,#f2c69c);-webkit-background-clip:text;background-clip:text;color:transparent}'
+    + '#mt-lg .s{font-size:14px;opacity:.78;text-align:center;line-height:1.55;max-width:440px;margin:0 auto 20px}'
+    + '#mt-lg .peito{position:relative;margin:0 auto 22px;width:min(300px,88%);aspect-ratio:1.5;border-radius:22px;background:#fff;color:#1b1f4b;padding:18px;box-shadow:0 30px 80px rgba(0,0,0,.5);transform:rotate(-3deg);animation:lgPeito .9s cubic-bezier(.2,1.4,.4,1) both;display:flex;flex-direction:column;justify-content:center;text-align:center}'
+    + '#mt-lg .peito small{font-size:10px;font-weight:800;letter-spacing:2px;color:#8b5cf6}#mt-lg .peito strong{font-size:44px;line-height:1;margin:6px 0;background:linear-gradient(135deg,#4f6ef7,#8b5cf6,#d6965a);-webkit-background-clip:text;background-clip:text;color:transparent}#mt-lg .peito span{font-size:13px;font-weight:800}'
+    + '@keyframes lgPeito{from{opacity:0;transform:rotate(-14deg) scale(.6) translateY(60px)}}'
+    + '#mt-lg .li{display:grid;gap:8px}#mt-lg .li div{display:flex;gap:12px;align-items:center;background:rgba(255,255,255,.08);border-radius:14px;padding:12px 14px;font-size:13.5px;line-height:1.4;opacity:0;animation:lgUp .5s cubic-bezier(.22,1,.36,1) forwards}'
+    + '#mt-lg .li b{width:32px;height:32px;border-radius:10px;background:rgba(255,255,255,.16);display:grid;place-items:center;flex:none;font-size:16px}#mt-lg .li .ok{opacity:.55;text-decoration:line-through}#mt-lg .li i{margin-left:auto;font-style:normal;font-size:11px;font-weight:800;opacity:.7}'
+    + '@keyframes lgUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}'
+    + '#mt-lg .cic{display:flex;gap:6px;justify-content:center;margin:4px 0 16px}#mt-lg .cic span{flex:1;max-width:92px;text-align:center;padding:10px 4px;border-radius:14px;background:rgba(255,255,255,.08);font-size:11px;font-weight:700;opacity:0;animation:lgUp .5s forwards}#mt-lg .cic span b{display:block;font-size:22px;margin-bottom:4px}'
+    + '#mt-lg .pr{display:grid;gap:8px;margin-top:12px}#mt-lg .pr div{padding:12px 14px;border-radius:14px;font-size:13px;font-weight:700;background:linear-gradient(135deg,rgba(214,150,90,.25),rgba(139,92,246,.2))}'
+    + '#mt-lg .dots{display:flex;gap:6px;justify-content:center;margin-top:18px}#mt-lg .dots i{width:7px;height:7px;border-radius:99px;background:rgba(255,255,255,.3);transition:width .3s}#mt-lg .dots i.on{width:22px;background:#fff}'
+    + '#mt-lg .cta{position:fixed;left:50%;transform:translateX(-50%);bottom:max(18px,env(safe-area-inset-bottom));width:calc(100% - 40px);max-width:520px;background:#fff;color:#1b1f4b;border:0;border-radius:18px;padding:17px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 14px 40px rgba(0,0,0,.4)}'
+    + '#mt-lg .dep{position:fixed;top:14px;right:16px;background:rgba(255,255,255,.1);border:0;color:#fff;border-radius:99px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer}'
+    + '.mt-guia{position:fixed;left:50%;transform:translateX(-50%);bottom:84px;z-index:800;background:linear-gradient(135deg,#1b1f4b,#4f6ef7);color:#fff;border-radius:18px;padding:12px 14px;display:flex;align-items:center;gap:12px;box-shadow:0 14px 40px rgba(27,31,75,.4);width:calc(100% - 28px);max-width:520px;animation:lgUp .5s both}'
+    + '.mt-guia b{font-size:13px;display:block}.mt-guia small{font-size:11.5px;opacity:.8}.mt-guia button{margin-left:auto;border:0;border-radius:99px;padding:9px 14px;font-weight:800;font-size:12.5px;background:#fff;color:#1b1f4b;cursor:pointer;white-space:nowrap}.mt-guia .x{background:none;color:#fff;padding:4px;margin-left:0;opacity:.6}';
+  document.head.appendChild(lgCss);
+  var PASSOS = [
+    { k: 'perfil', ic: '📝', t: 'Perguntas do seu perfil', ok: function (P) { return !!(P.onb && !P.onb.pulou); } },
+    { k: 'tour', ic: '🗺️', t: 'Tour pelos menus da plataforma', ok: function (P) { return P.tour.length > 0; } },
+    { k: 'prisma', ic: '🔷', t: 'Um teste: Prisma (talentos) ou Bússola (nível)', ok: function (P) { return !!(P.prisma || P.nivel); } },
+    { k: 'modulos', ic: '🎬', t: 'Assistir as 5 primeiras aulas', ok: function (P) { return P.vistas.length >= M10.adapt.aulas; } }
+  ];
+  var vistaK = function () { return 'mt10:largada-vista:' + EU.email; };
+  function ocupado() { return ['mi-entry', 'mi-onb', 'mi-tour', 'login-screen'].some(function (id) { var e = $(id); return e && (e.classList.contains('on') || (id === 'login-screen' && getComputedStyle(e).display !== 'none')); }); }
+  function talvezLargada() {
+    var vista = false; try { vista = !!localStorage.getItem(vistaK()); } catch (e) {}
+    if (!vista) { var t = setInterval(function () { if (!ocupado()) { clearInterval(t); setTimeout(function () { if (!ocupado()) largada(0); else talvezLargada(); }, 700); } }, 800); }
+    else guiaBarra();
+  }
+  function largada(n) {
+    var el = $('mt-lg'); if (!el) { el = document.createElement('div'); el.id = 'mt-lg'; document.body.appendChild(el); requestAnimationFrame(function () { el.classList.add('vis'); }); }
+    var P = EU.pl || { vistas: [], tour: [] }, nome = (EU.nome || '').split(' ')[0], h = '', bt = '';
+    if (n === 0) {
+      h = '<div class="peito"><small>MARATONA 10 MESES</small><strong>🏁</strong><span>' + esc(EU.nome) + '</span><span style="font-size:11px;opacity:.6;font-weight:600">Turma Fundadora</span></div>'
+        + '<div class="k">Largada</div><h1 class="q">Bem-vindo(a) à <em>maratona</em>, ' + esc(nome) + '!</h1>'
+        + '<p class="s">São 10 meses com o Gediel e a Mayandra, com o inglês dentro da sua rotina. Esta área é exclusiva de quem está na maratona.</p>'
+        + '<div class="pr"><div>🏆 ' + esc(M10.premios.concluir) + '</div><div>❓ ' + esc(M10.premios.primeiro) + '</div></div>';
+      bt = 'Como funciona →';
+    } else if (n === 1) {
+      h = '<div class="k">Como funciona</div><h1 class="q">5 ciclos, <em>um passo por dia</em></h1><p class="s">Cada ciclo dura 2 meses, tem 4 marcos e uma entrega. No fim de cada um sai o Top 15 e o placar zera.</p>'
+        + '<div class="cic">' + CIC.map(function (c, j) { return '<span style="animation-delay:' + (j * .08) + 's"><b>' + c.icone + '</b>' + esc(c.nome) + '</span>'; }).join('') + '</div>'
+        + '<div class="li">' + M10.pontos.slice(0, 5).map(function (x, j) { return '<div style="animation-delay:' + (.3 + j * .06) + 's"><b>' + x[0] + '</b>' + esc(x[1]) + '<i>+' + x[2] + '</i></div>'; }).join('') + '</div>'
+        + '<p class="s" style="margin-top:12px">Tem teto por dia: com constância, qualquer um alcança o 1º lugar.</p>';
+      bt = 'Meu roteiro de largada →';
+    } else {
+      h = '<div class="k">Seu roteiro</div><h1 class="q">Antes de correr, <em>conheça a pista</em></h1><p class="s">4 passos, na ordem. Eu te levo em cada um. Quando terminar, o checklist dos ciclos abre.</p>'
+        + '<div class="li">' + PASSOS.map(function (x, j) { var ok = x.ok(P); return '<div style="animation-delay:' + (j * .08) + 's"><b>' + (ok ? '✓' : x.ic) + '</b><span class="' + (ok ? 'ok' : '') + '">' + (j + 1) + '. ' + esc(x.t) + '</span>' + (x.k === 'modulos' ? '<i>' + Math.min(P.vistas.length, M10.adapt.aulas) + '/' + M10.adapt.aulas + '</i>' : '') + '</div>'; }).join('') + '</div>';
+      bt = 'Começar o passo 1 🚀';
+    }
+    el.innerHTML = '<button class="dep" data-lg="depois">Depois</button><div class="bx"><div class="sl">' + h + '</div><div class="dots">' + [0, 1, 2].map(function (j) { return '<i class="' + (j === n ? 'on' : '') + '"></i>'; }).join('') + '</div></div><button class="cta" data-lg="' + (n < 2 ? 'prox:' + (n + 1) : 'ir') + '">' + bt + '</button>';
+    el.scrollTop = 0;
+    if (n === 0) confeteLg();
+  }
+  function fecharLg() { var el = $('mt-lg'); if (!el) return; el.classList.remove('vis'); setTimeout(function () { el.remove(); }, 400); try { localStorage.setItem(vistaK(), '1'); } catch (e) {} }
+  function confeteLg() { var cores = ['#fff', '#f2c69c', '#8b5cf6', '#4f6ef7', '#10b981']; for (var j = 0; j < 60; j++) { var x = document.createElement('i'); x.style.cssText = 'position:fixed;top:-20px;z-index:9600;width:9px;height:14px;border-radius:2px;pointer-events:none;left:' + Math.random() * 100 + '%;background:' + cores[j % 5] + ';transition:transform ' + (2 + Math.random() * 2) + 's linear;'; document.body.appendChild(x); (function (x) { requestAnimationFrame(function () { requestAnimationFrame(function () { x.style.transform = 'translateY(110vh) rotate(720deg)'; }); }); setTimeout(function () { x.remove(); }, 4500); })(x); } }
+  // guia: leva a pessoa no próximo passo que falta
+  function proximo() { var P = EU.pl || { vistas: [], tour: [] }; return PASSOS.filter(function (x) { return !x.ok(P); })[0]; }
+  function guiar() {
+    sb.auth.getUser().then(function (r) {
+      if (r.data && r.data.user) lerPlataforma(r.data.user);
+      var p = proximo(); guiaBarra();
+      if (!p) { goTo('mt10', $('mt10-nav')); if (window.toast) toast('🎉 Adaptação concluída! Seu checklist abriu.', '#10b981'); return; }
+      if (p.k === 'perfil' && window.miConhecer) return window.miConhecer(function () { setTimeout(guiar, 600); });
+      if (p.k === 'tour' && window.miTour) { goTo('home', document.querySelector('.sidebar .nav-pill')); return setTimeout(function () { window.miTour('todos'); }, 500); }
+      var pill = document.querySelector('.sidebar .nav-pill[onclick*="\'' + p.k + '\'"]'); goTo(p.k, pill);
+    });
+  }
+  function guiaBarra() {
+    var g = $('mt-guia'); if (g) g.remove();
+    return; // barra flutuante desligada: atrapalhava a navegação (o roteiro fica no menu 🏁 Maratona)
+    var p = proximo(); if (!p || !EU.dentro) return;
+    try { if (sessionStorage.getItem('mt-guia-x')) return; } catch (e) {}
+    var feitos = PASSOS.length - PASSOS.filter(function (x) { return !x.ok(EU.pl); }).length;
+    g = document.createElement('div'); g.className = 'mt-guia'; g.id = 'mt-guia';
+    g.innerHTML = '<span style="font-size:24px">' + p.ic + '</span><span><b>Largada · passo ' + (feitos + 1) + ' de ' + PASSOS.length + '</b><small>' + esc(p.t) + '</small></span><button data-lg="guiar">Fazer agora</button><button class="x" data-lg="xguia" aria-label="Esconder">✕</button>';
+    document.body.appendChild(g);
+  }
+  window.mtLargada = function () { largada(0); };
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('[data-lg]'); if (!b) return;
+    var a = b.getAttribute('data-lg');
+    if (a.indexOf('prox:') === 0) return largada(+a.split(':')[1]);
+    if (a === 'depois') { fecharLg(); guiaBarra(); return; }
+    if (a === 'ir') { fecharLg(); return guiar(); }
+    if (a === 'guiar') return guiar();
+    if (a === 'xguia') { try { sessionStorage.setItem('mt-guia-x', '1'); } catch (x) {} var g = $('mt-guia'); if (g) g.remove(); }
+  });
 
   /* ---------- Painel Admin: escolher quem entra ---------- */
   var ADM = { users: [], dentro: {}, prog: {}, busca: '' };
@@ -333,6 +529,8 @@
     } else {
       r = await sb.from('maratona_membros').upsert({ email: em, nome: t.getAttribute('data-mt-nome') || null, turma: 'icd-1' });
       if (!r.error) ADM.dentro[em] = { email: em };
+      // incluir na maratona também libera o Programa (1º produto da lista do Programa)
+      if (!r.error) { var cfg = ((window.EBG_ACESSO || {}).estado || {}).cfg || {}; await sb.from('compras').upsert({ pedido: 'maratona-programa-' + em, email: em, produto: (cfg.programa || [])[0] || 'Inglês de Cada Dia' }); }
     }
     if (r.error) { alert('Não consegui salvar: ' + r.error.message); t.disabled = false; return; }
     if (typeof toast === 'function') toast(on ? 'Saiu da maratona' : '🏁 Entrou na Maratona 10 meses', on ? '#6b7280' : '#10b981');
@@ -344,5 +542,20 @@
     if (s && (ev === 'SIGNED_IN' || ev === 'INITIAL_SESSION')) setTimeout(carregar, 300);
     if (ev === 'SIGNED_OUT') { EU.dentro = false; EU.admin = false; var n = $('mt10-nav'); if (n) n.style.display = 'none'; }
   });
+  /* resumo pro painel lateral do app: posição no ciclo atual (null se a pessoa não está na maratona) */
+  window.EBG_MARATONA = {
+    async resumo() {
+      try {
+        if (!EU.dentro) return null;
+        var c = CIC.filter(function (x) { return estado(x) === 'atual'; })[0] || CIC.filter(function (x) { return estado(x) === 'feito'; }).pop();
+        if (!c) return null;
+        var r = await sb.rpc('maratona_ranking', { p_ciclo: c.n, p_de: c.de, p_ate: c.ate });
+        if (r.error || !r.data) return { ciclo: c.n, pos: 0, total: 0, pts: 0, prog: progresso(EU.feitos || {}, null) };
+        var meu = -1; r.data.forEach(function (x, k) { if (x.email === EU.email) meu = k; });
+        return { ciclo: c.n, pos: meu + 1, total: r.data.length, pts: meu >= 0 ? r.data[meu].pontos : 0,
+                 falta: meu > 0 ? r.data[meu - 1].pontos - r.data[meu].pontos + 1 : 0, prog: progresso(EU.feitos || {}, null) };
+      } catch (e) { return null; }
+    }
+  };
   montar();
 })();
