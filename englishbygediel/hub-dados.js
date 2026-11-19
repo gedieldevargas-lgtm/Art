@@ -186,9 +186,10 @@
     let guardado = null;
     try { guardado = JSON.parse(localStorage.getItem('ebg:hubcache') || 'null'); } catch (e) {}
     const buscar = buscarSalvo(CFG).then(d => { if (d) try { localStorage.setItem('ebg:hubcache', JSON.stringify(d)); } catch (e) {} return d; });
-    if (guardado) return juntar(base, guardado);
+    // link direto (?abrir=...): o material pode ser novo e faltar na cópia guardada, então espera o conteúdo atualizado
+    if (guardado && !/[?&]abrir=/.test(location.search)) return juntar(base, guardado);
     const d = await buscar;
-    return juntar(base, d);
+    return juntar(base, d || guardado);
   }
 
   async function buscarSalvo(CFG) {
