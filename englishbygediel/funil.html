@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gediel Vargas · Pare de travar no inglês</title>
+<meta name="description" content="11 anos de sala de aula, mais de 700 alunos. Descubra por que você trava na hora de falar inglês.">
+<meta name="theme-color" content="#0a1426">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Advercase';src:url('fonts/advercase.woff2') format('woff2');font-display:swap}
+:root{--bg:#0a1426;--card:#13233f;--linha:rgba(255,255,255,.1);--w:#fff;--dim:#a7b3c6;--azul:#6f86ff;--verde:#2ea05a;--verm:#e11d2e}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:Inter,system-ui,sans-serif;color:var(--dim);font-size:16px;line-height:1.55;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.serif{font-family:'Advercase','Instrument Serif',serif;color:var(--w);font-weight:400;letter-spacing:-.01em;line-height:1.08}
+.wrap{max-width:1040px;margin:0 auto;padding:0 18px}
+section{padding:56px 0}
+h2.serif{font-size:clamp(28px,6vw,42px);margin-bottom:10px}
+.sub{max-width:56ch;margin-bottom:22px}
+.rot{display:inline-block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--azul);font-weight:700;margin-bottom:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 26px;border-radius:99px;background:#fff;color:#0a1426;font-weight:700;font-size:16px;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px -12px rgba(255,255,255,.35)}
+.btn.verde{background:var(--verde);color:#fff}
+.btn.azul{background:var(--azul);color:#fff}
+.link{color:#c9d3e2;text-decoration:underline;text-underline-offset:4px;font-size:15px}
+.voltar{position:fixed;top:12px;left:12px;z-index:30;display:none;min-height:42px;padding:0 16px;border-radius:99px;background:rgba(10,20,38,.85);border:1px solid var(--linha);color:#fff;font-weight:600;font-size:14px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.voltar.on{display:inline-flex;align-items:center}
+
+/* 1. primeira tela */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;isolation:isolate;background:#0a1426 url(img/gradiente-azul.webp) center/cover}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(10,20,38,.15) 0%,rgba(10,20,38,.1) 42%,rgba(10,20,38,.97) 72%)}
+.hero .topo{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:16px 18px;font-weight:700;color:#fff;letter-spacing:.02em}
+.hero .topo a{font-size:13px;padding:9px 16px;border-radius:99px;background:rgba(255,255,255,.12);border:1px solid var(--linha)}
+.hero .foto{position:absolute;z-index:-1;left:50%;top:56px;transform:translateX(-50%);width:min(430px,104vw);filter:drop-shadow(0 0 60px rgba(160,190,255,.45))}
+@media(max-width:819px){.hero .foto{-webkit-mask-image:linear-gradient(#000 78%,transparent);mask-image:linear-gradient(#000 78%,transparent)}}
+.hero .conteudo{padding:0 18px 34px;max-width:640px;margin:0 auto;width:100%;text-align:center}
+.hero h1{font-size:clamp(34px,9vw,58px);margin-bottom:12px}
+.hero h1 em{font-style:normal;color:#9db4ff}
+.hero p{color:#dbe4f2;max-width:44ch;margin:0 auto 22px}
+.hero .acoes{display:flex;flex-direction:column;align-items:center;gap:14px}
+.hero .btn{width:100%;max-width:360px}
+@media(min-width:820px){.hero{min-height:720px}.hero .foto{left:auto;right:4%;top:auto;bottom:0;transform:none;width:520px}.hero .conteudo{margin:0 0 0 max(18px,calc((100vw - 1040px)/2));text-align:left}.hero p{margin-left:0}.hero .acoes{align-items:flex-start}}
+
+/* 2 e 7 depoimentos */
+.dep{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:720px){.dep{grid-template-columns:repeat(3,1fr)}}
+.vid{position:relative;aspect-ratio:9/12;border-radius:20px;overflow:hidden;background:var(--card);border:1px solid var(--linha);cursor:pointer;transition:transform .25s,box-shadow .25s}
+.vid:hover{transform:scale(1.02);box-shadow:0 22px 40px -20px rgba(0,0,0,.8)}
+.vid img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vid::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(6,12,24,.92))}
+.vid .play{position:absolute;z-index:1;top:14px;right:14px;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center}
+.vid .play svg{width:18px;height:18px;margin-left:3px;fill:#0a1426}
+.vid .leg{position:absolute;z-index:1;left:14px;right:14px;bottom:14px;color:#fff}
+.vid .leg b{display:block;font-size:15px;line-height:1.25}.vid .leg small{color:#c9d3e2;font-size:12.5px}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:2}
+.depx{display:grid;gap:12px;grid-template-columns:1fr}
+@media(min-width:720px){.depx{grid-template-columns:repeat(2,1fr)}}
+.dx{display:grid;grid-template-columns:76px 1fr;gap:14px;padding:14px;border-radius:18px;background:var(--card);border:1px solid var(--linha)}
+.dx img{width:76px;height:76px;border-radius:14px;object-fit:cover}
+.dx b{color:#fff;display:block}.dx p{font-size:14px;margin-top:4px}
+
+/* 3 e 4 produtos */
+.prod{display:grid;gap:22px;grid-template-columns:1fr;align-items:center;padding:20px;border-radius:26px;background:linear-gradient(160deg,#16294b,#0f1d36);border:1px solid var(--linha)}
+@media(min-width:820px){.prod{grid-template-columns:1fr 1fr;padding:30px;gap:36px}}
+.prod .capa{border-radius:18px;overflow:hidden;aspect-ratio:16/10;background:#0c1830}
+.prod .capa img,.prod .capa iframe{width:100%;height:100%;object-fit:cover;border:0}
+.lista{list-style:none;display:grid;gap:9px;margin:14px 0 18px}
+.lista li{position:relative;padding-left:26px;font-size:15px;color:#d3dcea}
+.lista li::before{content:"";position:absolute;left:0;top:6px;width:16px;height:16px;border-radius:50%;background:var(--verde) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7'/%3E%3C/svg%3E") center/11px no-repeat}
+.preco{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin:6px 0 4px}
+.preco b{font-size:34px;color:#fff;line-height:1}.preco s{font-size:15px}.preco span{font-size:14px}
+.selo{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#cfe9d8;margin:6px 0 16px}
+.bf{display:inline-flex;align-items:center;gap:10px;margin:8px 0 6px;padding:8px 14px;border-radius:14px;background:var(--verm);color:#fff;font-weight:700;font-size:14px}
+.bf .t{font-variant-numeric:tabular-nums;background:#fff;color:var(--verm);border-radius:8px;padding:2px 8px}
+.pl{padding:2px 8px;border-radius:6px;background:rgba(255,200,60,.16);color:#ffd36b;font-size:13px;font-weight:600}
+
+/* 5 e 6 cards */
+.grade{display:grid;gap:12px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:820px){.grade{grid-template-columns:repeat(3,1fr)}}
+.cd{display:flex;flex-direction:column;border-radius:18px;overflow:hidden;background:var(--card);border:1px solid var(--linha);transition:transform .25s,box-shadow .25s}
+.cd:hover{transform:scale(1.02);box-shadow:0 22px 40px -20px rgba(0,0,0,.8)}
+.cd img{width:100%;aspect-ratio:4/3;object-fit:cover;background:#0c1830}
+.cd div{padding:12px 14px 14px;display:flex;flex-direction:column;gap:4px;flex:1}
+.cd b{color:#fff;font-size:15px;line-height:1.25}.cd small{font-size:12.5px;color:var(--dim)}
+.cd .p{margin-top:auto;padding-top:8px;color:#fff;font-weight:700}
+.todos{margin-top:18px;text-align:center}
+
+/* 8 e 9 reservados para a etapa (d) */
+.reserva{border:1px dashed rgba(255,255,255,.25);border-radius:18px;padding:22px;text-align:center;font-size:14px}
+
+/* 10 rodapé */
+footer{padding:44px 0 90px;border-top:1px solid var(--linha);text-align:center}
+.redes{display:flex;justify-content:center;gap:12px;margin:14px 0 18px}
+.redes a{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);border:1px solid var(--linha);color:#fff}
+.redes svg{width:22px;height:22px;fill:currentColor}
+.rodalinks{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;font-size:14px}
+.rodalinks a{text-decoration:underline;text-underline-offset:4px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<button class="voltar" id="voltar" type="button">← Voltar ao topo</button>
+
+<!-- 1. PRIMEIRA TELA -->
+<header class="hero" id="topo">
+  <div class="topo"><span>english<span style="color:#9db4ff">by</span>gediel</span><a href="membros.html">Área de membros</a></div>
+  <img class="foto" src="img/gediel-centro.webp" alt="Professor Gediel Vargas" fetchpriority="high">
+  <div class="conteudo">
+    <h1 class="serif">Anos de inglês e você <em>ainda trava</em> na hora de falar?</h1>
+    <p>11 anos de sala de aula, mais de 700 alunos. Descubra o que realmente trava a sua fala.</p>
+    <div class="acoes">
+      <a class="btn" id="ctaQuiz" href="https://aulasecreta.netlify.app/">Descobrir por que eu travo</a>
+      <a class="link" href="#programa">Conhecer o Programa</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- 2. DEPOIMENTOS EM DESTAQUE -->
+<section id="depoimentos"><div class="wrap">
+  <span class="rot">Quem já destravou</span>
+  <h2 class="serif">Eles também travavam.</h2>
+  <p class="sub">Alunos reais contando, em vídeo, o que mudou.</p>
+  <div class="dep" id="depDestaque"></div>
+</div></section>
+
+<!-- 3. AULA SECRETA -->
+<section id="aulasecreta" style="background:rgba(255,255,255,.03)"><div class="wrap">
+  <div class="prod">
+    <div class="capa"><img id="asImg" src="" alt="Aula Secreta" loading="lazy"></div>
+    <div>
+      <span class="rot">Porta de entrada</span>
+      <h2 class="serif">Aula Secreta: os 3 segredos para destravar seu inglês</h2>
+      <p class="sub" style="margin-bottom:0">Os 3 segredos pra destravar seu inglês.</p>
+      <ul class="lista">
+        <li>[PREENCHER: o que a pessoa leva na Aula Secreta (formato, duração, o que aprende)]</li>
+        <li>[PREENCHER: item 2]</li>
+        <li>[PREENCHER: item 3]</li>
+      </ul>
+      <div class="preco"><b>R$ 47</b><span>pagamento único</span></div>
+      <div class="selo">🛡️ Garantia de 7 dias</div><br>
+      <a class="btn verde" id="asBtn" href="#" data-produto="Aula Secreta" data-valor="47">Quero a Aula Secreta</a>
+    </div>
+  </div>
+</div></section>
+
+<!-- 4. PROGRAMA INTELIGENTE -->
+<section id="programa"><div class="wrap">
+  <div class="prod">
+    <div class="capa"><iframe id="pgVideo" title="Programa Inteligente" loading="lazy" allowfullscreen></iframe></div>
+    <div>
+      <span class="rot">Acompanhamento de perto</span>
+      <h2 class="serif">Programa Inteligente</h2>
+      <p class="sub" id="pgSinopse" style="margin-bottom:0"></p>
+      <ul class="lista" id="pgInclui"></ul>
+      <div id="pgBF" class="bf" hidden>Black Friday · acaba em <span class="t" id="pgT">--</span></div>
+      <div class="preco"><b id="pgPreco">6x R$ 197</b><span>no cartão</span></div>
+      <div class="selo">🛡️ Garantia de 7 dias</div><br>
+      <a class="btn azul" id="pgBtn" href="#" data-produto="Programa Inteligente" data-valor="1182">Quero entrar no Programa</a>
+      <p style="font-size:13px;margin-top:12px">O Inglês de Cada Dia: maratona incluída no Programa Inteligente.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- 5. OUTROS MATERIAIS PAGOS -->
+<section id="ebooks" style="background:rgba(255,255,255,.03)"><div class="wrap">
+  <span class="rot">Pra ir mais fundo</span>
+  <h2 class="serif">Materiais e e-books</h2>
+  <p class="sub">Pagamento único, acesso imediato.</p>
+  <div class="grade" id="gePagos"></div>
+</div></section>
+
+<!-- 6. MATERIAIS GRÁTIS -->
+<section id="gratis"><div class="wrap">
+  <span class="rot">Pra começar hoje</span>
+  <h2 class="serif">Materiais grátis</h2>
+  <p class="sub">Comece sem pagar nada.</p>
+  <div class="grade" id="geGratis"></div>
+  <div class="todos"><a class="btn" href="index.html#gratis">Ver todos</a></div>
+</div></section>
+
+<!-- 7. RESTANTE DOS DEPOIMENTOS -->
+<section id="maisdep" style="background:rgba(255,255,255,.03)"><div class="wrap">
+  <h2 class="serif">Mais histórias de alunos</h2>
+  <div class="depx" id="depResto"></div>
+</div></section>
+
+<!-- 8. PLANOS (etapa d) -->
+<section id="planos"><div class="wrap">
+  <h2 class="serif">Planos</h2>
+  <div class="reserva">Etapa (d): três colunas (Grátis, Mission, Programa Inteligente), linha do Gênio e Instituição.</div>
+</div></section>
+
+<!-- 9. PERGUNTAS FREQUENTES (etapa d) -->
+<section id="faq" style="background:rgba(255,255,255,.03)"><div class="wrap">
+  <h2 class="serif">Perguntas frequentes</h2>
+  <div class="reserva">Etapa (d): como recebo o acesso, formas de pagamento, garantia, Aula Secreta x Programa, nível, falar com o Gediel.</div>
+</div></section>
+</main>
+
+<!-- 10. RODAPÉ -->
+<footer><div class="wrap">
+  <b class="serif" style="font-size:24px">Gediel Vargas</b>
+  <nav class="redes" id="redes" aria-label="Redes sociais"></nav>
+  <div class="rodalinks">
+    <a href="membros.html">Área de membros</a>
+    <a href="index.html#ecossistema">Outros projetos</a>
+    <a href="https://wa.me/5555999895429?text=Oi%20Gediel!%20Vim%20pelo%20site.">Falar no WhatsApp</a>
+  </div>
+</div></footer>
+
+<script src="config.js"></script>
+<script>
+(function(){
+  var C = window.EBG_CONFIG || {};
+  var $ = function(s){return document.querySelector(s)};
+  var esc = function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+  var REDES = [
+    ['https://instagram.com/englishbygediel','Instagram','<rect x="3" y="3" width="18" height="18" rx="5.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3"/>'],
+    ['https://www.youtube.com/@teachergediel','YouTube','<path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.7 15V9l5.8 3z"/>'],
+    ['https://www.tiktok.com/@englishbygediel','TikTok','<path d="M16.6 3c.4 2.2 1.8 3.7 4 3.9v3.2a7.4 7.4 0 0 1-4-1.2v6.3A6.3 6.3 0 1 1 10.3 9v3.3a3 3 0 1 0 3 3V3z"/>'],
+    ['https://wa.me/5555999895429?text=Oi%20Gediel!%20Vim%20pelo%20site.','WhatsApp','<path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2s-1 .3-3.4-.7a11.7 11.7 0 0 1-4.6-4.1 5.2 5.2 0 0 1-1.1-2.8 3 3 0 0 1 1-2.2 1 1 0 0 1 .7-.3h.5c.2 0 .4 0 .6.5l.9 2.1a.6.6 0 0 1 0 .5l-.3.5-.4.5c-.2.1-.3.3-.1.6a8 8 0 0 0 1.5 1.8 7 7 0 0 0 2.1 1.3c.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3a2.2 2.2 0 0 1-.1 1.2z"/>']
+  ];
+  $('#redes').innerHTML = REDES.map(function(r){return '<a href="'+r[0]+'" target="_blank" rel="noopener" aria-label="'+r[1]+'"><svg viewBox="0 0 24 24" aria-hidden="true">'+r[2]+'</svg></a>'}).join('');
+
+  // botão voltar ao topo (aparece depois da primeira tela)
+  var vb = $('#voltar');
+  vb.onclick = function(){ scrollTo({top:0,behavior:'smooth'}); };
+  addEventListener('scroll', function(){ vb.classList.toggle('on', scrollY > innerHeight*0.8); }, {passive:true});
+
+  // Black Friday: até 30/11/2026 23:59; depois some e o preço passa a 6x R$ 297
+  var FIM = new Date('2026-11-30T23:59:59-03:00').getTime();
+  function tickBF(){
+    var ms = FIM - Date.now(), bf = ms > 0;
+    $('#pgBF').hidden = !bf;
+    $('#pgPreco').textContent = bf ? '6x R$ 197' : '6x R$ 297';
+    if (bf){
+      var s = Math.floor(ms/1000), d = Math.floor(s/86400), h = Math.floor(s%86400/3600), m = Math.floor(s%3600/60), x = s%60, p = function(n){return String(n).padStart(2,'0')};
+      $('#pgT').textContent = (d ? d+'d ' : '') + p(h)+':'+p(m)+':'+p(x);
+    }
+  }
+  tickBF(); setInterval(tickBF, 1000);
+
+  var yt = function(id){return 'https://i.ytimg.com/vi/'+id+'/hqdefault.jpg'};
+  function vidCard(a){
+    return '<div class="vid" data-v="'+esc(a.video)+'" role="button" tabindex="0" aria-label="Assistir: '+esc(a.nome||a.titulo)+'"><img src="'+esc(a.img||yt(a.video))+'" alt="" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span><span class="leg"><b>'+esc(a.titulo)+'</b><small>'+esc(a.nome||'')+'</small></span></div>';
+  }
+  document.addEventListener('click', function(e){
+    var v = e.target.closest('.vid'); if (!v || v.querySelector('iframe')) return;
+    v.insertAdjacentHTML('beforeend','<iframe src="https://www.youtube.com/embed/'+encodeURIComponent(v.dataset.v)+'?autoplay=1&rel=0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="Depoimento"></iframe>');
+  });
+
+  var R = function(x){return (x||'').replace(/\s+/g,' ').trim()};
+  fetch(C.supabaseUrl.replace(/\/$/,'')+'/rest/v1/site_config?id=eq.hub&select=dados',{headers:{apikey:C.supabaseAnonKey,Authorization:'Bearer '+C.supabaseAnonKey}})
+  .then(function(r){return r.json()}).then(function(l){
+    var D = (l[0]||{}).dados || {}, cards = (D.cards||[]).filter(function(c){return c.ativo!==false}), by = {};
+    cards.forEach(function(c){by[c.id]=c});
+    var al = cards.filter(function(c){return c.tipo==='aluno' && c.video});
+    var dest = ['levi','laura','luiz'].map(function(i){return by[i]}).filter(Boolean);
+    $('#depDestaque').innerHTML = dest.map(vidCard).join('');
+    $('#depResto').innerHTML = al.filter(function(a){return dest.indexOf(a)<0}).map(function(a){
+      return '<div class="dx"><img src="'+esc(a.img)+'" alt="" loading="lazy"><div><b>'+esc(a.titulo)+'</b><small>'+esc((a.meta||a.nome||''))+'</small><p>'+esc(R(a.sinopse))+'</p></div></div>';
+    }).join('');
+
+    // Aula Secreta
+    var as = cards.filter(function(c){return /Aula Secreta/i.test(c.titulo)})[0];
+    if (as){ $('#asImg').src = as.img; $('#asBtn').href = as.link; }
+    // Programa Inteligente
+    var M = D.mentoria || {};
+    $('#pgVideo').src = 'https://www.youtube.com/embed/'+(M.video||C.videoApresentacao||'eXfovCYxdZw')+'?rel=0';
+    $('#pgSinopse').textContent = R(M.sinopse);
+    $('#pgInclui').innerHTML = (M.inclui||'').split('\n').filter(Boolean).map(function(t){return '<li>'+esc(t)+'</li>'}).join('');
+    $('#pgBtn').href = C.checkoutMentoria || M.checkout || '#';
+
+    // outros pagos, na ordem pedida
+    var ordem = [['Passaporte'],['Bíblia Linear'],['Guia de Inglês A1'],['Destrave Seu Inglês'],['Kit de Frases']];
+    var pagos = ordem.map(function(o){return cards.filter(function(c){return c.tipo==='pago' && c.titulo.indexOf(o[0])===0})[0]}).filter(Boolean);
+    $('#gePagos').innerHTML = pagos.map(function(c){
+      return '<a class="cd" href="index.html?abrir='+encodeURIComponent(c.id)+'"><img src="'+esc(c.img)+'" alt="" loading="lazy"><div><b>'+esc(c.titulo)+'</b><small>'+esc(c.linha||'')+'</small><span class="p">'+esc((c.preco||'').replace(/,00$/,''))+'</span></div></a>';
+    }).join('');
+    // 6 destaques grátis
+    var g = ['ebook-jogos','teste','prisma','centralprompts','professorai','grupoeom'].map(function(i){return by[i]}).filter(Boolean);
+    $('#geGratis').innerHTML = g.map(function(c){
+      return '<a class="cd" href="index.html?abrir='+encodeURIComponent(c.id)+'"><img src="'+esc(c.img||'img/card-teste.webp')+'" alt="" loading="lazy"><div><b>'+esc(c.titulo)+'</b><small>'+esc(c.linha||'')+'</small><span class="p">Grátis</span></div></a>';
+    }).join('');
+  });
+})();
+</script>
+</body>
+</html>
