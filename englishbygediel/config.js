@@ -8,8 +8,13 @@ window.EBG_CONFIG = {
   // (faltava o 55 do Brasil antes do DDD 55). Confirme.
   whatsapp: '5555999895429',
 
-  // Programa de Acompanhamento (antes chamado de mentoria): checkout da Kiwify
+  // Programa Inteligente (antes chamado de mentoria): checkout da Kiwify
   checkoutMentoria: 'https://pay.kiwify.com.br/CohRPDI',
+  // quiz da Aula Secreta (botão principal da abertura e da seção da Aula Secreta)
+  quizAulaSecreta: 'https://aulasecreta.netlify.app/',
+  // [PREENCHER] planilha que já recebe os contatos dos quizzes: cole aqui o endereço do Apps Script (POST com nome, whatsapp, modo, origem).
+  // Vazio = os contatos ficam só no Supabase (tabela hub_leads) e no aparelho da pessoa.
+  planilhaLeads: '',
   // Mentoria particular (aulas individuais, casal ou amigos): formulário
   mentoriaParticular: 'https://formularioaulas.netlify.app/',
   videoApresentacao: 'eXfovCYxdZw',
