@@ -12,8 +12,9 @@ window.EBG_CONFIG = {
   checkoutMentoria: 'https://pay.kiwify.com.br/CohRPDI',
   // quiz da Aula Secreta (botão principal da abertura e da seção da Aula Secreta)
   quizAulaSecreta: 'https://aulasecreta.netlify.app/',
-  // [PREENCHER] planilha que já recebe os contatos dos quizzes: cole aqui o endereço do Apps Script (POST com nome, whatsapp, modo, origem).
-  // Vazio = os contatos ficam só no Supabase (tabela hub_leads) e no aparelho da pessoa.
+  // Contato (nome + WhatsApp) de quem libera um material grátis: vai pro Supabase (tabela hub_leads) e
+  // aparece junto dos outros na aba "Pessoas" do painel (mesmo lugar dos quizzes). Pra também mandar
+  // pra uma planilha do Google (Apps Script, recebendo POST com nome/whatsapp/origem), cole o endereço aqui.
   planilhaLeads: '',
   // Mentoria particular (aulas individuais, casal ou amigos): formulário
   mentoriaParticular: 'https://formularioaulas.netlify.app/',

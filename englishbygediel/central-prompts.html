@@ -115,7 +115,18 @@ $('menuToggle').addEventListener('click',()=>{const open=$('sidebar').classList.
 $('sidebar').addEventListener('click',e=>{if(e.target.closest('a'))closeMenu();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closePreview();closeMenu();}if(e.key==='/'&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)&&!$('overlay').classList.contains('open')){e.preventDefault();$('search').focus();}});
 $('year').textContent=new Date().getFullYear();render();
-</script><a class="ebg-voltar" href="./" aria-label="Voltar ao Hub">← Voltar ao Hub</a>
+</script>
+<script src="config.js"></script>
+<script src="captura.js"></script>
+<script>
+// Acesso direto (sem passar pelo Hub): pede nome e WhatsApp antes de liberar os prompts.
+// Dentro do iframe do Hub a trava já foi feita lá (window.self !== window.top), então aqui não repete.
+(function () {
+  if (window.self !== window.top) return;
+  if (window.EBG_CAPTURA) window.EBG_CAPTURA.exigir({ titulo: 'Central de Prompts', texto: 'Esse material é grátis. Me diz quem é você e eu libero os 50 prompts.', botao: 'Liberar os prompts', origem: 'central-prompts' });
+})();
+</script>
+<a class="ebg-voltar" href="./" aria-label="Voltar ao Hub">← Voltar ao Hub</a>
 <style>.ebg-voltar{position:fixed;right:16px;bottom:16px;z-index:200;display:inline-flex;align-items:center;gap:6px;padding:12px 18px;border-radius:980px;background:#07162f;color:#fff;font:600 14px/1 -apple-system,BlinkMacSystemFont,Inter,system-ui,sans-serif;text-decoration:none;box-shadow:0 12px 30px rgba(7,22,47,.35);border:1px solid #ffffff22;transition:transform .18s}.ebg-voltar:active{transform:scale(.96)}</style>
 <script>(function(){var v=document.querySelector('.ebg-voltar');if(window.self!==window.top){v.remove();return}v.addEventListener('click',function(e){try{if(document.referrer&&new URL(document.referrer).origin===location.origin&&history.length>1){e.preventDefault();history.back()}}catch(x){}})})();</script>
 </body></html>
