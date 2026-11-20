@@ -533,6 +533,29 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
 .rod-links a,.rod-links button{color:var(--dim);text-decoration:underline;text-underline-offset:4px;font-size:13.5px}
 .rod-inst{margin:16px auto 0;max-width:60ch;font-size:12.5px;line-height:1.5;color:var(--dim)}
 .rod-inst a{color:#9db4ff;text-decoration:underline;text-underline-offset:3px}
+/* ===== FUNIL · etapa (b): página de produto dentro da ficha ===== */
+.ficha .voltar,.loja .voltar{position:absolute;top:12px;left:12px;z-index:2;display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:0 14px;border-radius:99px;background:rgba(10,20,38,.7);color:#fff;font-size:13.5px;font-weight:600;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.loja .voltar{position:static;margin-right:auto}
+.loja-cab{align-items:center}
+.ficha-img.prod-hero{aspect-ratio:16/10;display:grid;place-items:center;background:#0c1830 var(--capa) center/cover;overflow:hidden}
+.ficha-img.prod-hero::before{content:"";position:absolute;inset:0;background:inherit;filter:blur(26px) brightness(.55);transform:scale(1.2)}
+.ficha-img.prod-hero img{position:relative;width:auto;height:88%;max-width:70%;object-fit:contain;border-radius:10px;box-shadow:0 18px 40px -14px #000}
+.ficha-img.prod-hero img.larga{height:auto;width:100%;max-width:none;border-radius:0;box-shadow:none}
+.ficha h4.sub{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--cobre2);margin:18px 0 8px}
+.dentro-lista{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.pg{display:block;aspect-ratio:3/4;border-radius:12px;overflow:hidden;background:var(--card);border:1px solid var(--linha);padding:0}
+.pg img{width:100%;height:100%;object-fit:cover}
+.pg.falta-pg{display:grid;place-items:center;padding:10px;font-size:11px;line-height:1.3;text-align:center;color:#ffd36b;border-style:dashed}
+.ficha .inclui li{font-size:14px}
+.ficha-corpo.sem-img{padding-top:64px}
+.ficha .pra-quem{font-size:14.5px;color:#dfe7f6;margin:0}
+.ficha .garantia{margin:10px 0 0}
+.ficha .alem{margin-top:18px}
+.ficha .alem .oferta{margin-top:0}
+.ficha .alem-prog{margin-top:18px;padding:14px;border-radius:16px;background:linear-gradient(160deg,rgba(26,47,92,.8),rgba(19,35,63,.8));border:1px solid rgba(111,134,255,.45)}
+.ficha .alem-prog b{display:block;color:var(--marfim);font-size:14px;line-height:1.3;margin-bottom:10px}
+.ficha .alem-prog button{width:100%;padding:12px;border-radius:12px;background:#fff;color:#0a1426;font-weight:700;font-size:14px}
+.botoes .b1 .pr{opacity:.75;font-weight:600;margin-left:6px}
 /* material grátis liberado: aviso + oferta da Aula Secreta na mesma tela */
 .liberado{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;color:#8fe0a8;font-weight:600}
 .oferta{margin-top:18px;padding:12px;border-radius:16px;background:linear-gradient(160deg,rgba(26,47,92,.8),rgba(19,35,63,.8));border:1px solid rgba(111,134,255,.45);display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:center}
@@ -730,7 +753,7 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
 <div class="loja" id="loja" hidden>
   <div class="loja-fundo" data-loja-fechar></div>
   <section class="loja-caixa" role="dialog" aria-modal="true" aria-labelledby="lojaTitulo">
-    <div class="loja-cab"><div><h2 class="serif" id="lojaTitulo"></h2><p id="lojaSub"></p></div><button class="x" type="button" data-loja-fechar aria-label="Fechar">✕</button></div>
+    <div class="loja-cab"><button class="voltar" type="button" data-loja-fechar>← Voltar</button><div><h2 class="serif" id="lojaTitulo"></h2><p id="lojaSub"></p></div><button class="x" type="button" data-loja-fechar aria-label="Fechar">✕</button></div>
     <div class="filtros" id="lojaFiltros"></div>
     <div class="loja-grade" id="lojaGrade"></div>
     <p class="loja-aviso" id="lojaAviso"></p>
@@ -934,6 +957,8 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
     itens[c.id] = { modos: c.modos || [], titulo: c.titulo, img: c.img, cat: c.setor || '', linha: c.linha, sinopse: c.sinopse,
       meta: String(c.meta || '').split(',').map(x => x.trim()).filter(Boolean),
       gratis: c.tipo === 'gratis', pago: c.tipo === 'pago', aluno: c.tipo === 'aluno', membros: c.tipo === 'membros', extra: c.tipo === 'extra',
+      inclui: String(c.inclui || '').split('\n').map(x => x.trim()).filter(Boolean), praQuem: String(c.praQuem || '').trim(),
+      paginas: [c.pag1, c.pag2, c.pag3].map(u => https(u) || (/^img\//.test(u || '') ? u : '')).filter(Boolean),
       nome: c.nome, video: c.video, preco: c.preco || '', combina: (Array.isArray(c.combina) ? c.combina : String(c.combina || '').split(',')).map(x => x.trim()).filter(Boolean), parcelas: c.parcelas || '',
       cta: c.tipo === 'aluno' || (c.tipo === 'pago' && !link) ? null : c.tipo === 'membros' ? { rotulo: (H.membros || {}).cardBotao || 'Já sou aluno, entrar', acao: 'login' } : link ? { rotulo: c.botao || 'Abrir', acao: 'link', href: link }
         : { rotulo: c.botao || 'Quero saber mais', acao: 'whatsapp', texto: `Oi Gediel! Quero o ${c.titulo}.` },
@@ -989,7 +1014,7 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
     const k = aulaSecretaId(); sec.hidden = !k; if (!k) return;
     const m = itens[k];
     const linhas = String(m.sinopse || '').split('\n').map(x => x.trim()).filter(Boolean);
-    const inclui = linhas.length > 1 ? linhas : ['[PREENCHER: o que a pessoa leva na Aula Secreta (formato, duração, o que aprende)]', '[PREENCHER: item 2]', '[PREENCHER: item 3]'];
+    const inclui = (m.inclui || []).length ? m.inclui : ['[PREENCHER: o que a pessoa leva na Aula Secreta (formato, duração, o que aprende)]', '[PREENCHER: item 2]', '[PREENCHER: item 3]'];
     const u = m.cta && m.cta.acao === 'link' ? m.cta.href : '', quiz = https(CFG.quizAulaSecreta);
     $('#asCaixa').innerHTML = `<div class="prod-capa"><button type="button" data-abrir="${esc(k)}" aria-label="Ver detalhes da Aula Secreta">${m.img ? `<img src="${esc(m.img)}" alt="" loading="lazy">` : ''}</button></div>
       <div class="prod-txt"><span class="rotulo">${esc(S3.aulaSecretaRotulo || 'Porta de entrada')}</span><h2 class="serif">${esc(m.titulo)}</h2>${linhas.length === 1 ? `<p class="prod-linha">${esc(linhas[0])}</p>` : m.linha ? `<p class="prod-linha">${esc(m.linha)}</p>` : ''}
@@ -1073,14 +1098,14 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
     ultimoFoco = document.activeElement;
     const passos = String(x.comoJogar || '').split('\n').map(s => s.trim()).filter(Boolean);
     const u = https(x.link) || (/^[\w-]+\.html([?#].*)?$/.test(x.link || '') ? x.link : ''), fora = /^https?:/i.test(u);
-    $('#ficha').innerHTML = `<span class="alca"></span><button class="fechar" data-fechar aria-label="Fechar">✕</button>
+    $('#ficha').innerHTML = `<span class="alca"></span><button class="voltar" type="button" data-fechar>← Voltar</button><button class="fechar" data-fechar aria-label="Fechar">✕</button>
       <div class="ficha-jogo"><span class="jogo-ico grad g${(+i % 5) + 1}">${x.img ? `<img src="${esc(x.img)}" alt="">` : `<span>${esc(x.icone || '🎮')}</span>`}</span>
         <div><h3 class="serif" id="fichaTitulo" style="font-size:26px;line-height:1.05">${esc(x.titulo)}</h3>${x.sub ? `<small>${esc(x.sub)}</small>` : ''}</div></div>
       <div class="ficha-corpo">${x.sinopse ? `<p>${esc(x.sinopse)}</p>` : ''}
         ${passos.length ? `<ul>${passos.map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}
         <div class="botoes">${u ? (precisaLead() ? `<button class="b1" type="button" data-liberar="jogo:${esc(ref)}">🔒 Liberar grátis com nome e WhatsApp</button>` : `<a class="b1" href="${esc(u)}"${fora ? ' target="_blank" rel="noopener"' : ''}>${esc(x.botao || 'Jogar')}</a>`) : '<button class="b1 off" type="button" disabled>Em breve</button>'}</div>
       </div>`;
-    document.body.classList.add('aberta'); document.body.style.overflow = 'hidden';
+    abrirCamada();
     $('#ficha .fechar').focus();
   }
   galeria('jogos', 'jogos', 'loopJogos', 'contaJogos', 'sJogos');
@@ -1285,20 +1310,52 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
     const preco = m.preco && typeof m.preco === 'object' ? `<p class="preco">${esc(m.preco.separado || '')} <b>${esc(m.preco.parcelas)}</b><br><small>${esc(m.preco.nota)}</small></p>`
       : parcelado(m) ? `<p class="preco">${parcelado(m).n}x de <b>${esc(parcelado(m).cada)}</b><br><small>ou ${esc(parcelado(m).cheio)} à vista</small></p>`
       : m.preco ? `<p class="preco"><b>${esc(m.preco)}</b></p>` : '';
-    $('#ficha').innerHTML = `<span class="alca"></span><button class="fechar" data-fechar aria-label="Fechar">✕</button>
+    // material à venda: página de produto (capa, páginas internas, o que tem dentro, pra quem é, preço, garantia, compra, ir além)
+    if (m.pago) {
+      try { window.dispatchEvent(new CustomEvent('ebg:produto', { detail: { id: k, nome: m.titulo, valor: valorPreco(m.preco) } })); } catch (e) {}
+      const S5 = H.secoes || {}, asId = aulaSecretaId(), ehAula = k === asId;
+      const capa = m.img ? `<div class="ficha-img prod-hero" style="--capa:url('${esc(m.img)}')"><img src="${esc(m.img)}" alt="" id="fichaCapa" onload="if(this.naturalWidth>this.naturalHeight*1.2)this.classList.add('larga')"></div>` : '';
+      const pags = (m.paginas || []).slice(0, 3);
+      const porDentro = `<h4 class="sub">${esc(S5.porDentro || 'Por dentro')}</h4><div class="dentro-lista">${pags.length ? pags.map((u, i) => `<button type="button" class="pg" data-galeria="${esc(u)}" aria-label="Ver página ${i + 1}"><img src="${esc(u)}" alt="" loading="lazy"></button>`).join('') : [1, 2, 3].map(i => `<span class="pg falta-pg">[PREENCHER: imagem de página interna ${i}]</span>`).join('')}</div>`;
+      const dentro = `<h4 class="sub">${esc(S5.dentroTitulo || 'O que tem dentro')}</h4><ul class="inclui">${incluiHtml((m.inclui || []).length ? m.inclui : ['[PREENCHER: o que tem dentro]'])}</ul>`;
+      const praQuem = `<h4 class="sub">${esc(S5.praQuemTitulo || 'Pra quem é')}</h4><p class="pra-quem${/^\[PREENCHER/i.test(m.praQuem || '') ? ' falta' : ''}">${esc(m.praQuem || '[PREENCHER: pra quem é]')}</p>`;
+      const prTxt = String(m.preco || '').replace(/,00$/, '');
+      const comprar = m.cta && m.cta.acao === 'link' ? `<a class="b1" href="${esc(m.cta.href)}" target="_blank" rel="noopener" data-checkout="${esc(k)}">${esc(S5.comprar || 'Comprar agora')}${prTxt ? `<span class="pr">· ${esc(prTxt)}</span>` : ''}</a>` : botao(m.cta, 'b1');
+      const alem = ehAula
+        ? `<div class="alem-prog"><b>${esc(S5.alemPrograma || 'Quer o acompanhamento completo? Conheça o Programa Inteligente.')}</b><button type="button" data-ir="#programa" data-fechar>Ver o Programa Inteligente</button></div>`
+        : (asId && itens[asId] ? `<div class="alem"><h4 class="sub">${esc(S5.alemTitulo || 'Quer ir além do e-book?')}</h4>${ofertaAulaSecreta(k).replace('Quer ir além do material grátis?', esc(S5.alemTexto || 'Veja a Aula Secreta'))}</div>` : '');
+      $('#ficha').innerHTML = `<span class="alca"></span><button class="voltar" type="button" data-fechar>← Voltar</button><button class="fechar" data-fechar aria-label="Fechar">✕</button>
+        ${m.video ? `<div class="ficha-img${vertical ? ' vert' : ''}">${midia}</div>` : capa}
+        <div class="ficha-corpo${m.video || m.img ? '' : ' sem-img'}"><h3 class="serif" id="fichaTitulo">${esc(m.titulo)}</h3>
+          ${m.meta && m.meta.length ? `<div class="metas">${m.meta.filter(Boolean).map(x => `<span>${esc(x)}</span>`).join('')}</div>` : ''}
+          ${m.sinopse ? `<p>${esc(m.sinopse)}</p>` : ''}
+          ${porDentro}${dentro}${praQuem}
+          ${parcelado(m) ? preco : prTxt ? `<p class="preco"><b>${esc(prTxt)}</b><br><small>pagamento único</small></p>` : ''}
+          ${m.pago && !m.cta ? '<p class="preco"><small>Link de compra em breve.</small></p>' : ''}
+          <div class="garantia">🛡️ ${esc(S5.garantia || 'Garantia de 7 dias')}</div>
+          <div class="botoes">${comprar}${botao(m.cta2, 'b2')}</div>
+          ${alem}
+          ${(m.combina || []).filter(id => itens[id] && id !== k).length ? `<div class="combina"><h4>Combina com</h4><div class="combina-lista">${(m.combina || []).filter(id => itens[id] && id !== k).map(id => `<button class="combina-item" type="button" data-abrir="${esc(id)}">${itens[id].img ? `<img src="${esc(itens[id].img)}" alt="" loading="lazy">` : ''}<span>${esc(itens[id].titulo)}${typeof itens[id].preco === 'string' && itens[id].preco ? `<small>${esc(itens[id].preco)}</small>` : ''}</span></button>`).join('')}</div></div>` : ''}
+          <button class="copiar" type="button" data-copiar="${esc(k)}">🔗 Copiar link deste material</button>
+        </div>`;
+      abrirCamada();
+      $('#ficha .fechar').focus();
+      return;
+    }
+    $('#ficha').innerHTML = `<span class="alca"></span><button class="voltar" type="button" data-fechar>← Voltar</button><button class="fechar" data-fechar aria-label="Fechar">✕</button>
       ${midia ? `<div class="ficha-img${vertical ? ' vert' : ''}">${midia}</div>` : ''}
       <div class="ficha-corpo"><h3 class="serif" id="fichaTitulo">${esc(m.aluno ? '“' + m.titulo + '”' : m.titulo)}</h3>
         ${m.meta ? `<div class="metas">${m.meta.filter(Boolean).map(x => `<span>${esc(x)}</span>`).join('')}</div>` : ''}
         <p>${esc(m.sinopse)}</p>
-        ${m.inclui ? `<ul>${m.inclui.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
-        ${preco}
+        ${m.inclui && m.inclui.length ? `<ul>${m.inclui.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
+        ${preco}${k === 'mentoria' && /garantia/i.test((m.meta || []).join(' ')) ? `<div class="garantia">🛡️ ${esc((H.secoes || {}).garantia || 'Garantia de 7 dias')}</div>` : ''}
         ${m.pago && !m.cta ? '<p class="preco"><small>Link de compra em breve.</small></p>' : ''}
         <div class="botoes">${m.gratis && (m.cta || m.cta2) && precisaLead() ? `<button class="b1" type="button" data-liberar="${esc(k)}">🔒 Liberar grátis com nome e WhatsApp</button>` : botao(m.cta, 'b1') + botao(m.cta2, 'b2')}${m.aluno ? `<button class="b1" data-ir="#programa" data-fechar>${esc(H.secoes.botaoAluno || 'Quero esse resultado')}</button>` : ''}</div>
         ${m.gratis && (m.cta || m.cta2) && !precisaLead() ? `<span class="liberado">✅ Liberado pra você. Toque no botão pra abrir.</span>${ofertaAulaSecreta(k)}` : ''}
         ${(m.combina || []).filter(id => itens[id] && id !== k).length ? `<div class="combina"><h4>Combina com</h4><div class="combina-lista">${(m.combina || []).filter(id => itens[id] && id !== k).map(id => `<button class="combina-item" type="button" data-abrir="${esc(id)}">${itens[id].img ? `<img src="${esc(itens[id].img)}" alt="" loading="lazy">` : ''}<span>${esc(itens[id].titulo)}${typeof itens[id].preco === 'string' && itens[id].preco ? `<small>${esc(itens[id].preco)}</small>` : ''}</span></button>`).join('')}</div></div>` : ''}
         ${k !== 'mentoria' ? `<button class="copiar" type="button" data-copiar="${esc(k)}">🔗 Copiar link deste material</button>` : ''}
       </div>`;
-    document.body.classList.add('aberta'); document.body.style.overflow = 'hidden';
+    abrirCamada();
     $('#ficha .fechar').focus();
   }
   /* MARATONA: cartão flutuante que pisca, com contagem regressiva; toque abre a ficha */
@@ -1343,7 +1400,7 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
     DADOS.evento('ficha', 'maratona', MA.titulo);
     ultimoFoco = document.activeElement;
     const u = maLink(), fora = /^https?:/i.test(u);
-    $('#ficha').innerHTML = `<span class="alca"></span><button class="fechar" data-fechar aria-label="Fechar">✕</button>
+    $('#ficha').innerHTML = `<span class="alca"></span><button class="voltar" type="button" data-fechar>← Voltar</button><button class="fechar" data-fechar aria-label="Fechar">✕</button>
       ${MA.img ? `<div class="ficha-img" style="aspect-ratio:auto"><img class="mara-arte" src="${esc(MA.img)}" alt="${esc(MA.titulo)}"></div>` : ''}
       <div class="ficha-corpo"><h3 class="serif" id="fichaTitulo">${esc(MA.titulo)}</h3>
         <div class="metas">${[MA.rotulo, MA.selo, MA.detalhe].filter(Boolean).map(x => `<span>${esc(x)}</span>`).join('')}</div>
@@ -1351,7 +1408,7 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
         <div class="mara-conta" id="fichaMaraConta">${maConta(maResta())}</div>
         <div class="botoes"><a class="b1" href="${esc(u)}"${fora ? ' target="_blank" rel="noopener"' : ''}>${esc(MA.botao || 'Quero minha vaga')}</a></div>
       </div>`;
-    document.body.classList.add('aberta'); document.body.style.overflow = 'hidden';
+    abrirCamada();
     $('#ficha .fechar').focus();
   }
 
@@ -1361,19 +1418,29 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
     const url = https(MB.url) || (/^[\w-]+\.html([?#].*)?$/.test(MB.url || '') ? MB.url : '') || 'membros.html';
     const fora = /^https?:/i.test(url);
     ultimoFoco = document.activeElement;
-    $('#ficha').innerHTML = `<span class="alca"></span><button class="fechar" data-fechar aria-label="Fechar">✕</button>
+    $('#ficha').innerHTML = `<span class="alca"></span><button class="voltar" type="button" data-fechar>← Voltar</button><button class="fechar" data-fechar aria-label="Fechar">✕</button>
       <div class="login-corpo"><img class="avatar" src="${esc(TP.avatar)}" alt=""><h3 class="serif" id="fichaTitulo">${esc(MB.titulo || 'Área de membros')}</h3><p>${esc(MB.texto)}</p>
         <div class="botoes"><a class="b1" href="${esc(url)}"${fora ? ' target="_blank" rel="noopener"' : ''}>${esc(MB.botao || 'Entrar')}</a>
           <button class="b2" data-ir="#programa" data-fechar>${esc(MB.semConta || 'Ainda não sou aluno')}</button></div></div>`;
-    document.body.classList.add('aberta'); document.body.style.overflow = 'hidden';
+    abrirCamada();
     $('#ficha .fechar').focus();
   }
-  function fechar() {
-    if (!document.body.classList.contains('aberta')) return;
+  // a ficha entra no histórico: o botão voltar do celular fecha a ficha em vez de sair do site
+  let fichaNoHistorico = false;
+  function abrirCamada() {
+    if (!document.body.classList.contains('aberta') && !fichaNoHistorico) { try { history.pushState({ ebgFicha: 1 }, ''); fichaNoHistorico = true; } catch (e) {} }
+    document.body.classList.add('aberta'); document.body.style.overflow = 'hidden';
+  }
+  function fecharCamada() {
     document.body.classList.remove('aberta'); document.body.style.overflow = '';
     setTimeout(() => { if (!document.body.classList.contains('aberta')) $('#ficha').innerHTML = ''; }, 450);
     ultimoFoco && ultimoFoco.focus && ultimoFoco.focus();
   }
+  function fechar() {
+    if (!document.body.classList.contains('aberta')) return;
+    if (fichaNoHistorico) { fichaNoHistorico = false; history.back(); } else fecharCamada();
+  }
+  addEventListener('popstate', () => { if (document.body.classList.contains('aberta')) { fichaNoHistorico = false; fecharCamada(); } });
   /* CONTATO (nome + WhatsApp) antes de liberar: a folha sobe, guarda uma vez no aparelho e manda pro Supabase (hub_leads) e pra planilha (CFG.planilhaLeads) */
   let depoisDoContato = null;
   function pedirContato(ctx) {
@@ -1420,6 +1487,7 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
       else { const m = itens[ref] || {}; pedirContato({ titulo: m.titulo, sub: m.linha || m.cat, img: m.img, depois: { origem: 'material', item: ref, fn: () => abrir(ref) } }); }
       return;
     }
+    const gl = e.target.closest('[data-galeria]'); if (gl) { const c = $('#fichaCapa'); if (c) { c.src = gl.dataset.galeria; c.classList.remove('larga'); $('#ficha').scrollTo({ top: 0, behavior: 'smooth' }); } return; }
     if (e.target.closest('[data-vertodos]')) { gratisTodos = true; desenhar(); return; }
     if (e.target.closest('[data-extras]')) { extrasAberto = true; desenhar(); setTimeout(() => $('#extras').scrollIntoView({ behavior: reduz ? 'auto' : 'smooth', block: 'start' }), 60); return; }
     const f = e.target.closest('[data-filtro]'); if (f) { filtro = f.dataset.filtro; desenhar(); return; }

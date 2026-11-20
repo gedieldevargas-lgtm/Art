@@ -7,6 +7,22 @@
 
   // quais modos são grátis e quais abrem com um plano (muda no painel, em Modos → Acesso)
   const ACESSO_PADRAO = { teste: 'gratis', zero: 'gratis', jogos: 'gratis', prompts: 'gratis', materiais: 'gratis', fe: 'mission' };
+  // páginas de produto: "o que tem dentro" e "pra quem é" reorganizados a partir da descrição que já existe de cada material.
+  // Onde a descrição não diz, fica [PREENCHER]. No painel (Cards → O que tem dentro / Pra quem é) dá pra trocar tudo.
+  const PRODUTO_PADRAO = [
+    { re: /passaporte do ingl[eê]s/i, praQuem: 'Pra quem tem viagem marcada e não quer depender de ninguém lá fora.',
+      inclui: ['10 situações, do aeroporto à emergência', 'O que falar e o que você vai ouvir em cada uma', 'Vocabulário com imagem', 'Frases e diálogos reais', 'Planner de viagem', '[PREENCHER: quantidade de páginas]'] },
+    { re: /guia de ingl[eê]s (por n[ií]vel )?a1/i, praQuem: 'Pra quem fica pulando de vídeo em vídeo sem saber o que estudar em cada fase.',
+      inclui: ['Um mapa claro do A1 ao B2: o que estudar em cada fase', 'Planos semanais de 30 a 60 minutos', 'Missões e checklists pra transformar conteúdo em prática', '20 páginas em PDF'] },
+    { re: /destrave seu ingl[eê]s|pron[uú]ncia pra brasileiro/i, praQuem: 'Pra quem trava na hora de falar e não entende os símbolos de dicionário.',
+      inclui: ['Pronúncia escrita do jeito que brasileiro lê: chocolate vira TCHÓK-let', '4 níveis, do fácil ao chefão, cada um com explicação e exercício', 'Canais do YouTube pra praticar cada nível', '15 páginas, acesso imediato'] },
+    { re: /kit de frases/i, praQuem: 'Pra quem precisa de frases prontas pras situações essenciais do dia a dia.',
+      inclui: ['Frases prontas pras situações essenciais do dia a dia', 'Pra falar em voz alta, sem montar frase na cabeça', '[PREENCHER: quantas frases e quais situações]', '[PREENCHER: formato (PDF? áudio?)]'] },
+    { re: /b[ií]blia linear/i, praQuem: 'Pra quem quer aprender inglês com a Bíblia.',
+      inclui: ['As cartas de 1, 2 e 3 João', 'Inglês e português lado a lado, versículo por versículo', '[PREENCHER: quantidade de páginas e formato]'] },
+    { re: /aula secreta/i, praQuem: '[PREENCHER: pra quem é a Aula Secreta]',
+      inclui: ['[PREENCHER: o que a pessoa leva na Aula Secreta (formato, duração, o que aprende)]', '[PREENCHER: item 2]', '[PREENCHER: item 3]'] }
+  ];
   function padrao(C, CFG) {
     const whats = t => `https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent(t || '')}`;
     const destino = cta => {
@@ -89,6 +105,10 @@
         aulaSecretaRotulo: 'Porta de entrada · R$ 47', programaRotulo: 'Acompanhamento de perto', programaBotao: 'Quero entrar no Programa',
         maratonasTitulo: 'Maratonas do Programa', maratonasTexto: 'A que está rodando e a próxima. Maratona incluída no Programa Inteligente.',
         faq: 'Perguntas frequentes',
+        // páginas de produto (materiais à venda)
+        garantia: 'Garantia de 7 dias', dentroTitulo: 'O que tem dentro', praQuemTitulo: 'Pra quem é', porDentro: 'Por dentro',
+        alemTitulo: 'Quer ir além do e-book?', alemTexto: 'Veja a Aula Secreta: os 3 segredos pra destravar a fala.',
+        alemPrograma: 'Quer o acompanhamento completo? Conheça o Programa Inteligente.', comprar: 'Comprar agora',
         planosRotulo: 'Planos', planos: 'Escolha até onde você quer ir', planosSub: 'Todo mundo começa no Grátis. Cada plano libera um nível a mais da plataforma.',
         planosAviso: 'Aula particular com o Gediel não está inclusa em nenhum plano: a partir do Programa Inteligente você pode pedir um horário, e o valor é combinado direto com ele.',
         escadaTitulo: 'Por onde começar', escadaTexto: 'Cada degrau leva você um passo adiante. Comece pelo que faz sentido hoje.',
@@ -236,6 +256,13 @@
     if (H.topo) H.topo.bio = String(H.topo.bio || '').replace(/a porta pr[ao] (mentoria|programa de acompanhamento)/i, 'a porta pro Programa Inteligente');
     if (H.mentoria && /^Aplicar pr/i.test(H.mentoria.botaoAplicar || '')) H.mentoria.botaoAplicar = 'Quero entrar no Programa';
     (H.modos || []).forEach(m => { if (m && typeof m === 'object' && !m.acesso) m.acesso = ACESSO_PADRAO[m.id] || 'programa'; });
+    // páginas de produto: preenche o que falta a partir da descrição já existente (ver PRODUTO_PADRAO)
+    (H.cards || []).forEach(c => {
+      if (!c || c.tipo !== 'pago') return;
+      const p = PRODUTO_PADRAO.find(x => x.re.test(c.titulo || '')); if (!p) return;
+      if (!String(c.inclui || '').trim()) c.inclui = p.inclui.join('\n');
+      if (!String(c.praQuem || '').trim()) c.praQuem = p.praQuem;
+    });
     // planos: o nome "Inteligente" fica como chave; nos textos vira Programa Inteligente
     (H.planos || []).forEach(p => { if (!p || typeof p !== 'object') return; if (p.botao === 'Quero o Inteligente') p.botao = 'Quero entrar no Programa'; p.beneficios = String(p.beneficios || '').replace(/Tudo do Inteligente/g, 'Tudo do Programa Inteligente'); });
     if (S.planosAviso) S.planosAviso = S.planosAviso.replace(/a partir do Inteligente/g, 'a partir do Programa Inteligente');
