@@ -1281,7 +1281,7 @@
   var TIPOS=[
     {k:'conversa',ic:'💬',icn:'aula-conversa',nm:'Conversação',d:'Você e eu, 1 a 1, pra soltar o inglês falando.'},
     {k:'grupo',ic:'👥',icn:'aula-grupo',nm:'Grupo',d:'Você + amigos, família ou colegas de trabalho.'},
-    {k:'casal',ic:'💑',icn:'jogo-couple',nm:'Casal',d:'Os dois juntos, no mesmo ritmo.'},
+    {k:'casal',ic:'💑',icn:'aula-casal',nm:'Casal',d:'Os dois juntos, no mesmo ritmo.'},
     {k:'intensivo',ic:'🔥',icn:'fogo',nm:'Intensivo',d:'Imersão de vários dias seguidos, com prazo.'},
     {k:'prep',ic:'🎯',icn:'ctx-foco',nm:'Preparação',d:'Pra um momento específico que está chegando.'}
   ];
