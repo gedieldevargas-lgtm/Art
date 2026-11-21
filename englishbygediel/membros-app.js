@@ -458,7 +458,7 @@
   '.pl-ed{border:1px solid var(--border);border-radius:14px;padding:12px;margin-bottom:10px;display:flex;flex-direction:column;gap:7px}.pl-ed label{display:flex;flex-direction:column;gap:3px;font-size:11.5px;color:var(--fg2)}.pl-ed label.ck{flex-direction:row;align-items:center;gap:6px}',
   '.pl-ed input:not([type=checkbox]),.pl-ed textarea{border:1px solid var(--border);border-radius:9px;padding:7px 9px;background:transparent;color:var(--fg);font:inherit;font-size:13px}',
   /* ===== tema English on Mission (verde-escuro e dourado) ===== */
-  '#pane-eom{--th-g1:#0b2018;--th-g2:#123629;--th-gold:#d4b25c;--th-gold2:#f3e2a8;background:radial-gradient(ellipse at 80% -10%,rgba(212,178,92,.18),transparent 55%),linear-gradient(180deg,#0e271d,#08160f);border:1px solid rgba(212,178,92,.25);border-radius:26px;padding:22px 22px 30px!important;color:#f5efe0}',
+  '.content>#pane-eom{max-width:1560px!important}#pane-eom{--th-g1:#0b2018;--th-g2:#123629;--th-gold:#d4b25c;--th-gold2:#f3e2a8;background:radial-gradient(ellipse at 80% -10%,rgba(212,178,92,.18),transparent 55%),linear-gradient(180deg,#0e271d,#08160f);border:1px solid rgba(212,178,92,.25);border-radius:26px;padding:22px 22px 30px!important;color:#f5efe0}',
   '#pane-eom .uni-sec{font-family:"Cormorant Garamond",Georgia,serif;font-size:22px;font-weight:700;letter-spacing:.02em;text-transform:none;color:var(--th-gold2);margin:30px 0 12px;display:flex;align-items:center;gap:12px;scroll-margin-top:80px}#pane-eom .uni-sec:after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(212,178,92,.6),transparent)}',
   '#pane-eom .uni-card{background:linear-gradient(180deg,#143a2b,#0f2c21);border:1px solid rgba(212,178,92,.22);box-shadow:0 10px 30px rgba(0,0,0,.35)}#pane-eom .uni-card:hover{border-color:var(--th-gold);transform:translateY(-3px)}',
   '#pane-eom .uni-card .tt{color:#fbf5e4;font-size:14px}#pane-eom .uni-card .ss{color:rgba(245,239,224,.7)}#pane-eom .uni-card .ac{color:var(--th-gold)}#pane-eom .uni-card .th{background:#0b2018}',
@@ -1123,7 +1123,7 @@
   async function carregarCards(force){
     if(CARDS&&!force)return CARDS;
     var r=await window._sb.from('mi_uni_cards').select('*').order('ord').order('created_at');
-    CARDS=r.error?[]:(r.data||[]);CARDS._erro=r.error;
+    CARDS=r.error?[]:(r.data||[]);CARDS._erro=r.error;window._CARDS=CARDS;
     return CARDS;
   }
   async function carregarModsAll(force){

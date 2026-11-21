@@ -44,7 +44,7 @@
     else if(a==='salvarq')salvarQuiz();
   });
 
-  async function abrir(card){
+  async function abrir(card,vid){
     S.card=card;S.videos=[];S.cur=null;S.tab='quiz';S.sel={};S.fim=false;
     var id=listId(card.valor);
     ov.innerHTML='<div class="pl-w"><div class="pl-top"><button class="pl-back" data-pl="voltar">← Voltar</button><h2 class="pl-h">'+E(card.titulo)+'</h2></div><div class="pl-msg">Carregando os vídeos…</div></div>';
@@ -55,7 +55,7 @@
       if(!r.ok)throw new Error(j.erro||'Erro '+r.status);
       S.videos=j.videos;
     }catch(e){msg('Não consegui carregar a playlist: '+E(e.message));return;}
-    tocar(S.videos[0].id);
+    tocar((vid&&S.videos.some(function(v){return v.id===vid;}))?vid:S.videos[0].id);
   }
   function msg(t){ov.innerHTML='<div class="pl-w"><div class="pl-top"><button class="pl-back" data-pl="voltar">← Voltar</button><h2 class="pl-h">'+E(S.card.titulo)+'</h2></div><div class="pl-msg">'+t+'</div></div>';}
 

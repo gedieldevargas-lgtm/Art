@@ -1,7 +1,7 @@
 /* Filmes por nível: 15 por nível, status (assisti / quero assistir / não vi), nota e comentário. Salvo no aparelho. */
 (function () {
   'use strict';
-  var F = window.EBG_FILMES || [], NIV = ['A1', 'A2', 'B1', 'B2', 'C1'];
+  var F = window.EBG_FILMES || [], NIV = ['A1', 'A2', 'B1', 'B2', 'C1'], ABAS = NIV.concat(['CR']);
   var KEY = 'mi_filmes', KIMG = 'mi_fl_img3';
   var ST = { n: 'A1', aberto: null, f: 'todos' };
   var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
@@ -64,8 +64,8 @@
     var lista = F.filter(function (f) { return f.n === ST.n; }), vistos = lista.filter(function (f) { return est(f.id).s === 'visto'; }).length;
     var vis = lista.filter(function (f) { var s = est(f.id).s || 'nao'; return ST.f === 'todos' || s === ST.f; });
     var fil = [['todos', 'Todos'], ['quero', 'Quero assistir'], ['visto', 'Assisti'], ['nao', 'Não vi ainda']];
-    el.innerHTML = '<style>' + CSS + '</style><div class="fl"><div class="fl-h">Filmes por nível</div><div class="fl-s">15 filmes pra cada nível, do mais fácil de entender ao mais desafiador. Marque o que viu, dê sua nota e escreva o que achou. Dica: assista com legenda em inglês.</div>'
-      + '<div class="mi-dock" id="fl-abas">' + NIV.map(function (n) { return '<button data-nv="' + n + '"' + (n === ST.n ? ' class="on"' : '') + '>' + n + '</button>'; }).join('') + '</div>'
+    el.innerHTML = '<style>' + CSS + '</style><div class="fl"><div class="fl-h">' + (ST.n === 'CR' ? 'Filmes cristãos pra praticar inglês' : 'Filmes por nível') + '</div><div class="fl-s">' + (ST.n === 'CR' ? 'Histórias de fé em inglês. O nível de cada filme está na descrição: comece pelos de nível mais baixo. ' : '15 filmes pra cada nível, do mais fácil de entender ao mais desafiador. ') + ' Marque o que viu, dê sua nota e escreva o que achou. Dica: assista com legenda em inglês.</div>'
+      + '<div class="mi-dock" id="fl-abas">' + ABAS.map(function (n) { return '<button data-nv="' + n + '"' + (n === ST.n ? ' class="on"' : '') + '>' + (n === 'CR' ? '✝ Cristãos' : n) + '</button>'; }).join('') + '</div>'
       + '<div class="fl-prog"><b>' + vistos + ' de ' + lista.length + ' assistidos</b><div class="fl-bar"><i style="width:' + Math.round(vistos / lista.length * 100) + '%"></i></div></div>'
       + '<div class="fl-fil">' + fil.map(function (x) { return '<button data-ff="' + x[0] + '"' + (x[0] === ST.f ? ' class="on"' : '') + '>' + x[1] + '</button>'; }).join('') + '</div>'
       + '<div class="fl-grid">' + (vis.map(card).join('') || '<div class="fl-s">Nenhum filme nessa lista ainda.</div>') + '</div><div class="fl-s" style="font-size:11px;margin-top:14px;opacity:.7">Pôsteres: The Movie Database (TMDB). Este produto usa dados do TMDB, mas não é endossado nem certificado por ele.</div></div>';
@@ -86,5 +86,5 @@
     var t = e.target; if (!t.matches || !t.matches('.fl-cm')) return;
     var id = t.closest('.fl-c').dataset.id; (DB[id] = DB[id] || {}).c = t.value; sv(KEY, DB);
   });
-  window.EBG_FILMES_UI = { render: render };
+  window.EBG_FILMES_UI = { render: render, setTab: function (n) { ST.n = n; ST.f = 'todos'; ST.aberto = null; var p = document.getElementById('pane-filmes'); if (p) { p.dataset.ini = '1'; render(p); } } };
 })();

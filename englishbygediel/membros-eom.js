@@ -9,7 +9,7 @@
   +'#pane-eom .th-hero .th-k{margin-bottom:4px}#pane-eom .th-hero h1{font-size:clamp(20px,3vw,26px)!important;margin:0 0 8px!important}#pane-eom .th-hero p,#pane-eom .th-hero .th-ver,#pane-eom .th-hero .th-nav{display:none!important}'
   +'#pane-eom .th-hero .th-b1,#pane-eom .th-hero .th-b2{padding:8px 14px;font-size:12.5px;border-radius:12px}'
   +'.eom-q{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 0 14px;padding:2px}.eom-q::-webkit-scrollbar{display:none}'
-  +'.eom-q button{flex:none;display:flex;flex-direction:column;align-items:center;gap:4px;width:68px;background:none;border:0;color:#f3e2a8;font:inherit;font-size:11px;font-weight:700;cursor:pointer;padding:0}'
+  +'.eom-q button{flex:none;display:flex;flex-direction:column;align-items:center;gap:4px;width:72px;background:none;border:0;color:#f3e2a8;font:inherit;font-size:11px;font-weight:700;cursor:pointer;padding:0}'
   +'.eom-q button img{width:44px;height:44px;border-radius:12px;object-fit:contain;transition:transform .15s,box-shadow .15s}.eom-q button:hover img{transform:scale(1.08);box-shadow:0 8px 18px rgba(0,0,0,.4)}'
   +'.eom-grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:16px;align-items:start}.eom-side{position:sticky;top:8px;min-width:0}'
   +'@media(max-width:980px){.eom-grid{grid-template-columns:1fr}.eom-side{position:static}}'
@@ -27,6 +27,18 @@
   +'#pane-eom .uni-std .uni-card .th{aspect-ratio:1/1!important;width:62px;border-radius:10px;font-size:26px}#pane-eom .uni-std .uni-card .th .tg,#pane-eom .uni-std .uni-card .th .selo{display:none}'
   +'#pane-eom .uni-std .uni-card .bd{padding:0!important;min-width:0}#pane-eom .uni-std .uni-card .tt{font-size:13.5px;line-height:1.25}#pane-eom .uni-std .uni-card .ss{display:none}#pane-eom .uni-std .uni-card .ac{padding-top:2px;font-size:11.5px}'
   +'#pane-eom .uni-hero{padding:14px 16px!important;border-radius:16px}#pane-eom .uni-hero .ht{font-size:16px}#pane-eom .uni-hero .hs{font-size:12.5px}';
+  css.textContent+=''
+  +'body.theme-eom{--bg:#08160f;--sidebar:#0d261b;--surface:#143a2b;--surface2:#1a4634;--border:rgba(212,178,92,.22);--fg:#fbf5e4;--fg2:rgba(245,239,224,.78);--fg3:rgba(245,239,224,.5);--accent:#d4b25c;--accent2:#f3e2a8;--shadow:0 6px 18px rgba(0,0,0,.35);--shadow-md:0 8px 28px rgba(0,0,0,.45);color-scheme:dark}'
+  +'body.theme-eom,body.theme-eom .main,body.theme-eom .content{background:#08160f!important}body.theme-eom .topbar,body.theme-eom .sidebar{background:#0d261b!important;border-color:rgba(212,178,92,.2)!important}'
+  +'body.theme-eom #pane-eom{background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:4px 0 30px!important}'
+  +'body.theme-eom .back-btn,body.theme-eom .topbar .back-btn{background:#d4b25c!important;color:#14261c!important;border-color:#d4b25c!important}'
+  +'.eom-sem{display:grid;grid-template-columns:minmax(150px,230px) minmax(0,1fr);gap:14px;align-items:center;background:linear-gradient(180deg,#143a2b,#0f2c21);border:1px solid rgba(212,178,92,.28);border-radius:18px;padding:12px;margin-bottom:14px;cursor:pointer;text-align:left;color:inherit;font:inherit;width:100%}'
+  +'.eom-sem:hover{border-color:#d4b25c;box-shadow:0 12px 28px -12px rgba(0,0,0,.6)}'
+  +'.eom-sem .vt{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#0b2018}.eom-sem .vt img{width:100%;height:100%;object-fit:cover;display:block}'
+  +'.eom-sem .pl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}.eom-sem .pl i{width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.6);border:2px solid #f3e2a8;display:flex;align-items:center;justify-content:center}.eom-sem .pl svg{width:18px;height:18px;margin-left:3px}'
+  +'.eom-sem small{font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#d4b25c}.eom-sem b{display:block;font-family:"Cormorant Garamond",Georgia,serif;font-size:21px;color:#fbf5e4;line-height:1.2;margin:4px 0 6px}.eom-sem span{font-size:12.5px;color:rgba(245,239,224,.7)}'
+  +'.th-vid .th{position:relative}.th-vid .th .pl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.22)}.th-vid .th .pl i{width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,.6);border:2px solid #f3e2a8;display:flex;align-items:center;justify-content:center}.th-vid .th .pl svg{width:12px;height:12px;margin-left:2px}'
+  +'@media(max-width:620px){.eom-sem{grid-template-columns:1fr}}';
   document.head.appendChild(css);
 
   function lista(){
@@ -50,7 +62,7 @@
     if(!p||!window.LIVES)return;
     var hero=p.querySelector('.th-hero');
     var q=document.createElement('div');q.className='eom-q';
-    q.innerHTML=[['lives','lives','Lives'],['materiais','materiais','Materiais'],['devocionais','youtube','Devocionais'],['mural','eom','Mural'],['grupo','wa-real','Grupo'],['planos','planos','Planos']]
+    q.innerHTML=[['lives','lives','Lives'],['materiais','materiais','Materiais'],['devocionais','youtube','Devocionais'],['mural','eom','Mural'],['cristaos','culture','Filmes cristãos'],['spotify','sp-real','Spotify'],['grupo','wa-real','Grupo'],['planos','planos','Planos']]
       .map(function(x){return '<button data-eq="'+x[0]+'">'+IC(x[1])+x[2]+'</button>';}).join('');
     [].forEach.call(p.querySelectorAll('.uni-hero'),function(h){if(/devocional|ao vivo/i.test(h.textContent))h.remove();});
     var grid=document.createElement('div');grid.className='eom-grid';
@@ -60,6 +72,7 @@
     grid.appendChild(main);grid.appendChild(side);
     if(hero){hero.insertAdjacentElement('afterend',q);q.insertAdjacentElement('afterend',grid);}else{p.insertBefore(q,p.firstChild);p.appendChild(grid);}
     if(window.EBG_MURAL)window.EBG_MURAL.montar(side);
+    pregacao(main);capaVideo(main);
     if(window.tickCd)window.tickCd();
     clearInterval(compor._t);compor._t=setInterval(function(){var el=document.getElementById('eom-lv');if(!el){clearInterval(compor._t);return;}
       var n=document.createElement('div');n.innerHTML=lives();el.replaceWith(n.firstChild);if(window.tickCd)window.tickCd();},30000);
@@ -68,7 +81,49 @@
     var b=e.target.closest('.eom-q [data-eq],.eom-lv [data-eq]');if(!b)return;var a=b.dataset.eq;
     if(a==='mural'){var m=document.getElementById('eom-mural');if(m)m.scrollIntoView({behavior:'smooth',block:'start'});}
     else if(a==='grupo'&&window.miGrupoEom)miGrupoEom();
+    else if(a==='cristaos'){if(window.EBG_FILMES_UI)EBG_FILMES_UI.setTab('CR');if(window.go2)go2('filmes');}
+    else if(a==='spotify')spotify();
     else if(window.go2)go2(a);
   });
+  var PLAY='<svg viewBox="0 0 24 24" fill="#f3e2a8"><path d="M7 4.5v15l13-7.5z"/></svg>';
+  var cards=function(){return window._CARDS||[];};
+  var lid=function(v){return window.EBG_PLAYLIST_ID?EBG_PLAYLIST_ID(v):'';};
+  var ytid=function(u){var m=String(u||'').match(/(?:youtu\.be\/|v=|embed\/|live\/)([\w-]{11})/);return m?m[1]:'';};
+  function spotify(){
+    var c=cards().filter(function(x){return x.universo==='eom'&&/spotify/i.test((x.titulo||'')+' '+(x.valor||''))&&/^https?:/.test(x.valor||'');})[0];
+    if(c)window.open(c.valor,'_blank','noopener');else if(window.toast)toast('O link da playlist do Spotify ainda não foi cadastrado.');
+  }
+  async function videos(id){
+    var k='eom_pl_'+id;try{var c=JSON.parse(sessionStorage.getItem(k)||'null');if(c&&Date.now()-c.t<6e5)return c.v;}catch(e){}
+    var r=await fetch('/.netlify/functions/playlist-videos?list='+encodeURIComponent(id)),j=await r.json();if(!r.ok)throw new Error(j.erro||'erro');
+    try{sessionStorage.setItem(k,JSON.stringify({t:Date.now(),v:j.videos}));}catch(e){}return j.videos;
+  }
+  /* pregação da semana: uma da playlist de pregações, troca sozinha toda semana */
+  async function pregacao(main){
+    var c=cards().filter(function(x){return x.universo==='eom'&&/prega/i.test(x.titulo||'')&&lid(x.valor);})[0];if(!c)return;
+    try{
+      var v=await videos(lid(c.valor));if(!v||!v.length)return;
+      var sem=Math.floor((Date.now()-Date.UTC(2026,0,4))/(7*864e5)),it=v[((sem%v.length)+v.length)%v.length];
+      var b=document.createElement('button');b.className='eom-sem';b.type='button';
+      b.innerHTML='<div class="vt"><img alt="" src="https://i.ytimg.com/vi/'+it.id+'/hqdefault.jpg"><div class="pl"><i>'+PLAY+'</i></div></div><div><small>Pregação da semana</small><b>'+E(it.titulo)+'</b><span>Assistir agora'+(it.dur?' · '+E(it.dur):'')+'</span></div>';
+      b.onclick=function(){if(window.EBG_PLAYLIST)EBG_PLAYLIST.abrir(c,it.id);};
+      var lv=main.querySelector('#eom-lv');if(lv)lv.insertAdjacentElement('afterend',b);else main.insertBefore(b,main.firstChild);
+    }catch(e){}
+  }
+  /* "Inglês bíblico na prática": a capa vira o primeiro vídeo, com botão de play */
+  async function capaVideo(main){
+    var c=cards().filter(function(x){return x.universo==='eom'&&/ingl[eê]s b[ií]blico na pr[aá]tica/i.test(x.titulo||'');})[0];if(!c)return;
+    try{
+      var id='';
+      if(c.acao==='curso'&&c.valor){var r=await window._sb.from('mi_lessons').select('youtube_url,ord').eq('module_id',c.valor).order('ord').limit(1);id=ytid(((r.data||[])[0]||{}).youtube_url);}
+      else if(lid(c.valor)){var v=await videos(lid(c.valor));id=v&&v[0]?v[0].id:'';}
+      else id=ytid(c.valor);
+      if(!id)return;
+      var el=main.querySelector('[data-unicard="'+c.id+'"]');if(!el)return;var th=el.querySelector('.th');if(!th)return;
+      el.classList.add('th-vid');th.innerHTML='<img alt="" src="https://i.ytimg.com/vi/'+id+'/hqdefault.jpg"><div class="pl"><i>'+PLAY+'</i></div>';
+    }catch(e){}
+  }
+  var g0=window.goTo;
+  if(g0)window.goTo=function(p,el){var r=g0.call(this,p,el);document.body.classList.toggle('theme-eom',p==='eom');return r;};
   window.EBG_EOM={compor:compor};
 })();
