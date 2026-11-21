@@ -2402,10 +2402,10 @@
     var vis=lista.filter(function(m){return F==='todos'||(F==='gratis'?m.tipo==='gratis':F==='meus'?(matLivre(m)&&m.tipo!=='gratis'):(m.secao||'Materiais')===F);});
     h+='<div class="uni-grid mat-v">'+vis.map(function(m){
       var ok=matLivre(m),tag=m.tipo==='gratis'?'Grátis':ok?'✓ Seu':m.tipo==='programa'?'🔒 Programa':(m.preco||'🔒 Pago');
-      var fr=m.tipo==='gratis',cv=capaEbook(m);
+      var fr=m.tipo==='gratis',cv=capaEbook(m),cat=EBx?EBx.deMaterial(m):null;
       return '<div class="uni-card'+(ok?'':' lock')+(fr?' free':'')+(m.ativo===false?' mi-off':'')+'" data-mat="'+m.id+'">'+edCtl('mat',m.id)
         +'<div class="th">'+(cv?'<img loading="lazy" alt="" src="'+E(cv)+'">':(m.capa_url?'<img loading="lazy" alt="" src="'+E(m.capa_url)+'">':capaAuto(m.nome,n)))+'<span class="tg'+(fr?' free':ok?' own':'')+'">'+(fr?'✓ ':'')+E(tag)+'</span>'+(ok?'':'<span class="mv-lk">🔒</span>')+'</div>'
-        +'<div class="bd"><div class="tt">'+E(m.nome)+'</div><div class="ss" style="font-size:11.5px">'+(EBx&&(EBx.deMaterial(m)||{}).bonus?'📘 E-book + 📄 caderno pra imprimir':'')+'</div><div class="ac">'+(ok?(fr?'Abrir ›':'Ler agora ›'):(m.tipo==='programa'?'Ver o Programa ›':'Conhecer ›'))+'</div></div></div>';n++;}).join('')
+        +'<div class="bd"><div class="tt">'+E(cat?cat.nome:m.nome)+'</div><div class="ss mat-ds">'+E((cat&&cat.desc)||m.descricao||'')+(cat&&cat.bonus?'<br><b>+ caderno pra imprimir</b>':'')+'</div><div class="ac">'+(ok?(fr?'Abrir ›':'Ler agora ›'):(m.tipo==='programa'?'Ver o Programa ›':'Conhecer ›'))+'</div></div></div>';n++;}).join('')
       +(EDIT?'<button class="mi-novo" data-ed="mat-novo" data-sec="'+E(secs.indexOf(F)>=0?F:(secs[0]||'E-books'))+'">＋ Novo material</button>':'')+'</div>';
     if(!lista.length)h='<div class="admin-loading">Nenhum material ainda.</div>'+(EDIT?'<div class="uni-grid"><button class="mi-novo" data-ed="mat-novo">＋ Novo material</button></div>':'');
     if(EDIT)h='<div style="margin-bottom:14px"><label class="admin-btn admin-btn-ghost admin-btn-sm" style="cursor:pointer;display:inline-block">📥 Importar vários PDFs de uma vez<input type="file" id="mm-lote" accept="application/pdf" multiple style="display:none"></label></div>'+h;
