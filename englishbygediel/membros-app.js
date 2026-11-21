@@ -744,7 +744,7 @@
         var bt=trancada?'<button class="live-btn live-btn-lock" onclick="go2(\'planos\')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> Dentro dos planos · ver planos</button>'
           :now?'<a href="'+lv.link+'" target="_blank" rel="noopener" class="live-btn live-btn-on">'+(lv.type==='youtube'?'▶ Assistir no YouTube':'Entrar no Meet')+'</a>'
           :'<button class="live-btn live-btn-off" disabled>O link abre na hora</button>';
-        return '<div class="live-card'+(now?' is-live':'')+'"><div class="live-top"><div class="live-icon '+lv.iconClass+'">'+lv.icon+'</div><div class="live-info"><div class="live-title">'+lv.title+'</div><div class="live-sub">'+lv.sub+'</div>'
+        return '<div class="live-card'+(now?' is-live':'')+'" data-lid="'+E(lv.id)+'"><div class="live-top"><div class="live-icon '+lv.iconClass+'">'+lv.icon+'</div><div class="live-info"><div class="live-title">'+lv.title+'</div><div class="live-sub">'+lv.sub+'</div>'
           +(now?'<span class="live-status-live"><span class="live-dot"></span> AO VIVO AGORA</span>':'<span class="live-status-next">'+dayLabel(nx)+' às '+hh+'</span><div class="lv-cd" data-at="'+nx.getTime()+'"></div>')
           +'</div></div><div class="live-actions">'+bt+'<a href="'+agendaLink(lv,nx)+'" target="_blank" rel="noopener" class="live-btn live-btn-cal">📅 Pôr na agenda</a></div></div>';
       }).join('');
@@ -1189,10 +1189,10 @@
     var cf=(AS().cfg||{});
     if(k==='eom'){
       var membro=temProduto((cf.eom||['English on Mission'])[0]);
-      return '<div class="th-hero th-eom"><span class="mi-logo th-marca" aria-hidden="true"></span><div class="th-k">English on Mission</div>'
-        +'<h1>Toda língua tem um propósito.<br><em>A sua tem uma missão.</em></h1>'
-        +'<p>Inglês com a Bíblia: devocionais ao vivo, aulas, pregações, livros e uma comunidade que aprende junto.</p>'
-        +'<div class="th-ver">“Ide por todo o mundo e pregai o evangelho a toda criatura.” <b>Marcos 16:15</b></div>'
+      return '<div class="th-hero th-eom"><span class="mi-logo th-marca" aria-hidden="true"></span><div class="th-k" data-tx="eom-k">English on Mission</div>'
+        +'<h1 data-tx="eom-h1">Toda língua tem um propósito.<br><em>A sua tem uma missão.</em></h1>'
+        +'<p data-tx="eom-p">Inglês com a Bíblia: devocionais ao vivo, aulas, pregações, livros e uma comunidade que aprende junto.</p>'
+        +'<div class="th-ver" data-tx="eom-ver">“Ide por todo o mundo e pregai o evangelho a toda criatura.” <b>Marcos 16:15</b></div>'
         +'<div class="th-cta">'+(membro?'<span class="th-ok">✓ Você é membro do English on Mission</span>':(cf.checkoutEom?'<a class="th-b1" target="_blank" rel="noopener" href="'+E(cf.checkoutEom)+'">Assinar o English on Mission</a>':''))
         +'<button class="th-b2" data-th="grupo">'+IC('wa-real')+' Grupo no WhatsApp</button></div>'
         +(EDIT?'<button class="admin-btn admin-btn-ghost admin-btn-sm" style="margin-top:12px" data-ed="menu-ed" data-k="eom">✏️ Nome, frase e acesso do menu</button>':'')
@@ -2659,7 +2659,8 @@
     var t=$('mi-ed-btn');if(t){t.innerHTML=EDIT?tileBtn('check','Concluir','#0a4921'):tileBtn('editar','Editar','#6e4705');t.classList.toggle('on',EDIT);}
     pintarEdicaoMenu();pintarEdModulos();
     var pg=window.currentPage;if(UNIV[pg]){CARDS=null;desenharUni(pg);}if(pg==='materiais')renderMat();
-    if(EDIT)toast('✏️ Modo edição: toque em qualquer card, material ou menu pra editar','#4f6ef7');
+    document.dispatchEvent(new CustomEvent('ebg-edit',{detail:EDIT}));
+    if(EDIT)toast('✏️ Modo edição: toque em card, material, menu, live ou texto sublinhado pra editar. Salva sozinho.','#4f6ef7');
   }
   function botaoEdicao(){
     if($('mi-ed-btn')||!souAdmin())return;
@@ -2672,6 +2673,7 @@
     var t=0;(function esp(){var S=AS();if(S.pronto){botaoEdicao();aplicarMenus();if(window.currentPage==='materiais')renderMat();}else if(t++<240)setTimeout(esp,500);})();
   }
   window.MI_EDIT={ligar:modoEdicao,aplicarMenus:aplicarMenus};
+  window.EBG_ED={salvar:salvarCfg,on:function(){return EDIT;},cfg:function(){return AS().cfg||CFG||{};}};
   /* ───────── tela de oferta: todo clique em algo pago mostra o que a pessoa leva antes do checkout ───────── */
   function ofertaDe(url,oque){
     var cf=AS().cfg||{},nome=String(oque||'').replace(/^"|"$/g,''),pl=planos(),u=String(url||'');

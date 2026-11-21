@@ -49,12 +49,12 @@
   }
   function lives(){
     var livre=window.EBG_LIVRE||function(){return true;};
-    return '<div class="eom-lv" id="eom-lv"><h3>Lives</h3>'+lista().map(function(o,i){
+    return '<div class="eom-lv" id="eom-lv"><h3 data-tx="eom-lives">Lives</h3>'+lista().map(function(o,i){
       var lv=o.lv,agora=window.isLiveNow(lv),hh=String(lv.startH).padStart(2,'0')+'h'+(lv.startM?String(lv.startM).padStart(2,'0'):'');
       var bt=!livre(lv)?'<button class="eom-bt lk" data-eq="planos">Nos planos</button>'
         :agora?'<a class="eom-bt on" target="_blank" rel="noopener" href="'+E(lv.link)+'"><i></i>Acontecendo agora</a>'
         :'<button class="eom-bt ag" data-eq="lives">Ver Lives</button>';
-      return '<div class="eom-lr'+(i===0?' first':'')+'"><span class="ic"><img src="img/icons/lives.webp" alt="" style="width:26px;height:26px"></span><div style="min-width:0"><b>'+E(lv.title)+'</b>'
+      return '<div class="eom-lr'+(i===0?' first':'')+'" data-lid="'+E(lv.id)+'"><span class="ic"><img src="img/icons/lives.webp" alt="" style="width:26px;height:26px"></span><div style="min-width:0"><b>'+E(lv.title)+'</b>'
         +'<small>'+(agora?'Rolando agora':E(window.dayLabel(o.nx))+' às '+hh)+'</small>'+(agora?'':'<div class="lv-cd" data-at="'+o.nx.getTime()+'"></div>')+'</div>'+bt+'</div>';
     }).join('')+'</div>';
   }
@@ -128,5 +128,5 @@
   }
   var g0=window.goTo;
   if(g0)window.goTo=function(p,el){var r=g0.call(this,p,el);document.body.classList.toggle('theme-eom',p==='eom');return r;};
-  window.EBG_EOM={compor:compor};
+  window.EBG_EOM={compor:compor,refresh:function(){var el=document.getElementById('eom-lv');if(!el)return;var n=document.createElement('div');n.innerHTML=lives();el.replaceWith(n.firstChild);if(window.tickCd)window.tickCd();}};
 })();
