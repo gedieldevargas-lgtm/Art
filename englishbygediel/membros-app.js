@@ -358,6 +358,12 @@
   /* ícones maiores: atalhos, universos, contextos e redes */
   '.hm-quick button span .ic3d{width:54px!important;height:54px!important}.hm-uni span .ic3d{width:58px!important;height:58px!important}',
   '.ctx-chip .ce .ic3d{width:46px!important;height:46px!important}#pane-maratona .ctx-chip{min-width:112px;max-width:124px}',
+  /* chips do checklist: o próprio ícone é o card; o nome fica dentro, numa faixa mais escura da cor dele */
+  '#pane-maratona .ctx-chip{position:relative;padding:0!important;border:0!important;background:none!important;aspect-ratio:1/1;min-width:116px!important;max-width:128px!important;border-radius:20px;overflow:visible;transition:transform .15s,box-shadow .15s}',
+  '#pane-maratona .ctx-chip .ce{position:absolute;inset:0;margin:0!important;border-radius:20px;overflow:hidden;display:block}#pane-maratona .ctx-chip .ce .ic3d{width:100%!important;height:100%!important;margin:0!important;object-fit:cover;transform:translateY(-10%) scale(1.07)}',
+  '#pane-maratona .ctx-chip .ct{position:absolute;left:0;right:0;bottom:0;padding:9px 6px 8px;border-radius:0 0 20px 20px;background:color-mix(in srgb,var(--c) 88%,transparent);color:#fff;font-size:11px;font-weight:800;line-height:1.15;text-align:center;min-height:36px;display:flex;align-items:center;justify-content:center}',
+  '#pane-maratona .ctx-chip:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 12px 26px -10px rgba(0,0,0,.45)}#pane-maratona .ctx-chip.active{box-shadow:0 0 0 3px var(--accent),0 12px 26px -10px rgba(0,0,0,.4)}',
+
   '.right-rail a .ic3d,.right-rail button .ic3d{width:34px!important;height:34px!important}.right-rail a,.right-rail button[data-hm]{padding-top:11px!important;padding-bottom:11px!important;font-size:13px!important}',
   '.mar-task .mt-title,.mar-task-t{font-size:15px}',
   '.hm-ref .bts .ic3d{width:22px;height:22px}#mi-story .rd .ic3d{width:26px;height:26px}',
@@ -691,8 +697,14 @@
   if(doneOrig)window.taskDone=function(){doneOrig();salvarChecks();marcarDia();verCompleto();};
   function chipsCtx(){
     var g=document.querySelector('#pane-maratona .ctx-grid');if(!g||g.dataset.mi)return;g.dataset.mi='1';g.classList.remove('stagger');
-    g.innerHTML=CTX.map(function(c){return '<div class="ctx-chip'+(c.k==='Em Casa'?' active':'')+'" data-k="'+E(c.k)+'" onclick="selCtx(this)"><span class="ce">'+icCtx(c)+'</span>'+E(c.lb)+'</div>';}).join('');
+    g.innerHTML=CTX.map(function(c){return '<div class="ctx-chip'+(c.k==='Em Casa'?' active':'')+'" data-k="'+E(c.k)+'" style="--c:'+ctxCor(c)+'" onclick="selCtx(this)"><span class="ce">'+icCtx(c)+'</span><span class="ct" data-pt="'+E(c.lb)+'" data-en="'+E(CTX_EN[c.k]||c.lb)+'">'+E(c.lb)+'</span></div>';}).join('');
+    ctxIdioma();
   }
+  /* depois de 1 mês de uso da plataforma, os nomes dos lugares passam a aparecer em inglês */
+  var CTX_EN={'Em Casa':'At home','Acabei de acordar':'Just woke up','Vou pro banho':'Shower time','Prestes a dormir':'About to sleep','No carro':'In the car','No Transporte':'Bus, subway, Uber','No Trabalho':'At work','Intervalo do almoço':'Lunch break','Lavando a louça':'Washing dishes','Limpando a casa':'Cleaning the house','Cozinhando':'Cooking','Caminhando':'Walking','Na Academia':'At the gym','Na fila':'Waiting in line','No sofá':'Chilling on the couch','Só 5 minutos':'Only 5 minutes','Focado pra estudar':'Ready to study','Viajando':'Traveling','No mercado':'At the store','Na igreja':'At church','Com a família':'With family'};
+  function umMes(){try{var d=U&&U.created_at?new Date(U.created_at):null;if(!d||isNaN(d))return false;return Date.now()-d.getTime()>=30*864e5;}catch(e){return false;}}
+  function ctxIdioma(){var en=umMes();[].forEach.call(document.querySelectorAll('.ctx-chip .ct'),function(s){var t=en?s.dataset.en:s.dataset.pt;if(s.textContent!==t)s.textContent=t;});}
+  setInterval(ctxIdioma,3000);
   window.selCtx=function(el){
     var k=el.dataset.k;if(!k)return;
     [].forEach.call(document.querySelectorAll('.ctx-chip'),function(c){c.classList.toggle('active',c===el);});
