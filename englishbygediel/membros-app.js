@@ -712,7 +712,8 @@
     var L=window.LIVES||[];
     L.forEach(function(lv){
       if(lv.id==='series'){lv.title='Culture English · Séries e Filmes';lv.sub='Toda 2ª terça-feira do mês · começa 8/12 · 1h';lv.nth=2;lv.day=2;lv.startDate=new Date(2026,11,8);}
-      if(lv.id==='devocional'){lv.sub='Todo sábado · o link é revelado no grupo do WhatsApp';lv.type='grupo';}
+      if(lv.id==='devocional'){lv.sub='Todo sábado · grátis · o link abre aqui, só nas Lives';lv.free=true;}
+      if(lv.id==='series')lv.free=true;
     });
     function nthDia(y,m,dow,n){var d=new Date(y,m,1);while(d.getDay()!==dow)d.setDate(d.getDate()+1);d.setDate(d.getDate()+7*(n-1));return d;}
     var noOrig=window.nextOccurrence;
@@ -731,11 +732,15 @@
       return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(lv.title+' · Gediel')+'&dates='+f(nx)+'/'+f(en)+'&recur='+encodeURIComponent(rr)
         +'&details='+encodeURIComponent(lv.type==='grupo'?'O link é revelado no grupo do WhatsApp do English on Mission.':'Link: '+lv.link);
     }
+    function livreLive(lv){var S=AS();if(lv.free||!S.ok||souAdmin()||S.programa||S.tudo)return true;var ex=(S.cfg&&S.cfg.livesPlanos)||[];return ex.some(function(t){return temProduto(t);});}
+    window.go2=function(p){try{go(p);}catch(e){}};
+    var _sig='';setInterval(function(){var S=AS(),g=[S.pronto,S.programa,S.tudo,S.admin,window._isAdmin].join();if(g!==_sig){_sig=g;if(window.renderLives)renderLives();}},1200);
     window.renderLives=function(){
       var c=document.getElementById('live-cards-container');if(!c)return;
       c.innerHTML=(window.LIVES||[]).map(function(lv){return {lv:lv,nx:nextOccurrence(lv)};}).sort(function(a,b){return a.nx-b.nx;}).map(function(o){
         var lv=o.lv,nx=o.nx,now=isLiveNow(lv),hh=String(lv.startH).padStart(2,'0')+'h'+String(lv.startM).padStart(2,'0');
-        var bt=lv.type==='grupo'?'<button class="live-btn live-btn-on" onclick="miGrupoEom()">'+IC('wa-real')+' Pegar o link no grupo</button>'
+        var trancada=!livreLive(lv);
+        var bt=trancada?'<button class="live-btn live-btn-lock" onclick="go2(\'planos\')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> Dentro dos planos · ver planos</button>'
           :now?'<a href="'+lv.link+'" target="_blank" rel="noopener" class="live-btn live-btn-on">'+(lv.type==='youtube'?'▶ Assistir no YouTube':'Entrar no Meet')+'</a>'
           :'<button class="live-btn live-btn-off" disabled>O link abre na hora</button>';
         return '<div class="live-card'+(now?' is-live':'')+'"><div class="live-top"><div class="live-icon '+lv.iconClass+'">'+lv.icon+'</div><div class="live-info"><div class="live-title">'+lv.title+'</div><div class="live-sub">'+lv.sub+'</div>'
@@ -1169,7 +1174,8 @@
     if(!lista.length&&!EDIT)h+='<div class="admin-loading">Nenhum card ainda.'+(souAdmin()?' Toque em ✏️ Editar, lá em cima, pra criar.':'')+'</div>';
     if(lista.some(function(c){return /indica/i.test(c.tag||'');}))h+='<div style="font-size:10.5px;color:var(--fg3);margin-top:16px">Indicação = link de afiliado. Você paga o mesmo preço e eu posso receber uma comissão.</div>';
     p.innerHTML=h;
-    if(HERO){tickCd();var nav=p.querySelector('.th-nav');if(nav)nav.innerHTML=secs.map(function(s,si){return s?'<button data-goto="sec-'+k+'-'+si+'">'+E(s)+'</button>':'';}).join('');}
+    if(k==='eom'&&window.EBG_MURAL)window.EBG_MURAL.montar(p);
+    if(HERO){tickCd();var nav=p.querySelector('.th-nav');if(nav)nav.innerHTML=(k==='eom'?'<button data-goto="eom-mural">Mural</button>':'')+secs.map(function(s,si){return s?'<button data-goto="sec-'+k+'-'+si+'">'+E(s)+'</button>':'';}).join('');}
   }
   /* universos com cara de site próprio: EOM verde-escuro e dourado, Culture azul e vermelho */
   function heroUni(k,u,lista){
@@ -2313,7 +2319,7 @@
   }
   window.miGrupoEom=abrirGrupo;
   function ehDevocional(c){return c&&c.universo==='eom'&&/youtu/i.test(c.valor||'')&&/devocional|ao vivo/i.test(c.titulo||'');}
-  function folhaDevocional(){
+  function folhaDevocional(){go('lives');return;
     var lv=(window.LIVES||[]).filter(function(x){return x.id==='devocional';})[0],nx=lv&&window.nextOccurrence?nextOccurrence(lv):null;
     var ov=document.createElement('div');ov.className='pw-ov open';
     ov.innerHTML='<div class="pw" style="text-align:center"><div style="font-size:40px">🙏</div><div style="font-size:18px;font-weight:800;margin:6px 0">O link é revelado no grupo</div>'
@@ -2325,7 +2331,7 @@
     ov.addEventListener('click',function(e){var b=e.target.closest('[data-dv]');if(e.target===ov||(b&&b.dataset.dv==='fechar')){ov.remove();return;}if(b&&b.dataset.dv==='grupo'){abrirGrupo();ov.remove();}});
   }
   var acaoTxtOrig=acaoTxt;
-  acaoTxt=function(c){return ehDevocional(c)?'Pegar o link no grupo ›':acaoTxtOrig(c);};
+  acaoTxt=function(c){return ehDevocional(c)?'Ver nas Lives ›':acaoTxtOrig(c);};
   var abrirCardOrig=abrirCard;
   abrirCard=async function(id,uni){
     var c=(CARDS||[]).filter(function(x){return x.id===id;})[0];if(!c)return;

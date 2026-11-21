@@ -152,7 +152,7 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
 .live-btn{flex:1;border:none;border-radius:11px;padding:10px;font-size:12px;font-weight:700;cursor:pointer;transition:.12s;text-align:center;text-decoration:none;display:block}
 .live-btn-on{background:linear-gradient(135deg,#10b981,#059669);color:#fff}
 .live-btn-on:hover{filter:brightness(1.08)}
-.live-btn-off{background:var(--surface2);color:var(--fg3);cursor:not-allowed;border:1px solid var(--border)}
+.live-btn-lock{background:var(--surface2);color:var(--fg2);border:1px dashed var(--border);display:flex;align-items:center;justify-content:center;gap:6px}.live-btn-lock img{width:16px;height:16px}.live-btn-off{background:var(--surface2);color:var(--fg3);cursor:not-allowed;border:1px solid var(--border)}
 .live-btn-remind{background:var(--surface2);color:var(--fg2);border:1px solid var(--border);border-radius:11px;padding:10px 13px;font-size:12px;font-weight:600;cursor:pointer;transition:.12s;white-space:nowrap;text-decoration:none;display:inline-block}
 .live-btn-remind:hover{border-color:var(--accent);color:var(--accent)}
 
@@ -1111,7 +1111,7 @@ var LIVES=[
   {id:'a1a2',title:'Interação A1/A2',sub:'Nível iniciante · toda quinta-feira · 1h',icon:'💬',iconClass:'meet',day:4,startH:18,startM:30,endH:19,endM:30,link:'https://meet.google.com/ocs-zqws-kbt',type:'meet',startDate:new Date(2026,10,5)},
   {id:'b1b2',title:'Conversação B1/B2',sub:'Nível intermediário · toda quinta-feira · 1h',icon:'🗣️',iconClass:'meet',day:4,startH:19,startM:30,endH:20,endM:30,link:'https://meet.google.com/zvj-jpgs-mpu',type:'meet',startDate:new Date(2026,10,5)},
   {id:'series',title:'Inglês com Séries e Filmes',sub:'Toda terça-feira a partir de 17/11 · 1h',icon:'🎬',iconClass:'meet',day:2,startH:19,startM:0,endH:20,endM:0,link:'https://meet.google.com/zpq-npqi-swq',type:'meet',startDate:new Date(2026,10,17)},
-  {id:'devocional',title:'Devocional em Inglês',sub:'Todo sábado · livre · transmissão YouTube',icon:'✝️',iconClass:'yt',day:6,startH:9,startM:0,endH:10,endM:0,link:'https://youtube.com/live/QmDQciTioJI?feature=share',type:'youtube',startDate:new Date(2026,10,8)}
+  {id:'devocional',title:'Devocional em Inglês',sub:'Todo sábado · grátis · transmissão YouTube',icon:'✝️',iconClass:'yt',day:6,startH:9,startM:0,endH:10,endM:0,link:'https://youtube.com/live/QmDQciTioJI?feature=share',type:'youtube',startDate:new Date(2026,10,8)}
 ];
 function nextOccurrence(live){
   var now=new Date(),d=new Date(now);
@@ -2716,7 +2716,8 @@ document.getElementById('adm-les-modal').addEventListener('click',function(e){if
 <script src="membros-filmes.js?v=8"></script>
 <script src="prisma-perfis.js?v=1"></script>
 <script src="membros-prisma.js?v=1"></script>
-<script src="membros-app.js?v=202611191950"></script>
+<script src="membros-mural.js?v=1"></script>
+<script src="membros-app.js?v=202611211200"></script>
 <script src="playlist.js?v=1"></script>
 <script src="fx.js?v=2"></script>
 <script src="config.js"></script>
