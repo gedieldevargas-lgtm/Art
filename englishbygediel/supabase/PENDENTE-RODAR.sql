@@ -179,6 +179,8 @@ delete from public.mi_uni_cards where universo='eom' and titulo in ('Jogos','Ass
 -- MURAL do English on Mission (recados: testemunhos, pedidos de oração, avisos). Só assinantes leem e escrevem. Pode rodar mais de uma vez.
 create or replace function public.mural_acesso() returns boolean language sql stable security definer set search_path=public as
 $$ select public.sou_admin() or public.tenho_tudo() or exists(
+     select 1 from acesso a, jsonb_array_elements_text(coalesce(a.dados->'programa','[]'::jsonb)) t
+     where a.id='cfg' and public.comprei(t)) or exists(
      select 1 from acesso a, jsonb_array_elements_text(coalesce(a.dados->'eom','["English on Mission"]'::jsonb)) t
      where a.id='cfg' and public.comprei(t)) or public.comprei('English on Mission') $$;
 

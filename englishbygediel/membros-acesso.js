@@ -1,7 +1,7 @@
 /* Área de membros: o que cada aluno comprou, cadeados do Programa e painel "Gerenciar" (só admin).
    Precisa do supabase/membros.sql rodado no projeto dos membros. Sem ele, tudo fica como antes (sem cadeado). */
 (function(){
-  var sb=window._sb||_sb, PANES_PROGRAMA=['maratona','modulos'];
+  var sb=window._sb||_sb, PANES_PROGRAMA=['maratona','modulos','indicar'];
   var S={pronto:false,ok:false,admin:false,programa:false,cfg:{programa:[],jogosGratis:[],checkout:'',eom:[],checkoutEom:''},mats:[],compras:[],meta:''};
   var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
   // o "produto" pode ter vários trechos separados por vírgula (ex.: "Bíblia Linear, English on Mission")
@@ -86,6 +86,7 @@
   var goToOrig=window.goTo;
   window.goTo=function(page,el){
     if(PANES_PROGRAMA.indexOf(page)>=0&&!livre()){irCheckout(S.cfg.checkout,(window.TITLES&&TITLES[page])||'Essa área');return;}
+    if(page==='filmes'&&!livre()&&!(S.cfg.eom||[]).some(tem)&&(!window.EBG_MODO||EBG_MODO.modo()==='full')){return goToOrig('planos',document.querySelector('.nav-pill[onclick*="planos"]')||el);}
     if(page==='devocionais'&&!temEom()){irCheckout(S.cfg.checkoutEom||'https://pay.kiwify.com.br/oIjfTK8','Os Devocionais');return;}
     var r=goToOrig(page,el);if(page==='devocionais')desenharDev();return r;
   };

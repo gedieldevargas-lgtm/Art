@@ -10,7 +10,7 @@
   var SL={
     gratis:[
       {ic:'home.webp',t:'Bem-vindo(a)!',x:'Seu acesso grátis já está ativo. Em 1 minuto você vê o que já pode usar e o que dá pra destravar.'},
-      {ic:'lives.webp',t:'O que já é seu',x:L(['<b>Lives grátis:</b> Devocional (sábado, 9h) e Culture English','<b>Jogos</b> liberados pra praticar','<b>Materiais gratuitos</b>','<b>Bússola</b> (seu nível) e <b>Prisma</b> (seu jeito de aprender)'])},
+      {ic:'lives.webp',t:'O que já é seu',x:L(['<b>Lives grátis:</b> Devocional (sábado, 9h) e Culture English','<b>Jogos</b> liberados pra praticar','<b>Materiais gratuitos</b>','<b>Bússola</b> (seu nível), <b>Prisma</b> (seu jeito de aprender) e <b>Central de Prompts</b>','<b>Grupo do WhatsApp</b> do English on Mission'])},
       {ic:'planos.svg',t:'Tem muito mais pra destravar',x:'Isso aparece com cadeado no seu menu. É o que você ganha com um plano:'+L(['Aulas, módulos e Maratona de Hoje (Programa)','Lives de conversação A1/A2 e B1/B2','Mural, devocionais e pregações (English on Mission)','E-books e mini cursos'],true),btn:['planos','Ver os planos']}
     ],
     eom:[
@@ -22,7 +22,7 @@
       {ic:'eom.webp',t:'Assinatura ativada! 🎉',x:'O English on Mission acabou de abrir pra você. Veja o que mudou na sua plataforma:'+L(['<b>Mural da turma:</b> publique e comente, com selo dourado','<b>Devocionais gravados</b> e <b>pregação da semana</b>','<b>Inglês bíblico na prática</b> e materiais do EOM','Grupo do WhatsApp da turma'])}
     ],
     mudou_programa:[
-      {ic:'maratona.webp',t:'Você agora é do Programa 🚀',x:'Seu plano liberou o método completo. Novidades no seu menu:'+L(['<b>Maratona de Hoje:</b> o checklist do seu dia, por lugar onde você está','<b>Módulos e aulas</b> com quiz e comentários','<b>Todas as lives</b> (A1/A2 e B1/B2) e replays','<b>Todos os jogos</b> e materiais do Programa'])},
+      {ic:'maratona.webp',t:'Você agora é do Programa 🚀',x:'Seu plano liberou o método completo. Novidades no seu menu:'+L(['<b>Maratona de Hoje:</b> o checklist do seu dia, por lugar onde você está','<b>Módulos e aulas</b> com quiz e comentários','<b>Todas as lives</b> (A1/A2 e B1/B2) e replays','<b>Todos os jogos</b> e materiais do Programa','<b>English on Mission:</b> mural, devocionais gravados, pregações, Spotify e filmes cristãos','<b>Maratona 10 meses:</b> inscrição grátis, e você decide se participa','<b>Indique e ganhe</b> e chat de dúvidas com o Gediel'])},
       {ic:'bussola.webp',t:'Por onde começar',x:'1) Faça a <b>Bússola</b> pra saber seu nível. 2) Faça o <b>Prisma</b> pra montar seu plano. 3) Abra a <b>Maratona de Hoje</b> e comece pela tarefa mais curta.',btn:['maratona','Abrir a Maratona']}
     ],
     mudou_tudo:[

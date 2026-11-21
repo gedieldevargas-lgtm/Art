@@ -95,7 +95,7 @@
   }
   function liberado(){
     var S=(window.EBG_ACESSO||{}).estado||{};
-    if(S.admin||S.tudo||window._isAdmin)return true;
+    if(S.admin||S.tudo||S.programa||window._isAdmin)return true;
     var nomes=((S.cfg&&S.cfg.eom)||[]).concat(['English on Mission']);
     return nomes.some(function(n){n=String(n).toLowerCase();return (S.compras||[]).some(function(c){return (c.produto||'').toLowerCase().indexOf(n)>=0;})||String(S.meta||'').toLowerCase().indexOf(n)>=0;});
   }
