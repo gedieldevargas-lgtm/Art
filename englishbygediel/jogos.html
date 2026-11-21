@@ -879,7 +879,6 @@ Object.assign(RUN,{show:g=>tower(g),duel:g=>duel(g),gq:g=>gquiz(g),
  deep:g=>cards(g,DEEP,'Responda em inglês e devolva a pergunta: “What about you?”'),
  couple:g=>cards(g,{Casal:DEEP.Casal},'Um pergunta, o outro responde. Depois invertam. Sem português! 😉'),
  faith:g=>quiz(g,VOC_ALL.filter(w=>w[2]==='fé'||w[2]==='sentimentos'))});
-route();
 </script>
 <script id="v4">
 /* ===== v4: jogadores, placar da noite, prendas, Quem Sou Eu, Caça-Palavras, Palavras Cruzadas ===== */
@@ -1274,7 +1273,11 @@ route();
  route()})();
 </script>
 <style>.cv.locked{filter:saturate(.35) brightness(.7)}.cv.locked::after{content:"🔒";position:absolute;top:10px;right:10px;font-size:20px;background:rgba(0,0,0,.55);border-radius:99px;padding:4px 8px}.hubnote{margin:6px 0 10px;padding:10px 12px;border-radius:14px;background:rgba(255,211,110,.1);border:1px solid rgba(255,211,110,.3);font-size:14px}.hubnote a{color:var(--warn)}
-.chips{display:flex!important;flex-wrap:nowrap!important;gap:6px;padding:5px;border-radius:22px;background:color-mix(in srgb,var(--card,#fff) 70%,transparent);border:1px solid rgba(127,127,127,.25);overflow-x:auto;scrollbar-width:none;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}.chips::-webkit-scrollbar{display:none}
+.chips{display:flex!important;flex-wrap:wrap!important;gap:6px;padding:5px;border-radius:22px;background:rgba(255,255,255,.06);border:1px solid var(--bd);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}.chips .chip:not(.on){background:rgba(255,255,255,.07)!important;color:var(--tx)!important}
 .chips .chip{flex:1 0 auto;min-height:44px;padding:0 20px!important;border:none!important;border-radius:17px!important;white-space:nowrap;font-weight:800}.chips .chip.on{background:linear-gradient(135deg,#4f6ef7,#8b5cf6)!important;color:#fff!important;box-shadow:0 8px 18px -8px rgba(79,110,247,.8)}
+/* header do jogo: botão e título nunca quebram em 2 linhas */
+.top .btn,.top .backlnk{white-space:nowrap;flex:none}.top>div.mono{min-width:0;flex:1;text-align:center;line-height:1.35}.top>span.mono{white-space:nowrap;flex:none}
+.top .lives,.top .hearts{white-space:nowrap;font-size:14px;letter-spacing:-2px}
+.chips .chip{white-space:normal;text-align:center;line-height:1.15}
 </style>
 </body></html>
