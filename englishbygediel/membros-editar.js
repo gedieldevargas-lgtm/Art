@@ -68,6 +68,7 @@
      +'<div><label>Termina às</label><input class="admin-inp" type="time" id="lm-f" value="'+pad(v.endH)+':'+pad(v.endM)+'"></div>'
      +'<div><label>Tipo</label><select class="admin-inp" id="lm-ty">'+[['meet','Google Meet'],['youtube','YouTube'],['grupo','Link no grupo do WhatsApp']].map(function(o){return '<option value="'+o[0]+'"'+(v.type===o[0]?' selected':'')+'>'+o[1]+'</option>';}).join('')+'</select></div>'
      +'<div><label>Ícone (emoji)</label><input class="admin-inp" id="lm-ic" value="'+E(v.icon)+'" maxlength="4"></div>'
+     +'<div class="f"><label>Capa da live (link de imagem, opcional)</label><input class="admin-inp" id="lm-cp" value="'+E(v.capa||'')+'" placeholder="https://... (se vazio, usa a miniatura do YouTube)"></div>'
      +'<div class="f"><label>Link da live</label><input class="admin-inp" id="lm-l" value="'+E(v.link||'')+'" placeholder="https://..."></div>'
      +'<div><label>Quem acessa</label><select class="admin-inp" id="lm-fr"><option value="1"'+(v.free?' selected':'')+'>Grátis pra todos</option><option value="0"'+(!v.free?' selected':'')+'>Só dentro dos planos</option></select></div>'
      +'<div><label>Começa a valer em (opcional)</label><input class="admin-inp" type="date" id="lm-sd" value="'+dts(v.startDate)+'"></div></div>'
@@ -84,7 +85,7 @@
   function ler(){
     var hm=function(s){var p=(s||'0:0').split(':');return [+p[0]||0,+p[1]||0];},i=hm($('lm-i').value),f=hm($('lm-f').value);
     return {title:$('lm-t').value.trim(),sub:$('lm-s').value.trim(),day:+$('lm-d').value,nth:$('lm-n').value?+$('lm-n').value:0,startH:i[0],startM:i[1],endH:f[0],endM:f[1],
-      type:$('lm-ty').value,icon:$('lm-ic').value.trim(),link:$('lm-l').value.trim(),free:$('lm-fr').value==='1',startDate:$('lm-sd').value||''};
+      type:$('lm-ty').value,icon:$('lm-ic').value.trim(),link:$('lm-l').value.trim(),capa:$('lm-cp').value.trim(),free:$('lm-fr').value==='1',startDate:$('lm-sd').value||''};
   }
   function toast(t){if(window.toast)window.toast(t,'#10b981');}
 

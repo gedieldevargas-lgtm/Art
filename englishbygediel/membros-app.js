@@ -472,7 +472,7 @@
   '.th-ver{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:18px;color:var(--th-gold2);border-left:2px solid var(--th-gold);padding-left:12px;margin:0 0 18px;max-width:560px;position:relative}.th-ver b{display:block;margin:4px 0 0!important;font-style:normal;font-family:"Plus Jakarta Sans",sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--th-gold);margin-left:6px}',
   '.th-cta{display:flex;gap:10px;flex-wrap:wrap;position:relative}.th-cta .ic3d{width:22px;height:22px;vertical-align:-5px}',
   '.th-b1,.th-b2{border:none;border-radius:14px;padding:13px 18px;font:inherit;font-size:14px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}',
-  '.th-eom .th-b1{background:linear-gradient(135deg,#f3e2a8,#d4b25c);color:#14261c}.th-eom .th-b2{background:rgba(255,255,255,.08);color:#fbf5e4;border:1px solid rgba(212,178,92,.4)}.th-ok{color:var(--th-gold2);font-weight:800;font-size:14px;padding:12px 0}',
+  '.th-sau{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;color:#f3e2a8;font-size:15px}.th-sau b{color:#fff}.th-sau .th-selo{width:20px;height:20px;flex:none}.th-sau small{width:100%;opacity:.75;font-size:12.5px;margin-top:-2px}.th-eom .th-b1{background:linear-gradient(135deg,#f3e2a8,#d4b25c);color:#14261c}.th-eom .th-b2{background:rgba(255,255,255,.08);color:#fbf5e4;border:1px solid rgba(212,178,92,.4)}.th-ok{color:var(--th-gold2);font-weight:800;font-size:14px;padding:12px 0}',
   '.th-nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;position:relative}.th-nav button{border-radius:99px;padding:8px 14px;font:inherit;font-size:12.5px;font-weight:800;cursor:pointer}',
   '.th-eom .th-nav button{background:rgba(212,178,92,.12);color:var(--th-gold2);border:1px solid rgba(212,178,92,.35)}',
   /* ===== tema Culture English (azul e vermelho) ===== */
@@ -735,7 +735,7 @@
     function livreLive(lv){var S=AS();if(lv.free||!S.ok||souAdmin()||S.programa||S.tudo)return true;var ex=(S.cfg&&S.cfg.livesPlanos)||[];return ex.some(function(t){return temProduto(t);});}
     window.EBG_LIVRE=livreLive;
     window.go2=function(p){try{go(p);}catch(e){}};
-    var _sig='';setInterval(function(){var S=AS(),g=[S.pronto,S.programa,S.tudo,S.admin,window._isAdmin].join();if(g!==_sig){_sig=g;if(window.renderLives)renderLives();}},1200);
+    var _sig='';setInterval(function(){var S=AS(),g=[S.pronto,S.programa,S.tudo,S.admin,window._isAdmin].join();if(g!==_sig){_sig=g;if(window.renderLives)renderLives();try{var pg0=window.currentPage;if(typeof UNIV!=='undefined'&&UNIV[pg0]&&!EDIT){CARDS=null;desenharUni(pg0);}}catch(e){}}},1200);
     window.renderLives=function(){
       var c=document.getElementById('live-cards-container');if(!c)return;
       c.innerHTML=(window.LIVES||[]).map(function(lv){return {lv:lv,nx:nextOccurrence(lv)};}).sort(function(a,b){return a.nx-b.nx;}).map(function(o){
@@ -1188,12 +1188,17 @@
   function heroUni(k,u,lista){
     var cf=(AS().cfg||{});
     if(k==='eom'){
-      var membro=temProduto((cf.eom||['English on Mission'])[0]);
-      return '<div class="th-hero th-eom"><span class="mi-logo th-marca" aria-hidden="true"></span><div class="th-k" data-tx="eom-k">English on Mission</div>'
+      var membro=temProduto((cf.eom||[]).concat(['English on Mission']).join(','));
+      var S0=AS(),ehM=membro||S0.programa||S0.tudo||souAdmin();
+      var nm0=((U&&U.user_metadata&&(U.user_metadata.full_name||U.user_metadata.name))||'').trim().split(/\s+/)[0]||'';
+      var VERH='<svg class="th-selo" viewBox="0 0 24 24" aria-label="Membro verificado"><path d="M12 1.8l2.6 1.9 3.2-.1 1 3.1 2.6 1.9-1 3.1 1 3.1-2.6 1.9-1 3.1-3.2-.1L12 22.2l-2.6-1.9-3.2.1-1-3.1-2.6-1.9 1-3.1-1-3.1 2.6-1.9 1-3.1 3.2.1z" fill="#d4b25c"/><path d="M8 12.3l2.7 2.7L16.2 9.5" fill="none" stroke="#14261c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      var sau=ehM?'<div class="th-sau"><span>Graça e paz, <b>'+E(nm0||'amigo(a)')+'</b></span>'+VERH+'<small>Que bom ter você nessa missão. 🙏</small></div>':'';
+      membro=ehM;
+      return '<div class="th-hero th-eom"><span class="mi-logo th-marca" aria-hidden="true"></span>'+sau+'<div class="th-k" data-tx="eom-k">English on Mission</div>'
         +'<h1 data-tx="eom-h1">Toda língua tem um propósito.<br><em>A sua tem uma missão.</em></h1>'
         +'<p data-tx="eom-p">Inglês com a Bíblia: devocionais ao vivo, aulas, pregações, livros e uma comunidade que aprende junto.</p>'
         +'<div class="th-ver" data-tx="eom-ver">“Ide por todo o mundo e pregai o evangelho a toda criatura.” <b>Marcos 16:15</b></div>'
-        +'<div class="th-cta">'+(membro?'<span class="th-ok">✓ Você é membro do English on Mission</span>':(cf.checkoutEom?'<a class="th-b1" target="_blank" rel="noopener" href="'+E(cf.checkoutEom)+'">Assinar o English on Mission</a>':''))
+        +'<div class="th-cta">'+(membro?'':(cf.checkoutEom?'<a class="th-b1" target="_blank" rel="noopener" href="'+E(cf.checkoutEom)+'">Assinar o English on Mission</a>':''))
         +'<button class="th-b2" data-th="grupo">'+IC('wa-real')+' Grupo no WhatsApp</button></div>'
         +(EDIT?'<button class="admin-btn admin-btn-ghost admin-btn-sm" style="margin-top:12px" data-ed="menu-ed" data-k="eom">✏️ Nome, frase e acesso do menu</button>':'')
         +'<div class="th-nav"></div></div>';

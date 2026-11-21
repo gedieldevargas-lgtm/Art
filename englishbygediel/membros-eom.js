@@ -39,6 +39,10 @@
   +'.eom-sem small{font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#d4b25c}.eom-sem b{display:block;font-family:"Cormorant Garamond",Georgia,serif;font-size:21px;color:#fbf5e4;line-height:1.2;margin:4px 0 6px}.eom-sem span{font-size:12.5px;color:rgba(245,239,224,.7)}'
   +'.th-vid .th{position:relative}.th-vid .th .pl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.22)}.th-vid .th .pl i{width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,.6);border:2px solid #f3e2a8;display:flex;align-items:center;justify-content:center}.th-vid .th .pl svg{width:12px;height:12px;margin-left:2px}'
   +'@media(max-width:620px){.eom-sem{grid-template-columns:1fr}}';
+  css.textContent+='.eom-cv{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:2px 0 12px}.eom-cv button{all:unset;box-sizing:border-box;cursor:pointer;display:block;border-radius:14px;overflow:hidden;background:rgba(0,0,0,.25);border:1px solid rgba(243,226,168,.18);transition:transform .15s,box-shadow .15s}.eom-cv button:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.35)}'
+  +'.eom-cv .cp{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,#1d4a36,#0e271d);display:flex;align-items:center;justify-content:center;font-size:38px}.eom-cv .cp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}'
+  +'.eom-cv .cp i{position:absolute;left:8px;top:8px;font-style:normal;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:rgba(0,0,0,.6);color:#f3e2a8;padding:4px 8px;border-radius:99px}'
+  +'.eom-cv .tx{padding:9px 11px}.eom-cv .tx b{display:block;font-size:13px;color:#fff;line-height:1.25}.eom-cv .tx small{font-size:11.5px;color:#f3e2a8;opacity:.8}.eom-cv button:only-child{grid-column:1/-1}.eom-cv button:only-child .cp{aspect-ratio:21/9}@media(max-width:520px){.eom-cv{grid-template-columns:1fr}}';
   document.head.appendChild(css);
 
   function lista(){
@@ -47,9 +51,29 @@
     L.sort(function(a,b){var ad=a.lv.id==='devocional'?0:1,bd=b.lv.id==='devocional'?0:1;return ad-bd||a.nx-b.nx;});
     return L;
   }
+
+  /* capas: live anterior (último devocional gravado) e próxima live */
+  var PREV=null;
+  function capas(){
+    var L=lista().slice().sort(function(a,b){return a.nx-b.nx;})[0],h='';
+    if(PREV)h+='<button type="button" data-cv="prev"><div class="cp"><img alt="" src="https://i.ytimg.com/vi/'+PREV.id+'/hqdefault.jpg"><i>Live anterior</i></div><div class="tx"><b>'+E(PREV.titulo||'Devocional')+'</b><small>Assistir a gravação</small></div></button>';
+    if(L){var lv=L.lv,y=ytid(lv.link),img=lv.capa||(y?'https://i.ytimg.com/vi/'+y+'/hqdefault.jpg':'');
+      var hh=String(lv.startH).padStart(2,'0')+'h'+(lv.startM?String(lv.startM).padStart(2,'0'):'');
+      h+='<button type="button" data-cv="next"><div class="cp">'+(img?'<img alt="" src="'+E(img)+'" onerror="this.remove()">':E(lv.icon||'📺'))+'<i>Próxima live</i></div><div class="tx"><b>'+E(lv.title)+'</b><small>'+E(window.dayLabel(L.nx))+' às '+hh+'</small></div></button>';}
+    return h?'<div class="eom-cv">'+h+'</div>':'';
+  }
+  async function carregarPrev(){
+    var c=cards().filter(function(x){return x.universo==='eom'&&/devocion/i.test(x.titulo||'')&&lid(x.valor);})[0];if(!c)return;
+    try{var v=await videos(lid(c.valor));if(v&&v[0]){PREV={id:v[0].id,titulo:v[0].titulo,card:c};if(window.EBG_EOM)EBG_EOM.refresh();}}catch(e){}
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('.eom-cv [data-cv]');if(!b)return;
+    if(b.dataset.cv==='next'){if(window.go2)go2('lives');return;}
+    if(PREV&&window.EBG_PLAYLIST){window._plVid=PREV.id;var el=document.querySelector('#pane-eom [data-unicard="'+PREV.card.id+'"]');if(el)el.click();else{window._plVid=null;EBG_PLAYLIST.abrir(PREV.card,PREV.id);}}
+  });
   function lives(){
     var livre=window.EBG_LIVRE||function(){return true;};
-    return '<div class="eom-lv" id="eom-lv"><h3 data-tx="eom-lives">Lives</h3>'+lista().map(function(o,i){
+    return '<div class="eom-lv" id="eom-lv"><h3 data-tx="eom-lives">Lives</h3>'+capas()+lista().map(function(o,i){
       var lv=o.lv,agora=window.isLiveNow(lv),hh=String(lv.startH).padStart(2,'0')+'h'+(lv.startM?String(lv.startM).padStart(2,'0'):'');
       var bt=!livre(lv)?'<button class="eom-bt lk" data-eq="planos">Nos planos</button>'
         :agora?'<a class="eom-bt on" target="_blank" rel="noopener" href="'+E(lv.link)+'"><i></i>Acontecendo agora</a>'
@@ -62,7 +86,7 @@
     if(!p||!window.LIVES)return;
     var hero=p.querySelector('.th-hero');
     var q=document.createElement('div');q.className='eom-q';
-    q.innerHTML=[['lives','lives','Lives'],['materiais','materiais','Materiais'],['devocionais','youtube','Devocionais'],['mural','eom','Mural'],['cristaos','culture','Filmes cristãos'],['spotify','sp-real','Spotify'],['grupo','wa-real','Grupo'],['planos','planos','Planos']]
+    q.innerHTML=[['lives','lives','Lives'],['materiais','materiais','Materiais'],['devocionais','youtube','Devocionais'],['mural','eom','Mural'],['cristaos','culture','Filmes cristãos'],['spotify','sp-real','Spotify'],['planos','planos','Planos']]
       .map(function(x){return '<button data-eq="'+x[0]+'">'+IC(x[1])+x[2]+'</button>';}).join('');
     [].forEach.call(p.querySelectorAll('.uni-hero'),function(h){if(/devocional|ao vivo/i.test(h.textContent))h.remove();});
     var grid=document.createElement('div');grid.className='eom-grid';
@@ -72,7 +96,7 @@
     grid.appendChild(main);grid.appendChild(side);
     if(hero){hero.insertAdjacentElement('afterend',q);q.insertAdjacentElement('afterend',grid);}else{p.insertBefore(q,p.firstChild);p.appendChild(grid);}
     if(window.EBG_MURAL)window.EBG_MURAL.montar(side);
-    pregacao(main);capaVideo(main);
+    pregacao(main);capaVideo(main);carregarPrev();
     if(window.tickCd)window.tickCd();
     clearInterval(compor._t);compor._t=setInterval(function(){var el=document.getElementById('eom-lv');if(!el){clearInterval(compor._t);return;}
       var n=document.createElement('div');n.innerHTML=lives();el.replaceWith(n.firstChild);if(window.tickCd)window.tickCd();},30000);
