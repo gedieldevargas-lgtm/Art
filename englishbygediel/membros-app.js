@@ -3065,7 +3065,7 @@
   function planosPadrao(){
     var cf=AS().cfg||{};
     return [
-      {k:'gratis',nome:'Grátis',preco:'R$ 0',sub:'Pra conhecer o método',cor:'#64748b',beneficios:['Checklist diário e maratona','Jogos liberados','Materiais gratuitos','Lives abertas','Bússola de nível'],checkout:'',produtos:[]},
+      {k:'gratis',nome:'Grátis',preco:'R$ 0',sub:'Pra conhecer o método',cor:'#64748b',beneficios:['Checklist diário','Jogos liberados','Materiais gratuitos','Lives abertas','Bússola de nível'],checkout:'',produtos:[]},
       {k:'mission',nome:'Mission',preco:'R$ 25/mês',sub:'Inglês com a Bíblia',cor:'#1f6b4a',beneficios:['Tudo do Grátis','Devocionais gravados','Inglês bíblico na prática','Comunidade do English on Mission','Materiais do EOM'],checkout:cf.checkoutEom||'',produtos:(cf.eom&&cf.eom.length?cf.eom:['English on Mission'])},
       {k:'inteligente',nome:'Inteligente',preco:'6x R$ 297',promo:'6x R$ 197',promoAte:'2026-11-30',promoNome:'Black Friday',sub:'O Programa completo',cor:'#4f6ef7',beneficios:['Tudo do Grátis','Todas as aulas do Programa','Todos os materiais','Lives com replay','Pode pedir aula particular com o Gediel (paga à parte)'],checkout:cf.checkout||'',produtos:(cf.programa||[]).slice()},
       {k:'genio',nome:'Gênio',preco:'6x R$ 329',sub:'Tudo liberado',cor:'#d4a017',destaque:true,tudo:true,beneficios:['Tudo do Inteligente + Mission','Todos os e-books e mini-cursos','Tudo que for lançado, sem pagar de novo','Pode pedir aula particular com o Gediel (paga à parte)'],checkout:'',produtos:['Plano Gênio']},

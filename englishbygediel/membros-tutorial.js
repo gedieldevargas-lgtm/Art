@@ -11,7 +11,7 @@
     gratis:[
       {ic:'home.webp',t:'Bem-vindo(a)!',x:'Seu acesso grátis já está ativo. Em 1 minuto você vê o que já pode usar e o que dá pra destravar.'},
       {ic:'lives.webp',t:'O que já é seu',x:L(['<b>Lives grátis:</b> Devocional (sábado, 9h) e Culture English','<b>Jogos</b> liberados pra praticar','<b>Materiais gratuitos</b>','<b>Bússola</b> (seu nível), <b>Prisma</b> (seu jeito de aprender) e <b>Central de Prompts</b>','<b>Grupo do WhatsApp</b> do English on Mission'])},
-      {ic:'planos.svg',t:'Tem muito mais pra destravar',x:'Isso aparece com cadeado no seu menu. É o que você ganha com um plano:'+L(['Aulas, módulos e Maratona de Hoje (Programa)','Lives de conversação A1/A2 e B1/B2','Mural, devocionais e pregações (English on Mission)','E-books e mini cursos'],true),btn:['planos','Ver os planos']}
+      {ic:'planos.svg',t:'Tem muito mais pra destravar',x:'Isso aparece com cadeado no seu menu. É o que você ganha com um plano:'+L(['Aulas, módulos e Checklist de hoje (Programa)','Lives de conversação A1/A2 e B1/B2','Mural, devocionais e pregações (English on Mission)','E-books e mini cursos'],true),btn:['planos','Ver os planos']}
     ],
     eom:[
       {ic:'eom.webp',t:'Bem-vindo(a) ao English on Mission',x:'Inglês com a Bíblia, junto com a turma. Esta é a sua área: tudo gira em volta dela.'},
@@ -22,11 +22,11 @@
       {ic:'eom.webp',t:'Assinatura ativada! 🎉',x:'O English on Mission acabou de abrir pra você. Veja o que mudou na sua plataforma:'+L(['<b>Mural da turma:</b> publique e comente, com selo dourado','<b>Devocionais gravados</b> e <b>pregação da semana</b>','<b>Inglês bíblico na prática</b> e materiais do EOM','Grupo do WhatsApp da turma'])}
     ],
     mudou_programa:[
-      {ic:'maratona.webp',t:'Você agora é do Programa 🚀',x:'Seu plano liberou o método completo. Novidades no seu menu:'+L(['<b>Maratona de Hoje:</b> o checklist do seu dia, por lugar onde você está','<b>Módulos e aulas</b> com quiz e comentários','<b>Todas as lives</b> (A1/A2 e B1/B2) e replays','<b>Todos os jogos</b> e materiais do Programa','<b>English on Mission:</b> mural, devocionais gravados, pregações, Spotify e filmes cristãos','<b>Maratona 10 meses:</b> inscrição grátis, e você decide se participa','<b>Indique e ganhe</b> e chat de dúvidas com o Gediel'])},
-      {ic:'bussola.webp',t:'Por onde começar',x:'1) Faça a <b>Bússola</b> pra saber seu nível. 2) Faça o <b>Prisma</b> pra montar seu plano. 3) Abra a <b>Maratona de Hoje</b> e comece pela tarefa mais curta.',btn:['maratona','Abrir a Maratona']}
+      {ic:'maratona.webp',t:'Você agora é do Programa 🚀',x:'Seu plano liberou o método completo. Novidades no seu menu:'+L(['<b>Checklist de hoje:</b> o checklist do seu dia, por lugar onde você está','<b>Módulos e aulas</b> com quiz e comentários','<b>Todas as lives</b> (A1/A2 e B1/B2) e replays','<b>Todos os jogos</b> e materiais do Programa','<b>English on Mission:</b> mural, devocionais gravados, pregações, Spotify e filmes cristãos','<b>Maratona 10 meses:</b> inscrição grátis, e você decide se participa','<b>Indique e ganhe</b> e chat de dúvidas com o Gediel'])},
+      {ic:'bussola.webp',t:'Por onde começar',x:'1) Faça a <b>Bússola</b> pra saber seu nível. 2) Faça o <b>Prisma</b> pra montar seu plano. 3) Abra a <b>Checklist de hoje</b> e comece pela tarefa mais curta.',btn:['maratona','Abrir a Maratona']}
     ],
     mudou_tudo:[
-      {ic:'planos.svg',t:'Tudo liberado 👑',x:'Seu plano libera a plataforma inteira:'+L(['Programa completo (aulas, maratona, lives)','English on Mission: mural, devocionais e pregações','E-books, mini cursos e tudo que for lançado'])}
+      {ic:'planos.svg',t:'Tudo liberado 👑',x:'Seu plano libera a plataforma inteira:'+L(['Programa completo (aulas, checklist diário, lives)','English on Mission: mural, devocionais e pregações','E-books, mini cursos e tudo que for lançado'])}
     ]
   };
   function pacotes(){
@@ -101,7 +101,7 @@
       inscricao:[
         {ic:'bandeira.svg',t:'A maratona é opcional e grátis',x:'Quem está no Programa se inscreve <b>sem pagar nada</b>. Você pode participar ou não: o Programa funciona igual. A maratona só <b>turbina o resultado</b>, com turma, placar e prêmios.'},
         {ic:'check.webp',t:'Como entrar, passo a passo',x:'<b>1.</b> Você se inscreve (já fez!).<br><b>2.</b> O Gediel escolhe quem entra na turma, entre todos os inscritos.<br><b>3.</b> Se for escolhido, o menu <b>🏁 Maratona 10 meses</b> abre pra você aqui e você recebe o tutorial completo.<br><b>4.</b> Os pontos começam a contar sozinhos.'},
-        {ic:'modulos.webp',t:'Enquanto espera, já comece 🚀',x:'Não precisa esperar a resposta pra aprender. Quem chega no ritmo sai na frente:'+L(['Responda as perguntas do seu perfil e faça um teste (Bússola ou Prisma)','Assista as primeiras aulas do Programa','Abra a <b>Maratona de Hoje</b> e faça o checklist do dia'])},
+        {ic:'modulos.webp',t:'Enquanto espera, já comece 🚀',x:'Não precisa esperar a resposta pra aprender. Quem chega no ritmo sai na frente:'+L(['Responda as perguntas do seu perfil e faça um teste (Bússola ou Prisma)','Assista as primeiras aulas do Programa','Abra a <b>Checklist de hoje</b> e faça o checklist do dia'])},
         {ic:'bandeira.svg',t:'Os menus novos da maratona',x:'Se você for escolhido, aparecem pra você:'+L(['🏁 <b>Maratona 10 meses</b>: 5 ciclos, cada um com marcos e uma entrega','🏆 <b>Placar Top 15</b>: sua posição e quantos pontos faltam pra subir','📊 <b>Seus pontos</b> e progresso do ciclo','📲 <b>Grupo do WhatsApp</b> dos maratonistas'])},
         {ic:'jogos.webp',t:'Como se ganha ponto',x:pt+'<div style="margin-top:10px;font-size:13px;opacity:.8">Tudo isso o app registra sozinho.</div>'},
         {ic:'planos.svg',t:'Regras e prêmios',x:regras+premios,btn:['maratona','Ir pro Programa agora']}

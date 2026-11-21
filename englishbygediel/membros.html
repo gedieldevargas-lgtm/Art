@@ -542,7 +542,7 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
   <div class="sidebar-nav">
     <div class="nav-section">Menu</div>
     <div class="nav-pill active" onclick="goTo('home',this)"><span class="nav-icon">🏠</span><span>Início</span></div>
-    <div class="nav-pill" onclick="goTo('maratona',this)"><span class="nav-icon">🏃</span><span>Maratona de Hoje</span><span class="nav-badge">Novo</span></div>
+    <div class="nav-pill" onclick="goTo('maratona',this)"><span class="nav-icon">🏃</span><span>Checklist de hoje</span><span class="nav-badge">Novo</span></div>
     <div class="nav-pill" onclick="goTo('lives',this)"><span class="nav-icon">📺</span><span>Lives</span></div>
     <div class="nav-pill" onclick="goTo('modulos',this)"><span class="nav-icon">📚</span><span>Módulos</span></div>
     <div class="nav-pill" onclick="goTo('jogos',this)"><span class="nav-icon">🎮</span><span>Jogos</span></div>
@@ -583,7 +583,7 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
 
       <!-- MARATONA -->
       <div class="pane" id="pane-maratona">
-        <div style="font-size:21px;font-weight:800;margin-bottom:4px">Maratona de Hoje</div>
+        <div style="font-size:21px;font-weight:800;margin-bottom:4px">Checklist de hoje</div>
         <div style="font-size:13px;color:var(--fg2);margin-bottom:18px">Sessão personalizada B1 · Escolha seu contexto</div>
         <div class="mar-hero">
           <div style="font-size:10px;font-weight:800;letter-spacing:1.4px;color:rgba(255,255,255,.7);margin-bottom:3px">PLANO DO DIA</div>
@@ -880,7 +880,7 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
               <defs><linearGradient id="pg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#4f6ef7"/><stop offset="100%" stop-color="#8b5cf6"/></linearGradient></defs>
               <text x="26" y="31" text-anchor="middle" font-size="11" font-weight="800" fill="var(--fg)" font-family="inherit">65%</text>
             </svg>
-            <div><div style="font-size:13px;font-weight:700;margin-bottom:3px">Maratona de Hoje</div><div style="font-size:11px;color:var(--fg2)">3 de 4 tarefas feitas</div></div>
+            <div><div style="font-size:13px;font-weight:700;margin-bottom:3px">Checklist de hoje</div><div style="font-size:11px;color:var(--fg2)">3 de 4 tarefas feitas</div></div>
           </div>
         </div>
       </div>
@@ -1287,7 +1287,7 @@ function renderMat(){
 renderMat.__antigo=renderMat;renderMat();
 
 // ═══════════════════════════ NAVEGAÇÃO com animação ═══════════════════════════
-var TITLES={home:'Início',maratona:'Maratona de Hoje',lives:'Lives',modulos:'Módulos',jogos:'Jogos',materiais:'Materiais',bussola:'Bússola CEFR',prisma:'Prisma de Talentos',admin:'🛡️ Painel Admin'};
+var TITLES={home:'Início',maratona:'Checklist de hoje',lives:'Lives',modulos:'Módulos',jogos:'Jogos',materiais:'Materiais',bussola:'Bússola CEFR',prisma:'Prisma de Talentos',admin:'🛡️ Painel Admin'};
 var currentPage='home';
 function goTo(page,el){
   if(page==='jogos'){var gf=document.getElementById('games-frame');if(gf&&!gf.src)gf.src=gf.getAttribute('data-src');}
@@ -2724,14 +2724,14 @@ document.getElementById('adm-les-modal').addEventListener('click',function(e){if
 <script src="membros-mural.js?v=3"></script>
 <script src="membros-eom.js?v=9"></script>
 <script src="membros-modo.js?v=2"></script>
-<script src="membros-tutorial.js?v=3"></script>
+<script src="membros-tutorial.js?v=4"></script>
 <script src="membros-links.js?v=1"></script>
-<script src="membros-app.js?v=202611212520"></script>
+<script src="membros-app.js?v=202611212530"></script>
 <script src="membros-editar.js?v=2"></script>
 <script src="playlist.js?v=2"></script>
 <script src="fx.js?v=2"></script>
 <script src="config.js"></script>
 <script src="maratonas.js?v=202611181850"></script>
-<script src="membros-maratonas.js?v=202611212300"></script>
+<script src="membros-maratonas.js?v=202611212600"></script>
 </body>
 </html>

@@ -258,7 +258,7 @@
   "resumo": [
    "A regra dos 20 minutos por dia.",
    "Encaixar o inglês no seu contexto.",
-   "Usar a Maratona de Hoje como guia."
+   "Usar a Checklist de hoje como guia."
   ],
   "mapa": {
    "centro": "Rotina",
@@ -279,7 +279,7 @@
     {
      "t": "Guia",
      "itens": [
-      "Maratona de Hoje"
+      "Checklist de hoje"
      ]
     },
     {

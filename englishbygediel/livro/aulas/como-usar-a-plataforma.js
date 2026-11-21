@@ -142,7 +142,7 @@
      "p": "Onde ficam as tarefas do seu dia?",
      "emoji": "",
      "ops": [
-      "Na Maratona de Hoje",
+      "Na Checklist de hoje",
       "No perfil",
       "Nos comentários"
      ],
@@ -249,7 +249,7 @@
   }
  ],
  "missao": {
-  "tarefa": "Pratique: entre na Maratona de Hoje e complete 1 tarefa agora.",
+  "tarefa": "Pratique: entre na Checklist de hoje e complete 1 tarefa agora.",
   "falar": "I watch two new lessons a week.",
   "frases": 10,
   "exemplo": "I watch two new lessons a week."
@@ -258,7 +258,7 @@
   "resumo": [
    "Onde fica cada área da plataforma.",
    "Como funcionam quiz, comentários, reações e votos.",
-   "Como usar a Maratona de Hoje."
+   "Como usar a Checklist de hoje."
   ],
   "mapa": {
    "centro": "Plataforma",
@@ -273,7 +273,7 @@
     {
      "t": "Seu dia",
      "itens": [
-      "Maratona de Hoje"
+      "Checklist de hoje"
      ]
     },
     {

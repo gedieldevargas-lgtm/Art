@@ -89,8 +89,8 @@
     if (!perfil || !base) return false;
     var sec = document.createElement('div'); sec.className = 'nav-section'; sec.textContent = 'Maratonas';
     var p1 = document.createElement('div'); p1.className = 'nav-pill'; p1.id = 'mt10-nav'; p1.style.display = 'none';
-    p1.setAttribute('onclick', "goTo('mt10',this)"); p1.innerHTML = '<span class="nav-icon"><img class="ic3d" src="img/icons/bandeira.svg" alt="" draggable="false"></span><span>Maratona 10 meses</span><span class="nav-badge">Turma</span>';
-    var p2 = document.createElement('div'); p2.className = 'nav-pill'; p2.setAttribute('onclick', "goTo('maratonas',this)");
+    p1.setAttribute('onclick', "goTo('mt10',this)"); p1.innerHTML = '<span class="nav-icon"><img class="ic3d" src="img/icons/bandeira.svg" alt="" draggable="false"></span><span>Maratona</span><span class="nav-badge">Turma</span>';
+    var p2 = document.createElement('div'); p2.className = 'nav-pill'; p2.setAttribute('onclick', "goTo('maratonas',this)"); p2.style.display = 'none';
     p2.innerHTML = '<span class="nav-icon"><img class="ic3d" src="img/icons/calendario.svg" alt="" draggable="false"></span><span>Maratonas</span>';
     perfil.insertAdjacentElement('beforebegin', sec); sec.insertAdjacentElement('afterend', p1); p1.insertAdjacentElement('afterend', p2);
     var a = document.createElement('div'); a.className = 'pane'; a.id = 'pane-mt10';
@@ -358,6 +358,7 @@
 
     // outras maratonas: trancadas
     var minha = 'icd-1';
+    h += TODAS;
     h += '<div class="mt-box"><h3>Outras maratonas</h3><div class="s">Liberadas só pra quem entra em cada uma.</div><div class="mt-outras">' + MR.lista.filter(function (m) { return m.id !== minha; }).map(function (m) {
       return '<div>🔒 ' + esc(m.icone) + '<b>' + esc(m.nome) + '</b>' + esc(m.edicao) + ' · ' + esc(m.quando) + '</div>'; }).join('') + '</div></div>';
     p.innerHTML = h;
@@ -571,6 +572,8 @@
     + '.mt-en{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.mt-en button{border:0;border-radius:14px;padding:13px 20px;font:inherit;font-size:14.5px;font-weight:800;cursor:pointer}.mt-en .p{background:#fff;color:#2b180e}.mt-en .g{background:rgba(255,255,255,.16);color:#fff}'
     + '.mt-lk{border:0;background:none;color:var(--fg2);font-size:12px;text-decoration:underline;cursor:pointer;padding:6px 0}';
   document.head.appendChild(cssE);
+
+  var TODAS = '<div class="mt-box"><h3>Todas as maratonas</h3><div class="s">Veja as turmas abertas, as datas e faça sua inscrição ou entre na lista de espera.</div><div class="mt-en"><button class="p" style="background:var(--accent);color:#fff" data-mt-todas>📋 Ver maratonas e inscrições</button></div></div>';
   function entradaHtml() {
     var st = EU.status, P = EU.pl || { vistas: [], tour: [] };
     var h = '<div class="mt-hero"><small>Maratona 10 meses · aberta pra quem está no Programa</small>';
@@ -579,23 +582,24 @@
         + '<div class="mt-en"><button class="p" data-mt-tut="inscricao">📖 Como vai funcionar</button><button class="g" data-mt-ir="maratona">Começar o Programa agora</button></div></div>'
         + '<div class="mt-box"><h3>Não espere a resposta: já comece 🚀</h3><div class="s">A maratona só <b>turbina</b> o resultado. Quem já chega no ritmo sai na frente. Seu primeiro passo:</div>'
         + PASSOS.map(function (x) { var ok = x.ok(P); return '<div class="mt-ad' + (ok ? ' ok' : '') + '"><span class="ck">' + (ok ? '✓' : '') + '</span><span class="t">' + esc(x.t) + '</span></div>'; }).join('')
-        + '<div class="mt-en" style="margin-top:10px"><button class="p" style="background:var(--accent);color:#fff" data-mt-ir="maratona">✅ Maratona de Hoje</button><button class="g" style="background:var(--surface2);color:var(--fg)" data-mt-ir="modulos">🎬 Ir pras aulas</button></div></div>'
-        + '<div style="text-align:center"><button class="mt-lk" data-mt-cancela>Cancelar minha inscrição</button></div>';
+        + '<div class="mt-en" style="margin-top:10px"><button class="p" style="background:var(--accent);color:#fff" data-mt-ir="maratona">✅ Checklist de hoje</button><button class="g" style="background:var(--surface2);color:var(--fg)" data-mt-ir="modulos">🎬 Ir pras aulas</button></div></div>'
+        + TODAS + '<div style="text-align:center"><button class="mt-lk" data-mt-cancela>Cancelar minha inscrição</button></div>';
       return h;
     }
     if (st === 'recusado') {
-      return h + '<h2>Dessa vez não foi na turma</h2><p>O Programa continua 100% seu: checklist, aulas e lives. Se abrir uma próxima turma, você pode se inscrever de novo.</p><div class="mt-en"><button class="p" data-mt-ir="maratona">Continuar o Programa</button></div></div>';
+      return h + '<h2>Dessa vez não foi na turma</h2><p>O Programa continua 100% seu: checklist, aulas e lives. Se abrir uma próxima turma, você pode se inscrever de novo.</p><div class="mt-en"><button class="p" data-mt-ir="maratona">Continuar o Programa</button></div></div>' + TODAS;
     }
     h += '<h2>Quer correr junto com a turma?</h2><p>É <b>grátis</b> pra quem está no Programa e é <b>opcional</b>: você pode participar ou não, o Programa funciona igual. Você se inscreve e o Gediel escolhe quem entra.</p>'
       + '<div class="mt-en"><button class="p" data-mt-insc>🏁 Quero me inscrever</button><button class="g" data-mt-tut="inscricao">📖 Como funciona</button></div></div>'
       + '<div class="mt-box"><h3>O que a maratona acrescenta ao Programa</h3><div class="s">Você segue aprendendo do mesmo jeito. A maratona entra por cima, pra empurrar o resultado:</div>'
       + ['🏆 Placar Top 15 por ciclo, com pontos de verdade', '🎯 5 ciclos de 2 meses, cada um com marcos e uma entrega', '📲 Grupo no WhatsApp com a turma', '🎁 Prêmios pra quem concluir e pro 1º lugar'].map(function (t) { return '<div class="mt-ad"><span class="t">' + t + '</span></div>'; }).join('') + '</div>'
       + '<div class="mt-box"><h3>Como se ganha ponto</h3>' + M10.pontos.map(function (x) { return '<div class="mt-pt"><span>' + x[0] + '</span><span>' + esc(x[1]) + (x[3] ? '<small>' + esc(x[3]) + '</small>' : '') + '</span><b>+' + x[2] + '</b></div>'; }).join('') + '</div>'
-      + '<div class="mt-box trava"><h3>Ao se inscrever, você já começa</h3><div class="s">A inscrição abre seu tutorial e te leva pro Programa. Não precisa esperar a seleção pra aprender.</div></div>';
+      + '<div class="mt-box trava"><h3>Ao se inscrever, você já começa</h3><div class="s">A inscrição abre seu tutorial e te leva pro Programa. Não precisa esperar a seleção pra aprender.</div></div>' + TODAS;
     return h;
   }
   document.addEventListener('click', async function (e) {
-    var t = e.target.closest && e.target.closest('[data-mt-insc],[data-mt-cancela],[data-mt-tut],[data-mt-ir],[data-mt-ap],[data-mt-rec],[data-mt-zap]'); if (!t) return;
+    var t = e.target.closest && e.target.closest('[data-mt-todas],[data-mt-insc],[data-mt-cancela],[data-mt-tut],[data-mt-ir],[data-mt-ap],[data-mt-rec],[data-mt-zap]'); if (!t) return;
+    if (t.hasAttribute('data-mt-todas')) { goTo('maratonas', null); return; }
     if (t.hasAttribute('data-mt-tut')) { if (window.EBG_TUT) EBG_TUT.maratona(t.getAttribute('data-mt-tut')); return; }
     if (t.hasAttribute('data-mt-ir')) { if (window.go2) go2(t.getAttribute('data-mt-ir')); return; }
     if (t.hasAttribute('data-mt-insc')) {
