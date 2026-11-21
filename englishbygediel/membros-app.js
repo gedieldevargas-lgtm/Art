@@ -2340,7 +2340,7 @@
     var c=(CARDS||[]).filter(function(x){return x.id===id;})[0];if(!c)return;
     if(!temAcesso(c)){irCheckout(checkoutDe(c),'"'+c.titulo+'"');return;}
     if(c.acao==='material'){var mt=(AS().mats||[]).filter(function(x){return x.id===c.valor;})[0];if(mt)return abrirMaterial(mt);toast('Material ainda não ligado a esse card');return;}
-    if(c.acao==='playlist'){if(window.EBG_PLAYLIST)window.EBG_PLAYLIST.abrir(c);return;}
+    if(c.acao==='playlist'){var pv=window._plVid;window._plVid=null;if(window.EBG_PLAYLIST)window.EBG_PLAYLIST.abrir(c,pv);return;}
     if(ehDevocional(c))return folhaDevocional();
     return abrirCardOrig(id,uni);
   };

@@ -91,7 +91,8 @@
   var ytid=function(u){var m=String(u||'').match(/(?:youtu\.be\/|v=|embed\/|live\/)([\w-]{11})/);return m?m[1]:'';};
   function spotify(){
     var c=cards().filter(function(x){return x.universo==='eom'&&/spotify/i.test((x.titulo||'')+' '+(x.valor||''))&&/^https?:/.test(x.valor||'');})[0];
-    if(c)window.open(c.valor,'_blank','noopener');else if(window.toast)toast('O link da playlist do Spotify ainda não foi cadastrado.');
+    var el=c&&document.querySelector('#pane-eom [data-unicard="'+c.id+'"]');
+    if(el)el.click();else if(c)window.open(c.valor,'_blank','noopener');else if(window.toast)toast('O link da playlist do Spotify ainda não foi cadastrado.');
   }
   async function videos(id){
     var k='eom_pl_'+id;try{var c=JSON.parse(sessionStorage.getItem(k)||'null');if(c&&Date.now()-c.t<6e5)return c.v;}catch(e){}
@@ -106,7 +107,9 @@
       var sem=Math.floor((Date.now()-Date.UTC(2026,0,4))/(7*864e5)),it=v[((sem%v.length)+v.length)%v.length];
       var b=document.createElement('button');b.className='eom-sem';b.type='button';
       b.innerHTML='<div class="vt"><img alt="" src="https://i.ytimg.com/vi/'+it.id+'/hqdefault.jpg"><div class="pl"><i>'+PLAY+'</i></div></div><div><small>Pregação da semana</small><b>'+E(it.titulo)+'</b><span>Assistir agora'+(it.dur?' · '+E(it.dur):'')+'</span></div>';
-      b.onclick=function(){if(window.EBG_PLAYLIST)EBG_PLAYLIST.abrir(c,it.id);};
+      var ce=main.querySelector('[data-unicard="'+c.id+'"]'),trv=ce&&ce.classList.contains('lock');
+      if(trv)b.querySelector('span').textContent='Exclusivo para assinantes · toque pra assinar';
+      b.onclick=function(){var el=main.querySelector('[data-unicard="'+c.id+'"]');window._plVid=it.id;if(el)el.click();else if(window.EBG_PLAYLIST){window._plVid=null;EBG_PLAYLIST.abrir(c,it.id);}};
       var lv=main.querySelector('#eom-lv');if(lv)lv.insertAdjacentElement('afterend',b);else main.insertBefore(b,main.firstChild);
     }catch(e){}
   }
