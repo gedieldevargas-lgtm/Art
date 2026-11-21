@@ -1,7 +1,7 @@
 /* Área de membros: o que cada aluno comprou, cadeados do Programa e painel "Gerenciar" (só admin).
    Precisa do supabase/membros.sql rodado no projeto dos membros. Sem ele, tudo fica como antes (sem cadeado). */
 (function(){
-  var sb=window._sb||_sb, PANES_PROGRAMA=['maratona','lives','modulos'];
+  var sb=window._sb||_sb, PANES_PROGRAMA=['maratona','modulos'];
   var S={pronto:false,ok:false,admin:false,programa:false,cfg:{programa:[],jogosGratis:[],checkout:'',eom:[],checkoutEom:''},mats:[],compras:[],meta:''};
   var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
   // o "produto" pode ter vários trechos separados por vírgula (ex.: "Bíblia Linear, English on Mission")

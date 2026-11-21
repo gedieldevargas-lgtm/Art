@@ -733,6 +733,7 @@
         +'&details='+encodeURIComponent(lv.type==='grupo'?'O link é revelado no grupo do WhatsApp do English on Mission.':'Link: '+lv.link);
     }
     function livreLive(lv){var S=AS();if(lv.free||!S.ok||souAdmin()||S.programa||S.tudo)return true;var ex=(S.cfg&&S.cfg.livesPlanos)||[];return ex.some(function(t){return temProduto(t);});}
+    window.EBG_LIVRE=livreLive;
     window.go2=function(p){try{go(p);}catch(e){}};
     var _sig='';setInterval(function(){var S=AS(),g=[S.pronto,S.programa,S.tudo,S.admin,window._isAdmin].join();if(g!==_sig){_sig=g;if(window.renderLives)renderLives();}},1200);
     window.renderLives=function(){
@@ -1094,6 +1095,8 @@
     if(entrou||!user)return;entrou=true;contaAcesso();
     carregarEstado(user);restaurarChecks();pintarPerfil();iniciarEdicao();
     pintarRail();renderHome();
+    var m0=window.EBG_MODO&&EBG_MODO.rapido(user);
+    if(m0){EBG_MODO.aplicar();EBG_MODO.irPara(m0);return;}   // aluno do English on Mission / Culture: sem tutorial nem checklist, entra direto no universo dele
     var seguir=function(){if(!ST.bv)mostrarBoasVindas(false);else perguntarContexto();};
     if(!ST.onb)setTimeout(function(){conhecer(seguir);},60);else seguir();
   }
@@ -1174,7 +1177,7 @@
     if(!lista.length&&!EDIT)h+='<div class="admin-loading">Nenhum card ainda.'+(souAdmin()?' Toque em ✏️ Editar, lá em cima, pra criar.':'')+'</div>';
     if(lista.some(function(c){return /indica/i.test(c.tag||'');}))h+='<div style="font-size:10.5px;color:var(--fg3);margin-top:16px">Indicação = link de afiliado. Você paga o mesmo preço e eu posso receber uma comissão.</div>';
     p.innerHTML=h;
-    if(k==='eom'&&window.EBG_MURAL)window.EBG_MURAL.montar(p);
+    if(k==='eom'&&window.EBG_EOM)window.EBG_EOM.compor(p);
     if(HERO){tickCd();var nav=p.querySelector('.th-nav');if(nav)nav.innerHTML=(k==='eom'?'<button data-goto="eom-mural">Mural</button>':'')+secs.map(function(s,si){return s?'<button data-goto="sec-'+k+'-'+si+'">'+E(s)+'</button>':'';}).join('');}
   }
   /* universos com cara de site próprio: EOM verde-escuro e dourado, Culture azul e vermelho */
