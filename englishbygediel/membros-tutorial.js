@@ -56,7 +56,7 @@
     }
     ov.onclick=function(e){var b=e.target.closest('[data-t]');if(!b)return;var a=b.dataset.t;
       if(a==='prox'){i++;desenha();}
-      else{ov.className='';ov.innerHTML='';fim();if(a==='ir'){var s=slides[slides.length-1];if(s.btn&&window.go2)go2(s.btn[0]);}}
+      else{ov.className='';ov.innerHTML='';fim();if(a==='ir'){var s=slides[slides.length-1];if(s.btn){if(s.btn[0]==='mt10'){var nv=document.getElementById('mt10-nav');if(window.goTo)goTo('mt10',nv);}else if(window.go2)go2(s.btn[0]);}}}
     };
     desenha();
   }
@@ -88,5 +88,33 @@
     depois&&depois();
   }
   function abrir(){var p=pacotes(),k=p.indexOf('tudo')>=0?'mudou_tudo':p.indexOf('programa')>=0?'mudou_programa':p.indexOf('eom')>=0?'eom':'gratis';mostrar(SL[k],k==='eom'?'eom':'',function(){});}
-  window.EBG_TUT={iniciar:iniciar,abrir:abrir,pacotes:pacotes};
+
+  /* ---------- Maratona: como participar (inscrição) e boas-vindas de quem foi escolhido ---------- */
+  function maratona(modo,fim){
+    var M=(window.EBG_MARATONAS||{}).m10||{},pts=M.pontos||[],cic=M.ciclos||[],pr=M.premios||{};
+    var cf=AS().cfg||{},zap=cf.grupoMaratona||'';
+    var pt=L(pts.map(function(x){return x[0]+' '+x[1]+' <b>+'+x[2]+'</b>'+(x[3]?' <small>('+x[3]+')</small>':'');}));
+    var cicl=L(cic.map(function(c){return (c.icone||'🏁')+' <b>'+c.nome+'</b>';}));
+    var regras=L(['Só pontua quem foi escolhido pelo Gediel pra turma','Os pontos entram sozinhos: você só precisa usar a plataforma de verdade','Tem teto por dia em alguns itens, então todo mundo consegue alcançar o topo','Post nas redes vale 1 por dia e precisa do link','No fim de cada ciclo o <b>Top 15</b> é anunciado e o placar zera','Participar é opcional: o Programa continua igual pra quem não quiser']);
+    var premios=(pr.concluir||pr.primeiro)?'<div style="margin-top:12px">'+(pr.concluir?'🎁 '+pr.concluir+'<br>':'')+(pr.primeiro?'🏆 '+pr.primeiro:'')+'</div>':'';
+    var S2={
+      inscricao:[
+        {ic:'bandeira.svg',t:'A maratona é opcional e grátis',x:'Quem está no Programa se inscreve <b>sem pagar nada</b>. Você pode participar ou não: o Programa funciona igual. A maratona só <b>turbina o resultado</b>, com turma, placar e prêmios.'},
+        {ic:'check.webp',t:'Como entrar, passo a passo',x:'<b>1.</b> Você se inscreve (já fez!).<br><b>2.</b> O Gediel escolhe quem entra na turma, entre todos os inscritos.<br><b>3.</b> Se for escolhido, o menu <b>🏁 Maratona 10 meses</b> abre pra você aqui e você recebe o tutorial completo.<br><b>4.</b> Os pontos começam a contar sozinhos.'},
+        {ic:'modulos.webp',t:'Enquanto espera, já comece 🚀',x:'Não precisa esperar a resposta pra aprender. Quem chega no ritmo sai na frente:'+L(['Responda as perguntas do seu perfil e faça um teste (Bússola ou Prisma)','Assista as primeiras aulas do Programa','Abra a <b>Maratona de Hoje</b> e faça o checklist do dia'])},
+        {ic:'bandeira.svg',t:'Os menus novos da maratona',x:'Se você for escolhido, aparecem pra você:'+L(['🏁 <b>Maratona 10 meses</b>: 5 ciclos, cada um com marcos e uma entrega','🏆 <b>Placar Top 15</b>: sua posição e quantos pontos faltam pra subir','📊 <b>Seus pontos</b> e progresso do ciclo','📲 <b>Grupo do WhatsApp</b> dos maratonistas'])},
+        {ic:'jogos.webp',t:'Como se ganha ponto',x:pt+'<div style="margin-top:10px;font-size:13px;opacity:.8">Tudo isso o app registra sozinho.</div>'},
+        {ic:'planos.svg',t:'Regras e prêmios',x:regras+premios,btn:['maratona','Ir pro Programa agora']}
+      ],
+      aprovado:[
+        {ic:'bandeira.svg',t:'Você foi escolhido(a)! 🎉',x:'O Gediel escolheu você pra turma da Maratona 10 meses. O menu <b>🏁 Maratona 10 meses</b> acabou de abrir. Vou te mostrar como tudo funciona.'},
+        {ic:'check.webp',t:'5 ciclos de 2 meses',x:'Cada ciclo tem <b>4 marcos</b> e <b>1 entrega</b>:'+cicl},
+        {ic:'jogos.webp',t:'Pontos',x:pt},
+        {ic:'planos.svg',t:'Placar e regras',x:'No menu da maratona fica o <b>🏆 Placar Top 15</b>: sua posição, seus pontos e quanto falta pra passar o próximo.'+regras+premios},
+        {ic:'eom.webp',t:'Primeiro: se adapte à plataforma',x:'Antes do checklist dos ciclos abrir, você conhece a plataforma: perfil, tour, um teste e as primeiras aulas. O menu mostra o que falta.'+(zap?'<div style="margin-top:14px;text-align:center"><a class="tt-s" style="display:inline-block;text-decoration:none;padding:12px 18px;border-radius:14px;background:#25d366;color:#fff;font-weight:800" target="_blank" rel="noopener" href="'+zap.replace(/"/g,'')+'">📲 Entrar no grupo do WhatsApp</a></div>':''),btn:['mt10','Abrir a Maratona']}
+      ]
+    };
+    mostrar(S2[modo]||S2.inscricao,'',fim||function(){});
+  }
+  window.EBG_TUT={iniciar:iniciar,abrir:abrir,pacotes:pacotes,maratona:maratona};
 })();

@@ -13,7 +13,10 @@
   var br = function (s) { var d = d0(s); return String(d.getDate()).padStart(2, '0') + '/' + String(d.getMonth() + 1).padStart(2, '0') + '/' + d.getFullYear(); };
   var hojeS = MR.hoje();
   var SEM_TABELA = function (e) { return e && (/does not exist|schema cache|42P01|PGRST205/i.test((e.message || '') + (e.code || ''))); };
-  var EU = { email: '', nome: '', admin: false, dentro: false, feitos: {}, semTabela: false };
+  var EU = { email: '', nome: '', admin: false, dentro: false, status: '', turma: '', feitos: {}, semTabela: false };
+  var AS = function () { return (window.EBG_ACESSO || {}).estado || {}; };
+  var souProg = function () { var S = AS(); return !!(S.programa || S.tudo); };
+  var podeVer = function () { return EU.dentro || EU.admin || souProg() || !!EU.status; };
 
   /* ---------- estilos ---------- */
   var css = document.createElement('style');
@@ -188,7 +191,8 @@
   var goAnt = window.goTo;
   window.goTo = function (page, el) {
     if (page === 'mt10') {
-      if (!EU.dentro && !EU.admin) return;
+      if (!podeVer()) return;
+      if (!EU.dentro && !EU.admin) { RK.ciclo = null; desenhar(); return goAnt.apply(this, arguments); }
       sb.auth.getUser().then(function (r) { if (r.data && r.data.user) { lerPlataforma(r.data.user); if (EU.dentro) registrar(); desenhar(); } });
       RK.ciclo = null; desenhar();
     }
@@ -212,19 +216,32 @@
     var u = s.user, meta = u.user_metadata || {};
     EU.email = String(u.email || '').toLowerCase(); EU.nome = meta.full_name || meta.name || EU.email.split('@')[0];
     var ad = await sb.rpc('sou_admin'); EU.admin = ad.data === true || !!window._isAdmin;
-    var r = await sb.from('maratona_membros').select('email').eq('email', EU.email).maybeSingle();
+    var r = await sb.from('maratona_membros').select('email,status,turma').eq('email', EU.email).maybeSingle();
+    if (r.error && !SEM_TABELA(r.error)) r = await sb.from('maratona_membros').select('email').eq('email', EU.email).maybeSingle();
     EU.semTabela = SEM_TABELA(r.error);
-    EU.dentro = !!(r.data);
+    EU.status = r.data ? (r.data.status || 'aprovado') : ''; EU.turma = (r.data && r.data.turma) || '';
+    EU.dentro = EU.status === 'aprovado';
     if (EU.dentro || EU.admin) {
       var pg = await sb.from('maratona_progresso').select('feitos').eq('email', EU.email).maybeSingle();
       var local = {}; try { local = JSON.parse(localStorage.getItem('mt10:' + EU.email) || '{}'); } catch (e) {}
       EU.feitos = Object.assign({}, local, (pg.data && pg.data.feitos) || {});
     }
-    $('mt10-nav').style.display = (EU.dentro || EU.admin) ? 'flex' : 'none';
+    pintarNav();
     EU.uid = u.id;
     lerPlataforma(u);
     if (EU.dentro) registrar();
-    if (EU.dentro) talvezLargada();
+    if (EU.dentro) { if (EU.turma === 'aberta' && window.EBG_TUT) talvezBoasVindas(); else talvezLargada(); }
+  }
+  function pintarNav() {
+    var n = $('mt10-nav'); if (!n) return;
+    n.style.display = podeVer() ? 'flex' : 'none';
+    var b = n.querySelector('.nav-badge'); if (b) b.textContent = EU.dentro ? 'Turma' : EU.status === 'inscrito' ? 'Inscrito' : EU.admin ? 'Admin' : 'Grátis';
+  }
+  setInterval(pintarNav, 1500);
+  function talvezBoasVindas() {
+    var k = 'mt10:aprov-vista:' + EU.email, v = ''; try { v = localStorage.getItem(k); } catch (e) {}
+    if (v) return;
+    var t = setInterval(function () { if (!ocupado()) { clearInterval(t); setTimeout(function () { try { localStorage.setItem(k, '1'); } catch (e) {} EBG_TUT.maratona('aprovado'); }, 700); } }, 800);
   }
 
   /* ---------- tela do participante ---------- */
@@ -294,6 +311,7 @@
 
   function desenhar() {
     var p = $('pane-mt10'); if (!p) return;
+    if (!EU.dentro && !EU.admin) { p.innerHTML = entradaHtml(); return; }
     var ini = d0(M10.inicio), fim = d0(M10.fim), agora = new Date();
     var totalDias = Math.round((fim - ini) / 864e5) + 1, dia = Math.max(0, Math.min(totalDias, Math.floor((agora - ini) / 864e5) + 1));
     var atual = CIC.filter(function (c) { return estado(c) === 'atual'; })[0];
@@ -306,7 +324,9 @@
       + '<div class="mt-barra" title="Tempo da maratona"><i style="width:' + Math.round(dia / totalDias * 100) + '%"></i></div></div>';
     if (EU.admin && !EU.dentro) h += '<div class="mt-aviso">🛡️ Você está vendo como admin. O aluno entra pelo link de cadastro ou quando você marca em <b>Painel Admin → 🏁 Maratona 10m</b>.' + (EU.semTabela ? ' <b>Falta rodar o SQL da maratona no Supabase dos membros.</b>' : '') + '</div>';
 
-    h += '<div style="text-align:right;margin:-6px 0 12px"><button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="mtLargada()" style="border:0;background:none;color:var(--accent);font-weight:800;cursor:pointer">🏁 Rever a largada</button></div>';
+    var zapG = (AS().cfg || {}).grupoMaratona;
+    if (zapG) h += '<a class="mt-zap" target="_blank" rel="noopener" href="' + esc(zapG) + '"><img src="img/icons/wa-real.svg" alt="" onerror="this.style.display=\'none\'"><span><b>Grupo do WhatsApp da maratona</b><small>Avisos, dúvidas e a turma toda junta</small></span><i>Entrar ›</i></a>';
+    h += '<div style="text-align:right;margin:-6px 0 12px"><button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="EBG_TUT&&EBG_TUT.maratona(\'aprovado\')" style="border:0;background:none;color:var(--accent);font-weight:800;cursor:pointer">📖 Como participar</button> <button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="mtLargada()" style="border:0;background:none;color:var(--accent);font-weight:800;cursor:pointer">🏁 Rever a largada</button></div>';
     // como funciona
     h += '<details class="mt-box"' + (AD.ok ? '' : ' open') + '><summary style="cursor:pointer;font-weight:800">📖 Como funciona a maratona</summary><div style="margin-top:10px;font-size:13px;line-height:1.6;color:var(--fg2)">'
       + '<p><b style="color:var(--fg)">1. Adaptação.</b> Primeiro você conhece a plataforma: testes, perfil, tutorial e as primeiras aulas. Isso libera o checklist dos ciclos.</p>'
@@ -474,9 +494,11 @@
       var res = await admFetch('/auth/v1/admin/users?page=1&per_page=1000', {});
       var data = await res.json();
       ADM.users = (data.users || []).sort(function (a, b) { return (a.email || '').localeCompare(b.email || ''); });
-      var r = await sb.from('maratona_membros').select('email,nome,created_at');
+      var r = await sb.from('maratona_membros').select('email,nome,created_at,status,turma,inscrito_em');
+      if (r.error && !SEM_TABELA(r.error)) r = await sb.from('maratona_membros').select('email,nome,created_at');
       if (SEM_TABELA(r.error)) { el.innerHTML = '<div class="admin-loading" style="color:var(--red)">Falta criar a lista da maratona: rode <b>supabase/maratona-membros.sql</b> (ou o PENDENTE-RODAR.sql) no SQL Editor do Supabase dos membros e volte aqui.</div>'; return; }
-      ADM.dentro = {}; (r.data || []).forEach(function (x) { ADM.dentro[x.email.toLowerCase()] = x; });
+      ADM.dentro = {}; ADM.insc = []; (r.data || []).forEach(function (x) { var s = x.status || 'aprovado'; if (s === 'aprovado') ADM.dentro[x.email.toLowerCase()] = x; else if (s === 'inscrito') ADM.insc.push(x); });
+      ADM.insc.sort(function (a, b) { return String(a.inscrito_em || a.created_at).localeCompare(String(b.inscrito_em || b.created_at)); });
       var pg = await sb.from('maratona_progresso').select('email,feitos');
       ADM.prog = {}; (pg.data || []).forEach(function (x) { ADM.prog[x.email.toLowerCase()] = x.feitos || {}; });
       var cv = await sb.from('maratona_convites').select('codigo,ativo').eq('turma', 'icd-1').eq('ativo', true).limit(1);
@@ -494,7 +516,11 @@
       + '<div style="font-size:12px;color:var(--fg2);margin-bottom:10px">Quem abrir cria a própria conta já no Plano Inteligente e já dentro da Maratona 10 meses. Quem já tem conta só ganha a maratona (a senha continua a mesma).</div>'
       + (link ? '<div style="display:flex;gap:8px;flex-wrap:wrap"><input readonly value="' + esc(link) + '" style="flex:1;min-width:220px;padding:9px 12px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--fg)"><button class="admin-btn admin-btn-primary admin-btn-sm" data-mt-copiar="' + esc(link) + '">Copiar</button><button class="admin-btn admin-btn-ghost admin-btn-sm" data-mt-novo>Trocar link</button><button class="admin-btn admin-btn-ghost admin-btn-sm" data-mt-off>Desligar</button></div>'
         : '<button class="admin-btn admin-btn-primary admin-btn-sm" data-mt-novo>Gerar link</button>') + '</div>';
-    el.innerHTML = caixaLink + '<div style="font-size:13px;color:var(--fg2);margin-bottom:12px">Escolha à mão quem está na <b style="color:var(--fg)">Maratona 10 meses · Turma Fundadora</b>. Só quem estiver marcado vê o menu 🏁 com os 5 ciclos.</div>'
+    var zapAtual = ((AS().cfg || {}).grupoMaratona) || '';
+    var caixaZap = '<div style="background:var(--surface2);border-radius:14px;padding:14px;margin-bottom:16px"><div style="font-size:13px;font-weight:800;margin-bottom:4px">📲 Link do grupo do WhatsApp da maratona</div><div style="font-size:12px;color:var(--fg2);margin-bottom:10px">Aparece na aba Maratona e no tutorial de quem for escolhido.</div><div style="display:flex;gap:8px;flex-wrap:wrap"><input id="mt-zap-in" value="' + esc(zapAtual) + '" placeholder="https://chat.whatsapp.com/..." style="flex:1;min-width:220px;padding:9px 12px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--fg)"><button class="admin-btn admin-btn-primary admin-btn-sm" data-mt-zap>Salvar</button></div></div>';
+    var caixaInsc = '<div class="mt-box" style="border-color:var(--accent)"><h3>📝 Inscritos esperando sua escolha (' + (ADM.insc || []).length + ')</h3><div class="s">Gente do Programa que quer correr junto. Você decide quem entra.</div>'
+      + ((ADM.insc || []).length ? (ADM.insc || []).map(function (x) { var em = x.email.toLowerCase(); return '<div class="mt-ad"><span class="t"><b>' + esc(x.nome || em.split('@')[0]) + '</b><br><small>' + esc(em) + '</small></span><button class="mt-tg on" data-mt-ap="' + esc(em) + '">✓ Aprovar</button> <button class="mt-tg off" data-mt-rec="' + esc(em) + '">Recusar</button></div>'; }).join('') : '<div class="s">Ninguém inscrito no momento.</div>') + '</div>';
+    el.innerHTML = caixaInsc + caixaZap + caixaLink + '<div style="font-size:13px;color:var(--fg2);margin-bottom:12px">Escolha à mão quem está na <b style="color:var(--fg)">Maratona 10 meses · Turma Fundadora</b>. Só quem estiver marcado vê o menu 🏁 com os 5 ciclos.</div>'
       + '<div class="mt-adm-top"><span class="mt-conta">' + n + ' de ' + vagas + ' vagas</span><input id="mt-busca" type="search" placeholder="Buscar aluno por nome ou e-mail" value="' + esc(ADM.busca) + '"><button class="admin-btn admin-btn-ghost admin-btn-sm" id="mt-recarregar">🔄 Atualizar</button></div>'
       + '<div style="overflow-x:auto"><table class="admin-table"><thead><tr><th>Aluno</th><th>Progresso</th><th>Na maratona</th></tr></thead><tbody>'
       + lista.map(function (u) {
@@ -536,6 +562,70 @@
     if (typeof toast === 'function') toast(on ? 'Saiu da maratona' : '🏁 Entrou na Maratona 10 meses', on ? '#6b7280' : '#10b981');
     if (em === EU.email) { EU.dentro = !on; carregar(); }
     admDesenhar();
+  });
+
+
+  /* ---------- quem é do Programa mas ainda não foi escolhido: inscrição grátis ---------- */
+  var cssE = document.createElement('style');
+  cssE.textContent = '.mt-zap{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:linear-gradient(135deg,#128c4a,#25d366);color:#fff;text-decoration:none;margin-bottom:12px}.mt-zap img{width:32px;height:32px}.mt-zap span{flex:1;min-width:0}.mt-zap b{display:block;font-size:14px}.mt-zap small{font-size:12px;opacity:.9}.mt-zap i{font-style:normal;font-weight:800;font-size:13px}'
+    + '.mt-en{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.mt-en button{border:0;border-radius:14px;padding:13px 20px;font:inherit;font-size:14.5px;font-weight:800;cursor:pointer}.mt-en .p{background:#fff;color:#2b180e}.mt-en .g{background:rgba(255,255,255,.16);color:#fff}'
+    + '.mt-lk{border:0;background:none;color:var(--fg2);font-size:12px;text-decoration:underline;cursor:pointer;padding:6px 0}';
+  document.head.appendChild(cssE);
+  function entradaHtml() {
+    var st = EU.status, P = EU.pl || { vistas: [], tour: [] };
+    var h = '<div class="mt-hero"><small>Maratona 10 meses · aberta pra quem está no Programa</small>';
+    if (st === 'inscrito') {
+      h += '<h2>Inscrição recebida ✓</h2><p>O Gediel escolhe quem entra na turma entre os inscritos. Você vê o resultado aqui neste menu.</p>'
+        + '<div class="mt-en"><button class="p" data-mt-tut="inscricao">📖 Como vai funcionar</button><button class="g" data-mt-ir="maratona">Começar o Programa agora</button></div></div>'
+        + '<div class="mt-box"><h3>Não espere a resposta: já comece 🚀</h3><div class="s">A maratona só <b>turbina</b> o resultado. Quem já chega no ritmo sai na frente. Seu primeiro passo:</div>'
+        + PASSOS.map(function (x) { var ok = x.ok(P); return '<div class="mt-ad' + (ok ? ' ok' : '') + '"><span class="ck">' + (ok ? '✓' : '') + '</span><span class="t">' + esc(x.t) + '</span></div>'; }).join('')
+        + '<div class="mt-en" style="margin-top:10px"><button class="p" style="background:var(--accent);color:#fff" data-mt-ir="maratona">✅ Maratona de Hoje</button><button class="g" style="background:var(--surface2);color:var(--fg)" data-mt-ir="modulos">🎬 Ir pras aulas</button></div></div>'
+        + '<div style="text-align:center"><button class="mt-lk" data-mt-cancela>Cancelar minha inscrição</button></div>';
+      return h;
+    }
+    if (st === 'recusado') {
+      return h + '<h2>Dessa vez não foi na turma</h2><p>O Programa continua 100% seu: checklist, aulas e lives. Se abrir uma próxima turma, você pode se inscrever de novo.</p><div class="mt-en"><button class="p" data-mt-ir="maratona">Continuar o Programa</button></div></div>';
+    }
+    h += '<h2>Quer correr junto com a turma?</h2><p>É <b>grátis</b> pra quem está no Programa e é <b>opcional</b>: você pode participar ou não, o Programa funciona igual. Você se inscreve e o Gediel escolhe quem entra.</p>'
+      + '<div class="mt-en"><button class="p" data-mt-insc>🏁 Quero me inscrever</button><button class="g" data-mt-tut="inscricao">📖 Como funciona</button></div></div>'
+      + '<div class="mt-box"><h3>O que a maratona acrescenta ao Programa</h3><div class="s">Você segue aprendendo do mesmo jeito. A maratona entra por cima, pra empurrar o resultado:</div>'
+      + ['🏆 Placar Top 15 por ciclo, com pontos de verdade', '🎯 5 ciclos de 2 meses, cada um com marcos e uma entrega', '📲 Grupo no WhatsApp com a turma', '🎁 Prêmios pra quem concluir e pro 1º lugar'].map(function (t) { return '<div class="mt-ad"><span class="t">' + t + '</span></div>'; }).join('') + '</div>'
+      + '<div class="mt-box"><h3>Como se ganha ponto</h3>' + M10.pontos.map(function (x) { return '<div class="mt-pt"><span>' + x[0] + '</span><span>' + esc(x[1]) + (x[3] ? '<small>' + esc(x[3]) + '</small>' : '') + '</span><b>+' + x[2] + '</b></div>'; }).join('') + '</div>'
+      + '<div class="mt-box trava"><h3>Ao se inscrever, você já começa</h3><div class="s">A inscrição abre seu tutorial e te leva pro Programa. Não precisa esperar a seleção pra aprender.</div></div>';
+    return h;
+  }
+  document.addEventListener('click', async function (e) {
+    var t = e.target.closest && e.target.closest('[data-mt-insc],[data-mt-cancela],[data-mt-tut],[data-mt-ir],[data-mt-ap],[data-mt-rec],[data-mt-zap]'); if (!t) return;
+    if (t.hasAttribute('data-mt-tut')) { if (window.EBG_TUT) EBG_TUT.maratona(t.getAttribute('data-mt-tut')); return; }
+    if (t.hasAttribute('data-mt-ir')) { if (window.go2) go2(t.getAttribute('data-mt-ir')); return; }
+    if (t.hasAttribute('data-mt-insc')) {
+      t.disabled = true;
+      var r = await sb.from('maratona_membros').insert({ email: EU.email, nome: EU.nome || null, turma: 'aberta', status: 'inscrito', inscrito_em: new Date().toISOString() });
+      if (r.error) { t.disabled = false; if (typeof toast === 'function') toast(SEM_TABELA(r.error) || /status|policy|row-level/i.test(r.error.message || '') ? 'A inscrição liga assim que o Gediel rodar o SQL novo no Supabase.' : 'Não deu: ' + r.error.message, '#ef4444'); return; }
+      EU.status = 'inscrito'; EU.turma = 'aberta'; pintarNav(); desenhar();
+      if (typeof toast === 'function') toast('🏁 Inscrição feita! Veja como vai funcionar', '#10b981');
+      if (window.EBG_TUT) EBG_TUT.maratona('inscricao');
+      return;
+    }
+    if (t.hasAttribute('data-mt-cancela')) {
+      if (!confirm('Cancelar sua inscrição na maratona? O Programa continua normal.')) return;
+      var d = await sb.from('maratona_membros').delete().eq('email', EU.email);
+      if (!d.error) { EU.status = ''; EU.turma = ''; pintarNav(); desenhar(); }
+      return;
+    }
+    if (t.hasAttribute('data-mt-zap')) {
+      var v = ($('mt-zap-in') || {}).value || ''; v = v.trim();
+      if (v && !/^https?:\/\//i.test(v)) { alert('O link precisa começar com https://'); return; }
+      try { await window.EBG_ED.salvar({ grupoMaratona: v }); if (typeof toast === 'function') toast('✅ Link do grupo salvo', '#10b981'); } catch (x) { alert('Não salvou: ' + (x.message || x)); }
+      return;
+    }
+    // admin: aprovar / recusar inscrito
+    var em = t.getAttribute('data-mt-ap') || t.getAttribute('data-mt-rec'); if (!em) return;
+    var ap = t.hasAttribute('data-mt-ap'); t.disabled = true;
+    var up = await sb.from('maratona_membros').update({ status: ap ? 'aprovado' : 'recusado' }).eq('email', em);
+    if (up.error) { alert('Não consegui salvar: ' + up.error.message); t.disabled = false; return; }
+    if (typeof toast === 'function') toast(ap ? '🏁 ' + em + ' entrou na maratona' : 'Inscrição recusada', ap ? '#10b981' : '#6b7280');
+    admCarregar();
   });
 
   sb.auth.onAuthStateChange(function (ev, s) {
