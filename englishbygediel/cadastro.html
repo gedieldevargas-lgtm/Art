@@ -38,11 +38,11 @@ a.go{display:block;text-decoration:none;text-align:center;margin-top:20px;backgr
 (function(){
   var $=function(s){return document.querySelector(s);};
   var box=$('#box'),u=(new URLSearchParams(location.search).get('u')||'eom').toLowerCase();
-  var NOME={eom:'English on Mission',culture:'Culture English'};
+  var NOME={eom:'English on Mission',culture:'Culture English',gratis:'Plataforma Inteligente · acesso grátis'};
   var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
   var api=function(b){return fetch('/.netlify/functions/universo-cadastro',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json();}).catch(function(){return {erro:'Sem conexão. Tente de novo.'};});};
   if(!NOME[u]){box.innerHTML='<div class="ok"><div class="big">🔒</div><h1>Link <em>indisponível</em></h1><p class="s">Peça um novo link pro Gediel.</p></div>';return;}
-  box.innerHTML='<div class="k">Bem-vindo(a)</div><h1>Crie o seu <em>acesso</em></h1><p class="s">Cadastro rápido pra entrar no '+esc(NOME[u])+'. Você já entra direto na sua área.</p>'
+  box.innerHTML='<div class="k">Bem-vindo(a)</div><h1>Crie o seu <em>acesso</em></h1><p class="s">'+(u==='gratis'?'Cadastro rápido pra entrar na plataforma. Você começa com o acesso grátis e vê o que pode destravar depois.':'Cadastro rápido pra entrar no '+esc(NOME[u])+'. Você já entra direto na sua área.')+'</p>'
     +'<div class="plano"><span>'+esc(NOME[u])+'</span></div>'
     +'<label>Seu nome completo</label><input id="n" autocomplete="name" placeholder="Seu nome">'
     +'<label>E-mail (será o seu login)</label><input id="e" type="email" autocomplete="email" placeholder="voce@email.com">'

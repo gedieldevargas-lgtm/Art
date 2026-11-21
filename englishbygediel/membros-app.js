@@ -1096,9 +1096,13 @@
     carregarEstado(user);restaurarChecks();pintarPerfil();iniciarEdicao();
     pintarRail();renderHome();
     var m0=window.EBG_MODO&&EBG_MODO.rapido(user);
-    if(m0){EBG_MODO.aplicar();EBG_MODO.irPara(m0);return;}   // aluno do English on Mission / Culture: sem tutorial nem checklist, entra direto no universo dele
     var seguir=function(){if(!ST.bv)mostrarBoasVindas(false);else perguntarContexto();};
-    if(!ST.onb)setTimeout(function(){conhecer(seguir);},60);else seguir();
+    var rodar=function(){
+      if(m0){EBG_MODO.aplicar();EBG_MODO.irPara(m0);return;}   // aluno do English on Mission / Culture: entra direto no universo dele
+      if(!ST.onb)setTimeout(function(){conhecer(seguir);},60);else seguir();
+    };
+    // tutorial do plano da pessoa (primeiro acesso ou "o que mudou" depois de um upgrade); quem já tem universo cai nele na hora e vê o tutorial por cima
+    if(window.EBG_TUT){if(m0){rodar();EBG_TUT.iniciar(user,function(){});}else EBG_TUT.iniciar(user,rodar);}else rodar();
   }
   var setUIOrig=window.setUserUI,pend=null;
   window.setUserUI=function(user){setUIOrig(user);pend=user;};
@@ -2725,6 +2729,10 @@
     try{await navigator.clipboard.writeText(cvUrl(c));st.innerHTML+='<br><span style="color:var(--green)">Copiado! É só colar no privado.</span>';}catch(e){}
     conviteLista();
   };
+  window.EBG_CV={planos:cvPlanos,url:cvUrl,gerar:async function(k,nome){
+    var pl=cvPlanos().filter(function(x){return x.k===k;})[0];if(!pl)throw new Error('plano');var c=cvCodigo();
+    var r=await window._sb.from('maratona_convites').insert({codigo:c,turma:'privado',plano:cvProduto(pl)});if(r.error)throw r.error;
+    if(nome){var m=LS.get('mi-cv-nomes',{})||{};m[c]=nome;LS.set('mi-cv-nomes',m);}return cvUrl(c);}};
   document.addEventListener('click',function(e){
     var b=e.target.closest&&e.target.closest('[data-cv]');if(!b)return;var c=b.dataset.c,a=b.dataset.cv;
     if(a==='copiar'){var u=cvUrl(c);(navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(function(){toast('Link copiado','#10b981');},function(){window.prompt('Copie o link:',u);});}

@@ -727,6 +727,7 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
         <div class="admin-tabs">
           <button class="admin-tab active" onclick="adminTab('usuarios',this)">👥 Alunos</button>
           <button class="admin-tab" onclick="adminTab('criar',this)">➕ Criar Acesso</button>
+          <button class="admin-tab" onclick="adminTab('links',this)">🔗 Central de Links</button>
           <button class="admin-tab" onclick="adminTab('metricas',this)">📊 Métricas</button>
           <button class="admin-tab" onclick="adminTab('comentarios',this)">💬 Comentários</button>
           <button class="admin-tab" onclick="adminTab('duvidas',this)">🙋 Dúvidas</button>
@@ -797,6 +798,8 @@ button:active,.mat-card:active,.game-app-icon:active,.module-card:active{transfo
         </div>
 
         <!-- MÉTRICAS -->
+        <div class="admin-panel" id="adm-links"></div>
+
         <div class="admin-panel" id="adm-metricas">
           <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px" id="adm-metric-tiles">
             <div class="admin-loading" style="grid-column:1/-1">Carregando métricas...</div>
@@ -1713,6 +1716,7 @@ function adminTab(tab,btn){
   document.getElementById('adm-'+tab).classList.add('active');
   if(tab==='usuarios')loadUsers();
   if(tab==='criar'&&window.conviteLista)conviteLista();
+  if(tab==='links'&&window.EBG_LINKS)EBG_LINKS.montar();
   if(tab==='metricas')loadMetrics();
   if(tab==='comentarios')loadAdminComments();
   if(tab==='duvidas')loadAdminQuestions();
@@ -2720,7 +2724,9 @@ document.getElementById('adm-les-modal').addEventListener('click',function(e){if
 <script src="membros-mural.js?v=2"></script>
 <script src="membros-eom.js?v=4"></script>
 <script src="membros-modo.js?v=2"></script>
-<script src="membros-app.js?v=202611211930"></script>
+<script src="membros-tutorial.js?v=1"></script>
+<script src="membros-links.js?v=1"></script>
+<script src="membros-app.js?v=202611212100"></script>
 <script src="playlist.js?v=2"></script>
 <script src="fx.js?v=2"></script>
 <script src="config.js"></script>

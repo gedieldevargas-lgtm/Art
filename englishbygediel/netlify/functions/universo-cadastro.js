@@ -4,7 +4,7 @@
 const URL_MEMBROS = process.env.MEMBROS_URL || 'https://jzdxcefnlwjgimymgsux.supabase.co';
 const resp = (status, obj) => ({ statusCode: status, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(obj) });
 const corta = (v, n) => { v = String(v == null ? '' : v).trim(); return v ? v.slice(0, n) : ''; };
-const UNIVERSOS = ['eom', 'culture'];
+const UNIVERSOS = ['eom', 'culture', 'gratis'];   // gratis = plataforma completa, só com o que o plano grátis libera
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') return resp(405, { erro: 'use POST' });
