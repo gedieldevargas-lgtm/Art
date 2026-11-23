@@ -203,7 +203,7 @@
       if (b.tipo === 'vocab') {
         h += '<div class="lv-bloco"><div class="lv-bt">' + esc(b.titulo) + '</div><div class="lv-vocab' + (b.emoji ? ' emo' : '') + '">';
         b.itens.forEach(function (it) {
-          h += '<button type="button" class="lv-card" data-falar="' + esc(it[0].split(' / ')[0]) + '">' + (it[2] ? '<span class="lv-emo">' + it[2] + '</span>' : '') +
+          h += '<button type="button" class="lv-card" data-falar="' + esc(it[0].split(' / ')[0]) + '">' + (imgDe(it[0]) || (it[2] ? '<span class="lv-emo">' + it[2] + '</span>' : '')) +
             '<span class="en">' + esc(it[0]) + '</span><span class="pt">' + esc(it[1]) + '</span></button>';
         });
         h += '</div></div>';
@@ -265,7 +265,7 @@
       ex.itens.forEach(function (it, i) { lados.push(['en', i, it.en]); });
       var pts = ex.itens.map(function (it, i) { return ['pt', i, it.pt]; });
       h += '<div class="lv-jogo" data-jogo="' + ex.id + '"><div class="lv-placar"><span>⏱ <b class="lv-tempo">0s</b></span><span>❌ <b class="lv-erros">0</b></span></div><div class="lv-pares">' +
-        '<div class="lv-col">' + embaralhar(lados, semente).map(function (x) { var k = ex.id + '.' + x[1]; return '<button type="button" class="lv-tile' + (f[k] === 'ok' ? ' feito' : '') + '" data-par="' + x[1] + '" data-lado="en" data-k="' + k + '">' + esc(x[2]) + '</button>'; }).join('') + '</div>' +
+        '<div class="lv-col">' + embaralhar(lados, semente).map(function (x) { var k = ex.id + '.' + x[1]; return '<button type="button" class="lv-tile' + (f[k] === 'ok' ? ' feito' : '') + '" data-par="' + x[1] + '" data-lado="en" data-k="' + k + '">' + imgDe(x[2], 'lv-img-p') + esc(x[2]) + '</button>'; }).join('') + '</div>' +
         '<div class="lv-col">' + embaralhar(pts, semente + 2).map(function (x) { var k = ex.id + '.' + x[1]; return '<button type="button" class="lv-tile pt' + (f[k] === 'ok' ? ' feito' : '') + '" data-par="' + x[1] + '" data-lado="pt" data-k="' + k + '">' + esc(x[2]) + '</button>'; }).join('') + '</div></div>' +
         '<div class="lv-fb lv-fim"></div></div>';
     } else if (ex.tipo === 'conversa') {
@@ -283,6 +283,23 @@
     return gif ? '<video src="' + src + '" autoplay loop muted playsinline preload="metadata"></video>'
                : '<video src="' + src + '" poster="' + poster + '" controls playsinline preload="none"></video>';
   }
+  function imgDe(en, cls) {
+    var M = window.LIVRO_IMAGENS || {}, k = chaveG(en);
+    var src = M[k] || M[chaveG(String(en).split(' / ')[0])];
+    return src ? '<img class="' + (cls || 'lv-img') + '" src="' + BASE + src + '" alt="" loading="lazy">' : '';
+  }
+  // deixa a aula enxuta: jogo, cenas, 1 quiz e "monte a frase" (sem ditado, sem tradução escrita, sem redação longa)
+  function enxugar(a) {
+    if (a._enxuto) return; a._enxuto = true;
+    var ex = a.exercicios.filter(function (e) { return e.tipo === 'pares' || e.tipo === 'escolha' || e.tipo === 'montar' || e.id === 'cenas'; });
+    var vistos = {}; ex = ex.filter(function (e) { var t = e.id === 'cenas' ? 'cenas' : e.tipo; if (vistos[t]) return false; vistos[t] = 1; return true; });
+    if (!vistos.pares) {
+      var cs = cartoes(a).filter(function (c) { return c.en.split(' ').length <= 4 && c.pt.length <= 28; }).slice(0, 6);
+      if (cs.length >= 4) ex.unshift({ id: 'jogo', tipo: 'pares', titulo: 'Jogo: ligue os pares', instrucao: 'Toque numa palavra em inglês e depois na tradução. Seja rápido!', itens: cs.map(function (c) { return { en: c.en.split(' / ')[0], pt: c.pt }; }) });
+    }
+    ex.forEach(function (e) { if (e.tipo === 'pares') e.itens = e.itens.slice(0, 6); if (e.tipo === 'escolha') e.itens = e.itens.slice(0, 4); if (e.tipo === 'montar') e.itens = e.itens.slice(0, 3); });
+    a.exercicios = ex;
+  }
   function juntarMidia(a) {
     if (a._midia || !window.LIVRO_MIDIA) return; a._midia = true;
     var M = window.LIVRO_MIDIA[a.id]; if (!M) return;
@@ -292,7 +309,7 @@
   }
 
   function desenhar(el, a) {
-    juntarMidia(a);
+    juntarMidia(a); enxugar(a);
     var st = ler(a.id), tot = totalItens(a), ok = acertos(a, st);
     var aberto = st.aberto || 'revisar';
     var h = '<div class="lv" data-aula="' + esc(a.id) + '">' +
@@ -314,15 +331,11 @@
         '<button type="button" class="lv-btn sec" data-gabarito="' + ex.id + '">Ver respostas</button>' +
         '<button type="button" class="lv-btn sec" data-limpar="' + ex.id + '">Refazer</button></div></div></details>';
     });
-    if (a.missao) {
-      var nf = ((st.frases || '').split('\n').filter(function (x) { return x.trim(); })).length;
-      h += '<details class="lv-sec" data-sec="missao"' + (aberto === 'missao' ? ' open' : '') + '><summary>🎯 Missão da aula <em class="lv-cont' + (nf >= a.missao.frases ? ' tudo' : '') + '">' + Math.min(nf, a.missao.frases) + '/' + a.missao.frases + '</em></summary><div class="lv-corpo">' +
-        (a.missao.tarefa ? '<div class="lv-dica">✅ ' + esc(a.missao.tarefa) + '</div>' : '') +
-        (a.missao.falar ? '<div class="lv-dica">🗣️ Fale em voz alta, 2 vezes: <b>' + esc(a.missao.falar) + '</b> ' + btnSom(a.missao.falar) + '</div>' : '') +
-        '<p class="lv-inst">Escreva ' + a.missao.frases + ' frases e perguntas com o que aprendeu (uma por linha). Ex: ' + esc(a.missao.exemplo) + '</p>' +
-        '<textarea class="lv-frases" rows="8" placeholder="1 frase por linha…">' + esc(st.frases || '') + '</textarea>' +
-        '<div class="lv-mini-info">Fica salvo neste aparelho.</div></div></details>';
+    if (a.missao && (a.missao.tarefa || a.missao.falar)) {
+      h += '<div class="lv-dica lv-missao">🎯 <b>Missão:</b> ' + esc((a.missao.tarefa || '').replace(/^Pratique:\s*/, '')) +
+        (a.missao.falar ? '<br>🗣️ Fale 2 vezes: <b>' + esc(a.missao.falar) + '</b> ' + btnSom(a.missao.falar) : '') + '</div>';
     }
+    h += '<div class="lv-credito">Ilustrações: <a href="https://openmoji.org" target="_blank" rel="noopener">OpenMoji</a> (CC BY-SA 4.0)</div>';
     h += '</div>';
     el.innerHTML = h;
     var bc = el.querySelector('[data-cards]'); if (bc) desenharCards(bc, a);
@@ -431,7 +444,7 @@
     }
     var c = C[F.ordem[F.i]];
     box.innerHTML = '<div class="lv-fc-prog"><div class="lv-bar"><i style="width:' + Math.round(F.i / total * 100) + '%"></i></div><span>' + (F.i + 1) + '/' + total + '</span></div>' +
-      '<button type="button" class="lv-fc" data-fc="virar" aria-label="Virar o cartão"><div class="lv-fc-in"><div class="lv-fc-f">' + (c.e ? '<span class="lv-fc-e">' + c.e + '</span>' : '') + '<b>' + esc(c.en) + '</b><small>Toque para ver a tradução</small></div>' +
+      '<button type="button" class="lv-fc" data-fc="virar" aria-label="Virar o cartão"><div class="lv-fc-in"><div class="lv-fc-f">' + (imgDe(c.en, 'lv-fc-img') || (c.e ? '<span class="lv-fc-e">' + c.e + '</span>' : '')) + '<b>' + esc(c.en) + '</b><small>Toque para ver a tradução</small></div>' +
       '<div class="lv-fc-v"><b>' + esc(c.pt) + '</b><small>' + esc(c.en) + '</small></div></div></button>' +
       '<div class="lv-fc-acoes">' + btnSom(c.en.split(' / ')[0]) + '<button type="button" class="lv-btn sec" data-fc="nao">😕 Ainda não</button><button type="button" class="lv-btn" data-fc="sei">✅ Já sei</button></div>';
   }
@@ -563,6 +576,7 @@
   }
 
   function carregar(id, cb) {
+    if (!window.LIVRO_IMAGENS && !carregar._i) { carregar._i = 1; var ii = document.createElement('script'); ii.src = BASE + 'imagens.js?v=1'; ii.onload = ii.onerror = function () { carregar(id, cb); }; document.head.appendChild(ii); return; }
     if (!window.LIVRO_GLOSSARIO && !carregar._g) { carregar._g = 1; var gg = document.createElement('script'); gg.src = BASE + 'glossario.js?v=1'; gg.onload = gg.onerror = function () { carregar(id, cb); }; document.head.appendChild(gg); return; }
     if (!window.LIVRO_MIDIA && !carregar._m) { carregar._m = 1; var m = document.createElement('script'); m.src = BASE + 'midia.js?v=1'; m.onload = m.onerror = function () { carregar(id, cb); }; document.head.appendChild(m); return; }
     if (AULAS[id]) return cb(AULAS[id]);
