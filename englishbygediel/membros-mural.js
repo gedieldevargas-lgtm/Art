@@ -88,6 +88,8 @@
     var linha={body:body,parent_id:parent||null,user_name:nome};
     if(!parent){linha.tipo=tipo;if(foto)linha.imagem=foto;}
     var r=await sb().from('mi_mural').insert(linha);
+    if(r.error&&/column|schema cache|tipo|imagem/i.test(r.error.message||'')){var l2={body:body,parent_id:parent||null,user_name:nome};r=await sb().from('mi_mural').insert(l2);}
+    if(r.error)try{console.error('mural',r.error.message||r.error);}catch(e){}
     if(btn)btn.disabled=false;
     if(r.error){if(window.toast)toast(/comunidade/i.test(r.error.message||'')?'Esse texto tem palavras que não combinam com a nossa comunidade 🙏':'Não consegui publicar agora. Tenta de novo.');return false;}
     if(parent)abertos[parent]=true;else if(foto&&window.toast)toast('Recebido! A foto aparece pra turma depois que o Gediel aprovar 🙏');

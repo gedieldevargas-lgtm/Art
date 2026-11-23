@@ -15,7 +15,7 @@
   }
   function saved() { try { return localStorage.getItem(KEY) || ''; } catch (e) { return ''; } }
   function voice() {
-    var vs = en(), n = saved();
+    var vs = en(), n = '';
     return (n && vs.filter(function (v) { return v.name === n; })[0]) || vs.slice().sort(function (a, b) { return score(b) - score(a); })[0] || null;
   }
   function set(name) { try { localStorage.setItem(KEY, name); } catch (e) {} }
