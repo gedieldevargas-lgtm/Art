@@ -20,11 +20,14 @@
       ['gradiente', 'Imagem de gradiente', 'img']] },
     { k: 'entrada', t: 'Abertura (escolher o modo)', d: 'A primeira tela, com os modos girando em volta de você.', campos: [
       ['marca', 'Marca no topo'], ['rotulo', 'Linha pequena'], ['titulo', 'Título, antes da palavra destacada'], ['palavra', 'Palavra destacada'],
-      ['tituloFim', 'Final do título'], ['dica', 'Dica embaixo do título'], ['botao', 'Botão (vem antes do nome do modo)'],
+      ['tituloFim', 'Final do título'], ['dica', 'Dica embaixo do título'], ['botao', 'Botão (vem antes do nome do modo)'], ['nota', 'Frase embaixo do botão Ligar'],
+      ['giraSozinho', 'O anel gira sozinho até a pessoa tocar', 'bool'],
+      ['pedirContato', 'Pedir nome e WhatsApp antes de ligar o modo (uma vez por visitante)', 'bool'], ['contatoTitulo', 'Título da janela de contato'], ['contatoTexto', 'Texto da janela de contato', 'area'], ['contatoBotao', 'Botão da janela de contato'],
       ['foto', 'Sua foto no centro (de preferência sem fundo)', 'img'], ['fundo', 'Fundo da abertura', 'img']] },
     { k: 'modos', t: 'Modos', d: 'Os cards do anel. A ordem aqui é a ordem no anel. O texto aparece no topo quando a pessoa liga o modo.', lista: true,
-      titulo: 'nome', foto: 'img', novo: () => ({ id: 'modo' + Date.now().toString(36), nome: 'Modo Novo', img: '', marca: '', texto: '', recorte: false, tamanho: 100, verde: false, ativo: true }),
+      titulo: 'nome', foto: 'img', novo: () => ({ id: 'modo' + Date.now().toString(36), nome: 'Modo Novo', img: '', marca: '', texto: '', recorte: false, tamanho: 100, verde: false, ativo: true, acesso: 'programa' }),
       campos: [['nome', 'Nome'], ['img', 'Foto do card', 'img'], ['marca', 'Selo (ex.: Comece aqui)'], ['texto', 'Texto quando o modo liga', 'area'],
+        ['acesso', 'Etiqueta no card do anel', 'sel', [['gratis', 'Grátis'], ['programa', 'Abre com o Programa (cadeado)'], ['mission', 'Abre com o Mission (cadeado)']]],
         ['recorte', 'A foto é sem fundo (ganha gradiente e efeito 3D)', 'bool'], ['tamanho', 'Tamanho da pessoa no card (%)', 'num'],
         ['verde', 'Card verde', 'bool'], ['ativo', 'Aparece no anel', 'bool'], ['id', 'Código do modo (sem espaço; os cards usam ele)', 'codigo']] },
     { k: 'topo', t: 'Topo do Hub', d: 'O que aparece depois que a pessoa liga um modo.', campos: [
@@ -35,18 +38,23 @@
     { k: 'atalhos', t: 'Atalhos', d: 'Os 4 quadrados com ícone que giram, logo abaixo do topo.', lista: true, titulo: 'titulo', foto: 'img',
       novo: () => ({ titulo: 'Novo', sub: '', img: '', ir: 'gratis', icone: 'estrela' }),
       campos: [['titulo', 'Título'], ['sub', 'Subtítulo'], ['img', 'Foto', 'img'], ['texto', 'Frase que explica o card (aparece embaixo do título)', 'area'], ['plano', 'Nome do plano (puxa o preço e a promoção dele)'], ['auto', 'Preço automático', 'sel', [['', 'Não'], ['ebooks', 'Menor preço dos e-books']]], ['preco', 'Preço ou etiqueta escrita (ex.: R$ 0)'], ['ir', 'Leva até', 'sel', OPC.ir], ['url', 'Link (quando "Leva até" for um link)', 'url'], ['icone', 'Ícone', 'sel', OPC.icone]] },
-    { k: 'destaque', t: 'Vídeo em destaque', d: 'O cartão grande. Ao tocar, abre a ficha da mentoria.', campos: [
+    { k: 'destaque', t: 'Vídeo em destaque', d: 'A imagem do bloco do Programa Inteligente (quando a ficha do Programa não tem imagem própria).', campos: [
       ['rotulo', 'Etiqueta'], ['titulo', 'Título'], ['texto', 'Texto', 'area'], ['botao', 'Botão'], ['img', 'Imagem', 'img']] },
-    { k: 'mentoria', t: 'Ficha da mentoria', d: 'O que aparece ao tocar no vídeo em destaque.', campos: [
+    { k: 'mentoria', t: 'Programa Inteligente (bloco e ficha)', d: 'O bloco do Programa na página e a ficha que abre ao tocar no vídeo. O preço mostrado vem do plano "Inteligente" (em Planos), com a promoção e o contador.', campos: [
       ['titulo', 'Título'], ['sinopse', 'Descrição', 'area'], ['inclui', 'O que inclui (um item por linha)', 'area'], ['meta', 'Etiquetas (separe por vírgula)'],
       ['precoDe', 'Preço "de"'], ['precoPor', 'Preço "por"'], ['nota', 'Observação do preço'], ['video', 'Vídeo (link do YouTube, Reel do Instagram ou TikTok)', 'video'],
       ['img', 'Imagem (se não tiver vídeo)', 'img'], ['checkout', 'Link de compra', 'url'], ['botaoAplicar', 'Botão que leva ao chat'], ['botaoComprar', 'Botão de compra']] },
     { k: 'secoes', t: 'Títulos das fileiras', campos: [
-      ['gratis', 'Fileira grátis'], ['pagos', 'Fileira à venda'], ['botaoPagos', 'Link ao lado do título à venda'], ['membros', 'Fileira dentro da mentoria'], ['membrosSub', 'Link ao lado (abre o login)'], ['escadaTitulo', 'Título da escada (topo)'], ['escadaTexto', 'Texto da escada'], ['pagosConfianca', 'Frase de confiança embaixo do título à venda'], ['gratisTexto', 'Frase embaixo do título grátis'], ['gratisFaixa', 'Faixa de login nos materiais grátis (vazio = some)'], ['pagosTexto', 'Frase embaixo do título à venda'], ['membrosTexto', 'Frase embaixo do título dentro da mentoria'], ['extrasTexto', 'Frase embaixo do título ecossistema'], ['alunosTexto', 'Frase embaixo do título alunos'], ['planosRotulo', 'Etiqueta da aba de planos'], ['planos', 'Título da aba de planos'], ['planosSub', 'Texto da aba de planos'], ['planosAviso', 'Aviso embaixo dos planos'], ['jogos', 'Galeria de jogos'], ['simuladores', 'Galeria de simuladores'], ['extras', 'Fileira ecossistema'], ['alunos', 'Fileira de alunos'], ['botaoAluno', 'Botão na ficha do aluno']] },
+      ['gratis', 'Fileira grátis'], ['pagos', 'Fileira à venda'], ['botaoPagos', 'Link ao lado do título à venda'], ['membros', 'Fileira dentro do Programa'], ['membrosSub', 'Link ao lado (abre o login)'],
+      ['depoimentos', 'Título dos 3 depoimentos em destaque'], ['depoimentosTexto', 'Frase dos depoimentos em destaque'], ['aulaSecretaRotulo', 'Etiqueta do bloco da Aula Secreta'], ['programaRotulo', 'Etiqueta do bloco do Programa'], ['programaBotao', 'Botão de compra do Programa'],
+      ['maratonasTitulo', 'Título das maratonas'], ['maratonasTexto', 'Frase das maratonas'], ['faq', 'Título das perguntas frequentes'],
+      ['garantia', 'Selo de garantia nas páginas de produto'], ['comprar', 'Botão de compra nas páginas de produto'], ['alemTitulo', 'Bloco "ir além" nos e-books: título'], ['alemTexto', 'Bloco "ir além" nos e-books: texto'], ['alemPrograma', 'Bloco na Aula Secreta que leva ao Programa'], ['escadaTitulo', 'Título da escada (topo)'], ['escadaTexto', 'Texto da escada'], ['pagosConfianca', 'Frase de confiança embaixo do título à venda'], ['gratisTexto', 'Frase embaixo do título grátis'], ['gratisFaixa', 'Faixa de login nos materiais grátis (vazio = some)'], ['pagosTexto', 'Frase embaixo do título à venda'], ['membrosTexto', 'Frase embaixo do título dentro da mentoria'], ['extrasTexto', 'Frase embaixo do título ecossistema'], ['alunosTexto', 'Frase embaixo do título alunos'], ['planosRotulo', 'Etiqueta da aba de planos'], ['planos', 'Título da aba de planos'], ['planosSub', 'Texto da aba de planos'], ['planosAviso', 'Aviso embaixo dos planos'], ['jogos', 'Galeria de jogos'], ['simuladores', 'Galeria de simuladores'], ['extras', 'Fileira ecossistema'], ['alunos', 'Fileira de alunos'], ['botaoAluno', 'Botão na ficha do aluno']] },
     { k: 'cards', t: 'Cards (materiais e depoimentos)', d: 'Tudo o que aparece nas fileiras. Grátis vão pra fileira grátis, à venda pra "Pra ir mais fundo", trancados pra "Dentro da mentoria", ecossistema pra fileira própria e depoimentos pra fileira de alunos. Marque os modos onde o card aparece primeiro (sem nenhum marcado, aparece em todos).',
       lista: true, filtro: true, titulo: 'titulo', foto: 'img',
       novo: () => ({ id: 'c' + Date.now().toString(36), tipo: 'gratis', ativo: true, titulo: 'Novo material', linha: '', nome: '', setor: '', img: '', preco: '', link: '', botao: '', link2: '', botao2: '', video: '', sinopse: '', meta: '', modos: [] }),
       campos: [['tipo', 'Tipo', 'sel', OPC.tipoCard], ['ativo', 'Visível', 'bool'], ['titulo', 'Título (no depoimento, a frase)'], ['linha', 'Linha embaixo do título'],
+        ['inclui', 'Página do produto: o que tem dentro (um item por linha; só materiais à venda)', 'area'], ['praQuem', 'Página do produto: pra quem é (uma frase)', 'area'],
+        ['pag1', 'Página do produto: imagem de página interna 1', 'img'], ['pag2', 'Página do produto: imagem de página interna 2', 'img'], ['pag3', 'Página do produto: imagem de página interna 3', 'img'],
         ['nome', 'Nome do aluno (só depoimento)'], ['setor', 'Setor (vira filtro na fileira grátis: Prompts, E-books, Guias…)'], ['img', 'Capa', 'img'],
         ['preco', 'Preço (à venda)'], ['parcelas', 'Parcelas (ex.: 6 mostra "6x de…"; 1 mostra só o valor cheio; vazio = 6x a partir de R$ 300)'], ['link', 'Link do botão (landing, checkout, PDF…)', 'url'], ['botao', 'Texto do botão'],
         ['link2', 'Segundo link (opcional)', 'url'], ['botao2', 'Texto do segundo botão'], ['video', 'Vídeo (link do YouTube, Reel do Instagram ou TikTok)', 'video'],
@@ -85,7 +93,7 @@
       ['fim', 'Contagem até (AAAA-MM-DDTHH:MM, ex.: 2026-11-30T23:59)'], ['textoFim', 'Texto quando o prazo acabar'], ['texto', 'Texto da ficha', 'area'],
       ['foto', 'Foto do cartão flutuante', 'img'], ['img', 'Imagem da ficha (arte completa)', 'img'], ['link', 'Link do botão (checkout, formulário…)', 'url'],
       ['botao', 'Texto do botão'], ['mensagem', 'Mensagem do WhatsApp (se não tiver link)', 'area']] },
-    { k: 'aplicacao', t: 'Chat de aplicação', d: 'A seção final, com o chat que manda as respostas pro seu WhatsApp.', campos: [
+    { k: 'aplicacao', t: 'Captador (perguntas + indicação do plano)', d: 'Abre sozinho, por cima da tela, toda vez que a pessoa liga um modo no anel (nome e WhatsApp já vêm da folha de contato, não repete). No fim, indica um plano (Mission no Modo Fé, Grátis pra quem disse "ainda não sei" sobre investir, Programa Inteligente pro resto) e manda as respostas organizadas pro WhatsApp. Tem um botão "Pular" pra quem não quiser responder.', campos: [
       ['rotulo', 'Etiqueta'], ['titulo', 'Título'], ['destaque', 'Final do título (em destaque)'], ['texto', 'Texto', 'area'], ['foto', 'Foto no chat', 'img'],
       ['whatsapp', 'WhatsApp que recebe (55 + DDD + número)']] },
     { k: 'rodape', t: 'Rodapé', campos: [['nome', 'Nome'], ['linha', 'Linha de baixo']] }

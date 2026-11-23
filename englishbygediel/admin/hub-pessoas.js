@@ -12,7 +12,7 @@
   const soNum = t => String(t || '').replace(/\D/g, '');
   const tel = t => { let n = soNum(t); if (!n) return ''; if (n.length <= 11) n = '55' + n; return n; };
   const insta = t => { const s = String(t || '').trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i, '').replace(/[/?].*$/, '').replace(/^@/, ''); return s ? '@' + s.toLowerCase() : ''; };
-  const FONTES = { programa: 'Programa (chat)', mentoria: 'Mentoria particular', catalogo: 'Catálogo antigo', compra: 'Comprou', maratona: 'Maratona' };
+  const FONTES = { programa: 'Programa (chat)', mentoria: 'Mentoria particular', catalogo: 'Catálogo antigo', compra: 'Comprou', maratona: 'Maratona', hub: 'Materiais grátis (Hub)' };
   const NOMES_MODO = Object.fromEntries((window.EBG && window.EBG.modos || []).map(m => [m.id, m.nome]));
   let pessoas = [], eventosPorVisitante = new Map(), marcas = {};
 
@@ -31,11 +31,12 @@
     box.innerHTML = '<p class="sub">Carregando…</p>';
     const mc = await sb.from('crm_marcas').select('chave,chamado,chamado_em').like('chave', 'tel:%').limit(20000);
     marcas = Object.fromEntries(((mc && mc.data) || []).map(m => [m.chave, m]));
-    const [prog, ment, cat, vend, evs, mara] = await Promise.all([
+    const [prog, ment, cat, vend, evs, mara, hub] = await Promise.all([
       ler('leads_programa'), ler('leads_mentoria'), ler('leads', 'id,created_at,nome,whatsapp,instagram,email,objetivo,origem'),
       ler('vendas', 'created_at,pedido,status,produto,valor,nome,email,whatsapp,instagram,utm_source,pago_em'),
       ler('hub_eventos', 'created_at,visitante,tipo,item,rotulo,modo', 50000),
-      ler('maratonas_inscricoes', 'created_at,maratona,nome,whatsapp,email,instagram,nivel,objetivo,visitante')
+      ler('maratonas_inscricoes', 'created_at,maratona,nome,whatsapp,email,instagram,nivel,objetivo,visitante'),
+      ler('hub_leads', 'created_at,nome,whatsapp,origem,pagina')
     ]);
     eventosPorVisitante = new Map();
     evs.linhas.forEach(e => { if (!eventosPorVisitante.has(e.visitante)) eventosPorVisitante.set(e.visitante, []); eventosPorVisitante.get(e.visitante).push(e); });
@@ -64,6 +65,7 @@
     ment.linhas.forEach(r => somar('mentoria', r));
     cat.linhas.forEach(r => somar('catalogo', r, { objetivos: NOMES_MODO[r.objetivo] || r.objetivo }));
     vend.linhas.forEach(r => { const p = somar('compra', r); p.compras.push(r); });
+    hub.linhas.forEach(r => somar('hub', r, { objetivos: r.origem ? 'Liberou: ' + r.origem : '' }));
     mara.linhas.forEach(r => { const mm = window.EBG_MARATONAS && window.EBG_MARATONAS.porId(r.maratona); somar('maratona', r, { objetivos: r.objetivo, maratona: mm ? mm.nome + ' · ' + mm.edicao : r.maratona }); });
 
     // interesses: o que a pessoa ligou, abriu e clicou no Hub
@@ -84,7 +86,7 @@
     pessoas = lista.sort((a, b) => (b.ultimo || '').localeCompare(a.ultimo || ''));
 
     const faltam = [prog, ment, vend].filter(x => x.erro).length;
-    $('#pessoasAviso').textContent = faltam ? 'Algumas tabelas ainda não existem. Rode supabase/dados.sql e supabase/vendas.sql no Supabase.' : '';
+    $('#pessoasAviso').textContent = faltam ? 'Algumas tabelas ainda não existem. Rode supabase/dados.sql e supabase/vendas.sql no Supabase.' : (hub.erro ? 'A tabela hub_leads ainda não existe. Rode supabase/funil-etapa-a.sql no Supabase.' : '');
     // opções de interesse
     const todos = new Map(); pessoas.forEach(p => p.interesses.forEach(i => todos.set(i, (todos.get(i) || 0) + 1)));
     $('#pfInteresse').innerHTML = '<option value="">Todos os interesses</option>' + [...todos.entries()].sort((a, b) => b[1] - a[1]).map(([i, n]) => `<option value="${esc(i)}">${esc(i)} (${n})</option>`).join('');

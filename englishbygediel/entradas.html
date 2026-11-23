@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gediel · 3 opções de entrada</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Advercase';src:url('fonts/advercase.woff2') format('woff2');font-display:swap}
+:root{--bg:#0a1426;--card:#13233f;--grad:url(img/gradiente-azul.webp);--linha:rgba(255,255,255,.1);--w:#fff;--dim:#a7b3c6;--azul:#6f86ff;--verde:#2ea05a;--verm:#e11d2e;--cobre:#4a5a35;--cobre2:#8fa66a}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:Inter,system-ui,sans-serif;color:var(--dim);font-size:16px;line-height:1.55;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}button,input{font:inherit;color:inherit}button{background:none;border:0;cursor:pointer}
+.serif{font-family:'Advercase','Instrument Serif',serif;color:var(--w);font-weight:400;letter-spacing:-.01em;line-height:1.05}
+.wrap{max-width:1040px;margin:0 auto;padding:0 18px}
+section{padding:52px 0}
+h2.serif{font-size:clamp(28px,6vw,42px);margin-bottom:10px}
+.sub{max-width:56ch;margin-bottom:22px}
+.rot{display:inline-block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--azul);font-weight:700;margin-bottom:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 24px;border-radius:99px;background:#fff;color:#0a1426;font-weight:700;font-size:16px;transition:transform .2s,box-shadow .2s;border:0}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px -12px rgba(255,255,255,.35)}
+.btn.verde{background:var(--verde);color:#fff}.btn.azul{background:var(--azul);color:#fff}.btn.ghost{background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--linha)}
+.link{color:#c9d3e2;text-decoration:underline;text-underline-offset:4px;font-size:15px}
+.campo{display:flex;flex-direction:column;gap:6px;text-align:left}
+.campo label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#c9d3e2;font-weight:600}
+.campo input{width:100%;min-height:50px;padding:0 16px;border-radius:14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;outline:0}
+.campo input:focus{border-color:#9db4ff;background:rgba(255,255,255,.12)}
+.campo input::placeholder{color:#8794aa}
+.form{display:grid;gap:10px}
+.form .btn{width:100%}
+.form small{font-size:12px;color:#8fa0bd;text-align:center}
+@media(min-width:560px){.form.linha{grid-template-columns:1fr 1fr auto;align-items:end}.form.linha small{grid-column:1/-1}}
+
+/* ===== ANEL (o mesmo do Hub) ===== */
+.anel{position:relative;width:100%;perspective:1100px;touch-action:pan-y;cursor:grab;user-select:none}
+.anel:active{cursor:grabbing}
+.gediel{position:absolute;left:50%;bottom:-4%;height:92%;max-width:none;transform:translateX(-50%);z-index:5;pointer-events:none;filter:drop-shadow(0 0 22px rgba(255,255,255,.95)) drop-shadow(0 0 60px rgba(255,255,255,.7)) drop-shadow(0 0 110px rgba(255,255,255,.35))}
+.aura{position:absolute;left:50%;bottom:8%;width:min(80vw,620px);aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(143,166,106,.35),transparent 65%);filter:blur(10px)}
+.giro{position:absolute;left:50%;top:42%;width:0;height:0}
+@media(min-width:820px){.gediel{bottom:-8%;height:100%}.giro{top:48%}}
+.modo{clip-path:inset(0 round 18px);-webkit-mask-image:-webkit-radial-gradient(white,black);isolation:isolate;position:absolute;background-image:var(--grad)!important;background-size:cover!important;width:var(--mw,clamp(108px,26vw,170px));aspect-ratio:3/4;margin-left:calc(var(--mw,clamp(108px,26vw,170px))/-2);margin-top:calc(var(--mw,clamp(108px,26vw,170px))*-.66);border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#1b2d4d,#0e1b33);border:1px solid var(--linha);backface-visibility:hidden;box-shadow:0 20px 40px -18px #000;transition:box-shadow .3s,border-color .3s;text-align:left}
+.modo.verde{background-image:linear-gradient(180deg,rgba(62,80,44,.82),rgba(26,36,18,.9)),var(--grad)!important}
+.modo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.modo.recorte{background-image:none!important}
+.modo .m-bg{z-index:0;position:absolute;inset:-14%;background:var(--grad) center/cover;transform:translate3d(calc(var(--p,0) * -16px),calc(var(--q,0) * -10px),0) scale(1.08);transition:transform .25s ease-out}
+.modo.verde .m-bg{filter:hue-rotate(-95deg) saturate(.55) brightness(.75)}
+.modo .m-luz{z-index:0;position:absolute;inset:0;background:radial-gradient(60% 40% at calc(50% + var(--p,0) * 30%) 30%,rgba(255,255,255,.28),transparent 70%);mix-blend-mode:screen;pointer-events:none}
+.modo .m-sombra{z-index:0;right:auto;position:absolute;left:50%;bottom:4%;width:78%;height:12%;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.65),transparent);transform:translateX(calc(-50% + var(--p,0) * 10px));filter:blur(4px)}
+.modo.recorte img.m-pessoa{z-index:1;inset:auto auto 0 50%;left:50%;width:auto;max-width:none;height:var(--h,100%);object-fit:contain;object-position:bottom;transform:translateX(-50%)}
+.modo::after{content:"";position:absolute;inset:40% 0 0;z-index:2;background:linear-gradient(transparent,rgba(6,12,24,.6) 40%,rgba(6,12,24,.96))}
+.modo span{position:absolute;left:10px;right:10px;bottom:10px;z-index:3;color:#fff;font-family:'Advercase','Archivo Black',sans-serif;font-size:13.5px;line-height:1.05;letter-spacing:.01em;text-shadow:0 2px 8px rgba(0,0,0,.9),0 0 2px rgba(0,0,0,.8)}
+.modo i{position:absolute;top:8px;right:8px;z-index:3;width:36px;height:20px;border-radius:99px;background:rgba(255,255,255,.25);font-style:normal}
+.modo i::after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:#fff;transition:left .25s}
+.modo.on{border-color:var(--cobre2);box-shadow:0 0 0 2px var(--cobre2),0 24px 50px -16px rgba(143,166,106,.6)}
+.modo.on i{background:var(--cobre2)}.modo.on i::after{left:19px}
+.modo em{position:absolute;bottom:38px;left:10px;z-index:3;font-style:normal;font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:#fff;color:var(--bg);padding:4px 7px;border-radius:99px}
+/* etiqueta grátis / programa em cada card do anel */
+.modo b{position:absolute;top:8px;left:8px;z-index:3;font-size:9.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:4px 7px;border-radius:99px;background:rgba(10,20,38,.75);color:#fff;border:1px solid rgba(255,255,255,.2)}
+.modo b.livre{background:var(--verde);border-color:transparent}
+.setas{position:absolute;z-index:7;left:0;right:0;top:50%;display:flex;justify-content:space-between;padding:0 6px;pointer-events:none}
+.setas button{pointer-events:auto;width:40px;height:40px;border-radius:50%;background:rgba(10,20,38,.6);border:1px solid var(--linha);color:#fff;font-size:20px;line-height:1;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.ligar{position:relative;z-index:6;width:min(420px,calc(100% - 32px));padding:16px;border-radius:16px;background:#fff;color:#0a1426;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:14px;border:0;box-shadow:0 18px 40px -14px rgba(0,0,0,.8)}
+.ligar:active{transform:scale(.97)}
+
+/* ===== ENTRADA (tela fixa) ===== */
+.entrada{position:fixed;inset:0;z-index:30;background:linear-gradient(180deg,rgba(10,20,38,.55),rgba(10,20,38,.15) 45%,rgba(10,20,38,.75)),var(--grad) center/cover,var(--bg);display:flex;flex-direction:column;align-items:center;overflow:hidden;transition:opacity .6s,transform .6s}
+.entrada.sai{opacity:0;transform:scale(1.06);pointer-events:none}
+.ent-topo{width:100%;max-width:1120px;display:flex;justify-content:space-between;align-items:center;padding:16px 18px 0;color:#fff;font-weight:700;letter-spacing:-.3px;position:relative;z-index:8}
+.ent-topo b{color:#9db4ff}
+.ent-topo a{font-size:12.5px;padding:8px 14px;border-radius:99px;background:rgba(255,255,255,.12);border:1px solid var(--linha);font-weight:600}
+.ent-titulo{text-align:center;margin-top:2vh;padding:0 16px;position:relative;z-index:6}
+.ent-titulo small{display:block;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#c9d3e2}
+.ent-titulo h1{font-size:clamp(30px,7.6vw,64px);line-height:1;margin-top:8px;letter-spacing:-.02em}
+.ent-titulo h1 em{font-style:normal;color:#9db4ff}
+.ent-titulo p{font-size:13.5px;margin:8px auto 0;max-width:40ch;color:#dbe4f2}
+.entrada .anel{flex:1}
+.entrada .rodo{position:relative;z-index:6;width:100%;display:flex;flex-direction:column;align-items:center;gap:8px;padding-bottom:max(16px,env(safe-area-inset-bottom))}
+.entrada .rodo small{font-size:12px;color:#c9d3e2}
+
+/* folha de baixo (captura) */
+.folha{position:fixed;inset:0;z-index:40;background:rgba(4,8,18,.6);display:none;align-items:flex-end;justify-content:center;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.folha.on{display:flex}
+.folha .caixa{width:100%;max-width:520px;background:#0f1d36;border:1px solid var(--linha);border-radius:26px 26px 0 0;padding:18px 18px max(22px,env(safe-area-inset-bottom));animation:sobe .35s ease-out}
+@media(min-width:560px){.folha{align-items:center}.folha .caixa{border-radius:26px}}
+@keyframes sobe{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.folha .cab{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.folha .cab b{color:#fff;font-size:18px}
+.folha .cab button{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.1);color:#fff}
+.folha p{font-size:14px;margin-bottom:14px}
+.folha .modo-mini{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding:10px;border-radius:14px;background:rgba(255,255,255,.06)}
+.folha .modo-mini img{width:42px;height:56px;border-radius:8px;object-fit:cover}
+.folha .modo-mini b{color:#fff;display:block;font-size:14px}.folha .modo-mini small{font-size:12px}
+
+/* ===== B: página rolável, promessa primeiro ===== */
+.heroB{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;isolation:isolate;background:#0a1426 url(img/gradiente-azul.webp) center/cover}
+.heroB::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(10,20,38,.1) 0%,rgba(10,20,38,.1) 42%,rgba(10,20,38,.97) 72%)}
+.heroB .foto{position:absolute;z-index:-1;left:50%;top:56px;transform:translateX(-50%);width:min(430px,104vw);filter:drop-shadow(0 0 60px rgba(160,190,255,.45));-webkit-mask-image:linear-gradient(#000 78%,transparent);mask-image:linear-gradient(#000 78%,transparent)}
+.heroB .conteudo{padding:0 18px 28px;max-width:640px;margin:0 auto;width:100%;text-align:center}
+.heroB h1{font-size:clamp(32px,8.6vw,56px);margin-bottom:10px}
+.heroB h1 em{font-style:normal;color:#9db4ff}
+.heroB p{color:#dbe4f2;max-width:44ch;margin:0 auto 16px;font-size:15px}
+@media(min-width:820px){.heroB{min-height:720px}.heroB .foto{left:auto;right:4%;top:auto;bottom:0;transform:none;width:520px;-webkit-mask-image:none;mask-image:none}.heroB .conteudo{margin:0 0 0 max(18px,calc((100vw - 1040px)/2));text-align:left;max-width:560px}.heroB p{margin-left:0}}
+.universos{padding:40px 0 10px;text-align:center;position:relative;overflow:hidden}
+.universos .anel{height:min(64vh,540px)}
+.universos .acoes{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:8px;position:relative;z-index:6}
+
+/* ===== C: etapas ===== */
+.passos{position:relative;z-index:8;display:flex;gap:6px;align-items:center;justify-content:center;margin-top:10px;font-size:12px;color:#c9d3e2}
+.passos span{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:99px;background:rgba(255,255,255,.08);border:1px solid var(--linha)}
+.passos span b{width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center;font-size:11px;color:#fff}
+.passos span.on{background:#fff;color:#0a1426}.passos span.on b{background:#0a1426;color:#fff}
+.passos span.ok b{background:var(--verde);color:#fff}
+.passo1{position:relative;z-index:6;flex:1;min-height:0;width:100%;max-width:520px;display:flex;flex-direction:column;padding:8px 18px 12px}
+.passo1 h1{font-size:clamp(26px,6.8vw,44px)}
+.c-foto{flex:1;min-height:0;display:flex;justify-content:center;align-items:flex-end;margin:4px 0 8px}
+.c-foto img{height:100%;width:auto;max-width:100%;object-fit:contain;object-position:bottom;filter:drop-shadow(0 0 40px rgba(160,190,255,.45));-webkit-mask-image:linear-gradient(#000 85%,transparent);mask-image:linear-gradient(#000 85%,transparent)}
+.passo1 .form{background:rgba(10,20,38,.72);border:1px solid var(--linha);border-radius:22px;padding:14px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+[hidden]{display:none!important}
+
+/* ===== PÁGINA (igual pra todas as opções) ===== */
+.barra{position:sticky;top:0;z-index:20;display:flex;gap:8px;align-items:center;padding:10px 14px;background:rgba(10,20,38,.85);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--linha)}
+.barra .pil{display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:0 14px;border-radius:99px;background:rgba(255,255,255,.1);border:1px solid var(--linha);color:#fff;font-size:13px;font-weight:600}
+.barra .pil.azul{background:var(--azul);border-color:transparent}
+.barra .esp{flex:1}
+.modo-cab{padding:34px 0 10px;text-align:center}
+.modo-cab h2{font-size:clamp(30px,7vw,46px)}
+.modo-cab p{max-width:48ch;margin:8px auto 0}
+.trava{margin-top:22px;display:grid;gap:12px;grid-template-columns:1fr 1fr;text-align:left}
+.trava div{padding:14px;border-radius:18px;background:var(--card);border:1px solid var(--linha)}
+.trava b{display:block;color:#fff;font-size:26px;line-height:1}.trava small{font-size:12.5px}
+.trava div.lock{background:linear-gradient(160deg,#1a2f5c,#13233f);border-color:rgba(111,134,255,.5)}
+.planos{display:grid;gap:12px;grid-template-columns:1fr}
+@media(min-width:720px){.planos{grid-template-columns:repeat(3,1fr);align-items:stretch}}
+.plano{position:relative;padding:20px;border-radius:22px;background:var(--card);border:1px solid var(--linha);display:flex;flex-direction:column;gap:8px}
+.plano.dest{background:linear-gradient(160deg,#1a2f5c,#0f1d36);border-color:rgba(111,134,255,.6);box-shadow:0 30px 60px -30px rgba(111,134,255,.6)}
+.plano .tag{position:absolute;top:-11px;left:18px;padding:4px 10px;border-radius:99px;background:var(--azul);color:#fff;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.plano h3{color:#fff;font-size:22px}.plano .s{font-size:13px}
+.plano .pr{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:4px 0}
+.plano .pr b{font-size:30px;color:#fff;line-height:1}.plano .pr s{font-size:14px}.plano .pr span{font-size:13px}
+.plano ul{list-style:none;display:grid;gap:7px;margin:6px 0 10px}
+.plano li{position:relative;padding-left:24px;font-size:14px;color:#d3dcea}
+.plano li::before{content:"";position:absolute;left:0;top:5px;width:15px;height:15px;border-radius:50%;background:var(--verde) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7'/%3E%3C/svg%3E") center/10px no-repeat}
+.plano .btn{margin-top:auto;width:100%}
+.bf{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:12px;background:var(--verm);color:#fff;font-weight:700;font-size:12.5px;width:max-content}
+.bf .t{font-variant-numeric:tabular-nums;background:#fff;color:var(--verm);border-radius:6px;padding:1px 7px}
+.linha-plano{margin-top:14px;padding:14px 18px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid var(--linha);display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;font-size:14px;color:#d3dcea}
+.prod{display:grid;gap:20px;grid-template-columns:1fr;align-items:center;padding:18px;border-radius:26px;background:linear-gradient(160deg,#16294b,#0f1d36);border:1px solid var(--linha)}
+@media(min-width:820px){.prod{grid-template-columns:1fr 1fr;padding:30px;gap:36px}}
+.prod .capa{border-radius:18px;overflow:hidden;aspect-ratio:16/10;background:#0c1830}
+.prod .capa img,.prod .capa iframe{width:100%;height:100%;object-fit:cover;border:0}
+.lista{list-style:none;display:grid;gap:8px;margin:12px 0 16px}
+.lista li{position:relative;padding-left:26px;font-size:15px;color:#d3dcea}
+.lista li::before{content:"";position:absolute;left:0;top:6px;width:16px;height:16px;border-radius:50%;background:var(--verde) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7'/%3E%3C/svg%3E") center/11px no-repeat}
+.preco{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin:6px 0 4px}
+.preco b{font-size:34px;color:#fff;line-height:1}.preco span{font-size:14px}
+.selo{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#cfe9d8;margin:6px 0 16px}
+.dep{display:grid;gap:12px;grid-template-columns:1fr}
+@media(min-width:720px){.dep{grid-template-columns:repeat(3,1fr)}}
+.vid{position:relative;aspect-ratio:9/11;border-radius:20px;overflow:hidden;background:var(--card);border:1px solid var(--linha);cursor:pointer;transition:transform .25s,box-shadow .25s}
+.vid:hover{transform:scale(1.02);box-shadow:0 22px 40px -20px rgba(0,0,0,.8)}
+.vid img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vid::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(6,12,24,.92))}
+.vid .play{position:absolute;z-index:1;top:14px;right:14px;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center}
+.vid .play svg{width:18px;height:18px;margin-left:3px;fill:#0a1426}
+.vid .leg{position:absolute;z-index:1;left:14px;right:14px;bottom:14px;color:#fff}
+.vid .leg b{display:block;font-size:15px;line-height:1.25}.vid .leg small{color:#c9d3e2;font-size:12.5px}
+.grade{display:grid;gap:12px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:820px){.grade{grid-template-columns:repeat(3,1fr)}}
+.cd{display:flex;flex-direction:column;border-radius:18px;overflow:hidden;background:var(--card);border:1px solid var(--linha);transition:transform .25s,box-shadow .25s;position:relative}
+.cd:hover{transform:scale(1.02);box-shadow:0 22px 40px -20px rgba(0,0,0,.8)}
+.cd img{width:100%;aspect-ratio:4/3;object-fit:cover;background:#0c1830}
+.cd div{padding:12px 14px 14px;display:flex;flex-direction:column;gap:4px;flex:1}
+.cd b{color:#fff;font-size:15px;line-height:1.25}.cd small{font-size:12.5px;color:var(--dim)}
+.cd .p{margin-top:auto;padding-top:8px;color:#fff;font-weight:700}
+.cd .cad{position:absolute;top:10px;left:10px;padding:4px 9px;border-radius:99px;background:rgba(10,20,38,.8);color:#fff;font-size:11px;font-weight:700;border:1px solid var(--linha)}
+footer{padding:40px 0 40px;border-top:1px solid var(--linha);text-align:center}
+.redes{display:flex;justify-content:center;gap:12px;margin:14px 0 18px}
+.redes a{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);border:1px solid var(--linha);color:#fff}
+.redes svg{width:22px;height:22px;fill:currentColor}
+.rodalinks{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;font-size:14px}
+.rodalinks a{text-decoration:underline;text-underline-offset:4px}
+.alt{background:rgba(255,255,255,.03)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<!-- ===================== OPÇÃO A: anel na entrada (como hoje), promessa em cima, captura ao ligar ===================== -->
+<section class="entrada" id="entA" hidden aria-label="Escolha o seu modo">
+  <div class="ent-topo"><span>english<b>by</b>gediel</span><a href="membros.html">Área de membros</a></div>
+  <div class="ent-titulo">
+    <small>11 anos de sala de aula · +700 alunos</small>
+    <h1 class="serif">Anos de inglês e você <em>ainda trava</em>?</h1>
+    <p>Gire e escolha o seu universo. Os com cadeado abrem no Programa.</p>
+  </div>
+  <div class="anel" id="anelA"><span class="aura"></span><div class="giro" id="giroA"></div><img class="gediel" src="img/gediel-centro.webp" alt=""><div class="setas"><button type="button" data-gira="-1" aria-label="Anterior">‹</button><button type="button" data-gira="1" aria-label="Próximo">›</button></div></div>
+  <div class="rodo"><button class="ligar" id="ligarA" type="button">Ligar modo</button><small>Pra liberar todos os modos: Programa Inteligente</small></div>
+</section>
+
+<!-- ===================== OPÇÃO C: entrada em etapas (1 você · 2 seu modo · 3 ligar) ===================== -->
+<section class="entrada" id="entC" hidden aria-label="Entrada em etapas">
+  <div class="ent-topo"><span>english<b>by</b>gediel</span><a href="membros.html">Área de membros</a></div>
+  <div class="passos" id="passosC"><span class="on"><b>1</b> Você</span><span><b>2</b> Seu modo</span><span><b>3</b> Ligar</span></div>
+  <div class="passo1" id="c1">
+    <div class="ent-titulo" style="margin:0;padding:0">
+      <small>11 anos de sala de aula · +700 alunos</small>
+      <h1 class="serif">Anos de inglês e você <em>ainda trava</em>?</h1>
+      <p>Me diz quem é você e eu libero seu primeiro material grátis.</p>
+    </div>
+    <div class="c-foto"><img src="img/gediel-centro.webp" alt=""></div>
+    <form class="form" data-lead="c">
+      <div class="campo"><label>Seu nome</label><input name="nome" placeholder="Como posso te chamar?" required autocomplete="given-name"></div>
+      <div class="campo"><label>WhatsApp</label><input name="whats" placeholder="(55) 9 9999-9999" inputmode="tel" required autocomplete="tel"></div>
+      <button class="btn" type="submit">Continuar →</button>
+      <small>Só uma vez. Sem spam.</small>
+    </form>
+  </div>
+  <div class="ent-titulo" id="c2t" hidden><small>Passo 2</small><h1 class="serif" style="font-size:clamp(26px,6.5vw,44px)">Gire e escolha <em>o seu modo</em></h1><p>Os com cadeado abrem com o Programa.</p></div>
+  <div class="anel" id="anelC" hidden><span class="aura"></span><div class="giro" id="giroC"></div><img class="gediel" src="img/gediel-centro.webp" alt=""><div class="setas"><button type="button" data-gira="-1" aria-label="Anterior">‹</button><button type="button" data-gira="1" aria-label="Próximo">›</button></div></div>
+  <div class="rodo" id="c2r" hidden><button class="ligar" id="ligarC" type="button">Ligar modo</button><small>Pra liberar todos os modos: Programa Inteligente</small></div>
+</section>
+
+<!-- folha de captura (opção A) -->
+<div class="folha" id="folha" role="dialog" aria-modal="true">
+  <div class="caixa">
+    <div class="cab"><b>Antes de ligar</b><button type="button" data-fecha aria-label="Fechar">✕</button></div>
+    <div class="modo-mini" id="folhaModo"></div>
+    <p>Me diz quem é você e eu libero o modo e o seu primeiro material grátis.</p>
+    <form class="form" data-lead="a">
+      <div class="campo"><label>Seu nome</label><input name="nome" placeholder="Como posso te chamar?" required autocomplete="given-name"></div>
+      <div class="campo"><label>WhatsApp</label><input name="whats" placeholder="(55) 9 9999-9999" inputmode="tel" required autocomplete="tel"></div>
+      <button class="btn" type="submit">Ligar e receber o material</button>
+      <small>Só uma vez. Sem spam.</small>
+    </form>
+  </div>
+</div>
+
+<main id="pagina">
+  <!-- ===================== OPÇÃO B: promessa + captura primeiro, anel logo abaixo ===================== -->
+  <header class="heroB" id="heroB" hidden>
+    <div class="ent-topo" style="position:absolute;top:0;left:0;right:0"><span>english<b>by</b>gediel</span><a href="membros.html">Área de membros</a></div>
+    <img class="foto" src="img/gediel-centro.webp" alt="Gediel Vargas" fetchpriority="high">
+    <div class="conteudo">
+      <h1 class="serif">Anos de inglês e você <em>ainda trava</em> na hora de falar?</h1>
+      <p>11 anos de sala de aula, mais de 700 alunos. Me diz quem é você e eu libero seu primeiro material grátis.</p>
+      <form class="form linha" data-lead="b">
+        <div class="campo"><label>Seu nome</label><input name="nome" placeholder="Como posso te chamar?" required></div>
+        <div class="campo"><label>WhatsApp</label><input name="whats" placeholder="(55) 9 9999-9999" inputmode="tel" required></div>
+        <button class="btn" type="submit">Começar grátis</button>
+        <small>Só uma vez. Sem spam. · <a class="link" href="#programa">Conhecer o Programa</a></small>
+      </form>
+    </div>
+  </header>
+  <section class="universos" id="universos" hidden>
+    <div class="wrap"><span class="rot">Escolha o seu universo</span><h2 class="serif">Gire e ligue <em style="font-style:normal;color:#9db4ff">o seu modo</em></h2><p class="sub" style="margin:0 auto 6px">Cada modo mostra o inglês do seu dia a dia. Os com cadeado abrem no Programa.</p></div>
+    <div class="anel" id="anelB"><span class="aura"></span><div class="giro" id="giroB"></div><img class="gediel" src="img/gediel-centro.webp" alt=""><div class="setas"><button type="button" data-gira="-1" aria-label="Anterior">‹</button><button type="button" data-gira="1" aria-label="Próximo">›</button></div></div>
+    <div class="acoes"><button class="ligar" id="ligarB" type="button">Ligar modo</button><a class="link" href="#planos">Liberar todos os modos: ver planos</a></div>
+  </section>
+
+  <!-- barra do modo ligado -->
+  <div class="barra" id="barra" hidden><span class="pil" id="pilModo">Modo</span><button class="pil" type="button" data-trocar>trocar</button><span class="esp"></span><a class="pil azul" href="#planos">Planos</a><a class="pil" href="membros.html">Entrar</a></div>
+
+  <section class="modo-cab" id="modoCab" hidden><div class="wrap">
+    <span class="rot">Modo ligado</span>
+    <h2 class="serif" id="mcNome"></h2>
+    <p id="mcTexto"></p>
+    <div class="trava">
+      <div><b id="mcLivre">0</b><small>materiais liberados agora, grátis</small></div>
+      <div class="lock"><b id="mcTrancado">0</b><small>abrem com o Programa Inteligente · <a class="link" href="#planos">ver planos</a></small></div>
+    </div>
+  </div></section>
+
+  <section id="planos" class="alt"><div class="wrap">
+    <span class="rot">Pra liberar tudo</span>
+    <h2 class="serif">Planos</h2>
+    <p class="sub">Comece grátis. Quando quiser tudo liberado, o Programa Inteligente é o caminho.</p>
+    <div class="planos" id="gradePlanos"></div>
+    <div class="linha-plano" id="linhaGenio"></div>
+    <div class="linha-plano" id="linhaInst"></div>
+  </div></section>
+
+  <section id="aulasecreta"><div class="wrap">
+    <div class="prod">
+      <div class="capa"><img id="asImg" src="" alt="Aula Secreta" loading="lazy"></div>
+      <div>
+        <span class="rot">Porta de entrada · R$ 47</span>
+        <h2 class="serif">Aula Secreta: os 3 segredos para destravar seu inglês</h2>
+        <ul class="lista"><li>[PREENCHER: o que a pessoa leva na Aula Secreta]</li><li>[PREENCHER: item 2]</li><li>[PREENCHER: item 3]</li></ul>
+        <div class="preco"><b>R$ 47</b><span>pagamento único</span></div>
+        <div class="selo">🛡️ Garantia de 7 dias</div><br>
+        <a class="btn verde" id="asBtn" href="#">Quero a Aula Secreta</a>
+      </div>
+    </div>
+  </div></section>
+
+  <section id="programa" class="alt"><div class="wrap">
+    <div class="prod">
+      <div class="capa"><iframe id="pgVideo" title="Programa Inteligente" loading="lazy" allowfullscreen></iframe></div>
+      <div>
+        <span class="rot">Acompanhamento de perto</span>
+        <h2 class="serif">Programa Inteligente</h2>
+        <p class="sub" id="pgSinopse" style="margin-bottom:0"></p>
+        <ul class="lista" id="pgInclui"></ul>
+        <div class="bf" id="pgBF" hidden>Black Friday · acaba em <span class="t" id="pgT">--</span></div>
+        <div class="preco"><b id="pgPreco">6x R$ 197</b><span>no cartão</span></div>
+        <div class="selo">🛡️ Garantia de 7 dias</div><br>
+        <a class="btn azul" id="pgBtn" href="#">Quero entrar no Programa</a>
+        <p style="font-size:13px;margin-top:12px">O Inglês de Cada Dia: maratona incluída no Programa Inteligente.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <section id="depoimentos"><div class="wrap">
+    <span class="rot">Quem já destravou</span>
+    <h2 class="serif">Eles também travavam.</h2>
+    <div class="dep" id="depDestaque"></div>
+  </div></section>
+
+  <section id="ebooks" class="alt"><div class="wrap">
+    <span class="rot">Pra ir mais fundo</span>
+    <h2 class="serif">Materiais e e-books</h2>
+    <div class="grade" id="gePagos"></div>
+  </div></section>
+
+  <section id="gratis"><div class="wrap">
+    <span class="rot">Pra começar hoje</span>
+    <h2 class="serif">Materiais grátis</h2>
+    <div class="grade" id="geGratis"></div>
+    <div style="text-align:center;margin-top:18px"><a class="btn ghost" href="index.html#gratis">Ver todos</a></div>
+  </div></section>
+
+  <footer><div class="wrap">
+    <b class="serif" style="font-size:24px">Gediel Vargas</b>
+    <nav class="redes" id="redes" aria-label="Redes sociais"></nav>
+    <div class="rodalinks"><a href="membros.html">Área de membros</a><a href="index.html#extras">Outros projetos</a><a href="https://wa.me/5555999895429?text=Oi%20Gediel!%20Vim%20pelo%20site.">Falar no WhatsApp</a></div>
+  </div></footer>
+</main>
+
+<script src="config.js"></script>
+<script src="content.js"></script>
+<script src="maratonas.js"></script>
+<script src="hub-dados.js"></script>
+<script>
+(async function () {
+  const V = (new URLSearchParams(location.search).get('v') || 'a').toLowerCase();
+  const C = window.EBG, CFG = window.EBG_CONFIG || {};
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const H = await window.HUB_DADOS.carregar(C, CFG);
+  const modos = (H.modos || []).filter(m => m.ativo !== false);
+  const cards = (H.cards || []).filter(c => c.ativo !== false), by = {}; cards.forEach(c => by[c.id] = c);
+  // quais modos são grátis e quais abrem com o Programa (ajustável no editor depois)
+  const LIVRES = ['teste', 'zero', 'jogos', 'prompts', 'materiais'];
+  const etiqueta = m => LIVRES.includes(m.id) ? '<b class="livre">Grátis</b>' : `<b>🔒 ${m.id === 'fe' ? 'Mission' : 'Programa'}</b>`;
+  const LEAD_URL = ''; // [PREENCHER: endereço da planilha usada nos quizzes]
+
+  /* ---------- anel (o mesmo do Hub, sem girar sozinho) ---------- */
+  function montarAnel(anelId, giroId, ligarId, aoLigar) {
+    const anel = document.getElementById(anelId), giro = document.getElementById(giroId), ligar = document.getElementById(ligarId);
+    giro.innerHTML = modos.map(m => `<button class="modo${m.verde ? ' verde' : ''}${m.recorte ? ' recorte' : ''}" type="button" data-modo="${esc(m.id)}" aria-pressed="false">
+      ${m.recorte ? `<span class="m-bg"></span><span class="m-luz"></span><span class="m-sombra"></span><img class="m-pessoa" src="${esc(m.img)}" alt="" draggable="false" style="--h:${Math.min(Number(m.tamanho) || 100, 130) * .7}%">` : `<img src="${esc(m.img)}" alt="" draggable="false">`}${etiqueta(m)}${m.marca ? `<em>${esc(m.marca)}</em>` : ''}<i></i><span>${esc(m.nome)}</span></button>`).join('');
+    const cs = [...giro.querySelectorAll('.modo')], passo = 360 / cs.length;
+    let ang = 0, alvo = 0, escolhido = null, arrasto = null;
+    const raio = () => Math.min(anel.clientWidth * .62, 520);
+    function posicionar() {
+      const r = raio(), alt = Math.min(anel.clientHeight * .2, 170);
+      cs.forEach((c, i) => {
+        const a = (i * passo + ang) * Math.PI / 180, z = Math.cos(a);
+        c.style.transform = `perspective(1100px) translate3d(${Math.sin(a) * r}px, ${z * alt}px, ${z * r * .5}px) rotateY(${Math.sin(a) * -18}deg) scale(${.62 + (z + 1) * .23})`;
+        c.style.zIndex = z > .15 ? 6 + Math.round(z * 10) : 1;
+        c.style.opacity = (.35 + (z + 1) * .33).toFixed(2);
+        c.style.setProperty('--p', Math.sin(a).toFixed(3));
+        c.style.filter = z < 0 ? `brightness(${.55 + (z + 1) * .45})` : '';
+      });
+    }
+    function animar() { ang += (alvo - ang) * .12; posicionar(); if (Math.abs(alvo - ang) > .05) requestAnimationFrame(animar); }
+    const frente = () => { const n = modos.length; return ((Math.round(-ang / passo) % n) + n) % n; };
+    function marcar() { const m = modos[frente()]; escolhido = m; cs.forEach(c => { const on = c.dataset.modo === m.id; c.classList.toggle('on', on); c.setAttribute('aria-pressed', on); }); ligar.textContent = 'Ligar ' + m.nome; }
+    function escolher(id) { const i = modos.findIndex(m => m.id === id); let a = -i * passo; while (a - alvo > 180) a -= 360; while (alvo - a > 180) a += 360; alvo = a; requestAnimationFrame(animar); setTimeout(marcar, 60); }
+    anel.addEventListener('pointerdown', e => { if (e.target.closest('.setas')) return; arrasto = { x: e.clientX, a: alvo, moveu: false }; });
+    addEventListener('pointermove', e => { if (!arrasto) return; const dx = e.clientX - arrasto.x; if (Math.abs(dx) > 6) arrasto.moveu = true; alvo = arrasto.a + dx * .35; ang = alvo; posicionar(); });
+    addEventListener('pointerup', () => { if (arrasto) { alvo = Math.round(alvo / passo) * passo; requestAnimationFrame(animar); setTimeout(marcar, 80); setTimeout(() => { arrasto = null; }, 0); } });
+    anel.addEventListener('click', e => { const s = e.target.closest('[data-gira]'); if (s) { alvo -= Number(s.dataset.gira) * passo; requestAnimationFrame(animar); setTimeout(marcar, 80); return; } const c = e.target.closest('.modo'); if (c && !(arrasto && arrasto.moveu)) escolher(c.dataset.modo); });
+    ligar.addEventListener('click', () => aoLigar(escolhido || modos[frente()]));
+    addEventListener('resize', posicionar);
+    posicionar(); marcar();
+    return { escolher, posicionar };
+  }
+
+  /* ---------- lead: nome + WhatsApp, uma vez só por visitante ---------- */
+  const temLead = () => { try { return !!localStorage.getItem('ebg:lead'); } catch (e) { return false; } };
+  function guardarLead(f) {
+    const d = { nome: f.nome.value.trim(), whats: f.whats.value.replace(/\D/g, ''), quando: new Date().toISOString(), origem: 'entrada-' + V };
+    try { localStorage.setItem('ebg:lead', JSON.stringify(d)); } catch (e) {}
+    $$('.cd .cad').forEach(x => x.textContent = 'Liberado');
+    if (LEAD_URL) fetch(LEAD_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(d) }).catch(() => {});
+    return d;
+  }
+
+  /* ---------- página no modo ---------- */
+  let modoAtual = null;
+  function ligarModo(m) {
+    modoAtual = m;
+    $('#barra').hidden = false; $('#modoCab').hidden = false;
+    $('#pilModo').textContent = m.nome; $('#mcNome').textContent = m.nome; $('#mcTexto').textContent = m.texto || '';
+    const doModo = cards.filter(c => (c.modos || []).includes(m.id) && c.tipo !== 'aluno');
+    const livres = doModo.filter(c => c.tipo === 'gratis'), presos = doModo.filter(c => c.tipo === 'membros' || c.tipo === 'pago');
+    $('#mcLivre').textContent = livres.length || cards.filter(c => c.tipo === 'gratis').length;
+    $('#mcTrancado').textContent = presos.length || cards.filter(c => c.tipo === 'membros').length;
+    $$('.entrada').forEach(e => e.classList.add('sai'));
+    document.body.style.overflow = '';
+    if (V === 'b') { $('#universos').hidden = true; $('#heroB').hidden = true; }
+    scrollTo(0, 0);
+  }
+  document.addEventListener('click', e => { if (e.target.closest('[data-trocar]')) { location.href = location.pathname + '?v=' + V; } if (e.target.closest('[data-fecha]')) $('#folha').classList.remove('on'); });
+
+  /* ---------- as 3 opções ---------- */
+  let pendente = null;
+  if (V === 'a') {
+    $('#entA').hidden = false; document.body.style.overflow = 'hidden';
+    montarAnel('anelA', 'giroA', 'ligarA', m => {
+      if (temLead()) return ligarModo(m);
+      pendente = m;
+      $('#folhaModo').innerHTML = `<img src="${esc(m.img)}" alt=""><div><b>${esc(m.nome)}</b><small>${esc((m.texto || '').slice(0, 70))}…</small></div>`;
+      $('#folha').classList.add('on'); setTimeout(() => $('#folha input').focus(), 50);
+    });
+    $('[data-lead="a"]').addEventListener('submit', e => { e.preventDefault(); guardarLead(e.target); $('#folha').classList.remove('on'); ligarModo(pendente); });
+  }
+  if (V === 'b') {
+    $('#heroB').hidden = false; $('#universos').hidden = false;
+    const anel = montarAnel('anelB', 'giroB', 'ligarB', m => ligarModo(m));
+    $('[data-lead="b"]').addEventListener('submit', e => { e.preventDefault(); guardarLead(e.target); $('#universos').scrollIntoView({ behavior: 'smooth' }); });
+    setTimeout(anel.posicionar, 300);
+  }
+  if (V === 'c') {
+    $('#entC').hidden = false; document.body.style.overflow = 'hidden';
+    const passo2 = () => {
+      $('#c1').hidden = true; $('#c2t').hidden = false; $('#anelC').hidden = false; $('#c2r').hidden = false;
+      const ps = $$('#passosC span'); ps[0].className = 'ok'; ps[1].className = 'on';
+      const anel = montarAnel('anelC', 'giroC', 'ligarC', m => { ps[1].className = 'ok'; ps[2].className = 'ok'; ligarModo(m); });
+      setTimeout(anel.posicionar, 50);
+    };
+    $('[data-lead="c"]').addEventListener('submit', e => { e.preventDefault(); guardarLead(e.target); passo2(); });
+    if (temLead() || /passo=2/.test(location.search)) passo2();
+  }
+
+  /* ---------- conteúdo da página ---------- */
+  const hoje = new Date().toISOString().slice(0, 10);
+  const planos = (H.planos || []).filter(p => p && p.ativo !== false);
+  const tres = ['Grátis', 'Mission', 'Inteligente'].map(n => planos.find(p => p.nome === n)).filter(Boolean);
+  $('#gradePlanos').innerHTML = tres.map(p => {
+    const promo = p.promo && p.promoAte && hoje <= p.promoAte, dest = p.nome === 'Inteligente';
+    const nome = dest ? 'Programa Inteligente' : p.nome;
+    const href = p.acao === 'link' ? p.link : p.acao === 'login' ? 'membros.html' : '#';
+    return `<div class="plano${dest ? ' dest' : ''}">${dest ? '<span class="tag">Mais escolhido</span>' : ''}<h3 class="serif">${esc(nome)}</h3><span class="s">${esc(p.sub)}</span>
+      ${promo ? `<span class="bf">${esc(p.promoNome)} · acaba em <span class="t" data-bf>--</span></span>` : ''}
+      <div class="pr"><b>${esc(promo ? p.promo : p.preco)}</b>${promo ? `<s>${esc(p.preco)}</s>` : ''}<span>${esc(p.nota)}</span></div>
+      <ul>${(p.beneficios || '').split('\n').filter(Boolean).map(b => `<li>${esc(b)}</li>`).join('')}</ul>
+      <a class="btn${dest ? ' azul' : ' ghost'}" href="${esc(href)}">${esc(dest ? 'Quero entrar no Programa' : p.botao)}</a></div>`;
+  }).join('');
+  const genio = planos.find(p => p.nome === 'Gênio'), inst = planos.find(p => p.nome === 'Instituição');
+  $('#linhaGenio').innerHTML = genio ? `<span>👑 Quer tudo liberado? <b style="color:#fff">Conheça o Gênio</b> · ${esc(genio.preco)}</span>${genio.link ? `<a class="btn ghost" style="min-height:42px" href="${esc(genio.link)}">Quero o Gênio</a>` : '<span style="color:#ffd36b">[PREENCHER: link do Gênio]</span>'}` : '';
+  $('#linhaInst').innerHTML = inst ? `<span>🏫 Igrejas, escolas, empresas e grupos: <b style="color:#fff">plano Instituição</b>, sob medida.</span><a class="btn ghost" style="min-height:42px" href="https://wa.me/${esc(CFG.whatsapp || '5555999895429')}?text=${encodeURIComponent('Oi Gediel! Quero saber do plano Instituição.')}">Falar no WhatsApp</a>` : '';
+
+  const FIM = new Date('2026-11-30T23:59:59-03:00').getTime();
+  function tick() {
+    const ms = FIM - Date.now(), bf = ms > 0;
+    $('#pgBF').hidden = !bf; $('#pgPreco').textContent = bf ? '6x R$ 197' : '6x R$ 297';
+    if (!bf) { $$('[data-bf]').forEach(t => t.closest('.bf').remove()); return; }
+    const s = Math.floor(ms / 1000), d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60), x = s % 60, p = n => String(n).padStart(2, '0');
+    const t = (d ? d + 'd ' : '') + p(h) + ':' + p(m) + ':' + p(x); $('#pgT').textContent = t; $$('[data-bf]').forEach(e => e.textContent = t);
+  }
+  tick(); setInterval(tick, 1000);
+
+  const as = cards.find(c => /Aula Secreta/i.test(c.titulo));
+  if (as) { $('#asImg').src = as.img; $('#asBtn').href = as.link; }
+  const M = H.mentoria || {};
+  $('#pgVideo').src = 'https://www.youtube.com/embed/' + (M.video || CFG.videoApresentacao || 'eXfovCYxdZw') + '?rel=0';
+  $('#pgSinopse').textContent = (M.sinopse || '').replace(/\s+/g, ' ').trim();
+  $('#pgInclui').innerHTML = (M.inclui || '').split('\n').filter(Boolean).map(t => `<li>${esc(t)}</li>`).join('');
+  $('#pgBtn').href = CFG.checkoutMentoria || M.checkout || '#';
+
+  const yt = id => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+  $('#depDestaque').innerHTML = ['levi', 'laura', 'luiz'].map(i => by[i]).filter(Boolean).map(a => `<div class="vid" data-v="${esc(a.video)}" role="button" tabindex="0"><img src="${esc(a.img || yt(a.video))}" alt="" loading="lazy"><span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span><span class="leg"><b>${esc(a.titulo)}</b><small>${esc(a.nome || '')}</small></span></div>`).join('');
+  document.addEventListener('click', e => { const v = e.target.closest('.vid'); if (!v || v.querySelector('iframe')) return; v.insertAdjacentHTML('beforeend', `<iframe src="https://www.youtube.com/embed/${encodeURIComponent(v.dataset.v)}?autoplay=1&rel=0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="Depoimento" style="position:absolute;inset:0;width:100%;height:100%;border:0;z-index:2"></iframe>`); });
+
+  const ordem = ['Passaporte', 'Bíblia Linear', 'Guia de Inglês A1', 'Destrave Seu Inglês', 'Kit de Frases'];
+  const pagos = ordem.map(o => cards.find(c => c.tipo === 'pago' && c.titulo.indexOf(o) === 0)).filter(Boolean);
+  $('#gePagos').innerHTML = pagos.map(c => `<a class="cd" href="index.html?abrir=${encodeURIComponent(c.id)}"><img src="${esc(c.img)}" alt="" loading="lazy"><div><b>${esc(c.titulo)}</b><small>${esc(c.linha || '')}</small><span class="p">${esc((c.preco || '').replace(/,00$/, ''))}</span></div></a>`).join('');
+  const g = ['ebook-jogos', 'teste', 'prisma', 'centralprompts', 'professorai', 'grupoeom'].map(i => by[i]).filter(Boolean);
+  $('#geGratis').innerHTML = g.map(c => `<a class="cd" href="index.html?abrir=${encodeURIComponent(c.id)}"><span class="cad">${temLead() ? 'Liberado' : '🔒 Libere com nome e WhatsApp'}</span><img src="${esc(c.img || 'img/card-teste.webp')}" alt="" loading="lazy"><div><b>${esc(c.titulo)}</b><small>${esc(c.linha || '')}</small><span class="p">Grátis</span></div></a>`).join('');
+
+  const IC = { instagram: '<rect x="3" y="3" width="18" height="18" rx="5.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3"/>', youtube: '<path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.7 15V9l5.8 3z"/>', tiktok: '<path d="M16.6 3c.4 2.2 1.8 3.7 4 3.9v3.2a7.4 7.4 0 0 1-4-1.2v6.3A6.3 6.3 0 1 1 10.3 9v3.3a3 3 0 1 0 3 3V3z"/>', whatsapp: '<path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2s-1 .3-3.4-.7a11.7 11.7 0 0 1-4.6-4.1 5.2 5.2 0 0 1-1.1-2.8 3 3 0 0 1 1-2.2 1 1 0 0 1 .7-.3h.5c.2 0 .4 0 .6.5l.9 2.1a.6.6 0 0 1 0 .5l-.3.5-.4.5c-.2.1-.3.3-.1.6a8 8 0 0 0 1.5 1.8 7 7 0 0 0 2.1 1.3c.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/>' };
+  $('#redes').innerHTML = (H.redes || []).map(r => `<a href="${esc(r.url)}" target="_blank" rel="noopener" aria-label="${esc(r.tipo)}"><svg viewBox="0 0 24 24" aria-hidden="true">${IC[r.tipo] || ''}</svg></a>`).join('');
+})();
+</script>
+</body>
+</html>
