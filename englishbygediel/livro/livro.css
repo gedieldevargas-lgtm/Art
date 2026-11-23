@@ -159,3 +159,7 @@
 .lv-credito{margin-top:10px;font-size:10px;color:var(--lv-fg2);text-align:right}.lv-credito a{color:inherit}
 .lv-img.gen,.lv-img-p.gen,.lv-fc-img.gen{opacity:.55}
 .lv-alerta{background:color-mix(in srgb,#f59e0b 14%,transparent);border-left-color:#f59e0b}
+.lv-escuta{border:1px solid var(--lv-bd);border-radius:12px;padding:10px 12px;margin-top:8px;background:var(--lv-bg2)}
+.lv-escuta audio{width:100%;margin:4px 0}
+.lv-escuta .lv-b4{display:inline-block;font-size:12.5px;font-weight:700;color:var(--lv-ac);text-decoration:none;margin-top:4px}
+.lv-yt{position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#000;margin-bottom:6px}.lv-yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}

@@ -2113,7 +2113,8 @@ async function renderLesson(){
   var id=ytId(l.youtube_url);
   var livroId=livroDaAula(l);
   if(isOpen(l)){
-    var player='<div class="player-wrap"><iframe src="https://www.youtube-nocookie.com/embed/'+id+'?rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>';
+    var player=id?'<div class="player-wrap"><iframe src="https://www.youtube-nocookie.com/embed/'+id+'?rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>'
+      :'<div class="player-wrap" style="display:grid;place-items:center;text-align:center;color:#fff;background:radial-gradient(80% 80% at 70% 20%,#3b2a8f,#0d0b16);padding:20px"><div><div style="font-size:46px">🎧</div><div style="font-weight:800;font-size:18px">Aula de listening</div><div style="opacity:.8;font-size:13px;margin-top:4px">O áudio e os exercícios estão no livro da aula'+(livroId?' ao lado':'')+'.</div></div></div>';
     html+=livroId?'<div class="aula-grid"><div class="aula-video">'+player+'</div><aside class="aula-livro" id="aula-livro"></aside></div>':player;
   }else{
     var cov=lessonCover(l);
