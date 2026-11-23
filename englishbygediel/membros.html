@@ -2153,7 +2153,7 @@ function abrirLivroAula(id){
   if(!document.getElementById('livro-css')){var c=document.createElement('link');c.id='livro-css';c.rel='stylesheet';c.href='livro/livro.css?v=3';document.head.appendChild(c);}
   var semLivro=function(){var g=el.closest('.aula-grid');if(g){var vd=g.querySelector('.aula-video');g.parentNode.replaceChild(vd.firstChild,g);}};
   if(window.Livro)return window.Livro.abrir(el,id,semLivro);
-  var s=document.createElement('script');s.src='livro/livro.js?v=2';s.onload=function(){window.Livro.abrir(document.getElementById('aula-livro'),id,semLivro);};document.head.appendChild(s);
+  var s=document.createElement('script');s.src='livro/livro.js?v=3';s.onload=function(){window.Livro.abrir(document.getElementById('aula-livro'),id,semLivro);};document.head.appendChild(s);
 }
 function lessonNav(){
   var ls=_stLessons[_stCurMod.id]||[],i=ls.indexOf(_stCurLes);
@@ -2727,7 +2727,7 @@ document.getElementById('adm-les-modal').addEventListener('click',function(e){if
 <script src="membros-modo.js?v=2"></script>
 <script src="membros-tutorial.js?v=4"></script>
 <script src="membros-links.js?v=1"></script>
-<script src="voz.js?v=1"></script>
+<script src="voz.js?v=2"></script>
 <script src="membros-app.js?v=202611212700"></script>
 <script src="membros-editar.js?v=2"></script>
 <script src="playlist.js?v=2"></script>

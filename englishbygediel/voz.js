@@ -20,9 +20,10 @@
   }
   function set(name) { try { localStorage.setItem(KEY, name); } catch (e) {} }
   window.EBG_VOZ = { voice: voice, set: set, lista: function () { return en().sort(function (a, b) { return score(b) - score(a); }); } };
+  var ios = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent) && 'ontouchend' in document; /* no iOS escolher voz à mão pode deixar mudo: lá vale a voz do idioma */
   var orig = speechSynthesis.speak.bind(speechSynthesis);
   speechSynthesis.speak = function (u) {
-    try { if (u && (!u.lang || /^en/i.test(u.lang))) { var v = voice(); if (v) { u.voice = v; u.lang = v.lang; } } } catch (e) {}
+    try { if (!ios && u && (!u.lang || /^en/i.test(u.lang))) { var v = voice(); if (v) { u.voice = v; u.lang = v.lang; } } } catch (e) {}
     return orig(u);
   };
   try { speechSynthesis.getVoices(); } catch (e) {}

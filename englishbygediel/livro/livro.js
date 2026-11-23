@@ -49,6 +49,7 @@
   function acharVoz() {
     if (!('speechSynthesis' in window)) return;
     var vs = speechSynthesis.getVoices();
+    if (window.EBG_VOZ && EBG_VOZ.voice()) { voz = EBG_VOZ.voice(); return; }
     voz = vs.filter(function (v) { return /^en[-_]US/i.test(v.lang) && /google|samantha|natural|aria|jenny/i.test(v.name); })[0]
       || vs.filter(function (v) { return /^en[-_]US/i.test(v.lang); })[0]
       || vs.filter(function (v) { return /^en/i.test(v.lang); })[0] || null;
