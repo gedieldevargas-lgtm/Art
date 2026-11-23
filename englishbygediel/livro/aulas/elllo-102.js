@@ -1,0 +1,134 @@
+/* Listening C1 · Pet Peeves on the Bus (elllo.org) — exercícios do professor; gerado por livro/gerar/elllo.py */
+(window.LIVRO_AULAS = window.LIVRO_AULAS || {})['elllo-102'] = {
+ "id": "elllo-102",
+ "nivel": "Listening & Compreensão",
+ "unidade": 102,
+ "rotulo": "🎧 Listening · C1",
+ "titulo": "Pet Peeves on the Bus",
+ "subtitulo": "Tema: transporte · C1",
+ "semEbook": true,
+ "midiaPrincipal": {
+  "youtube": "",
+  "mp3": "https://elllo.org/Audio/A1301/1339-Jeremy-Bus.mp3",
+  "link": "https://elllo.org/english/1301/T1339-Jeremy-Bus.htm",
+  "credito": "ELLLO.org (Todd Beuckens)"
+ },
+ "revisar": [
+  {
+   "tipo": "vocab",
+   "titulo": "Expressões que aparecem na conversa",
+   "itens": [
+    [
+     "pet peeve",
+     "coisa que irrita"
+    ],
+    [
+     "get under my skin",
+     "me irritar"
+    ],
+    [
+     "make or break",
+     "decisivo"
+    ],
+    [
+     "common courtesy",
+     "educação básica"
+    ]
+   ]
+  }
+ ],
+ "exercicios": [
+  {
+   "id": "antes",
+   "tipo": "escolha",
+   "titulo": "Antes de ouvir: o que significa?",
+   "instrucao": "Conheça as expressões antes de dar play.",
+   "itens": [
+    {
+     "p": "\"pet peeve\" significa…",
+     "emoji": "",
+     "ops": [
+      "coisa que irrita",
+      "comodidade",
+      "não é meu forte"
+     ],
+     "c": 0
+    },
+    {
+     "p": "\"get under my skin\" significa…",
+     "emoji": "",
+     "ops": [
+      "de saco cheio",
+      "surgiu do nada",
+      "me irritar"
+     ],
+     "c": 2
+    },
+    {
+     "p": "\"make or break\" significa…",
+     "emoji": "",
+     "ops": [
+      "se locomover",
+      "decisivo",
+      "em movimento"
+     ],
+     "c": 1
+    },
+    {
+     "p": "\"common courtesy\" significa…",
+     "emoji": "",
+     "ops": [
+      "educação básica",
+      "alguns / poucos",
+      "senso de moda"
+     ],
+     "c": 0
+    }
+   ]
+  },
+  {
+   "id": "enquanto",
+   "tipo": "escolha",
+   "titulo": "Enquanto ouve",
+   "instrucao": "Dê play e responda enquanto escuta.",
+   "itens": [
+    {
+     "p": "Quem conversa nesta lição?",
+     "emoji": "",
+     "ops": [
+      "Abidemi, Jeremy",
+      "Erina, Mike",
+      "Lyndsay, Warren"
+     ],
+     "c": 0
+    },
+    {
+     "p": "De onde são os sotaques que você ouve?",
+     "emoji": "",
+     "ops": [
+      "Noruega, Canadá",
+      "EUA, Paquistão",
+      "Nigéria, Canadá"
+     ],
+     "c": 2
+    },
+    {
+     "p": "Sobre o que eles conversam?",
+     "emoji": "",
+     "ops": [
+      "filmes",
+      "transporte",
+      "datas comemorativas"
+     ],
+     "c": 1
+    }
+   ]
+  }
+ ],
+ "missao": {
+  "tarefa": "Ouça duas vezes: a 1ª só ouvindo, a 2ª acompanhando a transcrição no elllo.org. Depois fale 3 frases sobre: transporte.",
+  "falar": "pet peeve",
+  "frases": 3,
+  "exemplo": "pet peeve"
+ }
+};

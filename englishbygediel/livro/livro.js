@@ -294,7 +294,7 @@
   function enxugar(a) {
     if (a._enxuto) return; a._enxuto = true;
     var ex = a.exercicios.filter(function (e) { return e.tipo === 'pares' || e.tipo === 'escolha' || e.tipo === 'montar' || e.id === 'cenas'; });
-    var vistos = {}; ex = ex.filter(function (e) { var t = e.id === 'cenas' ? 'cenas' : e.tipo; if (vistos[t]) return false; vistos[t] = 1; return true; });
+    var vistos = {}; ex = ex.filter(function (e) { var t = (e.id === 'cenas' || e.id === 'antes' || e.id === 'enquanto') ? e.id : e.tipo; if (vistos[t]) return false; vistos[t] = 1; return true; });
     if (!vistos.pares) {
       var cs = cartoes(a).filter(function (c) { return c.en.split(' ').length <= 4 && c.pt.length <= 28; }).slice(0, 6);
       if (cs.length >= 4) ex.unshift({ id: 'jogo', tipo: 'pares', titulo: 'Jogo: ligue os pares', instrucao: 'Toque numa palavra em inglês e depois na tradução. Seja rápido!', itens: cs.map(function (c) { return { en: c.en.split(' / ')[0], pt: c.pt }; }) });
@@ -317,9 +317,18 @@
     var h = '<div class="lv" data-aula="' + esc(a.id) + '">' +
       '<div class="lv-head"><div><div class="lv-kick">📘 LIVRO DA AULA · ' + esc(a.rotulo || (a.nivel + ' · UNIT ' + a.unidade)).toUpperCase() + '</div>' +
       '<div class="lv-tit">' + esc(a.titulo) + ' <small>' + esc(a.subtitulo || '') + '</small></div></div>' +
-      '<a class="lv-baixar" href="' + esc(a.pdf ? a.pdf : BASE + 'ebook.html?u=' + a.id) + '" target="_blank" rel="noopener"' + (a.pdf ? ' download' : '') + '>⬇ Baixar e-book</a></div>' +
+      (a.semEbook ? '' : '<a class="lv-baixar" href="' + esc(a.pdf ? a.pdf : BASE + 'ebook.html?u=' + a.id) + '" target="_blank" rel="noopener"' + (a.pdf ? ' download' : '') + '>⬇ Baixar e-book</a>') + '</div>' +
       '<div class="lv-prog"><div class="lv-bar"><i style="width:' + Math.round(ok / tot * 100) + '%"></i></div><span>' + ok + '/' + tot + ' acertos</span></div>';
 
+    var MP = a.midiaPrincipal;
+    if (MP) {
+      var temVideoNaPagina = !!document.querySelector('.player-wrap iframe');
+      h += '<div class="lv-escuta">' +
+        (MP.youtube && !temVideoNaPagina ? '<div class="lv-yt"><iframe src="' + esc(MP.youtube) + '?rel=0" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe></div>' : '') +
+        (MP.mp3 && !(MP.youtube && temVideoNaPagina) ? '<div class="lv-bt">🎧 Áudio da conversa</div><audio controls preload="none" src="' + esc(MP.mp3) + '"></audio>' : '') +
+        (MP.link ? '<a class="lv-b4" href="' + esc(MP.link) + '" target="_blank" rel="noopener">📄 Ver a transcrição no elllo.org ↗</a>' : '') +
+        '<div class="lv-mini-info">Áudio/vídeo: ' + esc(MP.credito || 'elllo.org') + '</div></div>';
+    }
     h += '<details class="lv-sec" data-sec="revisar"' + (aberto === 'revisar' ? ' open' : '') + '><summary>🔁 Revisar a aula <em>toque para ouvir</em></summary><div class="lv-corpo">' + htmlRevisar(a) + '</div></details>';
     var cards = cartoes(a), frasesPron = frasesPronuncia(a);
     if (cards.length >= 3) h += '<details class="lv-sec" data-sec="cards"' + (aberto === 'cards' ? ' open' : '') + '><summary>🃏 Flashcards <em class="lv-cont">' + cards.length + ' cartões</em></summary><div class="lv-corpo" data-cards></div></details>';
