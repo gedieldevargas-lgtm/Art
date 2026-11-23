@@ -40,6 +40,7 @@ MAO = {'hi': '👋', 'hello': '👋', 'hey': '🙋', 'bye': '👋', 'thanks': '�
        'sun': '☀️', 'rain': '🌧️', 'snow': '❄️', 'wind': '💨', 'cloud': '☁️', 'hot': '🔥', 'cold': '🥶', 'summer': '☀️', 'winter': '❄️', 'spring': '🌸', 'fall': '🍂',
        'coffee': '☕', 'water': '💧', 'food': '🍽️', 'pizza': '🍕', 'breakfast': '🍳', 'lunch': '🥗', 'dinner': '🍝', 'shower': '🚿', 'bed': '🛏️', 'sleep': '😴',
        'run': '🏃', 'walk': '🚶', 'swim': '🏊', 'drive': '🚗', 'dance': '💃', 'sing': '🎤', 'cry': '😢', 'eat': '🍽️', 'drink': '🥤', 'study': '📚',
+       'one': '1️⃣', 'two': '2️⃣', 'three': '3️⃣', 'four': '4️⃣', 'five': '5️⃣', 'six': '6️⃣', 'seven': '7️⃣', 'eight': '8️⃣', 'nine': '9️⃣', 'ten': '🔟',
        'goal': '🎯', 'plan': '🗺️', 'routine': '🔁', 'habit': '🔁', 'level': '📶', 'question': '❓', 'answer': '💡', 'idea': '💡', 'money': '💰',
        'price': '🏷️', 'time': '🕐', 'today': '📅', 'tomorrow': '📅', 'yesterday': '📅', 'morning': '🌅', 'afternoon': '🌤️', 'evening': '🌙', 'night': '🌙'}
 
@@ -80,6 +81,16 @@ for a in aulas:
             k = re.sub(r"[^a-z0-9' ]+", ' ', it[0].lower().replace('’', "'")).strip()
             k = re.sub(r'\s+', ' ', k)
             mapa[k] = 'img/om/' + h + '.svg'; com += 1
+# ícone de cada módulo: usado quando a palavra não tem ilustração segura (assim todo card tem imagem, no mesmo estilo)
+MODS = {'Orientação': '🌟', 'Diagnóstico & Personalização': '🎯', 'Sons & Pronúncia': '🔊', 'Vocabulário Essencial': '📗', 'Gramática A1': '📘', 'Gramática A2–B1': '📙',
+        'Conversação A1–A2': '🗣️', 'Conversação B1': '💬', 'Listening & Compreensão': '🎧', 'Phrasal Verbs': '🧩', 'Idioms & Expressões': '💡', 'Inglês pela Música': '🎵',
+        'Inglês por Séries': '🎬', 'Business English': '💼', 'Escrita em Inglês': '✏️', 'Level 1': '📘', 'Level 2': '📙', 'Level 3': '📕', '_': '📖'}
+mods = {}
+for nome, e in MODS.items():
+    for h in (hexdo(e), '-'.join('%04X' % ord(c) for c in e)):
+        if os.path.exists(os.path.join(SVG, h + '.svg')):
+            shutil.copyfile(os.path.join(SVG, h + '.svg'), os.path.join(dest, h + '.svg')); mods[nome] = 'img/om/' + h + '.svg'; break
 with open(os.path.join(LIVRO, 'imagens.js'), 'w', encoding='utf-8') as f:
-    f.write('/* Ilustrações OpenMoji (openmoji.org, CC BY-SA 4.0) para o vocabulário. Gerado por livro/gerar/imagens.py */\nwindow.LIVRO_IMAGENS = ' + json.dumps(mapa, ensure_ascii=False, separators=(',', ':')) + ';\n')
+    f.write('/* Ilustrações OpenMoji (openmoji.org, CC BY-SA 4.0) para o vocabulário. Gerado por livro/gerar/imagens.py */\nwindow.LIVRO_IMAGENS = ' + json.dumps(mapa, ensure_ascii=False, separators=(',', ':')) + ';\n'
+            'window.LIVRO_IMAGENS_MODULO = ' + json.dumps(mods, ensure_ascii=False, separators=(',', ':')) + ';\n')
 print('itens', total, 'com imagem', com, 'arquivos', len(os.listdir(dest)))
