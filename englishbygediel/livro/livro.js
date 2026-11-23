@@ -198,7 +198,8 @@
   }
 
   function htmlRevisar(a) {
-    var h = '';
+    var h = '', av = (window.LIVRO_DICAS || {})[a.id];
+    if (av) h += '<div class="lv-dica lv-alerta">⚠️ <b>Atenção:</b> ' + esc(av) + '</div>';
     a.revisar.forEach(function (b) {
       if (b.tipo === 'vocab') {
         h += '<div class="lv-bloco"><div class="lv-bt">' + esc(b.titulo) + '</div><div class="lv-vocab' + (b.emoji ? ' emo' : '') + '">';
@@ -285,8 +286,9 @@
   }
   function imgDe(en, cls) {
     var M = window.LIVRO_IMAGENS || {}, k = chaveG(en);
-    var src = M[k] || M[chaveG(String(en).split(' / ')[0])];
-    return src ? '<img class="' + (cls || 'lv-img') + '" src="' + BASE + src + '" alt="" loading="lazy">' : '';
+    var src = M[k] || M[chaveG(String(en).split(' / ')[0])], generico = false;
+    if (!src) { var MM = window.LIVRO_IMAGENS_MODULO || {}; src = MM[imgDe.modulo] || MM._; generico = true; }
+    return src ? '<img class="' + (cls || 'lv-img') + (generico ? ' gen' : '') + '" src="' + BASE + src + '" alt="" loading="lazy">' : '';
   }
   // deixa a aula enxuta: jogo, cenas, 1 quiz e "monte a frase" (sem ditado, sem tradução escrita, sem redação longa)
   function enxugar(a) {
@@ -309,7 +311,7 @@
   }
 
   function desenhar(el, a) {
-    juntarMidia(a); enxugar(a);
+    juntarMidia(a); enxugar(a); imgDe.modulo = a.nivel;
     var st = ler(a.id), tot = totalItens(a), ok = acertos(a, st);
     var aberto = st.aberto || 'revisar';
     var h = '<div class="lv" data-aula="' + esc(a.id) + '">' +
@@ -576,6 +578,7 @@
   }
 
   function carregar(id, cb) {
+    if (!window.LIVRO_DICAS && !carregar._d) { carregar._d = 1; var dd = document.createElement('script'); dd.src = BASE + 'dicas.js?v=1'; dd.onload = dd.onerror = function () { carregar(id, cb); }; document.head.appendChild(dd); return; }
     if (!window.LIVRO_IMAGENS && !carregar._i) { carregar._i = 1; var ii = document.createElement('script'); ii.src = BASE + 'imagens.js?v=1'; ii.onload = ii.onerror = function () { carregar(id, cb); }; document.head.appendChild(ii); return; }
     if (!window.LIVRO_GLOSSARIO && !carregar._g) { carregar._g = 1; var gg = document.createElement('script'); gg.src = BASE + 'glossario.js?v=1'; gg.onload = gg.onerror = function () { carregar(id, cb); }; document.head.appendChild(gg); return; }
     if (!window.LIVRO_MIDIA && !carregar._m) { carregar._m = 1; var m = document.createElement('script'); m.src = BASE + 'midia.js?v=1'; m.onload = m.onerror = function () { carregar(id, cb); }; document.head.appendChild(m); return; }
