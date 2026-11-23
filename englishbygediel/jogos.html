@@ -339,7 +339,11 @@ function streak(){let n=0;const d=new Date();for(;;){const k=d.toISOString().sli
 function best(id,score){const b=ST.best[id]||0;if(score>b){ST.best[id]=score;save();return true}return false}
 function played(id){ST.plays[id]=(ST.plays[id]||0)+1;save()}
 /* voz grátis do navegador */
-let VOICE=null;function loadV(){const vs=speechSynthesis.getVoices();VOICE=vs.find(v=>/en-US/i.test(v.lang)&&/Google|Samantha|Aria|Jenny/i.test(v.name))||vs.find(v=>/en-US/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null}
+let VOICE=null;
+function enVoices(){try{return speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang))}catch(e){return[]}}
+function vScore(v){const n=v.name;let s=0;if(/natural|neural|online|premium|enhanced/i.test(n))s+=6;if(/Google (US|UK)|Samantha|Ava|Allison|Zoe|Aria|Jenny|Guy|Daniel|Karen|Moira|Serena/i.test(n))s+=3;if(/en[-_]US/i.test(v.lang))s+=2;if(/compact|espeak|fred|albert|bad |bahh|bells|boing|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|ralph|kathy/i.test(n))s-=8;return s}
+function loadV(){const vs=enVoices();VOICE=(ST&&ST.voice&&vs.find(v=>v.name===ST.voice))||vs.slice().sort((x,y)=>vScore(y)-vScore(x))[0]||null;const sel=document.getElementById('vsel');if(sel)fillV(sel)}
+function fillV(sel){const vs=enVoices().sort((x,y)=>vScore(y)-vScore(x));sel.innerHTML=vs.length?vs.map(v=>`<option value="${esc(v.name)}" ${VOICE&&VOICE.name===v.name?'selected':''}>${esc(v.name.replace(/^(Microsoft|Google) /,'$1 · '))} (${v.lang})</option>`).join(''):'<option>nenhuma voz em inglês neste aparelho</option>'}
 if('speechSynthesis' in window){loadV();speechSynthesis.onvoiceschanged=loadV}
 function say(t,rate){if(!('speechSynthesis' in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-US';if(VOICE)u.voice=VOICE;u.rate=rate||.92;speechSynthesis.speak(u)}
 const spk=t=>`<button class="btn sm" data-say="${esc(t)}" title="Ouvir">🔊</button>`;
@@ -899,7 +903,8 @@ function gquiz(g){const qs=getQs(ST.lvl,10);let i=0,score=0,run=0,missed=[];
 /* ---------- MENU: seletor de nível e som ---------- */
 const _menu=menu;
 menu=function(){_menu();const k=A().querySelector('.kpis');if(!k)return;
- k.insertAdjacentHTML('afterend',`<div class="lvbar"><div class="row sp"><span class="mono">seu nível de inglês</span><button class="btn sm" id="mut">${ST.mute?'🔇 sons desligados':'🔊 sons ligados'}</button></div><div class="lvseg">${[1,2,3].map(l=>`<button class="${ST.lvl===l?'on':''}" data-lv="${l}"><span>${LV[l].e}</span><b>${LV[l].n}</b><small>${LV[l].c}</small></button>`).join('')}</div><p class="mut sm" style="margin:6px 0 0">O nível muda as palavras, as frases, os quizzes e se a tradução aparece sozinha nas cartas.</p></div>`);
+ k.insertAdjacentHTML('afterend',`<div class="lvbar"><div class="row sp"><span class="mono">seu nível de inglês</span><button class="btn sm" id="mut">${ST.mute?'🔇 sons desligados':'🔊 sons ligados'}</button></div><div class="lvseg">${[1,2,3].map(l=>`<button class="${ST.lvl===l?'on':''}" data-lv="${l}"><span>${LV[l].e}</span><b>${LV[l].n}</b><small>${LV[l].c}</small></button>`).join('')}</div><p class="mut sm" style="margin:6px 0 0">O nível muda as palavras, as frases, os quizzes e se a tradução aparece sozinha nas cartas.</p><div class="row" style="margin-top:12px;gap:8px;flex-wrap:nowrap"><span class="mono" style="flex:none">🗣 voz</span><select id="vsel" style="flex:1;min-width:0;padding:10px;border-radius:12px;background:var(--glass2);color:var(--tx);border:1px solid var(--bd)"></select><button class="btn sm" id="vtest" style="flex:none">▶ testar</button></div><p class="mut sm" style="margin:6px 0 0">Não gostou da voz? Escolha outra. Vozes "Natural" ou "Neural" costumam soar bem melhores. O que aparece depende do seu aparelho.</p></div>`);
+ {const sel=$('#vsel');if(sel){fillV(sel);sel.onchange=()=>{const v=enVoices().find(x=>x.name===sel.value);if(v){VOICE=v;ST.voice=v.name;save();say('Hello! This is how I sound. Ready to practice English?')}};$('#vtest').onclick=()=>say('Hello! This is how I sound. Ready to practice English?')}}
  A().querySelectorAll('[data-lv]').forEach(b=>b.onclick=()=>{ST.lvl=+b.dataset.lv;save();applyLevel();sfx('ok');menu()});
  $('#mut').onclick=()=>{ST.mute=!ST.mute;save();menu();sfx('pop')}};
 
