@@ -149,3 +149,11 @@
 .lv-nota{font-size:28px;font-weight:800;line-height:1}
 .lv-pron-alvo{margin-top:4px;font-size:14px;font-weight:700}
 .pw-ok{color:var(--lv-ok)}.pw-erro{color:var(--lv-err);text-decoration:underline wavy}
+
+/* ilustrações do vocabulário (OpenMoji) */
+.lv-img{width:34px;height:34px;margin-bottom:2px}
+.lv-img-p{width:24px;height:24px;margin-right:6px;flex:none}
+.lv-fc-img{width:72px;height:72px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.2));background:rgba(255,255,255,.92);border-radius:50%;padding:6px}
+.lv-missao{margin-top:10px}
+.lv-vocab{grid-template-columns:repeat(auto-fill,minmax(118px,1fr))}
+.lv-credito{margin-top:10px;font-size:10px;color:var(--lv-fg2);text-align:right}.lv-credito a{color:inherit}
