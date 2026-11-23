@@ -93,7 +93,7 @@
       ['fim', 'Contagem até (AAAA-MM-DDTHH:MM, ex.: 2026-11-30T23:59)'], ['textoFim', 'Texto quando o prazo acabar'], ['texto', 'Texto da ficha', 'area'],
       ['foto', 'Foto do cartão flutuante', 'img'], ['img', 'Imagem da ficha (arte completa)', 'img'], ['link', 'Link do botão (checkout, formulário…)', 'url'],
       ['botao', 'Texto do botão'], ['mensagem', 'Mensagem do WhatsApp (se não tiver link)', 'area']] },
-    { k: 'aplicacao', t: 'Chat de aplicação (desligado na página inicial)', d: 'O chat saiu da página inicial no funil; "Falar com o Gediel" vai direto pro WhatsApp abaixo.', campos: [
+    { k: 'aplicacao', t: 'Captador (perguntas + indicação do plano)', d: 'Abre sozinho, por cima da tela, toda vez que a pessoa liga um modo no anel (nome e WhatsApp já vêm da folha de contato, não repete). No fim, indica um plano (Mission no Modo Fé, Grátis pra quem disse "ainda não sei" sobre investir, Programa Inteligente pro resto) e manda as respostas organizadas pro WhatsApp. Tem um botão "Pular" pra quem não quiser responder.', campos: [
       ['rotulo', 'Etiqueta'], ['titulo', 'Título'], ['destaque', 'Final do título (em destaque)'], ['texto', 'Texto', 'area'], ['foto', 'Foto no chat', 'img'],
       ['whatsapp', 'WhatsApp que recebe (55 + DDD + número)']] },
     { k: 'rodape', t: 'Rodapé', campos: [['nome', 'Nome'], ['linha', 'Linha de baixo']] }

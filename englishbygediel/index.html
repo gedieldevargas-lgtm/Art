@@ -570,6 +570,25 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
 .embutido.trancado .emb-capa{display:grid;place-items:center;gap:12px;min-height:260px;padding:24px;text-align:center;background:linear-gradient(160deg,#16294b,#0f1d36);color:#d3dcea}
 .embutido.trancado iframe{display:none}
 .emb-capa .b1{padding:14px 20px!important;font-size:15px!important;border-radius:14px!important}
+
+/* captador: o chat de perguntas, agora aberto sozinho a cada modo escolhido, numa camada por cima */
+.captador{position:fixed;inset:0;z-index:55;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.captador.on{opacity:1;pointer-events:auto}
+.captador-fundo{position:absolute;inset:0;background:rgba(4,8,18,.74);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.captador-caixa{position:relative;width:100%;max-width:760px;max-height:94vh;overflow-y:auto;background:var(--bg2);border:1px solid var(--linha);border-radius:26px 26px 0 0;padding:20px 18px max(20px,env(safe-area-inset-bottom));transform:translateY(24px);transition:transform .3s}
+.captador.on .captador-caixa{transform:none}
+@media (min-width:820px){.captador{align-items:center}.captador-caixa{border-radius:26px;padding:28px}}
+.captador-pular{display:block;margin:0 0 10px auto;min-height:36px;padding:0 14px;border-radius:99px;background:rgba(255,255,255,.08);color:var(--dim);font-size:12.5px;font-weight:600}
+.captador-pular:hover{color:#fff;background:rgba(255,255,255,.15)}
+.captador .chat{margin-top:0}
+/* cartão de indicação, ao fim do captador */
+.indicacao{margin-top:14px;padding:16px;border-radius:18px;background:linear-gradient(165deg,rgba(25,42,76,.95),rgba(11,21,41,.95));border:1px solid rgba(137,156,255,.5);box-shadow:0 0 0 1px rgba(137,156,255,.3),0 20px 40px -20px rgba(64,80,255,.5)}
+.indicacao small{display:block;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#9db4ff;margin-bottom:6px}
+.indicacao b{display:block;font-family:'Advercase','Instrument Serif',serif;font-size:22px;color:#fff;font-weight:400}
+.indicacao > span{display:block;font-size:12.5px;color:var(--dim);margin-top:2px}
+.ind-preco{margin:10px 0;font-size:24px;font-weight:800;color:#fff}
+.ind-preco small{display:inline;font-size:13px;font-weight:600;color:var(--dim);text-transform:none;letter-spacing:0;margin-left:4px}
+.ind-btn{display:block;text-align:center;padding:14px;border-radius:14px;background:linear-gradient(135deg,#9a8bff,#5b6cff);color:#fff;font-weight:700;font-size:15px}
 /* fileiras andam sozinhas: sem encaixe pra não travar o movimento */
 .trilho{scroll-snap-type:none!important}
 </style>
@@ -725,20 +744,26 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
     <div class="trilho cena" id="trilhoExtras"></div>
   </section>
 
-  <!-- chat de aplicação: saiu da página inicial (o Programa vende pelo checkout; falar com o Gediel vai pro WhatsApp) -->
-  <section class="secao chat-wrap" id="aplicar" hidden>
-    <div>
-      <span class="rotulo" id="aRotulo"></span>
-      <h2 class="serif" id="aTitulo" style="font-size:clamp(34px,5vw,52px);line-height:1"></h2>
-      <p id="aTexto" style="margin-top:10px;max-width:42ch"></p>
+  <!-- captador: abre sozinho a cada modo escolhido (nome e WhatsApp já vêm da folha de contato) -->
+  <div class="captador" id="captadorCamada" hidden>
+    <div class="captador-fundo" data-captador-fechar></div>
+    <div class="captador-caixa" role="dialog" aria-modal="true" aria-labelledby="aTitulo">
+      <button class="captador-pular" type="button" data-captador-fechar>Pular, só quero ver →</button>
+      <section class="secao chat-wrap" id="aplicar">
+        <div>
+          <span class="rotulo" id="aRotulo"></span>
+          <h2 class="serif" id="aTitulo" style="font-size:clamp(28px,5vw,44px);line-height:1"></h2>
+          <p id="aTexto" style="margin-top:10px;max-width:42ch"></p>
+        </div>
+        <div class="chat">
+          <div class="chat-topo"><img id="aFoto" src="img/gediel-brooklyn.webp" alt=""><div><strong id="aNome">Gediel</strong><small>● online agora</small></div></div>
+          <div class="chat-barra"><i id="barra"></i></div>
+          <div class="msgs" id="msgs" aria-live="polite"></div>
+          <div class="resp" id="resp"></div>
+        </div>
+      </section>
     </div>
-    <div class="chat">
-      <div class="chat-topo"><img id="aFoto" src="img/gediel-brooklyn.webp" alt=""><div><strong id="aNome">Gediel</strong><small>● online agora</small></div></div>
-      <div class="chat-barra"><i id="barra"></i></div>
-      <div class="msgs" id="msgs" aria-live="polite"></div>
-      <div class="resp" id="resp"></div>
-    </div>
-  </section>
+  </div>
 
   <!-- 10. rodapé -->
   <footer class="rodape-site" id="rodape">
@@ -1576,9 +1601,10 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
   $$('.aparece').forEach(el => io ? io.observe(el) : el.classList.add('ok'));
 
   /* CHAT DE APLICAÇÃO: as perguntas da landing "Seu inglês precisa caber na sua vida", uma por vez */
+  const leadSalvo = () => { try { return JSON.parse(localStorage.getItem('ebg:lead') || 'null'); } catch (e) { return null; } };
   const P = [
-    { id: 'nome', t: 'Oi! Eu sou o Gediel. 👋\nAntes de tudo: como você se chama?', tipo: 'texto', ph: 'Seu nome completo' },
-    { id: 'wpp', t: 'Prazer, {nome}! Qual o seu WhatsApp?', tipo: 'tel', ph: '(55) 99999-9999' },
+    { id: 'nome', t: 'Oi! Eu sou o Gediel. 👋\nAntes de tudo: como você se chama?', tipo: 'texto', ph: 'Seu nome completo', se: () => !leadSalvo() },
+    { id: 'wpp', t: 'Prazer, {nome}! Qual o seu WhatsApp?', tipo: 'tel', ph: '(55) 99999-9999', se: () => !leadSalvo() },
     { id: 'ig', t: 'Tem Instagram? (se não quiser, é só pular)', tipo: 'texto', ph: '@seuperfil', pular: true },
     { id: 'modo', t: 'Você quer participar como?', ops: ['Individual', 'Em casal'] },
     { id: 'parcNome', t: 'Que legal! Qual o nome do(a) seu/sua parceiro(a)?', tipo: 'texto', ph: 'Nome do(a) parceiro(a)', se: r => r.modo === 'Em casal' },
@@ -1625,22 +1651,62 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
     }, reduz ? 0 : 650);
   }
   function responder(v) { DADOS.evento('chat', 'passo', P[passo].id, 'aplicar', passo + 1); R[P[passo].id] = v; fala(v, true); proxima(); }
-  function fim() {
+  // qual plano indicar: Modo Fé puxa pro Mission; quem disse "ainda não sei" sobre investir vê o Grátis primeiro; o resto, o Programa Inteligente
+  function planoIndicado() {
+    const pl = (H.planos || []).filter(p => p && p.ativo !== false && p.nome);
+    const acha = n => pl.find(p => nrm(p.nome) === nrm(n));
+    if (modo && modo.id === 'fe') return acha('Mission') || acha('Inteligente') || pl.find(p => p.destaque) || pl[0];
+    if (R.inv === 'Ainda não sei') return acha('Grátis') || pl[0];
+    return acha('Inteligente') || pl.find(p => p.destaque) || pl[0];
+  }
+  function cartaoIndicacao() {
+    const pl = planoIndicado(); if (!pl) return '';
+    const hoje = new Date().toISOString().slice(0, 10);
+    const promo = !!(pl.promo && pl.promoAte && hoje <= pl.promoAte);
+    const preco = promo ? pl.promo : pl.preco;
+    const nome = /^inteligente$/i.test(String(pl.nome).trim()) ? 'Programa Inteligente' : pl.nome;
+    const u = https(pl.link);
+    const acao = pl.acao === 'login' ? `<button class="ind-btn" type="button" data-login>${esc(pl.botao || 'Entrar')}</button>`
+      : u ? `<a class="ind-btn" href="${esc(u)}" target="_blank" rel="noopener" data-checkout="${esc(nrm(pl.nome))}">${esc(pl.botao || 'Quero esse plano')}</a>`
+      : `<a class="ind-btn" href="${esc(whats('Oi Gediel! Quero saber do plano ' + pl.nome + '.'))}" target="_blank" rel="noopener">${esc(pl.botao || 'Quero esse plano')}</a>`;
+    return `<div class="indicacao"><small>O caminho recomendado pra você</small><b>${esc(nome)}</b>${pl.sub ? `<span>${esc(pl.sub)}</span>` : ''}<div class="ind-preco">${pl.acao === 'login' || !preco ? '' : partePreco(promo ? pl.promo : pl.preco)}</div>${acao}</div>`;
+  }
+  function fim(reabertura) {
     DADOS.evento('chat', 'concluiu', R.nome);
-    DADOS.lead('leads_programa', { nome: R.nome, whatsapp: R.wpp, instagram: R.ig === '—' ? null : R.ig, modalidade: R.modo, parceiro_nome: R.parcNome || null, parceiro_nivel: R.parcNivel || null,
-      nivel: R.nivel, dificuldades: R.dif, objetivos: R.obj, tempo: R.tempo, porque: R.porque, investimento: R.inv });
+    if (!reabertura) {
+      DADOS.lead('leads_programa', { nome: R.nome, whatsapp: R.wpp, instagram: R.ig === '—' ? null : R.ig, modalidade: R.modo, parceiro_nome: R.parcNome || null, parceiro_nivel: R.parcNivel || null,
+        nivel: R.nivel, dificuldades: R.dif, objetivos: R.obj, tempo: R.tempo, porque: R.porque, investimento: R.inv });
+      try { sessionStorage.setItem('ebg:captadorR', JSON.stringify(R)); } catch (e) {}
+    }
     $('#barra').style.width = '100%';
-    fala(`Perfeito, ${(R.nome || '').split(' ')[0]}! Suas respostas estão prontas. Toque no botão e elas chegam organizadas no meu WhatsApp. 🙌`);
+    fala(reabertura ? `Pro ${modo ? modo.nome : 'seu modo'}, baseado no que você me contou, o caminho é esse:` : `Perfeito, ${(R.nome || '').split(' ')[0]}! Suas respostas estão prontas. Toque no botão e elas chegam organizadas no meu WhatsApp. 🙌`);
     const texto = ['Olá, Gediel! 👋', 'Fiz a aplicação pelo Hub e quero entender qual o melhor caminho pra mim.', '',
       '👤 Nome: ' + R.nome, '📱 WhatsApp: ' + R.wpp, '📸 Instagram: ' + (R.ig || '—'), '',
       '👥 Modalidade: ' + R.modo + (R.modo === 'Em casal' ? `\n❤️ Parceiro(a): ${R.parcNome}\n🎓 Nível parceiro(a): ${R.parcNivel}` : ''), '',
       '🇺🇸 Inglês hoje: ' + R.nivel, '😣 Dificuldades: ' + R.dif, '🎯 Objetivos: ' + R.obj, '⏰ Tempo disponível: ' + R.tempo, '',
       '🔥 Por que agora:', R.porque, '', '💰 Interesse em acompanhamento: ' + R.inv].join('\n');
-    resp.innerHTML = `<a class="enviar grande" style="text-align:center" href="${esc(whats(texto))}" target="_blank" rel="noopener">Enviar no WhatsApp →</a>`;
+    resp.innerHTML = `${cartaoIndicacao()}${R.wpp ? `<a class="enviar grande" style="text-align:center;margin-top:10px" href="${esc(whats(texto))}" target="_blank" rel="noopener">Enviar no WhatsApp →</a>` : ''}`;
   }
-  // o chat começa quando aparece na tela
-  const chatIO = 'IntersectionObserver' in window ? new IntersectionObserver(es => { if (es[0].isIntersecting && passo < 0) { proxima(); chatIO.disconnect(); } }, { threshold: .3 }) : null;
-  chatIO ? chatIO.observe($('.chat')) : proxima();
+  // abre sozinho a cada modo escolhido: nome/WhatsApp já vêm da folha de contato; quem já respondeu nesta visita vê direto a indicação, adaptada ao novo modo
+  function abrirCaptador() {
+    const cam = $('#captadorCamada'); if (!cam) return;
+    const ls = leadSalvo(); if (ls) { R.nome = R.nome || ls.nome; R.wpp = R.wpp || ls.whatsapp; }
+    cam.hidden = false; requestAnimationFrame(() => cam.classList.add('on'));
+    document.body.style.overflow = 'hidden';
+    DADOS.evento('captador', 'abriu', modo ? modo.nome : '');
+    let salvo = null; try { salvo = JSON.parse(sessionStorage.getItem('ebg:captadorR') || 'null'); } catch (e) {}
+    if (salvo) { Object.assign(R, salvo); msgs.innerHTML = ''; resp.innerHTML = ''; fim(true); }
+    else if (passo < 0) proxima();
+    // já está respondendo (passo no meio): só reabre de onde parou, sem repetir nada
+  }
+  function fecharCaptador() {
+    const cam = $('#captadorCamada'); if (!cam || cam.hidden) return;
+    cam.classList.remove('on');
+    setTimeout(() => { cam.hidden = true; }, 320);
+    if (!document.body.classList.contains('aberta') && $('#loja').hidden) document.body.style.overflow = '';
+  }
+  document.addEventListener('click', e => { if (e.target.closest('[data-captador-fechar]')) fecharCaptador(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && !$('#captadorCamada').hidden) fecharCaptador(); });
 
   /* ENTRADA: os modos giram em volta do Gediel (como na landing). Arraste pra girar, toque pra escolher. */
   const modos = (H.modos || []).filter(m => m.ativo !== false);
@@ -1723,6 +1789,7 @@ body.entrando .mara{display:none}   /* na abertura (escolher o modo) o cartão d
     filtro = 'Tudo'; desenhar();
     $('#entrada').classList.add('sai'); document.body.style.overflow = '';
     scrollTo(0, 0); setTimeout(mover, 50);
+    setTimeout(abrirCaptador, 450);
   }
   $('#ligar').addEventListener('click', () => {
     const m = escolhido || modos[0];
