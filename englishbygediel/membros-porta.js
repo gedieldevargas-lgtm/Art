@@ -29,7 +29,7 @@
   document.head.appendChild(css);
 
   var BOOK = '<svg viewBox="0 0 120 120" aria-hidden="true"><path d="M60 34c-9-6-22-8-38-6v62c16-2 29 0 38 6 9-6 22-8 38-6V28c-16-2-29 0-38 6z" fill="none" stroke="#d4b25c" stroke-width="4" stroke-linejoin="round"/><path d="M60 34v62" stroke="#d4b25c" stroke-width="4"/><path d="M32 46c7-1 14 0 21 3M32 58c7-1 14 0 21 3M32 70c7-1 14 0 21 3M88 46c-7-1-14 0-21 3M88 58c-7-1-14 0-21 3M88 70c-7-1-14 0-21 3" stroke="#f3e2a8" stroke-width="3" stroke-linecap="round" fill="none"/><path d="M60 6v20M50 14h20" stroke="#f3e2a8" stroke-width="5" stroke-linecap="round"/></svg>';
-  var AREA = '<svg viewBox="0 0 120 120" aria-hidden="true"><rect x="22" y="78" width="76" height="20" rx="4" fill="none" stroke="#d4b25c" stroke-width="4"/><rect x="28" y="52" width="70" height="20" rx="4" fill="none" stroke="#d4b25c" stroke-width="4" transform="rotate(-4 63 62)"/><rect x="24" y="26" width="72" height="20" rx="4" fill="none" stroke="#f3e2a8" stroke-width="4" transform="rotate(3 60 36)"/><path d="M40 88h40M44 62h38M42 36h38" stroke="#f3e2a8" stroke-width="3" stroke-linecap="round"/></svg>';
+  var AREA = '<svg viewBox="0 0 120 120" aria-hidden="true"><g transform="translate(0,-11)"><rect x="22" y="78" width="76" height="20" rx="4" fill="none" stroke="#d4b25c" stroke-width="4"/><rect x="28" y="52" width="70" height="20" rx="4" fill="none" stroke="#d4b25c" stroke-width="4" transform="rotate(-4 63 62)"/><rect x="24" y="26" width="72" height="20" rx="4" fill="none" stroke="#f3e2a8" stroke-width="4" transform="rotate(3 60 36)"/><path d="M40 88h40M44 62h38M42 36h38" stroke="#f3e2a8" stroke-width="3" stroke-linecap="round"/></g></svg>';
 
   var ov = document.createElement('div');
   ov.id = 'mi-porta';
