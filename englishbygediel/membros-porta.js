@@ -82,7 +82,7 @@
     '.mi-bib .bl{position:absolute;top:50%;right:12px;transform:translateY(-50%);font-size:14px;opacity:.9}';
   function temBiblia() {
     var s = S();
-    if (!s.ok || s.admin || window._isAdmin || s.programa || s.tudo) return true;
+    if (!s.ok || s.admin || window._isAdmin) return true;   // só assinante do EOM (e admin) abre a Bíblia
     return (s.compras || []).some(function (c) { return /english on mission|mission|eom/i.test(c.produto || ''); });
   }
   function botaoMenu() {
