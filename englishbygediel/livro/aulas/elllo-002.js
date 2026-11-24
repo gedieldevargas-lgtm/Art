@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · A1",
  "titulo": "Likes and Favorites",
  "subtitulo": "Gramática: Likes and Favorites · A1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-002.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A1) sobre: gostos.",
+   "Praticar o ponto de gramática: Likes and Favorites.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Likes and Favorites",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Likes and Favorites"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Natalie, Todd",
+      "Reino Unido, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre gostos"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/7STtfJar73c",
   "mp3": "https://elllo.org/Audio/AGTK/A1-03-NatTodd-Farorites.mp3",
@@ -106,9 +147,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Angela, Todd",
+      "Julia, Todd",
       "Natalie, Todd",
-      "Mari, Ron"
+      "Aimee, Paul"
      ],
      "c": 1
     },
@@ -117,8 +158,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido, EUA",
-      "Reino Unido, Chile",
-      "Nova Zelândia, EUA"
+      "Nova Zelândia, EUA",
+      "Reino Unido"
      ],
      "c": 0
     },
@@ -126,8 +167,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "alfândega",
-      "choque cultural",
+      "lazer",
+      "idiomas e países",
       "gostos"
      ],
      "c": 2

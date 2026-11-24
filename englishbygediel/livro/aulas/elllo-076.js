@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B2",
  "titulo": "Tips for Learning on TV",
  "subtitulo": "Tema: aprender inglês · B2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-076.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B2) sobre: aprender inglês.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Tips for Learning on T",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "first of all",
+      "subtitle",
+      "closed caption",
+      "follow along"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Hana, Ben",
+      "Japão, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre aprender inglês"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/RS4dnS0PFKQ",
   "mp3": "",
@@ -48,8 +92,8 @@
      "p": "\"first of all\" significa…",
      "emoji": "",
      "ops": [
-      "aprender / pegar",
-      "é o pior",
+      "rabeca / violino",
+      "acompanhar",
       "antes de tudo"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"subtitle\" significa…",
      "emoji": "",
      "ops": [
-      "pagar a conta",
+      "não muito de",
       "legenda",
-      "vacinas antirrábicas"
+      "também (em negativas)"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "legenda oculta (CC)",
-      "emissões de carbono",
-      "vale-tudo"
+      "hospedagem",
+      "assim de cabeça"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"follow along\" significa…",
      "emoji": "",
      "ops": [
-      "algo importante",
-      "um nerd / bobão",
+      "trabalhadores por contrato (servidão)",
+      "montanhoso",
       "acompanhar"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Meg, Todd",
-      "Greg, Todd",
+      "Mari, Ron",
+      "Aimee, Todd",
       "Hana, Ben"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Jamaica, Reino Unido",
+      "Reino Unido, Itália",
       "Japão, EUA",
-      "Austrália, EUA"
+      "Nigéria, Reino Unido"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "aprender inglês",
-      "preços",
-      "humor"
+      "humor",
+      "cores"
      ],
      "c": 0
     }

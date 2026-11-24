@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C2",
  "titulo": "Organ Donation",
  "subtitulo": "Tema: ética · C2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-120.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C2) sobre: ética.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Organ Donation",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "controversial aspects",
+      "relating back",
+      "give permission",
+      "that's pretty deep"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Greg, Todd",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre ética"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A0951/985-Greg-Organs.mp3",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "aspectos polêmicos",
-      "cru",
-      "não nascemos um para o outro"
+      "reconhecível",
+      "faixa de preço"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"relating back\" significa…",
      "emoji": "",
      "ops": [
-      "não suporto",
-      "perfeito",
+      "só para esclarecer",
+      "sociável",
       "voltando a"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"give permission\" significa…",
      "emoji": "",
      "ops": [
-      "curva de sino (média)",
+      "no geral",
       "dar permissão",
-      "de pessoa para pessoa (P2P)"
+      "não muito de"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "isso é bem profundo",
-      "se perder em",
-      "uma variedade de"
+      "pontos altos",
+      "excepcional"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Greg, Todd",
-      "Meg, Todd",
-      "Natalie, Todd"
+      "Hana, Ben",
+      "Shantel, Todd"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "EUA, Reino Unido",
-      "Reino Unido",
+      "Japão, Canadá",
+      "Trinidad e Tobago, EUA",
       "EUA"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "países",
+      "idiomas e países",
       "ética",
-      "fim de semana"
+      "esportes"
      ],
      "c": 1
     }

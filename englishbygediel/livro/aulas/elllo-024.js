@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · A2",
  "titulo": "My English Town",
  "subtitulo": "Tema: cidades · A2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-024.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A2) sobre: cidades.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "My English Town",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "except",
+      "wherever",
+      "path",
+      "definitely"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Katie, Todd",
+      "Reino Unido, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre cidades"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/4vl7AajOQP4",
   "mp3": "",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "exceto",
-      "trazido de navio",
-      "dar permissão"
+      "tema em comum",
+      "fora isso"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"wherever\" significa…",
      "emoji": "",
      "ops": [
-      "rafting",
-      "se livrar de",
+      "no meu sangue",
+      "-itas (seguidores de)",
       "onde quer que"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"path\" significa…",
      "emoji": "",
      "ops": [
-      "legenda",
+      "preço fixo",
       "caminho / trilha",
-      "um longo caminho pela frente"
+      "surgiu do nada"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "com certeza",
-      "taxa de mortalidade",
-      "traumático"
+      "curva de sino (média)",
+      "de ponta"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Katie, Todd",
-      "Josh, Shirley",
-      "Abidemi, Todd"
+      "Sarah, Todd",
+      "Aimee, Paul"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido, Chile",
       "Nova Zelândia, EUA",
+      "Reino Unido",
       "Reino Unido, EUA"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "trabalho",
+      "descrições",
       "cidades",
-      "turismo"
+      "educação"
      ],
      "c": 1
     }

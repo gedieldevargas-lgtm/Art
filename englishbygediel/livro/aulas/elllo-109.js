@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C2",
  "titulo": "Health Coach",
  "subtitulo": "Tema: saúde · C2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-109.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C2) sobre: saúde.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Health Coach",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "modality",
+      "stagnation",
+      "stuck in a rut",
+      "spectrum"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Olga, Todd",
+      "Rússia, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre saúde"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/JAGxAzOZvho",
   "mp3": "",
@@ -48,8 +92,8 @@
      "p": "\"modality\" significa…",
      "emoji": "",
      "ops": [
-      "histeria",
-      "pista de obstáculos",
+      "indicativo",
+      "trabalhadores por contrato (servidão)",
       "modalidade"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"stagnation\" significa…",
      "emoji": "",
      "ops": [
-      "geografia",
+      "trabalhar em / melhorar",
       "estagnação",
-      "trabalhar em / melhorar"
+      "custar os olhos da cara"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "preso na rotina",
-      "se sentir obrigado",
-      "lindo"
+      "mudar de assunto",
+      "especialmente"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"spectrum\" significa…",
      "emoji": "",
      "ops": [
-      "aumentar aos poucos",
-      "me estressa",
+      "rotina normal de trabalho",
+      "rico / abastado",
       "espectro"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Monica, Todd",
-      "Julia, Nathan",
+      "Julia, Todd",
+      "Katie, Gilder",
       "Olga, Todd"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "País de Gales",
+      "Reino Unido, EUA",
       "Rússia, EUA",
-      "Nepal, EUA"
+      "Portugal, África do Sul (?)"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "saúde",
-      "trabalho remoto",
-      "mídia"
+      "restaurante",
+      "mar e história"
      ],
      "c": 0
     }

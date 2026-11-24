@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C2",
  "titulo": "Road Rage",
  "subtitulo": "Tema: trânsito · C2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-116.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C2) sobre: trânsito.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Road Rage",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "road rage",
+      "drives me bonkers",
+      "compassion",
+      "talk you through it"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Julia, Nathan",
+      "Reino Unido"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre trânsito"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/views-1151-1200/1171-Nathan-Rage.mp3",
@@ -48,9 +92,9 @@
      "p": "\"road rage\" significa…",
      "emoji": "",
      "ops": [
-      "resultado final / o essencial",
+      "chocantemente",
       "fúria no trânsito",
-      "não muito de"
+      "onde quer que"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "me deixa louco",
-      "de cabeça para baixo",
-      "subdividido"
+      "sazonal",
+      "dá uma olhada"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"compassion\" significa…",
      "emoji": "",
      "ops": [
-      "ser aberto",
-      "mais especificamente",
+      "legenda",
+      "faixa de preço",
       "compaixão"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"talk you through it\" significa…",
      "emoji": "",
      "ops": [
-      "duvidoso / arriscado",
+      "comer fora",
       "te explicar passo a passo",
-      "cuidando de"
+      "na hora / de improviso"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Jerri, Todd",
+      "Meg, Todd",
       "Julia, Nathan",
-      "Meg, Todd"
+      "Pernese, Doron"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido",
-      "Jamaica, Reino Unido",
-      "Reino Unido, Itália"
+      "Inglaterra, EUA",
+      "Reino Unido, EUA"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "sociedade",
-      "países",
+      "música",
+      "tecnologia e filhos",
       "trânsito"
      ],
      "c": 2

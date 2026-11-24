@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · B1",
  "titulo": "Would for Past Tense",
  "subtitulo": "Gramática: Would for Past Tense · B1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-044.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B1) sobre: datas comemorativas.",
+   "Praticar o ponto de gramática: Would for Past Tense.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Would for Past Tense",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Would for Past Tense"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Melissa, Doron",
+      "EUA, Reino Unido"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre datas comemorativas"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/grammar/L4-04-Would-Mel-VDay.mp3",
@@ -106,9 +147,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Natalie, Todd",
+      "Hana, Daniel",
       "Melissa, Doron",
-      "Josh, Shirley"
+      "Meg, Todd"
      ],
      "c": 1
     },
@@ -117,8 +158,8 @@
      "emoji": "",
      "ops": [
       "EUA, Reino Unido",
-      "Reino Unido, Vietnã",
-      "Reino Unido, Chile"
+      "Inglaterra, EUA",
+      "Portugal, África do Sul (?)"
      ],
      "c": 0
     },
@@ -126,8 +167,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "dinheiro",
-      "cidades",
+      "rádio",
+      "aprender inglês",
       "datas comemorativas"
      ],
      "c": 2

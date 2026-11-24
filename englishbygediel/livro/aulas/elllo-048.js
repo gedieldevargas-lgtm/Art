@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B1",
  "titulo": "Nepal Travel Tips",
  "subtitulo": "Tema: viagem · B1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-048.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B1) sobre: viagem.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Nepal Travel Tips",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "bungee jumping",
+      "rafting",
+      "capital",
+      "celebration"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Jin, Adam",
+      "Nepal, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre viagem"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/i7CIm-LHxgQ",
   "mp3": "",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "bungee jump",
-      "abolido",
-      "um longo caminho pela frente"
+      "sem vontade de",
+      "geralmente"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"rafting\" significa…",
      "emoji": "",
      "ops": [
-      "fábricas com trabalho explorado",
-      "reputação",
+      "celebridade",
+      "me irritar",
       "rafting"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"capital\" significa…",
      "emoji": "",
      "ops": [
-      "de cabeça para baixo",
+      "ficar longe de",
       "capital",
-      "estragar"
+      "único"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "celebração / festa",
-      "moleza",
-      "faixa de preço"
+      "me deixa louco",
+      "equivalente"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Jin, Adam",
-      "Katie, Gilder",
-      "Ginger, Nabeel"
+      "Antoinette, Warren",
+      "CleAnn, Todd"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "China, EUA",
-      "Japão, EUA",
+      "País de Gales",
+      "EUA, Reino Unido",
       "Nepal, EUA"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "transporte",
+      "cidades",
       "viagem",
-      "migração"
+      "feriados"
      ],
      "c": 1
     }

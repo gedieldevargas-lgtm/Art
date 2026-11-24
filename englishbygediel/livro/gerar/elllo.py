@@ -76,7 +76,14 @@ for i, d in enumerate(D, 1):
     if perg:
         ex.append({'id': 'enquanto', 'tipo': 'escolha', 'titulo': 'Enquanto ouve', 'instrucao': 'Dê play e responda enquanto escuta.', 'itens': perg})
     a = {'id': uid, 'nivel': mod, 'unidade': i, 'rotulo': '🎧 Listening · ' + nivel, 'titulo': titulo,
-         'subtitulo': ('Gramática: ' + gram if gram else 'Tema: ' + tema) + ' · ' + nivel, 'semEbook': True,
+         'subtitulo': ('Gramática: ' + gram if gram else 'Tema: ' + tema) + ' · ' + nivel, 'pdf': 'livro/pdf/%s.pdf' % uid,
+         'ebook': {'resumo': ['Ouvir uma conversa real (%s) sobre: %s.' % (nivel, tema or titulo),
+                              ('Praticar o ponto de gramática: %s.' % gram) if gram else 'Entender as expressões que aparecem na conversa.',
+                              'Responder perguntas sobre quem fala, os sotaques e o tema.', 'Falar 3 frases suas sobre o assunto.'],
+                   'mapa': {'centro': titulo[:22], 'ramos': [{'t': 'Ouça', 't2': 0, 'itens': ['1ª vez: só ouvindo', '2ª: com a transcrição']},
+                            {'t': 'Gramática' if gram else 'Expressões', 'itens': [gram] if gram else [v for v in voc[:4]]},
+                            {'t': 'Quem fala', 'itens': [falantes or '—', sotaques or '']}, {'t': 'Fale', 'itens': ['3 frases sobre ' + (tema or 'o tema')]}]},
+                   'imprimir': []},
          'midiaPrincipal': {'youtube': emb, 'mp3': mp3, 'link': link, 'credito': 'ELLLO.org (Todd Beuckens)'},
          'revisar': revisar, 'exercicios': ex,
          'missao': {'tarefa': 'Ouça duas vezes: a 1ª só ouvindo, a 2ª acompanhando a transcrição no elllo.org. Depois fale 3 frases sobre: ' + (tema or titulo) + '.', 'falar': falar, 'frases': 3, 'exemplo': falar}}

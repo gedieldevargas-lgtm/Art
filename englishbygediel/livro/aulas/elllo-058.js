@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B1",
  "titulo": "His Dreams",
  "subtitulo": "Tema: sonhos e carreira · B1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-058.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B1) sobre: sonhos e carreira.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "His Dreams",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "on the move",
+      "stuck to it",
+      "versatile",
+      "eclectic"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Lyndsay, Warren",
+      "EUA, Canadá"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre sonhos e carreira"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A1101/1118-Dream-Warren.mp3",
@@ -48,8 +92,8 @@
      "p": "\"on the move\" significa…",
      "emoji": "",
      "ops": [
-      "isso é bem profundo",
-      "comodidade",
+      "-itas (seguidores de)",
+      "tirar certificação",
       "em movimento"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"stuck to it\" significa…",
      "emoji": "",
      "ops": [
-      "mesada",
+      "incomodar",
       "persistiu",
-      "colocar o coração em"
+      "vacinas antirrábicas"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "versátil",
-      "desistir",
-      "áreas rurais"
+      "de preferência",
+      "experiência memorável"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"eclectic\" significa…",
      "emoji": "",
      "ops": [
-      "paisagem",
-      "geografia",
+      "falar o que pensa",
+      "lindo",
       "eclético"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Shirley, Yuri",
-      "Aimee, Katie",
+      "Ginger, Nabeel",
+      "Hana, Daniel",
       "Lyndsay, Warren"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Austrália, EUA",
+      "Reino Unido, EUA",
       "EUA, Canadá",
-      "Reino Unido, EUA"
+      "Reino Unido"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "sonhos e carreira",
-      "hotel",
-      "sociedade"
+      "lazer",
+      "educação"
      ],
      "c": 0
     }

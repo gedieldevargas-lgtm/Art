@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · A1",
  "titulo": "Articles",
  "subtitulo": "Gramática: Articles · A1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-015.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A1) sobre: casa.",
+   "Praticar o ponto de gramática: Articles.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Articles",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Articles"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Aimee, Todd",
+      "Reino Unido, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre casa"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/AGTK/A1-24-AimeeTodd-House-Articles.mp3",
@@ -107,8 +148,8 @@
      "emoji": "",
      "ops": [
       "Aimee, Todd",
-      "CleAnn, Todd",
-      "Julia, Nathan"
+      "Jin, Adam",
+      "Rebecca, Todd"
      ],
      "c": 0
     },
@@ -116,8 +157,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido, Chile",
       "Nova Zelândia, EUA",
+      "Reino Unido",
       "Reino Unido, EUA"
      ],
      "c": 2
@@ -126,9 +167,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "folclore",
+      "fim de semana",
       "casa",
-      "tecnologia"
+      "saúde"
      ],
      "c": 1
     }

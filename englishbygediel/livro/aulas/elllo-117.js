@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C2",
  "titulo": "Cambodia Road Trip Part 1",
  "subtitulo": "Tema: viagem · C2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-117.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C2) sobre: viagem.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Cambodia Road Trip Par",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "fundraising",
+      "annual",
+      "sketchy",
+      "set off"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Julia, Todd",
+      "Reino Unido, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre viagem"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/views-1151-1200/1167-Julia-Trip1.mp3",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "arrecadação de fundos",
-      "pessoalmente",
-      "áreas rurais"
+      "celebração / festa",
+      "especialmente"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"annual\" significa…",
      "emoji": "",
      "ops": [
-      "grogue / zonzo",
-      "pacote turístico",
+      "curva de sino (média)",
+      "caminho / trilha",
       "anual"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"sketchy\" significa…",
      "emoji": "",
      "ops": [
-      "em cima do muro",
+      "arquitetura",
       "duvidoso / arriscado",
-      "disparar"
+      "pilão"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "partir",
-      "travar / chegar ao limite",
-      "me sentir uma vaca (comendo demais)"
+      "nome conhecido de todos",
+      "pagar a conta"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Julia, Todd",
-      "Maria, Alex",
-      "Abidemi, Rory"
+      "Hana, Ben",
+      "Jerri, Todd"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido, Chile",
       "Nova Zelândia, EUA",
+      "Reino Unido",
       "Reino Unido, EUA"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "transporte",
+      "cidades",
       "viagem",
-      "migração"
+      "feriados"
      ],
      "c": 1
     }

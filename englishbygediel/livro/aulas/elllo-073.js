@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B2",
  "titulo": "Student Life in China Part 1",
  "subtitulo": "Tema: educação · B2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-073.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B2) sobre: educação.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Student Life in China ",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "reputation",
+      "distracted",
+      "put out",
+      "pressure"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Rufei, Todd",
+      "China, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre educação"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/lB9o4RUFYdI",
   "mp3": "",
@@ -48,8 +92,8 @@
      "p": "\"reputation\" significa…",
      "emoji": "",
      "ops": [
-      "aprender / pegar",
-      "largar um hábito",
+      "uma grande provação",
+      "lenda urbana",
       "reputação"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"distracted\" significa…",
      "emoji": "",
      "ops": [
-      "tarefas de casa",
+      "trabalhar em / melhorar",
       "distraído",
-      "subdividido"
+      "de jeito nenhum / nem um pouco"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "chateado / incomodado",
-      "conotação negativa",
-      "não consigo imaginar"
+      "ponta sul",
+      "madeira"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"pressure\" significa…",
      "emoji": "",
      "ops": [
-      "comer fora",
-      "alta temporada",
+      "surgiu do nada",
+      "preço fixo",
       "pressão"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Katie, Gilder",
-      "Hana, Daniel",
+      "Rebecca, Todd",
+      "Lyndsay, Warren",
       "Rufei, Todd"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Jamaica, Reino Unido",
+      "Reino Unido, Itália",
       "China, EUA",
-      "EUA, Canadá"
+      "Japão, EUA"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "educação",
-      "família e dinheiro",
-      "viver fora"
+      "casa",
+      "filmes"
      ],
      "c": 0
     }

@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · A1",
  "titulo": "Days of the Week",
  "subtitulo": "Gramática: Days of the Week · A1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-006.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A1) sobre: rotina.",
+   "Praticar o ponto de gramática: Days of the Week.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Days of the Week",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Days of the Week"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Meg, Todd",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre rotina"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/AGTK/A1-08-MegTodd-Days-of-Week-Busy.mp3",
@@ -107,8 +148,8 @@
      "emoji": "",
      "ops": [
       "Meg, Todd",
-      "Olga, Todd",
-      "Julia, Todd"
+      "Monica, Todd",
+      "Aimee, Katie"
      ],
      "c": 0
     },
@@ -116,8 +157,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "EUA, Reino Unido",
-      "Reino Unido",
+      "Japão, Canadá",
+      "Trinidad e Tobago, EUA",
       "EUA"
      ],
      "c": 2
@@ -126,9 +167,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "presentes",
+      "preços",
       "rotina",
-      "datas"
+      "migração"
      ],
      "c": 1
     }

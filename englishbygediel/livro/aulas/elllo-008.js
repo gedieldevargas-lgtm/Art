@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · A1",
  "titulo": "Subject Pronouns",
  "subtitulo": "Gramática: Subject Pronouns · A1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-008.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A1) sobre: celebridades.",
+   "Praticar o ponto de gramática: Subject Pronouns.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Subject Pronouns",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Subject Pronouns"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Shantel, Todd",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre celebridades"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/AGTK/A1-09-ShantelTodd-Celebrities-SubjectPronoun.mp3",
@@ -106,9 +147,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Shirley, Yuri",
+      "Julia, Nathan",
       "Shantel, Todd",
-      "Sarah, Todd"
+      "Naomi, Dai"
      ],
      "c": 1
     },
@@ -117,8 +158,8 @@
      "emoji": "",
      "ops": [
       "EUA",
-      "EUA, Reino Unido",
-      "Reino Unido"
+      "Japão, Canadá",
+      "Trinidad e Tobago, EUA"
      ],
      "c": 0
     },
@@ -126,7 +167,7 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "família e dinheiro",
+      "idiomas",
       "escola",
       "celebridades"
      ],

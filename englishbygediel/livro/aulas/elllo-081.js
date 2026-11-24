@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B2",
  "titulo": "Character Changes",
  "subtitulo": "Tema: personalidade · B2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-081.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B2) sobre: personalidade.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Character Changes",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "studious",
+      "open-attitude",
+      "to be open",
+      "pick up"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Maria, Alex",
+      "Dinamarca, Austrália"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre personalidade"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/views-1151-1200/1184-Maria-Personality.mp3",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "estudioso",
-      "áreas rurais",
-      "mais especificamente"
+      "ciclo vicioso",
+      "descobrir"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"open-attitude\" significa…",
      "emoji": "",
      "ops": [
-      "legenda",
-      "cantina / refeitório",
+      "alguns / poucos",
+      "descobrir",
       "atitude aberta"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"to be open\" significa…",
      "emoji": "",
      "ops": [
-      "em cima do muro",
+      "terraço",
       "ser aberto",
-      "cantina / refeitório"
+      "sem vontade de"
      ],
      "c": 1
     },
@@ -79,7 +123,7 @@
      "emoji": "",
      "ops": [
       "aprender / pegar",
-      "acompanhar",
+      "descobrir / entender",
       "distraído"
      ],
      "c": 0
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Maria, Alex",
-      "Melissa, Doron",
-      "Aimee, Todd"
+      "Aimee, Paul",
+      "Katie, Gilder"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Trinidad e Tobago, EUA",
-      "Reino Unido, Chile",
+      "Reino Unido, Vietnã",
+      "EUA, Paquistão",
       "Dinamarca, Austrália"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "saúde",
+      "tecnologia",
       "personalidade",
-      "objetos"
+      "turismo"
      ],
      "c": 1
     }

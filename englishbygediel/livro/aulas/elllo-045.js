@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · B1",
  "titulo": "Should for Suggestions",
  "subtitulo": "Gramática: Should for Suggestions · B1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-045.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B1) sobre: trabalho.",
+   "Praticar o ponto de gramática: Should for Suggestions.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Should for Suggestions",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Should for Suggestions"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "—",
+      ""
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre trabalho"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/AGTK/B1-05-Should-Sarah-Gov-Job.mp3",
@@ -106,9 +147,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "finanças",
+      "arrependimentos",
       "trabalho",
-      "mar e história"
+      "finanças"
      ],
      "c": 1
     }

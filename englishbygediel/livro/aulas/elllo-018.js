@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · A2",
  "titulo": "Adjectives",
  "subtitulo": "Gramática: Adjectives · A2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-018.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A2) sobre: preços.",
+   "Praticar o ponto de gramática: Adjectives.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Adjectives",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Adjectives"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Abidemi, Todd",
+      "Nigéria, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre preços"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/AGTK/A2-08-Abidemi-Todd-Expensive.mp3",
@@ -107,8 +148,8 @@
      "emoji": "",
      "ops": [
       "Abidemi, Todd",
-      "Abidemi, Rory",
-      "Jerri, Todd"
+      "Antoinette, Warren",
+      "Katie, Gilder"
      ],
      "c": 0
     },
@@ -116,8 +157,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Tailândia, EUA",
-      "Reino Unido, EUA",
+      "Nepal, EUA",
+      "País de Gales",
       "Nigéria, EUA"
      ],
      "c": 2
@@ -126,9 +167,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "expressões idiomáticas",
+      "turismo",
       "preços",
-      "cores"
+      "música"
      ],
      "c": 1
     }

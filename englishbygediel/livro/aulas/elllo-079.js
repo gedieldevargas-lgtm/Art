@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B2",
  "titulo": "Soccer Moms",
  "subtitulo": "Tema: família · B2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-079.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B2) sobre: família.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Soccer Moms",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "productive",
+      "affluent",
+      "equivalent",
+      "blue-collar"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Julia, Todd",
+      "Reino Unido, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre família"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/views-1201-1250/1223-Todd-SoccerMom.mp3",
@@ -48,8 +92,8 @@
      "p": "\"productive\" significa…",
      "emoji": "",
      "ops": [
-      "isso funciona / pode ser",
-      "comodidade",
+      "focar em vencer",
+      "expatriado",
       "produtivo"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"affluent\" significa…",
      "emoji": "",
      "ops": [
-      "rotina normal de trabalho",
+      "experiência memorável",
       "rico / abastado",
-      "aspectos polêmicos"
+      "descobrir / entender"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "equivalente",
-      "se forçar",
-      "pontos altos"
+      "legenda",
+      "culinária"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"blue-collar\" significa…",
      "emoji": "",
      "ops": [
-      "se acostumar com",
-      "salário mínimo justo",
+      "abolido",
+      "e assim por diante",
       "operário / trabalho braçal"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Maria, Alex",
-      "Abidemi, Rory",
+      "Hana, Ben",
+      "Jerri, Todd",
       "Julia, Todd"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Nova Zelândia, EUA",
+      "Reino Unido",
       "Reino Unido, EUA",
-      "Reino Unido, Chile"
+      "Nova Zelândia, EUA"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "família",
-      "transporte",
-      "sociedade"
+      "roupas",
+      "comida"
      ],
      "c": 0
     }

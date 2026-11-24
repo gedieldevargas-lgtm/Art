@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B1",
  "titulo": "Life in the Arctic",
  "subtitulo": "Tema: cultura · B1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-050.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B1) sobre: cultura.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Life in the Arctic",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "caribou",
+      "disgusting",
+      "square dance",
+      "fiddle"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Abidemi, Todd",
+      "Nigéria, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre cultura"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/CRHoPdASwdI",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/views-1451-1500/1454-AbidemiTodd-Innuits-32.mp3",
@@ -48,9 +92,9 @@
      "p": "\"caribou\" significa…",
      "emoji": "",
      "ops": [
-      "pacote turístico",
+      "estranho",
       "caribu (rena)",
-      "vale-tudo"
+      "por segurança"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "nojento",
-      "intimidador",
-      "elo fraco"
+      "subdividido",
+      "algo importante"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"square dance\" significa…",
      "emoji": "",
      "ops": [
-      "comodidade",
-      "em cima do muro",
+      "pista de obstáculos",
+      "marcar os pontos",
       "quadrilha americana"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"fiddle\" significa…",
      "emoji": "",
      "ops": [
-      "capital",
+      "por segurança",
       "rabeca / violino",
-      "áreas rurais"
+      "ficar longe de"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Jerri, Todd",
+      "Katie, Gilder",
       "Abidemi, Todd",
-      "Abidemi, Rory"
+      "Antoinette, Warren"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Nigéria, EUA",
-      "Tailândia, EUA",
-      "Reino Unido, EUA"
+      "Nepal, EUA",
+      "País de Gales"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "humor",
-      "idiomas e países",
+      "sonhos e carreira",
+      "personalidade",
       "cultura"
      ],
      "c": 2

@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C1",
  "titulo": "Black Friday",
  "subtitulo": "Tema: compras · C1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-089.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C1) sobre: compras.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Black Friday",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "ratchet up",
+      "free-for-all",
+      "hypocritical",
+      "hysteria"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Aimee, Todd",
+      "Reino Unido, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre compras"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/FnAfnnDgd0g",
   "mp3": "",
@@ -48,9 +92,9 @@
      "p": "\"ratchet up\" significa…",
      "emoji": "",
      "ops": [
-      "vale-tudo",
+      "decisivo",
       "aumentar aos poucos",
-      "em teoria"
+      "reclamar / choramingar"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "vale-tudo",
-      "caro demais",
-      "universalmente"
+      "nome conhecido de todos",
+      "me sentir uma vaca (comendo demais)"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"hypocritical\" significa…",
      "emoji": "",
      "ops": [
-      "pacote turístico",
-      "realista",
+      "guardar dinheiro",
+      "rabeca / violino",
       "hipócrita"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"hysteria\" significa…",
      "emoji": "",
      "ops": [
-      "andar dentro d'água",
+      "lançar",
       "histeria",
-      "aprender / pegar"
+      "aumentar aos poucos"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Julia, Nathan",
+      "Rebecca, Todd",
       "Aimee, Todd",
-      "CleAnn, Todd"
+      "Jin, Adam"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido, EUA",
-      "Reino Unido, Chile",
-      "Nova Zelândia, EUA"
+      "Nova Zelândia, EUA",
+      "Reino Unido"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "família",
-      "roupas",
+      "finanças",
+      "personalidade",
       "compras"
      ],
      "c": 2

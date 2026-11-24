@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · A2",
  "titulo": "Super City",
  "subtitulo": "Gramática: Superlatives · A2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-035.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A2) sobre: cidades.",
+   "Praticar o ponto de gramática: Superlatives.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Super City",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Superlatives"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Sarah, Todd",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre cidades"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/AFofVdat3M0",
   "mp3": "https://elllo.org/Audio/A1551/1584-Sarah-Superlatives-Cities.mp3",
@@ -106,9 +147,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Dan, Todd",
+      "Sarah, Adam",
       "Sarah, Todd",
-      "Shifani, Todd"
+      "Shirley, Ray"
      ],
      "c": 1
     },
@@ -117,8 +158,8 @@
      "emoji": "",
      "ops": [
       "EUA",
-      "EUA, Reino Unido",
-      "Reino Unido"
+      "Japão, Canadá",
+      "Trinidad e Tobago, EUA"
      ],
      "c": 0
     },
@@ -126,8 +167,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "turismo",
-      "trabalho",
+      "educação",
+      "descrições",
       "cidades"
      ],
      "c": 2

@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · A2",
  "titulo": "At the Mall",
  "subtitulo": "Tema: compras · A2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-023.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A2) sobre: compras.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "At the Mall",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "that's perfect",
+      "a variety of",
+      "sounds good",
+      "all day"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Katie, Todd",
+      "Reino Unido, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre compras"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/BrN9S84DQWs",
   "mp3": "https://elllo.org/Audio/A1501/1501-KatieTodd-MallShops-Places.mp3",
@@ -48,9 +92,9 @@
      "p": "\"that's perfect\" significa…",
      "emoji": "",
      "ops": [
-      "aspectos polêmicos",
+      "disparar",
       "perfeito",
-      "viralizar"
+      "apagar (dormir)"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "uma variedade de",
-      "não está dando certo",
-      "caribu (rena)"
+      "culinária",
+      "caminhada longa / trilha"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"sounds good\" significa…",
      "emoji": "",
      "ops": [
-      "fértil",
-      "a escada dos imóveis",
+      "pontos altos",
+      "de amadurecimento (filme)",
       "parece bom / combinado"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"all day\" significa…",
      "emoji": "",
      "ops": [
-      "bungee jump",
+      "caminhada longa / trilha",
       "o dia todo",
-      "estudioso"
+      "culinária"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Abidemi, Todd",
+      "Aimee, Paul",
       "Katie, Todd",
-      "Josh, Shirley"
+      "Sarah, Todd"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido, EUA",
-      "Reino Unido, Chile",
-      "Nova Zelândia, EUA"
+      "Nova Zelândia, EUA",
+      "Reino Unido"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "família",
-      "roupas",
+      "finanças",
+      "personalidade",
       "compras"
      ],
      "c": 2

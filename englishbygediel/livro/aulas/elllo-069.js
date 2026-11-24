@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B2",
  "titulo": "Family Money Flow",
  "subtitulo": "Tema: família e dinheiro · B2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-069.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B2) sobre: família e dinheiro.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Family Money Flow",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "flow of money",
+      "the property ladder",
+      "put money away",
+      "build values"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Angela, Todd",
+      "Inglaterra, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre família e dinheiro"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/aYarRwQ5EZM",
   "mp3": "",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "fluxo de dinheiro",
-      "se matricular",
-      "autêntico"
+      "anormal / bizarro",
+      "se locomover"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"the property ladder\" significa…",
      "emoji": "",
      "ops": [
-      "dá uma olhada",
-      "contraproducente",
+      "tema em comum",
+      "fora isso",
       "a escada dos imóveis"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"put money away\" significa…",
      "emoji": "",
      "ops": [
-      "pista de obstáculos",
+      "um milhão de dólares (estar ótimo)",
       "guardar dinheiro",
-      "binóculos"
+      "reclamar / choramingar"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "construir valores",
-      "pergunta difícil",
-      "obviamente"
+      "me deixa louco",
+      "legenda oculta (CC)"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Angela, Todd",
-      "Hana, Daniel",
-      "Josh, Shirley"
+      "Spencer, Curtis",
+      "Jake, Shirley"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Nepal, EUA",
-      "Rússia, EUA",
+      "Portugal, África do Sul (?)",
+      "Trinidad e Tobago, EUA",
       "Inglaterra, EUA"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "datas",
+      "feriados",
       "família e dinheiro",
-      "migração"
+      "sociedade"
      ],
      "c": 1
     }

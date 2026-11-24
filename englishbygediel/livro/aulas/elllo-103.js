@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C1",
  "titulo": "You know a good place?",
  "subtitulo": "Tema: restaurante · C1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-103.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C1) sobre: restaurante.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "You know a good place?",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "broil",
+      "and so on",
+      "stir-fry",
+      "vegetarian"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Josh, Shirley",
+      "EUA, Austrália"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre restaurante"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A1301/1315-josh-restaurant.mp3",
@@ -48,8 +92,8 @@
      "p": "\"broil\" significa…",
      "emoji": "",
      "ops": [
-      "mudar de ideia",
-      "acumulador (guarda tudo)",
+      "alguns / poucos",
+      "senso de moda",
       "grelhar"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"and so on\" significa…",
      "emoji": "",
      "ops": [
-      "surgiu do nada",
+      "em cima do muro",
       "e assim por diante",
-      "de saco cheio"
+      "mudar de ideia"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "refogado oriental",
-      "caribu (rena)",
-      "não me importo"
+      "prosperar",
+      "foi bom conversar com você"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"vegetarian\" significa…",
      "emoji": "",
      "ops": [
-      "traumático",
-      "não me importo",
+      "resolver logo",
+      "focar em vencer",
       "vegetariano"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Anthony, Todd",
-      "Crystal, George",
+      "Naomi, Dai",
+      "Shirley, Yuri",
       "Josh, Shirley"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Jamaica, Reino Unido",
+      "Trinidad e Tobago, EUA",
       "EUA, Austrália",
-      "EUA, Reino Unido"
+      "EUA, Canadá"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "restaurante",
-      "economia",
-      "mudança"
+      "trânsito",
+      "geografia"
      ],
      "c": 0
     }

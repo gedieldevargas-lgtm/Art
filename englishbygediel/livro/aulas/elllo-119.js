@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C2",
  "titulo": "Banned by Customs",
  "subtitulo": "Tema: alfândega · C2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-119.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C2) sobre: alfândega.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Banned by Customs",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "in a previous lifetime",
+      "had its moments",
+      "death rate",
+      "all in all"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Shirley, Ray",
+      "Austrália, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre alfândega"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A1051/1053-Ray-CustomBan.mp3",
@@ -48,9 +92,9 @@
      "p": "\"in a previous lifetime\" significa…",
      "emoji": "",
      "ops": [
-      "um nerd / bobão",
+      "de pessoa para pessoa (P2P)",
       "em outra vida",
-      "os moradores"
+      "preso na rotina"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "teve seus momentos",
-      "se meter em encrenca",
-      "colocar o coração em"
+      "ter vista para",
+      "dar permissão"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"death rate\" significa…",
      "emoji": "",
      "ops": [
-      "em cima do muro",
-      "se livrar de",
+      "descendência",
+      "sem vontade de",
       "taxa de mortalidade"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"all in all\" significa…",
      "emoji": "",
      "ops": [
-      "montanhoso",
+      "não me importo",
       "no geral",
-      "onde quer que"
+      "não tem como errar / imperdível"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Gyri, Viyasan",
+      "Mari, Ron",
       "Shirley, Ray",
-      "Erina, Mike"
+      "Jerri, Todd"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Austrália, EUA",
-      "Japão, Canadá",
-      "Nova Zelândia, EUA"
+      "Nigéria, Reino Unido",
+      "Japão, Canadá"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "folclore",
-      "datas comemorativas",
+      "família",
+      "presentes",
       "alfândega"
      ],
      "c": 2

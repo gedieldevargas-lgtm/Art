@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C1",
  "titulo": "Brain Drain",
  "subtitulo": "Tema: migração · C1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-092.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C1) sobre: migração.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Brain Drain",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "brain drain",
+      "rural areas",
+      "decades ago",
+      "subdivided"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Pernese, Doron",
+      "Jamaica, Reino Unido"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre migração"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/Z6QZGe0KlQQ",
   "mp3": "",
@@ -48,9 +92,9 @@
      "p": "\"brain drain\" significa…",
      "emoji": "",
      "ops": [
-      "comodidade",
+      "acumulador (guarda tudo)",
       "fuga de cérebros",
-      "isso é bem profundo"
+      "equivalente"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "áreas rurais",
-      "estou resolvido / pronto",
-      "de amadurecimento (filme)"
+      "legenda",
+      "se meter em encrenca"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"decades ago\" significa…",
      "emoji": "",
      "ops": [
-      "fábricas com trabalho explorado",
-      "nada mal",
+      "caribu (rena)",
+      "montanhoso",
       "décadas atrás"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"subdivided\" significa…",
      "emoji": "",
      "ops": [
-      "pista de obstáculos",
+      "boicote",
       "subdividido",
-      "hipócrita"
+      "onde quer que"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Jin, Adam",
+      "Lyndsay, Warren",
       "Pernese, Doron",
-      "Olga, Todd"
+      "Josh, Shirley"
      ],
      "c": 1
     },
@@ -108,7 +152,7 @@
      "ops": [
       "Jamaica, Reino Unido",
       "Trinidad e Tobago, EUA",
-      "Austrália, EUA"
+      "Reino Unido, EUA"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "fim de semana",
-      "animais",
+      "rotina",
+      "sociedade",
       "migração"
      ],
      "c": 2

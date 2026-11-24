@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · A1",
  "titulo": "Languages, Nationalities and Countries",
  "subtitulo": "Gramática: Languages, Nationalities and Countries · A1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-007.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A1) sobre: idiomas e países.",
+   "Praticar o ponto de gramática: Languages, Nationalities and Countries.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Languages, Nationaliti",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Languages, Nationalities and Countries"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Abidemi, Todd",
+      "Nigéria, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre idiomas e países"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/AGTK/A1-18-AbidemiTodd-Languages.mp3",
@@ -106,8 +147,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Abidemi, Rory",
-      "Jerri, Todd",
+      "Antoinette, Warren",
+      "Katie, Gilder",
       "Abidemi, Todd"
      ],
      "c": 2
@@ -116,9 +157,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido, EUA",
+      "País de Gales",
       "Nigéria, EUA",
-      "Tailândia, EUA"
+      "Nepal, EUA"
      ],
      "c": 1
     },
@@ -127,8 +168,8 @@
      "emoji": "",
      "ops": [
       "idiomas e países",
-      "transporte",
-      "habilidades"
+      "casa",
+      "escola"
      ],
      "c": 0
     }

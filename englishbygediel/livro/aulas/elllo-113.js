@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C2",
  "titulo": "Life on the Road",
  "subtitulo": "Tema: viagem · C2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-113.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C2) sobre: viagem.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Life on the Road",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "bother",
+      "normal work flow",
+      "rabies shots",
+      "sell someone"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Julia, Todd",
+      "Reino Unido, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre viagem"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/views-1201-1250/1249-Todd-Life.mp3",
@@ -50,7 +94,7 @@
      "ops": [
       "se meter em encrenca",
       "incomodar",
-      "surtar"
+      "polo / centro"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "rotina normal de trabalho",
-      "equivalente",
-      "acumulador (guarda tudo)"
+      "comer fora",
+      "não tem como errar / imperdível"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"rabies shots\" significa…",
      "emoji": "",
      "ops": [
-      "se perder em",
-      "um pé na porta (primeira chance)",
+      "contar com",
+      "de preferência",
       "vacinas antirrábicas"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"sell someone\" significa…",
      "emoji": "",
      "ops": [
-      "rico / abastado",
+      "operário / trabalho braçal",
       "convencer alguém",
-      "único"
+      "se sentir obrigado"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Abidemi, Rory",
+      "Jerri, Todd",
       "Julia, Todd",
-      "Maria, Alex"
+      "Hana, Ben"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido, EUA",
-      "Reino Unido, Chile",
-      "Nova Zelândia, EUA"
+      "Nova Zelândia, EUA",
+      "Reino Unido"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "migração",
-      "transporte",
+      "feriados",
+      "cidades",
       "viagem"
      ],
      "c": 2

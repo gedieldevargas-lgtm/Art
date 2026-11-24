@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B1",
  "titulo": "Hotel for Him",
  "subtitulo": "Tema: hotel · B1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-055.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B1) sobre: hotel.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Hotel for Him",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "appeal to me",
+      "situated",
+      "wade",
+      "local color"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Erina, Mike",
+      "Japão, Canadá"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre hotel"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/views-1201-1250/1235-Mike-Hotel.mp3",
@@ -48,8 +92,8 @@
      "p": "\"appeal to me\" significa…",
      "emoji": "",
      "ops": [
-      "atrás do saque",
-      "inicialmente",
+      "mudar de ideia",
+      "descobrir",
       "me atrair"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"situated\" significa…",
      "emoji": "",
      "ops": [
-      "aposentadoria",
+      "estragar",
       "localizado",
-      "coisa que irrita"
+      "por segurança"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "andar dentro d'água",
-      "histeria",
-      "pobreza extrema"
+      "hospedagem",
+      "celebração / festa"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"local color\" significa…",
      "emoji": "",
      "ops": [
-      "mau hábito",
-      "anual",
+      "coisa que irrita",
+      "contra a corrente",
       "cara local / cultura local"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Meg, Todd",
-      "Spencer, Curtis",
+      "Pernese, Doron",
+      "Josh, Shirley",
       "Erina, Mike"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Noruega, Canadá",
+      "Nova Zelândia, EUA",
       "Japão, Canadá",
-      "Reino Unido, EUA"
+      "Noruega, Canadá"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "hotel",
-      "mudança",
-      "esportes"
+      "cidades",
+      "descrições"
      ],
      "c": 0
     }

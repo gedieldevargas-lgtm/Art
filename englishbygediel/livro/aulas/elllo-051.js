@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B1",
  "titulo": "Life Happens Up North",
  "subtitulo": "Tema: cultura · B1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-051.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B1) sobre: cultura.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Life Happens Up North",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "shipped in",
+      "flown in",
+      "plumbing",
+      "enlightening"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Abidemi, Todd",
+      "Nigéria, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre cultura"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/wchp3Xm6KlI",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/views-1451-1500/1453-Abidemi-Todd-Innuits-32.mp3",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "trazido de navio",
-      "arquitetura",
-      "foi bom conversar com você"
+      "passar o olho",
+      "só para esclarecer"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"flown in\" significa…",
      "emoji": "",
      "ops": [
-      "fábricas com trabalho explorado",
-      "intimidador",
+      "se forçar",
+      "se meter em encrenca",
       "trazido de avião"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"plumbing\" significa…",
      "emoji": "",
      "ops": [
-      "algo importante",
+      "sem dúvida",
       "encanamento",
-      "logo de cara"
+      "experimentar"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "esclarecedor",
-      "assim de cabeça",
-      "amante de comida"
+      "algo importante",
+      "largar um hábito"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Abidemi, Todd",
-      "Abidemi, Rory",
-      "Jerri, Todd"
+      "Antoinette, Warren",
+      "Katie, Gilder"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Tailândia, EUA",
-      "Reino Unido, EUA",
+      "Nepal, EUA",
+      "País de Gales",
       "Nigéria, EUA"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "idiomas e países",
+      "personalidade",
       "cultura",
-      "humor"
+      "sonhos e carreira"
      ],
      "c": 1
     }

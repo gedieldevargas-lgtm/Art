@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · A1",
  "titulo": "Basic Verbs",
  "subtitulo": "Gramática: Basic Verbs · A1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-003.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A1) sobre: fim de semana.",
+   "Praticar o ponto de gramática: Basic Verbs.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Basic Verbs",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Basic Verbs"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Shantel, Todd",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre fim de semana"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/xBYASXpstjs",
   "mp3": "",
@@ -107,8 +148,8 @@
      "emoji": "",
      "ops": [
       "Shantel, Todd",
-      "Sarah, Todd",
-      "Shirley, Yuri"
+      "Naomi, Dai",
+      "Julia, Nathan"
      ],
      "c": 0
     },
@@ -116,8 +157,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "EUA, Reino Unido",
-      "Reino Unido",
+      "Japão, Canadá",
+      "Trinidad e Tobago, EUA",
       "EUA"
      ],
      "c": 2
@@ -126,9 +167,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "casa",
+      "escola",
       "fim de semana",
-      "datas comemorativas"
+      "filmes"
      ],
      "c": 1
     }

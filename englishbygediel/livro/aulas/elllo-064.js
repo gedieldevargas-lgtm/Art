@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B2",
  "titulo": "Bangkok Transportation - Part 2",
  "subtitulo": "Tema: transporte · B2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-064.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B2) sobre: transporte.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Bangkok Transportation",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "freak out",
+      "to get around",
+      "rush hour",
+      "fed up"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Jerri, Todd",
+      "Tailândia, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre transporte"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/vibWXv3mivU",
   "mp3": "",
@@ -48,8 +92,8 @@
      "p": "\"freak out\" significa…",
      "emoji": "",
      "ops": [
-      "nome conhecido de todos",
-      "me sentir uma vaca (comendo demais)",
+      "grogue / zonzo",
+      "nunca",
       "surtar"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"to get around\" significa…",
      "emoji": "",
      "ops": [
-      "rafting",
+      "conseguiu (fazer algo)",
       "se locomover",
-      "de pessoa para pessoa (P2P)"
+      "vegetariano"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "hora do rush",
-      "nessa linha",
-      "no fim das contas"
+      "ser desajeitado para dançar",
+      "educação básica"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"fed up\" significa…",
      "emoji": "",
      "ops": [
-      "celebração / festa",
-      "melhor interesse",
+      "desistir",
+      "ligado em moda",
       "de saco cheio"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Natalie, Todd",
-      "Aimee, Paul",
+      "Abidemi, Jeremy",
+      "Jin, Adam",
       "Jerri, Todd"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Japão, Canadá",
+      "Nova Zelândia, EUA",
       "Tailândia, EUA",
-      "Nova Zelândia, EUA"
+      "Portugal, África do Sul (?)"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "transporte",
-      "datas comemorativas",
-      "filmes"
+      "hotel",
+      "sociedade"
      ],
      "c": 0
     }

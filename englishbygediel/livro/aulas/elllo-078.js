@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B2",
  "titulo": "The Music Industry",
  "subtitulo": "Tema: música · B2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-078.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B2) sobre: música.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "The Music Industry",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "profit",
+      "illegally",
+      "peer to peer",
+      "go viral"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Hana, Ben",
+      "Japão, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre música"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/views-1451-1500/1490-Ben-Hanna-Music-Business.mp3",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "lucro",
-      "celebridade",
-      "taxa de mortalidade"
+      "assim de cabeça",
+      "rabeca / violino"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"illegally\" significa…",
      "emoji": "",
      "ops": [
-      "contar com",
-      "fúria no trânsito",
+      "reconhecível",
+      "quadrilha americana",
       "ilegalmente"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"peer to peer\" significa…",
      "emoji": "",
      "ops": [
-      "surgiu do nada",
+      "travar / chegar ao limite",
       "de pessoa para pessoa (P2P)",
-      "tema em comum"
+      "excesso"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "viralizar",
-      "experiência memorável",
-      "mimar as crianças"
+      "se perder em",
+      "compreender"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Hana, Ben",
-      "Meg, Todd",
-      "Greg, Todd"
+      "Mari, Ron",
+      "Aimee, Todd"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Austrália, EUA",
-      "Jamaica, Reino Unido",
+      "Nigéria, Reino Unido",
+      "Reino Unido, Itália",
       "Japão, EUA"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "feriados",
+      "carreira militar",
       "música",
-      "meio ambiente"
+      "compras"
      ],
      "c": 1
     }

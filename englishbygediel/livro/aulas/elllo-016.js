@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · A2",
  "titulo": "Present Continuous - Where is everyone?",
  "subtitulo": "Gramática: Present Continuous - Where is everyone? · A2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-016.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A2) sobre: Present Continuous - Where is everyone?.",
+   "Praticar o ponto de gramática: Present Continuous - Where is everyone?.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Present Continuous - W",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Present Continuous - Where is everyone?"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Hana, Daniel",
+      "Reino Unido, Chile"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre o tema"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/grammar/L3-03-PresentContinuous-DanielHanna-Everyone.mp3",
@@ -106,8 +147,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Abidemi, Todd",
-      "Sarah, Todd",
+      "Monica, Todd",
+      "Aimee, Paul",
       "Hana, Daniel"
      ],
      "c": 2
@@ -118,7 +159,7 @@
      "ops": [
       "Rep. Tcheca, África do Sul (?)",
       "Reino Unido, Chile",
-      "China, EUA"
+      "EUA, Reino Unido"
      ],
      "c": 1
     }

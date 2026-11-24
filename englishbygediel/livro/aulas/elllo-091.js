@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C1",
  "titulo": "Body Idioms - Part 1",
  "subtitulo": "Tema: expressões idiomáticas · C1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-091.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C1) sobre: expressões idiomáticas.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Body Idioms - Part 1",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "foot the bill",
+      "two left feet",
+      "cost an arm and a leg",
+      "cold shoulder"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Meg, Todd",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre expressões idiomáticas"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/V34Y6Qtznb4",
   "mp3": "",
@@ -48,8 +92,8 @@
      "p": "\"foot the bill\" significa…",
      "emoji": "",
      "ops": [
-      "centro financeiro",
-      "me ensina seus truques",
+      "indicativo",
+      "se envolver",
       "pagar a conta"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"two left feet\" significa…",
      "emoji": "",
      "ops": [
-      "trazido de navio",
+      "ter vista para",
       "ser desajeitado para dançar",
-      "fluxo de dinheiro"
+      "versátil"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "custar os olhos da cara",
-      "moleza",
-      "ligado em moda"
+      "rotina normal de trabalho",
+      "rico / abastado"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"cold shoulder\" significa…",
      "emoji": "",
      "ops": [
-      "fluxo de dinheiro",
-      "com certeza",
+      "arquitetura",
+      "fora do roteiro turístico",
       "dar um gelo"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Olga, Todd",
-      "Julia, Todd",
+      "Monica, Todd",
+      "Aimee, Katie",
       "Meg, Todd"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido",
+      "Trinidad e Tobago, EUA",
       "EUA",
-      "EUA, Reino Unido"
+      "Japão, Canadá"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "expressões idiomáticas",
-      "escola",
-      "países"
+      "roupas",
+      "descrições"
      ],
      "c": 0
     }

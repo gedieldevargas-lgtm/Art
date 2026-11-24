@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B1",
  "titulo": "Paul Bunyan",
  "subtitulo": "Tema: folclore · B1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-060.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B1) sobre: folclore.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Paul Bunyan",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "not too bad",
+      "folk hero",
+      "mythical",
+      "lumber"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Jake, Shirley",
+      "EUA, Austrália"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre folclore"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A1001/1017-Jake-BunyanMyth.mp3",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "nada mal",
-      "uma variedade de",
-      "traumático"
+      "guardar dinheiro",
+      "um conselho"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"folk hero\" significa…",
      "emoji": "",
      "ops": [
-      "aparecer",
-      "salário mínimo justo",
+      "convencer alguém",
+      "apagar (dormir)",
       "herói popular"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"mythical\" significa…",
      "emoji": "",
      "ops": [
-      "pessoalmente",
+      "áreas rurais",
       "mítico",
-      "segurar a língua"
+      "o dia todo"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "madeira",
-      "coisa que irrita",
-      "experimentar"
+      "expatriado",
+      "no geral"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Jake, Shirley",
-      "Shifani, Todd",
-      "Greg, Todd"
+      "Olga, Todd",
+      "Gyri, Viyasan"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "EUA, Reino Unido",
-      "Jamaica, Reino Unido",
+      "EUA, Canadá",
+      "Trinidad e Tobago, EUA",
       "EUA, Austrália"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "celebridades",
+      "ética",
       "folclore",
-      "gostos"
+      "mudança"
      ],
      "c": 1
     }

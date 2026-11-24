@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C1",
  "titulo": "Out of Country",
  "subtitulo": "Tema: migração · C1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-093.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C1) sobre: migração.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Out of Country",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "more or less",
+      "migrating",
+      "immigration",
+      "go for"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Pernese, Doron",
+      "Jamaica, Reino Unido"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre migração"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/onoiAcgxY2c",
   "mp3": "",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "mais ou menos",
-      "aparecer",
-      "mau hábito"
+      "não nascemos um para o outro",
+      "a vida em geral"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"migrating\" significa…",
      "emoji": "",
      "ops": [
-      "faixa de preço",
-      "ligado em moda",
+      "ela meio que ficou famosa",
+      "ambiente hostil",
       "migrando"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"immigration\" significa…",
      "emoji": "",
      "ops": [
-      "hora do rush",
+      "trazido de avião",
       "imigração",
-      "exceto"
+      "lucro"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "optar por / tentar",
-      "bem legal",
-      "legenda oculta (CC)"
+      "rabeca / violino",
+      "estar disposto a / à altura"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Pernese, Doron",
-      "Olga, Todd",
-      "Jin, Adam"
+      "Josh, Shirley",
+      "Lyndsay, Warren"
      ],
      "c": 0
     },
@@ -107,7 +151,7 @@
      "emoji": "",
      "ops": [
       "Trinidad e Tobago, EUA",
-      "Austrália, EUA",
+      "Reino Unido, EUA",
       "Jamaica, Reino Unido"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "animais",
+      "sociedade",
       "migração",
-      "fim de semana"
+      "rotina"
      ],
      "c": 1
     }

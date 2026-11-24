@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · B1",
  "titulo": "Used to",
  "subtitulo": "Gramática: Used to · B1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-043.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B1) sobre: infância.",
+   "Praticar o ponto de gramática: Used to.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Used to",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Used to"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Rachel, Todd",
+      "Nova Zelândia, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre infância"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/grammar/L4-03-RachelTodd-UsedTo-ParentsFarm.mp3",
@@ -106,8 +147,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
+      "Hana, Daniel",
       "Anthony, Todd",
-      "Antoinette, Warren",
       "Rachel, Todd"
      ],
      "c": 2
@@ -116,9 +157,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido",
+      "EUA",
       "Nova Zelândia, EUA",
-      "Nigéria, Canadá"
+      "Japão, Canadá"
      ],
      "c": 1
     },
@@ -127,7 +168,7 @@
      "emoji": "",
      "ops": [
       "infância",
-      "países",
+      "celebridades",
       "fim de semana"
      ],
      "c": 0

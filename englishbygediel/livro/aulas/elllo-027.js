@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · A2",
  "titulo": "SEA Travels - Vietnam and Myanmar",
  "subtitulo": "Tema: viagem · A2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-027.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A2) sobre: viagem.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "SEA Travels - Vietnam ",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "terrace",
+      "managed to + verb",
+      "impressive",
+      "scenery"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Abidemi, Todd",
+      "Nigéria, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre viagem"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/4VY8joQbj5I",
   "mp3": "",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "terraço",
-      "contraproducente",
-      "guardar dinheiro"
+      "trabalhar em / melhorar",
+      "genes"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"managed to + verb\" significa…",
      "emoji": "",
      "ops": [
-      "mudar de assunto",
-      "expressão idiomática",
+      "se destacar",
+      "engraçado você falar isso",
       "conseguiu (fazer algo)"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"impressive\" significa…",
      "emoji": "",
      "ops": [
-      "pirataria",
+      "de jeito nenhum / nem um pouco",
       "impressionante",
-      "bem pensado"
+      "nojento"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "paisagem",
-      "geralmente",
-      "impressionante"
+      "lenda urbana",
+      "conseguiu (fazer algo)"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Abidemi, Todd",
-      "Abidemi, Rory",
-      "Jerri, Todd"
+      "Antoinette, Warren",
+      "Katie, Gilder"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Tailândia, EUA",
-      "Reino Unido, EUA",
+      "Nepal, EUA",
+      "País de Gales",
       "Nigéria, EUA"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "transporte",
+      "cidades",
       "viagem",
-      "migração"
+      "feriados"
      ],
      "c": 1
     }

@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · A2",
  "titulo": "Travel Tips For Portugal",
  "subtitulo": "Tema: viagem · A2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-037.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A2) sobre: viagem.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Travel Tips For Portug",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "accommodation",
+      "authentic",
+      "budget",
+      "you can't miss it"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Ana, Michael",
+      "Portugal, África do Sul (?)"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre viagem"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/views-1301-1350/1304-Ana-PortugalTips.mp3",
@@ -48,8 +92,8 @@
      "p": "\"accommodation\" significa…",
      "emoji": "",
      "ops": [
-      "quadrilha americana",
-      "modalidade",
+      "expressão idiomática",
+      "achar chato",
       "hospedagem"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"authentic\" significa…",
      "emoji": "",
      "ops": [
-      "anual",
+      "único",
       "autêntico",
-      "mau hábito"
+      "acumulador (guarda tudo)"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "orçamento",
-      "acumulador (guarda tudo)",
-      "celebração / festa"
+      "rotas marítimas",
+      "por segurança"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"you can't miss it\" significa…",
      "emoji": "",
      "ops": [
-      "se sentir obrigado",
-      "espectro",
+      "montanhoso",
+      "comer fora",
       "não tem como errar / imperdível"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Olga, Todd",
-      "Aimee, Todd",
+      "Rachel, Todd",
+      "Maria, Alex",
       "Ana, Michael"
      ],
      "c": 2
@@ -108,7 +152,7 @@
      "ops": [
       "Reino Unido, Itália",
       "Portugal, África do Sul (?)",
-      "EUA"
+      "País de Gales"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "viagem",
-      "migração",
-      "transporte"
+      "feriados",
+      "cidades"
      ],
      "c": 0
     }

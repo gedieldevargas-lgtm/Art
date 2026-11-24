@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · A2",
  "titulo": "Mari's Favorite Foods",
  "subtitulo": "Tema: comida · A2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-038.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A2) sobre: comida.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Mari's Favorite Foods",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "cuisine",
+      "replace",
+      "has to be",
+      "raw"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Mari, Ron",
+      "Japão, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre comida"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A0901/939-Mari-Food.mp3",
@@ -48,9 +92,9 @@
      "p": "\"cuisine\" significa…",
      "emoji": "",
      "ops": [
-      "taxa de mortalidade",
+      "não me importo",
       "culinária",
-      "rafting"
+      "imigração"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "substituir",
-      "no meu sangue",
-      "reputação"
+      "de ponta",
+      "se meter em encrenca"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"has to be\" significa…",
      "emoji": "",
      "ops": [
-      "ciclo vicioso",
-      "comodidade",
+      "papelada",
+      "é o pior",
       "tem que ser"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"raw\" significa…",
      "emoji": "",
      "ops": [
-      "prático / útil",
+      "montanhoso",
       "cru",
-      "hora do rush"
+      "caribu (rena)"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Abidemi, Rory",
+      "Aimee, Paul",
       "Mari, Ron",
-      "Julia, Nathan"
+      "Aimee, Katie"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Japão, EUA",
-      "Austrália, EUA",
-      "Jamaica, Reino Unido"
+      "Nigéria, Reino Unido",
+      "Reino Unido, Itália"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "cidades",
-      "feriados",
+      "gostos",
+      "folclore",
       "comida"
      ],
      "c": 2

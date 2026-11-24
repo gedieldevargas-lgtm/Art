@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B2",
  "titulo": "Favorite Celebrities",
  "subtitulo": "Tema: celebridades · B2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-074.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B2) sobre: celebridades.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Favorite Celebrities",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "celebrity",
+      "she kind of got big",
+      "somehow",
+      "gorgeous"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Hana, Ben",
+      "Japão, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre celebridades"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/-du_sfUhO4k",
   "mp3": "",
@@ -48,9 +92,9 @@
      "p": "\"celebrity\" significa…",
      "emoji": "",
      "ops": [
-      "as cartas que a vida deu",
+      "ambiente hostil",
       "celebridade",
-      "ilegalmente"
+      "sempre"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "ela meio que ficou famosa",
-      "bungee jump",
-      "aspectos polêmicos"
+      "rotas marítimas",
+      "significar muito"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"somehow\" significa…",
      "emoji": "",
      "ops": [
-      "ciclo vicioso",
-      "apagar (dormir)",
+      "difícil de negar",
+      "e assim por diante",
       "de algum jeito"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"gorgeous\" significa…",
      "emoji": "",
      "ops": [
-      "surgiu do nada",
+      "de amadurecimento (filme)",
       "lindo",
-      "de saco cheio"
+      "trabalhadores por contrato (servidão)"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Greg, Todd",
+      "Aimee, Todd",
       "Hana, Ben",
-      "Meg, Todd"
+      "Mari, Ron"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Japão, EUA",
-      "Austrália, EUA",
-      "Jamaica, Reino Unido"
+      "Nigéria, Reino Unido",
+      "Reino Unido, Itália"
      ],
      "c": 0
     },
@@ -116,7 +160,7 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "família e dinheiro",
+      "idiomas",
       "escola",
       "celebridades"
      ],

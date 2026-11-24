@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · A2",
  "titulo": "Middle School",
  "subtitulo": "Tema: escola · A2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-039.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A2) sobre: escola.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Middle School",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "normally",
+      "canteen",
+      "find boring",
+      "nice talking to you"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Naomi, Dai",
+      "País de Gales"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre escola"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A0901/931-Noami-School.mp3",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "normalmente",
-      "mudar de assunto",
-      "descobrir"
+      "reconhecível",
+      "expressão idiomática"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"canteen\" significa…",
      "emoji": "",
      "ops": [
-      "também (em negativas)",
-      "pais de ninho vazio",
+      "os moradores",
+      "um conselho",
       "cantina / refeitório"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"find boring\" significa…",
      "emoji": "",
      "ops": [
-      "binóculos",
+      "eclético",
       "achar chato",
-      "se envolver"
+      "comprovado"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "foi bom conversar com você",
-      "clima",
-      "sob pressão"
+      "não é meu forte",
+      "desistir"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Naomi, Dai",
-      "Jake, Shirley",
-      "Hana, Ben"
+      "Katie, Gilder",
+      "Jerri, Todd"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Tailândia, EUA",
-      "Nepal, EUA",
+      "Reino Unido, Vietnã",
+      "Reino Unido, EUA",
       "País de Gales"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "preços",
+      "cidades",
       "escola",
-      "folclore"
+      "trabalho remoto"
      ],
      "c": 1
     }

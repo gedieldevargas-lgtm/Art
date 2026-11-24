@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B1",
  "titulo": "Teen Host",
  "subtitulo": "Tema: rádio · B1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-057.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B1) sobre: rádio.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Teen Host",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "daunting",
+      "(be) up to",
+      "come up with",
+      "on the spot"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Shifani, Todd",
+      "Nova Zelândia, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre rádio"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A1101/1121-Shifani-Radio.mp3",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "intimidador",
-      "surtar",
-      "colocar o coração em"
+      "alguns / poucos",
+      "lançar"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"(be) up to\" significa…",
      "emoji": "",
      "ops": [
-      "nojento",
-      "prático / útil",
+      "por assim dizer",
+      "espírito esportivo",
       "estar disposto a / à altura"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"come up with\" significa…",
      "emoji": "",
      "ops": [
-      "prosperar",
+      "mítico",
       "ter (uma ideia)",
-      "a vida em geral"
+      "mais ou menos"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "na hora / de improviso",
-      "se perder em",
-      "sem dúvida"
+      "estudioso",
+      "bungee jump"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Shifani, Todd",
-      "Hana, Ben",
-      "Abidemi, Jeremy"
+      "Meg, Todd",
+      "Spencer, Curtis"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Nigéria, Canadá",
-      "Reino Unido",
+      "Japão, Canadá",
+      "EUA",
       "Nova Zelândia, EUA"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "datas",
+      "esportes",
       "rádio",
-      "roupas"
+      "academia"
      ],
      "c": 1
     }

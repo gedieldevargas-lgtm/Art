@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C2",
  "titulo": "Climate Change",
  "subtitulo": "Tema: meio ambiente · C2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-111.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C2) sobre: meio ambiente.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Climate Change",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "freakish",
+      "indicative",
+      "hard to deny",
+      "backed up"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Aimee, Paul",
+      "Reino Unido"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre meio ambiente"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A1301/1301-amy-climate-change.mp3",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "anormal / bizarro",
-      "mais que",
-      "na hora / de improviso"
+      "hora do rush",
+      "uma bela experiência"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"indicative\" significa…",
      "emoji": "",
      "ops": [
-      "um longo caminho pela frente",
-      "legenda",
+      "floresceu / prosperou",
+      "com certeza",
       "indicativo"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"hard to deny\" significa…",
      "emoji": "",
      "ops": [
-      "lenda urbana",
+      "encanamento",
       "difícil de negar",
-      "bem legal"
+      "travar / chegar ao limite"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "comprovado",
-      "lucro",
-      "paranoico"
+      "caminhada longa / trilha",
+      "pirataria"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Aimee, Paul",
-      "Shirley, Yuri",
-      "Jana, Peter"
+      "Aimee, Katie",
+      "Shifani, Todd"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Jamaica, Reino Unido",
-      "Reino Unido, Itália",
+      "Inglaterra, EUA",
+      "Reino Unido, EUA",
       "Reino Unido"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "trabalho remoto",
+      "hotel",
       "meio ambiente",
-      "países"
+      "relacionamentos"
      ],
      "c": 1
     }

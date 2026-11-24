@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C1",
  "titulo": "Shockingly Different",
  "subtitulo": "Tema: choque cultural · C1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-104.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C1) sobre: choque cultural.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Shockingly Different",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "shockingly",
+      "weird",
+      "right off the bat",
+      "grow accustomed to"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Abidemi, Jeremy",
+      "Nigéria, Canadá"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre choque cultural"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A1301/1320-abidemi-differences.mp3",
@@ -48,9 +92,9 @@
      "p": "\"shockingly\" significa…",
      "emoji": "",
      "ops": [
-      "tema em comum",
+      "pessoalmente",
       "chocantemente",
-      "equivalente"
+      "rabeca / violino"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "estranho",
-      "um pé na porta (primeira chance)",
-      "tarefas de casa"
+      "geralmente",
+      "ter vista para"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"right off the bat\" significa…",
      "emoji": "",
      "ops": [
-      "me irritar",
-      "fuga de cérebros",
+      "sem vontade de",
+      "não muito de",
       "logo de cara"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"grow accustomed to\" significa…",
      "emoji": "",
      "ops": [
-      "espírito esportivo",
+      "rafting",
       "se acostumar com",
-      "caribu (rena)"
+      "voltando a"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Lyndsay, Warren",
+      "Shantel, Todd",
       "Abidemi, Jeremy",
-      "Erina, Mike"
+      "Rebecca, Todd"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Nigéria, Canadá",
-      "Noruega, Canadá",
-      "EUA, Paquistão"
+      "EUA, Paquistão",
+      "Reino Unido"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "roupas",
-      "dinheiro",
+      "planos",
+      "turismo",
       "choque cultural"
      ],
      "c": 2

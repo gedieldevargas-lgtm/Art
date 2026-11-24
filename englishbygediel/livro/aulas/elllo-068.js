@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B2",
  "titulo": "Kids and Boredom",
  "subtitulo": "Tema: filhos · B2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-068.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B2) sobre: filhos.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Kids and Boredom",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "pocket money",
+      "get the idea",
+      "spoil the kids",
+      "hit a wall"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Angela, Todd",
+      "Inglaterra, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre filhos"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/e3zxMrrt6tM",
   "mp3": "",
@@ -48,9 +92,9 @@
      "p": "\"pocket money\" significa…",
      "emoji": "",
      "ops": [
-      "substituir",
+      "paranoico",
       "mesada",
-      "concordo com você"
+      "logo de cara"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "entender a ideia",
-      "guardar dinheiro",
-      "montanhoso"
+      "experiência memorável",
+      "eclético"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"spoil the kids\" significa…",
      "emoji": "",
      "ops": [
-      "eclético",
-      "descobrir / entender",
+      "fácil de usar",
+      "a escada dos imóveis",
       "mimar as crianças"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"hit a wall\" significa…",
      "emoji": "",
      "ops": [
-      "lenda urbana",
+      "aumentar aos poucos",
       "travar / chegar ao limite",
-      "persistiu"
+      "optar por / tentar"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Josh, Shirley",
+      "Jake, Shirley",
       "Angela, Todd",
-      "Hana, Daniel"
+      "Spencer, Curtis"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Inglaterra, EUA",
-      "Nepal, EUA",
-      "Rússia, EUA"
+      "Portugal, África do Sul (?)",
+      "Trinidad e Tobago, EUA"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "folclore",
-      "educação",
+      "transporte",
+      "trabalho remoto",
       "filhos"
      ],
      "c": 2

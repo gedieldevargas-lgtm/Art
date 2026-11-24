@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B2",
  "titulo": "Empty Nest",
  "subtitulo": "Tema: família · B2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-070.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B2) sobre: família.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Empty Nest",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "empty nester",
+      "against the grain",
+      "family dynamics",
+      "get choked up"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Angela, Todd",
+      "Inglaterra, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre família"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/Kvla_DXTEB8",
   "mp3": "",
@@ -48,8 +92,8 @@
      "p": "\"empty nester\" significa…",
      "emoji": "",
      "ops": [
-      "aumentar aos poucos",
-      "lenda urbana",
+      "geografia",
+      "ter vista para",
       "pais de ninho vazio"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"against the grain\" significa…",
      "emoji": "",
      "ops": [
-      "prosperar",
+      "aspectos polêmicos",
       "contra a corrente",
-      "experimentar"
+      "bungee jump"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "dinâmica familiar",
-      "senso de moda",
-      "entender um conceito"
+      "fluxo de dinheiro",
+      "excepcional"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"get choked up\" significa…",
      "emoji": "",
      "ops": [
-      "não é meu forte",
-      "no geral",
+      "vestir rápido",
+      "desvantagem",
       "ficar com a voz embargada"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Hana, Daniel",
-      "Josh, Shirley",
+      "Spencer, Curtis",
+      "Jake, Shirley",
       "Angela, Todd"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Rússia, EUA",
+      "Trinidad e Tobago, EUA",
       "Inglaterra, EUA",
-      "Nepal, EUA"
+      "Portugal, África do Sul (?)"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "família",
-      "transporte",
-      "sociedade"
+      "roupas",
+      "comida"
      ],
      "c": 0
     }

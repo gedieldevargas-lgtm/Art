@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · A2",
  "titulo": "Going To",
  "subtitulo": "Gramática: Going To · A2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-017.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A2) sobre: planos.",
+   "Praticar o ponto de gramática: Going To.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Going To",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Going To"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Hana, Daniel",
+      "Reino Unido, Chile"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre planos"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/grammar/L3-05-HanaDaniel-Plans-GoingTo.mp3",
@@ -106,9 +147,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Sarah, Todd",
+      "Aimee, Paul",
       "Hana, Daniel",
-      "Abidemi, Todd"
+      "Monica, Todd"
      ],
      "c": 1
     },
@@ -117,7 +158,7 @@
      "emoji": "",
      "ops": [
       "Reino Unido, Chile",
-      "China, EUA",
+      "EUA, Reino Unido",
       "Rep. Tcheca, África do Sul (?)"
      ],
      "c": 0
@@ -126,8 +167,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "arrependimentos",
-      "idiomas e países",
+      "música",
+      "turismo",
       "planos"
      ],
      "c": 2

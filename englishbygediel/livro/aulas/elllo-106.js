@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C2",
  "titulo": "Bitcoin Part 2",
  "subtitulo": "Tema: finanças · C2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-106.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C2) sobre: finanças.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Bitcoin Part 2",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "at the end of the day",
+      "household word",
+      "big hurdle",
+      "user-friendly"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Anthony, Todd",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre finanças"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/eyWToFHVFaw",
   "mp3": "",
@@ -48,8 +92,8 @@
      "p": "\"at the end of the day\" significa…",
      "emoji": "",
      "ops": [
-      "custar os olhos da cara",
-      "salário mínimo justo",
+      "acumulador (guarda tudo)",
+      "único",
       "no fim das contas"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"household word\" significa…",
      "emoji": "",
      "ops": [
-      "estragar",
+      "egocêntrico",
       "nome conhecido de todos",
-      "refogado oriental"
+      "ela meio que ficou famosa"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "grande obstáculo",
-      "mudar de assunto",
-      "rotas marítimas"
+      "algo importante",
+      "minimalista"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"user-friendly\" significa…",
      "emoji": "",
      "ops": [
-      "rabeca / violino",
-      "acompanhar",
+      "complicado",
+      "indicativo",
       "fácil de usar"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Dan, Todd",
-      "Greg, Todd",
+      "Hana, Ben",
+      "Naomi, Dai",
       "Anthony, Todd"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido",
+      "Trinidad e Tobago, EUA",
       "EUA",
-      "EUA, Reino Unido"
+      "Japão, Canadá"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "finanças",
-      "planos",
-      "turismo"
+      "geografia",
+      "casa"
      ],
      "c": 0
     }

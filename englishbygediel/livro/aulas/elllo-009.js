@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · A1",
  "titulo": "Object Pronouns",
  "subtitulo": "Gramática: Object Pronouns · A1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-009.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A1) sobre: família.",
+   "Praticar o ponto de gramática: Object Pronouns.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Object Pronouns",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Object Pronouns"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Shantel, Todd",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre família"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/AGTK/A1-10-ShantelTodd-Family-ObjectPronouns.mp3",
@@ -107,8 +148,8 @@
      "emoji": "",
      "ops": [
       "Shantel, Todd",
-      "Sarah, Todd",
-      "Shirley, Yuri"
+      "Naomi, Dai",
+      "Julia, Nathan"
      ],
      "c": 0
     },
@@ -116,8 +157,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "EUA, Reino Unido",
-      "Reino Unido",
+      "Japão, Canadá",
+      "Trinidad e Tobago, EUA",
       "EUA"
      ],
      "c": 2
@@ -126,9 +167,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "sociedade",
+      "comida",
       "família",
-      "transporte"
+      "roupas"
      ],
      "c": 1
     }

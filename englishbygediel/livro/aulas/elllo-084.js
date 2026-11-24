@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B2",
  "titulo": "The Big Mix",
  "subtitulo": "Tema: história e cultura · B2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-084.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B2) sobre: história e cultura.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "The Big Mix",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "descent",
+      "indentured laborers",
+      "abolished",
+      "retirement"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "CleAnn, Todd",
+      "Trinidad e Tobago, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre história e cultura"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A1001/1015-CleAnn-Culture.mp3",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "descendência",
-      "se locomover",
-      "fuga de cérebros"
+      "estudioso",
+      "espectro"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"indentured laborers\" significa…",
      "emoji": "",
      "ops": [
-      "viralizar",
-      "alguns / poucos",
+      "aprender / pegar",
+      "largar um hábito",
       "trabalhadores por contrato (servidão)"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"abolished\" significa…",
      "emoji": "",
      "ops": [
-      "geografia",
+      "reconhecível",
       "abolido",
-      "trabalhar em / melhorar"
+      "trazido de navio"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "aposentadoria",
-      "fora isso",
-      "geografia"
+      "lenda urbana",
+      "dar um gelo"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "CleAnn, Todd",
-      "Shirley, Yuri",
-      "Erina, Mike"
+      "Shantel, Todd",
+      "Rufei, Todd"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "País de Gales",
-      "Japão, Canadá",
+      "Reino Unido, EUA",
+      "Portugal, África do Sul (?)",
       "Trinidad e Tobago, EUA"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "academia",
+      "restaurante",
       "história e cultura",
-      "mar e história"
+      "transporte"
      ],
      "c": 1
     }
