@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · A2",
  "titulo": "Farm Animals",
  "subtitulo": "Tema: animais · A2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-032.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A2) sobre: animais.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Farm Animals",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "get in trouble",
+      "in person",
+      "stay away from",
+      "social"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Meg, Todd",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre animais"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/o5oSo3o0fjM",
   "mp3": "",
@@ -48,9 +92,9 @@
      "p": "\"get in trouble\" significa…",
      "emoji": "",
      "ops": [
-      "disparar",
+      "equivalente",
       "se meter em encrenca",
-      "apagar (dormir)"
+      "celebração / festa"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "pessoalmente",
-      "excepcional",
-      "algum lugar"
+      "acumulador (guarda tudo)",
+      "celebração / festa"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"stay away from\" significa…",
      "emoji": "",
      "ops": [
-      "descobrir",
-      "no geral",
+      "sazonal",
+      "complicado",
       "ficar longe de"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"social\" significa…",
      "emoji": "",
      "ops": [
-      "fora isso",
+      "curva de sino (média)",
       "sociável",
-      "sempre"
+      "trabalhar em / melhorar"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Julia, Todd",
+      "Aimee, Katie",
       "Meg, Todd",
-      "Olga, Todd"
+      "Monica, Todd"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "EUA",
-      "EUA, Reino Unido",
-      "Reino Unido"
+      "Japão, Canadá",
+      "Trinidad e Tobago, EUA"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "sonhos e carreira",
-      "mudança",
+      "cores",
+      "academia",
       "animais"
      ],
      "c": 2

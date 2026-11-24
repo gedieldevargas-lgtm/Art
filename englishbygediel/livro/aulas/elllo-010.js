@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · A1",
  "titulo": "Demonstrative Pronouns",
  "subtitulo": "Gramática: Demonstrative Pronouns · A1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-010.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A1) sobre: objetos.",
+   "Praticar o ponto de gramática: Demonstrative Pronouns.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Demonstrative Pronouns",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Demonstrative Pronouns"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Natalie, Todd",
+      "Reino Unido, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre objetos"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/AGTK/A1-11-NatTodd-This-That-3.mp3",
@@ -106,8 +147,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Mari, Ron",
-      "Angela, Todd",
+      "Aimee, Paul",
+      "Julia, Todd",
       "Natalie, Todd"
      ],
      "c": 2
@@ -116,9 +157,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Nova Zelândia, EUA",
+      "Reino Unido",
       "Reino Unido, EUA",
-      "Reino Unido, Chile"
+      "Nova Zelândia, EUA"
      ],
      "c": 1
     },
@@ -127,8 +168,8 @@
      "emoji": "",
      "ops": [
       "objetos",
-      "academia",
-      "sociedade"
+      "migração",
+      "ética"
      ],
      "c": 0
     }

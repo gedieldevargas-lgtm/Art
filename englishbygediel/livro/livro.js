@@ -311,7 +311,7 @@
   }
 
   function desenhar(el, a) {
-    juntarMidia(a); enxugar(a); imgDe.modulo = a.nivel;
+    juntarMidia(a); enxugar(a); imgDe.modulo = a.nivel; A_ATUAL = a;
     var st = ler(a.id), tot = totalItens(a), ok = acertos(a, st);
     var aberto = st.aberto || 'revisar';
     var h = '<div class="lv" data-aula="' + esc(a.id) + '">' +
@@ -401,7 +401,7 @@
     try { window.parent !== window && window.parent.postMessage({ livro: a.id, acertos: ok, total: tot }, '*'); } catch (e) {}
   }
 
-  var JOGO = {};
+  var JOGO = {}, A_ATUAL = null;
   function clicarPar(el, a, t) {
     if (t.classList.contains('feito')) return;
     var jogo = t.closest('.lv-jogo'), id = jogo.dataset.jogo, J = JOGO[id] = JOGO[id] || { erros: 0, ini: Date.now() };
@@ -427,7 +427,7 @@
   function festa(el) {
     if (el.querySelector('.lv-festa')) return;
     var d = document.createElement('div'); d.className = 'lv-festa';
-    d.innerHTML = (window.LIVRO_MIDIA_FESTA ? '<video src="' + BASE + 'midia/' + window.LIVRO_MIDIA_FESTA + '.mp4" autoplay loop muted playsinline></video>' : '') + '<div>🏆 <b>Livro da aula completo!</b> Agora baixe o e-book e faça a missão no caderno.</div>';
+    d.innerHTML = (window.LIVRO_MIDIA_FESTA ? '<video src="' + BASE + 'midia/' + window.LIVRO_MIDIA_FESTA + '.mp4" autoplay loop muted playsinline></video>' : '') + '<div>🏆 <b>Livro da aula completo!</b> ' + (A_ATUAL && A_ATUAL.semEbook ? 'Agora faça a missão da aula.' : 'Agora baixe o e-book (botão no topo) e faça a missão no caderno.') + '</div>';
     el.querySelector('.lv').insertBefore(d, el.querySelector('.lv-sec'));
   }
 

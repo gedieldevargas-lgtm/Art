@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · A1",
  "titulo": "Adjectives and Adverbs of Intensity",
  "subtitulo": "Gramática: Adjectives and Adverbs of Intensity · A1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-011.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A1) sobre: descrições.",
+   "Praticar o ponto de gramática: Adjectives and Adverbs of Intensity.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Adjectives and Adverbs",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Adjectives and Adverbs of Intensity"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Natalie, Todd",
+      "Reino Unido, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre descrições"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/AGTK/A1-12-NatTodd-Adjectives.mp3",
@@ -106,9 +147,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Angela, Todd",
+      "Julia, Todd",
       "Natalie, Todd",
-      "Mari, Ron"
+      "Aimee, Paul"
      ],
      "c": 1
     },
@@ -117,8 +158,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido, EUA",
-      "Reino Unido, Chile",
-      "Nova Zelândia, EUA"
+      "Nova Zelândia, EUA",
+      "Reino Unido"
      ],
      "c": 0
     },
@@ -126,8 +167,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "mídia",
-      "saúde",
+      "geografia",
+      "tecnologia",
       "descrições"
      ],
      "c": 2

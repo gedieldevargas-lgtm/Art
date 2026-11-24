@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · A2",
  "titulo": "How International are you?",
  "subtitulo": "Tema: cultura · A2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-031.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A2) sobre: cultura.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "How International are ",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "find out",
+      "apart from that",
+      "not at all",
+      "a few"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Katie, Todd",
+      "Reino Unido, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre cultura"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/xap64D9PAyc",
   "mp3": "https://elllo.org/Audio/A1451/1457-Katie-International-Experience.mp3",
@@ -48,8 +92,8 @@
      "p": "\"find out\" significa…",
      "emoji": "",
      "ops": [
-      "alguns / poucos",
-      "com certeza",
+      "isolado",
+      "bungee jump",
       "descobrir"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"apart from that\" significa…",
      "emoji": "",
      "ops": [
-      "muito quente",
+      "em outra vida",
       "fora isso",
-      "eclético"
+      "na hora / de improviso"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "de jeito nenhum / nem um pouco",
-      "experiência memorável",
-      "resolver logo"
+      "pessoalmente",
+      "preço justo"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"a few\" significa…",
      "emoji": "",
      "ops": [
-      "se locomover",
-      "partir",
+      "não está dando certo",
+      "subdividido",
       "alguns / poucos"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Josh, Shirley",
-      "Abidemi, Todd",
+      "Sarah, Todd",
+      "Aimee, Paul",
       "Katie, Todd"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Nova Zelândia, EUA",
+      "Reino Unido",
       "Reino Unido, EUA",
-      "Reino Unido, Chile"
+      "Nova Zelândia, EUA"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "cultura",
-      "humor",
-      "idiomas e países"
+      "sonhos e carreira",
+      "personalidade"
      ],
      "c": 0
     }

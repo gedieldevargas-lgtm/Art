@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · A2",
  "titulo": "20 Years Abroad",
  "subtitulo": "Tema: viver fora · A2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-033.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A2) sobre: viver fora.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "20 Years Abroad",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "work permit",
+      "someplace",
+      "certificate",
+      "best of both worlds"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Meg, Todd",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre viver fora"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/views-1401-1450/1406-MegTodd-Travel-Thailand.mp3",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "visto de trabalho",
-      "contra a corrente",
-      "pessoalmente"
+      "de longa distância",
+      "vestido nos trinques"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"someplace\" significa…",
      "emoji": "",
      "ops": [
-      "taxa de mortalidade",
-      "pobreza extrema",
+      "orçamento",
+      "autêntico",
       "algum lugar"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"certificate\" significa…",
      "emoji": "",
      "ops": [
-      "vestido nos trinques",
+      "optar por / tentar",
       "certificado",
-      "compreender"
+      "em si"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "o melhor dos dois mundos",
-      "bungee jump",
-      "aspectos polêmicos"
+      "disparar",
+      "faixa de preço"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Meg, Todd",
-      "Olga, Todd",
-      "Julia, Todd"
+      "Monica, Todd",
+      "Aimee, Katie"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "EUA, Reino Unido",
-      "Reino Unido",
+      "Japão, Canadá",
+      "Trinidad e Tobago, EUA",
       "EUA"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "datas",
+      "sono e sonhos",
       "viver fora",
-      "preços"
+      "idiomas e países"
      ],
      "c": 1
     }

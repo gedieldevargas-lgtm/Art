@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · A1",
  "titulo": "Colors",
  "subtitulo": "Gramática: Colors · A1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-004.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A1) sobre: cores.",
+   "Praticar o ponto de gramática: Colors.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Colors",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Colors"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Meg, Todd",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre cores"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/AGTK/A1-02-MegTodd-Colors.mp3",
@@ -106,8 +147,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Olga, Todd",
-      "Julia, Todd",
+      "Monica, Todd",
+      "Aimee, Katie",
       "Meg, Todd"
      ],
      "c": 2
@@ -116,9 +157,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido",
+      "Trinidad e Tobago, EUA",
       "EUA",
-      "EUA, Reino Unido"
+      "Japão, Canadá"
      ],
      "c": 1
     },
@@ -127,8 +168,8 @@
      "emoji": "",
      "ops": [
       "cores",
-      "expressões idiomáticas",
-      "filhos"
+      "alfândega",
+      "dinheiro"
      ],
      "c": 0
     }

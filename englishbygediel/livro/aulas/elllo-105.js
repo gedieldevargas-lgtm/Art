@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C1",
  "titulo": "First Memories of Canada",
  "subtitulo": "Tema: migração · C1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-105.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C1) sobre: migração.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "First Memories of Cana",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "traumatic",
+      "initially",
+      "in the midst of",
+      "flourished"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Abidemi, Jeremy",
+      "Nigéria, Canadá"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre migração"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A1301/1319-abidemi-going-to-canada.mp3",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "traumático",
-      "eclético",
-      "de preferência"
+      "uma grande provação",
+      "pessoa de sono pesado"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"initially\" significa…",
      "emoji": "",
      "ops": [
-      "em si",
-      "vale-tudo",
+      "desvantagem",
+      "andar dentro d'água",
       "inicialmente"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"in the midst of\" significa…",
      "emoji": "",
      "ops": [
-      "sazonal",
+      "um nerd / bobão",
       "no meio de",
-      "atitude aberta"
+      "aguentar / lidar com"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "floresceu / prosperou",
-      "alta temporada",
-      "engraçado você falar isso"
+      "herói popular",
+      "conotação negativa"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Abidemi, Jeremy",
-      "Erina, Mike",
-      "Lyndsay, Warren"
+      "Rebecca, Todd",
+      "Shantel, Todd"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Noruega, Canadá",
       "EUA, Paquistão",
+      "Reino Unido",
       "Nigéria, Canadá"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "animais",
+      "sociedade",
       "migração",
-      "fim de semana"
+      "rotina"
      ],
      "c": 1
     }

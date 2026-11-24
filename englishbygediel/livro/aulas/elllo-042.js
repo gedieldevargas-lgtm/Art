@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · B1",
  "titulo": "Causative Verbs",
  "subtitulo": "Gramática: Causative Verbs · B1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-042.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B1) sobre: trabalho.",
+   "Praticar o ponto de gramática: Causative Verbs.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Causative Verbs",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Causative Verbs"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "—",
+      ""
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre trabalho"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/grammar/L4-02-Causative-Verbs-Teaching-Job.mp3",
@@ -106,9 +147,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "finanças",
+      "arrependimentos",
       "trabalho",
-      "mar e história"
+      "finanças"
      ],
      "c": 1
     }

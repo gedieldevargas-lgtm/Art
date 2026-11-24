@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C2",
  "titulo": "Breaking Bad Habits",
  "subtitulo": "Tema: saúde · C2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-108.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C2) sobre: saúde.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Breaking Bad Habits",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "break a habit",
+      "obsessive behavior",
+      "pop up",
+      "give up"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Olga, Todd",
+      "Rússia, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre saúde"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/biNWv0gNU_A",
   "mp3": "",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "largar um hábito",
-      "ter vista para",
-      "de jeito nenhum / nem um pouco"
+      "sazonal",
+      "lançar"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"obsessive behavior\" significa…",
      "emoji": "",
      "ops": [
-      "dá uma olhada",
-      "contraproducente",
+      "se envolver",
+      "desistir",
       "comportamento obsessivo"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"pop up\" significa…",
      "emoji": "",
      "ops": [
-      "pontos altos",
+      "pessoalmente",
       "aparecer",
-      "se forçar"
+      "segurar a língua"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "desistir",
-      "clima",
-      "contar com"
+      "sazonal",
+      "décadas atrás"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Olga, Todd",
-      "Monica, Todd",
-      "Julia, Nathan"
+      "Julia, Todd",
+      "Katie, Gilder"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Nepal, EUA",
-      "País de Gales",
+      "Portugal, África do Sul (?)",
+      "Reino Unido, EUA",
       "Rússia, EUA"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "mídia",
+      "mar e história",
       "saúde",
-      "trabalho remoto"
+      "restaurante"
      ],
      "c": 1
     }

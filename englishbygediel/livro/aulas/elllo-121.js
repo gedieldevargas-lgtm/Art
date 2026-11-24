@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C2",
  "titulo": "Minimum Wage",
  "subtitulo": "Tema: economia · C2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-121.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C2) sobre: economia.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Minimum Wage",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "proper minimum wage",
+      "in theory",
+      "sweatshops",
+      "abject poverty"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Greg, Todd",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre economia"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A0951/983-Greg-Wages.mp3",
@@ -48,8 +92,8 @@
      "p": "\"proper minimum wage\" significa…",
      "emoji": "",
      "ops": [
-      "nessa linha",
-      "de preferência",
+      "virando moda",
+      "vestir rápido",
       "salário mínimo justo"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"in theory\" significa…",
      "emoji": "",
      "ops": [
-      "fúria no trânsito",
+      "hospedagem",
       "em teoria",
-      "pagar a conta"
+      "compreender"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "fábricas com trabalho explorado",
-      "sociável",
-      "elo fraco"
+      "especialmente",
+      "dar um gelo"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"abject poverty\" significa…",
      "emoji": "",
      "ops": [
-      "pilão",
-      "distraído",
+      "desistir",
+      "não consigo imaginar",
       "pobreza extrema"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Meg, Todd",
-      "Natalie, Todd",
+      "Hana, Ben",
+      "Shantel, Todd",
       "Greg, Todd"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido",
+      "Trinidad e Tobago, EUA",
       "EUA",
-      "EUA, Reino Unido"
+      "Japão, Canadá"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "economia",
-      "ética",
-      "esportes"
+      "cores",
+      "comida"
      ],
      "c": 0
     }

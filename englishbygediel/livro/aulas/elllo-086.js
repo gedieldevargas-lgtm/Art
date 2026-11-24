@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C1",
  "titulo": "Street Food",
  "subtitulo": "Tema: comida · C1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-086.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C1) sobre: comida.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Street Food",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "foodie",
+      "pestle and mortar",
+      "roasting hot",
+      "hole-in-the-wall"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Natalie, Todd",
+      "Reino Unido, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre comida"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/kudBR4JBMzw",
   "mp3": "",
@@ -48,9 +92,9 @@
      "p": "\"foodie\" significa…",
      "emoji": "",
      "ops": [
-      "preço justo",
+      "caminhada longa / trilha",
       "amante de comida",
-      "de saco cheio"
+      "sem dúvida"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "pilão",
-      "tema em comum",
-      "atrás do saque"
+      "na hora / de improviso",
+      "estranho"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"roasting hot\" significa…",
      "emoji": "",
      "ops": [
-      "taxa de mortalidade",
-      "mais que",
+      "desnecessário / injusto",
+      "pergunta difícil",
       "muito quente"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"hole-in-the-wall\" significa…",
      "emoji": "",
      "ops": [
-      "com certeza",
+      "esclarecedor",
       "lugar pequeno e simples",
-      "fora do roteiro turístico"
+      "mecânico"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Angela, Todd",
+      "Julia, Todd",
       "Natalie, Todd",
-      "Mari, Ron"
+      "Aimee, Paul"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido, EUA",
-      "Reino Unido, Chile",
-      "Nova Zelândia, EUA"
+      "Nova Zelândia, EUA",
+      "Reino Unido"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "cidades",
-      "feriados",
+      "gostos",
+      "folclore",
       "comida"
      ],
      "c": 2

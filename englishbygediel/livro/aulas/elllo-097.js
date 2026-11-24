@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C1",
  "titulo": "New York Tips",
  "subtitulo": "Tema: viagem · C1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-097.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C1) sobre: viagem.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "New York Tips",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "I can't imagine",
+      "get lost in",
+      "memorable experience",
+      "binoculars"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Antoinette, Warren",
+      "EUA, Canadá"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre viagem"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A1351/1363-Warren-NewYork.mp3",
@@ -48,8 +92,8 @@
      "p": "\"I can't imagine\" significa…",
      "emoji": "",
      "ops": [
-      "surtar",
-      "comprovado",
+      "falar o que pensa",
+      "de amadurecimento (filme)",
       "não consigo imaginar"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"get lost in\" significa…",
      "emoji": "",
      "ops": [
-      "hora do rush",
+      "papelada",
       "se perder em",
-      "exceto"
+      "no geral"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "experiência memorável",
-      "desnecessário / injusto",
-      "pergunta difícil"
+      "quadrilha americana",
+      "conotação negativa"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"binoculars\" significa…",
      "emoji": "",
      "ops": [
-      "explicar por partes",
-      "descobrir / entender",
+      "aumentar aos poucos",
+      "rotas marítimas",
       "binóculos"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Naomi, Dai",
-      "Jake, Shirley",
+      "CleAnn, Todd",
+      "Shantel, Todd",
       "Antoinette, Warren"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Austrália, EUA",
+      "Reino Unido, EUA",
       "EUA, Canadá",
-      "Reino Unido, EUA"
+      "Reino Unido"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "viagem",
-      "migração",
-      "transporte"
+      "feriados",
+      "cidades"
      ],
      "c": 0
     }

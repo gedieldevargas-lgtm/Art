@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B1",
  "titulo": "Her Dreams",
  "subtitulo": "Tema: sonhos e carreira · B1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-059.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B1) sobre: sonhos e carreira.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Her Dreams",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "realistic",
+      "common theme",
+      "egotistical",
+      "make a difference"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Lyndsay, Warren",
+      "EUA, Canadá"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre sonhos e carreira"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A1101/1117-Dream-Lindsay.mp3",
@@ -48,9 +92,9 @@
      "p": "\"realistic\" significa…",
      "emoji": "",
      "ops": [
-      "salário mínimo justo",
+      "enviar um formulário",
       "realista",
-      "logo de cara"
+      "educação básica"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "tema em comum",
-      "no meio de",
-      "isso funciona / pode ser"
+      "não suporto",
+      "surtar"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"egotistical\" significa…",
      "emoji": "",
      "ops": [
-      "guardar dinheiro",
-      "não adequado para",
+      "culinária",
+      "te explicar passo a passo",
       "egocêntrico"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"make a difference\" significa…",
      "emoji": "",
      "ops": [
-      "fora do roteiro turístico",
+      "aumentar aos poucos",
       "fazer a diferença",
-      "pais de ninho vazio"
+      "o dia todo"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Aimee, Katie",
+      "Hana, Daniel",
       "Lyndsay, Warren",
-      "Shirley, Yuri"
+      "Ginger, Nabeel"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "EUA, Canadá",
-      "Reino Unido, EUA",
-      "Austrália, EUA"
+      "Reino Unido",
+      "Reino Unido, EUA"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "hotel",
-      "sociedade",
+      "lazer",
+      "educação",
       "sonhos e carreira"
      ],
      "c": 2

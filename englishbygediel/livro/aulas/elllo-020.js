@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · A2",
  "titulo": "Love it / Hate it",
  "subtitulo": "Gramática: Gerunds · A2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-020.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A2) sobre: lazer.",
+   "Praticar o ponto de gramática: Gerunds.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Love it / Hate it",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Gerunds"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Meg, Todd",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre lazer"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/FW0henUS1p4",
   "mp3": "",
@@ -106,9 +147,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Julia, Todd",
+      "Aimee, Katie",
       "Meg, Todd",
-      "Olga, Todd"
+      "Monica, Todd"
      ],
      "c": 1
     },
@@ -117,8 +158,8 @@
      "emoji": "",
      "ops": [
       "EUA",
-      "EUA, Reino Unido",
-      "Reino Unido"
+      "Japão, Canadá",
+      "Trinidad e Tobago, EUA"
      ],
      "c": 0
     },
@@ -126,8 +167,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "trabalho",
-      "rádio",
+      "casa",
+      "hotel",
       "lazer"
      ],
      "c": 2

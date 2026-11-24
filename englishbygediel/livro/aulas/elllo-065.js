@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B2",
  "titulo": "Bangkok Transportation - Part 1",
  "subtitulo": "Tema: transporte · B2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-065.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B2) sobre: transporte.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Bangkok Transportation",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "business district",
+      "attract tourists",
+      "fixed price",
+      "price range"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Jerri, Todd",
+      "Tailândia, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre transporte"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/HXjnFKfN-wQ",
   "mp3": "",
@@ -48,9 +92,9 @@
      "p": "\"business district\" significa…",
      "emoji": "",
      "ops": [
-      "se livrar de",
+      "tarefas de casa",
       "centro financeiro",
-      "clima"
+      "vestido nos trinques"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "atrair turistas",
-      "preço fixo",
-      "anormal / bizarro"
+      "o dia todo",
+      "áreas rurais"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"fixed price\" significa…",
      "emoji": "",
      "ops": [
-      "focar em vencer",
-      "hipócrita",
+      "quadrilha americana",
+      "minimalista",
       "preço fixo"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"price range\" significa…",
      "emoji": "",
      "ops": [
-      "dar permissão",
+      "se forçar",
       "faixa de preço",
-      "me irritar"
+      "lançar"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Aimee, Paul",
+      "Jin, Adam",
       "Jerri, Todd",
-      "Natalie, Todd"
+      "Abidemi, Jeremy"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Tailândia, EUA",
-      "Nova Zelândia, EUA",
-      "Japão, Canadá"
+      "Portugal, África do Sul (?)",
+      "Nova Zelândia, EUA"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "datas comemorativas",
-      "filmes",
+      "hotel",
+      "sociedade",
       "transporte"
      ],
      "c": 2

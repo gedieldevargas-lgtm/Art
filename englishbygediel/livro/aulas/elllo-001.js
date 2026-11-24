@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · A1",
  "titulo": "Be Verbs - Introductions",
  "subtitulo": "Gramática: Be Verbs - Introductions · A1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-001.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A1) sobre: apresentações.",
+   "Praticar o ponto de gramática: Be Verbs - Introductions.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Be Verbs - Introductio",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Be Verbs - Introductions"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Aimee, Todd",
+      "Reino Unido, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre apresentações"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/3ielOb6ztVY",
   "mp3": "",
@@ -106,8 +147,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "CleAnn, Todd",
-      "Julia, Nathan",
+      "Jin, Adam",
+      "Rebecca, Todd",
       "Aimee, Todd"
      ],
      "c": 2
@@ -116,9 +157,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Nova Zelândia, EUA",
+      "Reino Unido",
       "Reino Unido, EUA",
-      "Reino Unido, Chile"
+      "Nova Zelândia, EUA"
      ],
      "c": 1
     },
@@ -127,8 +168,8 @@
      "emoji": "",
      "ops": [
       "apresentações",
-      "hotel",
-      "fim de semana"
+      "viagem",
+      "saúde"
      ],
      "c": 0
     }

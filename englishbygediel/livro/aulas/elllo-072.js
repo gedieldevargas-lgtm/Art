@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B2",
  "titulo": "Alternative Education",
  "subtitulo": "Tema: educação · B2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-072.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B2) sobre: educação.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Alternative Education",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "emphasis",
+      "bell curve",
+      "feedback",
+      "grasp a concept"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Gyri, Viyasan",
+      "Noruega, Canadá"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre educação"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/Mw68vkBfoq4",
   "mp3": "",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "ênfase",
-      "disparar",
-      "faixa de preço"
+      "contar com",
+      "de preferência"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"bell curve\" significa…",
      "emoji": "",
      "ops": [
-      "vestido nos trinques",
-      "nunca",
+      "papelada",
+      "sazonal",
       "curva de sino (média)"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"feedback\" significa…",
      "emoji": "",
      "ops": [
-      "comodidade",
+      "não adequado para",
       "retorno / feedback",
-      "tem que ser"
+      "arrecadação de fundos"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "entender um conceito",
-      "rafting",
-      "taxa de mortalidade"
+      "surtar",
+      "comprovado"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Gyri, Viyasan",
-      "Katie, Gilder",
-      "Shifani, Todd"
+      "Ana, Michael",
+      "Greg, Todd"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Japão, Canadá",
-      "EUA, Canadá",
+      "China, EUA",
+      "Reino Unido",
       "Noruega, Canadá"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "viver fora",
+      "filmes",
       "educação",
-      "família e dinheiro"
+      "casa"
      ],
      "c": 1
     }

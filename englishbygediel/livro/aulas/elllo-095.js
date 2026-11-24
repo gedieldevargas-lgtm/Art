@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C1",
  "titulo": "Women in Uniform",
  "subtitulo": "Tema: carreira militar · C1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-095.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C1) sobre: carreira militar.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Women in Uniform",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "weak link",
+      "not suited for",
+      "obstacle course",
+      "Go for it"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Meg, Todd",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre carreira militar"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A1351/1369-Meg-01-Military.mp3",
@@ -48,9 +92,9 @@
      "p": "\"weak link\" significa…",
      "emoji": "",
      "ops": [
-      "fora do roteiro turístico",
+      "sempre",
       "elo fraco",
-      "arquitetura"
+      "um longo caminho pela frente"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "não adequado para",
-      "se sentir obrigado",
-      "lindo"
+      "exceto",
+      "conseguiu (fazer algo)"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"obstacle course\" significa…",
      "emoji": "",
      "ops": [
-      "vegetariano",
-      "alguns / poucos",
+      "polo / centro",
+      "mais ou menos",
       "pista de obstáculos"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"Go for it\" significa…",
      "emoji": "",
      "ops": [
-      "mudar de assunto",
+      "rafting",
       "vai fundo",
-      "imigração"
+      "os moradores"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Julia, Todd",
+      "Aimee, Katie",
       "Meg, Todd",
-      "Olga, Todd"
+      "Monica, Todd"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "EUA",
-      "EUA, Reino Unido",
-      "Reino Unido"
+      "Japão, Canadá",
+      "Trinidad e Tobago, EUA"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "presentes",
-      "datas comemorativas",
+      "turismo",
+      "viver fora",
       "carreira militar"
      ],
      "c": 2

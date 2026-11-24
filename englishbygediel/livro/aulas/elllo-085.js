@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B2",
  "titulo": "Winning",
  "subtitulo": "Tema: esportes · B2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-085.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B2) sobre: esportes.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Winning",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "focus on winning",
+      "force yourself",
+      "counterproductive",
+      "hostile environment"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Monica, Todd",
+      "Nova Zelândia, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre esportes"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A1001/1006-Monica-Winning.mp3",
@@ -48,8 +92,8 @@
      "p": "\"focus on winning\" significa…",
      "emoji": "",
      "ops": [
-      "nojento",
-      "-itas (seguidores de)",
+      "duvidoso / arriscado",
+      "contra a corrente",
       "focar em vencer"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"force yourself\" significa…",
      "emoji": "",
      "ops": [
-      "experimentar",
+      "estranho",
       "se forçar",
-      "coisa que irrita"
+      "na hora / de improviso"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "contraproducente",
-      "estranho",
-      "rotina normal de trabalho"
+      "excepcional",
+      "decisivo"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"hostile environment\" significa…",
      "emoji": "",
      "ops": [
-      "clima",
-      "me deixa louco",
+      "geografia",
+      "melhor interesse",
       "ambiente hostil"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Erina, Mike",
       "Aimee, Katie",
+      "Greg, Todd",
       "Monica, Todd"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido",
+      "EUA",
       "Nova Zelândia, EUA",
-      "Nigéria, Canadá"
+      "Japão, Canadá"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "esportes",
-      "viagem",
-      "fim de semana"
+      "filmes",
+      "gostos"
      ],
      "c": 0
     }

@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · A2",
  "titulo": "Mari's Abilities",
  "subtitulo": "Tema: habilidades · A2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-040.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A2) sobre: habilidades.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Mari's Abilities",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "more specifically",
+      "a dork",
+      "enroll",
+      "tricky question"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Mari, Ron",
+      "Japão, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre habilidades"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A0901/916-Mari-Ability.mp3",
@@ -48,8 +92,8 @@
      "p": "\"more specifically\" significa…",
      "emoji": "",
      "ops": [
-      "construir valores",
-      "amante de comida",
+      "de longa distância",
+      "contar com",
       "mais especificamente"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"a dork\" significa…",
      "emoji": "",
      "ops": [
-      "descobrir / entender",
+      "rotina normal de trabalho",
       "um nerd / bobão",
-      "anual"
+      "logo de cara"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "se matricular",
-      "focar em vencer",
-      "se envolver"
+      "intimidador",
+      "ambiente hostil"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"tricky question\" significa…",
      "emoji": "",
      "ops": [
-      "pressão",
-      "guardar dinheiro",
+      "grogue / zonzo",
+      "moleza",
       "pergunta difícil"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Julia, Nathan",
-      "Abidemi, Rory",
+      "Aimee, Katie",
+      "Aimee, Paul",
       "Mari, Ron"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Jamaica, Reino Unido",
+      "Reino Unido, Itália",
       "Japão, EUA",
-      "Austrália, EUA"
+      "Nigéria, Reino Unido"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "habilidades",
-      "expressões idiomáticas",
-      "tecnologia e filhos"
+      "academia",
+      "animais"
      ],
      "c": 0
     }

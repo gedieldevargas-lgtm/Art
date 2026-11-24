@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · B1",
  "titulo": "Do for Emphasis",
  "subtitulo": "Gramática: Do for Emphasis · B1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-041.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B1) sobre: idiomas.",
+   "Praticar o ponto de gramática: Do for Emphasis.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Do for Emphasis",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Do for Emphasis"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "—",
+      ""
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre idiomas"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/qhmqF4o5jeQ",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/grammar/L4-01-Do-Emphasis-Languages.mp3",
@@ -106,8 +147,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "hotel",
-      "tecnologia e filhos",
+      "apresentações",
+      "carreira militar",
       "idiomas"
      ],
      "c": 2

@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B2",
  "titulo": "Movie Take",
  "subtitulo": "Tema: filmes · B2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-075.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B2) sobre: filmes.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Movie Take",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "per se",
+      "figure out",
+      "coming-of-age",
+      "ruin"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Hana, Ben",
+      "Japão, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre filmes"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/HcOx9U7kM20",
   "mp3": "",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "em si",
-      "vale-tudo",
-      "pacote turístico"
+      "na hora / de improviso",
+      "quadrilha americana"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"figure out\" significa…",
      "emoji": "",
      "ops": [
-      "expatriado",
-      "hospedagem",
+      "enviar um formulário",
+      "mecânico",
       "descobrir / entender"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"coming-of-age\" significa…",
      "emoji": "",
      "ops": [
-      "emissões de carbono",
+      "comportamento obsessivo",
       "de amadurecimento (filme)",
-      "a escada dos imóveis"
+      "no meu sangue"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "estragar",
-      "retorno / feedback",
-      "um pé na porta (primeira chance)"
+      "o coração de",
+      "ciclo vicioso"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Hana, Ben",
-      "Meg, Todd",
-      "Greg, Todd"
+      "Mari, Ron",
+      "Aimee, Todd"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Austrália, EUA",
-      "Jamaica, Reino Unido",
+      "Nigéria, Reino Unido",
+      "Reino Unido, Itália",
       "Japão, EUA"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "fim de semana",
+      "geografia",
       "filmes",
-      "saúde"
+      "academia"
      ],
      "c": 1
     }

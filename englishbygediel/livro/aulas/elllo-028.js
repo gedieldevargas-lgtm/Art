@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · A2",
  "titulo": "SEA Travels - Thailand and Laos",
  "subtitulo": "Tema: viagem · A2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-028.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A2) sobre: viagem.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "SEA Travels - Thailand",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "trek",
+      "highlights",
+      "move on",
+      "quite an experience"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Abidemi, Todd",
+      "Nigéria, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre viagem"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/C28jVkRm36A",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/views-1451-1500/1463-Abidemi-Thailand-Laos.mp3",
@@ -48,8 +92,8 @@
      "p": "\"trek\" significa…",
      "emoji": "",
      "ops": [
-      "paisagem",
-      "clima",
+      "abolido",
+      "algo importante",
       "caminhada longa / trilha"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"highlights\" significa…",
      "emoji": "",
      "ops": [
-      "especialmente",
+      "um conselho",
       "pontos altos",
-      "encanamento"
+      "custar os olhos da cara"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "seguir em frente",
-      "imigração",
-      "localizado"
+      "centro financeiro",
+      "se sentir obrigado"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"quite an experience\" significa…",
      "emoji": "",
      "ops": [
-      "se forçar",
-      "se meter em encrenca",
+      "descendência",
+      "sem vontade de",
       "uma bela experiência"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Abidemi, Rory",
-      "Jerri, Todd",
+      "Antoinette, Warren",
+      "Katie, Gilder",
       "Abidemi, Todd"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido, EUA",
+      "País de Gales",
       "Nigéria, EUA",
-      "Tailândia, EUA"
+      "Nepal, EUA"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "viagem",
-      "migração",
-      "transporte"
+      "feriados",
+      "cidades"
      ],
      "c": 0
     }

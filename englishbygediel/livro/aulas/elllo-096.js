@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C1",
  "titulo": "His Do Over",
  "subtitulo": "Tema: arrependimentos · C1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-096.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C1) sobre: arrependimentos.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "His Do Over",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "along those lines",
+      "cutting edge",
+      "put your heart into",
+      "try out"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Sarah, Adam",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre arrependimentos"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A1351/1365-AdamSarah-01-DoOver.mp3",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "nessa linha",
-      "polo / centro",
-      "fluxo de dinheiro"
+      "sazonal",
+      "lançar"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"cutting edge\" significa…",
      "emoji": "",
      "ops": [
-      "surtar",
-      "equivalente",
+      "paisagem",
+      "ciclo vicioso",
       "de ponta"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"put your heart into\" significa…",
      "emoji": "",
      "ops": [
-      "hospedagem",
+      "aspectos polêmicos",
       "colocar o coração em",
-      "teve seus momentos"
+      "bungee jump"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "experimentar",
-      "um longo caminho pela frente",
-      "legenda"
+      "convencer alguém",
+      "apagar (dormir)"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Sarah, Adam",
-      "Julia, Nathan",
-      "Mari, Ron"
+      "Abidemi, Todd",
+      "Meg, Todd"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "EUA, Reino Unido",
-      "Reino Unido",
+      "Japão, Canadá",
+      "Trinidad e Tobago, EUA",
       "EUA"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "dinheiro",
+      "geografia",
       "arrependimentos",
-      "cidades"
+      "finanças"
      ],
      "c": 1
     }

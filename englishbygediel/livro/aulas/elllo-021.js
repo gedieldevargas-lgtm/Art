@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · A2",
  "titulo": "Saving and Wasting Money",
  "subtitulo": "Tema: dinheiro · A2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-021.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A2) sobre: dinheiro.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Saving and Wasting Mon",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "an easy person",
+      "eat out",
+      "teach me your tricks",
+      "it's a deal"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Abidemi, Todd",
+      "Nigéria, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre dinheiro"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/0ZaQUdS7sCU",
   "mp3": "https://elllo.org/Audio/A1501/1503-AbidemiTodd-SavingMoney.mp3",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "uma pessoa fácil de lidar",
-      "cuidando de",
-      "se perder em"
+      "cantina / refeitório",
+      "encanamento"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"eat out\" significa…",
      "emoji": "",
      "ops": [
-      "caro demais",
-      "vacinas antirrábicas",
+      "obviamente",
+      "ilegalmente",
       "comer fora"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"teach me your tricks\" significa…",
      "emoji": "",
      "ops": [
-      "elo fraco",
+      "sem vontade de",
       "me ensina seus truques",
-      "intimidador"
+      "no meio do grupo"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "fechado / combinado",
-      "quadrilha americana",
-      "modalidade"
+      "excepcional",
+      "algum lugar"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Abidemi, Todd",
-      "Abidemi, Rory",
-      "Jerri, Todd"
+      "Antoinette, Warren",
+      "Katie, Gilder"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Tailândia, EUA",
-      "Reino Unido, EUA",
+      "Nepal, EUA",
+      "País de Gales",
       "Nigéria, EUA"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "filhos",
+      "ética",
       "dinheiro",
-      "cores"
+      "folclore"
      ],
      "c": 1
     }

@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B1",
  "titulo": "New Gym",
  "subtitulo": "Tema: academia · B1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-056.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B1) sobre: academia.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "New Gym",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "real nice",
+      "more than",
+      "tricky",
+      "get certified"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Rebecca, Todd",
+      "Austrália, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre academia"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/views-1201-1250/1230-Rebecca-Gym.mp3",
@@ -48,9 +92,9 @@
      "p": "\"real nice\" significa…",
      "emoji": "",
      "ops": [
-      "celebração / festa",
+      "vegetariano",
       "bem legal",
-      "comprovado"
+      "trabalhar em / melhorar"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "mais que",
-      "encanamento",
-      "especialmente"
+      "não adequado para",
+      "certificado"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"tricky\" significa…",
      "emoji": "",
      "ops": [
-      "me atrair",
-      "papelada",
+      "normalmente",
+      "emissões de carbono",
       "complicado"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"get certified\" significa…",
      "emoji": "",
      "ops": [
-      "incomodar",
+      "me ensina seus truques",
       "tirar certificação",
-      "tema em comum"
+      "aumentar aos poucos"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Abidemi, Todd",
+      "Sarah, Todd",
       "Rebecca, Todd",
-      "Pernese, Doron"
+      "Jin, Adam"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Austrália, EUA",
-      "Japão, Canadá",
-      "Nova Zelândia, EUA"
+      "Nigéria, Reino Unido",
+      "Japão, Canadá"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "compras",
-      "transporte",
+      "alfândega",
+      "mar e história",
       "academia"
      ],
      "c": 2

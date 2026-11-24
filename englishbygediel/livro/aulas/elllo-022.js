@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · A2",
  "titulo": "Pack Rat",
  "subtitulo": "Gramática: Much / Many · A2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-022.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A2) sobre: objetos.",
+   "Praticar o ponto de gramática: Much / Many.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Pack Rat",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Much / Many"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Meg, Todd",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre objetos"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/REH2n_jZV1I",
   "mp3": "",
@@ -104,8 +145,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Olga, Todd",
-      "Julia, Todd",
+      "Monica, Todd",
+      "Aimee, Katie",
       "Meg, Todd"
      ],
      "c": 2
@@ -114,9 +155,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido",
+      "Trinidad e Tobago, EUA",
       "EUA",
-      "EUA, Reino Unido"
+      "Japão, Canadá"
      ],
      "c": 1
     },
@@ -125,8 +166,8 @@
      "emoji": "",
      "ops": [
       "objetos",
-      "academia",
-      "sociedade"
+      "migração",
+      "ética"
      ],
      "c": 0
     }

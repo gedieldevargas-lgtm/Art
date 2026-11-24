@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B2",
  "titulo": "Island Stress",
  "subtitulo": "Tema: turismo · B2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-066.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B2) sobre: turismo.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Island Stress",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "figure out",
+      "come up with",
+      "a long way to go",
+      "best interest"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Jerri, Todd",
+      "Tailândia, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre turismo"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/TlNOp06SVOA",
   "mp3": "",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "descobrir / entender",
-      "celebração / festa",
-      "esclarecedor"
+      "terraço",
+      "dar permissão"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"come up with\" significa…",
      "emoji": "",
      "ops": [
-      "se perder em",
-      "lindo",
+      "preço fixo",
+      "rotas marítimas",
       "ter (uma ideia)"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"a long way to go\" significa…",
      "emoji": "",
      "ops": [
-      "se matricular",
+      "ter vista para",
       "um longo caminho pela frente",
-      "madeira"
+      "fechado / combinado"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "melhor interesse",
-      "algo importante",
-      "minimalista"
+      "paranoico",
+      "é o pior"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Jerri, Todd",
-      "Natalie, Todd",
-      "Aimee, Paul"
+      "Abidemi, Jeremy",
+      "Jin, Adam"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
+      "Portugal, África do Sul (?)",
       "Nova Zelândia, EUA",
-      "Japão, Canadá",
       "Tailândia, EUA"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "academia",
+      "tecnologia e filhos",
       "turismo",
-      "alfândega"
+      "cultura"
      ],
      "c": 1
     }

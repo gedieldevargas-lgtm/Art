@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · A2",
  "titulo": "My English Family",
  "subtitulo": "Tema: família · A2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-026.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A2) sobre: família.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "My English Family",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "looking out for",
+      "obviously",
+      "chores",
+      "genes"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Katie, Todd",
+      "Reino Unido, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre família"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/Zzg2d0AG1Kk",
   "mp3": "",
@@ -48,9 +92,9 @@
      "p": "\"looking out for\" significa…",
      "emoji": "",
      "ops": [
-      "resolver logo",
+      "amante de comida",
       "cuidando de",
-      "experiência memorável"
+      "construir valores"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "obviamente",
-      "único",
-      "por segurança"
+      "ficar com a voz embargada",
+      "surtar"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"chores\" significa…",
      "emoji": "",
      "ops": [
-      "rafting",
-      "uma variedade de",
+      "perfeito",
+      "o que você quiser",
       "tarefas de casa"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"genes\" significa…",
      "emoji": "",
      "ops": [
-      "ambiente hostil",
+      "dar permissão",
       "genes",
-      "ela meio que ficou famosa"
+      "terraço"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Abidemi, Todd",
+      "Aimee, Paul",
       "Katie, Todd",
-      "Josh, Shirley"
+      "Sarah, Todd"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido, EUA",
-      "Reino Unido, Chile",
-      "Nova Zelândia, EUA"
+      "Nova Zelândia, EUA",
+      "Reino Unido"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "transporte",
-      "sociedade",
+      "roupas",
+      "comida",
       "família"
      ],
      "c": 2

@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · A2",
  "titulo": "Meg has to move",
  "subtitulo": "Tema: mudança · A2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-030.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A2) sobre: mudança.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Meg has to move",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "mechanic",
+      "paperwork",
+      "submit a form",
+      "get on it"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Meg, Todd",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre mudança"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/-zLlRlr4yhs",
   "mp3": "",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "mecânico",
-      "pilão",
-      "não tem como errar / imperdível"
+      "celebração / festa",
+      "melhor interesse"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"paperwork\" significa…",
      "emoji": "",
      "ops": [
-      "de algum jeito",
-      "geografia",
+      "viralizar",
+      "legenda",
       "papelada"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"submit a form\" significa…",
      "emoji": "",
      "ops": [
-      "salário mínimo justo",
+      "também (em negativas)",
       "enviar um formulário",
-      "paranoico"
+      "pessoalmente"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "resolver logo",
-      "descobrir",
-      "se matricular"
+      "se sentir obrigado",
+      "espectro"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Meg, Todd",
-      "Olga, Todd",
-      "Julia, Todd"
+      "Monica, Todd",
+      "Aimee, Katie"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "EUA, Reino Unido",
-      "Reino Unido",
+      "Japão, Canadá",
+      "Trinidad e Tobago, EUA",
       "EUA"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "choque cultural",
+      "filmes",
       "mudança",
-      "mar e história"
+      "economia"
      ],
      "c": 1
     }

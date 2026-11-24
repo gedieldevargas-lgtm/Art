@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C2",
  "titulo": "Change Climate Change",
  "subtitulo": "Tema: meio ambiente · C2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-110.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C2) sobre: meio ambiente.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Change Climate Change",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "carbon emissions",
+      "seasonal",
+      "long-haul",
+      "excess"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Aimee, Paul",
+      "Reino Unido"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre meio ambiente"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A1301/1302-amy-small-changes.mp3",
@@ -48,9 +92,9 @@
      "p": "\"carbon emissions\" significa…",
      "emoji": "",
      "ops": [
-      "distraído",
+      "rafting",
       "emissões de carbono",
-      "algum lugar"
+      "caribu (rena)"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "sazonal",
-      "hora do rush",
-      "caro demais"
+      "alguns / poucos",
+      "sob pressão"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"long-haul\" significa…",
      "emoji": "",
      "ops": [
-      "comodidade",
-      "alta temporada",
+      "um conselho",
+      "ter (uma ideia)",
       "de longa distância"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"excess\" significa…",
      "emoji": "",
      "ops": [
-      "só para esclarecer",
+      "foi bom conversar com você",
       "excesso",
-      "capital"
+      "muito quente"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Jana, Peter",
+      "Shifani, Todd",
       "Aimee, Paul",
-      "Shirley, Yuri"
+      "Aimee, Katie"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido",
-      "Jamaica, Reino Unido",
-      "Reino Unido, Itália"
+      "Inglaterra, EUA",
+      "Reino Unido, EUA"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "países",
-      "trabalho remoto",
+      "relacionamentos",
+      "hotel",
       "meio ambiente"
      ],
      "c": 2

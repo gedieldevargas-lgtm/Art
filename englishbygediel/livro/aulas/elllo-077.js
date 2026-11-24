@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B2",
  "titulo": "Tips for Learning English",
  "subtitulo": "Tema: aprender inglês · B2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-077.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B2) sobre: aprender inglês.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Tips for Learning Engl",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "work on",
+      "idiom",
+      "grasp",
+      "so to speak"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Hana, Ben",
+      "Japão, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre aprender inglês"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/cunAND0mBIw",
   "mp3": "",
@@ -48,9 +92,9 @@
      "p": "\"work on\" significa…",
      "emoji": "",
      "ops": [
-      "educação básica",
+      "concordo com você",
       "trabalhar em / melhorar",
-      "ser aberto"
+      "pobreza extrema"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "expressão idiomática",
-      "surtar",
-      "enviar um formulário"
+      "centro financeiro",
+      "rabeca / violino"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"grasp\" significa…",
      "emoji": "",
      "ops": [
-      "mimar as crianças",
-      "disparar",
+      "lenda urbana",
+      "vai fundo",
       "compreender"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"so to speak\" significa…",
      "emoji": "",
      "ops": [
-      "significar muito",
+      "taxa de mortalidade",
       "por assim dizer",
-      "rotas marítimas"
+      "bem legal"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Greg, Todd",
+      "Aimee, Todd",
       "Hana, Ben",
-      "Meg, Todd"
+      "Mari, Ron"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Japão, EUA",
-      "Austrália, EUA",
-      "Jamaica, Reino Unido"
+      "Nigéria, Reino Unido",
+      "Reino Unido, Itália"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "preços",
       "humor",
+      "cores",
       "aprender inglês"
      ],
      "c": 2

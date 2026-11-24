@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · A1",
  "titulo": "Months and Time Prepositions",
  "subtitulo": "Gramática: Months and Time Prepositions · A1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-012.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A1) sobre: feriados.",
+   "Praticar o ponto de gramática: Months and Time Prepositions.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Months and Time Prepos",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Months and Time Prepositions"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Meg, Todd",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre feriados"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/AGTK/A1-13-MegTodd-Holidays.mp3",
@@ -107,8 +148,8 @@
      "emoji": "",
      "ops": [
       "Meg, Todd",
-      "Olga, Todd",
-      "Julia, Todd"
+      "Monica, Todd",
+      "Aimee, Katie"
      ],
      "c": 0
     },
@@ -116,8 +157,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "EUA, Reino Unido",
-      "Reino Unido",
+      "Japão, Canadá",
+      "Trinidad e Tobago, EUA",
       "EUA"
      ],
      "c": 2
@@ -126,9 +167,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "cidades",
+      "música",
       "feriados",
-      "habilidades"
+      "restaurante"
      ],
      "c": 1
     }

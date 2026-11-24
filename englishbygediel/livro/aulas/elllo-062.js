@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · B2",
  "titulo": "Second Conditional",
  "subtitulo": "Gramática: Second Conditional · B2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-062.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B2) sobre: dinheiro.",
+   "Praticar o ponto de gramática: Second Conditional.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Second Conditional",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Second Conditional"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "—",
+      ""
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre dinheiro"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/grammar/L5-05A-SecondConditional-Million-Dollars.mp3",
@@ -106,8 +147,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "cores",
-      "filhos",
+      "folclore",
+      "ética",
       "dinheiro"
      ],
      "c": 2

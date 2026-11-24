@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C1",
  "titulo": "Single's Day",
  "subtitulo": "Tema: datas comemorativas · C1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-100.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C1) sobre: datas comemorativas.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Single's Day",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "go through the roof",
+      "urban myth",
+      "feel obliged",
+      "boycott"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Abidemi, Rory",
+      "Nigéria, Reino Unido"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre datas comemorativas"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A1301/1348-Rory-SinglesDay.mp3",
@@ -48,8 +92,8 @@
      "p": "\"go through the roof\" significa…",
      "emoji": "",
      "ops": [
-      "ilegalmente",
-      "se destacar",
+      "mudar de assunto",
+      "comodidade",
       "disparar"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"urban myth\" significa…",
      "emoji": "",
      "ops": [
-      "pais de ninho vazio",
+      "tarefas de casa",
       "lenda urbana",
-      "normalmente"
+      "estudioso"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "se sentir obrigado",
-      "madeira",
-      "educação básica"
+      "por assim dizer",
+      "pista de obstáculos"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"boycott\" significa…",
      "emoji": "",
      "ops": [
-      "pessoalmente",
-      "também (em negativas)",
+      "tem que ser",
+      "concordo com você",
       "boicote"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Angela, Todd",
-      "Meg, Todd",
+      "Jerri, Todd",
+      "Greg, Todd",
       "Abidemi, Rory"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Nigéria, Canadá",
+      "Inglaterra, EUA",
       "Nigéria, Reino Unido",
-      "Reino Unido, Chile"
+      "EUA"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "datas comemorativas",
-      "dinheiro",
-      "cidades"
+      "rádio",
+      "aprender inglês"
      ],
      "c": 0
     }

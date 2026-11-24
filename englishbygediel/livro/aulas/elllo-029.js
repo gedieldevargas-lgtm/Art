@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · A2",
  "titulo": "House on Loan",
  "subtitulo": "Tema: casa · A2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-029.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A2) sobre: casa.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "House on Loan",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "That works",
+      "a couple",
+      "whatever you want",
+      "check it out"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Katie, Todd",
+      "Reino Unido, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre casa"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/Ge6NCLMkJ5E",
   "mp3": "",
@@ -48,9 +92,9 @@
      "p": "\"That works\" significa…",
      "emoji": "",
      "ops": [
-      "melhor interesse",
+      "pessoalmente",
       "isso funciona / pode ser",
-      "celebração / festa"
+      "surtar"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "um par / alguns",
-      "estar disposto a / à altura",
-      "autêntico"
+      "o preço que se paga",
+      "celebração / festa"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"whatever you want\" significa…",
      "emoji": "",
      "ops": [
-      "fora do roteiro turístico",
-      "trabalhar em / melhorar",
+      "desistir",
+      "terraço",
       "o que você quiser"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"check it out\" significa…",
      "emoji": "",
      "ops": [
-      "o melhor dos dois mundos",
+      "movimentado",
       "dá uma olhada",
-      "trazido de navio"
+      "me estressa"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Abidemi, Todd",
+      "Aimee, Paul",
       "Katie, Todd",
-      "Josh, Shirley"
+      "Sarah, Todd"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido, EUA",
-      "Reino Unido, Chile",
-      "Nova Zelândia, EUA"
+      "Nova Zelândia, EUA",
+      "Reino Unido"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "tecnologia",
-      "folclore",
+      "saúde",
+      "fim de semana",
       "casa"
      ],
      "c": 2

@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · A2",
  "titulo": "City Down Under",
  "subtitulo": "Tema: cidades · A2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-036.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A2) sobre: cidades.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "City Down Under",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "Down Under",
+      "gorgeous",
+      "upside down",
+      "tram"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Josh, Shirley",
+      "EUA, Austrália"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre cidades"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A1301/1346-Shirley-Melbourne.mp3",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "a Austrália (apelido)",
-      "ter vista para",
-      "de longa distância"
+      "falar o que pensa",
+      "lindo"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"gorgeous\" significa…",
      "emoji": "",
      "ops": [
-      "refogado oriental",
-      "estragar",
+      "não adequado para",
+      "certificado",
       "lindo"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"upside down\" significa…",
      "emoji": "",
      "ops": [
-      "equivalente",
+      "boicote",
       "de cabeça para baixo",
-      "fértil"
+      "vale-tudo"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "bonde",
-      "aumentar aos poucos",
-      "levar a sério / a peito"
+      "centro financeiro",
+      "me sentir uma vaca (comendo demais)"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Josh, Shirley",
-      "Anthony, Todd",
-      "Crystal, George"
+      "Naomi, Dai",
+      "Shirley, Yuri"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "EUA, Reino Unido",
-      "Jamaica, Reino Unido",
+      "EUA, Canadá",
+      "Trinidad e Tobago, EUA",
       "EUA, Austrália"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "trabalho",
+      "descrições",
       "cidades",
-      "turismo"
+      "educação"
      ],
      "c": 1
     }

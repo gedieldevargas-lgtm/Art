@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B2",
  "titulo": "Countries United",
  "subtitulo": "Tema: países · B2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-083.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B2) sobre: países.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Countries United",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "on-the-fence",
+      "not my forte",
+      "change the subject",
+      "just to clarify"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Shirley, Yuri",
+      "Reino Unido, Itália"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre países"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A1001/1027-Shirley-UK.mp3",
@@ -48,9 +92,9 @@
      "p": "\"on-the-fence\" significa…",
      "emoji": "",
      "ops": [
-      "intimidador",
+      "equivalente",
       "em cima do muro",
-      "bem legal"
+      "fértil"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "não é meu forte",
-      "difícil de negar",
-      "idade certa"
+      "floresceu / prosperou",
+      "com certeza"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"change the subject\" significa…",
      "emoji": "",
      "ops": [
-      "comportamento obsessivo",
-      "se perder em",
+      "isolado",
+      "concordo com você",
       "mudar de assunto"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"just to clarify\" significa…",
      "emoji": "",
      "ops": [
-      "preço fixo",
+      "pista de obstáculos",
       "só para esclarecer",
-      "pessoa de sono pesado"
+      "o coração de"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Rachel, Todd",
+      "Ginger, Nabeel",
       "Shirley, Yuri",
-      "Aimee, Todd"
+      "Rufei, Todd"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido, Itália",
-      "Reino Unido, EUA",
-      "Japão, EUA"
+      "Nigéria, Reino Unido",
+      "EUA, Paquistão"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "sonhos e carreira",
-      "viagem",
+      "animais",
+      "choque cultural",
       "países"
      ],
      "c": 2

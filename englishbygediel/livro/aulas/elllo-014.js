@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · A1",
  "titulo": "Present Simple - Be Verbs",
  "subtitulo": "Gramática: Present Simple - Be Verbs · A1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-014.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A1) sobre: apresentações.",
+   "Praticar o ponto de gramática: Present Simple - Be Verbs.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Present Simple - Be Ve",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Present Simple - Be Verbs"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Aimee, Todd",
+      "Reino Unido, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre apresentações"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/RM4AsIawZ9E",
   "mp3": "",
@@ -106,9 +147,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Julia, Nathan",
+      "Rebecca, Todd",
       "Aimee, Todd",
-      "CleAnn, Todd"
+      "Jin, Adam"
      ],
      "c": 1
     },
@@ -117,8 +158,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido, EUA",
-      "Reino Unido, Chile",
-      "Nova Zelândia, EUA"
+      "Nova Zelândia, EUA",
+      "Reino Unido"
      ],
      "c": 0
     },
@@ -126,8 +167,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "hotel",
-      "fim de semana",
+      "viagem",
+      "saúde",
       "apresentações"
      ],
      "c": 2

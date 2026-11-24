@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B2",
  "titulo": "Student Life in China Part 2",
  "subtitulo": "Tema: educação · B2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-071.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B2) sobre: educação.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Student Life in China ",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "middle of the pack",
+      "exceptional",
+      "find out",
+      "impressive"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Rufei, Todd",
+      "China, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre educação"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/YUtH2o1dceU",
   "mp3": "",
@@ -48,9 +92,9 @@
      "p": "\"middle of the pack\" significa…",
      "emoji": "",
      "ops": [
-      "muito quente",
+      "mudar de assunto",
       "no meio do grupo",
-      "no fim das contas"
+      "salário mínimo justo"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "excepcional",
-      "anormal / bizarro",
-      "tem que ser"
+      "não me importo",
+      "caribu (rena)"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"find out\" significa…",
      "emoji": "",
      "ops": [
-      "partir",
-      "abolido",
+      "ciclo vicioso",
+      "descobrir / entender",
       "descobrir"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"impressive\" significa…",
      "emoji": "",
      "ops": [
-      "caro demais",
+      "pessoalmente",
       "impressionante",
-      "herói popular"
+      "celebração / festa"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Hana, Daniel",
+      "Lyndsay, Warren",
       "Rufei, Todd",
-      "Katie, Gilder"
+      "Rebecca, Todd"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "China, EUA",
-      "EUA, Canadá",
-      "Jamaica, Reino Unido"
+      "Japão, EUA",
+      "Reino Unido, Itália"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "família e dinheiro",
-      "viver fora",
+      "casa",
+      "filmes",
       "educação"
      ],
      "c": 2

@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C1",
  "titulo": "E-Mail Habits",
  "subtitulo": "Tema: tecnologia · C1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-101.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C1) sobre: tecnologia.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "E-Mail Habits",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "scan",
+      "handy",
+      "bad habit",
+      "a piece of advice"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Aimee, Paul",
+      "Reino Unido"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre tecnologia"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A1301/1341-amy-email-habits.mp3",
@@ -48,9 +92,9 @@
      "p": "\"scan\" significa…",
      "emoji": "",
      "ops": [
-      "também (em negativas)",
+      "o dia todo",
       "passar o olho",
-      "percurso / campo"
+      "rotas marítimas"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "prático / útil",
-      "ciclo vicioso",
-      "se livrar de"
+      "nessa linha",
+      "hospedagem"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"bad habit\" significa…",
      "emoji": "",
      "ops": [
-      "me ensina seus truques",
-      "substituir",
+      "o coração de",
+      "ciclo vicioso",
       "mau hábito"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"a piece of advice\" significa…",
      "emoji": "",
      "ops": [
-      "genes",
+      "viralizar",
       "um conselho",
-      "entender a ideia"
+      "localizado"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Jana, Peter",
+      "Shifani, Todd",
       "Aimee, Paul",
-      "Shirley, Yuri"
+      "Aimee, Katie"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido",
-      "Jamaica, Reino Unido",
-      "Reino Unido, Itália"
+      "Inglaterra, EUA",
+      "Reino Unido, EUA"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "casa",
-      "cidades",
+      "idiomas e países",
+      "personalidade",
       "tecnologia"
      ],
      "c": 2

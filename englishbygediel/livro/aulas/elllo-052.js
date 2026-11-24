@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B1",
  "titulo": "The Right Age",
  "subtitulo": "Tema: tecnologia e filhos · B1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-052.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B1) sobre: tecnologia e filhos.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "The Right Age",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "right age",
+      "stress me out",
+      "for security reasons",
+      "overpriced"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Aimee, Katie",
+      "Reino Unido"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre tecnologia e filhos"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/n3SeZ441PjQ",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/views-1401-1450/1448-Katie-Phone.mp3",
@@ -48,8 +92,8 @@
      "p": "\"right age\" significa…",
      "emoji": "",
      "ops": [
-      "espírito esportivo",
-      "coisa que irrita",
+      "assim de cabeça",
+      "descobrir",
       "idade certa"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"stress me out\" significa…",
      "emoji": "",
      "ops": [
-      "decisivo",
+      "universalmente",
       "me estressa",
-      "desistir"
+      "histeria"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "por segurança",
-      "percurso / campo",
-      "em cima do muro"
+      "mudar de ideia",
+      "se livrar de"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"overpriced\" significa…",
      "emoji": "",
      "ops": [
-      "algo importante",
-      "não adequado para",
+      "experiência memorável",
+      "resolver logo",
       "caro demais"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Maria, Alex",
-      "Aimee, Todd",
+      "Jake, Shirley",
+      "Jerri, Todd",
       "Aimee, Katie"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido, Itália",
+      "Reino Unido, EUA",
       "Reino Unido",
-      "Jamaica, Reino Unido"
+      "Inglaterra, EUA"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "tecnologia e filhos",
-      "presentes",
-      "empresas"
+      "fim de semana",
+      "turismo"
      ],
      "c": 0
     }

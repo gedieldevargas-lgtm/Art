@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B1",
  "titulo": "Media - Then and Now",
  "subtitulo": "Tema: mídia · B1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-047.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B1) sobre: mídia.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Media - Then and Now",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "life in general",
+      "hands down",
+      "whine",
+      "along those lines"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Meg, Todd",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre mídia"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/EIIUO_HY7jA",
   "mp3": "",
@@ -48,9 +92,9 @@
      "p": "\"life in general\" significa…",
      "emoji": "",
      "ops": [
-      "mesada",
+      "me arrependendo",
       "a vida em geral",
-      "versátil"
+      "dá uma olhada"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "sem dúvida",
-      "entender um conceito",
-      "mudar de assunto"
+      "pais de ninho vazio",
+      "me estressa"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"whine\" significa…",
      "emoji": "",
      "ops": [
-      "esclarecedor",
-      "lançar",
+      "fluxo de dinheiro",
+      "culinária",
       "reclamar / choramingar"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"along those lines\" significa…",
      "emoji": "",
      "ops": [
-      "pergunta difícil",
+      "especialmente",
       "nessa linha",
-      "não tem como errar / imperdível"
+      "curva de sino (média)"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Julia, Todd",
+      "Aimee, Katie",
       "Meg, Todd",
-      "Olga, Todd"
+      "Monica, Todd"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "EUA",
-      "EUA, Reino Unido",
-      "Reino Unido"
+      "Japão, Canadá",
+      "Trinidad e Tobago, EUA"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "cidades",
-      "casa",
+      "objetos",
+      "aprender inglês",
       "mídia"
      ],
      "c": 2

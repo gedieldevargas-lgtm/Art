@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B1",
  "titulo": "Food We Hate",
  "subtitulo": "Tema: comida · B1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-053.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B1) sobre: comida.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Food We Hate",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "can't stand",
+      "is the worst",
+      "universally",
+      "feel like a cow"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Katie, Gilder",
+      "Reino Unido, Vietnã"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre comida"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/gtIvnXkGTkE",
   "mp3": "",
@@ -48,9 +92,9 @@
      "p": "\"can't stand\" significa…",
      "emoji": "",
      "ops": [
-      "a Austrália (apelido)",
+      "tema em comum",
       "não suporto",
-      "não adequado para"
+      "parece bom / combinado"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "é o pior",
-      "tarefas de casa",
-      "autêntico"
+      "pista de obstáculos",
+      "quadrilha americana"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"universally\" significa…",
      "emoji": "",
      "ops": [
-      "quadrilha americana",
-      "acompanhar",
+      "prático / útil",
+      "fora do roteiro turístico",
       "universalmente"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"feel like a cow\" significa…",
      "emoji": "",
      "ops": [
-      "mudar de ideia",
+      "elo fraco",
       "me sentir uma vaca (comendo demais)",
-      "entender um conceito"
+      "sociável"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Sarah, Todd",
+      "Gyri, Viyasan",
       "Katie, Gilder",
-      "Julia, Todd"
+      "Mari, Ron"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido, Vietnã",
-      "EUA",
-      "Reino Unido"
+      "EUA, Reino Unido",
+      "Jamaica, Reino Unido"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "cidades",
-      "feriados",
+      "gostos",
+      "folclore",
       "comida"
      ],
      "c": 2

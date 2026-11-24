@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B1",
  "titulo": "The Break Up",
  "subtitulo": "Tema: relacionamentos · B1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-061.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B1) sobre: relacionamentos.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "The Break Up",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "it's funny you mention",
+      "it's not working out",
+      "uncalled for",
+      "we're not meant to be"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Crystal, George",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre relacionamentos"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A0951/988-George-Breakup.mp3",
@@ -48,8 +92,8 @@
      "p": "\"it's funny you mention\" significa…",
      "emoji": "",
      "ops": [
-      "nada mal",
-      "estudioso",
+      "percurso / campo",
+      "ênfase",
       "engraçado você falar isso"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"it's not working out\" significa…",
      "emoji": "",
      "ops": [
-      "expressão idiomática",
+      "significar muito",
       "não está dando certo",
-      "modalidade"
+      "rotas marítimas"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "desnecessário / injusto",
-      "mudar de assunto",
-      "rotas marítimas"
+      "ficar longe de",
+      "incomodar"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"we're not meant to be\" significa…",
      "emoji": "",
      "ops": [
-      "fora do roteiro turístico",
-      "com certeza",
+      "pergunta difícil",
+      "bonde",
       "não nascemos um para o outro"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Sarah, Adam",
-      "Rufei, Todd",
+      "Melissa, Doron",
+      "Olga, Todd",
       "Crystal, George"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido",
+      "Trinidad e Tobago, EUA",
       "EUA",
-      "EUA, Reino Unido"
+      "Japão, Canadá"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "relacionamentos",
-      "geografia",
-      "finanças"
+      "compras",
+      "trabalho remoto"
      ],
      "c": 0
     }

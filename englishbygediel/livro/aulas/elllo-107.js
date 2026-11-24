@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C2",
  "titulo": "Bitcoin Part 1",
  "subtitulo": "Tema: finanças · C2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-107.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C2) sobre: finanças.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Bitcoin Part 1",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "kicking myself",
+      "a foot in the door",
+      "came out of nowhere",
+      "break it down"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Anthony, Todd",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre finanças"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/wjgGvuAT_BM",
   "mp3": "",
@@ -48,9 +92,9 @@
      "p": "\"kicking myself\" significa…",
      "emoji": "",
      "ops": [
-      "entender a ideia",
+      "em teoria",
       "me arrependendo",
-      "paranoico"
+      "caribu (rena)"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "um pé na porta (primeira chance)",
-      "orçamento",
-      "um milhão de dólares (estar ótimo)"
+      "focar em vencer",
+      "expatriado"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"came out of nowhere\" significa…",
      "emoji": "",
      "ops": [
-      "comportamento obsessivo",
-      "vestido nos trinques",
+      "mau hábito",
+      "travar / chegar ao limite",
       "surgiu do nada"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"break it down\" significa…",
      "emoji": "",
      "ops": [
-      "mais ou menos",
+      "alta temporada",
       "explicar por partes",
-      "não me importo"
+      "comodidade"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Greg, Todd",
+      "Naomi, Dai",
       "Anthony, Todd",
-      "Dan, Todd"
+      "Hana, Ben"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "EUA",
-      "EUA, Reino Unido",
-      "Reino Unido"
+      "Japão, Canadá",
+      "Trinidad e Tobago, EUA"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "planos",
-      "turismo",
+      "geografia",
+      "casa",
       "finanças"
      ],
      "c": 2

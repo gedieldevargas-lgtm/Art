@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B2",
  "titulo": "Born to Run",
  "subtitulo": "Tema: esportes · B2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-080.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B2) sobre: esportes.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Born to Run",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "walk in the park",
+      "huge ordeal",
+      "come with age",
+      "bank on"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Julia, Todd",
+      "Reino Unido, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre esportes"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/views-1151-1200/1200-Julia-UltraRun.mp3",
@@ -48,9 +92,9 @@
      "p": "\"walk in the park\" significa…",
      "emoji": "",
      "ops": [
-      "decisivo",
+      "salário mínimo justo",
       "moleza",
-      "clima"
+      "custar os olhos da cara"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "uma grande provação",
-      "não tem como errar / imperdível",
-      "no fundo"
+      "eclético",
+      "aumentar aos poucos"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"come with age\" significa…",
      "emoji": "",
      "ops": [
-      "trazido de avião",
-      "reclamar / choramingar",
+      "estar disposto a / à altura",
+      "autêntico",
       "vir com a idade"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"bank on\" significa…",
      "emoji": "",
      "ops": [
-      "o coração de",
+      "lançar",
       "contar com",
-      "o que você quiser"
+      "alguns / poucos"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Abidemi, Rory",
+      "Jerri, Todd",
       "Julia, Todd",
-      "Maria, Alex"
+      "Hana, Ben"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido, EUA",
-      "Reino Unido, Chile",
-      "Nova Zelândia, EUA"
+      "Nova Zelândia, EUA",
+      "Reino Unido"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "viagem",
-      "fim de semana",
+      "filmes",
+      "gostos",
       "esportes"
      ],
      "c": 2

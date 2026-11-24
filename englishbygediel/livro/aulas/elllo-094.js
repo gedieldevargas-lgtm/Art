@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C1",
  "titulo": "Sleeping Patterns",
  "subtitulo": "Tema: sono e sonhos · C1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-094.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C1) sobre: sono e sonhos.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Sleeping Patterns",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "paranoid",
+      "deep sleeper",
+      "groggy",
+      "conk out"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Sarah, Todd",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre sono e sonhos"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A1351/1373-SarahTodd-01-Sleep.mp3",
@@ -48,8 +92,8 @@
      "p": "\"paranoid\" significa…",
      "emoji": "",
      "ops": [
-      "rabeca / violino",
-      "estar disposto a / à altura",
+      "o ponto de virada",
+      "sociável",
       "paranoico"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"deep sleeper\" significa…",
      "emoji": "",
      "ops": [
-      "elo fraco",
+      "legenda",
       "pessoa de sono pesado",
-      "sociável"
+      "me atrair"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "grogue / zonzo",
-      "prático / útil",
-      "fuga de cérebros"
+      "o que você quiser",
+      "celebração / festa"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"conk out\" significa…",
      "emoji": "",
      "ops": [
-      "celebridade",
-      "significar muito",
+      "aposentadoria",
+      "indicativo",
       "apagar (dormir)"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Shifani, Todd",
-      "Dan, Todd",
+      "Shirley, Ray",
+      "Sarah, Adam",
       "Sarah, Todd"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido",
+      "Trinidad e Tobago, EUA",
       "EUA",
-      "EUA, Reino Unido"
+      "Japão, Canadá"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "sono e sonhos",
-      "migração",
-      "ética"
+      "gostos",
+      "economia"
      ],
      "c": 0
     }

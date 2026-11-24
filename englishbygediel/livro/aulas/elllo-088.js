@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C1",
  "titulo": "Giving Gifts",
  "subtitulo": "Tema: presentes · C1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-088.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C1) sobre: presentes.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Giving Gifts",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "well thought out",
+      "mean the world",
+      "under pressure",
+      "change your mind"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Aimee, Todd",
+      "Reino Unido, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre presentes"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/F6UvLi81gvA",
   "mp3": "",
@@ -48,8 +92,8 @@
      "p": "\"well thought out\" significa…",
      "emoji": "",
      "ops": [
-      "abolido",
-      "localizado",
+      "pais de ninho vazio",
+      "fora do roteiro turístico",
       "bem pensado"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"mean the world\" significa…",
      "emoji": "",
      "ops": [
-      "me ensina seus truques",
+      "madeira",
       "significar muito",
-      "colocar o coração em"
+      "duvidoso / arriscado"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "sob pressão",
-      "resultado final / o essencial",
-      "prosperar"
+      "operário / trabalho braçal",
+      "experimentar"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"change your mind\" significa…",
      "emoji": "",
      "ops": [
-      "preço justo",
-      "rotina normal de trabalho",
+      "onde quer que",
+      "chocantemente",
       "mudar de ideia"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "CleAnn, Todd",
-      "Julia, Nathan",
+      "Jin, Adam",
+      "Rebecca, Todd",
       "Aimee, Todd"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Nova Zelândia, EUA",
+      "Reino Unido",
       "Reino Unido, EUA",
-      "Reino Unido, Chile"
+      "Nova Zelândia, EUA"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "presentes",
-      "academia",
-      "trabalho"
+      "esportes",
+      "economia"
      ],
      "c": 0
     }

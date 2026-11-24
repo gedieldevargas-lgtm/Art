@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · B1",
  "titulo": "Zero Conditionals",
  "subtitulo": "Gramática: Zero Conditionals · B1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-046.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B1) sobre: humor.",
+   "Praticar o ponto de gramática: Zero Conditionals.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Zero Conditionals",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Zero Conditionals"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "—",
+      ""
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre humor"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/grammar/L4-10-Zero-Conditional-Sarah-Moods.mp3",
@@ -107,8 +148,8 @@
      "emoji": "",
      "ops": [
       "humor",
-      "arrependimentos",
-      "infância"
+      "rádio",
+      "filmes"
      ],
      "c": 0
     }

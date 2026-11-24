@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · A2",
  "titulo": "Disc Golf",
  "subtitulo": "Tema: esportes · A2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-034.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A2) sobre: esportes.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Disc Golf",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "course",
+      "get involved",
+      "keep score",
+      "good sportsmanship"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Sarah, John",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre esportes"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/7i7NmC2daac",
   "mp3": "",
@@ -48,8 +92,8 @@
      "p": "\"course\" significa…",
      "emoji": "",
      "ops": [
-      "vestido nos trinques",
-      "tarefas de casa",
+      "experiência memorável",
+      "descobrir",
       "percurso / campo"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"get involved\" significa…",
      "emoji": "",
      "ops": [
-      "expressão idiomática",
+      "me sentir uma vaca (comendo demais)",
       "se envolver",
-      "largar um hábito"
+      "travar / chegar ao limite"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "marcar os pontos",
-      "celebração / festa",
-      "equivalente"
+      "grelhar",
+      "pacote turístico"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"good sportsmanship\" significa…",
      "emoji": "",
      "ops": [
-      "convencer alguém",
-      "um milhão de dólares (estar ótimo)",
+      "pessoa de sono pesado",
+      "fuga de cérebros",
       "espírito esportivo"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Abidemi, Rory",
-      "Rebecca, Todd",
+      "Meg, Todd",
+      "Aimee, Katie",
       "Sarah, John"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido",
+      "Trinidad e Tobago, EUA",
       "EUA",
-      "EUA, Reino Unido"
+      "Japão, Canadá"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "esportes",
-      "viagem",
-      "fim de semana"
+      "filmes",
+      "gostos"
      ],
      "c": 0
     }

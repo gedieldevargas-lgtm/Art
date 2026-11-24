@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C1",
  "titulo": "Slow Travel",
  "subtitulo": "Tema: viagem · C1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-098.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C1) sobre: viagem.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Slow Travel",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "expat",
+      "downside",
+      "the turning point",
+      "a big deal"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Dan, Todd",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre viagem"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A1301/1325-Dan-SlowTravel.mp3",
@@ -48,9 +92,9 @@
      "p": "\"expat\" significa…",
      "emoji": "",
      "ops": [
-      "décadas atrás",
+      "preso na rotina",
       "expatriado",
-      "algo importante"
+      "celebração / festa"
      ],
      "c": 1
     },
@@ -59,8 +103,8 @@
      "emoji": "",
      "ops": [
       "desvantagem",
-      "cuidando de",
-      "idade certa"
+      "hora do rush",
+      "papelada"
      ],
      "c": 0
     },
@@ -68,8 +112,8 @@
      "p": "\"the turning point\" significa…",
      "emoji": "",
      "ops": [
-      "não é meu forte",
-      "ciclo vicioso",
+      "de saco cheio",
+      "pacote turístico",
       "o ponto de virada"
      ],
      "c": 2
@@ -78,9 +122,9 @@
      "p": "\"a big deal\" significa…",
      "emoji": "",
      "ops": [
-      "antes de tudo",
+      "salário mínimo justo",
       "algo importante",
-      "falar o que pensa"
+      "aposentadoria"
      ],
      "c": 1
     }
@@ -96,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Josh, Shirley",
+      "Aimee, Todd",
       "Dan, Todd",
-      "Abidemi, Rory"
+      "Julia, Nathan"
      ],
      "c": 1
     },
@@ -107,8 +151,8 @@
      "emoji": "",
      "ops": [
       "EUA",
-      "EUA, Reino Unido",
-      "Reino Unido"
+      "Japão, Canadá",
+      "Trinidad e Tobago, EUA"
      ],
      "c": 0
     },
@@ -116,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "migração",
-      "transporte",
+      "feriados",
+      "cidades",
       "viagem"
      ],
      "c": 2

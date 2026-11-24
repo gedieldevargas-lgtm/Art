@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B2",
  "titulo": "Bangkok Shopping",
  "subtitulo": "Tema: compras · B2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-063.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B2) sobre: compras.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Bangkok Shopping",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "fashion-conscious",
+      "the price you pay",
+      "reasonably priced",
+      "becoming a thing"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Jerri, Todd",
+      "Tailândia, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre compras"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/AmP4F7eovpo",
   "mp3": "",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "ligado em moda",
-      "celebração / festa",
-      "preso na rotina"
+      "ponta sul",
+      "madeira"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"the price you pay\" significa…",
      "emoji": "",
      "ops": [
-      "abolido",
-      "partir",
+      "reclamar / choramingar",
+      "um milhão de dólares (estar ótimo)",
       "o preço que se paga"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"reasonably priced\" significa…",
      "emoji": "",
      "ops": [
-      "no meio do grupo",
+      "pilão",
       "preço justo",
-      "não é meu forte"
+      "caminhada longa / trilha"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "virando moda",
-      "genes",
-      "foi bom conversar com você"
+      "largar um hábito",
+      "expressão idiomática"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Jerri, Todd",
-      "Natalie, Todd",
-      "Aimee, Paul"
+      "Abidemi, Jeremy",
+      "Jin, Adam"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
+      "Portugal, África do Sul (?)",
       "Nova Zelândia, EUA",
-      "Japão, Canadá",
       "Tailândia, EUA"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "roupas",
+      "personalidade",
       "compras",
-      "família"
+      "finanças"
      ],
      "c": 1
     }

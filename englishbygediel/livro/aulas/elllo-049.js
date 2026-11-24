@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B1",
  "titulo": "Nepal by Region",
  "subtitulo": "Tema: geografia · B1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-049.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B1) sobre: geografia.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Nepal by Region",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "geography",
+      "hilly",
+      "fertile",
+      "climate"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Jin, Adam",
+      "Nepal, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre geografia"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/-wR7pYOXB0o",
   "mp3": "",
@@ -48,8 +92,8 @@
      "p": "\"geography\" significa…",
      "emoji": "",
      "ops": [
-      "sem vontade de",
-      "largar um hábito",
+      "resultado final / o essencial",
+      "andar dentro d'água",
       "geografia"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"hilly\" significa…",
      "emoji": "",
      "ops": [
-      "subdividido",
+      "certificado",
       "montanhoso",
-      "em si"
+      "não adequado para"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "fértil",
-      "caminhada longa / trilha",
-      "montanhoso"
+      "atitude aberta",
+      "sazonal"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"climate\" significa…",
      "emoji": "",
      "ops": [
-      "curva de sino (média)",
-      "de ponta",
+      "guardar dinheiro",
+      "arquitetura",
       "clima"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Katie, Gilder",
-      "Ginger, Nabeel",
+      "Antoinette, Warren",
+      "CleAnn, Todd",
       "Jin, Adam"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Japão, EUA",
+      "EUA, Reino Unido",
       "Nepal, EUA",
-      "China, EUA"
+      "País de Gales"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "geografia",
-      "fim de semana",
-      "comida"
+      "meio ambiente",
+      "datas"
      ],
      "c": 0
     }

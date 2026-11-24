@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B2",
  "titulo": "Eggplant Curry",
  "subtitulo": "Tema: comida · B2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-082.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B2) sobre: comida.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Eggplant Curry",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "handle",
+      "not much of",
+      "give it a try",
+      "have you over"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Ginger, Nabeel",
+      "EUA, Paquistão"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre comida"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A1001/1043A-Nabil-Curry.mp3",
@@ -48,8 +92,8 @@
      "p": "\"handle\" significa…",
      "emoji": "",
      "ops": [
-      "enviar um formulário",
-      "mecânico",
+      "se locomover",
+      "fuga de cérebros",
       "aguentar / lidar com"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"not much of\" significa…",
      "emoji": "",
      "ops": [
-      "madeira",
+      "experiência memorável",
       "não muito de",
-      "ser aberto"
+      "de preferência"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "experimentar",
-      "resultado final / o essencial",
-      "em si"
+      "se sentir obrigado",
+      "compreender"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"have you over\" significa…",
      "emoji": "",
      "ops": [
-      "vai fundo",
-      "no meio do grupo",
+      "uma bela experiência",
+      "subdividido",
       "te receber em casa"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Julia, Todd",
-      "Katie, Gilder",
+      "Aimee, Katie",
+      "Antoinette, Warren",
       "Ginger, Nabeel"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido, Itália",
+      "Jamaica, Reino Unido",
       "EUA, Paquistão",
-      "Trinidad e Tobago, EUA"
+      "País de Gales"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "comida",
-      "cidades",
-      "feriados"
+      "gostos",
+      "folclore"
      ],
      "c": 0
     }

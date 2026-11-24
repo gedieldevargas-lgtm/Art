@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C1",
  "titulo": "Pet Peeves on the Bus",
  "subtitulo": "Tema: transporte · C1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-102.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C1) sobre: transporte.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Pet Peeves on the Bus",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "pet peeve",
+      "get under my skin",
+      "make or break",
+      "common courtesy"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Abidemi, Jeremy",
+      "Nigéria, Canadá"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre transporte"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/A1301/1339-Jeremy-Bus.mp3",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "coisa que irrita",
-      "comodidade",
-      "não é meu forte"
+      "grogue / zonzo",
+      "pacote turístico"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"get under my skin\" significa…",
      "emoji": "",
      "ops": [
-      "de saco cheio",
-      "surgiu do nada",
+      "paisagem",
+      "me estressa",
       "me irritar"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"make or break\" significa…",
      "emoji": "",
      "ops": [
-      "se locomover",
+      "se sentir obrigado",
       "decisivo",
-      "em movimento"
+      "cuidando de"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "educação básica",
-      "alguns / poucos",
-      "senso de moda"
+      "bungee jump",
+      "aspectos polêmicos"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Abidemi, Jeremy",
-      "Erina, Mike",
-      "Lyndsay, Warren"
+      "Rebecca, Todd",
+      "Shantel, Todd"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Noruega, Canadá",
       "EUA, Paquistão",
+      "Reino Unido",
       "Nigéria, Canadá"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "filmes",
+      "sociedade",
       "transporte",
-      "datas comemorativas"
+      "hotel"
      ],
      "c": 1
     }

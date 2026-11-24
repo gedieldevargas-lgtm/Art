@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C1",
  "titulo": "Bustling Bangkok",
  "subtitulo": "Tema: cidades · C1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-087.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C1) sobre: cidades.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Bustling Bangkok",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "bustling",
+      "the heart of",
+      "thrive",
+      "hub"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Natalie, Todd",
+      "Reino Unido, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre cidades"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/j8ozpyhpmbs",
   "mp3": "",
@@ -49,8 +93,8 @@
      "emoji": "",
      "ops": [
       "movimentado",
-      "lucro",
-      "não consigo imaginar"
+      "vegetariano",
+      "conseguiu (fazer algo)"
      ],
      "c": 0
     },
@@ -58,8 +102,8 @@
      "p": "\"the heart of\" significa…",
      "emoji": "",
      "ops": [
-      "normalmente",
-      "largar um hábito",
+      "ciclo vicioso",
+      "descobrir",
       "o coração de"
      ],
      "c": 2
@@ -68,9 +112,9 @@
      "p": "\"thrive\" significa…",
      "emoji": "",
      "ops": [
-      "sob pressão",
+      "me irritar",
       "prosperar",
-      "vegetariano"
+      "movimentado"
      ],
      "c": 1
     },
@@ -79,8 +123,8 @@
      "emoji": "",
      "ops": [
       "polo / centro",
-      "o ponto de virada",
-      "sociável"
+      "trazido de navio",
+      "o dia todo"
      ],
      "c": 0
     }
@@ -97,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Natalie, Todd",
-      "Mari, Ron",
-      "Angela, Todd"
+      "Aimee, Paul",
+      "Julia, Todd"
      ],
      "c": 0
     },
@@ -106,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido, Chile",
       "Nova Zelândia, EUA",
+      "Reino Unido",
       "Reino Unido, EUA"
      ],
      "c": 2
@@ -116,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "trabalho",
+      "descrições",
       "cidades",
-      "turismo"
+      "educação"
      ],
      "c": 1
     }

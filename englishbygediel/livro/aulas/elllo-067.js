@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · B2",
  "titulo": "Tourism in Thailand",
  "subtitulo": "Tema: turismo · B2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-067.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (B2) sobre: turismo.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Tourism in Thailand",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "tourist package",
+      "high season",
+      "by far",
+      "the locals"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Jerri, Todd",
+      "Tailândia, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre turismo"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/gZPY8EVKpJo",
   "mp3": "",
@@ -48,8 +92,8 @@
      "p": "\"tourist package\" significa…",
      "emoji": "",
      "ops": [
-      "pirataria",
-      "distraído",
+      "se matricular",
+      "se sentir obrigado",
       "pacote turístico"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"high season\" significa…",
      "emoji": "",
      "ops": [
-      "binóculos",
+      "vale-tudo",
       "alta temporada",
-      "chocantemente"
+      "perfeito"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "de longe",
-      "lucro",
-      "trazido de avião"
+      "excepcional",
+      "decisivo"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"the locals\" significa…",
      "emoji": "",
      "ops": [
-      "ciclo vicioso",
-      "apagar (dormir)",
+      "operário / trabalho braçal",
+      "-itas (seguidores de)",
       "os moradores"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Natalie, Todd",
-      "Aimee, Paul",
+      "Abidemi, Jeremy",
+      "Jin, Adam",
       "Jerri, Todd"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Japão, Canadá",
+      "Nova Zelândia, EUA",
       "Tailândia, EUA",
-      "Nova Zelândia, EUA"
+      "Portugal, África do Sul (?)"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "turismo",
-      "alfândega",
-      "academia"
+      "cultura",
+      "tecnologia e filhos"
      ],
      "c": 0
     }

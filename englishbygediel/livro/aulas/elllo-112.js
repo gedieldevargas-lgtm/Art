@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C2",
  "titulo": "Fashion Sense",
  "subtitulo": "Tema: roupas · C2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-112.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C2) sobre: roupas.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Fashion Sense",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "fashion sense",
+      "throw on (clothes)",
+      "a million bucks",
+      "dressed to the nines"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Spencer, Curtis",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre roupas"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/views-1251-1300/1299-Spencer-Curtis-ComfortClothing.mp3",
@@ -48,8 +92,8 @@
      "p": "\"fashion sense\" significa…",
      "emoji": "",
      "ops": [
-      "não me importo",
-      "no fundo",
+      "idade certa",
+      "se acostumar com",
       "senso de moda"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"throw on (clothes)\" significa…",
      "emoji": "",
      "ops": [
-      "reclamar / choramingar",
+      "chocantemente",
       "vestir rápido",
-      "experimentar"
+      "sempre"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "um milhão de dólares (estar ótimo)",
-      "ponta sul",
-      "de amadurecimento (filme)"
+      "pontos altos",
+      "universalmente"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"dressed to the nines\" significa…",
      "emoji": "",
      "ops": [
-      "ciclo vicioso",
-      "me atrair",
+      "um par / alguns",
+      "também (em negativas)",
       "vestido nos trinques"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Katie, Gilder",
-      "Rufei, Todd",
+      "Dan, Todd",
+      "Lyndsay, Warren",
       "Spencer, Curtis"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido",
+      "Trinidad e Tobago, EUA",
       "EUA",
-      "EUA, Reino Unido"
+      "Japão, Canadá"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "roupas",
-      "família",
-      "migração"
+      "sono e sonhos",
+      "lazer"
      ],
      "c": 0
     }

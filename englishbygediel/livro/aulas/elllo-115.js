@@ -6,7 +6,51 @@
  "rotulo": "🎧 Listening · C2",
  "titulo": "Shipwrecks",
  "subtitulo": "Tema: mar e história · C2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-115.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (C2) sobre: mar e história.",
+   "Entender as expressões que aparecem na conversa.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Shipwrecks",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Expressões",
+     "itens": [
+      "southern tip",
+      "piracy",
+      "after the loot",
+      "shipping routes"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Jana, Peter",
+      "Rep. Tcheca, África do Sul (?)"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre mar e história"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/views-1201-1250/1222-Peter-Ships.mp3",
@@ -48,8 +92,8 @@
      "p": "\"southern tip\" significa…",
      "emoji": "",
      "ops": [
-      "inicialmente",
-      "abolido",
+      "substituir",
+      "tem que ser",
       "ponta sul"
      ],
      "c": 2
@@ -58,9 +102,9 @@
      "p": "\"piracy\" significa…",
      "emoji": "",
      "ops": [
-      "não muito de",
+      "vestido nos trinques",
       "pirataria",
-      "convencer alguém"
+      "comportamento obsessivo"
      ],
      "c": 1
     },
@@ -69,8 +113,8 @@
      "emoji": "",
      "ops": [
       "atrás do saque",
-      "geografia",
-      "fora do roteiro turístico"
+      "aprender / pegar",
+      "andar dentro d'água"
      ],
      "c": 0
     },
@@ -78,8 +122,8 @@
      "p": "\"shipping routes\" significa…",
      "emoji": "",
      "ops": [
-      "isso funciona / pode ser",
-      "de amadurecimento (filme)",
+      "ter (uma ideia)",
+      "incomodar",
       "rotas marítimas"
      ],
      "c": 2
@@ -96,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Jerri, Todd",
-      "Shantel, Todd",
+      "Melissa, Doron",
+      "Anthony, Todd",
       "Jana, Peter"
      ],
      "c": 2
@@ -106,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido",
+      "Portugal, África do Sul (?)",
       "Rep. Tcheca, África do Sul (?)",
-      "Nepal, EUA"
+      "Reino Unido, Itália"
      ],
      "c": 1
     },
@@ -117,8 +161,8 @@
      "emoji": "",
      "ops": [
       "mar e história",
-      "humor",
-      "planos"
+      "gostos",
+      "apresentações"
      ],
      "c": 0
     }

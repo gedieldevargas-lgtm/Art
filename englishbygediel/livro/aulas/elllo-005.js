@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · A1",
  "titulo": "Adjectives",
  "subtitulo": "Gramática: Adjectives · A1",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-005.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A1) sobre: cidades.",
+   "Praticar o ponto de gramática: Adjectives.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "Adjectives",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Adjectives"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Meg, Todd",
+      "EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre cidades"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "",
   "mp3": "https://elllo.org/Audio/AGTK/A1-07-MegTodd-Cities-Adjective.mp3",
@@ -106,9 +147,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Julia, Todd",
+      "Aimee, Katie",
       "Meg, Todd",
-      "Olga, Todd"
+      "Monica, Todd"
      ],
      "c": 1
     },
@@ -117,8 +158,8 @@
      "emoji": "",
      "ops": [
       "EUA",
-      "EUA, Reino Unido",
-      "Reino Unido"
+      "Japão, Canadá",
+      "Trinidad e Tobago, EUA"
      ],
      "c": 0
     },
@@ -126,8 +167,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "turismo",
-      "trabalho",
+      "educação",
+      "descrições",
       "cidades"
      ],
      "c": 2

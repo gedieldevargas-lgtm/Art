@@ -6,7 +6,48 @@
  "rotulo": "🎧 Listening · A2",
  "titulo": "A Typical Day",
  "subtitulo": "Gramática: Adverbs of frequency · A2",
- "semEbook": true,
+ "pdf": "livro/pdf/elllo-025.pdf",
+ "ebook": {
+  "resumo": [
+   "Ouvir uma conversa real (A2) sobre: rotina.",
+   "Praticar o ponto de gramática: Adverbs of frequency.",
+   "Responder perguntas sobre quem fala, os sotaques e o tema.",
+   "Falar 3 frases suas sobre o assunto."
+  ],
+  "mapa": {
+   "centro": "A Typical Day",
+   "ramos": [
+    {
+     "t": "Ouça",
+     "t2": 0,
+     "itens": [
+      "1ª vez: só ouvindo",
+      "2ª: com a transcrição"
+     ]
+    },
+    {
+     "t": "Gramática",
+     "itens": [
+      "Adverbs of frequency"
+     ]
+    },
+    {
+     "t": "Quem fala",
+     "itens": [
+      "Aimee, Todd",
+      "Reino Unido, EUA"
+     ]
+    },
+    {
+     "t": "Fale",
+     "itens": [
+      "3 frases sobre rotina"
+     ]
+    }
+   ]
+  },
+  "imprimir": []
+ },
  "midiaPrincipal": {
   "youtube": "https://www.youtube.com/embed/6m0dN_muOP4",
   "mp3": "https://s3-us-west-1.amazonaws.com/elllo-audio/views-1451-1500/1452-AimeeTodd-Routines.mp3",
@@ -106,8 +147,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "CleAnn, Todd",
-      "Julia, Nathan",
+      "Jin, Adam",
+      "Rebecca, Todd",
       "Aimee, Todd"
      ],
      "c": 2
@@ -116,9 +157,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Nova Zelândia, EUA",
+      "Reino Unido",
       "Reino Unido, EUA",
-      "Reino Unido, Chile"
+      "Nova Zelândia, EUA"
      ],
      "c": 1
     },
@@ -127,8 +168,8 @@
      "emoji": "",
      "ops": [
       "rotina",
-      "datas",
-      "presentes"
+      "migração",
+      "preços"
      ],
      "c": 0
     }
