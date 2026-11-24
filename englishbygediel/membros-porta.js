@@ -13,30 +13,30 @@
 
   var css = document.createElement('style');
   css.textContent =
-    '#mi-porta{position:fixed;inset:0;z-index:9700;display:none;align-items:center;justify-content:center;padding:max(20px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(20px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:radial-gradient(ellipse at 20% 0%,#2d3a8c 0%,#161a3d 48%,#090b18 100%);color:#fff;overflow:auto}' +
+    '#mi-porta{position:fixed;inset:0;z-index:9700;display:none;align-items:center;justify-content:center;padding:max(20px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(20px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:radial-gradient(ellipse at 50% 0%,#1d5a41 0%,#0f2c21 55%,#07140e 100%);color:#fbf5e4;overflow:auto}' +
     '#mi-porta.on{display:flex}' +
     '#mi-porta .pt-box{width:100%;max-width:1040px;margin:auto}' +
     '#mi-porta .pt-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}' +
-    '#mi-porta .pt-btn{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;min-height:min(62vh,440px);border:0;border-radius:32px;padding:28px 20px;color:#fff;font:inherit;cursor:pointer;text-align:center;box-shadow:0 18px 44px rgba(0,0,0,.4),inset 0 0 0 1.5px rgba(255,255,255,.16);transition:transform .2s,box-shadow .2s}' +
-    '#mi-porta .pt-btn:hover{transform:translateY(-4px) scale(1.015);box-shadow:0 26px 56px rgba(0,0,0,.5),inset 0 0 0 1.5px rgba(255,255,255,.28)}' +
-    '#mi-porta .pt-btn:focus-visible{outline:3px solid #fff;outline-offset:3px}' +
-    '#mi-porta .pt-a{background:linear-gradient(150deg,#4f6ef7 0%,#7c4fe0 100%)}' +
-    '#mi-porta .pt-b{background:linear-gradient(150deg,#b8791d 0%,#7a3f12 100%)}' +
+    '#mi-porta .pt-btn{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;min-height:min(62vh,440px);border:0;border-radius:32px;padding:28px 20px;color:#fbf5e4;font:inherit;cursor:pointer;text-align:center;background:linear-gradient(180deg,#1b4d38,#123626);box-shadow:0 18px 44px rgba(0,0,0,.45),inset 0 0 0 1.5px rgba(212,178,92,.55);transition:transform .2s,box-shadow .2s}' +
+    '#mi-porta .pt-btn:hover{transform:translateY(-4px) scale(1.015);box-shadow:0 26px 56px rgba(0,0,0,.55),inset 0 0 0 2px #d4b25c}' +
+    '#mi-porta .pt-btn:focus-visible{outline:3px solid #d4b25c;outline-offset:3px}' +
+    
     '#mi-porta .pt-ic{width:clamp(96px,16vw,150px);height:clamp(96px,16vw,150px);display:block}' +
     '#mi-porta .pt-ic img,#mi-porta .pt-ic svg{width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 10px 18px rgba(0,0,0,.35))}' +
-    '#mi-porta .pt-t{font-size:clamp(26px,4.6vw,40px);font-weight:800;letter-spacing:.5px;line-height:1.1;text-transform:uppercase;text-wrap:balance}' +
-    '@media(max-width:720px){#mi-porta .pt-grid{grid-template-columns:1fr;gap:14px}#mi-porta .pt-btn{min-height:0;flex-direction:row;justify-content:flex-start;gap:18px;padding:26px 22px;border-radius:26px;text-align:left}#mi-porta .pt-ic{width:84px;height:84px;flex:none}#mi-porta .pt-t{font-size:24px}}' +
+    '#mi-porta .pt-t{font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(34px,5.6vw,56px);font-weight:700;letter-spacing:.04em;line-height:1.05;text-transform:uppercase;color:#f3e2a8;text-wrap:balance;min-height:2.1em;display:flex;align-items:center;justify-content:center}' +
+    '@media(max-width:720px){#mi-porta .pt-grid{grid-template-columns:1fr;gap:14px}#mi-porta .pt-btn{min-height:0;flex-direction:row;justify-content:flex-start;gap:18px;padding:26px 22px;border-radius:26px;text-align:left}#mi-porta .pt-ic{width:84px;height:84px;flex:none}#mi-porta .pt-t{font-size:32px;min-height:0;justify-content:flex-start}}' +
     '#mi-porta-volta{display:none;align-items:center;gap:6px;border:1px solid var(--border);background:var(--surface2);color:var(--fg);border-radius:10px;padding:7px 12px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;flex:none}body.modo-eom #mi-porta-volta{display:inline-flex}#mi-porta-volta:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.18)}';
   document.head.appendChild(css);
 
-  var BOOK = '<svg viewBox="0 0 120 120" aria-hidden="true"><path d="M60 30c-9-6-22-8-38-6v64c16-2 29 0 38 6 9-6 22-8 38-6V24c-16-2-29 0-38 6z" fill="#fff8e6"/><path d="M60 30v64" stroke="#b8791d" stroke-width="3"/><path d="M30 38c8-1 17 0 24 3M30 50c8-1 17 0 24 3M30 62c8-1 17 0 24 3M90 38c-8-1-17 0-24 3M90 50c-8-1-17 0-24 3M90 62c-8-1-17 0-24 3" stroke="#d9b47a" stroke-width="2.6" stroke-linecap="round" fill="none"/><path d="M60 8v18M51 15h18" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg>';
+  var BOOK = '<svg viewBox="0 0 120 120" aria-hidden="true"><path d="M60 34c-9-6-22-8-38-6v62c16-2 29 0 38 6 9-6 22-8 38-6V28c-16-2-29 0-38 6z" fill="none" stroke="#d4b25c" stroke-width="4" stroke-linejoin="round"/><path d="M60 34v62" stroke="#d4b25c" stroke-width="4"/><path d="M32 46c7-1 14 0 21 3M32 58c7-1 14 0 21 3M32 70c7-1 14 0 21 3M88 46c-7-1-14 0-21 3M88 58c-7-1-14 0-21 3M88 70c-7-1-14 0-21 3" stroke="#f3e2a8" stroke-width="3" stroke-linecap="round" fill="none"/><path d="M60 6v20M50 14h20" stroke="#f3e2a8" stroke-width="5" stroke-linecap="round"/></svg>';
+  var AREA = '<svg viewBox="0 0 120 120" aria-hidden="true"><rect x="22" y="78" width="76" height="20" rx="4" fill="none" stroke="#d4b25c" stroke-width="4"/><rect x="28" y="52" width="70" height="20" rx="4" fill="none" stroke="#d4b25c" stroke-width="4" transform="rotate(-4 63 62)"/><rect x="24" y="26" width="72" height="20" rx="4" fill="none" stroke="#f3e2a8" stroke-width="4" transform="rotate(3 60 36)"/><path d="M40 88h40M44 62h38M42 36h38" stroke="#f3e2a8" stroke-width="3" stroke-linecap="round"/></svg>';
 
   var ov = document.createElement('div');
   ov.id = 'mi-porta';
   ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-label', 'Escolha onde entrar');
   ov.innerHTML = '<div class="pt-box"><div class="pt-grid">' +
-    '<button class="pt-btn pt-a" id="pt-area"><span class="pt-ic"><img src="img/icons/modulos.webp" alt="" draggable="false"></span><span class="pt-t">Área de membros</span></button>' +
-    '<button class="pt-btn pt-b" id="pt-bib"><span class="pt-ic">' + BOOK + '</span><span class="pt-t">Linear Bible</span></button>' +
+    '<button class="pt-btn" id="pt-area"><span class="pt-ic">' + AREA + '</span><span class="pt-t">Área de membros</span></button>' +
+    '<button class="pt-btn" id="pt-bib"><span class="pt-ic">' + BOOK + '</span><span class="pt-t">Linear Bible</span></button>' +
     '</div></div>';
   document.body.appendChild(ov);
 
