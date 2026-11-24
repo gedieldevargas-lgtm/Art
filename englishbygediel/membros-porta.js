@@ -72,5 +72,38 @@
     if ((ehEom() || ss('mi_porta_forca')) && !ss(KEY)) abrir();
   }, 400);
 
+
+  // botão grande da Bíblia dentro do menu lateral (quem não é do modo EOM). Sem acesso → leva pra assinatura do EOM.
+  var CHECK_EOM = 'https://pay.kiwify.com.br/oIjfTK8';
+  css.textContent += '.mi-bib{margin:6px 10px 10px;position:relative;display:flex;align-items:center;gap:14px;width:calc(100% - 20px);min-height:88px;padding:14px 16px;border:0;border-radius:20px;cursor:pointer;font:inherit;text-align:left;color:#fbf5e4;background:linear-gradient(180deg,#1b4d38,#123626);box-shadow:0 10px 26px rgba(0,0,0,.28),inset 0 0 0 1.5px rgba(212,178,92,.55);transition:transform .2s,box-shadow .2s}' +
+    '.mi-bib:hover{transform:translateY(-2px) scale(1.015);box-shadow:0 16px 34px rgba(0,0,0,.34),inset 0 0 0 2px #d4b25c}' +
+    '.mi-bib .bi{width:54px;height:54px;flex:none}.mi-bib .bi svg{width:100%;height:100%;display:block}' +
+    '.mi-bib .bt{font-family:"Cormorant Garamond",Georgia,serif;font-size:25px;font-weight:700;letter-spacing:.03em;line-height:1.05;text-transform:uppercase;color:#f3e2a8;padding-right:20px}' +
+    '.mi-bib .bl{position:absolute;top:50%;right:12px;transform:translateY(-50%);font-size:14px;opacity:.9}' +
+    'body.modo-eom .mi-bib,body.modo-culture .mi-bib{display:none!important}';
+  function temBiblia() {
+    var s = S();
+    if (!s.ok || s.admin || window._isAdmin || s.programa || s.tudo) return true;
+    return (s.compras || []).some(function (c) { return /english on mission|mission|eom/i.test(c.produto || ''); });
+  }
+  function botaoMenu() {
+    var nav = document.querySelector('.sidebar nav, .sidebar .nav, .sidebar'), sec = document.querySelector('.sidebar .nav-section');
+    if (!sec || document.getElementById('mi-bib')) return;
+    var b = document.createElement('button');
+    b.id = 'mi-bib'; b.type = 'button'; b.className = 'mi-bib';
+    b.innerHTML = '<span class="bi">' + BOOK + '</span><span class="bt">Linear Bible</span><span class="bl"></span>';
+    b.onclick = function () {
+      var s = S();
+      if (temBiblia()) { ss(KEY, null); location.href = (s.cfg || {}).linkBiblia || BIBLIA; }
+      else window.open((s.cfg || {}).checkoutEom || CHECK_EOM, '_blank', 'noopener');
+    };
+    sec.parentNode.insertBefore(b, sec);
+  }
+  setInterval(function () {
+    botaoMenu();
+    var b = document.getElementById('mi-bib'); if (!b) return;
+    var l = b.querySelector('.bl'); if (l) l.textContent = temBiblia() ? '' : '🔒';
+  }, 600);
+
   window.EBG_PORTA = { abrir: abrir, fechar: fechar };
 })();
