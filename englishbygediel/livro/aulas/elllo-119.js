@@ -92,9 +92,9 @@
      "p": "\"in a previous lifetime\" significa…",
      "emoji": "",
      "ops": [
-      "de pessoa para pessoa (P2P)",
+      "prosperar",
       "em outra vida",
-      "preso na rotina"
+      "experimentar"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "teve seus momentos",
-      "ter vista para",
-      "dar permissão"
+      "algo importante",
+      "décadas atrás"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"death rate\" significa…",
      "emoji": "",
      "ops": [
-      "descendência",
-      "sem vontade de",
+      "percurso / campo",
+      "em cima do muro",
       "taxa de mortalidade"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"all in all\" significa…",
      "emoji": "",
      "ops": [
-      "não me importo",
+      "pessoalmente",
       "no geral",
-      "não tem como errar / imperdível"
+      "celebração / festa"
      ],
      "c": 1
     }
@@ -142,7 +142,7 @@
      "ops": [
       "Mari, Ron",
       "Shirley, Ray",
-      "Jerri, Todd"
+      "Katie, Todd"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Austrália, EUA",
-      "Nigéria, Reino Unido",
-      "Japão, Canadá"
+      "Inglaterra, EUA",
+      "Nova Zelândia, EUA"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "família",
-      "presentes",
+      "idiomas e países",
+      "filmes",
       "alfândega"
      ],
      "c": 2

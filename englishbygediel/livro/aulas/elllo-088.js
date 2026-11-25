@@ -92,8 +92,8 @@
      "p": "\"well thought out\" significa…",
      "emoji": "",
      "ops": [
-      "pais de ninho vazio",
-      "fora do roteiro turístico",
+      "vacinas antirrábicas",
+      "pagar a conta",
       "bem pensado"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"mean the world\" significa…",
      "emoji": "",
      "ops": [
-      "madeira",
+      "culinária",
       "significar muito",
-      "duvidoso / arriscado"
+      "anormal / bizarro"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "sob pressão",
-      "operário / trabalho braçal",
-      "experimentar"
+      "hora do rush",
+      "de preferência"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"change your mind\" significa…",
      "emoji": "",
      "ops": [
-      "onde quer que",
-      "chocantemente",
+      "cuidando de",
+      "se sentir obrigado",
       "mudar de ideia"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Jin, Adam",
-      "Rebecca, Todd",
+      "Shantel, Todd",
+      "Dan, Todd",
       "Aimee, Todd"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido",
+      "Japão, Canadá",
       "Reino Unido, EUA",
-      "Nova Zelândia, EUA"
+      "Jamaica, Reino Unido"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "presentes",
-      "esportes",
-      "economia"
+      "datas",
+      "apresentações"
      ],
      "c": 0
     }

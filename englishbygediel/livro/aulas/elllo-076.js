@@ -15,7 +15,7 @@
    "Falar 3 frases suas sobre o assunto."
   ],
   "mapa": {
-   "centro": "Tips for Learning on T",
+   "centro": "Tips for Learning on TV",
    "ramos": [
     {
      "t": "Ouça",
@@ -92,8 +92,8 @@
      "p": "\"first of all\" significa…",
      "emoji": "",
      "ops": [
-      "rabeca / violino",
-      "acompanhar",
+      "ponta sul",
+      "madeira",
       "antes de tudo"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"subtitle\" significa…",
      "emoji": "",
      "ops": [
-      "não muito de",
+      "espírito esportivo",
       "legenda",
-      "também (em negativas)"
+      "um milhão de dólares (estar ótimo)"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "legenda oculta (CC)",
-      "hospedagem",
-      "assim de cabeça"
+      "ter (uma ideia)",
+      "incomodar"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"follow along\" significa…",
      "emoji": "",
      "ops": [
-      "trabalhadores por contrato (servidão)",
-      "montanhoso",
+      "sazonal",
+      "chateado / incomodado",
       "acompanhar"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Mari, Ron",
-      "Aimee, Todd",
+      "Shantel, Todd",
+      "Rufei, Todd",
       "Hana, Ben"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido, Itália",
+      "EUA, Reino Unido",
       "Japão, EUA",
-      "Nigéria, Reino Unido"
+      "EUA, Paquistão"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "aprender inglês",
-      "humor",
-      "cores"
+      "casa",
+      "ética"
      ],
      "c": 0
     }

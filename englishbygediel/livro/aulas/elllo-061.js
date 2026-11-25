@@ -92,8 +92,8 @@
      "p": "\"it's funny you mention\" significa…",
      "emoji": "",
      "ops": [
-      "percurso / campo",
-      "ênfase",
+      "minimalista",
+      "ficar longe de",
       "engraçado você falar isso"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"it's not working out\" significa…",
      "emoji": "",
      "ops": [
-      "significar muito",
+      "equivalente",
       "não está dando certo",
-      "rotas marítimas"
+      "celebração / festa"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "desnecessário / injusto",
-      "ficar longe de",
-      "incomodar"
+      "pressão",
+      "herói popular"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"we're not meant to be\" significa…",
      "emoji": "",
      "ops": [
-      "pergunta difícil",
-      "bonde",
+      "custar os olhos da cara",
+      "mudar de ideia",
       "não nascemos um para o outro"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Melissa, Doron",
-      "Olga, Todd",
+      "Jana, Peter",
+      "Jerri, Todd",
       "Crystal, George"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Trinidad e Tobago, EUA",
+      "País de Gales",
       "EUA",
-      "Japão, Canadá"
+      "Rússia, EUA"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "relacionamentos",
-      "compras",
-      "trabalho remoto"
+      "tecnologia",
+      "feriados"
      ],
      "c": 0
     }

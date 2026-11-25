@@ -15,7 +15,7 @@
    "Falar 3 frases suas sobre o assunto."
   ],
   "mapa": {
-   "centro": "SEA Travels - Vietnam ",
+   "centro": "SEA Travels - Vietnam and Myanmar",
    "ramos": [
     {
      "t": "Ouça",
@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "terraço",
-      "trabalhar em / melhorar",
-      "genes"
+      "esclarecedor",
+      "lançar"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"managed to + verb\" significa…",
      "emoji": "",
      "ops": [
-      "se destacar",
-      "engraçado você falar isso",
+      "virando moda",
+      "vestir rápido",
       "conseguiu (fazer algo)"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"impressive\" significa…",
      "emoji": "",
      "ops": [
-      "de jeito nenhum / nem um pouco",
+      "desvantagem",
       "impressionante",
-      "nojento"
+      "reputação"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "paisagem",
-      "lenda urbana",
-      "conseguiu (fazer algo)"
+      "celebração / festa",
+      "preso na rotina"
      ],
      "c": 0
     }
@@ -141,7 +141,7 @@
      "emoji": "",
      "ops": [
       "Abidemi, Todd",
-      "Antoinette, Warren",
+      "Mari, Ron",
       "Katie, Gilder"
      ],
      "c": 0
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Nepal, EUA",
-      "País de Gales",
+      "Reino Unido, Chile",
+      "Nigéria, Canadá",
       "Nigéria, EUA"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "cidades",
+      "tecnologia",
       "viagem",
-      "feriados"
+      "preços"
      ],
      "c": 1
     }

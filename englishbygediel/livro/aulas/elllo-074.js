@@ -92,9 +92,9 @@
      "p": "\"celebrity\" significa…",
      "emoji": "",
      "ops": [
-      "ambiente hostil",
+      "preço fixo",
       "celebridade",
-      "sempre"
+      "surgiu do nada"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "ela meio que ficou famosa",
-      "rotas marítimas",
-      "significar muito"
+      "um longo caminho pela frente",
+      "legenda"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"somehow\" significa…",
      "emoji": "",
      "ops": [
-      "difícil de negar",
-      "e assim por diante",
+      "centro financeiro",
+      "seguir em frente",
       "de algum jeito"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"gorgeous\" significa…",
      "emoji": "",
      "ops": [
-      "de amadurecimento (filme)",
+      "me irritar",
       "lindo",
-      "trabalhadores por contrato (servidão)"
+      "pontos altos"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Aimee, Todd",
+      "Rufei, Todd",
       "Hana, Ben",
-      "Mari, Ron"
+      "Shantel, Todd"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Japão, EUA",
-      "Nigéria, Reino Unido",
-      "Reino Unido, Itália"
+      "EUA, Paquistão",
+      "EUA, Reino Unido"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "idiomas",
-      "escola",
+      "arrependimentos",
+      "mar e história",
       "celebridades"
      ],
      "c": 2

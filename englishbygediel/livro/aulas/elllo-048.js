@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "bungee jump",
-      "sem vontade de",
-      "geralmente"
+      "legenda",
+      "faixa de preço"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"rafting\" significa…",
      "emoji": "",
      "ops": [
-      "celebridade",
-      "me irritar",
+      "sem dúvida",
+      "décadas atrás",
       "rafting"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"capital\" significa…",
      "emoji": "",
      "ops": [
-      "ficar longe de",
+      "bem pensado",
       "capital",
-      "único"
+      "se envolver"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "celebração / festa",
-      "me deixa louco",
-      "equivalente"
+      "clima",
+      "apagar (dormir)"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Jin, Adam",
-      "Antoinette, Warren",
-      "CleAnn, Todd"
+      "Melissa, Doron",
+      "Julia, Todd"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
+      "Reino Unido, EUA",
       "País de Gales",
-      "EUA, Reino Unido",
       "Nepal, EUA"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "cidades",
+      "tecnologia",
       "viagem",
-      "feriados"
+      "preços"
      ],
      "c": 1
     }

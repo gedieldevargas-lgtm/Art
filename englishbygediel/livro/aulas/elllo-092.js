@@ -92,9 +92,9 @@
      "p": "\"brain drain\" significa…",
      "emoji": "",
      "ops": [
-      "acumulador (guarda tudo)",
+      "preço justo",
       "fuga de cérebros",
-      "equivalente"
+      "preso na rotina"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "áreas rurais",
-      "legenda",
-      "se meter em encrenca"
+      "se perder em",
+      "lindo"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"decades ago\" significa…",
      "emoji": "",
      "ops": [
-      "caribu (rena)",
-      "montanhoso",
+      "orçamento",
+      "amante de comida",
       "décadas atrás"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"subdivided\" significa…",
      "emoji": "",
      "ops": [
-      "boicote",
+      "de ponta",
       "subdividido",
-      "onde quer que"
+      "ficar longe de"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Lyndsay, Warren",
+      "Shantel, Todd",
       "Pernese, Doron",
-      "Josh, Shirley"
+      "Julia, Todd"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Jamaica, Reino Unido",
-      "Trinidad e Tobago, EUA",
-      "Reino Unido, EUA"
+      "Reino Unido, EUA",
+      "Austrália, EUA"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "rotina",
-      "sociedade",
+      "tecnologia",
+      "trabalho",
       "migração"
      ],
      "c": 2

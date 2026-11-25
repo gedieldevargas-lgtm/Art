@@ -92,8 +92,8 @@
      "p": "\"appeal to me\" significa…",
      "emoji": "",
      "ops": [
-      "mudar de ideia",
-      "descobrir",
+      "alguns / poucos",
+      "descendência",
       "me atrair"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"situated\" significa…",
      "emoji": "",
      "ops": [
-      "estragar",
+      "rotas marítimas",
       "localizado",
-      "por segurança"
+      "mudar de assunto"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "andar dentro d'água",
-      "hospedagem",
-      "celebração / festa"
+      "antes de tudo",
+      "se locomover"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"local color\" significa…",
      "emoji": "",
      "ops": [
-      "coisa que irrita",
-      "contra a corrente",
+      "grelhar",
+      "tirar certificação",
       "cara local / cultura local"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Pernese, Doron",
-      "Josh, Shirley",
+      "Jake, Shirley",
+      "Rebecca, Todd",
       "Erina, Mike"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Nova Zelândia, EUA",
+      "EUA, Austrália",
       "Japão, Canadá",
-      "Noruega, Canadá"
+      "EUA, Canadá"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "hotel",
-      "cidades",
-      "descrições"
+      "relacionamentos",
+      "tecnologia e filhos"
      ],
      "c": 0
     }

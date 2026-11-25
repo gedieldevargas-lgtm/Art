@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "a Austrália (apelido)",
-      "falar o que pensa",
-      "lindo"
+      "atitude aberta",
+      "viralizar"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"gorgeous\" significa…",
      "emoji": "",
      "ops": [
-      "não adequado para",
-      "certificado",
+      "fácil de usar",
+      "enviar um formulário",
       "lindo"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"upside down\" significa…",
      "emoji": "",
      "ops": [
-      "boicote",
+      "culinária",
       "de cabeça para baixo",
-      "vale-tudo"
+      "legenda"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "bonde",
-      "centro financeiro",
-      "me sentir uma vaca (comendo demais)"
+      "pontos altos",
+      "me irritar"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Josh, Shirley",
-      "Naomi, Dai",
-      "Shirley, Yuri"
+      "Melissa, Doron",
+      "Ana, Michael"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "EUA, Canadá",
       "Trinidad e Tobago, EUA",
+      "Reino Unido, Chile",
       "EUA, Austrália"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "descrições",
+      "restaurante",
       "cidades",
-      "educação"
+      "idiomas e países"
      ],
      "c": 1
     }

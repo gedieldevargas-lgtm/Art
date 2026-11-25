@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "mais ou menos",
-      "não nascemos um para o outro",
-      "a vida em geral"
+      "de longe",
+      "descendência"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"migrating\" significa…",
      "emoji": "",
      "ops": [
-      "ela meio que ficou famosa",
-      "ambiente hostil",
+      "bem pensado",
+      "pirataria",
       "migrando"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"immigration\" significa…",
      "emoji": "",
      "ops": [
-      "trazido de avião",
+      "paranoico",
       "imigração",
-      "lucro"
+      "optar por / tentar"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "optar por / tentar",
-      "rabeca / violino",
-      "estar disposto a / à altura"
+      "marcar os pontos",
+      "anual"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Pernese, Doron",
-      "Josh, Shirley",
-      "Lyndsay, Warren"
+      "Julia, Todd",
+      "Shantel, Todd"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Trinidad e Tobago, EUA",
       "Reino Unido, EUA",
+      "Austrália, EUA",
       "Jamaica, Reino Unido"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "sociedade",
+      "trabalho",
       "migração",
-      "rotina"
+      "tecnologia"
      ],
      "c": 1
     }

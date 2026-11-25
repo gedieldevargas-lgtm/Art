@@ -15,7 +15,7 @@
    "Falar 3 frases suas sobre o assunto."
   ],
   "mapa": {
-   "centro": "How International are ",
+   "centro": "How International are you?",
    "ramos": [
     {
      "t": "Ouça",
@@ -92,8 +92,8 @@
      "p": "\"find out\" significa…",
      "emoji": "",
      "ops": [
-      "isolado",
-      "bungee jump",
+      "rabeca / violino",
+      "estou resolvido / pronto",
       "descobrir"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"apart from that\" significa…",
      "emoji": "",
      "ops": [
-      "em outra vida",
+      "nada mal",
       "fora isso",
-      "na hora / de improviso"
+      "ilegalmente"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "de jeito nenhum / nem um pouco",
-      "pessoalmente",
-      "preço justo"
+      "celebração / festa",
+      "se meter em encrenca"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"a few\" significa…",
      "emoji": "",
      "ops": [
-      "não está dando certo",
-      "subdividido",
+      "universalmente",
+      "contra a corrente",
       "alguns / poucos"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Sarah, Todd",
-      "Aimee, Paul",
+      "Jake, Shirley",
+      "Rebecca, Todd",
       "Katie, Todd"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido",
+      "Japão, Canadá",
       "Reino Unido, EUA",
-      "Nova Zelândia, EUA"
+      "Jamaica, Reino Unido"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "cultura",
-      "sonhos e carreira",
-      "personalidade"
+      "dinheiro",
+      "carreira militar"
      ],
      "c": 0
     }

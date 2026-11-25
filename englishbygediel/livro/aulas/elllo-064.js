@@ -15,7 +15,7 @@
    "Falar 3 frases suas sobre o assunto."
   ],
   "mapa": {
-   "centro": "Bangkok Transportation",
+   "centro": "Bangkok Transportation - Part 2",
    "ramos": [
     {
      "t": "Ouça",
@@ -92,8 +92,8 @@
      "p": "\"freak out\" significa…",
      "emoji": "",
      "ops": [
-      "grogue / zonzo",
-      "nunca",
+      "compreender",
+      "e assim por diante",
       "surtar"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"to get around\" significa…",
      "emoji": "",
      "ops": [
-      "conseguiu (fazer algo)",
+      "versátil",
       "se locomover",
-      "vegetariano"
+      "não está dando certo"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "hora do rush",
-      "ser desajeitado para dançar",
-      "educação básica"
+      "anormal / bizarro",
+      "me deixa louco"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"fed up\" significa…",
      "emoji": "",
      "ops": [
-      "desistir",
-      "ligado em moda",
+      "educação básica",
+      "aumentar aos poucos",
       "de saco cheio"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Abidemi, Jeremy",
-      "Jin, Adam",
+      "Melissa, Doron",
+      "Katie, Todd",
       "Jerri, Todd"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Nova Zelândia, EUA",
+      "Reino Unido",
       "Tailândia, EUA",
-      "Portugal, África do Sul (?)"
+      "Reino Unido, Chile"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "transporte",
-      "hotel",
-      "sociedade"
+      "cultura",
+      "tecnologia e filhos"
      ],
      "c": 0
     }

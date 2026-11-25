@@ -92,8 +92,8 @@
      "p": "\"modality\" significa…",
      "emoji": "",
      "ops": [
-      "indicativo",
-      "trabalhadores por contrato (servidão)",
+      "vestir rápido",
+      "desvantagem",
       "modalidade"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"stagnation\" significa…",
      "emoji": "",
      "ops": [
-      "trabalhar em / melhorar",
+      "especialmente",
       "estagnação",
-      "custar os olhos da cara"
+      "encanamento"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "preso na rotina",
-      "mudar de assunto",
-      "especialmente"
+      "chocantemente",
+      "experimentar"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"spectrum\" significa…",
      "emoji": "",
      "ops": [
-      "rotina normal de trabalho",
-      "rico / abastado",
+      "e assim por diante",
+      "tarefas de casa",
       "espectro"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Julia, Todd",
-      "Katie, Gilder",
+      "Aimee, Katie",
+      "Abidemi, Todd",
       "Olga, Todd"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido, EUA",
+      "País de Gales",
       "Rússia, EUA",
-      "Portugal, África do Sul (?)"
+      "Inglaterra, EUA"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "saúde",
-      "restaurante",
-      "mar e história"
+      "trânsito",
+      "idiomas"
      ],
      "c": 0
     }

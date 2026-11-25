@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "descendência",
-      "estudioso",
-      "espectro"
+      "tirar certificação",
+      "único"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"indentured laborers\" significa…",
      "emoji": "",
      "ops": [
-      "aprender / pegar",
-      "largar um hábito",
+      "espírito esportivo",
+      "coisa que irrita",
       "trabalhadores por contrato (servidão)"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"abolished\" significa…",
      "emoji": "",
      "ops": [
-      "reconhecível",
+      "chateado / incomodado",
       "abolido",
-      "trazido de navio"
+      "só para esclarecer"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "aposentadoria",
-      "lenda urbana",
-      "dar um gelo"
+      "hora do rush",
+      "cru"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "CleAnn, Todd",
-      "Shantel, Todd",
-      "Rufei, Todd"
+      "Abidemi, Rory",
+      "Gyri, Viyasan"
      ],
      "c": 0
     },
@@ -151,7 +151,7 @@
      "emoji": "",
      "ops": [
       "Reino Unido, EUA",
-      "Portugal, África do Sul (?)",
+      "EUA",
       "Trinidad e Tobago, EUA"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "restaurante",
+      "idiomas e países",
       "história e cultura",
-      "transporte"
+      "família e dinheiro"
      ],
      "c": 1
     }

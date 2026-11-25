@@ -148,8 +148,8 @@
      "emoji": "",
      "ops": [
       "humor",
-      "rádio",
-      "filmes"
+      "sociedade",
+      "cultura"
      ],
      "c": 0
     }

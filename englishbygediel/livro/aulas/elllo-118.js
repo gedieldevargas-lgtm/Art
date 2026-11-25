@@ -92,8 +92,8 @@
      "p": "\"negative connotation\" significa…",
      "emoji": "",
      "ops": [
-      "focar em vencer",
-      "me ensina seus truques",
+      "o dia todo",
+      "áreas rurais",
       "conotação negativa"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"deep down\" significa…",
      "emoji": "",
      "ops": [
-      "bem legal",
+      "mesada",
       "no fundo",
-      "o coração de"
+      "pirataria"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "ciclo vicioso",
-      "pirataria",
-      "comer fora"
+      "egocêntrico",
+      "distraído"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"hand they've been dealt\" significa…",
      "emoji": "",
      "ops": [
-      "trazido de navio",
-      "elo fraco",
+      "falar o que pensa",
+      "lindo",
       "as cartas que a vida deu"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
+      "Aimee, Paul",
       "Hana, Daniel",
-      "Anthony, Todd",
       "Rachel, Todd"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido",
+      "Japão, Canadá",
       "Reino Unido, EUA",
-      "Nova Zelândia, EUA"
+      "Jamaica, Reino Unido"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "sociedade",
-      "aprender inglês",
-      "família e dinheiro"
+      "filmes",
+      "esportes"
      ],
      "c": 0
     }

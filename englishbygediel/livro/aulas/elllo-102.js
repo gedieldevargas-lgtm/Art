@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "coisa que irrita",
-      "grogue / zonzo",
-      "pacote turístico"
+      "se destacar",
+      "engraçado você falar isso"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"get under my skin\" significa…",
      "emoji": "",
      "ops": [
-      "paisagem",
-      "me estressa",
+      "desistir",
+      "o melhor dos dois mundos",
       "me irritar"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"make or break\" significa…",
      "emoji": "",
      "ops": [
-      "se sentir obrigado",
+      "optar por / tentar",
       "decisivo",
-      "cuidando de"
+      "em si"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "educação básica",
-      "bungee jump",
-      "aspectos polêmicos"
+      "custar os olhos da cara",
+      "aparecer"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Abidemi, Jeremy",
-      "Rebecca, Todd",
-      "Shantel, Todd"
+      "Shirley, Yuri",
+      "Melissa, Doron"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "EUA, Paquistão",
-      "Reino Unido",
+      "Tailândia, EUA",
+      "Nepal, EUA",
       "Nigéria, Canadá"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "sociedade",
+      "tecnologia e filhos",
       "transporte",
-      "hotel"
+      "cultura"
      ],
      "c": 1
     }

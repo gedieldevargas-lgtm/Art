@@ -92,8 +92,8 @@
      "p": "\"course\" significa…",
      "emoji": "",
      "ops": [
-      "experiência memorável",
-      "descobrir",
+      "não me importo",
+      "terraço",
       "percurso / campo"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"get involved\" significa…",
      "emoji": "",
      "ops": [
-      "me sentir uma vaca (comendo demais)",
+      "amante de comida",
       "se envolver",
-      "travar / chegar ao limite"
+      "assim de cabeça"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "marcar os pontos",
-      "grelhar",
-      "pacote turístico"
+      "a vida em geral",
+      "encanamento"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"good sportsmanship\" significa…",
      "emoji": "",
      "ops": [
-      "pessoa de sono pesado",
-      "fuga de cérebros",
+      "emissões de carbono",
+      "lenda urbana",
       "espírito esportivo"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Meg, Todd",
-      "Aimee, Katie",
+      "Gyri, Viyasan",
+      "Erina, Mike",
       "Sarah, John"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Trinidad e Tobago, EUA",
+      "País de Gales",
       "EUA",
-      "Japão, Canadá"
+      "Rússia, EUA"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "esportes",
-      "filmes",
-      "gostos"
+      "roupas",
+      "trabalho"
      ],
      "c": 0
     }

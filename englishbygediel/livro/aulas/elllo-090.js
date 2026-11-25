@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "no meu sangue",
-      "não muito de",
-      "no fundo"
+      "modalidade",
+      "salário mínimo justo"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"take it to heart\" significa…",
      "emoji": "",
      "ops": [
-      "histeria",
-      "prático / útil",
+      "expatriado",
+      "no fim das contas",
       "levar a sério / a peito"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"bite your lip\" significa…",
      "emoji": "",
      "ops": [
-      "se meter em encrenca",
+      "retorno / feedback",
       "segurar a língua",
-      "comportamento obsessivo"
+      "com certeza"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "falar o que pensa",
-      "isso é bem profundo",
-      "de amadurecimento (filme)"
+      "aparecer",
+      "indicativo"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Meg, Todd",
-      "Monica, Todd",
-      "Aimee, Katie"
+      "Sarah, John",
+      "Shirley, Ray"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Japão, Canadá",
-      "Trinidad e Tobago, EUA",
+      "Rússia, EUA",
+      "País de Gales",
       "EUA"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "descrições",
+      "escola",
       "expressões idiomáticas",
-      "roupas"
+      "casa"
      ],
      "c": 1
     }

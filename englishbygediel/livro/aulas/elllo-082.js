@@ -92,8 +92,8 @@
      "p": "\"handle\" significa…",
      "emoji": "",
      "ops": [
-      "se locomover",
-      "fuga de cérebros",
+      "vestir rápido",
+      "difícil de negar",
       "aguentar / lidar com"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"not much of\" significa…",
      "emoji": "",
      "ops": [
-      "experiência memorável",
+      "caro demais",
       "não muito de",
-      "de preferência"
+      "assim de cabeça"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "experimentar",
-      "se sentir obrigado",
-      "compreender"
+      "não nascemos um para o outro",
+      "a vida em geral"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"have you over\" significa…",
      "emoji": "",
      "ops": [
-      "uma bela experiência",
-      "subdividido",
+      "não me importo",
+      "resolver logo",
       "te receber em casa"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Aimee, Katie",
-      "Antoinette, Warren",
+      "Olga, Todd",
+      "Dan, Todd",
       "Ginger, Nabeel"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Jamaica, Reino Unido",
+      "Nigéria, EUA",
       "EUA, Paquistão",
-      "País de Gales"
+      "Noruega, Canadá"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "comida",
-      "gostos",
-      "folclore"
+      "saúde",
+      "rotina"
      ],
      "c": 0
     }

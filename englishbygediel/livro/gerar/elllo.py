@@ -80,7 +80,7 @@ for i, d in enumerate(D, 1):
          'ebook': {'resumo': ['Ouvir uma conversa real (%s) sobre: %s.' % (nivel, tema or titulo),
                               ('Praticar o ponto de gramática: %s.' % gram) if gram else 'Entender as expressões que aparecem na conversa.',
                               'Responder perguntas sobre quem fala, os sotaques e o tema.', 'Falar 3 frases suas sobre o assunto.'],
-                   'mapa': {'centro': titulo[:22], 'ramos': [{'t': 'Ouça', 't2': 0, 'itens': ['1ª vez: só ouvindo', '2ª: com a transcrição']},
+                   'mapa': {'centro': titulo, 'ramos': [{'t': 'Ouça', 't2': 0, 'itens': ['1ª vez: só ouvindo', '2ª: com a transcrição']},
                             {'t': 'Gramática' if gram else 'Expressões', 'itens': [gram] if gram else [v for v in voc[:4]]},
                             {'t': 'Quem fala', 'itens': [falantes or '—', sotaques or '']}, {'t': 'Fale', 'itens': ['3 frases sobre ' + (tema or 'o tema')]}]},
                    'imprimir': []},

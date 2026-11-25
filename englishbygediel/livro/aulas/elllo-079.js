@@ -92,8 +92,8 @@
      "p": "\"productive\" significa…",
      "emoji": "",
      "ops": [
-      "focar em vencer",
-      "expatriado",
+      "desistir",
+      "no geral",
       "produtivo"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"affluent\" significa…",
      "emoji": "",
      "ops": [
-      "experiência memorável",
+      "lançar",
       "rico / abastado",
-      "descobrir / entender"
+      "trabalhar em / melhorar"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "equivalente",
-      "legenda",
-      "culinária"
+      "ciclo vicioso",
+      "ter (uma ideia)"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"blue-collar\" significa…",
      "emoji": "",
      "ops": [
-      "abolido",
-      "e assim por diante",
+      "aprender / pegar",
+      "largar um hábito",
       "operário / trabalho braçal"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Hana, Ben",
-      "Jerri, Todd",
+      "Rebecca, Todd",
+      "Sarah, John",
       "Julia, Todd"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido",
+      "Japão, Canadá",
       "Reino Unido, EUA",
-      "Nova Zelândia, EUA"
+      "Jamaica, Reino Unido"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "família",
-      "roupas",
-      "comida"
+      "finanças",
+      "hotel"
      ],
      "c": 0
     }

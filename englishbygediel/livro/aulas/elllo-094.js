@@ -92,8 +92,8 @@
      "p": "\"paranoid\" significa…",
      "emoji": "",
      "ops": [
-      "o ponto de virada",
-      "sociável",
+      "mítico",
+      "em outra vida",
       "paranoico"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"deep sleeper\" significa…",
      "emoji": "",
      "ops": [
-      "legenda",
+      "obviamente",
       "pessoa de sono pesado",
-      "me atrair"
+      "não consigo imaginar"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "grogue / zonzo",
-      "o que você quiser",
-      "celebração / festa"
+      "chateado / incomodado",
+      "bem pensado"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"conk out\" significa…",
      "emoji": "",
      "ops": [
-      "aposentadoria",
-      "indicativo",
+      "caro demais",
+      "estagnação",
       "apagar (dormir)"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Shirley, Ray",
-      "Sarah, Adam",
+      "Abidemi, Rory",
+      "Jin, Adam",
       "Sarah, Todd"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Trinidad e Tobago, EUA",
+      "País de Gales",
       "EUA",
-      "Japão, Canadá"
+      "Rússia, EUA"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "sono e sonhos",
-      "gostos",
-      "economia"
+      "datas comemorativas",
+      "rotina"
      ],
      "c": 0
     }

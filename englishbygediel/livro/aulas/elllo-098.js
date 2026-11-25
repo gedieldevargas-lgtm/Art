@@ -92,9 +92,9 @@
      "p": "\"expat\" significa…",
      "emoji": "",
      "ops": [
-      "preso na rotina",
+      "ilegalmente",
       "expatriado",
-      "celebração / festa"
+      "difícil de negar"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "desvantagem",
-      "hora do rush",
-      "papelada"
+      "ciclo vicioso",
+      "não tem como errar / imperdível"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"the turning point\" significa…",
      "emoji": "",
      "ops": [
-      "de saco cheio",
-      "pacote turístico",
+      "não está dando certo",
+      "caribu (rena)",
       "o ponto de virada"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"a big deal\" significa…",
      "emoji": "",
      "ops": [
-      "salário mínimo justo",
+      "montanhoso",
       "algo importante",
-      "aposentadoria"
+      "engraçado você falar isso"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Aimee, Todd",
+      "Jerri, Todd",
       "Dan, Todd",
-      "Julia, Nathan"
+      "Antoinette, Warren"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "EUA",
-      "Japão, Canadá",
-      "Trinidad e Tobago, EUA"
+      "Rússia, EUA",
+      "País de Gales"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "feriados",
-      "cidades",
+      "preços",
+      "tecnologia",
       "viagem"
      ],
      "c": 2

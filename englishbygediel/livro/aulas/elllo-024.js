@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "exceto",
-      "tema em comum",
-      "fora isso"
+      "sem dúvida",
+      "legenda oculta (CC)"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"wherever\" significa…",
      "emoji": "",
      "ops": [
-      "no meu sangue",
-      "-itas (seguidores de)",
+      "uma pessoa fácil de lidar",
+      "difícil de negar",
       "onde quer que"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"path\" significa…",
      "emoji": "",
      "ops": [
-      "preço fixo",
+      "lançar",
       "caminho / trilha",
-      "surgiu do nada"
+      "rotas marítimas"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "com certeza",
-      "curva de sino (média)",
-      "de ponta"
+      "desvantagem",
+      "minimalista"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Katie, Todd",
-      "Sarah, Todd",
-      "Aimee, Paul"
+      "Jake, Shirley",
+      "Rebecca, Todd"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Nova Zelândia, EUA",
-      "Reino Unido",
+      "Jamaica, Reino Unido",
+      "Japão, Canadá",
       "Reino Unido, EUA"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "descrições",
+      "restaurante",
       "cidades",
-      "educação"
+      "idiomas e países"
      ],
      "c": 1
     }

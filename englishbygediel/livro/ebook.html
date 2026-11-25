@@ -117,6 +117,11 @@ p{margin:0 0 8px;font-size:10.5pt;line-height:1.5}
 .g{font-size:8.8pt}.g b{display:block;color:var(--ac);margin-bottom:1px}.g ol{margin:0;padding-left:16px}
 .emo{grid-template-columns:28px 1fr;font-size:9.6pt}
 .dica{font-size:9.6pt}
+.capa-yt{position:relative;margin-top:22px;width:92mm;border-radius:14px;overflow:hidden;border:2px solid rgba(255,255,255,.25)}
+.capa-yt img{display:block;width:100%}.capa-yt span,.ytb a span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:#ff0033;color:#fff;display:grid;place-items:center;font-size:18px}
+.ytb a{position:relative;display:block;border-radius:10px;overflow:hidden}.ytb img{display:block;width:100%}.ytb p{font-size:8.5pt;color:var(--mut);margin:3px 0 0}
+.capa .tt{overflow-wrap:anywhere}
+.tt,.ht{overflow-wrap:anywhere}
 </style>
 </head>
 <body>
@@ -137,27 +142,32 @@ p{margin:0 0 8px;font-size:10.5pt;line-height:1.5}
   function pagina(html,cls){return '<section class="pg '+(cls||'')+'">'+html+rod()+'</section>';}
 
   // ---------- mapa mental (SVG) ----------
+  // quebra o texto em linhas que cabem na largura (estimativa por caractere) e, se ainda passar, comprime o texto para caber
+  function linhasDe(t,maxCh){var ws=String(t).split(' '),out=[],l='';ws.forEach(function(w){if((l+' '+w).trim().length>maxCh&&l){out.push(l);l=w;}else l=(l+' '+w).trim();});if(l)out.push(l);return out;}
+  function txt(x,y,t,o){var lw=(o.cw||6.4)*t.length;return '<text x="'+x+'" y="'+y+'"'+(o.meio?' text-anchor="middle"':'')+' fill="'+(o.cor||'#14121f')+'" font-size="'+o.fs+'" font-weight="'+(o.fw||600)+'"'+(o.ff?' font-family="'+o.ff+'"':'')+(lw>o.max?' textLength="'+o.max+'" lengthAdjust="spacingAndGlyphs"':'')+'>'+esc(t)+'</text>';}
   function mapa(m){
-    var W=720,cx=W/2,cores=['#6d4df5','#a855f7','#ec4899','#f59e0b','#10b981','#0ea5e9'];
-    var esq=[],dir=[];m.ramos.forEach(function(r,i){(i%2?dir:esq).push([r,i]);});
-    function alt(r){return 30+r.itens.length*17+12;}
-    var hE=esq.reduce(function(s,x){return s+alt(x[0])+14;},0),hD=dir.reduce(function(s,x){return s+alt(x[0])+14;},0);
-    var H=Math.max(hE,hD)+20,cy=H/2,out='',lin='';
-    function lado(lista,x0,ladoDir){
-      var tot=lista.reduce(function(s,x){return s+alt(x[0])+14;},0),y=(H-tot)/2+7;
-      lista.forEach(function(p){
-        var r=p[0],c=cores[p[1]%cores.length],h=alt(r),bw=220,bx=ladoDir?x0:x0-bw,my=y+h/2;
-        var ax=ladoDir?bx:bx+bw,sx=ladoDir?cx+70:cx-70;
+    var W=720,cx=W/2,cores=['#6d4df5','#a855f7','#ec4899','#f59e0b','#10b981','#0ea5e9'],BW=232,MAXI=31;
+    var ramos=m.ramos.map(function(r,i){var ls=[];r.itens.filter(Boolean).forEach(function(it){linhasDe('• '+it,MAXI).forEach(function(l,k){ls.push(k?'   '+l:l);});});return {t:r.t,ls:ls.slice(0,7),i:i};});
+    var esq=[],dir=[];ramos.forEach(function(r,i){(i%2?dir:esq).push(r);});
+    function alt(r){return 34+r.ls.length*16+10;}
+    var hE=esq.reduce(function(s,x){return s+alt(x)+14;},0),hD=dir.reduce(function(s,x){return s+alt(x)+14;},0);
+    var cl=linhasDe(m.centro,14).slice(0,4),CW=158,CH=26+cl.length*20;
+    var H=Math.max(hE,hD,CH+20)+20,cy=H/2,out='',lin='';
+    function lado(lista,ladoDir){
+      var tot=lista.reduce(function(s,x){return s+alt(x)+14;},0),y=(H-tot)/2+7;
+      lista.forEach(function(r){
+        var c=cores[r.i%cores.length],h=alt(r),bx=ladoDir?W-BW-4:4,my=y+h/2,ax=ladoDir?bx:bx+BW,sx=ladoDir?cx+CW/2:cx-CW/2;
         lin+='<path d="M'+sx+','+cy+' C'+((sx+ax)/2)+','+cy+' '+((sx+ax)/2)+','+my+' '+ax+','+my+'" fill="none" stroke="'+c+'" stroke-width="3" stroke-linecap="round" opacity=".55"/>';
-        out+='<rect x="'+bx+'" y="'+y+'" width="'+bw+'" height="'+h+'" rx="12" fill="#fff" stroke="'+c+'" stroke-width="1.6"/>';
-        out+='<rect x="'+bx+'" y="'+y+'" width="'+bw+'" height="26" rx="12" fill="'+c+'"/><rect x="'+bx+'" y="'+(y+14)+'" width="'+bw+'" height="12" fill="'+c+'"/>';
-        out+='<text x="'+(bx+12)+'" y="'+(y+18)+'" fill="#fff" font-size="12.5" font-weight="800">'+esc(r.t)+'</text>';
-        r.itens.forEach(function(it,j){out+='<text x="'+(bx+14)+'" y="'+(y+46+j*17)+'" fill="#14121f" font-size="12" font-weight="600">• '+esc(it)+'</text>';});
+        out+='<rect x="'+bx+'" y="'+y+'" width="'+BW+'" height="'+h+'" rx="12" fill="#fff" stroke="'+c+'" stroke-width="1.6"/>';
+        out+='<rect x="'+bx+'" y="'+y+'" width="'+BW+'" height="26" rx="12" fill="'+c+'"/><rect x="'+bx+'" y="'+(y+14)+'" width="'+BW+'" height="12" fill="'+c+'"/>';
+        out+=txt(bx+12,y+18,r.t,{fs:12.5,fw:800,cor:'#fff',max:BW-24,cw:7.4});
+        r.ls.forEach(function(l,k){out+=txt(bx+12,y+46+k*16,l,{fs:11.5,max:BW-22,cw:6.2});});
         y+=h+14;
       });
     }
-    lado(esq,cx-110,false);lado(dir,cx+110,true);
-    var centro='<ellipse cx="'+cx+'" cy="'+cy+'" rx="78" ry="34" fill="url(#gc)"/><text x="'+cx+'" y="'+(cy+6)+'" text-anchor="middle" fill="#fff" font-size="18" font-family="Archivo Black">'+esc(m.centro)+'</text>';
+    lado(esq,false);lado(dir,true);
+    var centro='<rect x="'+(cx-CW/2)+'" y="'+(cy-CH/2)+'" width="'+CW+'" height="'+CH+'" rx="'+Math.min(CH/2,24)+'" fill="url(#gc)"/>'+
+      cl.map(function(l,k){return txt(cx,cy-CH/2+30+k*20,l,{meio:1,fs:15,fw:400,cor:'#fff',ff:'Archivo Black',max:CW-18,cw:9.6});}).join('');
     return '<svg viewBox="0 0 '+W+' '+H+'" font-family="Plus Jakarta Sans,sans-serif"><defs><linearGradient id="gc" x1="0" x2="1"><stop offset="0" stop-color="#6d4df5"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs>'+lin+out+centro+'</svg>';
   }
 
@@ -193,13 +203,14 @@ p{margin:0 0 8px;font-size:10.5pt;line-height:1.5}
   function exPorId(i){return A.exercicios.filter(function(e){return e.id===i;})[0];}
 
   function montar(a){
-    A=a;if(!a)return;document.title='E-book · '+a.titulo;
+    A=a;if(!a)return;var YT=((a.midiaPrincipal||{}).youtube||'').split('/embed/')[1]||'';YT=YT.split('?')[0];document.title='E-book · '+a.titulo;
     var E=a.ebook,h='';
     // 1. capa
     h+='<section class="pg capa"><div class="orb"></div><div class="orb2"></div>'
       +'<div class="logo"><i>✦</i><div>INGLÊS INTELIGENTE<small>Inglês no seu estilo de inteligência.</small></div></div>'
-      +'<div class="meio"><div class="kick">'+esc(a.rotulo||(a.nivel+' · UNIT '+a.unidade)).toUpperCase()+'</div><div class="tt">'+esc(a.titulo)+'</div><div class="st">'+esc(a.subtitulo)+'</div>'
-      +'<div class="tags"><span>🗺️ Mapa mental</span><span>📊 Gráficos</span><span>✍️ Exercícios</span><span>✅ Gabarito</span></div></div>'
+      +'<div class="meio"><div class="kick" data-x="1">'+esc(a.rotulo||(a.nivel+' · UNIT '+a.unidade)).toUpperCase()+'</div><div class="tt" style="font-size:'+(a.titulo.length>44?34:a.titulo.length>30?44:a.titulo.length>18?54:62)+'pt">'+esc(a.titulo)+'</div><div class="st">'+esc(a.subtitulo)+'</div>'
+      +'<div class="tags"><span>🗺️ Mapa mental</span>'+((E.escala||E.dia)?'<span>📊 Gráficos</span>':'')+'<span>✍️ Exercícios</span><span>✅ Gabarito</span>'+(YT?'<span>🎬 Vídeo da lição</span>':'')+'</div>'
+      +(YT?'<div class="capa-yt"><img src="img/yt/'+YT+'.jpg" alt=""><span>▶</span></div>':'')+'</div>'
       +'<div class="ass">E-book da aula · continuação do vídeo<b>TEACHER GEDIEL</b></div></section>';
     PG=1;
     // 2. resumo + mapa
@@ -223,6 +234,8 @@ p{margin:0 0 8px;font-size:10.5pt;line-height:1.5}
     dials.forEach(function(d){B.push('<div class="bl bx"><div class="vbt">💬 '+esc(d.titulo)+'</div>'+d.falas.map(function(f){return '<div class="f"><b>'+esc(f[0])+':</b> '+esc(f[1])+'<span>'+esc(f[2])+'</span></div>';}).join('')+'</div>');});
     if(E.escala)B.push('<div class="bl fig"><h4>📊 '+esc(E.escala.titulo)+'</h4>'+escala(E.escala)+'</div>');
     if(E.dia)B.push('<div class="bl fig"><h4>🕐 '+esc(E.dia.titulo)+'</h4>'+dia(E.dia)+'<p class="nota">'+esc(E.dia.nota||'')+'</p></div>');
+    if(YT)B.unshift('<div class="bl ytb"><div class="vbt">🎬 Assista à lição</div><a href="https://www.youtube.com/watch?v='+YT+'"><img src="img/yt/'+YT+'.jpg" alt=""><span>▶</span></a><p>youtube.com/watch?v='+YT+'</p></div>');
+    if(a.midiaPrincipal&&a.midiaPrincipal.link)B.push('<div class="dica">📄 Transcrição: '+esc(a.midiaPrincipal.link.replace(/^https?:\/\//,''))+'</div>');
     B.push('<div class="sep">✍️ Pratique no papel · tente sozinho antes de olhar o gabarito</div>');
     // --- exercícios gerados a partir da aula
     // 1. ligar
@@ -287,13 +300,17 @@ p{margin:0 0 8px;font-size:10.5pt;line-height:1.5}
     B.push('<div class="sep">✅ Gabarito · confira só depois de fazer tudo</div>');
     GAB.forEach(function(g,i){B.push('<div class="g"><b>'+(i+1)+'. '+esc(g[0])+'</b><ol type="a">'+g[1].map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ol></div>');});
     document.getElementById('livro').innerHTML=h;
-    (document.fonts?document.fonts.ready:Promise.resolve()).then(function(){empacotar(B);document.body.dataset.pronto='1';});
+    (document.fonts?document.fonts.ready:Promise.resolve()).then(function(){
+      var pr=document.querySelectorAll('.pg')[1],mp=pr&&pr.querySelector('.mapa'),ini=null;
+      if(mp){var topo=mp.getBoundingClientRect().bottom-pr.getBoundingClientRect().top+14;
+        if(pr.getBoundingClientRect().height-topo>260){var c=document.createElement('div');c.className='cols';c.style.top=topo+'px';c.innerHTML='<div class="col"></div><div class="col"></div>';pr.insertBefore(c,pr.querySelector('.rod'));ini=pr;}}
+      empacotar(B,ini);document.body.dataset.pronto='1';});
   }
   // coloca os blocos em 2 colunas, página por página, sem deixar espaço vazio
-  function empacotar(blocos){
+  function empacotar(blocos,pgInicial){
     var main=document.getElementById('livro');
     function novaPagina(){var s=document.createElement('section');s.className='pg';s.innerHTML='<div class="cols"><div class="col"></div><div class="col"></div></div>'+rod();main.appendChild(s);return s;}
-    var pg=novaPagina(),ci=0;
+    var pg=pgInicial||novaPagina(),ci=0;
     function col(){return pg.querySelectorAll('.col')[ci];}
     blocos.forEach(function(html){
       if(html==='<!--quebra-->'){

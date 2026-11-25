@@ -148,8 +148,8 @@
      "emoji": "",
      "ops": [
       "Aimee, Todd",
-      "Jin, Adam",
-      "Rebecca, Todd"
+      "Shantel, Todd",
+      "Dan, Todd"
      ],
      "c": 0
     },
@@ -157,8 +157,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Nova Zelândia, EUA",
-      "Reino Unido",
+      "Jamaica, Reino Unido",
+      "Japão, Canadá",
       "Reino Unido, EUA"
      ],
      "c": 2
@@ -167,9 +167,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "fim de semana",
+      "viagem",
       "casa",
-      "saúde"
+      "habilidades"
      ],
      "c": 1
     }

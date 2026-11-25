@@ -15,7 +15,7 @@
    "Falar 3 frases suas sobre o assunto."
   ],
   "mapa": {
-   "centro": "Travel Tips For Portug",
+   "centro": "Travel Tips For Portugal",
    "ramos": [
     {
      "t": "Ouça",
@@ -92,8 +92,8 @@
      "p": "\"accommodation\" significa…",
      "emoji": "",
      "ops": [
-      "expressão idiomática",
-      "achar chato",
+      "custar os olhos da cara",
+      "aparecer",
       "hospedagem"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"authentic\" significa…",
      "emoji": "",
      "ops": [
-      "único",
+      "modalidade",
       "autêntico",
-      "acumulador (guarda tudo)"
+      "quadrilha americana"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "orçamento",
-      "rotas marítimas",
-      "por segurança"
+      "reclamar / choramingar",
+      "de saco cheio"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"you can't miss it\" significa…",
      "emoji": "",
      "ops": [
-      "montanhoso",
-      "comer fora",
+      "equivalente",
+      "eclético",
       "não tem como errar / imperdível"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Rachel, Todd",
-      "Maria, Alex",
+      "Rebecca, Todd",
+      "Aimee, Katie",
       "Ana, Michael"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido, Itália",
+      "Nepal, EUA",
       "Portugal, África do Sul (?)",
-      "País de Gales"
+      "Inglaterra, EUA"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "viagem",
-      "feriados",
-      "cidades"
+      "preços",
+      "tecnologia"
      ],
      "c": 0
     }

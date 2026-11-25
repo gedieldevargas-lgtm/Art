@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "ligado em moda",
-      "ponta sul",
-      "madeira"
+      "minimalista",
+      "ficar com a voz embargada"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"the price you pay\" significa…",
      "emoji": "",
      "ops": [
-      "reclamar / choramingar",
-      "um milhão de dólares (estar ótimo)",
+      "clima",
+      "colocar o coração em",
       "o preço que se paga"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"reasonably priced\" significa…",
      "emoji": "",
      "ops": [
-      "pilão",
+      "de longa distância",
       "preço justo",
-      "caminhada longa / trilha"
+      "produtivo"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "virando moda",
-      "largar um hábito",
-      "expressão idiomática"
+      "conotação negativa",
+      "de saco cheio"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Jerri, Todd",
-      "Abidemi, Jeremy",
-      "Jin, Adam"
+      "Melissa, Doron",
+      "Katie, Todd"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Portugal, África do Sul (?)",
-      "Nova Zelândia, EUA",
+      "Reino Unido, Chile",
+      "Reino Unido",
       "Tailândia, EUA"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "personalidade",
+      "filmes",
       "compras",
-      "finanças"
+      "música"
      ],
      "c": 1
     }

@@ -93,7 +93,7 @@
      "emoji": "",
      "ops": [
       "aspectos polêmicos",
-      "reconhecível",
+      "moleza",
       "faixa de preço"
      ],
      "c": 0
@@ -102,8 +102,8 @@
      "p": "\"relating back\" significa…",
      "emoji": "",
      "ops": [
-      "só para esclarecer",
-      "sociável",
+      "um pé na porta (primeira chance)",
+      "subdividido",
       "voltando a"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"give permission\" significa…",
      "emoji": "",
      "ops": [
-      "no geral",
+      "algo importante",
       "dar permissão",
-      "não muito de"
+      "caminho / trilha"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "isso é bem profundo",
-      "pontos altos",
-      "excepcional"
+      "arquitetura",
+      "aparecer"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Greg, Todd",
-      "Hana, Ben",
-      "Shantel, Todd"
+      "Abidemi, Jeremy",
+      "Shirley, Yuri"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Japão, Canadá",
-      "Trinidad e Tobago, EUA",
+      "Rússia, EUA",
+      "País de Gales",
       "EUA"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "idiomas e países",
+      "trânsito",
       "ética",
-      "esportes"
+      "música"
      ],
      "c": 1
     }

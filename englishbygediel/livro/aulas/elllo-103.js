@@ -92,8 +92,8 @@
      "p": "\"broil\" significa…",
      "emoji": "",
      "ops": [
-      "alguns / poucos",
-      "senso de moda",
+      "pressão",
+      "o preço que se paga",
       "grelhar"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"and so on\" significa…",
      "emoji": "",
      "ops": [
-      "em cima do muro",
+      "pirataria",
       "e assim por diante",
-      "mudar de ideia"
+      "de preferência"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "refogado oriental",
-      "prosperar",
-      "foi bom conversar com você"
+      "uma variedade de",
+      "não muito de"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"vegetarian\" significa…",
      "emoji": "",
      "ops": [
-      "resolver logo",
-      "focar em vencer",
+      "estranho",
+      "ficar longe de",
       "vegetariano"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Naomi, Dai",
-      "Shirley, Yuri",
+      "Melissa, Doron",
+      "Ana, Michael",
       "Josh, Shirley"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Trinidad e Tobago, EUA",
+      "Reino Unido, Chile",
       "EUA, Austrália",
-      "EUA, Canadá"
+      "Trinidad e Tobago, EUA"
      ],
      "c": 1
     },
@@ -162,7 +162,7 @@
      "ops": [
       "restaurante",
       "trânsito",
-      "geografia"
+      "meio ambiente"
      ],
      "c": 0
     }

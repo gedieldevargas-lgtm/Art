@@ -92,9 +92,9 @@
      "p": "\"kicking myself\" significa…",
      "emoji": "",
      "ops": [
-      "em teoria",
+      "caro demais",
       "me arrependendo",
-      "caribu (rena)"
+      "de cabeça para baixo"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "um pé na porta (primeira chance)",
-      "focar em vencer",
-      "expatriado"
+      "culinária",
+      "de pessoa para pessoa (P2P)"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"came out of nowhere\" significa…",
      "emoji": "",
      "ops": [
-      "mau hábito",
-      "travar / chegar ao limite",
+      "tema em comum",
+      "atrás do saque",
       "surgiu do nada"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"break it down\" significa…",
      "emoji": "",
      "ops": [
-      "alta temporada",
+      "aumentar aos poucos",
       "explicar por partes",
-      "comodidade"
+      "eclético"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Naomi, Dai",
+      "Gyri, Viyasan",
       "Anthony, Todd",
-      "Hana, Ben"
+      "Julia, Nathan"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "EUA",
-      "Japão, Canadá",
-      "Trinidad e Tobago, EUA"
+      "Rússia, EUA",
+      "País de Gales"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "geografia",
-      "casa",
+      "preços",
+      "mudança",
       "finanças"
      ],
      "c": 2

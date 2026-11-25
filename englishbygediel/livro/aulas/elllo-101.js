@@ -92,9 +92,9 @@
      "p": "\"scan\" significa…",
      "emoji": "",
      "ops": [
-      "o dia todo",
+      "genes",
       "passar o olho",
-      "rotas marítimas"
+      "trabalhar em / melhorar"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "prático / útil",
-      "nessa linha",
-      "hospedagem"
+      "produtivo",
+      "vacinas antirrábicas"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"bad habit\" significa…",
      "emoji": "",
      "ops": [
-      "o coração de",
-      "ciclo vicioso",
+      "não é meu forte",
+      "tem que ser",
       "mau hábito"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"a piece of advice\" significa…",
      "emoji": "",
      "ops": [
-      "viralizar",
+      "cuidando de",
       "um conselho",
-      "localizado"
+      "trabalhar em / melhorar"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Shifani, Todd",
+      "Julia, Todd",
       "Aimee, Paul",
-      "Aimee, Katie"
+      "Crystal, George"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido",
-      "Inglaterra, EUA",
-      "Reino Unido, EUA"
+      "EUA",
+      "Rep. Tcheca, África do Sul (?)"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "idiomas e países",
-      "personalidade",
+      "comida",
+      "esportes",
       "tecnologia"
      ],
      "c": 2

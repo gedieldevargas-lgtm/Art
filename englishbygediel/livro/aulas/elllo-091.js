@@ -92,8 +92,8 @@
      "p": "\"foot the bill\" significa…",
      "emoji": "",
      "ops": [
-      "indicativo",
-      "se envolver",
+      "ciclo vicioso",
+      "se livrar de",
       "pagar a conta"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"two left feet\" significa…",
      "emoji": "",
      "ops": [
-      "ter vista para",
+      "trabalhadores por contrato (servidão)",
       "ser desajeitado para dançar",
-      "versátil"
+      "indicativo"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "custar os olhos da cara",
-      "rotina normal de trabalho",
-      "rico / abastado"
+      "chocantemente",
+      "experiência memorável"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"cold shoulder\" significa…",
      "emoji": "",
      "ops": [
-      "arquitetura",
-      "fora do roteiro turístico",
+      "também (em negativas)",
+      "pais de ninho vazio",
       "dar um gelo"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Monica, Todd",
-      "Aimee, Katie",
+      "Sarah, John",
+      "Shirley, Ray",
       "Meg, Todd"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Trinidad e Tobago, EUA",
+      "País de Gales",
       "EUA",
-      "Japão, Canadá"
+      "Rússia, EUA"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "expressões idiomáticas",
-      "roupas",
-      "descrições"
+      "casa",
+      "escola"
      ],
      "c": 0
     }

@@ -15,7 +15,7 @@
    "Falar 3 frases suas sobre o assunto."
   ],
   "mapa": {
-   "centro": "Bangkok Transportation",
+   "centro": "Bangkok Transportation - Part 1",
    "ramos": [
     {
      "t": "Ouça",
@@ -92,9 +92,9 @@
      "p": "\"business district\" significa…",
      "emoji": "",
      "ops": [
-      "tarefas de casa",
+      "sem sorte",
       "centro financeiro",
-      "vestido nos trinques"
+      "normalmente"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "atrair turistas",
-      "o dia todo",
-      "áreas rurais"
+      "te explicar passo a passo",
+      "ficar longe de"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"fixed price\" significa…",
      "emoji": "",
      "ops": [
-      "quadrilha americana",
-      "minimalista",
+      "fechado / combinado",
+      "terraço",
       "preço fixo"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"price range\" significa…",
      "emoji": "",
      "ops": [
-      "se forçar",
+      "dar permissão",
       "faixa de preço",
-      "lançar"
+      "terraço"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Jin, Adam",
+      "Katie, Todd",
       "Jerri, Todd",
-      "Abidemi, Jeremy"
+      "Melissa, Doron"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Tailândia, EUA",
-      "Portugal, África do Sul (?)",
-      "Nova Zelândia, EUA"
+      "Reino Unido, Chile",
+      "Reino Unido"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "hotel",
-      "sociedade",
+      "cultura",
+      "tecnologia e filhos",
       "transporte"
      ],
      "c": 2

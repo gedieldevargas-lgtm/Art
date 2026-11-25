@@ -92,9 +92,9 @@
      "p": "\"shockingly\" significa…",
      "emoji": "",
      "ops": [
-      "pessoalmente",
+      "andar dentro d'água",
       "chocantemente",
-      "rabeca / violino"
+      "difícil de negar"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "estranho",
-      "geralmente",
-      "ter vista para"
+      "algo importante",
+      "largar um hábito"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"right off the bat\" significa…",
      "emoji": "",
      "ops": [
-      "sem vontade de",
-      "não muito de",
+      "no meio do grupo",
+      "minimalista",
       "logo de cara"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"grow accustomed to\" significa…",
      "emoji": "",
      "ops": [
-      "rafting",
+      "espírito esportivo",
       "se acostumar com",
-      "voltando a"
+      "achar chato"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Shantel, Todd",
+      "Melissa, Doron",
       "Abidemi, Jeremy",
-      "Rebecca, Todd"
+      "Shirley, Yuri"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Nigéria, Canadá",
-      "EUA, Paquistão",
-      "Reino Unido"
+      "Tailândia, EUA",
+      "Nepal, EUA"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "planos",
-      "turismo",
+      "compras",
+      "preços",
       "choque cultural"
      ],
      "c": 2

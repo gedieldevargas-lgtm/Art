@@ -18,6 +18,11 @@ for (const id of ids) {
   const transborda = await p.$$eval('.pg', ps => ps.map((x, i) => { const r = x.getBoundingClientRect(); let m = 0;
     x.querySelectorAll('*:not(.rod):not(.rod *):not(.orb):not(.orb2)').forEach(c => { const cr = c.getBoundingClientRect(); if (cr.height) m = Math.max(m, cr.bottom - r.top); });
     return m > r.height - 40 ? i + 1 : 0; }).filter(Boolean));
+  // texto saindo pela lateral da página ou da caixa do mapa mental
+  const fora = await p.$$eval('.pg', ps => ps.flatMap((pg, i) => { const r = pg.getBoundingClientRect(); const ruins = [];
+    pg.querySelectorAll('*').forEach(e => { if (!e.childElementCount && e.textContent.trim()) { const b = e.getBoundingClientRect(); if (b.width && (b.right > r.right - 2 || b.left < r.left + 2)) ruins.push((i + 1) + ':' + e.textContent.trim().slice(0, 20)); } });
+    return ruins; }));
+  if (fora.length) transborda.push('texto fora: ' + fora.slice(0, 3).join(' | '));
   await p.pdf({ path: path.join(AQUI, '..', '..', pdf), format: 'A4', printBackground: true, preferCSSPageSize: true });
   const n = await p.$$eval('.pg', x => x.length);
   await p.close();

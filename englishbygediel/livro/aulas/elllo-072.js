@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "ênfase",
-      "contar com",
-      "de preferência"
+      "sem sorte",
+      "não me importo"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"bell curve\" significa…",
      "emoji": "",
      "ops": [
-      "papelada",
-      "sazonal",
+      "fora do roteiro turístico",
+      "especialmente",
       "curva de sino (média)"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"feedback\" significa…",
      "emoji": "",
      "ops": [
-      "não adequado para",
+      "taxa de mortalidade",
       "retorno / feedback",
-      "arrecadação de fundos"
+      "rabeca / violino"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "entender um conceito",
-      "surtar",
-      "comprovado"
+      "capital",
+      "só para esclarecer"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Gyri, Viyasan",
-      "Ana, Michael",
-      "Greg, Todd"
+      "Melissa, Doron",
+      "Jake, Shirley"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "China, EUA",
-      "Reino Unido",
+      "Nigéria, EUA",
+      "Japão, EUA",
       "Noruega, Canadá"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "filmes",
+      "arrependimentos",
       "educação",
-      "casa"
+      "alfândega"
      ],
      "c": 1
     }

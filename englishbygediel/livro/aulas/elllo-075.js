@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "em si",
-      "na hora / de improviso",
-      "quadrilha americana"
+      "impressionante",
+      "uma grande provação"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"figure out\" significa…",
      "emoji": "",
      "ops": [
-      "enviar um formulário",
-      "mecânico",
+      "desnecessário / injusto",
+      "não está dando certo",
       "descobrir / entender"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"coming-of-age\" significa…",
      "emoji": "",
      "ops": [
-      "comportamento obsessivo",
+      "especialmente",
       "de amadurecimento (filme)",
-      "no meu sangue"
+      "geralmente"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "estragar",
-      "o coração de",
-      "ciclo vicioso"
+      "distraído",
+      "me ensina seus truques"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Hana, Ben",
-      "Mari, Ron",
-      "Aimee, Todd"
+      "Shantel, Todd",
+      "Rufei, Todd"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Nigéria, Reino Unido",
-      "Reino Unido, Itália",
+      "EUA, Paquistão",
+      "EUA, Reino Unido",
       "Japão, EUA"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "geografia",
+      "mudança",
       "filmes",
-      "academia"
+      "cores"
      ],
      "c": 1
     }

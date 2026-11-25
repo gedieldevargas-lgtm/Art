@@ -147,9 +147,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "arrependimentos",
+      "celebridades",
       "trabalho",
-      "finanças"
+      "família e dinheiro"
      ],
      "c": 1
     }

@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "intimidador",
-      "alguns / poucos",
-      "lançar"
+      "acumulador (guarda tudo)",
+      "celebração / festa"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"(be) up to\" significa…",
      "emoji": "",
      "ops": [
-      "por assim dizer",
-      "espírito esportivo",
+      "curva de sino (média)",
+      "especialmente",
       "estar disposto a / à altura"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"come up with\" significa…",
      "emoji": "",
      "ops": [
-      "mítico",
+      "orçamento",
       "ter (uma ideia)",
-      "mais ou menos"
+      "convencer alguém"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "na hora / de improviso",
-      "estudioso",
-      "bungee jump"
+      "eclético",
+      "de preferência"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Shifani, Todd",
-      "Meg, Todd",
-      "Spencer, Curtis"
+      "Ginger, Nabeel",
+      "Aimee, Katie"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Japão, Canadá",
-      "EUA",
+      "Austrália, EUA",
+      "China, EUA",
       "Nova Zelândia, EUA"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "esportes",
+      "tecnologia",
       "rádio",
-      "academia"
+      "folclore"
      ],
      "c": 1
     }

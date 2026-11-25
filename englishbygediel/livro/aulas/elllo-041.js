@@ -147,8 +147,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "apresentações",
-      "carreira militar",
+      "aprender inglês",
+      "humor",
       "idiomas"
      ],
      "c": 2

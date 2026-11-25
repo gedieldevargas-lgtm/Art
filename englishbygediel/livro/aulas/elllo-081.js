@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "estudioso",
-      "ciclo vicioso",
-      "descobrir"
+      "fuga de cérebros",
+      "paranoico"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"open-attitude\" significa…",
      "emoji": "",
      "ops": [
-      "alguns / poucos",
-      "descobrir",
+      "caminhada longa / trilha",
+      "exceto",
       "atitude aberta"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"to be open\" significa…",
      "emoji": "",
      "ops": [
-      "terraço",
+      "se envolver",
       "ser aberto",
-      "sem vontade de"
+      "focar em vencer"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "aprender / pegar",
-      "descobrir / entender",
-      "distraído"
+      "modalidade",
+      "boicote"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Maria, Alex",
-      "Aimee, Paul",
-      "Katie, Gilder"
+      "Rebecca, Todd",
+      "Dan, Todd"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido, Vietnã",
-      "EUA, Paquistão",
+      "Inglaterra, EUA",
+      "Rússia, EUA",
       "Dinamarca, Austrália"
      ],
      "c": 2
@@ -162,7 +162,7 @@
      "ops": [
       "tecnologia",
       "personalidade",
-      "turismo"
+      "história e cultura"
      ],
      "c": 1
     }

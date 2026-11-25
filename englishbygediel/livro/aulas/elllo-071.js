@@ -15,7 +15,7 @@
    "Falar 3 frases suas sobre o assunto."
   ],
   "mapa": {
-   "centro": "Student Life in China ",
+   "centro": "Student Life in China Part 2",
    "ramos": [
     {
      "t": "Ouça",
@@ -92,9 +92,9 @@
      "p": "\"middle of the pack\" significa…",
      "emoji": "",
      "ops": [
-      "mudar de assunto",
+      "montanhoso",
       "no meio do grupo",
-      "salário mínimo justo"
+      "onde quer que"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "excepcional",
-      "não me importo",
-      "caribu (rena)"
+      "movimentado",
+      "comer fora"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"find out\" significa…",
      "emoji": "",
      "ops": [
-      "ciclo vicioso",
-      "descobrir / entender",
+      "ter (uma ideia)",
+      "indicativo",
       "descobrir"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"impressive\" significa…",
      "emoji": "",
      "ops": [
-      "pessoalmente",
+      "não é meu forte",
       "impressionante",
-      "celebração / festa"
+      "comer fora"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Lyndsay, Warren",
+      "Greg, Todd",
       "Rufei, Todd",
-      "Rebecca, Todd"
+      "Abidemi, Rory"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "China, EUA",
-      "Japão, EUA",
-      "Reino Unido, Itália"
+      "País de Gales",
+      "EUA, Canadá"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "casa",
-      "filmes",
+      "alfândega",
+      "arrependimentos",
       "educação"
      ],
      "c": 2

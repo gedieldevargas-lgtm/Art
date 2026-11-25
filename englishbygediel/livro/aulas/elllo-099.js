@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "isolado",
-      "voltando a",
-      "realista"
+      "legenda",
+      "indicativo"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"off the beaten track\" significa…",
      "emoji": "",
      "ops": [
-      "nada mal",
-      "estranho",
+      "ficar longe de",
+      "preso na rotina",
       "fora do roteiro turístico"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"off the top of my head\" significa…",
      "emoji": "",
      "ops": [
-      "hora do rush",
+      "celebração / festa",
       "assim de cabeça",
-      "seguir em frente"
+      "em movimento"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "se destacar",
-      "de algum jeito",
-      "geografia"
+      "reclamar / choramingar",
+      "expressão idiomática"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Dan, Todd",
-      "Julia, Nathan",
-      "Aimee, Todd"
+      "Antoinette, Warren",
+      "Jerri, Todd"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Japão, Canadá",
-      "Trinidad e Tobago, EUA",
+      "Rússia, EUA",
+      "País de Gales",
       "EUA"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "rádio",
+      "escola",
       "trabalho remoto",
-      "objetos"
+      "trabalho"
      ],
      "c": 1
     }

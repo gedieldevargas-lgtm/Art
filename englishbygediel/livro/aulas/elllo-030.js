@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "mecânico",
-      "celebração / festa",
-      "melhor interesse"
+      "eclético",
+      "aumentar aos poucos"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"paperwork\" significa…",
      "emoji": "",
      "ops": [
-      "viralizar",
-      "legenda",
+      "uma pessoa fácil de lidar",
+      "difícil de negar",
       "papelada"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"submit a form\" significa…",
      "emoji": "",
      "ops": [
-      "também (em negativas)",
+      "localizado",
       "enviar um formulário",
-      "pessoalmente"
+      "se sentir obrigado"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "resolver logo",
-      "se sentir obrigado",
-      "espectro"
+      "educação básica",
+      "disparar"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Meg, Todd",
-      "Monica, Todd",
-      "Aimee, Katie"
+      "Sarah, John",
+      "Shirley, Ray"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Japão, Canadá",
-      "Trinidad e Tobago, EUA",
+      "Rússia, EUA",
+      "País de Gales",
       "EUA"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "filmes",
+      "história e cultura",
       "mudança",
-      "economia"
+      "meio ambiente"
      ],
      "c": 1
     }

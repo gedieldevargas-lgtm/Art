@@ -147,8 +147,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Jin, Adam",
-      "Rebecca, Todd",
+      "Shantel, Todd",
+      "Dan, Todd",
       "Aimee, Todd"
      ],
      "c": 2
@@ -157,9 +157,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido",
+      "Japão, Canadá",
       "Reino Unido, EUA",
-      "Nova Zelândia, EUA"
+      "Jamaica, Reino Unido"
      ],
      "c": 1
     },
@@ -168,8 +168,8 @@
      "emoji": "",
      "ops": [
       "rotina",
-      "migração",
-      "preços"
+      "esportes",
+      "idiomas e países"
      ],
      "c": 0
     }

@@ -92,8 +92,8 @@
      "p": "\"proper minimum wage\" significa…",
      "emoji": "",
      "ops": [
-      "virando moda",
-      "vestir rápido",
+      "arquitetura",
+      "se meter em encrenca",
       "salário mínimo justo"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"in theory\" significa…",
      "emoji": "",
      "ops": [
-      "hospedagem",
+      "caribu (rena)",
       "em teoria",
-      "compreender"
+      "sem vontade de"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "fábricas com trabalho explorado",
-      "especialmente",
-      "dar um gelo"
+      "rotas marítimas",
+      "significar muito"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"abject poverty\" significa…",
      "emoji": "",
      "ops": [
-      "desistir",
-      "não consigo imaginar",
+      "estragar",
+      "compaixão",
       "pobreza extrema"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Hana, Ben",
-      "Shantel, Todd",
+      "Abidemi, Jeremy",
+      "Shirley, Yuri",
       "Greg, Todd"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Trinidad e Tobago, EUA",
+      "País de Gales",
       "EUA",
-      "Japão, Canadá"
+      "Rússia, EUA"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "economia",
-      "cores",
-      "comida"
+      "tecnologia",
+      "trânsito"
      ],
      "c": 0
     }

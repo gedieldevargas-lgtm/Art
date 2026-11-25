@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "fluxo de dinheiro",
-      "anormal / bizarro",
-      "se locomover"
+      "abolido",
+      "e assim por diante"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"the property ladder\" significa…",
      "emoji": "",
      "ops": [
-      "tema em comum",
-      "fora isso",
+      "perfeito",
+      "vale-tudo",
       "a escada dos imóveis"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"put money away\" significa…",
      "emoji": "",
      "ops": [
-      "um milhão de dólares (estar ótimo)",
+      "aguentar / lidar com",
       "guardar dinheiro",
-      "reclamar / choramingar"
+      "montanhoso"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "construir valores",
-      "me deixa louco",
-      "legenda oculta (CC)"
+      "emissões de carbono",
+      "desnecessário / injusto"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Angela, Todd",
-      "Spencer, Curtis",
-      "Jake, Shirley"
+      "Jin, Adam",
+      "Rebecca, Todd"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Portugal, África do Sul (?)",
-      "Trinidad e Tobago, EUA",
+      "Rússia, EUA",
+      "EUA, Austrália",
       "Inglaterra, EUA"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "feriados",
+      "fim de semana",
       "família e dinheiro",
-      "sociedade"
+      "rádio"
      ],
      "c": 1
     }

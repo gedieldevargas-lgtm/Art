@@ -92,9 +92,9 @@
      "p": "\"That works\" significa…",
      "emoji": "",
      "ops": [
-      "pessoalmente",
+      "atitude aberta",
       "isso funciona / pode ser",
-      "surtar"
+      "lançar"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "um par / alguns",
-      "o preço que se paga",
-      "celebração / festa"
+      "trabalhadores por contrato (servidão)",
+      "fuga de cérebros"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"whatever you want\" significa…",
      "emoji": "",
      "ops": [
-      "desistir",
-      "terraço",
+      "duvidoso / arriscado",
+      "sob pressão",
       "o que você quiser"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"check it out\" significa…",
      "emoji": "",
      "ops": [
-      "movimentado",
+      "acumulador (guarda tudo)",
       "dá uma olhada",
-      "me estressa"
+      "mudar de ideia"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Aimee, Paul",
+      "Rebecca, Todd",
       "Katie, Todd",
-      "Sarah, Todd"
+      "Jake, Shirley"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido, EUA",
-      "Nova Zelândia, EUA",
-      "Reino Unido"
+      "Jamaica, Reino Unido",
+      "Japão, Canadá"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "saúde",
-      "fim de semana",
+      "habilidades",
+      "viagem",
       "casa"
      ],
      "c": 2

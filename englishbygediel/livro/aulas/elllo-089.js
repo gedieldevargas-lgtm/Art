@@ -92,9 +92,9 @@
      "p": "\"ratchet up\" significa…",
      "emoji": "",
      "ops": [
-      "decisivo",
+      "os moradores",
       "aumentar aos poucos",
-      "reclamar / choramingar"
+      "normalmente"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "vale-tudo",
-      "nome conhecido de todos",
-      "me sentir uma vaca (comendo demais)"
+      "madeira",
+      "educação básica"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"hypocritical\" significa…",
      "emoji": "",
      "ops": [
-      "guardar dinheiro",
-      "rabeca / violino",
+      "experimentar",
+      "sem sorte",
       "hipócrita"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"hysteria\" significa…",
      "emoji": "",
      "ops": [
-      "lançar",
+      "pobreza extrema",
       "histeria",
-      "aumentar aos poucos"
+      "o dia todo"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Rebecca, Todd",
+      "Dan, Todd",
       "Aimee, Todd",
-      "Jin, Adam"
+      "Shantel, Todd"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido, EUA",
-      "Nova Zelândia, EUA",
-      "Reino Unido"
+      "Jamaica, Reino Unido",
+      "Japão, Canadá"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "finanças",
-      "personalidade",
+      "música",
+      "filmes",
       "compras"
      ],
      "c": 2

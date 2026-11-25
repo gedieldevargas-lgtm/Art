@@ -147,9 +147,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Aimee, Katie",
+      "Shirley, Ray",
       "Meg, Todd",
-      "Monica, Todd"
+      "Sarah, John"
      ],
      "c": 1
     },
@@ -158,8 +158,8 @@
      "emoji": "",
      "ops": [
       "EUA",
-      "Japão, Canadá",
-      "Trinidad e Tobago, EUA"
+      "Rússia, EUA",
+      "País de Gales"
      ],
      "c": 0
     },
@@ -167,8 +167,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "casa",
-      "hotel",
+      "sonhos e carreira",
+      "carreira militar",
       "lazer"
      ],
      "c": 2

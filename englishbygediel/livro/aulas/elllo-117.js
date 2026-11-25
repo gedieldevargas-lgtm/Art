@@ -15,7 +15,7 @@
    "Falar 3 frases suas sobre o assunto."
   ],
   "mapa": {
-   "centro": "Cambodia Road Trip Par",
+   "centro": "Cambodia Road Trip Part 1",
    "ramos": [
     {
      "t": "Ouça",
@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "arrecadação de fundos",
-      "celebração / festa",
-      "especialmente"
+      "o dia todo",
+      "pobreza extrema"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"annual\" significa…",
      "emoji": "",
      "ops": [
-      "curva de sino (média)",
-      "caminho / trilha",
+      "estranho",
+      "partir",
       "anual"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"sketchy\" significa…",
      "emoji": "",
      "ops": [
-      "arquitetura",
+      "levar a sério / a peito",
       "duvidoso / arriscado",
-      "pilão"
+      "pessoa de sono pesado"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "partir",
-      "nome conhecido de todos",
-      "pagar a conta"
+      "migrando",
+      "dinâmica familiar"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Julia, Todd",
-      "Hana, Ben",
-      "Jerri, Todd"
+      "Rebecca, Todd",
+      "Sarah, John"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Nova Zelândia, EUA",
-      "Reino Unido",
+      "Jamaica, Reino Unido",
+      "Japão, Canadá",
       "Reino Unido, EUA"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "cidades",
+      "tecnologia",
       "viagem",
-      "feriados"
+      "preços"
      ],
      "c": 1
     }

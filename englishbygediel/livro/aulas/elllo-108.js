@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "largar um hábito",
-      "sazonal",
-      "lançar"
+      "paisagem",
+      "mau hábito"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"obsessive behavior\" significa…",
      "emoji": "",
      "ops": [
-      "se envolver",
-      "desistir",
+      "ciclo vicioso",
+      "apagar (dormir)",
       "comportamento obsessivo"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"pop up\" significa…",
      "emoji": "",
      "ops": [
-      "pessoalmente",
+      "conotação negativa",
       "aparecer",
-      "segurar a língua"
+      "isso funciona / pode ser"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "desistir",
-      "sazonal",
-      "décadas atrás"
+      "idade certa",
+      "assim de cabeça"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Olga, Todd",
-      "Julia, Todd",
-      "Katie, Gilder"
+      "Aimee, Katie",
+      "Abidemi, Todd"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Portugal, África do Sul (?)",
-      "Reino Unido, EUA",
+      "Inglaterra, EUA",
+      "País de Gales",
       "Rússia, EUA"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "mar e história",
+      "idiomas",
       "saúde",
-      "restaurante"
+      "trânsito"
      ],
      "c": 1
     }

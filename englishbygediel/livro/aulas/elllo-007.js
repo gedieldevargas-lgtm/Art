@@ -15,7 +15,7 @@
    "Falar 3 frases suas sobre o assunto."
   ],
   "mapa": {
-   "centro": "Languages, Nationaliti",
+   "centro": "Languages, Nationalities and Countries",
    "ramos": [
     {
      "t": "Ouça",
@@ -147,7 +147,7 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Antoinette, Warren",
+      "Mari, Ron",
       "Katie, Gilder",
       "Abidemi, Todd"
      ],
@@ -157,9 +157,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "País de Gales",
+      "Nigéria, Canadá",
       "Nigéria, EUA",
-      "Nepal, EUA"
+      "Reino Unido, Chile"
      ],
      "c": 1
     },
@@ -168,8 +168,8 @@
      "emoji": "",
      "ops": [
       "idiomas e países",
-      "casa",
-      "escola"
+      "presentes",
+      "datas"
      ],
      "c": 0
     }

@@ -15,7 +15,7 @@
    "Falar 3 frases suas sobre o assunto."
   ],
   "mapa": {
-   "centro": "SEA Travels - Thailand",
+   "centro": "SEA Travels - Thailand and Laos",
    "ramos": [
     {
      "t": "Ouça",
@@ -92,8 +92,8 @@
      "p": "\"trek\" significa…",
      "emoji": "",
      "ops": [
-      "abolido",
-      "algo importante",
+      "algum lugar",
+      "caro demais",
       "caminhada longa / trilha"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"highlights\" significa…",
      "emoji": "",
      "ops": [
-      "um conselho",
+      "orçamento",
       "pontos altos",
-      "custar os olhos da cara"
+      "convencer alguém"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "seguir em frente",
-      "centro financeiro",
-      "se sentir obrigado"
+      "ênfase",
+      "papelada"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"quite an experience\" significa…",
      "emoji": "",
      "ops": [
-      "descendência",
-      "sem vontade de",
+      "histeria",
+      "prosperar",
       "uma bela experiência"
      ],
      "c": 2
@@ -140,7 +140,7 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Antoinette, Warren",
+      "Mari, Ron",
       "Katie, Gilder",
       "Abidemi, Todd"
      ],
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "País de Gales",
+      "Nigéria, Canadá",
       "Nigéria, EUA",
-      "Nepal, EUA"
+      "Reino Unido, Chile"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "viagem",
-      "feriados",
-      "cidades"
+      "preços",
+      "tecnologia"
      ],
      "c": 0
     }

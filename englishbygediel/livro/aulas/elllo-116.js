@@ -92,9 +92,9 @@
      "p": "\"road rage\" significa…",
      "emoji": "",
      "ops": [
-      "chocantemente",
+      "bem pensado",
       "fúria no trânsito",
-      "onde quer que"
+      "se envolver"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "me deixa louco",
-      "sazonal",
-      "dá uma olhada"
+      "disparar",
+      "faixa de preço"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"compassion\" significa…",
      "emoji": "",
      "ops": [
-      "legenda",
-      "faixa de preço",
+      "geralmente",
+      "especialmente",
       "compaixão"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"talk you through it\" significa…",
      "emoji": "",
      "ops": [
-      "comer fora",
+      "e assim por diante",
       "te explicar passo a passo",
-      "na hora / de improviso"
+      "compreender"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Meg, Todd",
+      "Josh, Shirley",
       "Julia, Nathan",
-      "Pernese, Doron"
+      "Anthony, Todd"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido",
-      "Inglaterra, EUA",
-      "Reino Unido, EUA"
+      "EUA",
+      "Rep. Tcheca, África do Sul (?)"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "música",
-      "tecnologia e filhos",
+      "transporte",
+      "trabalho",
       "trânsito"
      ],
      "c": 2
