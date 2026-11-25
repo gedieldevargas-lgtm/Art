@@ -15,7 +15,7 @@
    "Falar 3 frases suas sobre o assunto."
   ],
   "mapa": {
-   "centro": "Months and Time Prepos",
+   "centro": "Months and Time Prepositions",
    "ramos": [
     {
      "t": "Ouça",
@@ -148,8 +148,8 @@
      "emoji": "",
      "ops": [
       "Meg, Todd",
-      "Monica, Todd",
-      "Aimee, Katie"
+      "Sarah, John",
+      "Shirley, Ray"
      ],
      "c": 0
     },
@@ -157,8 +157,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Japão, Canadá",
-      "Trinidad e Tobago, EUA",
+      "Rússia, EUA",
+      "País de Gales",
       "EUA"
      ],
      "c": 2
@@ -167,9 +167,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "música",
+      "animais",
       "feriados",
-      "restaurante"
+      "expressões idiomáticas"
      ],
      "c": 1
     }

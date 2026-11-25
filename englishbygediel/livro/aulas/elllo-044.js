@@ -147,9 +147,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Hana, Daniel",
+      "Sarah, John",
       "Melissa, Doron",
-      "Meg, Todd"
+      "Angela, Todd"
      ],
      "c": 1
     },
@@ -158,8 +158,8 @@
      "emoji": "",
      "ops": [
       "EUA, Reino Unido",
-      "Inglaterra, EUA",
-      "Portugal, África do Sul (?)"
+      "Nova Zelândia, EUA",
+      "Dinamarca, Austrália"
      ],
      "c": 0
     },
@@ -167,8 +167,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "rádio",
-      "aprender inglês",
+      "animais",
+      "mídia",
       "datas comemorativas"
      ],
      "c": 2

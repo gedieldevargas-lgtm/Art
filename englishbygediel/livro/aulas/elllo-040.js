@@ -92,8 +92,8 @@
      "p": "\"more specifically\" significa…",
      "emoji": "",
      "ops": [
-      "de longa distância",
-      "contar com",
+      "assim de cabeça",
+      "caro demais",
       "mais especificamente"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"a dork\" significa…",
      "emoji": "",
      "ops": [
-      "rotina normal de trabalho",
+      "vacinas antirrábicas",
       "um nerd / bobão",
-      "logo de cara"
+      "caro demais"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "se matricular",
-      "intimidador",
-      "ambiente hostil"
+      "isso funciona / pode ser",
+      "conseguiu (fazer algo)"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"tricky question\" significa…",
      "emoji": "",
      "ops": [
-      "grogue / zonzo",
-      "moleza",
+      "bem pensado",
+      "pirataria",
       "pergunta difícil"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Aimee, Katie",
-      "Aimee, Paul",
+      "Shirley, Ray",
+      "Shirley, Yuri",
       "Mari, Ron"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido, Itália",
+      "EUA, Reino Unido",
       "Japão, EUA",
-      "Nigéria, Reino Unido"
+      "EUA, Paquistão"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "habilidades",
-      "academia",
-      "animais"
+      "datas",
+      "preços"
      ],
      "c": 0
     }

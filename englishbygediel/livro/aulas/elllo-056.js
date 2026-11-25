@@ -92,9 +92,9 @@
      "p": "\"real nice\" significa…",
      "emoji": "",
      "ops": [
-      "vegetariano",
+      "em cima do muro",
       "bem legal",
-      "trabalhar em / melhorar"
+      "mudar de ideia"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "mais que",
-      "não adequado para",
-      "certificado"
+      "floresceu / prosperou",
+      "estagnação"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"tricky\" significa…",
      "emoji": "",
      "ops": [
-      "normalmente",
-      "emissões de carbono",
+      "alguns / poucos",
+      "caribu (rena)",
       "complicado"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"get certified\" significa…",
      "emoji": "",
      "ops": [
-      "me ensina seus truques",
+      "prático / útil",
       "tirar certificação",
-      "aumentar aos poucos"
+      "mítico"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Sarah, Todd",
+      "Angela, Todd",
       "Rebecca, Todd",
-      "Jin, Adam"
+      "Jake, Shirley"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Austrália, EUA",
-      "Nigéria, Reino Unido",
-      "Japão, Canadá"
+      "Inglaterra, EUA",
+      "Nova Zelândia, EUA"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "alfândega",
-      "mar e história",
+      "preços",
+      "mudança",
       "academia"
      ],
      "c": 2

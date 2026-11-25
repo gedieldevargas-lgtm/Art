@@ -92,8 +92,8 @@
      "p": "\"I can't imagine\" significa…",
      "emoji": "",
      "ops": [
-      "falar o que pensa",
-      "de amadurecimento (filme)",
+      "trazido de navio",
+      "o melhor dos dois mundos",
       "não consigo imaginar"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"get lost in\" significa…",
      "emoji": "",
      "ops": [
-      "papelada",
+      "colocar o coração em",
       "se perder em",
-      "no geral"
+      "pirataria"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "experiência memorável",
-      "quadrilha americana",
-      "conotação negativa"
+      "expatriado",
+      "prosperar"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"binoculars\" significa…",
      "emoji": "",
      "ops": [
-      "aumentar aos poucos",
-      "rotas marítimas",
+      "orçamento",
+      "amante de comida",
       "binóculos"
      ],
      "c": 2
@@ -141,7 +141,7 @@
      "emoji": "",
      "ops": [
       "CleAnn, Todd",
-      "Shantel, Todd",
+      "Rachel, Todd",
       "Antoinette, Warren"
      ],
      "c": 2
@@ -152,7 +152,7 @@
      "ops": [
       "Reino Unido, EUA",
       "EUA, Canadá",
-      "Reino Unido"
+      "País de Gales"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "viagem",
-      "feriados",
-      "cidades"
+      "preços",
+      "tecnologia"
      ],
      "c": 0
     }

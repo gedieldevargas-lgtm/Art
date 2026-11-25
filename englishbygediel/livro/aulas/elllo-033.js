@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "visto de trabalho",
-      "de longa distância",
-      "vestido nos trinques"
+      "celebridade",
+      "elo fraco"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"someplace\" significa…",
      "emoji": "",
      "ops": [
-      "orçamento",
-      "autêntico",
+      "isolado",
+      "ela meio que ficou famosa",
       "algum lugar"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"certificate\" significa…",
      "emoji": "",
      "ops": [
-      "optar por / tentar",
+      "substituir",
       "certificado",
-      "em si"
+      "uma bela experiência"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "o melhor dos dois mundos",
-      "disparar",
-      "faixa de preço"
+      "visto de trabalho",
+      "largar um hábito"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Meg, Todd",
-      "Monica, Todd",
-      "Aimee, Katie"
+      "Sarah, John",
+      "Shirley, Ray"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Japão, Canadá",
-      "Trinidad e Tobago, EUA",
+      "Rússia, EUA",
+      "País de Gales",
       "EUA"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "sono e sonhos",
+      "ética",
       "viver fora",
-      "idiomas e países"
+      "finanças"
      ],
      "c": 1
     }

@@ -15,7 +15,7 @@
    "Falar 3 frases suas sobre o assunto."
   ],
   "mapa": {
-   "centro": "Present Continuous - W",
+   "centro": "Present Continuous - Where is everyone?",
    "ramos": [
     {
      "t": "Ouça",
@@ -147,8 +147,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Monica, Todd",
-      "Aimee, Paul",
+      "Dan, Todd",
+      "Hana, Ben",
       "Hana, Daniel"
      ],
      "c": 2
@@ -157,9 +157,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Rep. Tcheca, África do Sul (?)",
+      "China, EUA",
       "Reino Unido, Chile",
-      "EUA, Reino Unido"
+      "Austrália, EUA"
      ],
      "c": 1
     }

@@ -148,7 +148,7 @@
      "emoji": "",
      "ops": [
       "Abidemi, Todd",
-      "Antoinette, Warren",
+      "Mari, Ron",
       "Katie, Gilder"
      ],
      "c": 0
@@ -157,8 +157,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Nepal, EUA",
-      "País de Gales",
+      "Reino Unido, Chile",
+      "Nigéria, Canadá",
       "Nigéria, EUA"
      ],
      "c": 2
@@ -167,9 +167,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "turismo",
+      "sono e sonhos",
       "preços",
-      "música"
+      "animais"
      ],
      "c": 1
     }

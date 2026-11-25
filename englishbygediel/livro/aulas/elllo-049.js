@@ -92,8 +92,8 @@
      "p": "\"geography\" significa…",
      "emoji": "",
      "ops": [
-      "resultado final / o essencial",
-      "andar dentro d'água",
+      "isolado",
+      "rafting",
       "geografia"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"hilly\" significa…",
      "emoji": "",
      "ops": [
-      "certificado",
+      "não adequado para",
       "montanhoso",
-      "não adequado para"
+      "grogue / zonzo"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "fértil",
-      "atitude aberta",
-      "sazonal"
+      "ser aberto",
+      "mais especificamente"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"climate\" significa…",
      "emoji": "",
      "ops": [
-      "guardar dinheiro",
-      "arquitetura",
+      "sem dúvida",
+      "bungee jump",
       "clima"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Antoinette, Warren",
-      "CleAnn, Todd",
+      "Melissa, Doron",
+      "Julia, Todd",
       "Jin, Adam"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "EUA, Reino Unido",
+      "País de Gales",
       "Nepal, EUA",
-      "País de Gales"
+      "Reino Unido, EUA"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "geografia",
-      "meio ambiente",
-      "datas"
+      "educação",
+      "sono e sonhos"
      ],
      "c": 0
     }

@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "de preferência",
-      "em outra vida",
-      "realista"
+      "impressionante",
+      "uma grande provação"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"I'm set\" significa…",
      "emoji": "",
      "ops": [
-      "-itas (seguidores de)",
-      "tirar certificação",
+      "inicialmente",
+      "trabalhadores por contrato (servidão)",
       "estou resolvido / pronto"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"amenity\" significa…",
      "emoji": "",
      "ops": [
-      "autêntico",
+      "muito quente",
       "comodidade",
-      "se matricular"
+      "dar permissão"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "sem vontade de",
-      "substituir",
-      "tem que ser"
+      "caribu (rena)",
+      "se sentir obrigado"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Erina, Mike",
-      "Pernese, Doron",
-      "Josh, Shirley"
+      "Jake, Shirley",
+      "Rebecca, Todd"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Noruega, Canadá",
-      "Nova Zelândia, EUA",
+      "EUA, Canadá",
+      "EUA, Austrália",
       "Japão, Canadá"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "descrições",
+      "tecnologia e filhos",
       "hotel",
-      "cidades"
+      "relacionamentos"
      ],
      "c": 1
     }

@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "lucro",
-      "assim de cabeça",
-      "rabeca / violino"
+      "nada mal",
+      "pagar a conta"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"illegally\" significa…",
      "emoji": "",
      "ops": [
-      "reconhecível",
-      "quadrilha americana",
+      "estudioso",
+      "bungee jump",
       "ilegalmente"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"peer to peer\" significa…",
      "emoji": "",
      "ops": [
-      "travar / chegar ao limite",
+      "geralmente",
       "de pessoa para pessoa (P2P)",
-      "excesso"
+      "arrecadação de fundos"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "viralizar",
-      "se perder em",
-      "compreender"
+      "culinária",
+      "caminhada longa / trilha"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Hana, Ben",
-      "Mari, Ron",
-      "Aimee, Todd"
+      "Shantel, Todd",
+      "Rufei, Todd"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Nigéria, Reino Unido",
-      "Reino Unido, Itália",
+      "EUA, Paquistão",
+      "EUA, Reino Unido",
       "Japão, EUA"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "carreira militar",
+      "geografia",
       "música",
-      "compras"
+      "expressões idiomáticas"
      ],
      "c": 1
     }

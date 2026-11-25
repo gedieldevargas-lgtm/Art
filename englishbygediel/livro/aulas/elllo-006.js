@@ -148,8 +148,8 @@
      "emoji": "",
      "ops": [
       "Meg, Todd",
-      "Monica, Todd",
-      "Aimee, Katie"
+      "Sarah, John",
+      "Shirley, Ray"
      ],
      "c": 0
     },
@@ -157,8 +157,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Japão, Canadá",
-      "Trinidad e Tobago, EUA",
+      "Rússia, EUA",
+      "País de Gales",
       "EUA"
      ],
      "c": 2
@@ -167,9 +167,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "preços",
+      "idiomas e países",
       "rotina",
-      "migração"
+      "esportes"
      ],
      "c": 1
     }

@@ -15,7 +15,7 @@
    "Falar 3 frases suas sobre o assunto."
   ],
   "mapa": {
-   "centro": "Tips for Learning Engl",
+   "centro": "Tips for Learning English",
    "ramos": [
     {
      "t": "Ouça",
@@ -92,9 +92,9 @@
      "p": "\"work on\" significa…",
      "emoji": "",
      "ops": [
-      "concordo com você",
+      "ter vista para",
       "trabalhar em / melhorar",
-      "pobreza extrema"
+      "fechado / combinado"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "expressão idiomática",
-      "centro financeiro",
-      "rabeca / violino"
+      "lugar pequeno e simples",
+      "no fundo"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"grasp\" significa…",
      "emoji": "",
      "ops": [
-      "lenda urbana",
-      "vai fundo",
+      "grogue / zonzo",
+      "pacote turístico",
       "compreender"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"so to speak\" significa…",
      "emoji": "",
      "ops": [
-      "taxa de mortalidade",
+      "madeira",
       "por assim dizer",
-      "bem legal"
+      "áreas rurais"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Aimee, Todd",
+      "Rufei, Todd",
       "Hana, Ben",
-      "Mari, Ron"
+      "Shantel, Todd"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Japão, EUA",
-      "Nigéria, Reino Unido",
-      "Reino Unido, Itália"
+      "EUA, Paquistão",
+      "EUA, Reino Unido"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "humor",
-      "cores",
+      "casa",
+      "ética",
       "aprender inglês"
      ],
      "c": 2

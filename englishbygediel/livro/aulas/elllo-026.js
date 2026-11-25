@@ -92,9 +92,9 @@
      "p": "\"looking out for\" significa…",
      "emoji": "",
      "ops": [
-      "amante de comida",
+      "caro demais",
       "cuidando de",
-      "construir valores"
+      "hospedagem"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "obviamente",
-      "ficar com a voz embargada",
-      "surtar"
+      "algo importante",
+      "nunca"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"chores\" significa…",
      "emoji": "",
      "ops": [
-      "perfeito",
-      "o que você quiser",
+      "o preço que se paga",
+      "celebração / festa",
       "tarefas de casa"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"genes\" significa…",
      "emoji": "",
      "ops": [
-      "dar permissão",
+      "imigração",
       "genes",
-      "terraço"
+      "estranho"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Aimee, Paul",
+      "Rebecca, Todd",
       "Katie, Todd",
-      "Sarah, Todd"
+      "Jake, Shirley"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido, EUA",
-      "Nova Zelândia, EUA",
-      "Reino Unido"
+      "Jamaica, Reino Unido",
+      "Japão, Canadá"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "roupas",
-      "comida",
+      "finanças",
+      "hotel",
       "família"
      ],
      "c": 2

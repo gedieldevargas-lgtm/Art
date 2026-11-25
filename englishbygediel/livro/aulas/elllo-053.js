@@ -92,9 +92,9 @@
      "p": "\"can't stand\" significa…",
      "emoji": "",
      "ops": [
-      "tema em comum",
+      "especialmente",
       "não suporto",
-      "parece bom / combinado"
+      "curva de sino (média)"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "é o pior",
-      "pista de obstáculos",
-      "quadrilha americana"
+      "experiência memorável",
+      "mimar as crianças"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"universally\" significa…",
      "emoji": "",
      "ops": [
-      "prático / útil",
-      "fora do roteiro turístico",
+      "aumentar aos poucos",
+      "isso é bem profundo",
       "universalmente"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"feel like a cow\" significa…",
      "emoji": "",
      "ops": [
-      "elo fraco",
+      "caribu (rena)",
       "me sentir uma vaca (comendo demais)",
-      "sociável"
+      "sem vontade de"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Gyri, Viyasan",
+      "Aimee, Katie",
       "Katie, Gilder",
-      "Mari, Ron"
+      "Erina, Mike"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido, Vietnã",
-      "EUA, Reino Unido",
-      "Jamaica, Reino Unido"
+      "Japão, EUA",
+      "País de Gales"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "gostos",
-      "folclore",
+      "saúde",
+      "rotina",
       "comida"
      ],
      "c": 2

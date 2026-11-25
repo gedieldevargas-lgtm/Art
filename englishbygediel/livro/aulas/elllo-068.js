@@ -92,9 +92,9 @@
      "p": "\"pocket money\" significa…",
      "emoji": "",
      "ops": [
-      "paranoico",
+      "foi bom conversar com você",
       "mesada",
-      "logo de cara"
+      "arquitetura"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "entender a ideia",
-      "experiência memorável",
-      "eclético"
+      "andar dentro d'água",
+      "o preço que se paga"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"spoil the kids\" significa…",
      "emoji": "",
      "ops": [
-      "fácil de usar",
-      "a escada dos imóveis",
+      "anormal / bizarro",
+      "tem que ser",
       "mimar as crianças"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"hit a wall\" significa…",
      "emoji": "",
      "ops": [
-      "aumentar aos poucos",
+      "quadrilha americana",
       "travar / chegar ao limite",
-      "optar por / tentar"
+      "guardar dinheiro"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Jake, Shirley",
+      "Rebecca, Todd",
       "Angela, Todd",
-      "Spencer, Curtis"
+      "Jin, Adam"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Inglaterra, EUA",
-      "Portugal, África do Sul (?)",
-      "Trinidad e Tobago, EUA"
+      "Rússia, EUA",
+      "EUA, Austrália"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "transporte",
-      "trabalho remoto",
+      "cores",
+      "preços",
       "filhos"
      ],
      "c": 2

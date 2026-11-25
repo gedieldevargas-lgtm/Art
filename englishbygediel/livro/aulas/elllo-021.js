@@ -15,7 +15,7 @@
    "Falar 3 frases suas sobre o assunto."
   ],
   "mapa": {
-   "centro": "Saving and Wasting Mon",
+   "centro": "Saving and Wasting Money",
    "ramos": [
     {
      "t": "Ouça",
@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "uma pessoa fácil de lidar",
-      "cantina / refeitório",
-      "encanamento"
+      "estar disposto a / à altura",
+      "vacinas antirrábicas"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"eat out\" significa…",
      "emoji": "",
      "ops": [
-      "obviamente",
-      "ilegalmente",
+      "ênfase",
+      "em cima do muro",
       "comer fora"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"teach me your tricks\" significa…",
      "emoji": "",
      "ops": [
-      "sem vontade de",
+      "em cima do muro",
       "me ensina seus truques",
-      "no meio do grupo"
+      "comodidade"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "fechado / combinado",
-      "excepcional",
-      "algum lugar"
+      "por segurança",
+      "nunca"
      ],
      "c": 0
     }
@@ -141,7 +141,7 @@
      "emoji": "",
      "ops": [
       "Abidemi, Todd",
-      "Antoinette, Warren",
+      "Mari, Ron",
       "Katie, Gilder"
      ],
      "c": 0
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Nepal, EUA",
-      "País de Gales",
+      "Reino Unido, Chile",
+      "Nigéria, Canadá",
       "Nigéria, EUA"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "ética",
+      "geografia",
       "dinheiro",
-      "folclore"
+      "comida"
      ],
      "c": 1
     }

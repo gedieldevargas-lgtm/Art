@@ -147,8 +147,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Monica, Todd",
-      "Aimee, Katie",
+      "Sarah, John",
+      "Shirley, Ray",
       "Meg, Todd"
      ],
      "c": 2
@@ -157,9 +157,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Trinidad e Tobago, EUA",
+      "País de Gales",
       "EUA",
-      "Japão, Canadá"
+      "Rússia, EUA"
      ],
      "c": 1
     },
@@ -168,8 +168,8 @@
      "emoji": "",
      "ops": [
       "cores",
-      "alfândega",
-      "dinheiro"
+      "dinheiro",
+      "folclore"
      ],
      "c": 0
     }

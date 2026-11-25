@@ -92,9 +92,9 @@
      "p": "\"cuisine\" significa…",
      "emoji": "",
      "ops": [
-      "não me importo",
+      "comodidade",
       "culinária",
-      "imigração"
+      "ciclo vicioso"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "substituir",
-      "de ponta",
-      "se meter em encrenca"
+      "taxa de mortalidade",
+      "se locomover"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"has to be\" significa…",
      "emoji": "",
      "ops": [
-      "papelada",
-      "é o pior",
+      "me atrair",
+      "legenda",
       "tem que ser"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"raw\" significa…",
      "emoji": "",
      "ops": [
-      "montanhoso",
+      "paranoico",
       "cru",
-      "caribu (rena)"
+      "optar por / tentar"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Aimee, Paul",
+      "Shirley, Yuri",
       "Mari, Ron",
-      "Aimee, Katie"
+      "Shirley, Ray"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Japão, EUA",
-      "Nigéria, Reino Unido",
-      "Reino Unido, Itália"
+      "EUA, Paquistão",
+      "EUA, Reino Unido"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "gostos",
-      "folclore",
+      "saúde",
+      "rotina",
       "comida"
      ],
      "c": 2

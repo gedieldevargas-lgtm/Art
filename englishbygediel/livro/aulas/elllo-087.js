@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "movimentado",
-      "vegetariano",
-      "conseguiu (fazer algo)"
+      "um longo caminho pela frente",
+      "largar um hábito"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"the heart of\" significa…",
      "emoji": "",
      "ops": [
-      "ciclo vicioso",
-      "descobrir",
+      "ênfase",
+      "elo fraco",
       "o coração de"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"thrive\" significa…",
      "emoji": "",
      "ops": [
-      "me irritar",
+      "tem que ser",
       "prosperar",
-      "movimentado"
+      "substituir"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "polo / centro",
-      "trazido de navio",
-      "o dia todo"
+      "na hora / de improviso",
+      "comer fora"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Natalie, Todd",
-      "Aimee, Paul",
-      "Julia, Todd"
+      "Hana, Ben",
+      "Jerri, Todd"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Nova Zelândia, EUA",
-      "Reino Unido",
+      "Jamaica, Reino Unido",
+      "Japão, Canadá",
       "Reino Unido, EUA"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "descrições",
+      "restaurante",
       "cidades",
-      "educação"
+      "idiomas e países"
      ],
      "c": 1
     }

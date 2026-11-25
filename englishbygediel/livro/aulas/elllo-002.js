@@ -147,9 +147,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Julia, Todd",
+      "Jerri, Todd",
       "Natalie, Todd",
-      "Aimee, Paul"
+      "Hana, Ben"
      ],
      "c": 1
     },
@@ -158,8 +158,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido, EUA",
-      "Nova Zelândia, EUA",
-      "Reino Unido"
+      "Jamaica, Reino Unido",
+      "Japão, Canadá"
      ],
      "c": 0
     },
@@ -167,8 +167,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "lazer",
-      "idiomas e países",
+      "finanças",
+      "cidades",
       "gostos"
      ],
      "c": 2

@@ -92,8 +92,8 @@
      "p": "\"right age\" significa…",
      "emoji": "",
      "ops": [
-      "assim de cabeça",
-      "descobrir",
+      "preço fixo",
+      "anormal / bizarro",
       "idade certa"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"stress me out\" significa…",
      "emoji": "",
      "ops": [
-      "universalmente",
+      "nunca",
       "me estressa",
-      "histeria"
+      "comer fora"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "por segurança",
-      "mudar de ideia",
-      "se livrar de"
+      "modalidade",
+      "salário mínimo justo"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"overpriced\" significa…",
      "emoji": "",
      "ops": [
-      "experiência memorável",
-      "resolver logo",
+      "legenda",
+      "faixa de preço",
       "caro demais"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Jake, Shirley",
-      "Jerri, Todd",
+      "Jin, Adam",
+      "Greg, Todd",
       "Aimee, Katie"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido, EUA",
+      "Rep. Tcheca, África do Sul (?)",
       "Reino Unido",
-      "Inglaterra, EUA"
+      "EUA"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "tecnologia e filhos",
-      "fim de semana",
-      "turismo"
+      "habilidades",
+      "dinheiro"
      ],
      "c": 0
     }

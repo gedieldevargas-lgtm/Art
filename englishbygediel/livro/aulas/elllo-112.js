@@ -92,8 +92,8 @@
      "p": "\"fashion sense\" significa…",
      "emoji": "",
      "ops": [
-      "idade certa",
-      "se acostumar com",
+      "subdividido",
+      "tarefas de casa",
       "senso de moda"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"throw on (clothes)\" significa…",
      "emoji": "",
      "ops": [
-      "chocantemente",
+      "bem pensado",
       "vestir rápido",
-      "sempre"
+      "fechado / combinado"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "um milhão de dólares (estar ótimo)",
-      "pontos altos",
-      "universalmente"
+      "celebridade",
+      "tarefas de casa"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"dressed to the nines\" significa…",
      "emoji": "",
      "ops": [
-      "um par / alguns",
-      "também (em negativas)",
+      "ela meio que ficou famosa",
+      "ambiente hostil",
       "vestido nos trinques"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Dan, Todd",
-      "Lyndsay, Warren",
+      "Crystal, George",
+      "Abidemi, Rory",
       "Spencer, Curtis"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Trinidad e Tobago, EUA",
+      "País de Gales",
       "EUA",
-      "Japão, Canadá"
+      "Rússia, EUA"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "roupas",
-      "sono e sonhos",
-      "lazer"
+      "esportes",
+      "descrições"
      ],
      "c": 0
     }

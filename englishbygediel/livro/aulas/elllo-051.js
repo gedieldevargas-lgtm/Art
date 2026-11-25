@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "trazido de navio",
-      "passar o olho",
-      "só para esclarecer"
+      "de longe",
+      "curva de sino (média)"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"flown in\" significa…",
      "emoji": "",
      "ops": [
-      "se forçar",
-      "se meter em encrenca",
+      "hospedagem",
+      "assim de cabeça",
       "trazido de avião"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"plumbing\" significa…",
      "emoji": "",
      "ops": [
-      "sem dúvida",
+      "custar os olhos da cara",
       "encanamento",
-      "experimentar"
+      "parece bom / combinado"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "esclarecedor",
-      "algo importante",
-      "largar um hábito"
+      "paisagem",
+      "mau hábito"
      ],
      "c": 0
     }
@@ -141,7 +141,7 @@
      "emoji": "",
      "ops": [
       "Abidemi, Todd",
-      "Antoinette, Warren",
+      "Mari, Ron",
       "Katie, Gilder"
      ],
      "c": 0
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Nepal, EUA",
-      "País de Gales",
+      "Reino Unido, Chile",
+      "Nigéria, Canadá",
       "Nigéria, EUA"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "personalidade",
+      "carreira militar",
       "cultura",
-      "sonhos e carreira"
+      "dinheiro"
      ],
      "c": 1
     }

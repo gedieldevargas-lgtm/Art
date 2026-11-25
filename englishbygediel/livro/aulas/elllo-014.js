@@ -15,7 +15,7 @@
    "Falar 3 frases suas sobre o assunto."
   ],
   "mapa": {
-   "centro": "Present Simple - Be Ve",
+   "centro": "Present Simple - Be Verbs",
    "ramos": [
     {
      "t": "Ouça",
@@ -147,9 +147,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Rebecca, Todd",
+      "Dan, Todd",
       "Aimee, Todd",
-      "Jin, Adam"
+      "Shantel, Todd"
      ],
      "c": 1
     },
@@ -158,8 +158,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido, EUA",
-      "Nova Zelândia, EUA",
-      "Reino Unido"
+      "Jamaica, Reino Unido",
+      "Japão, Canadá"
      ],
      "c": 0
     },
@@ -167,8 +167,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "viagem",
-      "saúde",
+      "fim de semana",
+      "migração",
       "apresentações"
      ],
      "c": 2

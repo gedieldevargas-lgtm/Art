@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "nada mal",
-      "guardar dinheiro",
-      "um conselho"
+      "duvidoso / arriscado",
+      "contra a corrente"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"folk hero\" significa…",
      "emoji": "",
      "ops": [
-      "convencer alguém",
-      "apagar (dormir)",
+      "encanamento",
+      "montanhoso",
       "herói popular"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"mythical\" significa…",
      "emoji": "",
      "ops": [
-      "áreas rurais",
+      "caro demais",
       "mítico",
-      "o dia todo"
+      "compreender"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "madeira",
-      "expatriado",
-      "no geral"
+      "desvantagem",
+      "no fim das contas"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Jake, Shirley",
-      "Olga, Todd",
-      "Gyri, Viyasan"
+      "Naomi, Dai",
+      "Jin, Adam"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "EUA, Canadá",
       "Trinidad e Tobago, EUA",
+      "Reino Unido, Chile",
       "EUA, Austrália"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "ética",
+      "escola",
       "folclore",
-      "mudança"
+      "trabalho remoto"
      ],
      "c": 1
     }

@@ -147,9 +147,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Julia, Nathan",
+      "Aimee, Katie",
       "Shantel, Todd",
-      "Naomi, Dai"
+      "Antoinette, Warren"
      ],
      "c": 1
     },
@@ -158,8 +158,8 @@
      "emoji": "",
      "ops": [
       "EUA",
-      "Japão, Canadá",
-      "Trinidad e Tobago, EUA"
+      "Rússia, EUA",
+      "País de Gales"
      ],
      "c": 0
     },
@@ -167,8 +167,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "idiomas",
-      "escola",
+      "arrependimentos",
+      "mar e história",
       "celebridades"
      ],
      "c": 2

@@ -92,8 +92,8 @@
      "p": "\"empty nester\" significa…",
      "emoji": "",
      "ops": [
-      "geografia",
-      "ter vista para",
+      "desistir",
+      "pacote turístico",
       "pais de ninho vazio"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"against the grain\" significa…",
      "emoji": "",
      "ops": [
-      "aspectos polêmicos",
+      "optar por / tentar",
       "contra a corrente",
-      "bungee jump"
+      "prático / útil"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "dinâmica familiar",
-      "fluxo de dinheiro",
-      "excepcional"
+      "inicialmente",
+      "trabalhadores por contrato (servidão)"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"get choked up\" significa…",
      "emoji": "",
      "ops": [
-      "vestir rápido",
-      "desvantagem",
+      "por assim dizer",
+      "egocêntrico",
       "ficar com a voz embargada"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Spencer, Curtis",
-      "Jake, Shirley",
+      "Jin, Adam",
+      "Rebecca, Todd",
       "Angela, Todd"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Trinidad e Tobago, EUA",
+      "EUA, Austrália",
       "Inglaterra, EUA",
-      "Portugal, África do Sul (?)"
+      "Rússia, EUA"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "família",
-      "roupas",
-      "comida"
+      "finanças",
+      "hotel"
      ],
      "c": 0
     }

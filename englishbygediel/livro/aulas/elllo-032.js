@@ -92,9 +92,9 @@
      "p": "\"get in trouble\" significa…",
      "emoji": "",
      "ops": [
-      "equivalente",
+      "contar com",
       "se meter em encrenca",
-      "celebração / festa"
+      "universalmente"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "pessoalmente",
-      "acumulador (guarda tudo)",
-      "celebração / festa"
+      "preso na rotina",
+      "de pessoa para pessoa (P2P)"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"stay away from\" significa…",
      "emoji": "",
      "ops": [
-      "sazonal",
-      "complicado",
+      "anual",
+      "descobrir / entender",
       "ficar longe de"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"social\" significa…",
      "emoji": "",
      "ops": [
-      "curva de sino (média)",
+      "apagar (dormir)",
       "sociável",
-      "trabalhar em / melhorar"
+      "convencer alguém"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Aimee, Katie",
+      "Shirley, Ray",
       "Meg, Todd",
-      "Monica, Todd"
+      "Sarah, John"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "EUA",
-      "Japão, Canadá",
-      "Trinidad e Tobago, EUA"
+      "Rússia, EUA",
+      "País de Gales"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "cores",
-      "academia",
+      "viagem",
+      "feriados",
       "animais"
      ],
      "c": 2

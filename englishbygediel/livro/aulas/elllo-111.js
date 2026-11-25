@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "anormal / bizarro",
-      "hora do rush",
-      "uma bela experiência"
+      "isolado",
+      "ambiente hostil"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"indicative\" significa…",
      "emoji": "",
      "ops": [
-      "floresceu / prosperou",
-      "com certeza",
+      "excepcional",
+      "travar / chegar ao limite",
       "indicativo"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"hard to deny\" significa…",
      "emoji": "",
      "ops": [
-      "encanamento",
+      "pessoalmente",
       "difícil de negar",
-      "travar / chegar ao limite"
+      "rabeca / violino"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "comprovado",
-      "caminhada longa / trilha",
-      "pirataria"
+      "andar dentro d'água",
+      "o preço que se paga"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Aimee, Paul",
-      "Aimee, Katie",
-      "Shifani, Todd"
+      "Crystal, George",
+      "Julia, Todd"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Inglaterra, EUA",
-      "Reino Unido, EUA",
+      "EUA",
+      "Rep. Tcheca, África do Sul (?)",
       "Reino Unido"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "hotel",
+      "celebridades",
       "meio ambiente",
-      "relacionamentos"
+      "animais"
      ],
      "c": 1
     }

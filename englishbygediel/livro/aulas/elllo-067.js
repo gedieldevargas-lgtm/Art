@@ -92,8 +92,8 @@
      "p": "\"tourist package\" significa…",
      "emoji": "",
      "ops": [
-      "se matricular",
-      "se sentir obrigado",
+      "preço fixo",
+      "anormal / bizarro",
       "pacote turístico"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"high season\" significa…",
      "emoji": "",
      "ops": [
-      "vale-tudo",
+      "no meio de",
       "alta temporada",
-      "perfeito"
+      "desnecessário / injusto"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "de longe",
-      "excepcional",
-      "decisivo"
+      "de preferência",
+      "se perder em"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"the locals\" significa…",
      "emoji": "",
      "ops": [
-      "operário / trabalho braçal",
-      "-itas (seguidores de)",
+      "minimalista",
+      "binóculos",
       "os moradores"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Abidemi, Jeremy",
-      "Jin, Adam",
+      "Melissa, Doron",
+      "Katie, Todd",
       "Jerri, Todd"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Nova Zelândia, EUA",
+      "Reino Unido",
       "Tailândia, EUA",
-      "Portugal, África do Sul (?)"
+      "Reino Unido, Chile"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "turismo",
-      "cultura",
-      "tecnologia e filhos"
+      "filmes",
+      "feriados"
      ],
      "c": 0
     }

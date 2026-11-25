@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "nessa linha",
-      "sazonal",
-      "lançar"
+      "exceto",
+      "conseguiu (fazer algo)"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"cutting edge\" significa…",
      "emoji": "",
      "ops": [
-      "paisagem",
-      "ciclo vicioso",
+      "fluxo de dinheiro",
+      "com certeza",
       "de ponta"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"put your heart into\" significa…",
      "emoji": "",
      "ops": [
-      "aspectos polêmicos",
+      "experiência memorável",
       "colocar o coração em",
-      "bungee jump"
+      "coisa que irrita"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "experimentar",
-      "convencer alguém",
-      "apagar (dormir)"
+      "taxa de mortalidade",
+      "marcar os pontos"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Sarah, Adam",
-      "Abidemi, Todd",
-      "Meg, Todd"
+      "Jake, Shirley",
+      "Hana, Ben"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Japão, Canadá",
-      "Trinidad e Tobago, EUA",
+      "Rússia, EUA",
+      "País de Gales",
       "EUA"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "geografia",
+      "choque cultural",
       "arrependimentos",
-      "finanças"
+      "tecnologia"
      ],
      "c": 1
     }

@@ -92,9 +92,9 @@
      "p": "\"that's perfect\" significa…",
      "emoji": "",
      "ops": [
-      "disparar",
+      "vacinas antirrábicas",
       "perfeito",
-      "apagar (dormir)"
+      "prosperar"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "uma variedade de",
-      "culinária",
-      "caminhada longa / trilha"
+      "paranoico",
+      "custar os olhos da cara"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"sounds good\" significa…",
      "emoji": "",
      "ops": [
-      "pontos altos",
-      "de amadurecimento (filme)",
+      "movimentado",
+      "explicar por partes",
       "parece bom / combinado"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"all day\" significa…",
      "emoji": "",
      "ops": [
-      "caminhada longa / trilha",
+      "mecânico",
       "o dia todo",
-      "culinária"
+      "pirataria"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Aimee, Paul",
+      "Rebecca, Todd",
       "Katie, Todd",
-      "Sarah, Todd"
+      "Jake, Shirley"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido, EUA",
-      "Nova Zelândia, EUA",
-      "Reino Unido"
+      "Jamaica, Reino Unido",
+      "Japão, Canadá"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "finanças",
-      "personalidade",
+      "música",
+      "filmes",
       "compras"
      ],
      "c": 2

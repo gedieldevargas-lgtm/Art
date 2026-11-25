@@ -92,9 +92,9 @@
      "p": "\"bother\" significa…",
      "emoji": "",
      "ops": [
-      "se meter em encrenca",
+      "pista de obstáculos",
       "incomodar",
-      "polo / centro"
+      "histeria"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "rotina normal de trabalho",
-      "comer fora",
-      "não tem como errar / imperdível"
+      "intimidador",
+      "rabeca / violino"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"rabies shots\" significa…",
      "emoji": "",
      "ops": [
-      "contar com",
-      "de preferência",
+      "em movimento",
+      "rafting",
       "vacinas antirrábicas"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"sell someone\" significa…",
      "emoji": "",
      "ops": [
-      "operário / trabalho braçal",
+      "anormal / bizarro",
       "convencer alguém",
-      "se sentir obrigado"
+      "no meio de"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Jerri, Todd",
+      "Sarah, John",
       "Julia, Todd",
-      "Hana, Ben"
+      "Rebecca, Todd"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido, EUA",
-      "Nova Zelândia, EUA",
-      "Reino Unido"
+      "Jamaica, Reino Unido",
+      "Japão, Canadá"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "feriados",
-      "cidades",
+      "preços",
+      "tecnologia",
       "viagem"
      ],
      "c": 2

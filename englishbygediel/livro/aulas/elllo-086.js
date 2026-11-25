@@ -92,9 +92,9 @@
      "p": "\"foodie\" significa…",
      "emoji": "",
      "ops": [
-      "caminhada longa / trilha",
+      "descendência",
       "amante de comida",
-      "sem dúvida"
+      "foi bom conversar com você"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "pilão",
-      "na hora / de improviso",
-      "estranho"
+      "desnecessário / injusto",
+      "mimar as crianças"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"roasting hot\" significa…",
      "emoji": "",
      "ops": [
-      "desnecessário / injusto",
-      "pergunta difícil",
+      "sem dúvida",
+      "bungee jump",
       "muito quente"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"hole-in-the-wall\" significa…",
      "emoji": "",
      "ops": [
-      "esclarecedor",
+      "eclético",
       "lugar pequeno e simples",
-      "mecânico"
+      "vir com a idade"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Julia, Todd",
+      "Jerri, Todd",
       "Natalie, Todd",
-      "Aimee, Paul"
+      "Hana, Ben"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido, EUA",
-      "Nova Zelândia, EUA",
-      "Reino Unido"
+      "Jamaica, Reino Unido",
+      "Japão, Canadá"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "gostos",
-      "folclore",
+      "saúde",
+      "rotina",
       "comida"
      ],
      "c": 2

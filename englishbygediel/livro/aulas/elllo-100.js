@@ -92,8 +92,8 @@
      "p": "\"go through the roof\" significa…",
      "emoji": "",
      "ops": [
-      "mudar de assunto",
-      "comodidade",
+      "subdividido",
+      "tarefas de casa",
       "disparar"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"urban myth\" significa…",
      "emoji": "",
      "ops": [
-      "tarefas de casa",
+      "algum lugar",
       "lenda urbana",
-      "estudioso"
+      "nunca"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "se sentir obrigado",
-      "por assim dizer",
-      "pista de obstáculos"
+      "marcar os pontos",
+      "anual"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"boycott\" significa…",
      "emoji": "",
      "ops": [
-      "tem que ser",
-      "concordo com você",
+      "pergunta difícil",
+      "obviamente",
       "boicote"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Jerri, Todd",
-      "Greg, Todd",
+      "Gyri, Viyasan",
+      "Josh, Shirley",
       "Abidemi, Rory"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Inglaterra, EUA",
+      "Jamaica, Reino Unido",
       "Nigéria, Reino Unido",
-      "EUA"
+      "País de Gales"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "datas comemorativas",
-      "rádio",
-      "aprender inglês"
+      "animais",
+      "mídia"
      ],
      "c": 0
     }

@@ -15,7 +15,7 @@
    "Falar 3 frases suas sobre o assunto."
   ],
   "mapa": {
-   "centro": "Adjectives and Adverbs",
+   "centro": "Adjectives and Adverbs of Intensity",
    "ramos": [
     {
      "t": "Ouça",
@@ -147,9 +147,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Julia, Todd",
+      "Jerri, Todd",
       "Natalie, Todd",
-      "Aimee, Paul"
+      "Hana, Ben"
      ],
      "c": 1
     },
@@ -158,8 +158,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido, EUA",
-      "Nova Zelândia, EUA",
-      "Reino Unido"
+      "Jamaica, Reino Unido",
+      "Japão, Canadá"
      ],
      "c": 0
     },
@@ -167,8 +167,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "geografia",
-      "tecnologia",
+      "choque cultural",
+      "preços",
       "descrições"
      ],
      "c": 2

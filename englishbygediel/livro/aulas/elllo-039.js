@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "normalmente",
-      "reconhecível",
-      "expressão idiomática"
+      "montanhoso",
+      "comer fora"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"canteen\" significa…",
      "emoji": "",
      "ops": [
-      "os moradores",
-      "um conselho",
+      "difícil de negar",
+      "e assim por diante",
       "cantina / refeitório"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"find boring\" significa…",
      "emoji": "",
      "ops": [
-      "eclético",
+      "quadrilha americana",
       "achar chato",
-      "comprovado"
+      "na hora / de improviso"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "foi bom conversar com você",
-      "não é meu forte",
-      "desistir"
+      "disparar",
+      "elo fraco"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Naomi, Dai",
-      "Katie, Gilder",
-      "Jerri, Todd"
+      "Olga, Todd",
+      "Dan, Todd"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido, Vietnã",
       "Reino Unido, EUA",
+      "Rep. Tcheca, África do Sul (?)",
       "País de Gales"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "cidades",
+      "gostos",
       "escola",
-      "trabalho remoto"
+      "família e dinheiro"
      ],
      "c": 1
     }

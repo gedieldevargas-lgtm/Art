@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "resultado final / o essencial",
-      "trabalhar em / melhorar",
-      "lançar"
+      "isso é bem profundo",
+      "atitude aberta"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"come out with\" significa…",
      "emoji": "",
      "ops": [
-      "não é meu forte",
-      "no geral",
+      "quadrilha americana",
+      "conotação negativa",
       "lançar"
      ],
      "c": 2
@@ -114,7 +114,7 @@
      "ops": [
       "descobrir / entender",
       "-itas (seguidores de)",
-      "complicado"
+      "mudar de ideia"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "reconhecível",
-      "prático / útil",
-      "fora do roteiro turístico"
+      "se destacar",
+      "encanamento"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Spencer, Curtis",
-      "Dan, Todd",
-      "Lyndsay, Warren"
+      "Crystal, George",
+      "Abidemi, Rory"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Japão, Canadá",
-      "Trinidad e Tobago, EUA",
+      "Rússia, EUA",
+      "País de Gales",
       "EUA"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "tecnologia",
+      "habilidades",
       "empresas",
-      "música"
+      "apresentações"
      ],
      "c": 1
     }

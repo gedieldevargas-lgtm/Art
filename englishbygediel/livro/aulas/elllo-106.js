@@ -92,8 +92,8 @@
      "p": "\"at the end of the day\" significa…",
      "emoji": "",
      "ops": [
-      "acumulador (guarda tudo)",
-      "único",
+      "estranho",
+      "especialmente",
       "no fim das contas"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"household word\" significa…",
      "emoji": "",
      "ops": [
-      "egocêntrico",
+      "de pessoa para pessoa (P2P)",
       "nome conhecido de todos",
-      "ela meio que ficou famosa"
+      "culinária"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "grande obstáculo",
-      "algo importante",
-      "minimalista"
+      "ciclo vicioso",
+      "comodidade"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"user-friendly\" significa…",
      "emoji": "",
      "ops": [
-      "complicado",
-      "indicativo",
+      "mais que",
+      "na hora / de improviso",
       "fácil de usar"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Hana, Ben",
-      "Naomi, Dai",
+      "Julia, Nathan",
+      "Gyri, Viyasan",
       "Anthony, Todd"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Trinidad e Tobago, EUA",
+      "País de Gales",
       "EUA",
-      "Japão, Canadá"
+      "Rússia, EUA"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "finanças",
-      "geografia",
-      "casa"
+      "preços",
+      "mudança"
      ],
      "c": 0
     }

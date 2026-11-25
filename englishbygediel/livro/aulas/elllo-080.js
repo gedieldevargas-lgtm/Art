@@ -92,9 +92,9 @@
      "p": "\"walk in the park\" significa…",
      "emoji": "",
      "ops": [
-      "salário mínimo justo",
+      "descobrir",
       "moleza",
-      "custar os olhos da cara"
+      "ciclo vicioso"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "uma grande provação",
-      "eclético",
-      "aumentar aos poucos"
+      "espírito esportivo",
+      "coisa que irrita"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"come with age\" significa…",
      "emoji": "",
      "ops": [
-      "estar disposto a / à altura",
-      "autêntico",
+      "focar em vencer",
+      "expatriado",
       "vir com a idade"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"bank on\" significa…",
      "emoji": "",
      "ops": [
-      "lançar",
+      "fora isso",
       "contar com",
-      "alguns / poucos"
+      "quadrilha americana"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Jerri, Todd",
+      "Sarah, John",
       "Julia, Todd",
-      "Hana, Ben"
+      "Rebecca, Todd"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido, EUA",
-      "Nova Zelândia, EUA",
-      "Reino Unido"
+      "Jamaica, Reino Unido",
+      "Japão, Canadá"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "filmes",
-      "gostos",
+      "roupas",
+      "trabalho",
       "esportes"
      ],
      "c": 2

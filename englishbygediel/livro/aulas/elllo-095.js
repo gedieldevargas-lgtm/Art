@@ -92,9 +92,9 @@
      "p": "\"weak link\" significa…",
      "emoji": "",
      "ops": [
-      "sempre",
+      "largar um hábito",
       "elo fraco",
-      "um longo caminho pela frente"
+      "especialmente"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "não adequado para",
-      "exceto",
-      "conseguiu (fazer algo)"
+      "uma variedade de",
+      "traumático"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"obstacle course\" significa…",
      "emoji": "",
      "ops": [
-      "polo / centro",
-      "mais ou menos",
+      "realista",
+      "uma variedade de",
       "pista de obstáculos"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"Go for it\" significa…",
      "emoji": "",
      "ops": [
-      "rafting",
+      "curva de sino (média)",
       "vai fundo",
-      "os moradores"
+      "de longe"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Aimee, Katie",
+      "Shirley, Ray",
       "Meg, Todd",
-      "Monica, Todd"
+      "Sarah, John"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "EUA",
-      "Japão, Canadá",
-      "Trinidad e Tobago, EUA"
+      "Rússia, EUA",
+      "País de Gales"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "turismo",
-      "viver fora",
+      "ética",
+      "celebridades",
       "carreira militar"
      ],
      "c": 2

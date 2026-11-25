@@ -147,8 +147,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "folclore",
-      "ética",
+      "comida",
+      "geografia",
       "dinheiro"
      ],
      "c": 2

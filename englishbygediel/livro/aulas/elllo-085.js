@@ -92,8 +92,8 @@
      "p": "\"focus on winning\" significa…",
      "emoji": "",
      "ops": [
-      "duvidoso / arriscado",
-      "contra a corrente",
+      "ter (uma ideia)",
+      "indicativo",
       "focar em vencer"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"force yourself\" significa…",
      "emoji": "",
      "ops": [
-      "estranho",
+      "montanhoso",
       "se forçar",
-      "na hora / de improviso"
+      "obviamente"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "contraproducente",
-      "excepcional",
-      "decisivo"
+      "polo / centro",
+      "resultado final / o essencial"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"hostile environment\" significa…",
      "emoji": "",
      "ops": [
-      "geografia",
-      "melhor interesse",
+      "desvantagem",
+      "minimalista",
       "ambiente hostil"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
+      "Rufei, Todd",
       "Aimee, Katie",
-      "Greg, Todd",
       "Monica, Todd"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "EUA",
+      "China, EUA",
       "Nova Zelândia, EUA",
-      "Japão, Canadá"
+      "Austrália, EUA"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "esportes",
-      "filmes",
-      "gostos"
+      "roupas",
+      "trabalho"
      ],
      "c": 0
     }

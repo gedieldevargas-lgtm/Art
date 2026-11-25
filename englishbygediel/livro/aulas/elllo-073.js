@@ -15,7 +15,7 @@
    "Falar 3 frases suas sobre o assunto."
   ],
   "mapa": {
-   "centro": "Student Life in China ",
+   "centro": "Student Life in China Part 1",
    "ramos": [
     {
      "t": "Ouça",
@@ -92,8 +92,8 @@
      "p": "\"reputation\" significa…",
      "emoji": "",
      "ops": [
-      "uma grande provação",
-      "lenda urbana",
+      "de pessoa para pessoa (P2P)",
+      "rafting",
       "reputação"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"distracted\" significa…",
      "emoji": "",
      "ops": [
-      "trabalhar em / melhorar",
+      "mau hábito",
       "distraído",
-      "de jeito nenhum / nem um pouco"
+      "aparecer"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "chateado / incomodado",
-      "ponta sul",
-      "madeira"
+      "na hora / de improviso",
+      "quadrilha americana"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"pressure\" significa…",
      "emoji": "",
      "ops": [
-      "surgiu do nada",
-      "preço fixo",
+      "movimentado",
+      "explicar por partes",
       "pressão"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Rebecca, Todd",
-      "Lyndsay, Warren",
+      "Abidemi, Rory",
+      "Greg, Todd",
       "Rufei, Todd"
      ],
      "c": 2
@@ -150,9 +150,9 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Reino Unido, Itália",
+      "EUA, Canadá",
       "China, EUA",
-      "Japão, EUA"
+      "País de Gales"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "educação",
-      "casa",
-      "filmes"
+      "alfândega",
+      "arrependimentos"
      ],
      "c": 0
     }

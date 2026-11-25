@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "descobrir / entender",
-      "terraço",
-      "dar permissão"
+      "celebração / festa",
+      "se meter em encrenca"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"come up with\" significa…",
      "emoji": "",
      "ops": [
-      "preço fixo",
-      "rotas marítimas",
+      "um pé na porta (primeira chance)",
+      "também (em negativas)",
       "ter (uma ideia)"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"a long way to go\" significa…",
      "emoji": "",
      "ops": [
-      "ter vista para",
+      "hospedagem",
       "um longo caminho pela frente",
-      "fechado / combinado"
+      "nessa linha"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "melhor interesse",
-      "paranoico",
-      "é o pior"
+      "excepcional",
+      "travar / chegar ao limite"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Jerri, Todd",
-      "Abidemi, Jeremy",
-      "Jin, Adam"
+      "Melissa, Doron",
+      "Katie, Todd"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Portugal, África do Sul (?)",
-      "Nova Zelândia, EUA",
+      "Reino Unido, Chile",
+      "Reino Unido",
       "Tailândia, EUA"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "tecnologia e filhos",
+      "feriados",
       "turismo",
-      "cultura"
+      "filmes"
      ],
      "c": 1
     }

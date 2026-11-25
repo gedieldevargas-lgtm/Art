@@ -92,9 +92,9 @@
      "p": "\"caribou\" significa…",
      "emoji": "",
      "ops": [
-      "estranho",
+      "prosperar",
       "caribu (rena)",
-      "por segurança"
+      "bungee jump"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "nojento",
-      "subdividido",
-      "algo importante"
+      "custar os olhos da cara",
+      "salário mínimo justo"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"square dance\" significa…",
      "emoji": "",
      "ops": [
-      "pista de obstáculos",
-      "marcar os pontos",
+      "se sentir obrigado",
+      "onde quer que",
       "quadrilha americana"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"fiddle\" significa…",
      "emoji": "",
      "ops": [
-      "por segurança",
+      "fora isso",
       "rabeca / violino",
-      "ficar longe de"
+      "se locomover"
      ],
      "c": 1
     }
@@ -142,7 +142,7 @@
      "ops": [
       "Katie, Gilder",
       "Abidemi, Todd",
-      "Antoinette, Warren"
+      "Mari, Ron"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Nigéria, EUA",
-      "Nepal, EUA",
-      "País de Gales"
+      "Reino Unido, Chile",
+      "Nigéria, Canadá"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "sonhos e carreira",
-      "personalidade",
+      "dinheiro",
+      "carreira militar",
       "cultura"
      ],
      "c": 2

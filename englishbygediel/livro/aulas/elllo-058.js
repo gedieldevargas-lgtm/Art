@@ -92,8 +92,8 @@
      "p": "\"on the move\" significa…",
      "emoji": "",
      "ops": [
-      "-itas (seguidores de)",
-      "tirar certificação",
+      "andar dentro d'água",
+      "o preço que se paga",
       "em movimento"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"stuck to it\" significa…",
      "emoji": "",
      "ops": [
-      "incomodar",
+      "se meter em encrenca",
       "persistiu",
-      "vacinas antirrábicas"
+      "surtar"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "versátil",
-      "de preferência",
-      "experiência memorável"
+      "logo de cara",
+      "travar / chegar ao limite"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"eclectic\" significa…",
      "emoji": "",
      "ops": [
-      "falar o que pensa",
-      "lindo",
+      "trabalhar em / melhorar",
+      "fábricas com trabalho explorado",
       "eclético"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Ginger, Nabeel",
       "Hana, Daniel",
+      "Jana, Peter",
       "Lyndsay, Warren"
      ],
      "c": 2
@@ -152,7 +152,7 @@
      "ops": [
       "Reino Unido, EUA",
       "EUA, Canadá",
-      "Reino Unido"
+      "País de Gales"
      ],
      "c": 1
     },
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "sonhos e carreira",
-      "lazer",
-      "educação"
+      "datas comemorativas",
+      "cultura"
      ],
      "c": 0
     }

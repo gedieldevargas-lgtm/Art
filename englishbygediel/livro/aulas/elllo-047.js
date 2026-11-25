@@ -92,9 +92,9 @@
      "p": "\"life in general\" significa…",
      "emoji": "",
      "ops": [
-      "me arrependendo",
+      "no geral",
       "a vida em geral",
-      "dá uma olhada"
+      "não é meu forte"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "sem dúvida",
-      "pais de ninho vazio",
-      "me estressa"
+      "custar os olhos da cara",
+      "trabalhar em / melhorar"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"whine\" significa…",
      "emoji": "",
      "ops": [
-      "fluxo de dinheiro",
-      "culinária",
+      "se sentir obrigado",
+      "espectro",
       "reclamar / choramingar"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"along those lines\" significa…",
      "emoji": "",
      "ops": [
-      "especialmente",
+      "realista",
       "nessa linha",
-      "curva de sino (média)"
+      "voltando a"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Aimee, Katie",
+      "Shirley, Ray",
       "Meg, Todd",
-      "Monica, Todd"
+      "Sarah, John"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "EUA",
-      "Japão, Canadá",
-      "Trinidad e Tobago, EUA"
+      "Rússia, EUA",
+      "País de Gales"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "objetos",
-      "aprender inglês",
+      "escola",
+      "rádio",
       "mídia"
      ],
      "c": 2

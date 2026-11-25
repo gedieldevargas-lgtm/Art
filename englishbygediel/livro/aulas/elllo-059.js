@@ -92,9 +92,9 @@
      "p": "\"realistic\" significa…",
      "emoji": "",
      "ops": [
-      "enviar um formulário",
+      "legenda",
       "realista",
-      "educação básica"
+      "convencer alguém"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "tema em comum",
-      "não suporto",
-      "surtar"
+      "conotação negativa",
+      "de saco cheio"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"egotistical\" significa…",
      "emoji": "",
      "ops": [
-      "culinária",
-      "te explicar passo a passo",
+      "falar o que pensa",
+      "lindo",
       "egocêntrico"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"make a difference\" significa…",
      "emoji": "",
      "ops": [
-      "aumentar aos poucos",
+      "prosperar",
       "fazer a diferença",
-      "o dia todo"
+      "expatriado"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Hana, Daniel",
+      "Jana, Peter",
       "Lyndsay, Warren",
-      "Ginger, Nabeel"
+      "Hana, Daniel"
      ],
      "c": 1
     },
@@ -151,7 +151,7 @@
      "emoji": "",
      "ops": [
       "EUA, Canadá",
-      "Reino Unido",
+      "País de Gales",
       "Reino Unido, EUA"
      ],
      "c": 0
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "lazer",
-      "educação",
+      "datas comemorativas",
+      "cultura",
       "sonhos e carreira"
      ],
      "c": 2

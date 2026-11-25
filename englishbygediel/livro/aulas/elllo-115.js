@@ -92,8 +92,8 @@
      "p": "\"southern tip\" significa…",
      "emoji": "",
      "ops": [
-      "substituir",
-      "tem que ser",
+      "sem vontade de",
+      "hipócrita",
       "ponta sul"
      ],
      "c": 2
@@ -102,9 +102,9 @@
      "p": "\"piracy\" significa…",
      "emoji": "",
      "ops": [
-      "vestido nos trinques",
+      "se perder em",
       "pirataria",
-      "comportamento obsessivo"
+      "se livrar de"
      ],
      "c": 1
     },
@@ -113,8 +113,8 @@
      "emoji": "",
      "ops": [
       "atrás do saque",
-      "aprender / pegar",
-      "andar dentro d'água"
+      "emissões de carbono",
+      "o preço que se paga"
      ],
      "c": 0
     },
@@ -122,8 +122,8 @@
      "p": "\"shipping routes\" significa…",
      "emoji": "",
      "ops": [
-      "ter (uma ideia)",
-      "incomodar",
+      "cuidando de",
+      "duvidoso / arriscado",
       "rotas marítimas"
      ],
      "c": 2
@@ -140,8 +140,8 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Melissa, Doron",
-      "Anthony, Todd",
+      "Ginger, Nabeel",
+      "Mari, Ron",
       "Jana, Peter"
      ],
      "c": 2
@@ -150,7 +150,7 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "Portugal, África do Sul (?)",
+      "EUA, Reino Unido",
       "Rep. Tcheca, África do Sul (?)",
       "Reino Unido, Itália"
      ],
@@ -161,8 +161,8 @@
      "emoji": "",
      "ops": [
       "mar e história",
-      "gostos",
-      "apresentações"
+      "filhos",
+      "trabalho"
      ],
      "c": 0
     }

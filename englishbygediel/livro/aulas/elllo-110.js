@@ -92,9 +92,9 @@
      "p": "\"carbon emissions\" significa…",
      "emoji": "",
      "ops": [
-      "rafting",
+      "geralmente",
       "emissões de carbono",
-      "caribu (rena)"
+      "arrecadação de fundos"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "sazonal",
-      "alguns / poucos",
-      "sob pressão"
+      "nunca",
+      "trabalhadores por contrato (servidão)"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"long-haul\" significa…",
      "emoji": "",
      "ops": [
-      "um conselho",
-      "ter (uma ideia)",
+      "surtar",
+      "se meter em encrenca",
       "de longa distância"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"excess\" significa…",
      "emoji": "",
      "ops": [
-      "foi bom conversar com você",
+      "pilão",
       "excesso",
-      "muito quente"
+      "me deixa louco"
      ],
      "c": 1
     }
@@ -140,9 +140,9 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Shifani, Todd",
+      "Julia, Todd",
       "Aimee, Paul",
-      "Aimee, Katie"
+      "Crystal, George"
      ],
      "c": 1
     },
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido",
-      "Inglaterra, EUA",
-      "Reino Unido, EUA"
+      "EUA",
+      "Rep. Tcheca, África do Sul (?)"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "relacionamentos",
-      "hotel",
+      "animais",
+      "celebridades",
       "meio ambiente"
      ],
      "c": 2

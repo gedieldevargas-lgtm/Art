@@ -92,9 +92,9 @@
      "p": "\"on-the-fence\" significa…",
      "emoji": "",
      "ops": [
-      "equivalente",
+      "optar por / tentar",
       "em cima do muro",
-      "fértil"
+      "em si"
      ],
      "c": 1
     },
@@ -103,8 +103,8 @@
      "emoji": "",
      "ops": [
       "não é meu forte",
-      "floresceu / prosperou",
-      "com certeza"
+      "anormal / bizarro",
+      "idade certa"
      ],
      "c": 0
     },
@@ -112,8 +112,8 @@
      "p": "\"change the subject\" significa…",
      "emoji": "",
      "ops": [
-      "isolado",
-      "concordo com você",
+      "trabalhadores por contrato (servidão)",
+      "moleza",
       "mudar de assunto"
      ],
      "c": 2
@@ -122,9 +122,9 @@
      "p": "\"just to clarify\" significa…",
      "emoji": "",
      "ops": [
-      "pista de obstáculos",
+      "amante de comida",
       "só para esclarecer",
-      "o coração de"
+      "optar por / tentar"
      ],
      "c": 1
     }
@@ -140,7 +140,7 @@
      "p": "Quem conversa nesta lição?",
      "emoji": "",
      "ops": [
-      "Ginger, Nabeel",
+      "Jin, Adam",
       "Shirley, Yuri",
       "Rufei, Todd"
      ],
@@ -151,8 +151,8 @@
      "emoji": "",
      "ops": [
       "Reino Unido, Itália",
-      "Nigéria, Reino Unido",
-      "EUA, Paquistão"
+      "Nova Zelândia, EUA",
+      "Japão, Canadá"
      ],
      "c": 0
     },
@@ -160,8 +160,8 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "animais",
-      "choque cultural",
+      "folclore",
+      "sono e sonhos",
       "países"
      ],
      "c": 2

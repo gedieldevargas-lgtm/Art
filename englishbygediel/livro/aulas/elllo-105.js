@@ -15,7 +15,7 @@
    "Falar 3 frases suas sobre o assunto."
   ],
   "mapa": {
-   "centro": "First Memories of Cana",
+   "centro": "First Memories of Canada",
    "ramos": [
     {
      "t": "Ouça",
@@ -93,8 +93,8 @@
      "emoji": "",
      "ops": [
       "traumático",
-      "uma grande provação",
-      "pessoa de sono pesado"
+      "coisa que irrita",
+      "surtar"
      ],
      "c": 0
     },
@@ -102,8 +102,8 @@
      "p": "\"initially\" significa…",
      "emoji": "",
      "ops": [
-      "desvantagem",
-      "andar dentro d'água",
+      "fuga de cérebros",
+      "percurso / campo",
       "inicialmente"
      ],
      "c": 2
@@ -112,9 +112,9 @@
      "p": "\"in the midst of\" significa…",
      "emoji": "",
      "ops": [
-      "um nerd / bobão",
+      "certificado",
       "no meio de",
-      "aguentar / lidar com"
+      "pressão"
      ],
      "c": 1
     },
@@ -123,8 +123,8 @@
      "emoji": "",
      "ops": [
       "floresceu / prosperou",
-      "herói popular",
-      "conotação negativa"
+      "celebração / festa",
+      "em si"
      ],
      "c": 0
     }
@@ -141,8 +141,8 @@
      "emoji": "",
      "ops": [
       "Abidemi, Jeremy",
-      "Rebecca, Todd",
-      "Shantel, Todd"
+      "Shirley, Yuri",
+      "Melissa, Doron"
      ],
      "c": 0
     },
@@ -150,8 +150,8 @@
      "p": "De onde são os sotaques que você ouve?",
      "emoji": "",
      "ops": [
-      "EUA, Paquistão",
-      "Reino Unido",
+      "Tailândia, EUA",
+      "Nepal, EUA",
       "Nigéria, Canadá"
      ],
      "c": 2
@@ -160,9 +160,9 @@
      "p": "Sobre o que eles conversam?",
      "emoji": "",
      "ops": [
-      "sociedade",
+      "trabalho",
       "migração",
-      "rotina"
+      "tecnologia"
      ],
      "c": 1
     }
