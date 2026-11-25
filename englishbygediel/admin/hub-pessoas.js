@@ -12,7 +12,7 @@
   const soNum = t => String(t || '').replace(/\D/g, '');
   const tel = t => { let n = soNum(t); if (!n) return ''; if (n.length <= 11) n = '55' + n; return n; };
   const insta = t => { const s = String(t || '').trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i, '').replace(/[/?].*$/, '').replace(/^@/, ''); return s ? '@' + s.toLowerCase() : ''; };
-  const FONTES = { programa: 'Programa (chat)', mentoria: 'Mentoria particular', catalogo: 'Catálogo antigo', compra: 'Comprou', maratona: 'Maratona' };
+  const FONTES = { programa: 'Programa (chat)', mentoria: 'Mentoria particular', catalogo: 'Catálogo antigo', eom: 'English on Mission', compra: 'Comprou', maratona: 'Maratona' };
   const NOMES_MODO = Object.fromEntries((window.EBG && window.EBG.modos || []).map(m => [m.id, m.nome]));
   let pessoas = [], eventosPorVisitante = new Map(), marcas = {};
 
@@ -33,7 +33,7 @@
     marcas = Object.fromEntries(((mc && mc.data) || []).map(m => [m.chave, m]));
     const [prog, ment, cat, vend, evs, mara] = await Promise.all([
       ler('leads_programa'), ler('leads_mentoria'), ler('leads', 'id,created_at,nome,whatsapp,instagram,email,objetivo,origem'),
-      ler('vendas', 'created_at,pedido,status,produto,valor,nome,email,whatsapp,instagram,utm_source,pago_em'),
+      ler('vendas', 'created_at,pedido,status,evento,produto,valor,nome,email,whatsapp,instagram,utm_source,pago_em'),
       ler('hub_eventos', 'created_at,visitante,tipo,item,rotulo,modo', 50000),
       ler('maratonas_inscricoes', 'created_at,maratona,nome,whatsapp,email,instagram,nivel,objetivo,visitante')
     ]);
@@ -62,7 +62,7 @@
     }
     prog.linhas.forEach(r => somar('programa', r));
     ment.linhas.forEach(r => somar('mentoria', r));
-    cat.linhas.forEach(r => somar('catalogo', r, { objetivos: NOMES_MODO[r.objetivo] || r.objetivo }));
+    cat.linhas.forEach(r => somar(/^EOM|captador EOM/i.test(String(r.origem || '')) ? 'eom' : 'catalogo', r, { objetivos: NOMES_MODO[r.objetivo] || r.objetivo }));
     vend.linhas.forEach(r => { const p = somar('compra', r); p.compras.push(r); });
     mara.linhas.forEach(r => { const mm = window.EBG_MARATONAS && window.EBG_MARATONAS.porId(r.maratona); somar('maratona', r, { objetivos: r.objetivo, maratona: mm ? mm.nome + ' · ' + mm.edicao : r.maratona }); });
 
@@ -79,6 +79,7 @@
       p.compras.forEach(c => c.produto && cont.set(c.produto, (cont.get(c.produto) || 0) + 5));
       p.registros.forEach(r => { if (r.fonte === 'maratona') { const k = 'Maratona: ' + r.maratona; cont.set(k, (cont.get(k) || 0) + 6); } });
       p.interesses = [...cont.entries()].sort((a, b) => b[1] - a[1]).map(x => x[0]).slice(0, 8);
+      p.cancelou = p.compras.some(c => /cancel|refund|charge/i.test((c.status || '') + ' ' + (c.evento || '')));
       p.gasto = p.compras.filter(c => c.status === 'paid' || c.status === 'approved').reduce((a, c) => a + Number(c.valor || 0), 0);
     });
     pessoas = lista.sort((a, b) => (b.ultimo || '').localeCompare(a.ultimo || ''));
@@ -114,7 +115,7 @@
         <td>${p.whatsapp ? `<a class="link" target="_blank" rel="noopener" href="https://wa.me/${p.whatsapp}" data-sem-abrir data-marca-whats="tel:${esc(p.whatsapp)}">${esc(p.whatsapp)}</a>` : ''}${p.email ? `<small>${esc(p.email)}</small>` : ''}${p.instagram ? `<small><a class="link" target="_blank" rel="noopener" href="https://instagram.com/${esc(p.instagram.slice(1))}" data-sem-abrir>${esc(p.instagram)}</a></small>` : ''}</td>
         <td>${[...p.fontes].map(x => `<span class="hub-tag ${x}">${esc(FONTES[x])}</span>`).join(' ')}</td>
         <td>${p.interesses.slice(0, 4).map(x => `<span class="chip-int">${esc(x)}</span>`).join(' ')}</td>
-        <td>${p.gasto ? real(p.gasto) : '—'}</td><td>${data(p.ultimo)}</td></tr>`).join('')}</tbody></table></div>`
+        <td>${p.gasto ? real(p.gasto) : '—'}${p.cancelou ? ' <span class="hub-tag" style="background:#fee2e2;color:#b91c1c">Cancelou</span>' : ''}</td><td>${data(p.ultimo)}</td></tr>`).join('')}</tbody></table></div>`
       : '<p class="vazio">Ninguém com esses filtros.</p>';
   }
 

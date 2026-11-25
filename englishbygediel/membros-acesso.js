@@ -2,6 +2,8 @@
    Precisa do supabase/membros.sql rodado no projeto dos membros. Sem ele, tudo fica como antes (sem cadeado). */
 (function(){
   var sb=window._sb||_sb, PANES_PROGRAMA=['maratona','modulos','indicar'];
+  // link direto do "obrigado": membros.html?ir=materiais abre direto na área do produto, mesmo depois do login
+  try{var _ir=new URLSearchParams(location.search).get('ir');if(_ir)sessionStorage.setItem('ebg_ir',_ir.replace(/[^\w-]/g,''));}catch(e){}
   var S={pronto:false,ok:false,admin:false,programa:false,cfg:{programa:[],jogosGratis:[],checkout:'',eom:[],checkoutEom:''},mats:[],compras:[],meta:''};
   var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
   // o "produto" pode ter vários trechos separados por vírgula (ex.: "Bíblia Linear, English on Mission")
@@ -143,6 +145,41 @@
     }
   });
 
+  // ───── prazo dos programas: 6 meses a partir do pagamento (Maratona: o prazo da turma). E-book/material avulso e Mission não vencem aqui.
+  //  cfg.validade = {programaMeses:6, maratonaMeses:10, maratonaTrechos:['nome do produto da maratona']}
+  function aplicarValidade(){
+    var V=Object.assign({programaMeses:6,maratonaMeses:10,maratonaTrechos:[]},S.cfg.validade||{});
+    var prog=(S.cfg.programa||[]).concat(['Plano Inteligente','Plano Gênio']).map(function(x){return String(x).toLowerCase();});
+    var mara=(V.maratonaTrechos||[]).map(function(x){return String(x).toLowerCase();});
+    var casa=function(c,l){var n=(c.produto||'').toLowerCase();return l.some(function(t){return t&&n.indexOf(t)>=0;});};
+    var agora=Date.now();S.expiradas=[];
+    S.compras=S.compras.filter(function(c){
+      if(String(c.pedido||'').indexOf('manual-')===0)return true;            // liberação na mão não vence sozinha
+      var m=casa(c,mara)?V.maratonaMeses:casa(c,prog)?V.programaMeses:0;
+      if(!m||!c.created_at)return true;
+      var fim=new Date(c.created_at);fim.setMonth(fim.getMonth()+m);
+      if(agora<=fim.getTime())return true;
+      S.expiradas.push({produto:c.produto,fim:fim});return false;
+    });
+    if(S.expiradas.length&&!S.compras.some(function(c){return casa(c,prog)||casa(c,mara);}))S.meta='';  // o texto antigo do cadastro não pode reabrir o que venceu
+  }
+  function avisarVencido(){
+    if(!S.expiradas||!S.expiradas.length)return;
+    try{if(sessionStorage.getItem('ebg_venc'))return;sessionStorage.setItem('ebg_venc','1');}catch(e){}
+    var x=S.expiradas[0],d=x.fim.toLocaleDateString('pt-BR');
+    ov.innerHTML='<div class="pw"><div style="font-size:40px">⏳</div><h3>Seu acesso ao '+esc(x.produto)+' terminou</h3>'
+      +'<p>O prazo acabou em '+esc(d)+'. Seus materiais e e-books continuam com você. Pra voltar às aulas e lives do programa, é só renovar.</p>'
+      +'<a class="ir" target="_blank" rel="noopener" href="'+esc(S.cfg.checkout||'https://pay.kiwify.com.br/CohRPDI')+'">Renovar meu acesso</a><button class="nao" data-fechar>Agora não</button></div>';
+    ov.classList.add('open');
+  }
+  function irDireto(){
+    var d;try{d=sessionStorage.getItem('ebg_ir');}catch(e){}
+    if(!d||!S.pronto)return;
+    try{sessionStorage.removeItem('ebg_ir');}catch(e){}
+    var pill=document.querySelector('.nav-pill[onclick*="\''+d+'\'"]');
+    setTimeout(function(){try{window.goTo(d,pill||document.querySelector('.nav-pill'));}catch(e){}},400);
+  }
+
   // ───── carregar dados do aluno
   async function carregar(){
     var u=(await sb.auth.getUser()).data.user;if(!u){S.ok=false;return;}
@@ -154,11 +191,12 @@
     S.admin=r[3].data===true;
     S.todasCompras=r[1].data||[];
     S.compras=S.todasCompras.filter(function(c){return (c.email||'').toLowerCase()===(u.email||'').toLowerCase();});
+    aplicarValidade();
     S.mats=r[2].data||[];
     S.programa=(S.cfg.programa||[]).concat(['Plano Inteligente']).some(tem);   // turma da maratona entra com produto "Plano Inteligente"
     S.tudo=((S.cfg.planos&&S.cfg.planos.tudo)||['Plano Gênio','Plano Instituição']).some(tem);   // Gênio / Instituição: libera tudo
     if(S.tudo)S.programa=true;
-    S.pronto=true;pintar();
+    S.pronto=true;pintar();avisarVencido();irDireto();
   }
   function pintar(){
     criarDev();marcarNav();renderGames();renderMat();
