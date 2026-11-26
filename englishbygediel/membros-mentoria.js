@@ -305,5 +305,11 @@
   }, 600);
   setInterval(function () { if (ini && !document.hidden && (tem())) pingar(); }, 25000);
   document.addEventListener('visibilitychange', function () { if (ini && !document.hidden) pingar(); });
-  window.EBG_MENTORIA = { registrar: registrar, recarregar: function () { return carregar().then(desenhar); } };
+  window.EBG_MENTORIA = {
+    registrar: registrar, recarregar: function () { return carregar().then(desenhar); },
+    // usado pelo Modo professor (membros-modos.js)
+    dados: function () { return { alunos: M.alunos, enc: M.enc, pres: M.pres, ok: M.ok }; },
+    minhaSala: function () { abrirSala(SALA + '?prof', 'Minha sala'); },
+    decidir: decidir, avatar: avatar, dt: dt, fixos: fixos, encDe: encDe, feitos: feitos, on: on
+  };
 })();
