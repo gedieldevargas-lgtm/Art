@@ -1,6 +1,7 @@
 -- MENTORIAS COM SALA FIXA (particular, casal e turma).
 -- A sala de vídeo é a do site da Central (gedielcentral.netlify.app/sala.html); aqui ficam só os cadastros.
--- O admin (tabela admins) cria e edita tudo pelo painel /admin, aba "Mentorias".
+-- RODE NO PROJETO DA ÁREA DE MEMBROS ("metodo-inteligente"), onde os alunos fazem login.
+-- O admin (tabela admins) cria e edita tudo na área de membros → Admin → aba "🎥 Mentorias".
 -- Cada aluno só lê as mentorias em que o e-mail dele está na lista. Pode rodar mais de uma vez.
 -- Só precisa do supabase/admin.sql (usa is_admin()); não depende do membros.sql.
 

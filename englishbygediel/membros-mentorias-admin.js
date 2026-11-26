@@ -1,12 +1,11 @@
-/* Aba "Mentorias" do painel: cada mentoria (particular, casal ou turma) tem uma SALA FIXA
+/* Aba "🎥 Mentorias" na ADMINISTRAÇÃO DA ÁREA DE MEMBROS: cada mentoria (particular, casal ou turma) tem uma SALA FIXA
    com foto, dias e horário, os alunos (por e-mail) e o link que o aluno usa.
+   · Usa o mesmo login (admin) da área de membros (window._sb, projeto "metodo-inteligente").
    · A sala de vídeo é a do site da Central (SITE/sala.html); aqui só se cadastra e se abre.
-   · O aluno vê a mentoria dele na área de membros (membros-mentorias.js).
-   · Tabela: supabase/mentorias-salas.sql. O link do aluno é gerado na primeira vez, pedindo a senha do professor da sala. */
+   · O aluno vê a mentoria dele na home (membros-mentorias.js).
+   · Tabela: supabase/mentorias-salas.sql. O link do aluno é gerado na 1ª vez, pedindo a senha do professor da sala. */
 (() => {
-  const A = window.EBG_ADMIN;
-  if (!A) return;
-  const { sb } = A;
+  const sbf = () => window._sb;   // o mesmo login (admin) da área de membros
   const SITE = 'https://gedielcentral.netlify.app';
   const $ = (s, el = document) => el.querySelector(s);
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -19,26 +18,26 @@
   const css = document.createElement('style');
   css.textContent = `
   .mn-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px;margin:16px 0}
-  .mn-card{display:flex;gap:14px;background:var(--surface);border:1px solid var(--linha);border-radius:var(--raio);padding:16px}
+  .mn-card{display:flex;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px}
   .mn-card.off{opacity:.55}
-  .mn-av{width:64px;height:64px;flex:none;border-radius:50%;background:var(--surface-3) center/cover;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.15rem;color:var(--muted)}
+  .mn-av{width:64px;height:64px;flex:none;border-radius:50%;background:var(--surface2) center/cover;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.15rem;color:var(--fg2)}
   .mn-main{min-width:0;flex:1;display:grid;gap:5px;align-content:start}
   .mn-top{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.mn-top b{font-size:1rem}
-  .mn-tag{font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--surface-3)}
+  .mn-tag{font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--surface2)}
   .mn-hoje{font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:99px;background:#34d399;color:#052e1b}
-  .mn-quando{font-size:.88rem}.mn-al{font-size:.78rem;color:var(--muted);overflow-wrap:anywhere}
+  .mn-quando{font-size:.88rem}.mn-al{font-size:.78rem;color:var(--fg2);overflow-wrap:anywhere}
   .mn-btns{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
-  .mn-vazio{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--linha);border-radius:var(--raio)}
-  dialog#mnDlg{border:1px solid var(--linha);border-radius:var(--raio);background:var(--surface);color:inherit;padding:0;width:min(560px,94vw);max-height:92vh}
+  .mn-vazio{padding:28px;text-align:center;color:var(--fg2);border:1px dashed var(--border);border-radius:14px}
+  dialog#mnDlg{border:1px solid var(--border);border-radius:14px;background:var(--surface);color:inherit;padding:0;width:min(560px,94vw);max-height:92vh}
   dialog#mnDlg::backdrop{background:rgba(0,0,0,.55)}
   #mnDlg form{display:grid;gap:12px;padding:20px;max-height:92vh;overflow:auto}
-  #mnDlg h3{margin:0;font:400 1.4rem/1.2 var(--serif)}
-  #mnDlg label{display:grid;gap:5px;font-size:.82rem;color:var(--muted)}
-  #mnDlg input[type=text],#mnDlg input[type=time],#mnDlg select,#mnDlg textarea{background:var(--surface-2);border:1px solid var(--linha);border-radius:8px;padding:9px 10px;color:inherit;font:inherit;font-size:.9rem}
+  #mnDlg h3{margin:0;font-size:1.15rem;font-weight:800}
+  #mnDlg label{display:grid;gap:5px;font-size:.82rem;color:var(--fg2)}
+  #mnDlg input[type=text],#mnDlg input[type=time],#mnDlg select,#mnDlg textarea{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:9px 10px;color:inherit;font:inherit;font-size:.9rem}
   #mnDlg textarea{min-height:84px;resize:vertical}
   #mnDlg input[type=checkbox]{width:16px;height:16px;min-width:0;padding:0;margin:0;flex:none}
   .mn-dias{display:flex;gap:6px;flex-wrap:wrap}
-  #mnDlg .mn-dias label{display:flex;flex-direction:row;align-items:center;gap:6px;background:var(--surface-2);border:1px solid var(--linha);border-radius:99px;padding:6px 12px;cursor:pointer;color:inherit}
+  #mnDlg .mn-dias label{display:flex;flex-direction:row;align-items:center;gap:6px;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:6px 12px;cursor:pointer;color:inherit}
   #mnDlg label.mn-check{display:flex;flex-direction:row;align-items:center;gap:8px;color:inherit;font-size:.88rem}
   .mn-foto{display:flex;gap:12px;align-items:center}
   .mn-rodape{display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap;margin-top:4px}`;
@@ -50,7 +49,7 @@
     <h3 id="mnTit">Nova mentoria</h3>
     <label>Nome da mentoria<input type="text" id="mnNome" maxlength="120" placeholder="ex.: Camila, Evelyn & Rhian ou Turma Gabriel"></label>
     <label>Tipo<select id="mnTipo"><option value="particular">Particular (1 aluno)</option><option value="casal">Casal</option><option value="turma">Turma</option></select></label>
-    <div><div style="font-size:.82rem;color:var(--muted);margin-bottom:6px">Dias fixos da semana</div><div class="mn-dias" id="mnDias"></div></div>
+    <div><div style="font-size:.82rem;color:var(--fg2);margin-bottom:6px">Dias fixos da semana</div><div class="mn-dias" id="mnDias"></div></div>
     <label>Horário fixo<input type="time" id="mnHora"></label>
     <label>E-mails dos alunos (um por linha). Só eles veem esta sala no app.<textarea id="mnEmails" placeholder="aluno@email.com"></textarea></label>
     <label>Adicionar quem já comprou<select id="mnCompra"><option value="">— escolher e-mail —</option></select></label>
@@ -58,7 +57,7 @@
     <label>Nome da sala no endereço (não mude depois de mandar o link)<input type="text" id="mnSala" maxlength="40"></label>
     <label class="mn-check"><input type="checkbox" id="mnAtivo" checked> Mentoria ativa (aparece para os alunos)</label>
     <p class="erro" id="mnErro"></p>
-    <div class="mn-rodape"><button class="botao" type="button" id="mnCancela">Cancelar</button><button class="botao" type="submit" id="mnSalva">Salvar</button></div>
+    <div class="mn-rodape"><button class="admin-btn admin-btn-ghost" type="button" id="mnCancela">Cancelar</button><button class="admin-btn admin-btn-primary" type="submit" id="mnSalva">Salvar</button></div>
   </form>`;
   document.body.appendChild(dlg);
   $('#mnDias').innerHTML = ORD.map(d => `<label><input type="checkbox" value="${d}"> ${D3[d]}</label>`).join('');
@@ -68,10 +67,10 @@
 
   async function carregar() {
     $('#mnLista').innerHTML = '<p class="sub">Carregando…</p>'; aviso('');
-    const r = await sb.from('mi_mentorias').select('*').order('nome');
+    const r = await sbf().from('mi_mentorias').select('*').order('nome');
     if (r.error) { $('#mnLista').innerHTML = ''; aviso('Não consegui ler as mentorias: ' + r.error.message + ' (rodou o supabase/mentorias-salas.sql?)'); return; }
     linhas = r.data || []; desenhar();
-    const c = await sb.from('compras').select('email,produto').order('created_at', { ascending: false }).limit(3000);
+    const c = await sbf().from('compras').select('email,produto').order('created_at', { ascending: false }).limit(3000);
     compras = c.error ? [] : (c.data || []);
   }
 
@@ -87,7 +86,7 @@
         <div class="mn-top"><b>${esc(m.nome)}</b><span class="mn-tag">${TIPOS[m.tipo] || m.tipo}</span>${(m.dias || []).includes(hoje) ? '<span class="mn-hoje">hoje</span>' : ''}${m.ativo ? '' : '<span class="mn-tag">pausada</span>'}</div>
         <div class="mn-quando">${esc(dias || 'sem dias definidos')}${m.hora ? ' · ' + esc(m.hora) : ''}</div>
         <div class="mn-al">${esc(al)}</div>
-        <div class="mn-btns"><button class="botao" type="button" data-mn="entrar" data-id="${m.id}">▶ Entrar</button><button class="botao" type="button" data-mn="link" data-id="${m.id}">🔗 Link do aluno</button><button class="botao" type="button" data-mn="editar" data-id="${m.id}">Editar</button><button class="botao" type="button" data-mn="apagar" data-id="${m.id}">Remover</button></div>
+        <div class="mn-btns"><button class="admin-btn admin-btn-ghost admin-btn-sm" type="button" data-mn="entrar" data-id="${m.id}">▶ Entrar</button><button class="admin-btn admin-btn-ghost admin-btn-sm" type="button" data-mn="link" data-id="${m.id}">🔗 Link do aluno</button><button class="admin-btn admin-btn-ghost admin-btn-sm" type="button" data-mn="editar" data-id="${m.id}">Editar</button><button class="admin-btn admin-btn-ghost admin-btn-sm" type="button" data-mn="apagar" data-id="${m.id}">Remover</button></div>
       </div></div>`;
     }).join('');
   }
@@ -134,7 +133,7 @@
     const linha = { nome, tipo: $('#mnTipo').value, emails: emailsDe($('#mnEmails').value), dias: $$dias().filter(i => i.checked).map(i => +i.value), hora: $('#mnHora').value || null, foto: foto || null, sala, ativo: $('#mnAtivo').checked };
     if (ed && ed.sala !== sala) linha.k = null;      // endereço novo = link novo
     $('#mnSalva').disabled = true;
-    const r = ed ? await sb.from('mi_mentorias').update(linha).eq('id', ed.id) : await sb.from('mi_mentorias').insert(linha);
+    const r = ed ? await sbf().from('mi_mentorias').update(linha).eq('id', ed.id) : await sbf().from('mi_mentorias').insert(linha);
     $('#mnSalva').disabled = false;
     if (r.error) { $('#mnErro').textContent = /duplicate|unique/i.test(r.error.message) ? 'Já existe uma sala com esse nome no endereço. Mude o nome da sala.' : 'Não salvou: ' + r.error.message; return; }
     dlg.close(); carregar();
@@ -148,7 +147,7 @@
       const r = await fetch(`${SITE}/api/sala?action=link&sala=${encodeURIComponent(m.sala)}&senha=${encodeURIComponent(senha)}`);
       const d = await r.json();
       if (!r.ok) { senha = ''; throw new Error(d.erro || 'erro ' + r.status); }
-      const u = await sb.from('mi_mentorias').update({ k: d.k }).eq('id', m.id);
+      const u = await sbf().from('mi_mentorias').update({ k: d.k }).eq('id', m.id);
       if (u.error) throw new Error(u.error.message);
       m.k = d.k; return linkAluno(m);
     } catch (e) { aviso('Não consegui gerar o link: ' + e.message); return ''; }
@@ -165,14 +164,33 @@
       try { await navigator.clipboard.writeText(u); aviso('✅ Link do aluno copiado: ' + u); } catch (e) { prompt('Copie o link do aluno:', u); }
     } else if (a === 'apagar') {
       if (confirm('Remover a mentoria "' + m.nome + '"? Os alunos deixam de ver esta sala.')) {
-        const r = await sb.from('mi_mentorias').delete().eq('id', m.id);
+        const r = await sbf().from('mi_mentorias').delete().eq('id', m.id);
         if (r.error) aviso('Não removeu: ' + r.error.message); else carregar();
       }
     }
   });
-  const nova = $('#mnNova'), rec = $('#mnRecarregar');
-  if (nova) nova.addEventListener('click', () => form(null));
-  if (rec) rec.addEventListener('click', carregar);
+  /* ---------- a aba "Mentorias" na administração (mesmo jeito das outras abas) ---------- */
+  function montarAba() {
+    const tabs = document.querySelector('.admin-tabs'), ref = document.getElementById('adm-modulos');
+    if (!tabs || !ref || document.getElementById('adm-mentorias') || typeof window.adminTab !== 'function') return false;
+    const b = document.createElement('button');
+    b.className = 'admin-tab'; b.textContent = '🎥 Mentorias'; b.setAttribute('onclick', "adminTab('mentorias',this)"); tabs.appendChild(b);
+    const p = document.createElement('div');
+    p.className = 'admin-panel'; p.id = 'adm-mentorias';
+    p.innerHTML = `<div class="admin-form">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:6px"><div class="admin-form-title" style="margin:0">🎥 Mentorias · salas fixas</div>
+        <div style="display:flex;gap:8px"><button class="admin-btn admin-btn-primary" type="button" id="mnNova">+ Nova mentoria</button><button class="admin-btn admin-btn-ghost" type="button" id="mnRecarregar">Atualizar</button></div></div>
+      <div style="font-size:12px;color:var(--fg2);line-height:1.7">Cada mentoria (particular, casal ou turma) tem uma sala fixa na nossa sala de vídeo, com foto, dias e horário. Cadastre o e-mail dos alunos: eles veem a mentoria deles aqui na home, com o botão de entrar. <b>🔗 Link do aluno</b> gera o link para mandar por fora; <b>▶ Entrar</b> abre a sala como professor.</div>
+      <p class="erro" id="mnAviso" style="color:#f87171;font-size:12px;margin:8px 0 0"></p></div>
+      <div class="mn-grid" id="mnLista"></div>`;
+    ref.insertAdjacentElement('afterend', p);
+    $('#mnNova').addEventListener('click', () => form(null));
+    $('#mnRecarregar').addEventListener('click', carregar);
+    const tabAnt = window.adminTab;
+    window.adminTab = function (tab, btn) { const r = tabAnt.apply(this, arguments); if (tab === 'mentorias') carregar(); return r; };
+    return true;
+  }
+  if (!montarAba()) { const t = setInterval(() => { if (montarAba()) clearInterval(t); }, 600); setTimeout(() => clearInterval(t), 60000); }
 
   window.EBG_MENTORIAS = { abrir: carregar };
 })();
