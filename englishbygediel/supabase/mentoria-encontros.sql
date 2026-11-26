@@ -28,3 +28,12 @@ drop policy if exists ment_en_pedir on public.mi_mentoria_encontros;
 create policy ment_en_pedir on public.mi_mentoria_encontros for insert with check (
   status = 'pedido' and lower(coalesce(email, '')) = lower(coalesce(auth.jwt() ->> 'email', ''))
   and exists (select 1 from public.mi_mentorias m where m.id = mentoria_id and m.ativo and lower(coalesce(auth.jwt() ->> 'email', '')) = any(m.emails)));
+
+-- dados que SÓ O ADMIN anota (nível, objetivo, anotações). Fica em tabela separada de propósito: o aluno lê a linha dele em mi_mentorias, então anotação ali vazaria.
+create table if not exists public.mi_mentoria_notas (
+  mentoria_id uuid primary key references public.mi_mentorias(id) on delete cascade,
+  nivel text, objetivo text, notas text
+);
+alter table public.mi_mentoria_notas enable row level security;
+drop policy if exists ment_nt_adm on public.mi_mentoria_notas;
+create policy ment_nt_adm on public.mi_mentoria_notas for all using (public.is_admin()) with check (public.is_admin());
