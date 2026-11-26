@@ -4,7 +4,7 @@
 const CENTRAL = process.env.CENTRAL_URL || 'https://gedielcentral.netlify.app';
 exports.handler = async (event) => {
   const ids = String((event.queryStringParameters || {}).salas || '').toLowerCase().split(',')
-    .map((s) => s.trim().replace(/[^a-z0-9-]/g, '')).filter(Boolean).slice(0, 16);
+    .map((s) => s.trim().replace(/[^a-z0-9-]/g, '')).filter(Boolean).slice(0, 60);
   const out = {};
   await Promise.all(ids.map(async (id) => {
     try {
