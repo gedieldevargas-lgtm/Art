@@ -285,13 +285,14 @@
     var d = new Date(); sb.from('maratona_eventos').upsert({ email: EU.email, tipo: 'jogo', ref: String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0') }, { onConflict: 'email,tipo,ref,dia', ignoreDuplicates: true }).then(function () {});
   }, 60000);
 
+  var ADM_OCULTO = /^(gedieldevargas|vargasgediel)@gmail\.com$/i;   // o professor nunca aparece no placar
   var RK = { ciclo: null, dados: null, erro: '' };
   async function ranking(n) {
     var c = CIC.filter(function (x) { return x.n === n; })[0]; if (!c) return;
     RK.ciclo = n; RK.dados = null; RK.erro = ''; desenhar();
     var r = await sb.rpc('maratona_ranking', { p_ciclo: n, p_de: c.de, p_ate: c.ate });
     if (r.error) RK.erro = SEM_TABELA(r.error) || /function/i.test(r.error.message) ? 'O ranking liga assim que o Gediel rodar o SQL novo no Supabase.' : r.error.message;
-    RK.dados = r.data || []; desenhar();
+    RK.dados = (r.data || []).filter(function (x) { return !ADM_OCULTO.test(x.email || ''); }); desenhar();
   }
   function htmlRanking() {
     var h = '<div class="mt-tabs">' + CIC.filter(function (c) { return hojeS >= c.de; }).map(function (c) { return '<button data-mt-rk="' + c.n + '"' + (RK.ciclo === c.n ? ' class="on"' : '') + '>Ciclo ' + c.n + '</button>'; }).join('') + '</div>';
@@ -645,6 +646,7 @@
         if (!c) return null;
         var r = await sb.rpc('maratona_ranking', { p_ciclo: c.n, p_de: c.de, p_ate: c.ate });
         if (r.error || !r.data) return { ciclo: c.n, pos: 0, total: 0, pts: 0, prog: progresso(EU.feitos || {}, null) };
+        r.data = r.data.filter(function (x) { return !ADM_OCULTO.test(x.email || ''); });
         var meu = -1; r.data.forEach(function (x, k) { if (x.email === EU.email) meu = k; });
         return { ciclo: c.n, pos: meu + 1, total: r.data.length, pts: meu >= 0 ? r.data[meu].pontos : 0,
                  falta: meu > 0 ? r.data[meu - 1].pontos - r.data[meu].pontos + 1 : 0, prog: progresso(EU.feitos || {}, null) };

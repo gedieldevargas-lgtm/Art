@@ -101,7 +101,7 @@ create policy eventos_admin on public.maratona_eventos for delete to authenticat
 create or replace function public.maratona_ranking(p_ciclo int, p_de date, p_ate date)
 returns table (email text, nome text, pontos int, dias int, aulas int, marcos int, entregas int, comentarios int, quiz int, jogos int, posts int)
 language sql stable security definer set search_path = public as $$
-  with m as (select lower(mm.email) email, coalesce(nullif(mm.nome,''), split_part(mm.email,'@',1)) nome from maratona_membros mm),
+  with m as (select lower(mm.email) email, coalesce(nullif(mm.nome,''), split_part(mm.email,'@',1)) nome from maratona_membros mm where not exists (select 1 from admins a where lower(a.email) = lower(mm.email))),
   ev as (select lower(e.email) email, e.tipo, e.ref, e.dia from maratona_eventos e where e.dia between p_de and p_ate),
   dd as (select ev.email, count(distinct ev.dia) n from ev where tipo='acesso' group by 1),
   au as (select ev.email, count(distinct ev.ref) n from ev where tipo='aula' group by 1),
@@ -254,7 +254,7 @@ create policy eventos_grava on public.maratona_eventos for insert to authenticat
 create or replace function public.maratona_ranking(p_ciclo int, p_de date, p_ate date)
 returns table (email text, nome text, pontos int, dias int, aulas int, marcos int, entregas int, comentarios int, quiz int, jogos int, posts int)
 language sql stable security definer set search_path = public as $$
-  with m as (select lower(mm.email) email, coalesce(nullif(mm.nome,''), split_part(mm.email,'@',1)) nome from maratona_membros mm where mm.status = 'aprovado'),
+  with m as (select lower(mm.email) email, coalesce(nullif(mm.nome,''), split_part(mm.email,'@',1)) nome from maratona_membros mm where mm.status = 'aprovado' and not exists (select 1 from admins a where lower(a.email) = lower(mm.email))),
   ev as (select lower(e.email) email, e.tipo, e.ref, e.dia from maratona_eventos e where e.dia between p_de and p_ate),
   dd as (select ev.email, count(distinct ev.dia) n from ev where tipo='acesso' group by 1),
   au as (select ev.email, count(distinct ev.ref) n from ev where tipo='aula' group by 1),
