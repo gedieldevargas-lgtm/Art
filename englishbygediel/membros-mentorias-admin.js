@@ -13,7 +13,9 @@
   const TIPOS = { particular: 'Particular', casal: 'Casal', turma: 'Turma' };
   const slug = t => String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40);
   const emailsDe = txt => [...new Set(String(txt || '').toLowerCase().split(/[\s,;]+/).filter(e => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)))];
-  let linhas = [], compras = [], senha = '', ed = null, foto = '';
+  let linhas = [], compras = [], senha = '', ed = null, foto = '', carregado = false;
+  const central = () => { try { if (window.EBG_MENTORIA && window.EBG_MENTORIA.recarregar) window.EBG_MENTORIA.recarregar(); } catch (e) {} };
+  const tokenAdmin = async () => { try { const r = await sbf().auth.getSession(); return (r.data && r.data.session && r.data.session.access_token) || ''; } catch (e) { return ''; } };
 
   const css = document.createElement('style');
   css.textContent = `
@@ -52,6 +54,7 @@
     <div><div style="font-size:.82rem;color:var(--fg2);margin-bottom:6px">Dias fixos da semana</div><div class="mn-dias" id="mnDias"></div></div>
     <label>Horário fixo<input type="time" id="mnHora"></label>
     <label>E-mails dos alunos (um por linha). Só eles veem esta sala no app.<textarea id="mnEmails" placeholder="aluno@email.com"></textarea></label>
+    <label>Escolher aluno da plataforma (nome + foto)<select id="mnAluno"><option value="">— carregando alunos… —</option></select></label>
     <label>Adicionar quem já comprou<select id="mnCompra"><option value="">— escolher e-mail —</option></select></label>
     <div class="mn-foto"><span class="mn-av" id="mnPrev"></span><label style="flex:1">Foto<input type="file" id="mnFoto" accept="image/*"></label></div>
     <label>Nome da sala no endereço (não mude depois de mandar o link)<input type="text" id="mnSala" maxlength="40"></label>
@@ -69,7 +72,7 @@
     $('#mnLista').innerHTML = '<p class="sub">Carregando…</p>'; aviso('');
     const r = await sbf().from('mi_mentorias').select('*').order('nome');
     if (r.error) { $('#mnLista').innerHTML = ''; aviso('Não consegui ler as mentorias: ' + r.error.message + ' (rodou o supabase/mentorias-salas.sql?)'); return; }
-    linhas = r.data || []; desenhar();
+    linhas = r.data || []; carregado = true; desenhar();
     const c = await sbf().from('compras').select('email,produto').order('created_at', { ascending: false }).limit(3000);
     compras = c.error ? [] : (c.data || []);
   }
@@ -86,7 +89,7 @@
         <div class="mn-top"><b>${esc(m.nome)}</b><span class="mn-tag">${TIPOS[m.tipo] || m.tipo}</span>${(m.dias || []).includes(hoje) ? '<span class="mn-hoje">hoje</span>' : ''}${m.ativo ? '' : '<span class="mn-tag">pausada</span>'}</div>
         <div class="mn-quando">${esc(dias || 'sem dias definidos')}${m.hora ? ' · ' + esc(m.hora) : ''}</div>
         <div class="mn-al">${esc(al)}</div>
-        <div class="mn-btns"><button class="admin-btn admin-btn-ghost admin-btn-sm" type="button" data-mn="entrar" data-id="${m.id}">▶ Entrar</button><button class="admin-btn admin-btn-ghost admin-btn-sm" type="button" data-mn="link" data-id="${m.id}">🔗 Link do aluno</button><button class="admin-btn admin-btn-ghost admin-btn-sm" type="button" data-mn="editar" data-id="${m.id}">Editar</button><button class="admin-btn admin-btn-ghost admin-btn-sm" type="button" data-mn="apagar" data-id="${m.id}">Remover</button></div>
+        <div class="mn-btns"><button class="admin-btn admin-btn-ghost admin-btn-sm" type="button" data-mn="entrar" data-id="${m.id}">▶ Entrar</button><button class="admin-btn admin-btn-ghost admin-btn-sm" type="button" data-mn="link" data-id="${m.id}">🔗 Link do aluno</button><button class="admin-btn admin-btn-ghost admin-btn-sm" type="button" data-mn="editar" data-id="${m.id}">Editar</button><button class="admin-btn admin-btn-ghost admin-btn-sm" type="button" data-mn="status" data-id="${m.id}">${m.ativo ? '⏸ Pausar' : '▶ Reativar'}</button><button class="admin-btn admin-btn-ghost admin-btn-sm" type="button" data-mn="apagar" data-id="${m.id}">Remover</button></div>
       </div></div>`;
     }).join('');
   }
@@ -103,8 +106,50 @@
     const vistos = new Set(), op = [];
     compras.forEach(c => { const e = String(c.email || '').toLowerCase(); if (e && !vistos.has(e)) { vistos.add(e); op.push(`<option value="${esc(e)}">${esc(e)}${c.produto ? ' · ' + esc(c.produto) : ''}</option>`); } });
     $('#mnCompra').innerHTML = '<option value="">— escolher e-mail —</option>' + op.join('');
+    alunosCarregar().then(preencherAlunos);
     dlg.showModal();
   }
+  /* alunos da plataforma (mesma lista da aba Alunos) — com nome e foto */
+  let alunos = null;
+  const fotoDe = u => { const m = (u && u.user_metadata) || {}; return m.avatar_url || m.picture || m.foto || (m.mi && m.mi.foto) || ''; };
+  const nomeDe = u => { const m = (u && u.user_metadata) || {}; return m.full_name || m.name || m.nome || String((u && u.email) || '').split('@')[0]; };
+  async function alunosCarregar() {
+    if (alunos) return alunos;
+    try {
+      const ses = (await sbf().auth.getSession()).data.session;
+      const r = await fetch('/.netlify/functions/membros-admin', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + (ses ? ses.access_token : '') }, body: JSON.stringify({ path: '/auth/v1/admin/users?page=1&per_page=1000', method: 'GET' }) });
+      const d = await r.json();
+      alunos = (d.users || []).filter(u => u.email).sort((x, y) => nomeDe(x).localeCompare(nomeDe(y)));
+    } catch (e) { alunos = []; }
+    return alunos;
+  }
+  function preencherAlunos() {
+    const el = $('#mnAluno'); if (!el) return;
+    el.innerHTML = '<option value="">— escolher aluno —</option>' + (alunos || []).map(u => `<option value="${esc(u.id)}">${esc(nomeDe(u))} · ${esc(u.email)}</option>`).join('');
+  }
+  $('#mnAluno').addEventListener('change', e => {
+    const u = (alunos || []).find(x => x.id === e.target.value); if (!u) return;
+    const em = String(u.email).toLowerCase(), lista = emailsDe($('#mnEmails').value); if (!lista.includes(em)) lista.push(em);
+    $('#mnEmails').value = lista.join('\n');
+    if (!$('#mnNome').value.trim()) { $('#mnNome').value = nomeDe(u); if (!ed && !$('#mnSala').dataset.manual) $('#mnSala').value = slug(nomeDe(u)); }
+    const f = fotoDe(u); if (f && !foto) { foto = f; $('#mnPrev').style.backgroundImage = `url(${f})`; $('#mnPrev').textContent = ''; }
+    e.target.value = '';
+  });
+  // um clique na aba Alunos: vira mentorado (cria a sala já com e-mail, nome e foto)
+  async function deAluno(id) {
+    if (!carregado) await carregar();
+    await alunosCarregar();
+    const u = (alunos || []).find(x => x.id === id); if (!u) return msg('Não achei esse aluno.');
+    const em = String(u.email).toLowerCase(), ja = linhas.find(m => (m.emails || []).map(x => String(x).toLowerCase()).includes(em));
+    if (ja) return msg('✅ ' + nomeDe(u) + ' já é mentorado (sala "' + ja.nome + '"). Veja na aba 🎥 Mentorias.');
+    let base = slug(nomeDe(u)) || 'aluno', sala = base, n = 2; while (linhas.some(m => m.sala === sala)) sala = base + '-' + n++;
+    const r = await sbf().from('mi_mentorias').insert({ nome: nomeDe(u), tipo: 'particular', emails: [em], dias: [], hora: null, foto: fotoDe(u) || null, sala, ativo: true });
+    if (r.error) return msg('Não consegui: ' + r.error.message);
+    await carregar(); central();
+    msg('✅ ' + nomeDe(u) + ' virou mentorado. Já aparece na Central das Mentorias — toque em ✎ Editar pra pôr dia e horário.');
+  }
+  function msg(t) { aviso(t); if (window.toast) toast(t, '#10b981'); else alert(t); }
+
   const $$dias = () => [...document.querySelectorAll('#mnDias input')];
 
   $('#mnCompra').addEventListener('change', e => {
@@ -136,21 +181,27 @@
     const r = ed ? await sbf().from('mi_mentorias').update(linha).eq('id', ed.id) : await sbf().from('mi_mentorias').insert(linha);
     $('#mnSalva').disabled = false;
     if (r.error) { $('#mnErro').textContent = /duplicate|unique/i.test(r.error.message) ? 'Já existe uma sala com esse nome no endereço. Mude o nome da sala.' : 'Não salvou: ' + r.error.message; return; }
-    dlg.close(); carregar();
+    dlg.close(); carregar(); central();
   });
 
   async function linkDe(m) {
     if (m.k) return linkAluno(m);
-    if (!senha) senha = prompt('Senha do professor da sala (a mesma que você usa para entrar na aula). Só pedimos uma vez:') || '';
-    if (!senha) return '';
-    try {
-      const r = await fetch(`${SITE}/api/sala?action=link&sala=${encodeURIComponent(m.sala)}&senha=${encodeURIComponent(senha)}`);
-      const d = await r.json();
-      if (!r.ok) { senha = ''; throw new Error(d.erro || 'erro ' + r.status); }
-      const u = await sbf().from('mi_mentorias').update({ k: d.k }).eq('id', m.id);
-      if (u.error) throw new Error(u.error.message);
-      m.k = d.k; return linkAluno(m);
-    } catch (e) { aviso('Não consegui gerar o link: ' + e.message); return ''; }
+    let k = '';
+    const tok = await tokenAdmin();                       // já está logado como admin: não precisa de senha
+    if (tok) { try { const r = await fetch(`${SITE}/api/sala?action=link&sala=${encodeURIComponent(m.sala)}`, { headers: { Authorization: 'Bearer ' + tok } }); const d = await r.json(); if (r.ok && d.k) k = d.k; } catch (e) {} }
+    if (!k) {                                            // plano B: senha do professor da sala
+      if (!senha) senha = prompt('Não consegui pelo seu login. Digite a senha do professor da sala (só pedimos uma vez):') || '';
+      if (!senha) return '';
+      try {
+        const r = await fetch(`${SITE}/api/sala?action=link&sala=${encodeURIComponent(m.sala)}&senha=${encodeURIComponent(senha)}`);
+        const d = await r.json();
+        if (!r.ok) { senha = ''; throw new Error(d.erro || 'erro ' + r.status); }
+        k = d.k;
+      } catch (e) { aviso('Não consegui gerar o link: ' + e.message); return ''; }
+    }
+    const u = await sbf().from('mi_mentorias').update({ k }).eq('id', m.id);
+    if (u.error) { aviso('Não consegui guardar o link: ' + u.error.message); return ''; }
+    m.k = k; return linkAluno(m);
   }
 
   document.addEventListener('click', async ev => {
@@ -158,17 +209,73 @@
     const m = linhas.find(x => x.id === b.dataset.id); if (!m) return;
     const a = b.dataset.mn;
     if (a === 'editar') form(m);
-    else if (a === 'entrar') window.open(`${SITE}/sala.html?sala=${encodeURIComponent(m.sala)}&prof`, '_blank', 'noopener');
+    else if (a === 'entrar') { const t = await tokenAdmin(); window.open(`${SITE}/sala.html?sala=${encodeURIComponent(m.sala)}&prof${t ? '#t=' + t : ''}`, '_blank', 'noopener'); }
+    else if (a === 'status') { const r = await sbf().from('mi_mentorias').update({ ativo: !m.ativo }).eq('id', m.id); if (r.error) aviso('Não salvou: ' + r.error.message); else { carregar(); central(); } }
     else if (a === 'link') {
       const u = await linkDe(m); if (!u) return;
       try { await navigator.clipboard.writeText(u); aviso('✅ Link do aluno copiado: ' + u); } catch (e) { prompt('Copie o link do aluno:', u); }
     } else if (a === 'apagar') {
       if (confirm('Remover a mentoria "' + m.nome + '"? Os alunos deixam de ver esta sala.')) {
         const r = await sbf().from('mi_mentorias').delete().eq('id', m.id);
-        if (r.error) aviso('Não removeu: ' + r.error.message); else carregar();
+        if (r.error) aviso('Não removeu: ' + r.error.message); else { carregar(); central(); }
       }
     }
   });
+  /* ---------- importar da Central (texto copiado pelo botão 📋 da Central) ---------- */
+  const css2 = document.createElement('style');
+  css2.textContent = `dialog#mnImp{border:1px solid var(--border);border-radius:14px;background:var(--surface);color:inherit;padding:0;width:min(600px,94vw);max-height:92vh}
+  dialog#mnImp::backdrop{background:rgba(0,0,0,.55)}
+  #mnImp textarea{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:9px 10px;color:inherit;font:inherit;font-size:.85rem;resize:vertical;min-height:90px;width:100%}
+  #mnImpLista label{display:flex;align-items:center;gap:8px;padding:7px 4px;border-top:1px solid var(--border);font-size:.86rem;cursor:pointer}
+  #mnImpLista label.ja{opacity:.5;cursor:default}#mnImpLista input{width:16px;height:16px;flex:none}`;
+  document.head.appendChild(css2);
+  const imp = document.createElement('dialog');
+  imp.id = 'mnImp';
+  imp.innerHTML = `<div style="display:grid;gap:12px;padding:20px;max-height:92vh;overflow:auto">
+    <div style="font-size:1.1rem;font-weight:800">⬇ Importar mentorados da Central</div>
+    <div style="font-size:.82rem;color:var(--fg2);line-height:1.6">Na <b>Central</b> (Mentorias) clique em <b>📋 Copiar mentorados p/ área de membros</b>, volte aqui e cole o texto abaixo.</div>
+    <textarea id="mnImpTxt" placeholder="Cole aqui o texto copiado da Central"></textarea>
+    <button class="admin-btn admin-btn-ghost" type="button" id="mnImpLer">Ler a lista</button>
+    <div id="mnImpLista"></div>
+    <p id="mnImpErro" style="color:#f87171;font-size:12px;margin:0"></p>
+    <div class="mn-rodape"><button class="admin-btn admin-btn-ghost" type="button" id="mnImpCancela">Cancelar</button><button class="admin-btn admin-btn-primary" type="button" id="mnImpOk" disabled>Importar</button></div></div>`;
+  document.body.appendChild(imp);
+  let impItens = [];
+  function lerLista() {
+    const err = $('#mnImpErro'); err.textContent = ''; impItens = []; $('#mnImpLista').innerHTML = ''; $('#mnImpOk').disabled = true;
+    let j; try { j = JSON.parse($('#mnImpTxt').value.trim()); } catch (e) { err.textContent = 'Esse texto não parece ser da Central. Copie de novo pelo botão 📋.'; return; }
+    if (!j || !Array.isArray(j.itens) || !j.itens.length) { err.textContent = 'A lista veio vazia.'; return; }
+    const existentes = new Set(linhas.map(x => x.sala)), usados = new Set(existentes);
+    j.itens.slice(0, 200).forEach(i => {
+      const nome = String((i && i.nome) || '').trim().slice(0, 120); if (!nome) return;
+      const tipo = ['particular', 'casal', 'turma'].includes(i.tipo) ? i.tipo : 'particular';
+      let sala = slug(i.sala || nome) || 'sala'; const ja = existentes.has(sala);
+      if (!ja) { let n = 2, base = sala; while (usados.has(sala)) sala = (base + '-' + n++).slice(0, 40); usados.add(sala); }
+      impItens.push({ nome, tipo, sala, ja, ativo: i.ativo !== false, dias: (Array.isArray(i.dias) ? i.dias : []).map(Number).filter(d => d >= 0 && d <= 6), hora: /^[0-2]\d:[0-5]\d$/.test(i.hora || '') ? i.hora : null, foto: (typeof i.foto === 'string' && /^data:image\//.test(i.foto) && i.foto.length <= 120000) ? i.foto : null });
+    });
+    $('#mnImpLista').innerHTML = impItens.map((i, k) => `<label class="${i.ja ? 'ja' : ''}"><input type="checkbox" data-i="${k}" ${i.ja ? 'disabled' : 'checked'}> <span><b>${esc(i.nome)}</b> · ${TIPOS[i.tipo]}${i.ativo ? '' : ' · inativo'}${i.ja ? ' · <em>já existe aqui</em>' : ''}</span></label>`).join('');
+    $('#mnImpOk').disabled = !impItens.some(i => !i.ja);
+    if (!impItens.length) err.textContent = 'Não encontrei mentorados nessa lista.';
+  }
+  $('#mnImpLer').addEventListener('click', lerLista);
+  $('#mnImpCancela').addEventListener('click', () => imp.close());
+  $('#mnImpOk').addEventListener('click', async () => {
+    const sel = [...imp.querySelectorAll('#mnImpLista input:checked')].map(i => impItens[+i.dataset.i]);
+    if (!sel.length) return;
+    $('#mnImpOk').disabled = true;
+    const r = await sbf().from('mi_mentorias').insert(sel.map(i => ({ nome: i.nome, tipo: i.tipo, emails: [], dias: i.dias, hora: i.hora, foto: i.foto, sala: i.sala, ativo: i.ativo })));
+    if (r.error) { $('#mnImpErro').textContent = 'Não importou: ' + r.error.message; $('#mnImpOk').disabled = false; return; }
+    imp.close(); await carregar(); central();
+    const msg = '✅ ' + sel.length + ' mentorados importados. Agora toque em Editar em cada um e coloque o e-mail do aluno (é assim que ele vê a sala dele).';
+    aviso(msg); if (window.toast) toast(msg, '#10b981');
+  });
+  window.EBG_MENTORIAS_FORM = {
+    deAluno,
+    novo: async () => { if (!carregado) await carregar(); form(null); },
+    editar: async id => { if (!carregado) await carregar(); let m = linhas.find(x => x.id === id); if (!m) { const r = await sbf().from('mi_mentorias').select('*').eq('id', id).maybeSingle(); m = r.data; } if (m) form(m); },
+    importar: async () => { if (!carregado) await carregar(); $('#mnImpTxt').value = ''; $('#mnImpLista').innerHTML = ''; $('#mnImpErro').textContent = ''; $('#mnImpOk').disabled = true; imp.showModal(); }
+  };
+
   /* ---------- a aba "Mentorias" na administração (mesmo jeito das outras abas) ---------- */
   function montarAba() {
     const tabs = document.querySelector('.admin-tabs'), ref = document.getElementById('adm-modulos');

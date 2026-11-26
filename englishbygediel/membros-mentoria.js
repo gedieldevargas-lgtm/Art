@@ -45,6 +45,7 @@
     '.mt-sala:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(0,0,0,.26)}.mt-sala:disabled{filter:grayscale(.5);cursor:default;transform:none}' +
     '.mt-sala .ic{width:60px;height:60px;flex:none}.mt-sala .ic svg{width:100%;height:100%;display:block}.mt-sala .tt{min-width:0;flex:1}' +
     '.mt-sala .t{display:block;font-size:22px;font-weight:800;letter-spacing:-.3px}.mt-sala .s{display:flex;align-items:center;gap:7px;font-size:13px;margin-top:5px;flex-wrap:wrap}' +
+    '.mt-fo{width:38px;height:38px;border-radius:50%;flex:none;background:#d9e8e2 center/cover;color:#0b5d46;font-weight:800;font-size:13px;display:inline-flex;align-items:center;justify-content:center;margin-right:2px}' +
     '.mt-dot{width:10px;height:10px;border-radius:50%;background:#b8c9c2;flex:none}.mt-dot.on{background:#5dff9b;box-shadow:0 0 0 3px rgba(93,255,155,.3)}' +
     '.mt-sala .go{flex:none;box-sizing:border-box;background:#fff;color:#0b5d46;font-weight:800;font-size:14px;border-radius:12px;padding:10px 16px;white-space:nowrap}' +
     '.mt-box{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:16px 18px}.mt-box h3{font-size:16px;margin:0 0 10px;font-weight:800}' +
@@ -70,7 +71,8 @@
   // ───── dados
   async function carregar() {
     var u = (await sb().auth.getUser()).data.user; M.email = ((u && u.email) || '').toLowerCase();
-    var a = await sb().from('mi_mentorias').select('*').eq('ativo', true).order('nome');
+    var q = sb().from('mi_mentorias').select('*'); if (!admin()) q = q.eq('ativo', true);
+    var a = await q.order('nome');
     if (a.error) { M.ok = false; M.erro = a.error.message; return; }
     var e = await sb().from('mi_mentoria_encontros').select('*').order('inicio');
     M.ok = true; M.alunos = a.data || []; M.encOk = !e.error; M.enc = e.data || [];
@@ -78,7 +80,7 @@
     await pingar();
   }
   async function pingar() {
-    var ids = M.alunos.map(function (a) { return a.sala; }).filter(Boolean);
+    var ids = M.alunos.filter(function (a) { return a.ativo !== false; }).map(function (a) { return a.sala; }).filter(Boolean);
     if (!ids.length) return;
     var antes = Object.assign({}, M.pres);
     try { var r = await fetch('/.netlify/functions/sala-ping?salas=' + encodeURIComponent(ids.join(',')), { cache: 'no-store' }); M.pres = r.ok ? await r.json() : {}; } catch (e) { M.pres = {}; }
@@ -86,6 +88,20 @@
     desenhar();
   }
   var on = function (a) { return !!(a && a.sala && M.pres[a.sala] > 0); };
+
+  // ───── admin: entra na sala com o próprio login (sem senha) e gera o link do aluno
+  var API = SALA.replace(/\/sala\.html$/, '');
+  async function tokenAdmin() { try { var r = await sb().auth.getSession(); return (r.data && r.data.session && r.data.session.access_token) || ''; } catch (e) { return ''; } }
+  async function urlProf(q) { var t = await tokenAdmin(); return SALA + q + (t ? '#t=' + t : ''); }
+  async function garantirK(al) {
+    if (al.k) return;
+    var t = await tokenAdmin(); if (!t) return;
+    try {
+      var r = await fetch(API + '/api/sala?action=link&sala=' + encodeURIComponent(al.sala), { headers: { Authorization: 'Bearer ' + t } });
+      var d = await r.json();
+      if (r.ok && d.k) { var u = await sb().from('mi_mentorias').update({ k: d.k }).eq('id', al.id); if (!u.error) al.k = d.k; }
+    } catch (e) {}
+  }
 
   // ───── sala embutida (tela cheia, com voltar)
   function abrirSala(url, titulo) {
@@ -135,11 +151,13 @@
     var enc = encDe(a), ped = enc.filter(function (e) { return e.status === 'pedido'; }).length, aberto = M.edit === a.id;
     var prox = enc.filter(function (e) { return (e.status === 'confirmado' || e.status === 'pedido') && new Date(e.inicio) > new Date(); }).sort(function (x, y) { return new Date(x.inicio) - new Date(y.inicio); })[0];
     var fx = fixos(a, 1)[0];
-    var h = '<div class="mt-box mt-al" data-id="' + a.id + '"><div class="top" data-mt="editar" style="cursor:pointer">' + avatar(a) + '<span class="nm">' + esc(a.nome) + '<span class="meta" style="display:block;font-weight:500">' + esc(TIPOG[a.tipo] || '') + (a.nivel ? ' · ' + esc(a.nivel) : '') + '</span></span>' +
+    var h = '<div class="mt-box mt-al" data-id="' + a.id + '"><div class="top" data-mt="editar" style="cursor:pointer">' + avatar(a) + '<span class="nm">' + esc(a.nome) + (a.ativo === false ? ' <small style="color:#d99a2b">(inativo)</small>' : '') + '<span class="meta" style="display:block;font-weight:500">' + esc(TIPOG[a.tipo] || '') + (a.nivel ? ' · ' + esc(a.nivel) : '') + '</span></span>' +
       '<span class="meta" style="text-align:right">' + feitos(a) + (a.encontros_total ? ' / ' + a.encontros_total : '') + ' encontros<br>' + (on(a) ? '<b style="color:#1b8f6b">🟢 na sala agora</b>' : '<span class="mt-dot" style="display:inline-block"></span> sala vazia') + '</span></div>' +
       '<div class="meta">' + (ped ? '<b style="color:#d99a2b">🕓 ' + ped + ' pedido' + (ped > 1 ? 's' : '') + ' esperando você</b> · ' : '') + (prox ? 'Próximo: ' + esc(dt(prox.inicio)) : (fx ? 'Próximo fixo: ' + esc(dt(fx.toISOString())) : 'Sem encontro marcado')) + '</div>' +
       '<div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="mt-btn s" data-mt="prof">▶ Entrar na sala com ' + esc((a.nome || '').split(' ')[0]) + '</button>' +
-      '<button type="button" class="mt-btn s g" data-mt="copiar"' + (a.k ? '' : ' disabled') + '>🔗 Link</button><button type="button" class="mt-btn s g" data-mt="editar">' + (aberto ? 'Fechar' : 'Detalhes') + '</button></div>';
+      '<button type="button" class="mt-btn s g" data-mt="copiar">🔗 Link</button><button type="button" class="mt-btn s g" data-mt="editar">' + (aberto ? 'Fechar' : 'Detalhes') + '</button>' +
+      '<button type="button" class="mt-btn s g" data-mt="edit-m">✎ Editar</button><button type="button" class="mt-btn s g" data-mt="status">' + (a.ativo === false ? '▶ Reativar' : '⏸ Pausar') + '</button></div>' +
+      ((a.emails || []).length ? '' : '<div class="meta" style="color:#d99a2b">⚠ Sem e-mail de aluno: ele ainda não vê a sala no app. Toque em ✎ Editar.</div>');
     if (aberto) {
       var v = function (x) { return esc(a[x] == null ? '' : a[x]); };
       h += '<div class="mt-ed"><label>Nível<input data-k="nivel" value="' + v('nivel') + '" placeholder="ex.: B1"></label><label>Encontros combinados<input data-k="encontros_total" type="number" min="0" value="' + v('encontros_total') + '"></label>' +
@@ -148,8 +166,7 @@
         '<div class="full meta">' + ((a.emails || []).map(esc).join(', ') || 'sem e-mail cadastrado') + (a.dias && a.dias.length ? ' · fixo ' + esc(diasTxt(a)) + ' ' + esc(a.hora || '') : '') + '</div>' +
         '<div class="full"><button type="button" class="mt-btn s" data-mt="salvar">Salvar</button></div>' +
         '<div class="full" style="border-top:1px solid var(--border);padding-top:10px"><b style="font-size:13px">Encontros</b>' +
-        (enc.map(function (e) { return '<div class="mt-enc" data-e="' + e.id + '"><span>' + esc(dt(e.inicio)) + (e.tipo ? ' · ' + esc(e.tipo) : '') + '</span><span><select data-ens>' + Object.keys(ST).map(function (k) { return '<option value="' + k + '"' + (e.status === k ? ' selected' : '') + '>' + ST[k][0] + '</option>'; }).join('') + '</select> <button type="button" class="mt-btn s g" data-mt="apagar-enc">🗑</button></span></div>'; }).join('') || '<div class="meta">Nenhum encontro.</div>') +
-        '<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"><input type="datetime-local" id="mt-novo-dt"><button type="button" class="mt-btn s" data-mt="add-enc">+ Encontro</button></div></div></div>';
+        (enc.map(function (e) { return '<div class="mt-enc" data-e="' + e.id + '"><span>' + esc(dt(e.inicio)) + (e.tipo ? ' · ' + esc(e.tipo) : '') + '</span><span><select data-ens>' + Object.keys(ST).map(function (k) { return '<option value="' + k + '"' + (e.status === k ? ' selected' : '') + '>' + ST[k][0] + '</option>'; }).join('') + '</select> <button type="button" class="mt-btn s g" data-mt="apagar-enc">🗑</button></span></div>'; }).join('') || '<div class="meta">Nenhum encontro.</div>') +        '<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"><input type="datetime-local" id="mt-novo-dt"><button type="button" class="mt-btn s" data-mt="add-enc">+ Encontro</button></div></div></div>';
     }
     return h + '</div>';
   }
@@ -164,16 +181,19 @@
     }).join('') + '</div>';
   }
   function htmlAdmin() {
-    var h = '<div class="mt-wrap"><div class="mt-h1">Mentorias</div><div class="mt-sub">Pedidos, fotos e status dos seus mentorandos. Clique em um pra ver e anotar os detalhes.</div>' + pedidos() +
-      '<button type="button" class="mt-sala" data-mt="minha"><span class="ic">' + CAM + '</span><span class="tt"><span class="t">Minha sala</span><span class="s">Abre o seu meet aqui dentro (entre com a sua senha)</span></span><span class="go">Abrir</span></button>';
+    var ativos = M.alunos.filter(function (a) { return a.ativo !== false; }), inativos = M.alunos.filter(function (a) { return a.ativo === false; });
+    var online = ativos.filter(on).length;
+    var h = '<div class="mt-wrap"><div class="mt-h1">Central das Mentorias</div><div class="mt-sub"><b>' + ativos.length + '</b> ativos · ' + inativos.length + ' inativos · <span style="color:#1b8f6b;font-weight:700">🟢 ' + online + ' com gente na sala agora</span></div>' + pedidos() +
+      '<button type="button" class="mt-sala" data-mt="minha"><span class="ic">' + CAM + '</span><span class="tt"><span class="t">Minha sala</span><span class="s">Abre a sala da Central aqui dentro, já logado (sem senha)</span></span><span class="go">Abrir</span></button>' +
+      '<div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="mt-btn s" data-mt="novo">＋ Novo mentorando</button><button type="button" class="mt-btn s g" data-mt="importar">⬇ Importar da Central</button></div>';
     Object.keys(TIPOG).forEach(function (g) {
-      var l = M.alunos.filter(function (a) { return a.tipo === g; });
+      var l = ativos.filter(function (a) { return a.tipo === g; });
       if (l.length) h += '<div class="mt-grp">' + ({ particular: 'Individual', casal: 'Casais', turma: 'Turma' })[g] + '</div>' + l.map(cartao).join('');
     });
-    if (!M.alunos.length) h += '<div class="mt-box">Nenhuma mentoria cadastrada ainda. Em Admin → Alunos, use “🎓 Tornar mentorando”.</div>';
+    if (inativos.length) h += '<div class="mt-grp">Inativos</div>' + inativos.map(cartao).join('');
+    if (!M.alunos.length) h += '<div class="mt-box">Nenhuma mentoria cadastrada ainda. Toque em <b>＋ Novo mentorando</b>, em <b>⬇ Importar da Central</b> ou, em Admin → Alunos, use “🎓 Tornar mentorando”.</div>';
     if (M.alunos.length && !M.encOk) h += '<div class="mt-box">Os encontros e anotações ligam assim que você rodar o SQL <b>supabase/mentoria-encontros.sql</b>.</div>';
-    h += '<div class="mt-sub">Criar ou mudar alunos, dias, horário e foto da sala: <b>Admin → 🎥 Mentorias</b>.</div></div>';
-    return h;
+    h += '<div class="mt-sub">Dica: o aluno só vê a sala dele depois que o e-mail dele estiver cadastrado em ✎ Editar.</div></div>';    return h;
   }
 
   function desenhar(force) {
@@ -205,12 +225,26 @@
     if (a === 'abrir-home') return window.goTo && goTo('mentoria', document.getElementById('mi-nav-mentoria'));
     if (a === 'entrar' && al && al.k) abrirSala(linkDe(al), 'Sala do Gediel');
     if (a === 'marcar') { window._mentVoltar = true; window.goTo && goTo('agendar'); }
-    if (a === 'minha') abrirSala(SALA + '?prof', 'Minha sala');
-    if (a === 'prof' && al) abrirSala(SALA + '?sala=' + encodeURIComponent(al.sala) + '&prof', 'Sala · ' + al.nome);
-    if (a === 'copiar' && al) { try { await navigator.clipboard.writeText(linkDe(al)); tx('🔗 Link de ' + al.nome + ' copiado', '#10b981'); } catch (x) { tx(linkDe(al)); } }
+    if (a === 'minha') abrirSala(await urlProf('?prof'), 'Minha sala');
+    if (a === 'prof' && al) abrirSala(await urlProf('?sala=' + encodeURIComponent(al.sala) + '&prof'), 'Sala · ' + al.nome);
+    if (a === 'copiar' && al) {
+      await garantirK(al);
+      if (!linkDe(al)) return tx('Não consegui gerar o link agora. Tente de novo em instantes.', '#ef4444');
+      try { await navigator.clipboard.writeText(linkDe(al)); tx('🔗 Link de ' + al.nome + ' copiado', '#10b981'); } catch (x) { tx(linkDe(al)); }
+    }
+    if (a === 'novo' || a === 'importar' || (a === 'edit-m' && al)) {
+      var F = window.EBG_MENTORIAS_FORM;
+      if (!F) return tx('O formulário ainda não carregou. Recarregue a página (Cmd+Shift+R).', '#ef4444');
+      if (a === 'novo') F.novo(); else if (a === 'importar') F.importar(); else F.editar(al.id);
+    }
+    if (a === 'status' && al) {
+      var nv = al.ativo === false;
+      var rs = await sb().from('mi_mentorias').update({ ativo: nv }).eq('id', al.id);
+      if (rs.error) return tx('Não salvou 😕', '#ef4444');
+      al.ativo = nv; tx(nv ? '▶ ' + al.nome + ' reativado' : '⏸ ' + al.nome + ' pausado', '#10b981'); desenhar(true); pingar();
+    }
     if (a === 'confirmar') return decidir(t.closest('[data-e]').dataset.e, 'confirmado');
-    if (a === 'recusar') return decidir(t.closest('[data-e]').dataset.e, 'cancelado');
-    if (a === 'editar') { M.edit = M.edit === id ? null : id; desenhar(true); }
+    if (a === 'recusar') return decidir(t.closest('[data-e]').dataset.e, 'cancelado');    if (a === 'editar') { M.edit = M.edit === id ? null : id; desenhar(true); }
     if (a === 'salvar') await salvarTotal(id);
     if (a === 'add-enc' && al) {
       var v = $('mt-novo-dt').value; if (!v) return tx('Escolha data e hora', '#ef4444');
