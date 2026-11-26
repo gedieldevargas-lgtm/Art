@@ -42,8 +42,7 @@
     var dias = ORD.filter(function (d) { return (m.dias || []).indexOf(d) >= 0; }).map(function (d) { return D3[d]; }).join(' · ');
     var av = m.foto ? '<span class="mm-av" style="background-image:url(' + esc(m.foto) + ')"></span>' : '<span class="mm-av">' + esc((m.nome || '?').trim().slice(0, 2).toUpperCase()) + '</span>';
     var p = proxima(m);
-    var go = m.k ? '<a class="mm-go" href="' + SITE + '/sala.html?sala=' + encodeURIComponent(m.sala) + '&k=' + encodeURIComponent(m.k) + '" target="_blank" rel="noopener">Entrar na sala</a>'
-      : '<span class="mm-go off">Link em breve</span>';
+    var go = m.k ? '<button type="button" class="mm-go" data-mt="abrir-home" style="border:0;font:inherit;cursor:pointer">Abrir mentoria</button>' : '<span class="mm-go off">Link em breve</span>';
     return '<div class="mm-card">' + av + '<div class="mm-tx"><div class="mm-k">' + esc(TIPOS[m.tipo] || 'Mentoria') + '</div><div class="mm-t">' + esc(m.nome) + '</div>' +
       '<div class="mm-s">' + esc(dias || 'Horário a combinar') + (m.hora ? ' · ' + esc(m.hora) : '') + '</div>' +
       (p ? '<span class="mm-prox' + (p.hoje ? ' hoje' : '') + '">Próxima aula: ' + esc(p.txt) + '</span>' : '') + '</div>' + go + '</div>';

@@ -906,56 +906,34 @@ livro: textos-claros-paragrafos-conectores-e-revisao$t$ where module_id=m and ti
 livro: usando-ia-pra-revisar-sem-depender-dela$t$ where module_id=m and title in ($t$Usando IA pra revisar (sem depender dela)$t$,$t$IA Corrige, Mas Você Decide$t$);
 end $mod$;
 
--- ===== mentoria-central.sql =====
--- CENTRAL DAS MENTORIAS (aba "Mentoria" da área de membros). Pode rodar mais de uma vez.
--- mi_mentoria_alunos: quem tem mentoria (individual, casal, turma), a sala dele na Central, o link do aluno e quantos encontros foram combinados.
--- mi_mentoria_encontros: cada encontro (pedido / confirmado / feito / cancelado).
--- Cada aluno só enxerga o que é dele (pelo e-mail); o admin vê e edita tudo.
-create table if not exists public.mi_mentoria_alunos (
-  id uuid primary key default gen_random_uuid(),
-  nome text not null,
-  email text,                                   -- e-mail do login do aluno na área de membros
-  formato text not null default 'individual',   -- individual | casal | turma
-  sala text,                                    -- id da sala na Central (ex.: camila)
-  link text,                                    -- link do aluno (sala.html?sala=...&k=...) - só o aluno dono e o admin leem
-  encontros_total int,                          -- quantos encontros foram combinados
-  ativo boolean not null default true,
-  ordem int not null default 0
-);
-create index if not exists mi_mentoria_alunos_email on public.mi_mentoria_alunos (lower(email));
-alter table public.mi_mentoria_alunos enable row level security;
-drop policy if exists ment_al_ler on public.mi_mentoria_alunos;
-create policy ment_al_ler on public.mi_mentoria_alunos for select using (public.sou_admin() or (email is not null and lower(email) = public.meu_email()));
-drop policy if exists ment_al_adm on public.mi_mentoria_alunos;
-create policy ment_al_adm on public.mi_mentoria_alunos for all using (public.sou_admin()) with check (public.sou_admin());
+-- ===== mentoria-encontros.sql (depois do mentorias-salas.sql) =====
+-- ENCONTROS DA MENTORIA (aba "Mentoria" da área de membros). Rode DEPOIS do supabase/mentorias-salas.sql. Pode rodar mais de uma vez.
+-- Quantos encontros foram combinados com cada mentoria + cada encontro (pedido / confirmado / feito / cancelado).
+-- O aluno só lê os encontros do e-mail dele e só consegue criar "pedido"; o admin (tabela admins) vê e edita tudo.
+alter table public.mi_mentorias add column if not exists encontros_total int;
 
 create table if not exists public.mi_mentoria_encontros (
   id uuid primary key default gen_random_uuid(),
-  aluno_id uuid references public.mi_mentoria_alunos(id) on delete cascade,
-  email text,
+  mentoria_id uuid not null references public.mi_mentorias(id) on delete cascade,
+  email text,                                   -- quem pediu (aluno)
   inicio timestamptz not null,
   status text not null default 'pedido' check (status in ('pedido','confirmado','feito','cancelado')),
   tipo text,
   obs text,
   created_at timestamptz not null default now()
 );
-create index if not exists mi_mentoria_enc_email on public.mi_mentoria_encontros (lower(email), inicio);
+create index if not exists mi_mentoria_enc_ix on public.mi_mentoria_encontros (mentoria_id, inicio);
 alter table public.mi_mentoria_encontros enable row level security;
-drop policy if exists ment_en_ler on public.mi_mentoria_encontros;
-create policy ment_en_ler on public.mi_mentoria_encontros for select using (public.sou_admin() or (email is not null and lower(email) = public.meu_email()));
-drop policy if exists ment_en_pedir on public.mi_mentoria_encontros;
-create policy ment_en_pedir on public.mi_mentoria_encontros for insert with check (public.sou_admin() or (lower(email) = public.meu_email() and status = 'pedido'));
-drop policy if exists ment_en_adm on public.mi_mentoria_encontros;
-create policy ment_en_adm on public.mi_mentoria_encontros for update using (public.sou_admin()) with check (public.sou_admin());
-drop policy if exists ment_en_del on public.mi_mentoria_encontros;
-create policy ment_en_del on public.mi_mentoria_encontros for delete using (public.sou_admin());
 
--- os mentorandos que já estão na sua Central (preencha e-mail, link e total na própria aba Mentoria)
-insert into public.mi_mentoria_alunos (nome, formato, sala, ordem)
-select v.nome, v.formato, v.sala, v.ordem from (values
-  ('Camila','individual','camila',1), ('João Alberto','individual','joao-alberto',2), ('José','individual','jose',3),
-  ('Maiza','individual','maiza',4), ('Raul','individual','raul',5),
-  ('Evelyn & Rhian','casal','evelyn-rhian',6), ('Gabriel & Roberta','casal','gabriel-roberta',7),
-  ('Turma','turma','turma',8)
-) as v(nome, formato, sala, ordem)
-where not exists (select 1 from public.mi_mentoria_alunos a where a.sala = v.sala);
+drop policy if exists ment_en_adm on public.mi_mentoria_encontros;
+create policy ment_en_adm on public.mi_mentoria_encontros for all using (public.is_admin()) with check (public.is_admin());
+
+-- o aluno enxerga os encontros das mentorias em que o e-mail dele está
+drop policy if exists ment_en_ler on public.mi_mentoria_encontros;
+create policy ment_en_ler on public.mi_mentoria_encontros for select using (
+  exists (select 1 from public.mi_mentorias m where m.id = mentoria_id and m.ativo and lower(coalesce(auth.jwt() ->> 'email', '')) = any(m.emails)));
+-- e pode pedir um encontro novo (sempre como "pedido")
+drop policy if exists ment_en_pedir on public.mi_mentoria_encontros;
+create policy ment_en_pedir on public.mi_mentoria_encontros for insert with check (
+  status = 'pedido' and lower(coalesce(email, '')) = lower(coalesce(auth.jwt() ->> 'email', ''))
+  and exists (select 1 from public.mi_mentorias m where m.id = mentoria_id and m.ativo and lower(coalesce(auth.jwt() ->> 'email', '')) = any(m.emails)));
