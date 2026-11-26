@@ -2156,7 +2156,7 @@ async function renderLesson(){
     +'<button class="lesson-tab '+(_stLesTab==='desc'?'active':'')+'" data-t="desc" onclick="lesTab(\'desc\')">📝 Descrição</button>'
     +(hasQuiz?'<button class="lesson-tab '+(_stLesTab==='quiz'?'active':'')+'" data-t="quiz" onclick="lesTab(\'quiz\')">🧩 Quiz</button>':'')
     +'<button class="lesson-tab '+(_stLesTab==='coment'?'active':'')+'" data-t="coment" onclick="lesTab(\'coment\')">💬 Comentários</button></div>';
-  html+='<div class="lesson-panel '+(_stLesTab==='desc'?'active':'')+'" id="les-p-desc"><div class="lesson-desc">'+(descSemLivro(l.description)?esc(descSemLivro(l.description)):'<span style="color:var(--fg3)">Sem descrição ainda.</span>')+'</div></div>';
+  html+='<div class="lesson-panel '+(_stLesTab==='desc'?'active':'')+'" id="les-p-desc"><div class="lesson-desc">'+(descSemLivro(l.description)?esc(descSemLivro(l.description)):'<span style="color:var(--fg3)">Sem descrição ainda.</span>')+'</div>'+botoesDaAula(l.description)+'</div>';
   html+='<div class="lesson-panel '+(_stLesTab==='quiz'?'active':'')+'" id="les-p-quiz">'+(hasQuiz?renderQuiz(l):'')+'</div>';
   html+='<div class="lesson-panel '+(_stLesTab==='coment'?'active':'')+'" id="les-p-coment"><div id="les-comments"><div class="admin-loading">Carregando comentários...</div></div>'
     +'<div class="comment-box"><textarea class="admin-inp" id="les-comment-txt" placeholder="Deixa sua dúvida ou comentário sobre a aula..."></textarea><button class="admin-btn admin-btn-primary" onclick="postComment()">Comentar</button></div></div>';
@@ -2168,7 +2168,14 @@ async function renderLesson(){
 var LIVRO_RE=/(^|\n)[ \t]*(?:📘)?[ \t]*livro[ \t]*:[ \t]*([\w-]+)[ \t]*(?=\n|$)/i;
 function livroDaAula(l){if(l.livro)return String(l.livro).trim();var m=(l.description||'').match(LIVRO_RE);if(m)return m[2];var u=(l.title||'').match(/\b(?:unit|unidade)\s*0*(\d{1,2})\b/i);if(u)return 'unit-'+('0'+u[1]).slice(-2);return slugAula(l.title);}
 function slugAula(t){t=String(t||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');return t.slice(0,70).replace(/-+$/,'')||null;}
-function descSemLivro(d){return (d||'').replace(LIVRO_RE,'$1').trim();}
+/* Botões da aula: linhas "ir: jogos | Abrir os jogos" (abre uma área da plataforma) ou "link: https://... | Texto" (abre o link). Ficam como botão embaixo da descrição. */
+function BTN_RE(){return /(^|\n)[ \t]*(ir|link)[ \t]*:[ \t]*([^|\n]+?)[ \t]*\|[ \t]*([^\n]+)/gi;}
+function descSemLivro(d){return (d||'').replace(LIVRO_RE,'$1').replace(BTN_RE(),'$1').replace(/\n{3,}/g,'\n\n').trim();}
+function botoesDaAula(d){var out='',m,re=BTN_RE();while((m=re.exec(d||''))){var t=m[2].toLowerCase(),v=m[3].trim(),lb=m[4].trim();
+  if(t==='ir'&&/^[a-z0-9-]+$/i.test(v))out+='<button type="button" class="admin-btn admin-btn-primary" style="margin:6px 8px 0 0" onclick="lesIr(\''+v+'\')">'+esc(lb)+'</button>';
+  else if(t==='link'&&/^https:\/\//i.test(v))out+='<a class="admin-btn admin-btn-primary" style="margin:6px 8px 0 0;display:inline-block;text-decoration:none" href="'+esc(v)+'" target="_blank" rel="noopener">'+esc(lb)+'</a>';}
+  return out?'<div class="lesson-btns" style="margin-top:12px">'+out+'</div>':'';}
+function lesIr(pg){var el=[].filter.call(document.querySelectorAll('.nav-pill'),function(n){return (n.getAttribute('onclick')||'').indexOf("'"+pg+"'")>=0;})[0];goTo(pg,el||null);}
 function abrirLivroAula(id){
   var el=document.getElementById('aula-livro');if(!el)return;
   if(!document.getElementById('livro-css')){var c=document.createElement('link');c.id='livro-css';c.rel='stylesheet';c.href='livro/livro.css?v=3';document.head.appendChild(c);}
