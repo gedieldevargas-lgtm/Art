@@ -54,6 +54,7 @@
     <div><div style="font-size:.82rem;color:var(--fg2);margin-bottom:6px">Dias fixos da semana</div><div class="mn-dias" id="mnDias"></div></div>
     <label>Horário fixo<input type="time" id="mnHora"></label>
     <label>E-mails dos alunos (um por linha). Só eles veem esta sala no app.<textarea id="mnEmails" placeholder="aluno@email.com"></textarea></label>
+    <label>Escolher aluno da plataforma (nome + foto)<select id="mnAluno"><option value="">— carregando alunos… —</option></select></label>
     <label>Adicionar quem já comprou<select id="mnCompra"><option value="">— escolher e-mail —</option></select></label>
     <div class="mn-foto"><span class="mn-av" id="mnPrev"></span><label style="flex:1">Foto<input type="file" id="mnFoto" accept="image/*"></label></div>
     <label>Nome da sala no endereço (não mude depois de mandar o link)<input type="text" id="mnSala" maxlength="40"></label>
@@ -105,8 +106,50 @@
     const vistos = new Set(), op = [];
     compras.forEach(c => { const e = String(c.email || '').toLowerCase(); if (e && !vistos.has(e)) { vistos.add(e); op.push(`<option value="${esc(e)}">${esc(e)}${c.produto ? ' · ' + esc(c.produto) : ''}</option>`); } });
     $('#mnCompra').innerHTML = '<option value="">— escolher e-mail —</option>' + op.join('');
+    alunosCarregar().then(preencherAlunos);
     dlg.showModal();
   }
+  /* alunos da plataforma (mesma lista da aba Alunos) — com nome e foto */
+  let alunos = null;
+  const fotoDe = u => { const m = (u && u.user_metadata) || {}; return m.avatar_url || m.picture || m.foto || (m.mi && m.mi.foto) || ''; };
+  const nomeDe = u => { const m = (u && u.user_metadata) || {}; return m.full_name || m.name || m.nome || String((u && u.email) || '').split('@')[0]; };
+  async function alunosCarregar() {
+    if (alunos) return alunos;
+    try {
+      const ses = (await sbf().auth.getSession()).data.session;
+      const r = await fetch('/.netlify/functions/membros-admin', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + (ses ? ses.access_token : '') }, body: JSON.stringify({ path: '/auth/v1/admin/users?page=1&per_page=1000', method: 'GET' }) });
+      const d = await r.json();
+      alunos = (d.users || []).filter(u => u.email).sort((x, y) => nomeDe(x).localeCompare(nomeDe(y)));
+    } catch (e) { alunos = []; }
+    return alunos;
+  }
+  function preencherAlunos() {
+    const el = $('#mnAluno'); if (!el) return;
+    el.innerHTML = '<option value="">— escolher aluno —</option>' + (alunos || []).map(u => `<option value="${esc(u.id)}">${esc(nomeDe(u))} · ${esc(u.email)}</option>`).join('');
+  }
+  $('#mnAluno').addEventListener('change', e => {
+    const u = (alunos || []).find(x => x.id === e.target.value); if (!u) return;
+    const em = String(u.email).toLowerCase(), lista = emailsDe($('#mnEmails').value); if (!lista.includes(em)) lista.push(em);
+    $('#mnEmails').value = lista.join('\n');
+    if (!$('#mnNome').value.trim()) { $('#mnNome').value = nomeDe(u); if (!ed && !$('#mnSala').dataset.manual) $('#mnSala').value = slug(nomeDe(u)); }
+    const f = fotoDe(u); if (f && !foto) { foto = f; $('#mnPrev').style.backgroundImage = `url(${f})`; $('#mnPrev').textContent = ''; }
+    e.target.value = '';
+  });
+  // um clique na aba Alunos: vira mentorado (cria a sala já com e-mail, nome e foto)
+  async function deAluno(id) {
+    if (!carregado) await carregar();
+    await alunosCarregar();
+    const u = (alunos || []).find(x => x.id === id); if (!u) return msg('Não achei esse aluno.');
+    const em = String(u.email).toLowerCase(), ja = linhas.find(m => (m.emails || []).map(x => String(x).toLowerCase()).includes(em));
+    if (ja) return msg('✅ ' + nomeDe(u) + ' já é mentorado (sala "' + ja.nome + '"). Veja na aba 🎥 Mentorias.');
+    let base = slug(nomeDe(u)) || 'aluno', sala = base, n = 2; while (linhas.some(m => m.sala === sala)) sala = base + '-' + n++;
+    const r = await sbf().from('mi_mentorias').insert({ nome: nomeDe(u), tipo: 'particular', emails: [em], dias: [], hora: null, foto: fotoDe(u) || null, sala, ativo: true });
+    if (r.error) return msg('Não consegui: ' + r.error.message);
+    await carregar(); central();
+    msg('✅ ' + nomeDe(u) + ' virou mentorado. Já aparece na Central das Mentorias — toque em ✎ Editar pra pôr dia e horário.');
+  }
+  function msg(t) { aviso(t); if (window.toast) toast(t, '#10b981'); else alert(t); }
+
   const $$dias = () => [...document.querySelectorAll('#mnDias input')];
 
   $('#mnCompra').addEventListener('change', e => {
@@ -227,6 +270,7 @@
     aviso(msg); if (window.toast) toast(msg, '#10b981');
   });
   window.EBG_MENTORIAS_FORM = {
+    deAluno,
     novo: async () => { if (!carregado) await carregar(); form(null); },
     editar: async id => { if (!carregado) await carregar(); let m = linhas.find(x => x.id === id); if (!m) { const r = await sbf().from('mi_mentorias').select('*').eq('id', id).maybeSingle(); m = r.data; } if (m) form(m); },
     importar: async () => { if (!carregado) await carregar(); $('#mnImpTxt').value = ''; $('#mnImpLista').innerHTML = ''; $('#mnImpErro').textContent = ''; $('#mnImpOk').disabled = true; imp.showModal(); }

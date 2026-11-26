@@ -34,6 +34,7 @@
     '.mt-sala:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(0,0,0,.26)}.mt-sala:disabled{filter:grayscale(.5);cursor:default;transform:none}' +
     '.mt-sala .ic{width:60px;height:60px;flex:none}.mt-sala .ic svg{width:100%;height:100%;display:block}.mt-sala .tt{min-width:0;flex:1}' +
     '.mt-sala .t{display:block;font-size:22px;font-weight:800;letter-spacing:-.3px}.mt-sala .s{display:flex;align-items:center;gap:7px;font-size:13px;margin-top:5px;flex-wrap:wrap}' +
+    '.mt-fo{width:38px;height:38px;border-radius:50%;flex:none;background:#d9e8e2 center/cover;color:#0b5d46;font-weight:800;font-size:13px;display:inline-flex;align-items:center;justify-content:center;margin-right:2px}' +
     '.mt-dot{width:10px;height:10px;border-radius:50%;background:#b8c9c2;flex:none}.mt-dot.on{background:#5dff9b;box-shadow:0 0 0 3px rgba(93,255,155,.3)}' +
     '.mt-sala .go{flex:none;box-sizing:border-box;background:#fff;color:#0b5d46;font-weight:800;font-size:14px;border-radius:12px;padding:10px 16px;white-space:nowrap}' +
     '.mt-box{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:16px 18px}.mt-box h3{font-size:16px;margin:0 0 10px;font-weight:800}' +
@@ -124,7 +125,7 @@
   function cartao(a) {
     var enc = encDe(a), ped = enc.filter(function (e) { return e.status === 'pedido'; }).length;
     var prox = enc.filter(function (e) { return (e.status === 'confirmado' || e.status === 'pedido') && new Date(e.inicio) > new Date(); }).sort(function (x, y) { return new Date(x.inicio) - new Date(y.inicio); })[0];
-    var h = '<div class="mt-box mt-al" data-id="' + a.id + '"><div class="top"><span class="mt-dot' + (on(a) ? ' on' : '') + '" title="' + (on(a) ? 'Tem gente na sala' : 'Sala vazia') + '"></span><span class="nm">' + esc(a.nome) + (a.ativo === false ? ' <span class="mt-chip" style="background:#8a93a0">inativo</span>' : '') + '</span>' +
+    var h = '<div class="mt-box mt-al" data-id="' + a.id + '"><div class="top"><span class="mt-dot' + (on(a) ? ' on' : '') + '" title="' + (on(a) ? 'Tem gente na sala' : 'Sala vazia') + '"></span><span class="mt-fo"' + (a.foto ? ' style="background-image:url(' + esc(a.foto) + ')"' : '') + '>' + (a.foto ? '' : esc((a.nome || '?').trim().slice(0, 2).toUpperCase())) + '</span><span class="nm">' + esc(a.nome) + (a.ativo === false ? ' <span class="mt-chip" style="background:#8a93a0">inativo</span>' : '') + '</span>' +
       '<span class="meta">' + feitos(a) + (a.encontros_total ? ' / ' + a.encontros_total : '') + ' encontros' + (ped ? ' · <b style="color:#d99a2b">🕓 ' + ped + ' pedido' + (ped > 1 ? 's' : '') + '</b>' : '') + '</span></div>' +
       '<div class="meta">' + (prox ? 'Próximo: ' + esc(dt(prox.inicio)) : 'Sem encontro marcado') + (on(a) ? ' · <b style="color:#1b8f6b">🟢 ' + M.pres[a.sala] + ' na sala</b>' : '') + '</div>' +
       '<div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="mt-btn s" data-mt="prof">▶ Entrar na sala</button>' +
