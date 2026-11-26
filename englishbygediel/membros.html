@@ -1735,6 +1735,7 @@ async function loadUsers(){
     var users=(data.users||[]).sort(function(a,b){return new Date(b.created_at)-new Date(a.created_at);});
     var cr=await _sb.from('compras').select('pedido,email,produto,created_at');var porEmail={};
     (cr.data||[]).forEach(function(c){var k=(c.email||'').toLowerCase();(porEmail[k]=porEmail[k]||[]).push(c);});
+    var mr=await _sb.from('mi_mentorias').select('emails');window._admMentorandos={};((mr&&mr.data)||[]).forEach(function(m){(m.emails||[]).forEach(function(e){window._admMentorandos[e]=1;});});
     window._admUsers={};users.forEach(function(u){window._admUsers[u.id]=u;});
     window._admCompras=porEmail;
     if(!users.length){el.innerHTML='<div class="admin-loading">Nenhum aluno cadastrado ainda.</div>';return;}
@@ -1751,12 +1752,29 @@ async function loadUsers(){
         +'<td>'+((porEmail[(u.email||'').toLowerCase()]||[]).map(function(c){return '<span class="adm-acc">'+esc(c.produto||'produto')+'<button title="Tirar esse acesso" onclick="admTirarAcesso(\''+esc(c.pedido)+'\')">✕</button></span>';}).join('')||'<span style="font-size:11px;color:var(--fg3)">Nenhum</span>')+'</td>'
         +'<td><span class="admin-status '+(confirmed?'admin-status-ok':'admin-status-pend')+'">'+(confirmed?'Confirmado':'Pendente')+'</span></td>'
         +'<td style="font-size:11px;color:var(--fg2)">'+dateStr+'</td>'
-        +'<td style="white-space:nowrap"><button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="admPerfil(\''+u.id+'\')">📋 Perfil'+((meta.mi&&meta.mi.onb&&!meta.mi.onb.pulou)?' ✓':'')+'</button> <button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="admReenviar(\''+u.id+'\')">📧 Enviar acesso</button> <button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="openResetModal(\''+u.id+'\',\''+esc(u.email)+'\')">🔑 Senha</button> <button class="admin-btn admin-btn-danger admin-btn-sm" onclick="admApagarAluno(\''+u.id+'\')">🗑️ Apagar</button></td>'
+        +'<td style="white-space:nowrap"><button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="admPerfil(\''+u.id+'\')">📋 Perfil'+((meta.mi&&meta.mi.onb&&!meta.mi.onb.pulou)?' ✓':'')+'</button> <button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="admMentorar(\''+u.id+'\')">'+(window._admMentorandos[(u.email||'').toLowerCase()]?'🎓 Mentorando ✓':'🎓 Tornar mentorando')+'</button> <button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="admReenviar(\''+u.id+'\')">📧 Enviar acesso</button> <button class="admin-btn admin-btn-ghost admin-btn-sm" onclick="openResetModal(\''+u.id+'\',\''+esc(u.email)+'\')">🔑 Senha</button> <button class="admin-btn admin-btn-danger admin-btn-sm" onclick="admApagarAluno(\''+u.id+'\')">🗑️ Apagar</button></td>'
         +'</tr>';
     });
     html+='</tbody></table></div>';
     el.innerHTML=html;
   }catch(e){el.innerHTML='<div class="admin-loading" style="color:var(--red)">Erro ao carregar: '+e.message+'</div>';}
+}
+
+// ─── Aluno vira mentorando: já aparece na aba Mentoria (com a foto dele) ───
+async function admMentorar(id){
+  var u=(window._admUsers||{})[id];if(!u)return;
+  var email=(u.email||'').toLowerCase();
+  if((window._admMentorandos||{})[email]){toast('Já é mentorando. Veja em Mentoria 🎓','#10b981');return;}
+  var meta=u.user_metadata||{},nome=meta.full_name||meta.name||email.split('@')[0];
+  var base=nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,34)||'aluno';
+  var foto=meta.avatar_url&&String(meta.avatar_url).length<=120000?meta.avatar_url:null;
+  for(var i=0;i<4;i++){
+    var sala=i?base+'-'+Math.random().toString(36).slice(2,5):base;
+    var r=await _sb.from('mi_mentorias').insert({nome:nome,tipo:'particular',emails:[email],sala:sala,foto:foto});
+    if(!r.error){window._admMentorandos[email]=1;toast('🎓 '+nome+' agora é mentorando. Está na aba Mentoria','#10b981');loadUsers();if(window.EBG_MENTORIA)EBG_MENTORIA.recarregar();return;}
+    if(!/duplicate|unique/i.test(r.error.message||'')){toast('Não deu: '+(r.error.message||'rode o SQL das mentorias'),'#ef4444');return;}
+  }
+  toast('Não consegui criar a sala','#ef4444');
 }
 
 // ─── E-mail de acesso (Make → Gmail do Gediel) ───
@@ -2715,7 +2733,7 @@ document.getElementById('adm-les-modal').addEventListener('click',function(e){if
 </script>
 <script src="membros-acesso.js?v=202611212330"></script>
 <script src="membros-porta.js?v=8"></script>
-<script src="membros-mentoria.js?v=4"></script>
+<script src="membros-mentoria.js?v=5"></script>
 <script src="membros-mentorias.js?v=2"></script>
 <script src="membros-tarefas.js?v=202611182"></script>
 <script src="prompts-dados.js?v=1"></script>

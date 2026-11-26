@@ -41,6 +41,7 @@
     '.mt-enc{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid var(--border);font-size:14px;flex-wrap:wrap}.mt-enc:first-of-type{border-top:0}' +
     '.mt-chip{font-size:12px;font-weight:700;padding:3px 9px;border-radius:99px;color:#fff;white-space:nowrap}' +
     '.mt-btn{border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:800;font-size:14px;cursor:pointer;background:var(--accent,#4f6ef7);color:#fff}.mt-btn.g{background:var(--surface2);color:var(--fg);border:1px solid var(--border)}.mt-btn.s{padding:7px 11px;font-size:12.5px;border-radius:10px}' +
+    '.mt-av{width:52px;height:52px;flex:none;border-radius:50%;background:rgba(127,127,127,.2) center/cover;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;color:var(--fg2)}' +
     '.mt-grp{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--fg2);margin:6px 0 -4px}' +
     '.mt-al{display:flex;flex-direction:column;gap:10px}.mt-al .top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.mt-al .nm{font-weight:800;font-size:16px;flex:1;min-width:130px}.mt-al .meta{font-size:12.5px;color:var(--fg2)}' +
     '.mt-ed{display:grid;grid-template-columns:1fr 1fr;gap:8px;border-top:1px solid var(--border);padding-top:12px}.mt-ed label{display:flex;flex-direction:column;gap:3px;font-size:12px;color:var(--fg2)}.mt-ed .full{grid-column:1/-1}' +
@@ -106,10 +107,20 @@
   }
 
   // ───── central do admin
+  function fotoDe(a) {
+    if (a.foto) return a.foto;
+    var us = window._admUsers || {}, k;       // sem foto cadastrada: usa a do perfil do aluno (se a lista de alunos do Admin já foi aberta)
+    for (k in us) { var u = us[k]; if (u && u.email && (a.emails || []).indexOf(u.email.toLowerCase()) >= 0 && u.user_metadata && u.user_metadata.avatar_url) return u.user_metadata.avatar_url; }
+    return '';
+  }
+  function avatar(a) {
+    var f = fotoDe(a);
+    return '<span class="mt-av"' + (f ? ' style="background-image:url(' + esc(f) + ')"' : '') + '>' + (f ? '' : esc((a.nome || '?').trim().slice(0, 2).toUpperCase())) + '</span>';
+  }
   function cartao(a) {
     var enc = encDe(a), ped = enc.filter(function (e) { return e.status === 'pedido'; }).length;
     var prox = enc.filter(function (e) { return (e.status === 'confirmado' || e.status === 'pedido') && new Date(e.inicio) > new Date(); }).sort(function (x, y) { return new Date(x.inicio) - new Date(y.inicio); })[0];
-    var h = '<div class="mt-box mt-al" data-id="' + a.id + '"><div class="top"><span class="mt-dot' + (on(a) ? ' on' : '') + '" title="' + (on(a) ? 'Tem gente na sala' : 'Sala vazia') + '"></span><span class="nm">' + esc(a.nome) + '</span>' +
+    var h = '<div class="mt-box mt-al" data-id="' + a.id + '"><div class="top">' + avatar(a) + '<span class="mt-dot' + (on(a) ? ' on' : '') + '" title="' + (on(a) ? 'Tem gente na sala' : 'Sala vazia') + '"></span><span class="nm">' + esc(a.nome) + '</span>' +
       '<span class="meta">' + feitos(a) + (a.encontros_total ? ' / ' + a.encontros_total : '') + ' encontros' + (ped ? ' · <b style="color:#d99a2b">🕓 ' + ped + ' pedido' + (ped > 1 ? 's' : '') + '</b>' : '') + '</span></div>' +
       '<div class="meta">' + (prox ? 'Próximo: ' + esc(dt(prox.inicio)) : 'Sem encontro marcado') + (on(a) ? ' · <b style="color:#1b8f6b">🟢 ' + M.pres[a.sala] + ' na sala</b>' : '') + '</div>' +
       '<div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="mt-btn s" data-mt="prof">▶ Entrar na sala</button>' +
