@@ -15,7 +15,7 @@
 
   var css = document.createElement('style');
   css.textContent =
-    '#mm-porta,#mm-prof{position:fixed;inset:0;z-index:9650;display:none;overflow:auto;background:var(--bg);color:var(--fg);padding:max(20px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(24px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}' +
+    '#mm-porta,#mm-prof{position:fixed;inset:0;z-index:9990;display:none;overflow:auto;background:var(--bg);color:var(--fg);padding:max(20px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(24px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}' +
     '#mm-porta.on,#mm-prof.on{display:block}#mm-porta .box{max-width:900px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;justify-content:center;gap:22px}' +
     '#mm-porta h1{font-size:clamp(22px,4vw,30px);margin:0;text-align:center;font-weight:800}#mm-porta .oi{text-align:center;font-size:14px;color:var(--fg2);margin-bottom:-14px}' +
     '#mm-porta .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}' +
@@ -115,10 +115,19 @@
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && prof.classList.contains('on')) { ss('mm_ok', null); abrirPorta(); } });
 
+  // já abre a porta no primeiro instante se este aparelho já entrou como admin (sem mostrar a plataforma antes)
+  var PRE = ls('mi_adm_ok') === '1' && !PULA && !ss('mm_ok');
+  if (PRE) { var u0 = ls('mi_modo_adm'); $('mm-oi').textContent = 'Olá, Gediel'; porta.classList.add('on'); }
   var decidido = false;
   setInterval(function () {
-    if (!decidido && S().pronto) { decidido = true; if (admin() && !PULA && !ss('mm_ok')) abrirPorta(); }
+    var s = S();
+    if (!decidido && s.pronto) {
+      decidido = true;
+      if (admin()) { ls('mi_adm_ok', '1'); if (!PULA && !ss('mm_ok') && !porta.classList.contains('on')) abrirPorta(); }
+      else { ls('mi_adm_ok', '0'); if (PRE) porta.classList.remove('on'); }
+      document.documentElement.classList.remove('mm-pre');
+    }
     if (prof.classList.contains('on')) pintarProf();
-  }, 1000);
+  }, 200);
   window.EBG_MODOS = { abrir: abrirPorta, editor: entrarEditor, professor: entrarProfessor };
 })();
