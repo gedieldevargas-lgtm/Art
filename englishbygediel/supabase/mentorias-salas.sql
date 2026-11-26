@@ -2,7 +2,7 @@
 -- A sala de vídeo é a do site da Central (gedielcentral.netlify.app/sala.html); aqui ficam só os cadastros.
 -- O admin (tabela admins) cria e edita tudo pelo painel /admin, aba "Mentorias".
 -- Cada aluno só lê as mentorias em que o e-mail dele está na lista. Pode rodar mais de uma vez.
--- Precisa do supabase/membros.sql já rodado (usa sou_admin() e meu_email()).
+-- Só precisa do supabase/admin.sql (usa is_admin()); não depende do membros.sql.
 
 create table if not exists public.mi_mentorias (
   id         uuid primary key default gen_random_uuid(),
@@ -22,8 +22,8 @@ alter table public.mi_mentorias enable row level security;
 
 drop policy if exists mentorias_admin on public.mi_mentorias;
 create policy mentorias_admin on public.mi_mentorias for all
-  using (public.sou_admin()) with check (public.sou_admin());
+  using (public.is_admin()) with check (public.is_admin());
 
 drop policy if exists mentorias_aluno on public.mi_mentorias;
 create policy mentorias_aluno on public.mi_mentorias for select
-  using (ativo and public.meu_email() = any(emails));
+  using (ativo and lower(coalesce(auth.jwt() ->> 'email', '')) = any(emails));
