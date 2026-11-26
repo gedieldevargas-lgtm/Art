@@ -1,0 +1,178 @@
+/* Aba "Mentorias" do painel: cada mentoria (particular, casal ou turma) tem uma SALA FIXA
+   com foto, dias e horário, os alunos (por e-mail) e o link que o aluno usa.
+   · A sala de vídeo é a do site da Central (SITE/sala.html); aqui só se cadastra e se abre.
+   · O aluno vê a mentoria dele na área de membros (membros-mentorias.js).
+   · Tabela: supabase/mentorias-salas.sql. O link do aluno é gerado na primeira vez, pedindo a senha do professor da sala. */
+(() => {
+  const A = window.EBG_ADMIN;
+  if (!A) return;
+  const { sb } = A;
+  const SITE = 'https://gedielcentral.netlify.app';
+  const $ = (s, el = document) => el.querySelector(s);
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const D3 = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'], ORD = [1, 2, 3, 4, 5, 6, 0];
+  const TIPOS = { particular: 'Particular', casal: 'Casal', turma: 'Turma' };
+  const slug = t => String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40);
+  const emailsDe = txt => [...new Set(String(txt || '').toLowerCase().split(/[\s,;]+/).filter(e => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)))];
+  let linhas = [], compras = [], senha = '', ed = null, foto = '';
+
+  const css = document.createElement('style');
+  css.textContent = `
+  .mn-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px;margin:16px 0}
+  .mn-card{display:flex;gap:14px;background:var(--surface);border:1px solid var(--linha);border-radius:var(--raio);padding:16px}
+  .mn-card.off{opacity:.55}
+  .mn-av{width:64px;height:64px;flex:none;border-radius:50%;background:var(--surface-3) center/cover;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.15rem;color:var(--muted)}
+  .mn-main{min-width:0;flex:1;display:grid;gap:5px;align-content:start}
+  .mn-top{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.mn-top b{font-size:1rem}
+  .mn-tag{font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--surface-3)}
+  .mn-hoje{font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:99px;background:#34d399;color:#052e1b}
+  .mn-quando{font-size:.88rem}.mn-al{font-size:.78rem;color:var(--muted);overflow-wrap:anywhere}
+  .mn-btns{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+  .mn-vazio{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--linha);border-radius:var(--raio)}
+  dialog#mnDlg{border:1px solid var(--linha);border-radius:var(--raio);background:var(--surface);color:inherit;padding:0;width:min(560px,94vw);max-height:92vh}
+  dialog#mnDlg::backdrop{background:rgba(0,0,0,.55)}
+  #mnDlg form{display:grid;gap:12px;padding:20px;max-height:92vh;overflow:auto}
+  #mnDlg h3{margin:0;font:400 1.4rem/1.2 var(--serif)}
+  #mnDlg label{display:grid;gap:5px;font-size:.82rem;color:var(--muted)}
+  #mnDlg input[type=text],#mnDlg input[type=time],#mnDlg select,#mnDlg textarea{background:var(--surface-2);border:1px solid var(--linha);border-radius:8px;padding:9px 10px;color:inherit;font:inherit;font-size:.9rem}
+  #mnDlg textarea{min-height:84px;resize:vertical}
+  #mnDlg input[type=checkbox]{width:16px;height:16px;min-width:0;padding:0;margin:0;flex:none}
+  .mn-dias{display:flex;gap:6px;flex-wrap:wrap}
+  #mnDlg .mn-dias label{display:flex;flex-direction:row;align-items:center;gap:6px;background:var(--surface-2);border:1px solid var(--linha);border-radius:99px;padding:6px 12px;cursor:pointer;color:inherit}
+  #mnDlg label.mn-check{display:flex;flex-direction:row;align-items:center;gap:8px;color:inherit;font-size:.88rem}
+  .mn-foto{display:flex;gap:12px;align-items:center}
+  .mn-rodape{display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap;margin-top:4px}`;
+  document.head.appendChild(css);
+
+  const dlg = document.createElement('dialog');
+  dlg.id = 'mnDlg';
+  dlg.innerHTML = `<form method="dialog" id="mnForm">
+    <h3 id="mnTit">Nova mentoria</h3>
+    <label>Nome da mentoria<input type="text" id="mnNome" maxlength="120" placeholder="ex.: Camila, Evelyn & Rhian ou Turma Gabriel"></label>
+    <label>Tipo<select id="mnTipo"><option value="particular">Particular (1 aluno)</option><option value="casal">Casal</option><option value="turma">Turma</option></select></label>
+    <div><div style="font-size:.82rem;color:var(--muted);margin-bottom:6px">Dias fixos da semana</div><div class="mn-dias" id="mnDias"></div></div>
+    <label>Horário fixo<input type="time" id="mnHora"></label>
+    <label>E-mails dos alunos (um por linha). Só eles veem esta sala no app.<textarea id="mnEmails" placeholder="aluno@email.com"></textarea></label>
+    <label>Adicionar quem já comprou<select id="mnCompra"><option value="">— escolher e-mail —</option></select></label>
+    <div class="mn-foto"><span class="mn-av" id="mnPrev"></span><label style="flex:1">Foto<input type="file" id="mnFoto" accept="image/*"></label></div>
+    <label>Nome da sala no endereço (não mude depois de mandar o link)<input type="text" id="mnSala" maxlength="40"></label>
+    <label class="mn-check"><input type="checkbox" id="mnAtivo" checked> Mentoria ativa (aparece para os alunos)</label>
+    <p class="erro" id="mnErro"></p>
+    <div class="mn-rodape"><button class="botao" type="button" id="mnCancela">Cancelar</button><button class="botao" type="submit" id="mnSalva">Salvar</button></div>
+  </form>`;
+  document.body.appendChild(dlg);
+  $('#mnDias').innerHTML = ORD.map(d => `<label><input type="checkbox" value="${d}"> ${D3[d]}</label>`).join('');
+
+  const aviso = t => { const e = $('#mnAviso'); if (e) e.textContent = t || ''; };
+  const linkAluno = m => `${SITE}/sala.html?sala=${encodeURIComponent(m.sala)}&k=${encodeURIComponent(m.k)}`;
+
+  async function carregar() {
+    $('#mnLista').innerHTML = '<p class="sub">Carregando…</p>'; aviso('');
+    const r = await sb.from('mi_mentorias').select('*').order('nome');
+    if (r.error) { $('#mnLista').innerHTML = ''; aviso('Não consegui ler as mentorias: ' + r.error.message + ' (rodou o supabase/mentorias-salas.sql?)'); return; }
+    linhas = r.data || []; desenhar();
+    const c = await sb.from('compras').select('email,produto').order('created_at', { ascending: false }).limit(3000);
+    compras = c.error ? [] : (c.data || []);
+  }
+
+  function desenhar() {
+    const el = $('#mnLista');
+    if (!linhas.length) { el.innerHTML = '<div class="mn-vazio">Nenhuma mentoria ainda. Toque em <b>+ Nova mentoria</b> para criar a primeira sala fixa.</div>'; return; }
+    const hoje = new Date().getDay();
+    el.innerHTML = linhas.map(m => {
+      const dias = ORD.filter(d => (m.dias || []).includes(d)).map(d => D3[d]).join(' · ');
+      const av = m.foto ? `<span class="mn-av" style="background-image:url(${esc(m.foto)})"></span>` : `<span class="mn-av">${esc((m.nome || '?').trim().slice(0, 2).toUpperCase())}</span>`;
+      const al = (m.emails || []).length ? m.emails.join(', ') : 'nenhum aluno ainda';
+      return `<div class="mn-card${m.ativo ? '' : ' off'}">${av}<div class="mn-main">
+        <div class="mn-top"><b>${esc(m.nome)}</b><span class="mn-tag">${TIPOS[m.tipo] || m.tipo}</span>${(m.dias || []).includes(hoje) ? '<span class="mn-hoje">hoje</span>' : ''}${m.ativo ? '' : '<span class="mn-tag">pausada</span>'}</div>
+        <div class="mn-quando">${esc(dias || 'sem dias definidos')}${m.hora ? ' · ' + esc(m.hora) : ''}</div>
+        <div class="mn-al">${esc(al)}</div>
+        <div class="mn-btns"><button class="botao" type="button" data-mn="entrar" data-id="${m.id}">▶ Entrar</button><button class="botao" type="button" data-mn="link" data-id="${m.id}">🔗 Link do aluno</button><button class="botao" type="button" data-mn="editar" data-id="${m.id}">Editar</button><button class="botao" type="button" data-mn="apagar" data-id="${m.id}">Remover</button></div>
+      </div></div>`;
+    }).join('');
+  }
+
+  function form(m) {
+    ed = m || null; foto = (m && m.foto) || '';
+    $('#mnTit').textContent = m ? 'Editar mentoria' : 'Nova mentoria';
+    $('#mnNome').value = m ? m.nome : ''; $('#mnTipo').value = m ? m.tipo : 'particular';
+    $('#mnHora').value = (m && m.hora) || ''; $('#mnEmails').value = m ? (m.emails || []).join('\n') : '';
+    $('#mnSala').value = m ? m.sala : ''; $('#mnAtivo').checked = m ? !!m.ativo : true;
+    $$dias().forEach(i => { i.checked = !!(m && (m.dias || []).includes(+i.value)); });
+    $('#mnPrev').style.backgroundImage = foto ? `url(${foto})` : ''; $('#mnPrev').textContent = foto ? '' : '📷';
+    $('#mnErro').textContent = ''; $('#mnFoto').value = '';
+    const vistos = new Set(), op = [];
+    compras.forEach(c => { const e = String(c.email || '').toLowerCase(); if (e && !vistos.has(e)) { vistos.add(e); op.push(`<option value="${esc(e)}">${esc(e)}${c.produto ? ' · ' + esc(c.produto) : ''}</option>`); } });
+    $('#mnCompra').innerHTML = '<option value="">— escolher e-mail —</option>' + op.join('');
+    dlg.showModal();
+  }
+  const $$dias = () => [...document.querySelectorAll('#mnDias input')];
+
+  $('#mnCompra').addEventListener('change', e => {
+    const v = e.target.value; if (!v) return;
+    const lista = emailsDe($('#mnEmails').value); if (!lista.includes(v)) lista.push(v);
+    $('#mnEmails').value = lista.join('\n'); e.target.value = '';
+  });
+  $('#mnNome').addEventListener('input', () => { if (!ed && !$('#mnSala').dataset.manual) $('#mnSala').value = slug($('#mnNome').value); });
+  $('#mnSala').addEventListener('input', e => { e.target.dataset.manual = '1'; });
+  $('#mnCancela').addEventListener('click', () => dlg.close());
+  $('#mnFoto').addEventListener('change', e => {
+    const f = e.target.files[0]; if (!f) return;
+    const rd = new FileReader();
+    rd.onload = () => { const im = new Image(); im.onload = () => {
+      const T = 256, lado = Math.min(im.width, im.height), c = document.createElement('canvas'); c.width = c.height = T;
+      c.getContext('2d').drawImage(im, (im.width - lado) / 2, (im.height - lado) / 2, lado, lado, 0, 0, T, T);
+      foto = c.toDataURL('image/jpeg', 0.82); $('#mnPrev').style.backgroundImage = `url(${foto})`; $('#mnPrev').textContent = '';
+    }; im.src = rd.result; };
+    rd.readAsDataURL(f);
+  });
+
+  $('#mnForm').addEventListener('submit', async ev => {
+    ev.preventDefault();
+    const nome = $('#mnNome').value.trim(), sala = slug($('#mnSala').value || nome);
+    if (!nome) { $('#mnErro').textContent = 'Escreva o nome da mentoria.'; return; }
+    const linha = { nome, tipo: $('#mnTipo').value, emails: emailsDe($('#mnEmails').value), dias: $$dias().filter(i => i.checked).map(i => +i.value), hora: $('#mnHora').value || null, foto: foto || null, sala, ativo: $('#mnAtivo').checked };
+    if (ed && ed.sala !== sala) linha.k = null;      // endereço novo = link novo
+    $('#mnSalva').disabled = true;
+    const r = ed ? await sb.from('mi_mentorias').update(linha).eq('id', ed.id) : await sb.from('mi_mentorias').insert(linha);
+    $('#mnSalva').disabled = false;
+    if (r.error) { $('#mnErro').textContent = /duplicate|unique/i.test(r.error.message) ? 'Já existe uma sala com esse nome no endereço. Mude o nome da sala.' : 'Não salvou: ' + r.error.message; return; }
+    dlg.close(); carregar();
+  });
+
+  async function linkDe(m) {
+    if (m.k) return linkAluno(m);
+    if (!senha) senha = prompt('Senha do professor da sala (a mesma que você usa para entrar na aula). Só pedimos uma vez:') || '';
+    if (!senha) return '';
+    try {
+      const r = await fetch(`${SITE}/api/sala?action=link&sala=${encodeURIComponent(m.sala)}&senha=${encodeURIComponent(senha)}`);
+      const d = await r.json();
+      if (!r.ok) { senha = ''; throw new Error(d.erro || 'erro ' + r.status); }
+      const u = await sb.from('mi_mentorias').update({ k: d.k }).eq('id', m.id);
+      if (u.error) throw new Error(u.error.message);
+      m.k = d.k; return linkAluno(m);
+    } catch (e) { aviso('Não consegui gerar o link: ' + e.message); return ''; }
+  }
+
+  document.addEventListener('click', async ev => {
+    const b = ev.target.closest('[data-mn]'); if (!b) return;
+    const m = linhas.find(x => x.id === b.dataset.id); if (!m) return;
+    const a = b.dataset.mn;
+    if (a === 'editar') form(m);
+    else if (a === 'entrar') window.open(`${SITE}/sala.html?sala=${encodeURIComponent(m.sala)}&prof`, '_blank', 'noopener');
+    else if (a === 'link') {
+      const u = await linkDe(m); if (!u) return;
+      try { await navigator.clipboard.writeText(u); aviso('✅ Link do aluno copiado: ' + u); } catch (e) { prompt('Copie o link do aluno:', u); }
+    } else if (a === 'apagar') {
+      if (confirm('Remover a mentoria "' + m.nome + '"? Os alunos deixam de ver esta sala.')) {
+        const r = await sb.from('mi_mentorias').delete().eq('id', m.id);
+        if (r.error) aviso('Não removeu: ' + r.error.message); else carregar();
+      }
+    }
+  });
+  const nova = $('#mnNova'), rec = $('#mnRecarregar');
+  if (nova) nova.addEventListener('click', () => form(null));
+  if (rec) rec.addEventListener('click', carregar);
+
+  window.EBG_MENTORIAS = { abrir: carregar };
+})();
