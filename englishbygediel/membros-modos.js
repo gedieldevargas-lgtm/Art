@@ -51,11 +51,29 @@
   faixa.innerHTML = '<button type="button" data-mm="inicio">← Início</button><span class="t">✏️ Modo editor · salva sozinho</span><button type="button" data-mm="acessos">Acessos e materiais</button><button type="button" data-mm="admin">Painel admin</button>';
   document.body.appendChild(faixa);
 
-  var prof = document.createElement('div'); prof.id = 'mm-prof'; document.body.appendChild(prof);
+  var prof = document.createElement('div'); prof.id = 'mm-prof';
+  prof.innerHTML = '<div class="wrap"><div class="hd"><button type="button" class="mm-b" data-mm="inicio">← Início</button><h2>Modo professor</h2><button type="button" class="mm-b p" data-mm="minhasala">Minha sala</button></div>' +
+    '<div class="tabs"><button type="button" class="mm-tab on" data-mm="aba" data-t="painel">🏠 Painel</button><button type="button" class="mm-tab" data-mm="aba" data-t="mentorias">🎓 Mentorias</button></div>' +
+    '<div id="mm-painel"></div><div id="mm-mhost" style="display:none"></div></div>';
+  document.body.appendChild(prof);
+  css.textContent += '#mm-prof .tabs{display:flex;gap:8px;flex-wrap:wrap}.mm-tab{border:1px solid var(--border);background:var(--surface);color:var(--fg2);border-radius:99px;padding:9px 18px;font:inherit;font-weight:800;font-size:14px;cursor:pointer}.mm-tab.on{background:var(--accent);color:#fff;border-color:transparent}#mm-mhost .pane{display:block;opacity:1}#mm-mhost #pane-mentoria{padding:0}';
+  function aba(t) {
+    var host = $('mm-mhost'), pn = $('pane-mentoria');
+    [].forEach.call(prof.querySelectorAll('.mm-tab'), function (b) { b.classList.toggle('on', b.dataset.t === t); });
+    prof.dataset.tab = t;
+    $('mm-painel').style.display = t === 'painel' ? '' : 'none'; host.style.display = t === 'mentorias' ? '' : 'none';
+    if (t === 'mentorias' && pn) { host.appendChild(pn); if (window.EBG_MENTORIA) EBG_MENTORIA.recarregar(); }
+    else devolverPane();
+    if (t === 'painel') pintarProf();
+  }
+  function devolverPane() {   // a aba Mentorias volta pro lugar de origem (usada fora do Modo professor)
+    var pn = $('pane-mentoria'), ag = $('pane-agendar');
+    if (pn && ag && pn.parentNode === $('mm-mhost')) ag.insertAdjacentElement('afterend', pn);
+  }
 
   function abrirPorta() {
     var u = ls('mi_modo_adm'); $('mm-oi').textContent = 'Olá, Gediel' + (u ? ' · último: ' + (u === 'editor' ? 'Modo editor' : 'Modo professor') : '');
-    porta.classList.add('on'); prof.classList.remove('on'); document.body.classList.remove('mm-ed');
+    porta.classList.add('on'); prof.classList.remove('on'); devolverPane(); document.body.classList.remove('mm-ed');
     if (window.MI_EDIT) MI_EDIT.ligar(false);
   }
   function entrarEditor() {
@@ -65,16 +83,17 @@
   function entrarProfessor() {
     ls('mi_modo_adm', 'professor'); ss('mm_ok', '1'); porta.classList.remove('on'); document.body.classList.remove('mm-ed');
     if (window.MI_EDIT) MI_EDIT.ligar(false);
-    prof.classList.add('on'); pintarProf(); if (window.EBG_MENTORIA) EBG_MENTORIA.recarregar().then(pintarProf);
+    prof.classList.add('on'); aba('painel'); if (window.EBG_MENTORIA) EBG_MENTORIA.recarregar().then(pintarProf);
   }
   function ir(pagina) {          // setor: fecha o painel e abre a página da plataforma
-    prof.classList.remove('on');
+    if (pagina === 'mentoria') return aba('mentorias');
+    prof.classList.remove('on'); devolverPane();
     var el = [].filter.call(document.querySelectorAll('.nav-pill'), function (n) { return (n.getAttribute('onclick') || '').indexOf("'" + pagina + "'") >= 0; })[0];
     if (window.goTo) goTo(pagina, el || null);
   }
 
   function pintarProf() {
-    if (!prof.classList.contains('on')) return;
+    if (!prof.classList.contains('on') || prof.dataset.tab === 'mentorias') return;
     var D = window.EBG_MENTORIA ? EBG_MENTORIA.dados() : { alunos: [], enc: [], pres: {}, ok: false }, E = window.EBG_MENTORIA;
     var ped = D.enc.filter(function (e) { return e.status === 'pedido'; }).sort(function (a, b) { return new Date(a.inicio) - new Date(b.inicio); });
     var naSala = D.alunos.filter(function (a) { return a.sala && D.pres[a.sala] > 0; }).length;
@@ -83,8 +102,7 @@
       nHoje += D.enc.filter(function (e) { return e.mentoria_id === a.id && e.status === 'confirmado' && new Date(e.inicio).toDateString() === hoje; }).length;
       var fx = E ? E.fixos(a, 1)[0] : null; if (fx && fx.toDateString() === hoje) nHoje++;
     });
-    var h = '<div class="wrap"><div class="hd"><button type="button" class="mm-b" data-mm="inicio">← Início</button><h2>Modo professor</h2><button type="button" class="mm-b p" data-mm="minhasala">Minha sala</button></div>' +
-      '<div class="mets"><div class="met"><small>Pedidos esperando</small><b>' + ped.length + '</b></div><div class="met"><small>Na sala agora</small><b>' + naSala + '</b></div><div class="met"><small>Encontros hoje</small><b>' + nHoje + '</b></div><div class="met"><small>Mentorandos</small><b>' + D.alunos.length + '</b></div></div>';
+    var h = '<div class="mets"><div class="met"><small>Pedidos esperando</small><b>' + ped.length + '</b></div><div class="met"><small>Na sala agora</small><b>' + naSala + '</b></div><div class="met"><small>Encontros hoje</small><b>' + nHoje + '</b></div><div class="met"><small>Mentorandos</small><b>' + D.alunos.length + '</b></div></div>';
     if (!D.ok) h += '<div class="cx">Os dados das mentorias ligam depois que você rodar o SQL das mentorias no Supabase.</div>';
     h += '<div class="cols"><div class="cx"><h3>Pedidos de mentoria</h3>' + (ped.length ? ped.slice(0, 6).map(function (e) {
       var a = D.alunos.filter(function (x) { return x.id === e.mentoria_id; })[0] || { nome: e.email || '?' };
@@ -97,8 +115,8 @@
       '<div class="vz" style="padding:0">Setores</div><div class="secs">' +
       [['mentoria', '🎓', 'Mentorias'], ['mt10', '🏁', 'Maratona'], ['admin', '👥', 'Alunos e acessos'], ['admin', '🛒', 'Vendas'], ['eom', '💬', 'Mural e EOM'], ['lives', '📅', 'Agenda e lives']].map(function (s) {
         return '<button type="button" class="sec" data-mm="ir" data-p="' + s[0] + '"><span style="font-size:22px">' + s[1] + '</span>' + s[2] + '</button>';
-      }).join('') + '</div></div>';
-    if (prof.dataset.h !== h) { prof.dataset.h = h; prof.innerHTML = h; }
+      }).join('') + '</div>';
+    var pa = $('mm-painel'); if (pa && pa.dataset.h !== h) { pa.dataset.h = h; pa.innerHTML = h; }
   }
 
   document.addEventListener('click', function (e) {
@@ -106,7 +124,8 @@
     var a = t.dataset.mm;
     if (a === 'editor') entrarEditor();
     else if (a === 'professor') entrarProfessor();
-    else if (a === 'inicio') { ss('mm_ok', null); abrirPorta(); }
+    else if (a === 'aba') aba(t.dataset.t);
+    else if (a === 'inicio') { ss('mm_ok', null); devolverPane(); abrirPorta(); }
     else if (a === 'ir') ir(t.dataset.p);
     else if (a === 'minhasala') { if (window.EBG_MENTORIA) EBG_MENTORIA.minhaSala(); }
     else if (a === 'confirmar') { var el = t.closest('[data-e]'); if (el && window.EBG_MENTORIA) EBG_MENTORIA.decidir(el.dataset.e, 'confirmado').then(pintarProf); }
