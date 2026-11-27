@@ -49,6 +49,9 @@
       }
     } catch (e) {}
     try {
+      var pl = window.EBG_PLANO && EBG_PLANO.hoje(); if (pl) { var h0 = new Date(); h0.setHours(0, 0, 0, 0); out.push({ ts: h0.getTime(), e: '🎯', t: 'Sessão de hoje do seu plano', s: pl.g.n + ' · sessão ' + pl.n + ' de ' + pl.de, a: 'plano' }); }
+    } catch (e) {}
+    try {
       var M = window.EBG_MENTORIA && EBG_MENTORIA.dados(), adm = window._isAdmin;
       if (M && !adm) (M.enc || []).filter(function (x) { return x.status === 'confirmado' && new Date(x.inicio) > new Date(); }).slice(0, 3).forEach(function (x) { out.push({ ts: new Date(x.created_at || x.inicio).getTime(), e: '🎓', t: 'Mentoria confirmada', s: new Date(x.inicio).toLocaleString('pt-BR', { weekday: 'short', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }), a: 'mentoria' }); });
     } catch (e) {}
@@ -77,6 +80,7 @@
       if (i.a === 'aula' && window.MI_APP) MI_APP.abrirAula(i.mod, i.les);
       else if (i.a === 'live' && window.goTo) goTo('lives', null);
       else if (i.a === 'mentoria' && window.goTo) goTo('mentoria', null);
+      else if (i.a === 'plano' && window.goTo) goTo('plano', null);
       return;
     }
     if (aberto && !pop.contains(e.target)) fechar();

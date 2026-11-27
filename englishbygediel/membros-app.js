@@ -650,13 +650,14 @@
     ST.prismaRes=m.prismaRes||l.prismaRes||null;
     ST.onb=m.onb||l.onb||null;
     ST.idioma=!!(m.idioma||l.idioma);
+    ST.plano=(m.plano&&l.plano)?((m.plano.upd||0)>=(l.plano.upd||0)?m.plano:l.plano):(m.plano||l.plano||null);
   }
   function salvar(){
     LS.set(chave(),ST);
     clearTimeout(salvarT);
     salvarT=setTimeout(function(){
       if(!U)return;
-      window._sb.auth.updateUser({data:{mi:{dias:ST.dias.slice(-150),vistas:ST.vistas.slice(-400),ultima:ST.ultima,bv:ST.bv,tour:ST.tour,nivel:ST.nivel,prisma:ST.prisma,prismaRes:ST.prismaRes,onb:ST.onb,idioma:ST.idioma,prog:podarProg()}}}).catch(function(){});
+      window._sb.auth.updateUser({data:{mi:{dias:ST.dias.slice(-150),vistas:ST.vistas.slice(-400),ultima:ST.ultima,bv:ST.bv,tour:ST.tour,nivel:ST.nivel,prisma:ST.prisma,prismaRes:ST.prismaRes,onb:ST.onb,idioma:ST.idioma,plano:ST.plano||null,prog:podarProg()}}}).catch(function(){});
     },1500);
   }
   function marcarDia(){
@@ -3401,5 +3402,6 @@
     compartilharQuiz:compartilharConquista,compartilharDia:function(){compartilharConquista(null);},festa:festa,
     vista:function(id){return (ST.vistas||[]).indexOf(id)>=0;},
     alternarVista:function(id){var i=ST.vistas.indexOf(id);if(i>=0)ST.vistas.splice(i,1);else{ST.vistas.push(id);marcarDia();}salvar();return i<0;},
-    proxLives:proxLives,quando:quando};
+    proxLives:proxLives,quando:quando,
+    plano:function(){return ST.plano||null;},salvarPlano:function(p){ST.plano=p;salvar();}};
 })();
