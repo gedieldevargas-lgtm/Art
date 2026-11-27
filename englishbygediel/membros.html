@@ -2089,7 +2089,8 @@ async function openModule(modId){
     +(m.cover_url?'<img src="'+esc(m.cover_url)+'" style="width:120px;aspect-ratio:16/9;object-fit:cover;border-radius:12px">':'<div style="width:120px;aspect-ratio:16/9;border-radius:12px;position:relative;overflow:hidden;flex-shrink:0">'+capaAuto(m.name,(_stMods||[]).filter(function(x){return (x.trilha||'programa')==='programa';}).indexOf(m))+'</div>')
     +'<div><div style="font-size:21px;font-weight:800">'+esc(m.name)+'</div><div style="font-size:13px;color:var(--fg2)">'+esc(m.sub||'')+' · '+ls.length+' aula'+(ls.length!==1?'s':'')+'</div></div></div>';
   if(!ls.length){v.innerHTML=head+'<div class="admin-loading">Nenhuma aula cadastrada ainda.</div>';return;}
-  var html='<div class="lesson-list">';
+  var nv=ls.filter(function(l){return vistaDe(l.id);}).length;
+  var html=(nv?'<div style="font-size:13px;font-weight:700;color:var(--green);margin:-6px 0 12px">✓ '+nv+' de '+ls.length+' aula'+(ls.length!==1?'s':'')+' vista'+(nv!==1?'s':'')+'</div>':'')+'<div class="lesson-list">';
   ls.forEach(function(l,i){
     var cov=lessonCover(l);
     var q=mine[l.id];
@@ -2097,7 +2098,8 @@ async function openModule(modId){
     html+='<div class="lesson-item '+(op?'':'locked')+'" onclick="openLesson(\''+l.id+'\')">'
       +'<div class="lthumb">'+(cov?'<img src="'+esc(cov)+'" alt="">':capaAuto(l.title,i))+(op?'':'<div class="mod-thumb-lock">'+(relFuture(l)?'📅':'⏳')+'</div>')+'</div>'
       +'<div style="flex:1;min-width:0"><div class="lt">'+(i+1)+'. '+esc(l.title)+'</div><div class="ls">'
-      +(op?'<span style="color:var(--green);font-weight:700">▶ Disponível</span>':relFuture(l)?'<span style="color:var(--accent);font-weight:700">📅 Libera '+fmtRel(l)+'</span>':'<span style="color:var(--gold);font-weight:700">⏳ Em breve</span>')
+      +(op&&vistaDe(l.id)?'<span style="color:var(--green);font-weight:800">✓ Vista</span>':'')
+      +(op&&!vistaDe(l.id)?'<span style="color:var(--green);font-weight:700">▶ Disponível</span>':relFuture(l)?'<span style="color:var(--accent);font-weight:700">📅 Libera '+fmtRel(l)+'</span>':'<span style="color:var(--gold);font-weight:700">⏳ Em breve</span>')
       +(!op&&votes[l.id]?'<span>🙋 '+votes[l.id]+' esperando</span>':'')
       +(reacts[l.id]?'<span>'+reacts[l.id]+' reaç'+(reacts[l.id]>1?'ões':'ão')+'</span>':'')
       +(q?'<span>🧩 Quiz '+q.score+'/'+q.total+'</span>':(l.quiz&&l.quiz.length?'<span>🧩 Quiz</span>':''))
@@ -2106,6 +2108,8 @@ async function openModule(modId){
   v.innerHTML=head+html+'</div>';
 }
 
+function vistaDe(id){try{return !!(window.MI_APP&&MI_APP.vista&&MI_APP.vista(id));}catch(e){return false;}}
+function altVista(){var l=_stCurLes;if(!l||!window.MI_APP)return;var on=MI_APP.alternarVista(l.id),b=document.getElementById('btn-vista');if(b){b.classList.toggle('on',on);b.textContent=on?'✓ Aula assistida':'Marcar como assistida';}}
 async function openLesson(lesId){
   var ls=_stLessons[_stCurMod.id]||[];
   var l=ls.filter(function(x){return x.id===lesId;})[0];if(!l)return;
@@ -2143,6 +2147,7 @@ async function renderLesson(){
       +'<div class="s">'+(votes.length?'<strong>'+votes.length+'</strong> '+(votes.length===1?'pessoa está esperando':'pessoas estão esperando')+' por ela':'Seja o primeiro a pedir essa aula')+'</div>'
       +'<button class="vote-btn '+(myVote?'on':'')+'" onclick="toggleVote()">'+(myVote?'✅ Você está esperando':'🙋 Estou esperando por essa aula')+'</button></div></div>';
   }
+  if(isOpen(l))html+='<div style="margin-top:12px"><button type="button" id="btn-vista" class="vote-btn'+(vistaDe(l.id)?' on':'')+'" onclick="altVista()">'+(vistaDe(l.id)?'✓ Aula assistida':'Marcar como assistida')+'</button></div>';
   html+=lessonNav();
   // professor vê o livro mesmo antes da aula liberar
   if(!isOpen(l)&&livroId&&window._isAdmin)html+='<div style="margin-top:14px"><div style="font-size:12px;font-weight:700;color:var(--fg3);margin-bottom:6px">👁 Só você vê: livro desta aula (o aluno vê quando a aula liberar)</div><aside class="aula-livro" id="aula-livro"></aside></div>';
@@ -2743,6 +2748,7 @@ document.getElementById('adm-les-modal').addEventListener('click',function(e){if
 <script src="membros-acesso.js?v=202611212330"></script>
 <script src="membros-porta.js?v=8"></script>
 <script src="membros-mentoria.js?v=8"></script>
+<script src="membros-notif.js?v=1"></script>
 <script src="membros-modos.js?v=5"></script>
 <script src="membros-mentorias.js?v=2"></script>
 <script src="membros-tarefas.js?v=202611182"></script>
@@ -2760,7 +2766,7 @@ document.getElementById('adm-les-modal').addEventListener('click',function(e){if
 <script src="membros-tutorial.js?v=4"></script>
 <script src="membros-links.js?v=1"></script>
 <script src="voz.js?v=2"></script>
-<script src="membros-app.js?v=202611261300"></script>
+<script src="membros-app.js?v=202611271100"></script>
 <script src="membros-editar.js?v=2"></script>
 <script src="playlist.js?v=2"></script>
 <script src="fx.js?v=2"></script>

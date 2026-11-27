@@ -3398,5 +3398,8 @@
     b.addEventListener('click',function(){document.body.classList.toggle('rail-off');try{localStorage.setItem('mi_rail_off',document.body.classList.contains('rail-off')?'1':'0');}catch(e){}pr();});})();
   setTimeout(montarAbasLives,0);
   window.MI_APP={conhecer:conhecer,tour:tour,aulaAberta:aulaAberta,marcarDia:marcarDia,abrirAula:abrirAula,renderHome:renderHome,
-    compartilharQuiz:compartilharConquista,compartilharDia:function(){compartilharConquista(null);},festa:festa};
+    compartilharQuiz:compartilharConquista,compartilharDia:function(){compartilharConquista(null);},festa:festa,
+    vista:function(id){return (ST.vistas||[]).indexOf(id)>=0;},
+    alternarVista:function(id){var i=ST.vistas.indexOf(id);if(i>=0)ST.vistas.splice(i,1);else{ST.vistas.push(id);marcarDia();}salvar();return i<0;},
+    proxLives:proxLives,quando:quando};
 })();
