@@ -131,12 +131,15 @@
     { ic: '💬', t: 'Comentários das aulas', a: 'admin', v: 'comentarios' },
     { ic: '🎥', t: 'Links das salas', a: 'admin', v: 'mentorias' },
     { ic: '📅', t: 'Agenda e lives', a: 'pag', v: 'lives' },
-    { ic: '🙏', t: 'Mural e EOM', a: 'pag', v: 'eom' }
+    { ic: '🙏', t: 'Mural e EOM', a: 'pag', v: 'eom' },
+    { ic: '🖼️', t: 'Fotos de perfil', a: 'fn', v: 'foto' },
+    { ic: '💬', t: 'Comunidade (feed)', a: 'pag', v: 'feed' }
   ];
   function pillDe(pg) { return [].filter.call(document.querySelectorAll('.nav-pill'), function (n) { return (n.getAttribute('onclick') || '').indexOf("'" + pg + "'") >= 0; })[0] || null; }
   function sair(titulo) { prof.classList.remove('on'); devolverPane(); document.body.classList.add('mm-sec'); $('mm-volta-t').textContent = titulo || ''; }
   function setor(s) {
     if (s.a === 'aba') return aba(s.v);
+    if (s.a === 'fn') { if (window.EBG_FOTO) EBG_FOTO.revisar(); return; }
     sair(s.t);
     if (s.a === 'pag') { if (window.goTo) goTo(s.v, pillDe(s.v)); return; }
     // admin: abre o painel admin e cai direto na aba pedida

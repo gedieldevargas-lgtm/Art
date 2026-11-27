@@ -10,7 +10,7 @@
     eom:['home','maratona','modulos','jogos','bussola','prisma','prompts','culture','viagens','indicar','agendar','mt10'],
     culture:['home','maratona','bussola','prisma','prompts','eom','viagens','indicar','agendar','mt10']
   };
-  var PERMITE={eom:['eom','lives','materiais','planos','filmes','plano'],culture:['culture','lives','filmes','jogos','materiais','planos','plano']};
+  var PERMITE={eom:['eom','lives','materiais','planos','filmes','plano','feed'],culture:['culture','lives','filmes','jogos','materiais','planos','plano','feed']};
   var BNAV={
     eom:[['eom','eom.webp','Início'],['lives','lives.webp','Lives'],['materiais','materiais.webp','Materiais'],['menu','menu.svg','Menu']],
     culture:[['culture','culture.webp','Início'],['lives','lives.webp','Lives'],['jogos','jogos.webp','Jogos'],['menu','menu.svg','Menu']]
