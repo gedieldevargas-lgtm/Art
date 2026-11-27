@@ -214,7 +214,7 @@
     var base = $('nav-plano') || [].filter.call(document.querySelectorAll('.nav-pill'), function (n) { return /goTo\('maratona'/.test(n.getAttribute('onclick') || ''); })[0];
     if (base && !$('nav-feed')) {
       var n = document.createElement('div'); n.className = 'nav-pill'; n.id = 'nav-feed'; n.setAttribute('onclick', "goTo('feed',this)");
-      n.innerHTML = '<span class="nav-icon">💬</span><span>Comunidade</span><span class="nav-badge">Novo</span>'; base.insertAdjacentElement('afterend', n);
+      n.innerHTML = '<span class="nav-icon" data-ic3d="1">' + (window.IC ? IC('feed') : '💬') + '</span><span>Comunidade</span><span class="nav-badge">Novo</span>'; base.insertAdjacentElement('afterend', n);
     }
     return true;
   }

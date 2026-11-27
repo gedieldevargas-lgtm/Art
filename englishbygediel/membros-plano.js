@@ -1,7 +1,7 @@
 /* MEU PLANO — plano de autodisciplina que cada aluno monta sozinho.
    1) escolhe o resultado (20 opções)  2) ajusta horas, minutos por dia, dias da semana e início
    3) recebe o cronograma: sessões com data, etapas e um intensivo por semana
-   4) marca os dias na plataforma (conta na sequência) ou imprime a folha e risca na parede.
+   4) a sessão do dia entra SOZINHA no checklist de hoje e marca quando a pessoa cumpre lá (não existe marcação manual aqui); ou imprime a folha (sempre 1 página A4) e risca na parede.
    Estado: ST.plano (salvo no aparelho e na conta, junto com o resto do progresso do aluno). */
 (function () {
   var $ = function (id) { return document.getElementById(id); };
@@ -92,13 +92,16 @@
     '.pl-hoje{border:2px solid var(--accent)}.pl-hoje .t{font-size:18px;font-weight:800;margin:2px 0 4px}.pl-hoje .f{color:var(--fg2);font-size:14px;line-height:1.5}' +
     '.pl-sem{display:flex;flex-direction:column;gap:8px}.pl-sem .wl{font-size:12px;font-weight:800;color:var(--fg2);text-transform:uppercase;letter-spacing:.5px}' +
     '.pl-dias{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px}' +
-    '.pl-d{display:flex;flex-direction:column;align-items:center;gap:2px;border:1px solid var(--border);background:var(--surface);color:var(--fg);border-radius:14px;padding:10px 6px;font:inherit;cursor:pointer;position:relative}' +
-    '.pl-d small{font-size:11px;color:var(--fg2)}.pl-d b{font-size:15px}.pl-d .k{font-size:18px;height:22px}.pl-d.ok{background:rgba(27,143,107,.16);border-color:rgba(27,143,107,.5)}.pl-d.atr{border-color:rgba(239,68,68,.55);background:rgba(239,68,68,.07)}.pl-d.hj{border:2px solid var(--accent)}.pl-d.fut{opacity:.6;cursor:default}.pl-d .int{position:absolute;top:4px;right:6px;font-size:12px}' +
+    '.pl-d{display:flex;flex-direction:column;align-items:center;gap:2px;border:1px solid var(--border);background:var(--surface);color:var(--fg);border-radius:14px;padding:10px 6px;font:inherit;position:relative}' +
+    '.pl-d small{font-size:11px;color:var(--fg2)}.pl-d b{font-size:15px}.pl-d .k{font-size:18px;height:22px}.pl-d.ok{background:rgba(27,143,107,.16);border-color:rgba(27,143,107,.5)}.pl-d.atr{border-color:rgba(239,68,68,.55);background:rgba(239,68,68,.07)}.pl-d.hj{border:2px solid var(--accent)}.pl-d.fut{opacity:.6}.pl-d .int{position:absolute;top:4px;right:6px;font-size:12px}' +
     '.pl-et{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--border)}.pl-et:first-of-type{border-top:0}.pl-et .nn{flex:none;width:28px;height:28px;border-radius:99px;background:var(--surface2);display:grid;place-items:center;font-weight:800;font-size:13px}.pl-et.on .nn{background:var(--accent);color:#fff}.pl-et .tx{flex:1;min-width:0}.pl-et small{display:block;color:var(--fg2);font-size:12.5px;line-height:1.4}' +
     '#pl-print{display:none}' +
-    '@media print{body.pl-printing>*:not(#pl-print){display:none!important}body.pl-printing{padding:0!important;background:#fff!important}#pl-print{display:block!important;color:#000;background:#fff;font-family:Arial,Helvetica,sans-serif;padding:0}' +
-    '#pl-print h1{font-size:22px;margin:0 0 2px}#pl-print .m{font-size:12px;color:#444;margin-bottom:8px}#pl-print .cm{border:1.5px solid #000;border-radius:8px;padding:8px 12px;font-size:12.5px;margin:8px 0 12px}#pl-print .wk{page-break-inside:avoid;margin-bottom:10px}#pl-print .wk .l{font-size:11px;font-weight:700;margin-bottom:4px;text-transform:uppercase}' +
-    '#pl-print .row{display:flex;gap:6px;flex-wrap:wrap}#pl-print .b{width:84px;border:1.5px solid #000;border-radius:8px;padding:5px;text-align:center;font-size:11px;position:relative}#pl-print .b .q{display:block;width:26px;height:26px;border:2px solid #000;border-radius:5px;margin:4px auto 2px}#pl-print .b .z{position:absolute;top:2px;right:4px;font-size:11px}#pl-print .et{font-size:11.5px;margin-top:4px}#pl-print .ft{font-size:10.5px;color:#444;margin-top:10px;border-top:1px solid #999;padding-top:6px}@page{size:A4;margin:12mm}}';
+    '@media print{@page{size:A4;margin:10mm}html,body{height:auto!important;overflow:visible!important}body.pl-printing>*:not(#pl-print){display:none!important;visibility:hidden!important;position:absolute!important;height:0!important;overflow:hidden!important}body.pl-printing{padding:0!important;margin:0!important;background:#fff!important}' +
+    '#pl-print{display:flex!important;flex-direction:column;height:275mm;overflow:hidden;box-sizing:border-box;color:#000;background:#fff;font-family:Arial,Helvetica,sans-serif;padding:0;page-break-after:avoid;break-after:avoid}' +
+    '#pl-print h1{font-size:19px;margin:0 0 1px}#pl-print .m{font-size:10.5px;color:#333;margin-bottom:5px}#pl-print .cm{border:1.2px solid #000;border-radius:6px;padding:5px 9px;font-size:10.5px;margin:0 0 6px}' +
+    '#pl-print .gr{display:grid;gap:1.6mm;align-content:start;flex:none}#pl-print .b{border:1.2px solid #000;border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:1mm;text-align:center;line-height:1.15;position:relative;overflow:hidden}' +
+    '#pl-print .b .q{display:block;border:1.6px solid #000;border-radius:3px;aspect-ratio:1;width:42%}#pl-print .b .z{position:absolute;top:.5mm;right:1mm;font-size:8px}#pl-print .b.f .q{background:#000}' +
+    '#pl-print .ft{font-size:9px;color:#333;margin-top:auto;border-top:1px solid #999;padding-top:4px}}';
   document.head.appendChild(css);
 
   function montar() {
@@ -110,7 +113,7 @@
     var base = [].filter.call(document.querySelectorAll('.nav-pill'), function (n) { return /goTo\('maratona'/.test(n.getAttribute('onclick') || ''); })[0];
     if (base && !$('nav-plano')) {
       var n = document.createElement('div'); n.className = 'nav-pill'; n.id = 'nav-plano'; n.setAttribute('onclick', "goTo('plano',this)");
-      n.innerHTML = '<span class="nav-icon">🎯</span><span>Meu plano</span><span class="nav-badge">Novo</span>'; base.insertAdjacentElement('afterend', n);
+      n.innerHTML = '<span class="nav-icon" data-ic3d="1">' + (window.IC ? IC('alvo') : '🎯') + '</span><span>Meu plano</span><span class="nav-badge">Novo</span>'; base.insertAdjacentElement('afterend', n);
     }
     return true;
   }
@@ -118,7 +121,7 @@
   var back = function (alvo, txt) { return '<div><button type="button" class="pl-b s" data-pl="' + alvo + '">← ' + txt + '</button></div>'; };
 
   function telaInicio() {
-    return '<div class="pl"><div><h2>🎯 Meu plano de autodisciplina</h2><div class="sub">Você escolhe o resultado que quer, diz quanto tempo tem, e eu monto o seu cronograma. Marque aqui ou imprima e risque na parede.</div></div>' +
+    return '<div class="pl"><div><h2>🎯 Meu plano de autodisciplina</h2><div class="sub">Você escolhe o resultado que quer, diz quanto tempo tem, e eu monto o seu cronograma. A sessão de cada dia entra sozinha no seu checklist de hoje. Ou imprima a folha e risque na parede.</div></div>' +
       '<div class="pl-box" style="border-color:var(--accent)"><h3>Quer começar rápido?</h3><div class="sub" style="margin:0 0 12px">Plano recomendado do Gediel: <b>perder o medo de falar</b>, 30 minutos por dia, de segunda a sexta.</div><button type="button" class="pl-b p" data-pl="pronto">Usar o plano recomendado</button></div>' +
       '<div><h3 style="margin:0 0 4px;font-size:16px">Ou escolha o seu resultado</h3><div class="sub" style="margin:0 0 12px">Qual resultado você quer ter?</div></div>' +
       '<div class="pl-grid">' + G.map(function (g) { return '<button type="button" class="pl-card" data-pl="g" data-id="' + g.id + '"><span class="ic">' + g.ic + '</span><b>' + esc(g.n) + '</b><span>≈ ' + g.h + ' horas</span></button>'; }).join('') + '</div></div>';
@@ -143,7 +146,7 @@
 
   function chipDia(s, hj) {
     var cls = s.feito ? 'ok' : s.iso === hj ? 'hj' : s.iso < hj ? 'atr' : 'fut', ic = s.feito ? '✅' : s.iso > hj ? '⬜' : '⭕';
-    return '<button type="button" class="pl-d ' + cls + '" data-pl="marcar" data-iso="' + s.iso + '" title="Sessão ' + s.n + '">' + (s.intensivo ? '<span class="int">' + (s.final ? '🏁' : '🔥') + '</span>' : '') + '<small>' + DSEM[s.d.getDay()] + '</small><b>' + fmt(s.d) + '</b><span class="k">' + ic + '</span></button>';
+    return '<div class="pl-d ' + cls + '" title="Sessão ' + s.n + '">' + (s.intensivo ? '<span class="int">' + (s.final ? '🏁' : '🔥') + '</span>' : '') + '<small>' + DSEM[s.d.getDay()] + '</small><b>' + fmt(s.d) + '</b><span class="k">' + ic + '</span></div>';
   }
   function abrirBt(et) { return et[3] ? '<button type="button" class="pl-b s" data-pl="abrir" data-mod="' + esc(et[3]) + '" data-ir="' + esc(et[2]) + '">Abrir na plataforma</button>' : et[2] ? '<button type="button" class="pl-b s" data-pl="abrir" data-mod="" data-ir="' + esc(et[2]) + '">Abrir na plataforma</button>' : ''; }
   function telaPlano(p) {
@@ -156,11 +159,11 @@
       var ehHoje = prox.iso === hj, et = prox.et;
       h += '<div class="pl-box pl-hoje"><div class="sub" style="margin:0">' + (ehHoje ? 'HOJE' : prox.iso < hj ? 'ATRASADA · ' + fmtL(prox.d).toUpperCase() : 'PRÓXIMA · ' + fmtL(prox.d).toUpperCase()) + ' · sessão ' + prox.n + ' de ' + p.N + (prox.intensivo ? (prox.final ? ' · 🏁 FINAL' : ' · 🔥 INTENSIVO') : '') + '</div>' +
         '<div class="t">' + esc(et[0]) + '</div><div class="f">' + esc(et[1]) + '<br><b>' + (prox.intensivo ? 'Intensivo: ' : 'Hoje: ') + '</b>' + esc(prox.intensivo ? g.i : prox.ativ) + '</div>' +
-        '<div class="pl-row" style="margin-top:12px">' + (prox.iso <= hj ? '<button type="button" class="pl-b p" data-pl="marcar" data-iso="' + prox.iso + '">✓ Fiz essa sessão</button>' : '') + abrirBt(et) + '</div></div>';
+        '<div class="pl-row" style="margin-top:12px">' + (ehHoje ? '<button type="button" class="pl-b p" data-pl="checklist">✅ Fazer no checklist de hoje</button>' : '') + abrirBt(et) + '</div>' + (ehHoje ? '<div class="sub" style="margin-top:10px">Marcação automática: a sessão aparece como a última tarefa do seu checklist de hoje. Ao marcar lá, ela conta aqui.</div>' : '') + '</div>';
     }
-    if (st.atras >= 3) h += '<div class="pl-box"><b>Você tem ' + st.atras + ' sessões atrasadas.</b><div class="sub">Sem culpa. Dá pra marcar as que fez ou recalcular o plano a partir de hoje.</div><div style="margin-top:10px"><button type="button" class="pl-b" data-pl="recalcular">Recalcular a partir de hoje</button></div></div>';
+    if (st.atras >= 1) h += '<div class="pl-box"><b>Você tem ' + st.atras + (st.atras === 1 ? ' sessão atrasada.' : ' sessões atrasadas.') + '</b><div class="sub">Sem culpa. Recalcule o plano a partir de hoje e siga de onde parou.</div><div style="margin-top:10px"><button type="button" class="pl-b" data-pl="recalcular">Recalcular a partir de hoje</button></div></div>';
     var sem = {}, ordem = []; st.l.forEach(function (s) { if (!sem[s.sem]) { sem[s.sem] = []; ordem.push(s.sem); } sem[s.sem].push(s); });
-    h += '<div class="pl-box"><h3>Seu cronograma</h3><div style="display:flex;flex-direction:column;gap:14px">' + ordem.map(function (k, i) { return '<div class="pl-sem"><div class="wl">Semana ' + (i + 1) + '</div><div class="pl-dias">' + sem[k].map(function (s) { return chipDia(s, hj); }).join('') + '</div></div>'; }).join('') + '</div><div class="sub" style="margin-top:10px">🔥 = intensivo da semana · 🏁 = sessão final · toque num dia pra marcar ou desmarcar</div></div>';
+    h += '<div class="pl-box"><h3>Seu cronograma</h3><div style="display:flex;flex-direction:column;gap:14px">' + ordem.map(function (k, i) { return '<div class="pl-sem"><div class="wl">Semana ' + (i + 1) + '</div><div class="pl-dias">' + sem[k].map(function (s) { return chipDia(s, hj); }).join('') + '</div></div>'; }).join('') + '</div><div class="sub" style="margin-top:10px">🔥 = intensivo da semana · 🏁 = sessão final · os dias são marcados sozinhos quando você cumpre a tarefa do plano no checklist</div></div>';
     var faseAtual = prox ? prox.fase : 3;
     h += '<div class="pl-box"><h3>As 4 etapas do seu plano</h3>' + g.e.map(function (e, i) { return '<div class="pl-et' + (i === faseAtual ? ' on' : '') + '"><span class="nn">' + (i + 1) + '</span><span class="tx"><b>' + esc(e[0]) + '</b><small>' + esc(e[1]) + '</small></span>' + abrirBt(e) + '</div>'; }).join('') + '</div>';
     h += '<div class="pl-row"><button type="button" class="pl-b s" data-pl="ajustar">Mudar resultado ou ritmo</button></div></div>';
@@ -199,13 +202,19 @@
   async function imprimir() {
     var p = plano(); if (!p) return; var g = porId(p.g) || G[0], st = stats(p), nome = '';
     try { var u = await window._sb.auth.getUser(); var m = (u.data.user || {}).user_metadata || {}; nome = m.nome || m.name || m.full_name || ''; } catch (e) {}
+    /* a folha SEMPRE cabe em 1 página A4: poucas sessões = 1 caixa por dia; muitas = 1 caixa por semana; milhares = 1 caixa a cada 4 semanas */
     var sem = {}, ordem = []; st.l.forEach(function (s) { if (!sem[s.sem]) { sem[s.sem] = []; ordem.push(s.sem); } sem[s.sem].push(s); });
-    var h = '<h1>' + g.ic + ' Meu plano: ' + esc(g.n) + '</h1><div class="m">' + (nome ? esc(nome) + ' · ' : '') + p.min + ' min por dia · ' + p.dias.slice().sort(function (a, b) { return ORDEM.indexOf(a) - ORDEM.indexOf(b); }).map(function (d) { return DSEM[d]; }).join(', ') + (st.l[0] ? ' · de ' + fmt(st.l[0].d) + ' até ' + fmt(st.fim) : '') + ' · ' + p.N + ' sessões</div>' +
-      '<div class="cm"><b>Meu compromisso:</b> eu me comprometo a estudar ' + p.min + ' minutos nos dias combinados, mesmo nos dias difíceis. Quem cumpre o combinado, chega. ✍️ Assinatura: ______________________</div>';
-    ordem.forEach(function (k, i) {
-      h += '<div class="wk"><div class="l">Semana ' + (i + 1) + '</div><div class="row">' + sem[k].map(function (s) { return '<div class="b">' + (s.intensivo ? '<span class="z">' + (s.final ? '🏁' : '🔥') + '</span>' : '') + DSEM[s.d.getDay()] + ' ' + fmt(s.d) + '<span class="q"></span>' + (s.feito ? '✓' : '') + '</div>'; }).join('') + '</div></div>';
-    });
-    h += '<div class="ft"><b>Etapas:</b> ' + g.e.map(function (e, i) { return (i + 1) + '. ' + esc(e[0]); }).join('  ·  ') + '<br>🔥 intensivo da semana · 🏁 sessão final · Plano gerado na Plataforma Inteligente — English by Gediel</div>';
+    var caixas = [], modo = 'dia';
+    if (st.l.length <= 120) { caixas = st.l.map(function (s) { return { t: DSEM[s.d.getDay()] + ' ' + fmt(s.d), z: s.final ? '🏁' : s.intensivo ? '🔥' : '', f: s.feito }; }); }
+    else if (ordem.length <= 120) { modo = 'semana'; caixas = ordem.map(function (k, i) { var l = sem[k]; return { t: 'Sem ' + (i + 1) + '<br>' + fmt(l[0].d) + ' · ' + l.length + 'x', z: l.some(function (s) { return s.final; }) ? '🏁' : '', f: l.every(function (s) { return s.feito; }) }; }); }
+    else { modo = 'bloco'; for (var i = 0; i < ordem.length; i += 4) { var gr = ordem.slice(i, i + 4), ls = [].concat.apply([], gr.map(function (k) { return sem[k]; })); caixas.push({ t: 'Sem ' + (i + 1) + '-' + (i + gr.length) + '<br>' + fmt(ls[0].d), z: ls.some(function (s) { return s.final; }) ? '🏁' : '', f: ls.every(function (s) { return s.feito; }) }); } }
+    var n = caixas.length, cols = n <= 15 ? 5 : n <= 40 ? 7 : n <= 84 ? 8 : n <= 130 ? 10 : n <= 220 ? 12 : 14;
+    var linhas = Math.ceil(n / cols), altMm = Math.max(9, Math.min(26, Math.floor(1900 / Math.max(1, linhas)) / 10)), fs = altMm < 13 ? 7 : altMm < 18 ? 8.5 : 10;
+    if (linhas * altMm + (linhas - 1) * 1.6 > 205) { altMm = Math.floor((205 - (linhas - 1) * 1.6) / linhas * 10) / 10; fs = 6.5; }
+    var h = '<h1>' + g.ic + ' Meu plano: ' + esc(g.n) + '</h1><div class="m">' + (nome ? esc(nome) + ' · ' : '') + p.min + ' min por dia · ' + p.dias.slice().sort(function (a, b) { return ORDEM.indexOf(a) - ORDEM.indexOf(b); }).map(function (d) { return DSEM[d]; }).join(', ') + (st.l[0] ? ' · de ' + fmt(st.l[0].d) + ' até ' + fmt(st.fim) : '') + ' · ' + p.N + ' sessões' + (modo === 'semana' ? ' · cada caixa = 1 semana' : modo === 'bloco' ? ' · cada caixa = 4 semanas' : '') + '</div>' +
+      '<div class="cm"><b>Meu compromisso:</b> eu me comprometo a estudar ' + p.min + ' minutos nos dias combinados, mesmo nos dias difíceis. Quem cumpre o combinado, chega. ✍️ Assinatura: ______________________</div>' +
+      '<div class="gr" style="grid-template-columns:repeat(' + cols + ',1fr);grid-auto-rows:' + altMm + 'mm;font-size:' + fs + 'px">' + caixas.map(function (c) { return '<div class="b' + (c.f ? ' f' : '') + '">' + (c.z ? '<span class="z">' + c.z + '</span>' : '') + '<span>' + c.t + '</span><span class="q"></span></div>'; }).join('') + '</div>' +
+      '<div class="ft"><b>Etapas:</b> ' + g.e.map(function (e, i) { return (i + 1) + '. ' + esc(e[0]); }).join('  ·  ') + '<br>Risque a caixa de cada dia cumprido' + (modo === 'dia' ? ' · 🔥 intensivo da semana · 🏁 sessão final' : '') + ' · Plataforma Inteligente — English by Gediel</div>';
     $('pl-print').innerHTML = h; document.body.classList.add('pl-printing');
     var fim = function () { document.body.classList.remove('pl-printing'); window.removeEventListener('afterprint', fim); };
     window.addEventListener('afterprint', fim); setTimeout(function () { window.print(); }, 80); setTimeout(fim, 60000);
@@ -224,11 +233,7 @@
     if (a === 'min') { V.min = +t.dataset.v; return desenhar(); }
     if (a === 'dia') { var d = +t.dataset.v, i = V.dias.indexOf(d); if (i >= 0) V.dias.splice(i, 1); else V.dias.push(d); return desenhar(); }
     if (a === 'criar') { var h = Math.max(5, Math.min(400, +($('pl-h') || {}).value || V.h)); if (!V.dias.length) return; return criar(V.g, h, V.min, V.dias.slice(), ($('pl-ini') || {}).value || V.ini); }
-    if (a === 'marcar' && p) {
-      var k = t.dataset.iso, hj = iso(new Date()); if (k > hj) return;
-      p.marc = p.marc || {}; if (p.marc[k]) delete p.marc[k]; else { p.marc[k] = 1; if (k === hj && A() && A().marcarDia) A().marcarDia(); }
-      guardar(p); desenhar(); var s = stats(p); if (s.pct >= 100 && window.toast) toast('🏁 Plano concluído! Parabéns!'); return;
-    }
+    if (a === 'checklist') { var pm = [].filter.call(document.querySelectorAll('.nav-pill'), function (n) { return /goTo\('maratona'/.test(n.getAttribute('onclick') || ''); })[0] || null; if (window.goTo) goTo('maratona', pm); return; }
     if (a === 'recalcular' && p) { var st = stats(p); p.antes = st.total; p.marc = {}; p.ini = iso(new Date()); guardar(p); return desenhar(); }
     if (a === 'imprimir') return imprimir();
     if (a === 'abrir') return abrir(t.dataset.mod, t.dataset.ir);
@@ -245,5 +250,21 @@
     window.goTo = function (page) { var r = g0.apply(this, arguments); if (page === 'plano') { V.tela = plano() ? 'plano' : 'inicio'; V.novo = false; desenhar(); } return r; };
   }
   setInterval(function () { if (!S().pronto) return; if (montar()) envolver(); }, 600);
-  window.EBG_PLANO = { hoje: function () { var p = plano(); if (!p) return null; var s = stats(p); return s.hoje && !s.hoje.feito ? { n: s.hoje.n, de: p.N, g: porId(p.g) } : null; }, metas: G };
+  /* tarefa que entra no checklist de hoje (null se hoje não é dia de sessão) */
+  function tarefaHoje() {
+    var p = plano(); if (!p) return null; var st = stats(p), s = st.hoje; if (!s) return null;
+    var g = porId(p.g) || G[0], et = s.et, ativ = s.intensivo ? g.i : s.ativ;
+    return { _plano: 1, _mn: p.min, icon: '🎯', title: 'Meu plano · ' + et[0] + ' (sessão ' + s.n + ' de ' + p.N + (s.final ? ' · final' : s.intensivo ? ' · intensivo' : '') + ')', sub: p.min + ' min · ' + g.n,
+      info: { why: 'Você mesmo montou este plano para ' + g.n.toLowerCase() + '. Cumprir o combinado de hoje é o que faz o plano andar.',
+        steps: [et[1], (s.intensivo ? 'Intensivo: ' : 'Hoje: ') + ativ, 'Reserve ' + p.min + ' minutos sem distração', 'Marque esta tarefa como feita: o seu plano se atualiza sozinho'],
+        links: [{ t: '🎯 Abrir meu plano', u: '#plano' }] } };
+  }
+  /* chamado pelo checklist: marca/desmarca a sessão de hoje */
+  function marcarHoje(on) {
+    var p = plano(); if (!p) return; var hj = iso(new Date()); p.marc = p.marc || {};
+    if (on) { if (p.marc[hj]) return; p.marc[hj] = 1; } else { if (!p.marc[hj]) return; delete p.marc[hj]; }
+    guardar(p); var pn = $('pane-plano'); if (pn && pn.classList.contains('active') && V.tela === 'plano') desenhar();
+    if (on && stats(p).pct >= 100 && window.toast) toast('🏁 Plano concluído! Parabéns!');
+  }
+  window.EBG_PLANO = { tarefaHoje: tarefaHoje, marcarHoje: marcarHoje, hoje: function () { var p = plano(); if (!p) return null; var s = stats(p); return s.hoje && !s.hoje.feito ? { n: s.hoje.n, de: p.N, g: porId(p.g) } : null; }, metas: G };
 })();

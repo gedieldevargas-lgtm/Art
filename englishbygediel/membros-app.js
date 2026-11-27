@@ -693,7 +693,7 @@
     return {k:k,tot:tot,feitos:feitos,pct:tot?Math.round(feitos*100/tot):0};
   }
   var chkOrig=window.chkMarTask;
-  window.chkMarTask=function(el,key,i){chkOrig(el,key,i);salvarChecks();if(((_ctxChecked[key]||[])[i])){marcarDia();verCompleto(key);}else pintarRail();};
+  window.chkMarTask=function(el,key,i){chkOrig(el,key,i);salvarChecks();try{if(((CTX_TASKS[key]||[])[i]||{})._plano)planoSync(key,i);}catch(e){}if(((_ctxChecked[key]||[])[i])){marcarDia();verCompleto(key);}else pintarRail();};
   var doneOrig=window.taskDone;
   if(doneOrig)window.taskDone=function(){doneOrig();salvarChecks();marcarDia();verCompleto();};
   function chipsCtx(){
@@ -2871,7 +2871,7 @@
   (function esperar(n){var S=AS();if(S&&S.pronto&&S.cfg){migrarDados();return;}if(n<40)setTimeout(function(){esperar(n+1);},1000);})(0);
   window.miLink=function(u){
     var t=window._curTask?{key:window._curTask.key,i:window._curTask.i}:null;
-    if(u==='#jogos')return go('jogos');if(u==='#prompts'){if(window.EBG_PROMPTS_UI)EBG_PROMPTS_UI.abrir('rapido');return go('prompts');}if(u==='#modulos')return go('modulos');if(u==='#planos')return go('planos');if(u==='#prisma')return go('prisma');
+    if(u==='#jogos')return go('jogos');if(u==='#prompts'){if(window.EBG_PROMPTS_UI)EBG_PROMPTS_UI.abrir('rapido');return go('prompts');}if(u==='#modulos')return go('modulos');if(u==='#planos')return go('planos');if(u==='#prisma')return go('prisma');if(u==='#plano')return go('plano');
     if(u.indexOf('#aula:')===0){var x=u.split(':');return abrirAula(x[1],x[2]);}
     if(u.indexOf('#jogo:')===0){window.__tarefaJogo=t;if(!jogar(u.slice(6)))go('jogos');return;}
   };
@@ -2978,7 +2978,18 @@
     if(window.renderMarTasks)window.renderMarTasks(k);pintarRail();try{renderHome();}catch(x){}
     toast('⏱ Checklist ajustado pra '+b.dataset.tm+' min','#10b981');
   });
-  function tarefasDoDia(label){tarefasDoDia0(label);tarefaDoJeito(label);ajustarTempo(label);}
+  function tarefasDoDia(label){tarefasDoDia0(label);tarefaDoJeito(label);ajustarTempo(label);tarefaDoPlano(label);}
+  /* Meu plano: a sessão de hoje entra sozinha no checklist; marcar aqui é o único jeito de cumprir a sessão */
+  function tarefaDoPlano(label){
+    if(!window.CTX_TASKS||!CTX_TASKS[label]||label==='_idioma')return;
+    CTX_TASKS[label]=CTX_TASKS[label].filter(function(x){return !x._plano;});
+    var t=null;try{t=window.EBG_PLANO&&EBG_PLANO.tarefaHoje?EBG_PLANO.tarefaHoje():null;}catch(e){}if(t)CTX_TASKS[label].push(t);
+  }
+  function planoSync(key,i){
+    if(!window.EBG_PLANO||!EBG_PLANO.marcarHoje)return;var ch=window._ctxChecked||{},alg=false;
+    Object.keys(ch).forEach(function(k){var l=(window.CTX_TASKS&&CTX_TASKS[k])||[];(ch[k]||[]).forEach(function(v,j){if(v&&l[j]&&l[j]._plano)alg=true;});});
+    EBG_PLANO.marcarHoje(alg);
+  }
   function tarefaDoJeito(label){
     if(!window.CTX_TASKS||!CTX_TASKS[label]||!ST.prisma||!INTEL[ST.prisma])return;
     var it=INTEL[ST.prisma],R=ST.prismaRes||{},lista=(R.taticas&&R.taticas.length?R.taticas:[]).concat(it.est||[]);if(!lista.length)return;
@@ -3042,7 +3053,7 @@
   function trocas(){return LS.get('mi_troca_'+dia(),{});}
   function aplicarTrocas(label){
     var tr=trocas()[label];if(!tr||!CTX_TASKS[label])return;var base=CTX_TASKS[label].slice();
-    Object.keys(tr).forEach(function(i){var n=tr[i];if(!n)return;var alt=variacoes(label,+i,base)[n-1];if(alt)CTX_TASKS[label][i]=alt;});
+    Object.keys(tr).forEach(function(i){var n=tr[i];if(!n||(base[i]&&base[i]._plano))return;var alt=variacoes(label,+i,base)[n-1];if(alt)CTX_TASKS[label][i]=alt;});
   }
   window.miTrocar=function(ev,label,i){
     ev.stopPropagation();var ch=(window._ctxChecked||{})[label]||[];if(ch[i]){toast('Essa você já fez ✓');return;}
@@ -3054,7 +3065,7 @@
     if(label!=='_idioma'){if(iniciante())label='Primeiros passos';if(!CTX_TASKS[label])label='Em Casa';tarefasDoDia(label);aplicarTrocas(label);}
     var r=rmtOrig(label);
     if(label!=='_idioma'){var tr=(trocas()[label])||{},ch=(window._ctxChecked||{})[label]||[];
-      [].forEach.call(document.querySelectorAll('#mar-tasks-list .mar-task'),function(el,i){if(ch[i])return;
+      [].forEach.call(document.querySelectorAll('#mar-tasks-list .mar-task'),function(el,i){if(ch[i]||((CTX_TASKS[label]||[])[i]||{})._plano)return;
         var b=document.createElement('button');b.className='mi-troca';b.title='Trocar por outra tarefa';b.innerHTML='🔄<small>'+((tr[i]||0)+1)+'/3</small>';
         b.setAttribute('onclick',"miTrocar(event,'"+label.replace(/'/g,"\\'")+"',"+i+")");var hint=el.querySelector('.open-hint');el.insertBefore(b,hint);});}
     if(label!=='_idioma'){var lt=CTX_TASKS[label]||[];[].forEach.call(document.querySelectorAll('#mar-tasks-list .mar-task-title'),function(el,i){var x=lt[i];if(x&&x._mn!=null&&!el.querySelector('.mi-mn'))el.insertAdjacentHTML('beforeend',' <span class="mi-mn">⏱ '+fmtMn(x._mn)+'</span>');});}
