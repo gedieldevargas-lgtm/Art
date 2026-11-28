@@ -103,7 +103,7 @@
       '<button type="button" class="fo-b s" data-fo="galeria">🖼️ Escolher da galeria</button>' +
       (recusada && !cand && ultSrc ? '<button type="button" class="fo-b s" data-fo="manual">👤 É o meu rosto de verdade: enviar para o professor conferir</button>' : '') +
       (temAtual && !cand ? '<button type="button" class="fo-b s" data-fo="atual">Usar a foto que já tenho</button>' : '') +
-      (obrig ? '<button type="button" class="sair" data-fo="sair">Sair da conta</button>' : '<button type="button" class="fo-b s" data-fo="fechar">← Voltar</button>') +
+      (obrig ? '<button type="button" class="fo-b s" data-fo="pular">⏭️ Pular por agora</button><button type="button" class="sair" data-fo="sair">Sair da conta</button>' : '<button type="button" class="fo-b s" data-fo="fechar">← Voltar</button>') +
       '</div>';
   }
   function abrir(obrigatorio) {
@@ -151,6 +151,7 @@
     else if (a === 'salvar') salvar();
     else if (a === 'manual') { lerImagem(ultSrc).then(function (img) { cand = { foto: recortar(img, null), status: 'pendente' }; recusada = false; desenhar('Sua foto vai para o professor aprovar. Você já pode entrar.', ''); }); }
     else if (a === 'fechar') fechar();
+    else if (a === 'pular') { try { sessionStorage.setItem('mi_foto_pulou', '1'); } catch (e) {} fechar(); }
     else if (a === 'sair') { if (window.confirmLogout) confirmLogout(); else if (window._sb) _sb.auth.signOut(); }
   });
   gate.addEventListener('change', function (e) {
@@ -177,6 +178,8 @@
       if (aberto && obrig) fechar();
       return;
     }
+    var pulou = false; try { pulou = sessionStorage.getItem('mi_foto_pulou') === '1'; } catch (e) {}
+    if (pulou) return;                                     // pulou nesta visita: volta a pedir na próxima
     if (!aberto || !obrig) abrir(true);
   }
   setInterval(function () { checar(false); }, 4000);
