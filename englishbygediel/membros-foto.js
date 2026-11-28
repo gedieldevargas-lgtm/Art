@@ -8,7 +8,7 @@
   var $ = function (id) { return document.getElementById(id); };
   var esc = function (x) { return String(x == null ? '' : x).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   var LS = { g: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, s: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
-  var U = null, perfil = null, aberto = false, obrig = false, cand = null, ultimo = 0, lib = null;
+  var U = null, perfil = null, aberto = false, obrig = false, cand = null, ultimo = 0, lib = null, ultSrc = null, recusada = false;
 
   var css = document.createElement('style');
   css.textContent =
@@ -55,11 +55,15 @@
     var m = 640, k = Math.min(1, m / Math.max(img.naturalWidth, img.naturalHeight));
     var c = document.createElement('canvas'); c.width = Math.round(img.naturalWidth * k); c.height = Math.round(img.naturalHeight * k);
     c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-    var r; try { r = await f.detectAllFaces(c, new f.TinyFaceDetectorOptions({ inputSize: 416, scoreThreshold: 0.5 })); } catch (e) { return { indisponivel: true }; }
+    var lim = function (p) { return Promise.race([p, new Promise(function (_, no) { setTimeout(function () { no(new Error('tempo')); }, 20000); })]); };
+    var r; try {
+      r = await lim(f.detectAllFaces(c, new f.TinyFaceDetectorOptions({ inputSize: 416, scoreThreshold: 0.4 })));
+      if (!r.length) r = await lim(f.detectAllFaces(c, new f.TinyFaceDetectorOptions({ inputSize: 608, scoreThreshold: 0.2 })));   // 2ª chance, mais tolerante
+    } catch (e) { return { indisponivel: true }; }
     if (!r.length) return { ok: false, motivo: 'Não achei um rosto nessa foto. Use uma foto sua, de frente, com boa luz (nada de desenho, anime, paisagem ou logo).' };
     if (r.length > 1) return { ok: false, motivo: 'Tem mais de uma pessoa na foto. Use uma foto só sua.' };
     var b = r[0].box, lado = Math.min(c.width, c.height);
-    if (b.width < lado * 0.15) return { ok: false, motivo: 'O rosto está muito pequeno. Chegue mais perto da câmera.' };
+    if (b.width < lado * 0.1) return { ok: false, motivo: 'O rosto está muito pequeno. Chegue mais perto da câmera.' };
     return { ok: true, caixa: { x: b.x / k, y: b.y / k, w: b.width / k, h: b.height / k } };
   }
   /* recorta em quadrado 320x320 centrado no rosto (ou no meio da foto) e comprime */
@@ -97,6 +101,7 @@
       (cand ? '<button type="button" class="fo-b" data-fo="salvar">✅ Usar esta foto</button>' : '') +
       '<button type="button" class="fo-b' + (cand ? ' s' : '') + '" data-fo="selfie">📷 Tirar uma selfie</button>' +
       '<button type="button" class="fo-b s" data-fo="galeria">🖼️ Escolher da galeria</button>' +
+      (recusada && !cand && ultSrc ? '<button type="button" class="fo-b s" data-fo="manual">👤 É o meu rosto de verdade: enviar para o professor conferir</button>' : '') +
       (temAtual && !cand ? '<button type="button" class="fo-b s" data-fo="atual">Usar a foto que já tenho</button>' : '') +
       (obrig ? '<button type="button" class="sair" data-fo="sair">Sair da conta</button>' : '<button type="button" class="fo-b s" data-fo="fechar">← Voltar</button>') +
       '</div>';
@@ -109,11 +114,12 @@
   function msg(t, c) { var m = $('fo-msg'); if (m) { m.className = 'msg ' + (c || ''); m.textContent = t; } }
 
   async function analisar(src) {
+    ultSrc = src; recusada = false;
     msg('🔎 Conferindo sua foto…');
     var b = gate.querySelectorAll('.fo-b'); [].forEach.call(b, function (x) { x.disabled = true; });
     try {
       var img = await lerImagem(src), r = await procurarRosto(img);
-      if (r.ok === false) { cand = null; desenhar(r.motivo, 'er'); return; }
+      if (r.ok === false) { cand = null; recusada = true; desenhar(r.motivo, 'er'); return; }
       var foto = recortar(img, r.caixa || null);
       cand = { foto: foto, status: r.indisponivel ? 'pendente' : 'ok' };
       desenhar(r.indisponivel ? 'Não consegui conferir agora. Sua foto vai para o professor aprovar, mas você já pode entrar.' : '✅ Rosto encontrado!', r.indisponivel ? '' : 'ok');
@@ -143,6 +149,7 @@
     else if (a === 'galeria') $('fo-file2').click();
     else if (a === 'atual') analisar(avatarAtual());
     else if (a === 'salvar') salvar();
+    else if (a === 'manual') { lerImagem(ultSrc).then(function (img) { cand = { foto: recortar(img, null), status: 'pendente' }; recusada = false; desenhar('Sua foto vai para o professor aprovar. Você já pode entrar.', ''); }); }
     else if (a === 'fechar') fechar();
     else if (a === 'sair') { if (window.confirmLogout) confirmLogout(); else if (window._sb) _sb.auth.signOut(); }
   });
